@@ -14,6 +14,12 @@ var/datum/global_hud/global_hud = new()
 	var/obj/screen/blurry
 	var/list/vimpaired
 	var/list/darkMask
+	//Mask filters
+	var/obj/screen/g_dither = null
+	var/obj/screen/r_dither = null
+	var/obj/screen/gray_dither = null
+	var/obj/screen/lp_dither = null
+
 
 /datum/global_hud/New()
 	//420erryday psychedellic colours screen overlay for when you are high
@@ -29,6 +35,39 @@ var/datum/global_hud/global_hud = new()
 	blurry.icon_state = "blurry"
 	blurry.layer = 17
 	blurry.mouse_opacity = 0
+
+	//Green filter for the gasmask
+	g_dither = new /obj/screen()
+	g_dither.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	g_dither.name = "gasmask"
+	g_dither.icon_state = "dither12g"
+	g_dither.layer = 17
+	g_dither.mouse_opacity = 0
+
+	//Red filter for the thermal glasses
+	r_dither = new /obj/screen()
+	r_dither.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	r_dither.name = "thermal glasses"
+	r_dither.icon_state = "ditherred"
+	r_dither.layer = 17
+	r_dither.mouse_opacity = 0
+
+	//Gray filter for the sunglasses
+	gray_dither = new /obj/screen()
+	gray_dither.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	gray_dither.name = "sunglasses"
+	gray_dither.icon_state = "dark32"
+	gray_dither.layer = 17
+	gray_dither.mouse_opacity = 0
+
+	//Yellow filter for the mesons
+	lp_dither = new /obj/screen()
+	lp_dither.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	lp_dither.name = "mesons"
+	lp_dither.icon_state = "ditherlimepulse"
+	lp_dither.layer = 17
+	lp_dither.mouse_opacity = 0
+
 
 	var/obj/screen/O
 	var/i

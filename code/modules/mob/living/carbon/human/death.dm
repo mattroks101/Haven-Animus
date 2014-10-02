@@ -25,11 +25,11 @@
 	else
 		hgibs(loc, viruses, dna)
 
-//	if(virtual)
-//		usr << "\red <b>You died. Game over. Returning to the real world...</b>"
-//		sleep(80)
-//		return_VR()
-
+/*	if(virtual)
+		usr << "\red <b>You died. Game over. Returning to the real world...</b>"
+		sleep(80)
+		return_VR()
+*/
 	spawn(15)
 		if(animation)	del(animation)
 		if(src)			del(src)
@@ -50,15 +50,15 @@
 	flick("dust-h", animation)
 	new /obj/effect/decal/remains/human(loc)
 
-//	if(virtual)
-//		usr << "\red <b>You died. Game over. Returning to the real world...</b>"
-//		sleep(80)
-//		return_VR()
+/*	if(virtual)
+		usr << "\red <b>You died. Game over. Returning to the real world...</b>"
+		sleep(80)
+		return_VR()
 
 	spawn(15)
 		if(animation)	del(animation)
 		if(src)			del(src)
-
+*/
 
 /mob/living/carbon/human/death(gibbed)
 	if(stat == DEAD)	return
@@ -121,11 +121,11 @@
 //		world.log << "k"
 		ticker.mode.check_win()		//Calls the rounds wincheck, mainly for wizard, malf, and changeling now
 
-//	if(virtual)
-//		usr << "\red <b>You died. Game over. Returning to the real world...</b>"
-//		sleep(80)
-//		return_VR()
-
+/*	if(virtual)
+		usr << "\red <b>You died. Game over. Returning to the real world...</b>"
+		sleep(80)
+		return_VR()
+*/
 	return ..(gibbed)
 
 

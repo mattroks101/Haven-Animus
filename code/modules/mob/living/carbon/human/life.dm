@@ -1123,7 +1123,7 @@
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.g_dither, global_hud.r_dither, global_hud.gray_dither, global_hud.lp_dither)
 
 		update_action_buttons()
 
@@ -1367,6 +1367,19 @@
 				var/obj/item/clothing/glasses/welding/O = glasses
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
+
+			if((istype(wear_mask, /obj/item/clothing/mask/gas) && !istype(wear_mask, /obj/item/clothing/mask/gas/swat) && !istype(wear_mask, /obj/item/clothing/mask/gas/syndicate)) || istype(glasses, /obj/item/clothing/glasses/night))
+				client.screen += global_hud.g_dither
+
+			if ((istype(glasses, /obj/item/clothing/glasses/thermal) && !istype(glasses, /obj/item/clothing/glasses/thermal/syndi)) || istype(glasses, /obj/item/clothing/glasses/hud/security) || istype(wear_mask, /obj/item/clothing/mask/gas/swat) || istype(wear_mask, /obj/item/clothing/mask/gas/syndicate))
+				client.screen += global_hud.r_dither
+
+			if (istype(glasses, /obj/item/clothing/glasses/sunglasses) || istype(head, /obj/item/clothing/head/helmet/riot))
+				client.screen += global_hud.gray_dither
+
+			if (istype(glasses, /obj/item/clothing/glasses/meson) || istype(glasses, /obj/item/clothing/glasses/thermal/syndi))
+				client.screen += global_hud.lp_dither
+
 
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)
