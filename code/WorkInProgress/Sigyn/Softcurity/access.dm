@@ -185,7 +185,7 @@
 	switch(job)
 		if("Geneticist")
 			return list(access_medical, access_morgue, access_genetics)
-		if("Station Engineer")
+		if("Vessel Engineer")
 			return list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
 		if("Assistant")
 			if(config.assistant_maint)
@@ -497,7 +497,7 @@
 
 /proc/get_all_jobs()
 	return list("Assistant", "Captain", "Head of Personnel", "Bartender", "Chef", "Botanist", "Quartermaster", "Cargo Technician",
-				"Shaft Miner", "Clown", "Mime", "Janitor", "Librarian", "Lawyer", "Chaplain", "Chief Engineer", "Station Engineer",
+				"Shaft Miner", "Clown", "Mime", "Janitor", "Librarian", "Lawyer", "Chaplain", "Chief Engineer", "Vessel Engineer",
 				"Atmospheric Technician", "Roboticist", "Chief Medical Officer", "Medical Doctor", "Chemist", "Geneticist", "Virologist",
 				"Research Director", "Scientist", "Head of Security", "Warden", "Detective", "Security Officer")
 

@@ -198,7 +198,7 @@ var/list/event_last_fired = list()
 
 		if(istype(M, /mob/living/silicon/robot) && M:module && M:module.name == "engineering robot module")
 			active_with_role["Engineer"]++
-		if(M.mind.assigned_role in list("Chief Engineer", "Station Engineer"))
+		if(M.mind.assigned_role in list("Chief Engineer", "Vessel Engineer"))
 			active_with_role["Engineer"]++
 
 		if(istype(M, /mob/living/silicon/robot) && M:module && M:module.name == "medical robot module")

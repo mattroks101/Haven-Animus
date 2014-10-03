@@ -130,7 +130,7 @@
 	var/traitor_name = H.real_name
 	var/prob_right_dude = rand(1, 100)
 
-	src.text += "<BR><BR>The <B>[name_1] [name_2]</B> implied an undercover operative was acting on their behalf on the station currently."
+	src.text += "<BR><BR>The <B>[name_1] [name_2]</B> implied an undercover operative was acting on their behalf on the ship currently."
 	src.text += "It would be in your best interests to suspect everybody, as these undercover operatives could have implants which trigger them to have their memories removed until they are needed. He, or she, could even be a high ranking officer."
 
 	src.text += "After some investigation, we "
@@ -152,10 +152,10 @@
 	if(!H) return
 	var/traitor_job = H.mind.assigned_role
 
-	src.text += "<BR><BR>It has been brought to our attention that the [name_1] [name_2] have stumbled upon some dark secrets. They apparently want to spread the dangerous knowledge onto as many stations as they can."
+	src.text += "<BR><BR>It has been brought to our attention that the [name_1] [name_2] have stumbled upon some dark secrets. They apparently want to spread the dangerous knowledge onto as many ships as they can."
 	src.text += "Watch out for the following: praying to an unfamilar god, preaching the word of \[REDACTED\], sacrifices, magical dark power, living constructs of evil and a portal to the dimension of the underworld."
 
-	src.text += "Based on our intelligence, we are [prob_right_dude]% sure that if true, someone doing the job of [traitor_job] on your station may have been converted "
+	src.text += "Based on our intelligence, we are [prob_right_dude]% sure that if true, someone doing the job of [traitor_job] on your ship may have been converted "
 	src.text += "and instilled with the idea of the flimsiness of the real world, seeking to destroy it. "
 
 	src.text += "<BR>However, if this information is acted on without substantial evidence, those responsible will face severe repercussions."
@@ -171,10 +171,10 @@
 	if(!H) return
 	var/traitor_job = H.mind.assigned_role
 
-	src.text += "<BR><BR>It has been brought to our attention that the [name_1] [name_2] are attempting to stir unrest on one of our stations in your sector."
+	src.text += "<BR><BR>It has been brought to our attention that the [name_1] [name_2] are attempting to stir unrest on one of our ships in your sector."
 	src.text += "Watch out for suspicious activity among the crew and make sure that all heads of staff report in periodically."
 
-	src.text += "Based on our intelligence, we are [prob_right_dude]% sure that if true, someone doing the job of [traitor_job] on your station may have been brainwashed "
+	src.text += "Based on our intelligence, we are [prob_right_dude]% sure that if true, someone doing the job of [traitor_job] on your ship may have been brainwashed "
 	src.text += "at a recent conference, and their department should be closely monitored for signs of mutiny. "
 
 	src.text += "<BR>However, if this information is acted on without substantial evidence, those responsible will face severe repercussions."

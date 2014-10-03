@@ -325,7 +325,7 @@ datum/objective/block
 		return 1
 
 datum/objective/silence
-	explanation_text = "Do not allow anyone to escape the station.  Only allow the pods to be sent when everyone is dead and your story is the only one left."
+	explanation_text = "Do not allow anyone to escape the ship.  Only allow the pods to be sent when everyone is dead and your story is the only one left."
 
 	check_completion()
 		if(emergency_shuttle.location<2)
@@ -474,7 +474,7 @@ datum/objective/harm
 
 
 datum/objective/nuclear
-	explanation_text = "Destroy the station with a nuclear device."
+	explanation_text = "Destroy the ship with a nuclear device."
 
 
 
@@ -490,7 +490,7 @@ datum/objective/steal
 		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
 		"a functional AI" = /obj/item/device/aicard,
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
-		"the station blueprints" = /obj/item/blueprints,
+		"the ship blueprints" = /obj/item/blueprints,
 		"a nasa voidsuit" = /obj/item/clothing/suit/space/nasavoid,
 		"28 moles of plasma (full tank)" = /obj/item/weapon/tank,
 //		"a sample of slime extract" = /obj/item/slime_extract,
@@ -760,7 +760,7 @@ datum/objective/heist
 
 datum/objective/heist/kidnap
 	choose_target()
-		var/list/roles = list("Chief Engineer","Research Director","Roboticist","Chemist","Station Engineer")
+		var/list/roles = list("Chief Engineer","Research Director","Roboticist","Chemist","Vessel Engineer")
 		var/list/possible_targets = list()
 		var/list/priority_targets = list()
 
@@ -885,7 +885,7 @@ datum/objective/heist/salvage
 				target = "diamond"
 				target_amount = 20
 
-		explanation_text = "Ransack the station and escape with [target_amount] [target]."
+		explanation_text = "Ransack the ship and escape with [target_amount] [target]."
 
 	check_completion()
 

@@ -305,7 +305,7 @@ var/global/datum/controller/gameticker/ticker
 				if (mode.station_was_nuked)
 					feedback_set_details("end_proper","nuke")
 					if(!delay_end)
-						world << "\blue <B>Rebooting due to destruction of station in [restart_timeout/10] seconds</B>"
+						world << "\blue <B>Rebooting due to destruction of the ship in [restart_timeout/10] seconds</B>"
 				else
 					feedback_set_details("end_proper","proper completion")
 					if(!delay_end)
