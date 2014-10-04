@@ -101,7 +101,6 @@ datum/preferences
 
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
-	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -258,15 +257,6 @@ datum/preferences
 			dat += "<b><a href=\"byond://?src=\ref[user];preference=records;record=1\">Character Records</a></b><br>"
 
 		dat += "<b><a href=\"byond://?src=\ref[user];preference=antagoptions;active=0\">Set Antag Options</b></a><br>"
-
-		dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=input'><b>Set Flavor Text</b></a><br>"
-		if(lentext(flavor_text) <= 40)
-			if(!lentext(flavor_text))
-				dat += "\[...\]"
-			else
-				dat += "[flavor_text]"
-		else
-			dat += "[copytext(flavor_text, 1, 37)]...<br>"
 		dat += "<br>"
 
 		dat += "<br><b>Hair</b><br>"
@@ -378,8 +368,6 @@ datum/preferences
 				HTML += " <font color=orange>\[Low]</font>"
 			else
 				HTML += " <font color=red>\[NEVER]</font>"
-			if(job.alt_titles)
-				HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			HTML += "</a></td></tr>"
 
 		HTML += "</td'></tr></table>"
@@ -470,21 +458,6 @@ datum/preferences
 		user << browse(null, "window=preferences")
 		user << browse(HTML, "window=antagoptions")
 		return
-
-
-
-	proc/GetPlayerAltTitle(datum/job/job)
-		return player_alt_titles.Find(job.title) > 0 \
-			? player_alt_titles[job.title] \
-			: job.title
-
-	proc/SetPlayerAltTitle(datum/job/job, new_title)
-		// remove existing entry
-		if(player_alt_titles.Find(job.title))
-			player_alt_titles -= job.title
-		// add one if it's not default
-		if(job.title != new_title)
-			player_alt_titles[job.title] = new_title
 
 	proc/SetJob(mob/user, role)
 		var/datum/job/job = job_master.GetJob(role)
@@ -625,14 +598,6 @@ datum/preferences
 					else
 						return 0
 					SetChoices(user)
-				if ("alt_title")
-					var/datum/job/job = locate(href_list["job"])
-					if (job)
-						var/choices = list(job.title) + job.alt_titles
-						var/choice = input("Pick a title for [job.title].", "Character Generation", GetPlayerAltTitle(job)) as anything in choices | null
-						if(choice)
-							SetPlayerAltTitle(job, choice)
-							SetChoices(user)
 				if("input")
 					SetJob(user, href_list["text"])
 				else
@@ -738,89 +703,6 @@ datum/preferences
 						var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
 						if(new_age)
 							age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
-					if("species")
-
-						var/list/new_species = list("Human")
-						var/prev_species = species
-						var/whitelisted = 0
-
-						if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-							for(var/S in whitelisted_species)
-								if(is_alien_whitelisted(user,S))
-									new_species += S
-									whitelisted = 1
-							if(!whitelisted)
-								alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
-						else //Not using the whitelist? Aliens for everyone!
-							new_species = whitelisted_species
-
-						species = input("Please select a species", "Character Generation", null) in new_species
-
-						if(prev_species != species)
-							//grab one of the valid hair styles for the newly chosen species
-							var/list/valid_hairstyles = list()
-							for(var/hairstyle in hair_styles_list)
-								var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-								if(gender == MALE && S.gender == FEMALE)
-									continue
-								if(gender == FEMALE && S.gender == MALE)
-									continue
-								if( !(species in S.species_allowed))
-									continue
-								valid_hairstyles[hairstyle] = hair_styles_list[hairstyle]
-
-							if(valid_hairstyles.len)
-								h_style = pick(valid_hairstyles)
-							else
-								//this shouldn't happen
-								h_style = hair_styles_list["Bald"]
-
-							//grab one of the valid facial hair styles for the newly chosen species
-							var/list/valid_facialhairstyles = list()
-							for(var/facialhairstyle in facial_hair_styles_list)
-								var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-								if(gender == MALE && S.gender == FEMALE)
-									continue
-								if(gender == FEMALE && S.gender == MALE)
-									continue
-								if( !(species in S.species_allowed))
-									continue
-
-								valid_facialhairstyles[facialhairstyle] = facial_hair_styles_list[facialhairstyle]
-
-							if(valid_facialhairstyles.len)
-								f_style = pick(valid_facialhairstyles)
-							else
-								//this shouldn't happen
-								f_style = facial_hair_styles_list["Shaved"]
-
-							//reset hair colour and skin colour
-							r_hair = 0//hex2num(copytext(new_hair, 2, 4))
-							g_hair = 0//hex2num(copytext(new_hair, 4, 6))
-							b_hair = 0//hex2num(copytext(new_hair, 6, 8))
-
-							s_tone = 0
-
-					if("language")
-						var/languages_available
-						var/list/new_languages = list("None")
-
-						if(config.usealienwhitelist)
-							for(var/L in all_languages)
-								var/datum/language/lang = all_languages[L]
-								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
-									new_languages += lang
-									languages_available = 1
-
-							if(!(languages_available))
-								alert(user, "There are not currently any available secondary languages.")
-						else
-							for(var/L in all_languages)
-								var/datum/language/lang = all_languages[L]
-								if(!(lang.flags & RESTRICTED))
-									new_languages += lang.name
-
-						language = input("Please select a secondary language", "Character Generation", null) in new_languages
 
 					if("b_type")
 						var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
@@ -912,15 +794,6 @@ datum/preferences
 						var/new_relation = input(user, "Choose your relation to NT. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference")  as null|anything in list("Loyal", "Supportive", "Neutral", "Skeptical", "Opposed")
 						if(new_relation)
 							nanotrasen_relation = new_relation
-
-					if("flavor_text")
-						var/msg = input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!","Flavor Text",html_decode(flavor_text)) as message
-
-						if(msg != null)
-							msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-							msg = html_encode(msg)
-
-							flavor_text = msg
 
 					if("disabilities")
 						if(text2num(href_list["disabilities"]) >= -1)
@@ -1023,24 +896,13 @@ datum/preferences
 
 					if("ui")
 						switch(UI_style)
-//							if("Midnight")
-//								UI_style = "Orange"
 							if("White") //"Orange"
 								UI_style = "old"
 							if("old")
 								UI_style = "White"
 							else
 								UI_style = "old"//"Midnight"
-
-//					if("UIcolor")
-//						var/UI_style_color_new = input(user, "Choose your UI color, dark colors are not recommended!") as color|null
-//						if(!UI_style_color_new) return
-//						UI_style_color = UI_style_color_new
-
-//					if("UIalpha")
-//						var/UI_style_alpha_new = input(user, "Select a new alpha(transparence) parametr for UI, between 50 and 255") as num
-//						if(!UI_style_alpha_new | !(UI_style_alpha_new <= 255 && UI_style_alpha_new >= 50)) return
-//						UI_style_alpha = UI_style_alpha_new  // I don't need this bay12 shit
+  // I don't need this bay12 shit
 
 					if("be_special")
 						var/num = text2num(href_list["num"])
@@ -1094,20 +956,18 @@ datum/preferences
 		if(be_random_name)
 			real_name = random_name(gender)
 
-		if(config.humans_need_surnames)
-			var/firstspace = findtext(real_name, " ")
-			var/name_length = length(real_name)
-			if(!firstspace)	//we need a surname
-				real_name += " [pick(last_names)]"
-			else if(firstspace == name_length)
-				real_name += "[pick(last_names)]"
+		var/firstspace = findtext(real_name, " ")
+		var/name_length = length(real_name)
+		if(!firstspace)	//we need a surname
+			real_name += " [pick(last_names)]"
+		else if(firstspace == name_length)
+			real_name += "[pick(last_names)]"
 
 		character.real_name = real_name
 		character.name = character.real_name
 		if(character.dna)
 			character.dna.real_name = character.real_name
 
-		character.flavor_text = flavor_text
 		character.med_record = med_record
 		character.sec_record = sec_record
 		character.gen_record = gen_record

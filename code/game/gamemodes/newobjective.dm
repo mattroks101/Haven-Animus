@@ -342,7 +342,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "Protect [target.current.real_name], the [target.role_alt_title ? target.role_alt_title : (!role_type ? target.assigned_role : target.special_role)]."
+					explanation_text = "Protect [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -354,7 +354,7 @@ datum
 				target = targeta
 				job = joba
 				weight = get_points(job)
-				explanation_text = "Assassinate [target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role]."
+				explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 
 			check_completion()
 				if(target && target.current)
@@ -393,7 +393,7 @@ datum
 						break
 
 				if(target && target.current)
-					explanation_text = "Assassinate [target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role]."
+					explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 				else
 					explanation_text = "Free Objective"
 
@@ -411,7 +411,7 @@ datum
 					target = pick(possible_targets)
 
 				if(target && target.current)
-					explanation_text = "Assassinate [target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role]."
+					explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 				else
 					explanation_text = "Free Objective"
 
@@ -1246,7 +1246,7 @@ datum
 			proc/find_target()
 				..()
 				if(target && target.current)
-					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role], has defied us for the last time.  Make an example of him, and bring us his severed head."
+					explanation_text = "[target.current.real_name], the [target.assigned_role], has defied us for the last time.  Make an example of him, and bring us his severed head."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1255,7 +1255,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : (!role_type ? target.assigned_role : target.special_role)], has defied us for the last time.  Make an example of him, and bring us his severed head."
+					explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role], has defied us for the last time.  Make an example of him, and bring us his severed head."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1356,7 +1356,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "Steal the brain of [target.current.real_name] the [target.role_alt_title ? target.role_alt_title : (!role_type ? target.assigned_role : target.special_role)]."
+					explanation_text = "Steal the brain of [target.current.real_name] the [!role_type ? target.assigned_role : target.special_role]."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1378,7 +1378,7 @@ datum
 			proc/find_target()
 				..()
 				if(target && target.current)
-					explanation_text = "Assassinate [target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role]."
+					explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1387,7 +1387,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "Assassinate [target.current.real_name], the [target.role_alt_title ? target.role_alt_title : (!role_type ? target.assigned_role : target.special_role)]."
+					explanation_text = "Assassinate [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
 				else
 					explanation_text = "Free Objective"
 				return target
