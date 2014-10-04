@@ -42,57 +42,37 @@
 	msg += "<b>Total Players: [length(Lines)]</b>"
 	src << msg
 
-/client/verb/staffwho()
+/client/verb/adminwho()
 	set category = "Admin"
-	set name = "Staffwho"
+	set name = "Adminwho"
 
 	var/msg = ""
-	var/modmsg = ""
-	var/num_mods_online = 0
 	var/num_admins_online = 0
 	if(holder)
 		for(var/client/C in admins)
-			if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights))
-				msg += "\t[C] is a [C.holder.rank]"
+			msg += "\t[C] is a [C.holder.rank]"
 
-				if(C.holder.fakekey)
-					msg += " <i>(as [C.holder.fakekey])</i>"
+			if(C.holder.fakekey)
+				msg += " <i>(as [C.holder.fakekey])</i>"
 
-				if(isobserver(C.mob))
-					msg += " - Observing"
-				else if(istype(C.mob,/mob/new_player))
-					msg += " - Lobby"
-				else
-					msg += " - Playing"
-
-				if(C.is_afk())
-					msg += " (AFK)"
-				msg += "\n"
-
-				num_admins_online++
+			if(isobserver(C.mob))
+				msg += " - Observing"
+			else if(istype(C.mob,/mob/new_player))
+				msg += " - Lobby"
 			else
-				modmsg += "\t[C] is a [C.holder.rank]"
+				msg += " - Playing"
 
-				if(isobserver(C.mob))
-					modmsg += " - Observing"
-				else if(istype(C.mob,/mob/new_player))
-					modmsg += " - Lobby"
-				else
-					modmsg += " - Playing"
+			if(C.is_afk())
+				msg += " (AFK)"
+			msg += "\n"
 
-				if(C.is_afk())
-					modmsg += " (AFK)"
-				modmsg += "\n"
-				num_mods_online++
+			num_admins_online++
 
 	else
 		for(var/client/C in admins)
-			if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights))
-				if(!C.holder.fakekey)
-					msg += "\t[C] is a [C.holder.rank]\n"
-					num_admins_online++
-			else
-				modmsg += "\t[C] is a [C.holder.rank]\n"
+			if(!C.holder.fakekey)
+				msg += "\t[C] is a [C.holder.rank]\n"
+				num_admins_online++
 
-	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg + "\n<b> Current Moderators([num_mods_online]):</b>\n" + modmsg
+	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg
 	src << msg

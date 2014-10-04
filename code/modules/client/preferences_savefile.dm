@@ -103,13 +103,10 @@
 	S.cd = "/character[slot]"
 
 	//Character
-	S["OOC_Notes"]			>> metadata
 	S["real_name"]			>> real_name
 	S["name_is_always_random"] >> be_random_name
 	S["gender"]				>> gender
 	S["age"]				>> age
-	S["species"]			>> species
-	S["language"]			>> language
 
 	//colors to be consolidated into hex strings (requires some work with dna code)
 	S["hair_red"]			>> r_hair
@@ -141,7 +138,6 @@
 	S["job_engsec_low"]		>> job_engsec_low
 
 	//Miscellaneous
-	S["flavor_text"]		>> flavor_text
 	S["med_record"]			>> med_record
 	S["sec_record"]			>> sec_record
 	S["gen_record"]			>> gen_record
@@ -159,7 +155,6 @@
 	S["uplinklocation"] >> uplinklocation
 
 	//Sanitize
-	metadata		= sanitize_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
 	if(isnull(species)) species = "Human"
 	if(isnull(language)) language = "None"
@@ -211,13 +206,10 @@
 	S.cd = "/character[default_slot]"
 
 	//Character
-	S["OOC_Notes"]			<< metadata
 	S["real_name"]			<< real_name
 	S["name_is_always_random"] << be_random_name
 	S["gender"]				<< gender
 	S["age"]				<< age
-	S["species"]			<< species
-	S["language"]			<< language
 	S["hair_red"]			<< r_hair
 	S["hair_green"]			<< g_hair
 	S["hair_blue"]			<< b_hair
@@ -247,7 +239,6 @@
 	S["job_engsec_low"]		<< job_engsec_low
 
 	//Miscellaneous
-	S["flavor_text"]		<< flavor_text
 	S["med_record"]			<< med_record
 	S["sec_record"]			<< sec_record
 	S["gen_record"]			<< gen_record

@@ -37,26 +37,6 @@
 			output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
 
 		output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
-
-		if(!IsGuestKey(src.key))
-			establish_db_connection()
-
-			if(dbcon.IsConnected())
-				var/isadmin = 0
-				if(src.client && src.client.holder)
-					isadmin = 1
-				var/DBQuery/query = dbcon.NewQuery("SELECT id FROM erro_poll_question WHERE [(isadmin ? "" : "adminonly = false AND")] Now() BETWEEN starttime AND endtime AND id NOT IN (SELECT pollid FROM erro_poll_vote WHERE ckey = \"[ckey]\") AND id NOT IN (SELECT pollid FROM erro_poll_textreply WHERE ckey = \"[ckey]\")")
-				query.Execute()
-				var/newpoll = 0
-				while(query.NextRow())
-					newpoll = 1
-					break
-
-				if(newpoll)
-					output += "<p><b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b></p>"
-				else
-					output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
-
 		output += "</div>"
 
 		src << browse(output,"window=playersetup;size=210x240;can_close=0")
@@ -166,105 +146,6 @@
 			AttemptLateSpawn(href_list["SelectedJob"])
 			return
 
-		if(href_list["privacy_poll"])
-			establish_db_connection()
-			if(!dbcon.IsConnected())
-				return
-			var/voted = 0
-
-			//First check if the person has not voted yet.
-			var/DBQuery/query = dbcon.NewQuery("SELECT * FROM erro_privacy WHERE ckey='[src.ckey]'")
-			query.Execute()
-			while(query.NextRow())
-				voted = 1
-				break
-
-			//This is a safety switch, so only valid options pass through
-			var/option = "UNKNOWN"
-			switch(href_list["privacy_poll"])
-				if("signed")
-					option = "SIGNED"
-				if("anonymous")
-					option = "ANONYMOUS"
-				if("nostats")
-					option = "NOSTATS"
-				if("later")
-					usr << browse(null,"window=privacypoll")
-					return
-				if("abstain")
-					option = "ABSTAIN"
-
-			if(option == "UNKNOWN")
-				return
-
-			if(!voted)
-				var/sql = "INSERT INTO erro_privacy VALUES (null, Now(), '[src.ckey]', '[option]')"
-				var/DBQuery/query_insert = dbcon.NewQuery(sql)
-				query_insert.Execute()
-				usr << "<b>Thank you for your vote!</b>"
-				usr << browse(null,"window=privacypoll")
-
-		if(!ready && href_list["preference"])
-			if(client)
-				client.prefs.process_link(src, href_list)
-		else if(!href_list["late_join"])
-			new_player_panel()
-
-		if(href_list["showpoll"])
-
-			handle_player_polling()
-			return
-
-		if(href_list["pollid"])
-
-			var/pollid = href_list["pollid"]
-			if(istext(pollid))
-				pollid = text2num(pollid)
-			if(isnum(pollid))
-				src.poll_player(pollid)
-			return
-
-		if(href_list["votepollid"] && href_list["votetype"])
-			var/pollid = text2num(href_list["votepollid"])
-			var/votetype = href_list["votetype"]
-			switch(votetype)
-				if("OPTION")
-					var/optionid = text2num(href_list["voteoptionid"])
-					vote_on_poll(pollid, optionid)
-				if("TEXT")
-					var/replytext = href_list["replytext"]
-					log_text_poll_reply(pollid, replytext)
-				if("NUMVAL")
-					var/id_min = text2num(href_list["minid"])
-					var/id_max = text2num(href_list["maxid"])
-
-					if( (id_max - id_min) > 100 )	//Basic exploit prevention
-						usr << "The option ID difference is too big. Please contact administration or the database admin."
-						return
-
-					for(var/optionid = id_min; optionid <= id_max; optionid++)
-						if(!isnull(href_list["o[optionid]"]))	//Test if this optionid was replied to
-							var/rating
-							if(href_list["o[optionid]"] == "abstain")
-								rating = null
-							else
-								rating = text2num(href_list["o[optionid]"])
-								if(!isnum(rating))
-									return
-
-							vote_on_numval_poll(pollid, optionid, rating)
-				if("MULTICHOICE")
-					var/id_min = text2num(href_list["minoptionid"])
-					var/id_max = text2num(href_list["maxoptionid"])
-
-					if( (id_max - id_min) > 100 )	//Basic exploit prevention
-						usr << "The option ID difference is too big. Please contact administration or the database admin."
-						return
-
-					for(var/optionid = id_min; optionid <= id_max; optionid++)
-						if(!isnull(href_list["option_[optionid]"]))	//Test if this optionid was selected
-							vote_on_poll(pollid, optionid, 1)
-
 	proc/IsJobAvailable(rank)
 		var/datum/job/job = job_master.GetJob(rank)
 		if(!job)	return 0
@@ -314,8 +195,6 @@
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)
 		if (ticker.current_state == GAME_STATE_PLAYING)
 			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// BS12 EDIT Arrivals Announcement Computer, rather than the AI.
-			if(character.mind.role_alt_title)
-				rank = character.mind.role_alt_title
 			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] has arrived on the ship.", "Arrivals Announcement Computer")
 			del(a)
 
@@ -355,20 +234,6 @@
 
 		var/mob/living/carbon/human/new_character = new(loc)
 		new_character.lastarea = get_area(loc)
-
-		var/datum/species/chosen_species
-		if(client.prefs.species)
-			chosen_species = all_species[client.prefs.species]
-		if(chosen_species)
-			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & IS_WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
-				new_character.set_species(client.prefs.species)
-
-		var/datum/language/chosen_language
-		if(client.prefs.language)
-			chosen_language = all_languages["[client.prefs.language]"]
-		if(chosen_language)
-			if(is_alien_whitelisted(src, client.prefs.language) || !config.usealienwhitelist || !(chosen_language.flags & WHITELISTED))
-				new_character.add_language("[client.prefs.language]")
 
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)

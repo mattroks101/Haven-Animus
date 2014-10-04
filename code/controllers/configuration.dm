@@ -34,10 +34,9 @@
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/protect_roles_from_antagonist = 0// If security and such can be tratior/cult/other
 	var/continous_rounds = 1			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
-	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
-	var/Ticklag = 0.4
-	var/Tickcomp = 0
+	var/Ticklag = 0.7
+	var/Tickcomp = 1
 
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
@@ -46,7 +45,6 @@
 	var/list/modes = list()				// allowed modes
 	var/list/votable_modes = list()		// votable modes
 	var/list/probabilities = list()		// relative probability of each mode
-	var/humans_need_surnames = 0
 	var/allow_random_events = 0			// enables random events mid-round when set to 1
 	var/allow_ai = 1					// allow ai job
 	var/hostedby = null
@@ -317,9 +315,6 @@
 				if ("feature_object_spell_system")
 					config.feature_object_spell_system = 1
 
-				if ("allow_metadata")
-					config.allow_Metadata = 1
-
 				if ("traitor_scaling")
 					config.traitor_scaling = 1
 
@@ -376,10 +371,7 @@
 
 				if("allow_holidays")
 					Holiday = 1
-/*
-				if("use_irc_bot")
-					use_irc_bot = 1
-*/
+
 				if("ticklag")
 					Ticklag = text2num(value)
 
@@ -387,15 +379,9 @@
 					config.antag_hud_allowed = 1
 				if("antag_hud_restricted")
 					config.antag_hud_restricted = 1
-/*
-				if("socket_talk")
-					socket_talk = text2num(value)
-*/
+
 				if("tickcomp")
 					Tickcomp = 1
-
-				if("humans_need_surnames")
-					humans_need_surnames = 1
 
 				if("tor_ban")
 					ToRban = 1

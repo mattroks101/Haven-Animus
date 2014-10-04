@@ -42,9 +42,6 @@ var/global/datum/controller/occupations/job_master
 			if(J.title == rank)	return J
 		return null
 
-	proc/GetPlayerAltTitle(mob/new_player/player, rank)
-		return player.client.prefs.GetPlayerAltTitle(GetJob(rank))
-
 	proc/AssignRole(var/mob/new_player/player, var/rank, var/latejoin = 0)
 		Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
 		if(player && player.mind && rank)
@@ -58,7 +55,6 @@ var/global/datum/controller/occupations/job_master
 			if((job.current_positions < position_limit) || position_limit == -1)
 				Debug("Player: [player] is now Rank: [rank], JCP:[job.current_positions], JPL:[position_limit]")
 				player.mind.assigned_role = rank
-				player.mind.role_alt_title = GetPlayerAltTitle(player, rank)
 				unassigned -= player
 				job.current_positions++
 				return 1
@@ -400,7 +396,6 @@ var/global/datum/controller/occupations/job_master
 		var/alt_title = null
 		if(H.mind)
 			H.mind.assigned_role = rank
-			alt_title = H.mind.role_alt_title
 
 			switch(rank)
 				if("Cyborg")
