@@ -1,6 +1,5 @@
 var/CMinutes = null
 var/savefile/Banlist
-var/list/bwhitelist
 
 
 /proc/CheckBan(var/ckey, var/id, var/address)
@@ -24,7 +23,7 @@ var/list/bwhitelist
 				.["desc"] = "\nReason: [Banlist["reason"]]\nExpires: [GetExp(Banlist["minutes"])]\nBy: [Banlist["bannedby"]][appeal]"
 		else
 			Banlist.cd	= "/base/[ckey][id]"
-			.["desc"]	= "\nReason: [Banlist["reason"]]\nExpires: <B>PERMANENT</B>\nBy: [Banlist["bannedby"]][appeal]"
+			.["desc"]	= "\nReason: [Banlist["reason"]]\nExpires: <B>PERMENANT</B>\nBy: [Banlist["bannedby"]][appeal]"
 		.["reason"]	= "ckey/id"
 		return .
 	else
@@ -50,7 +49,7 @@ var/list/bwhitelist
 					else
 						.["desc"] = "\nReason: [Banlist["reason"]]\nExpires: [GetExp(Banlist["minutes"])]\nBy: [Banlist["bannedby"]][appeal]"
 				else
-					.["desc"] = "\nReason: [Banlist["reason"]]\nExpires: <B>PERMANENT</B>\nBy: [Banlist["bannedby"]][appeal]"
+					.["desc"] = "\nReason: [Banlist["reason"]]\nExpires: <B>PERMENANT</B>\nBy: [Banlist["bannedby"]][appeal]"
 				.["reason"] = matches
 				return .
 	return 0
@@ -117,6 +116,7 @@ var/list/bwhitelist
 		Banlist["temp"] << temp
 		if (temp)
 			Banlist["minutes"] << bantimestamp
+		notes_add(ckey, "Banned for [minutes] minutes - [reason]")
 	return 1
 
 /proc/RemoveBan(foldername)
@@ -134,8 +134,8 @@ var/list/bwhitelist
 		log_admin("Ban Expired: [key]")
 		message_admins("Ban Expired: [key]")
 	else
-		ban_unban_log_save("[key_name_admin(usr)] unbanned [key]")
-		log_admin("[key_name_admin(usr)] unbanned [key]")
+		ban_unban_log_save("[key_name(usr)] unbanned [key]")
+		log_admin("[key_name(usr)] unbanned [key]")
 		message_admins("[key_name_admin(usr)] unbanned: [key]")
 		feedback_inc("ban_unban",1)
 		usr.client.holder.DB_ban_unban( ckey(key), BANTYPE_ANY_FULLBAN)
@@ -225,28 +225,3 @@ var/list/bwhitelist
 	for (var/A in Banlist.dir)
 		RemoveBan(A)
 
-/proc/load_bwhitelist()
-	log_admin("Loading whitelist")
-	bwhitelist = list()
-	var/DBConnection/dbcon1 = new()
-	dbcon1.Connect("dbi:mysql:forum2:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
-	if(!dbcon1.IsConnected())
-		log_admin("Failed to load bwhitelist. Error: [dbcon1.ErrorMsg()]")
-		return
-	var/DBQuery/query = dbcon1.NewQuery("SELECT byond FROM Z_whitelist ORDER BY byond ASC")
-	query.Execute()
-	while(query.NextRow())
-		bwhitelist += "[query.item[1]]"
-	if (bwhitelist==list(  ))
-		log_admin("Failed to load bwhitelist or its empty")
-		return
-	dbcon1.Disconnect()
-
-/proc/check_bwhitelist(var/K)
-	if (!bwhitelist)
-		load_bwhitelist()
-		if (!bwhitelist)
-			return 0
-	if (K in bwhitelist)
-		return 1
-	return 0
