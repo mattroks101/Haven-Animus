@@ -364,5 +364,5 @@
 	return L
 
 /turf/handle_fall(mob/faller, forced)
-	faller.lying = pick(90, 270)
+	faller.lying = 90
 

@@ -77,6 +77,7 @@
 
 /obj/machinery/door/firedoor/attack_hand(mob/user as mob)
 	add_fingerprint(user)
+/*
 	if(operating)
 		return//Already doing something.
 
@@ -121,6 +122,8 @@
 			if(alarmed)
 				nextstate = CLOSED
 				close()
+	*/
+	return
 
 /obj/machinery/door/firedoor/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	add_fingerprint(user)
@@ -141,7 +144,7 @@
 		return
 
 
-	if( istype(C, /obj/item/weapon/crowbar) || ( istype(C,/obj/item/weapon/twohanded/fireaxe) && C:wielded == 1 ) )
+	if(istype(C, /obj/item/weapon/crowbar) || (istype(C,/obj/item/weapon/twohanded/fireaxe) && C:wielded == 1 ) )
 		if(operating)
 			return
 
