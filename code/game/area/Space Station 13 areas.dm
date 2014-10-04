@@ -577,6 +577,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Prison Morgue"
 	icon_state = "morgue"
 
+/area/prison/execution
+	name = "\improper Execution Room"
+	icon_state = "morgue"
+
 /area/prison/medical_research
 	name = "\improper Prison Genetic Research"
 	icon_state = "medresearch"

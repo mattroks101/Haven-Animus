@@ -199,7 +199,10 @@
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 	var/on = 0					// 1 if on, 0 if off
 	var/on_gs = 0
-	var/brightness = 8			// luminosity when on, also used in power calculation
+	var/brightnessred = 8				// luminosity when on, also used in power calculation
+	var/brightnessgreen = 8
+	var/brightnessblue = 8
+
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0
 	var/light_type = /obj/item/weapon/light/tube		// the type of light item
@@ -215,7 +218,9 @@
 	icon_state = "bulb1"
 	base_state = "bulb"
 	fitting = "bulb"
-	brightness = 4
+	brightnessred = 5
+	brightnessgreen = 5
+	brightnessblue = 4
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
@@ -224,7 +229,9 @@
 	name = "spotlight"
 	fitting = "large tube"
 	light_type = /obj/item/weapon/light/tube/large
-	brightness = 12
+	brightnessred = 10
+	brightnessgreen = 10
+	brightnessblue = 10
 
 /obj/machinery/light/built/New()
 	status = LIGHT_EMPTY
@@ -243,11 +250,16 @@
 	spawn(2)
 		switch(fitting)
 			if("tube")
-				brightness = 8
+				brightnessred = 8
+				brightnessgreen = 8
+				brightnessblue = 8
 				if(prob(2))
 					broken(1)
 			if("bulb")
-				brightness = 4
+				brightnessred = 5
+				brightnessgreen = 5
+				brightnessblue = 4
+
 				if(prob(5))
 					broken(1)
 		spawn(1)
@@ -281,7 +293,7 @@
 
 	update_icon()
 	if(on)
-		if(luminosity != brightness)
+		if(luminosity != brightnessred)
 			switchcount++
 			if(rigged)
 				if(status == LIGHT_OK && trigger)
@@ -295,10 +307,10 @@
 					status = LIGHT_BURNED
 					icon_state = "[base_state]-burned"
 					on = 0
-					SetLuminosity(0)
+					SetLuminosity(0, 0, 0)
 			else
 				use_power = 2
-				SetLuminosity(brightness)
+				SetLuminosity(brightnessred, brightnessgreen, brightnessblue)
 	else
 		use_power = 1
 		SetLuminosity(0)
@@ -355,7 +367,11 @@
 				user << "You insert the [L.name]."
 				switchcount = L.switchcount
 				rigged = L.rigged
-				brightness = L.brightness
+
+				brightnessred = L.brightnessred
+				brightnessgreen = L.brightnessgreen
+				brightnessblue = L.brightnessblue
+
 				on = has_power()
 				update()
 
@@ -513,7 +529,9 @@
 	var/obj/item/weapon/light/L = new light_type()
 	L.status = status
 	L.rigged = rigged
-	L.brightness = src.brightness
+	L.brightnessred = src.brightnessred
+	L.brightnessgreen = src.brightnessgreen
+	L.brightnessblue = src.brightnessblue
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
@@ -538,7 +556,9 @@
 	var/obj/item/weapon/light/L = new light_type()
 	L.status = status
 	L.rigged = rigged
-	L.brightness = brightness
+	L.brightnessred = brightnessred
+	L.brightnessgreen = brightnessgreen
+	L.brightnessblue = brightnessblue
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
@@ -571,7 +591,10 @@
 	if(status == LIGHT_OK)
 		return
 	status = LIGHT_OK
-	brightness = initial(brightness)
+	brightnessred = initial(brightnessred)
+	brightnessgreen = initial(brightnessgreen)
+	brightnessblue = initial(brightnessblue)
+
 	on = 1
 	update()
 
@@ -646,7 +669,12 @@
 	var/switchcount = 0	// number of times switched
 	m_amt = 60
 	var/rigged = 0		// true if rigged to explode
-	var/brightness = 2 //how much light it gives off
+	var/brightness = 2
+	var/brightnessred = 2	//how much light it gives off
+	var/brightnessgreen = 2
+	var/brightnessblue = 2
+
+
 
 /obj/item/weapon/light/tube
 	name = "light tube"
@@ -655,12 +683,19 @@
 	base_state = "ltube"
 	item_state = "c_tube"
 	g_amt = 100
-	brightness = 8
+	brightnessred = 8	//how much light it gives off
+	brightnessgreen = 8
+	brightnessblue = 8
+
+
+
 
 /obj/item/weapon/light/tube/large
 	w_class = 2
 	name = "large light tube"
-	brightness = 15
+	brightnessred = 10	//how much light it gives off
+	brightnessgreen = 10
+	brightnessblue = 10
 
 /obj/item/weapon/light/bulb
 	name = "light bulb"
@@ -669,7 +704,9 @@
 	base_state = "lbulb"
 	item_state = "contvapour"
 	g_amt = 100
-	brightness = 5
+	brightnessred = 5
+	brightnessgreen = 5
+	brightnessblue = 4
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
 	..()
@@ -682,7 +719,9 @@
 	base_state = "fbulb"
 	item_state = "egg4"
 	g_amt = 100
-	brightness = 5
+	brightnessred = 5
+	brightnessgreen = 5
+	brightnessblue = 4
 
 // update the icon state and description of the light
 
@@ -703,9 +742,13 @@
 	..()
 	switch(name)
 		if("light tube")
-			brightness = rand(6,9)
+			brightnessred = 8
+			brightnessgreen = 8
+			brightnessblue = 8
 		if("light bulb")
-			brightness = rand(4,6)
+			brightnessred = 5
+			brightnessgreen = 5
+			brightnessblue = 4
 	update()
 
 

@@ -161,6 +161,18 @@
 	active = 1
 	icon_state = "launcheract"
 
+
+	for(var/obj/structure/stool/bed/chair/e_chair/M in world)
+		if (M.id == src.id)
+			spawn(0)
+				if(!M.on)
+					usr << "<span class='notice'>You switch [src] on, and activate it.</span>"
+					M.on = 1
+				else
+					usr << "<span class='notice'>You activate [src].</span>"
+				M.shock()
+				return
+
 	for(var/obj/machinery/door/poddoor/M in world)
 		if (M.id == src.id)
 			spawn( 0 )

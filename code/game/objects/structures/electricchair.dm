@@ -5,6 +5,7 @@
 	var/on = 0
 	var/obj/item/assembly/shock_kit/part = null
 	var/last_time = 1.0
+	var/id = null
 
 /obj/structure/stool/bed/chair/e_chair/New()
 	..()
