@@ -103,7 +103,6 @@
 	S.cd = "/character[slot]"
 
 	//Character
-	S["OOC_Notes"]			>> metadata
 	S["real_name"]			>> real_name
 	S["name_is_always_random"] >> be_random_name
 	S["gender"]				>> gender
@@ -159,7 +158,6 @@
 	S["uplinklocation"] >> uplinklocation
 
 	//Sanitize
-	metadata		= sanitize_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
 	if(isnull(species)) species = "Human"
 	if(isnull(language)) language = "None"
@@ -211,7 +209,6 @@
 	S.cd = "/character[default_slot]"
 
 	//Character
-	S["OOC_Notes"]			<< metadata
 	S["real_name"]			<< real_name
 	S["name_is_always_random"] << be_random_name
 	S["gender"]				<< gender

@@ -34,10 +34,9 @@
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/protect_roles_from_antagonist = 0// If security and such can be tratior/cult/other
 	var/continous_rounds = 1			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
-	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
-	var/Ticklag = 0.4
-	var/Tickcomp = 0
+	var/Ticklag = 0.7
+	var/Tickcomp = 1
 
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
@@ -316,9 +315,6 @@
 
 				if ("feature_object_spell_system")
 					config.feature_object_spell_system = 1
-
-				if ("allow_metadata")
-					config.allow_Metadata = 1
 
 				if ("traitor_scaling")
 					config.traitor_scaling = 1

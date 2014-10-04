@@ -111,8 +111,6 @@ datum/preferences
 
 	var/uplinklocation = "PDA"
 
-		// OOC Metadata:
-	var/metadata = ""
 	var/slot_name = ""
 
 /datum/preferences/New(client/C)
@@ -127,92 +125,6 @@ datum/preferences
 	real_name = random_name(gender)
 
 /datum/preferences
-	proc/ZeroSkills(var/forced = 0)
-		for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
-			if(!skills.Find(S.ID) || forced)
-				skills[S.ID] = SKILL_NONE
-	proc/CalculateSkillPoints()
-		used_skillpoints = 0
-		for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
-			var/multiplier = 1
-			switch(skills[S.ID])
-				if(SKILL_NONE)
-					used_skillpoints += 0 * multiplier
-				if(SKILL_BASIC)
-					used_skillpoints += 1 * multiplier
-				if(SKILL_ADEPT)
-					// secondary skills cost less
-					if(S.secondary)
-						used_skillpoints += 1 * multiplier
-					else
-						used_skillpoints += 3 * multiplier
-				if(SKILL_EXPERT)
-					// secondary skills cost less
-					if(S.secondary)
-						used_skillpoints += 3 * multiplier
-					else
-						used_skillpoints += 6 * multiplier
-
-	proc/GetSkillClass(points)
-		// skill classes describe how your character compares in total points
-		var/original_points = points
-		points -= min(round((age - 20) / 2.5), 4) // every 2.5 years after 20, one extra skillpoint
-		if(age > 30)
-			points -= round((age - 30) / 5) // every 5 years after 30, one extra skillpoint
-		if(original_points > 0 && points <= 0) points = 1
-		switch(points)
-			if(0)
-				return "Unconfigured"
-			if(1 to 3)
-				return "Terrifying"
-			if(4 to 6)
-				return "Below Average"
-			if(7 to 10)
-				return "Average"
-			if(11 to 14)
-				return "Above Average"
-			if(15 to 18)
-				return "Exceptional"
-			if(19 to 24)
-				return "Genius"
-			if(24 to 1000)
-				return "God"
-
-	proc/SetSkills(mob/user)
-		if(SKILLS == null)
-			setup_skills()
-
-		if(skills.len == 0)
-			ZeroSkills()
-
-
-		var/HTML = "<body>"
-		HTML += "<b>Select your Skills</b><br>"
-		HTML += "Current skill level: <b>[GetSkillClass(used_skillpoints)]</b> ([used_skillpoints])<br>"
-		HTML += "<a href=\"byond://?src=\ref[user];preference=skills;preconfigured=1;\">Use preconfigured skillset</a><br>"
-		HTML += "<table>"
-		for(var/V in SKILLS)
-			HTML += "<tr><th colspan = 5><b>[V]</b>"
-			HTML += "</th></tr>"
-			for(var/datum/skill/S in SKILLS[V])
-				var/level = skills[S.ID]
-				HTML += "<tr style='text-align:left;'>"
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;skillinfo=\ref[S]'>[S.name]</a></th>"
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_NONE]'><font color=[(level == SKILL_NONE) ? "red" : "black"]>\[Untrained\]</font></a></th>"
-				// secondary skills don't have an amateur level
-				if(S.secondary)
-					HTML += "<th></th>"
-				else
-					HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_BASIC]'><font color=[(level == SKILL_BASIC) ? "red" : "black"]>\[Amateur\]</font></a></th>"
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_ADEPT]'><font color=[(level == SKILL_ADEPT) ? "red" : "black"]>\[Trained\]</font></a></th>"
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_EXPERT]'><font color=[(level == SKILL_EXPERT) ? "red" : "black"]>\[Professional\]</font></a></th>"
-				HTML += "</tr>"
-		HTML += "</table>"
-		HTML += "<a href=\"byond://?src=\ref[user];preference=skills;cancel=1;\">\[Done\]</a>"
-
-		user << browse(null, "window=preferences")
-		user << browse(HTML, "window=show_skills;size=600x800")
-		return
 
 	proc/ShowChoices(mob/user)
 		if(!user || !user.client)	return
@@ -245,17 +157,11 @@ datum/preferences
 
 		dat += "<br>"
 		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
-//		dat += "<b>Custom UI</b>(recommended for White UI):<br>"
-//		dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
-//		dat += "-Alpha(transparency): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"  //I don't need this bay12 shit
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</b></a><br>"
 		dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "All Emotes" : "Nearest Creatures"]</b></a><br>"
 		dat += "<b>Ghost radio:</b> <a href='?_src_=prefs;preference=ghost_radio'><b>[(toggles & CHAT_GHOSTRADIO) ? "All Chatter" : "Nearest Speakers"]</b></a><br>"
-
-		if(config.allow_Metadata)
-			dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a><br>"
 
 		dat += "<br><b>Occupation Choices</b><br>"
 		dat += "\t<a href='?_src_=prefs;preference=job;task=menu'><b>Set Preferences</b></a><br>"
@@ -352,8 +258,6 @@ datum/preferences
 			dat += "<b><a href=\"byond://?src=\ref[user];preference=records;record=1\">Character Records</a></b><br>"
 
 		dat += "<b><a href=\"byond://?src=\ref[user];preference=antagoptions;active=0\">Set Antag Options</b></a><br>"
-
-		dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
 
 		dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=input'><b>Set Flavor Text</b></a><br>"
 		if(lentext(flavor_text) <= 40)
@@ -734,40 +638,6 @@ datum/preferences
 				else
 					SetChoices(user)
 			return 1
-		else if(href_list["preference"] == "skills")
-			if(href_list["cancel"])
-				user << browse(null, "window=show_skills")
-				ShowChoices(user)
-			else if(href_list["skillinfo"])
-				var/datum/skill/S = locate(href_list["skillinfo"])
-				var/HTML = "<b>[S.name]</b><br>[S.desc]"
-				user << browse(HTML, "window=\ref[user]skillinfo")
-			else if(href_list["setskill"])
-				var/datum/skill/S = locate(href_list["setskill"])
-				var/value = text2num(href_list["newvalue"])
-				skills[S.ID] = value
-				CalculateSkillPoints()
-				SetSkills(user)
-			else if(href_list["preconfigured"])
-				var/selected = input(user, "Select a skillset", "Skillset") as null|anything in SKILL_PRE
-				if(!selected) return
-
-				ZeroSkills(1)
-				for(var/V in SKILL_PRE[selected])
-					if(V == "field")
-						skill_specialization = SKILL_PRE[selected]["field"]
-						continue
-					skills[V] = SKILL_PRE[selected][V]
-				CalculateSkillPoints()
-
-				SetSkills(user)
-			else if(href_list["setspecialization"])
-				skill_specialization = href_list["setspecialization"]
-				CalculateSkillPoints()
-				SetSkills(user)
-			else
-				SetSkills(user)
-			return 1
 
 		else if(href_list["preference"] == "records")
 			if(text2num(href_list["record"]) >= 1)
@@ -951,11 +821,6 @@ datum/preferences
 									new_languages += lang.name
 
 						language = input("Please select a secondary language", "Character Generation", null) in new_languages
-
-					if("metadata")
-						var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
-						if(new_metadata)
-							metadata = sanitize(copytext(new_metadata,1,MAX_MESSAGE_LEN))
 
 					if("b_type")
 						var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
