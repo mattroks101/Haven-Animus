@@ -42,7 +42,46 @@
 	src.ui_interact(user)
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/attack_hand(mob/user as mob)
-	src.ui_interact(user)
+//	src.ui_interact(user)
+	user.set_machine(src)
+	var/temp_text = ""
+	if(air_contents.temperature > (T0C - 20))
+		temp_text = "<FONT color=red>[air_contents.temperature]</FONT>"
+	else if(air_contents.temperature < (T0C - 20) && air_contents.temperature > (T0C - 100))
+		temp_text = "<FONT color=black>[air_contents.temperature]</FONT>"
+	else
+		temp_text = "<FONT color=blue>[air_contents.temperature]</FONT>"
+
+	var/dat = {"<B>Cryo gas cooling system</B><BR>
+	Current status: [ on ? "<A href='?src=\ref[src];start=1'>Off</A> <B>On</B>" : "<B>Off</B> <A href='?src=\ref[src];start=1'>On</A>"]<BR>
+	Current gas temperature: [temp_text]<BR>
+	Current air pressure: [air_contents.return_pressure()]<BR>
+	Target gas temperature: <A href='?src=\ref[src];temp=-100'>-</A> <A href='?src=\ref[src];temp=-10'>-</A> <A href='?src=\ref[src];temp=-1'>-</A> [current_temperature] <A href='?src=\ref[src];temp=1'>+</A> <A href='?src=\ref[src];temp=10'>+</A> <A href='?src=\ref[src];temp=100'>+</A><BR>
+	"}
+
+	user << browse(dat, "window=freezer;size=400x500")
+	onclose(user, "freezer")
+
+/obj/machinery/atmospherics/unary/cold_sink/freezer/Topic(href, href_list)
+	if ((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon/ai)))
+		usr.set_machine(src)
+		if (href_list["start"])
+			if(isobserver(usr))
+				return
+			src.on = !src.on
+			update_icon()
+		if(href_list["temp"])
+			if(isobserver(usr))
+				return
+			var/amount = text2num(href_list["temp"])
+			if(amount > 0)
+				src.current_temperature = min(T20C, src.current_temperature+amount)
+			else
+				src.current_temperature = max((T0C - 200), src.current_temperature+amount)
+	src.updateUsrDialog()
+	src.add_fingerprint(usr)
+	return
+
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	// this is the data which will be sent to the ui
@@ -53,7 +92,7 @@
 	data["minGasTemperature"] = round(T0C - 200)
 	data["maxGasTemperature"] = round(T20C)
 	data["targetGasTemperature"] = round(current_temperature)
-	
+
 	var/temp_class = "good"
 	if (air_contents.temperature > (T0C - 20))
 		temp_class = "bad"
@@ -74,7 +113,7 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/atmospherics/unary/cold_sink/freezer/Topic(href, href_list)	
+/obj/machinery/atmospherics/unary/cold_sink/freezer/Topic(href, href_list)
 	if (href_list["toggleStatus"])
 		src.on = !src.on
 		update_icon()
@@ -136,7 +175,7 @@
 
 /obj/machinery/atmospherics/unary/heat_reservoir/heater/attack_hand(mob/user as mob)
 	src.ui_interact(user)
-	
+
 /obj/machinery/atmospherics/unary/heat_reservoir/heater/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	// this is the data which will be sent to the ui
 	var/data[0]
@@ -146,7 +185,7 @@
 	data["minGasTemperature"] = round(T20C)
 	data["maxGasTemperature"] = round(T20C+280)
 	data["targetGasTemperature"] = round(current_temperature)
-	
+
 	var/temp_class = "normal"
 	if (air_contents.temperature > (T20C+40))
 		temp_class = "bad"
@@ -175,7 +214,7 @@
 			src.current_temperature = min((T20C+280), src.current_temperature+amount)
 		else
 			src.current_temperature = max(T20C, src.current_temperature+amount)
-	
+
 	src.add_fingerprint(usr)
 	return 1
 
