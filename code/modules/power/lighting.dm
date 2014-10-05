@@ -250,9 +250,10 @@
 	spawn(2)
 		switch(fitting)
 			if("tube")
-				brightnessred = 8
-				brightnessgreen = 8
-				brightnessblue = 8
+				var/br = pick(7,9)
+				brightnessred = br
+				brightnessgreen = br
+				brightnessblue = br
 				if(prob(2))
 					broken(1)
 			if("bulb")
