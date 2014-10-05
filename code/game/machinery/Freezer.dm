@@ -36,10 +36,10 @@
 	return
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/attack_ai(mob/user as mob)
-	src.ui_interact(user)
+	src.attack_hand(user)
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/attack_paw(mob/user as mob)
-	src.ui_interact(user)
+	src.attack_hand(user)
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/attack_hand(mob/user as mob)
 //	src.ui_interact(user)
@@ -112,20 +112,6 @@
 		ui.open()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
-
-/obj/machinery/atmospherics/unary/cold_sink/freezer/Topic(href, href_list)
-	if (href_list["toggleStatus"])
-		src.on = !src.on
-		update_icon()
-	if(href_list["temp"])
-		var/amount = text2num(href_list["temp"])
-		if(amount > 0)
-			src.current_temperature = min(T20C, src.current_temperature+amount)
-		else
-			src.current_temperature = max((T0C - 200), src.current_temperature+amount)
-
-	src.add_fingerprint(usr)
-	return 1
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/process()
 	..()
