@@ -33,7 +33,7 @@
 		amount--
 	return
 
-/obj/structure/closet/walllocker/verb/verb_toggleopen()
+/obj/structure/closet/walllocker/verb_toggleopen()
 	set hidden = 1
 
 /obj/structure/closet/walllocker/emerglocker/north
