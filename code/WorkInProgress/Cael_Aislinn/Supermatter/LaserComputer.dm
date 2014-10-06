@@ -45,7 +45,7 @@
 			return
 
 
-	user.machine = src
+	usr.set_machine(src)
 	var/t = "<TT><B>Laser status monitor</B><HR>"
 
 	var/obj/machinery/engine/laser/laser = src.laser[1]
@@ -97,17 +97,17 @@
 		for(var/obj/machinery/engine/laser/laser in src.laser)
 			laser.power += d
 			laser.setpower(max(1, min(3000, laser.power)))// clamp to range
-			src.updateDialog()
+		src.updateDialog()
 	else if( href_list["online"] )
 		for(var/obj/machinery/engine/laser/laser in src.laser)
 			laser.on = !laser.on
-			src.updateDialog()
+		src.updateDialog()
 	else if( href_list["freq"] )
 		var/amt = text2num(href_list["freq"])
 		for(var/obj/machinery/engine/laser/laser in src.laser)
 			if(laser.freq+amt>0)
 				laser.freq+=amt
-				src.updateDialog()
+		src.updateDialog()
 /obj/machinery/computer/lasercon/process()
 	if(!(stat & (NOPOWER|BROKEN)) )
 		use_power(250)
