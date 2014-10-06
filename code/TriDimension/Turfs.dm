@@ -43,12 +43,12 @@
 								return
 							else
 								var/mob/living/carbon/human/H = AM
-								var/damage = 5
-								H.apply_damage(min(rand(0,damage),0), BRUTE, "groin")
-								H.apply_damage(min(rand(0,damage),0), BRUTE, "l_leg")
-								H.apply_damage(min(rand(0,damage),0), BRUTE, "r_leg")
-								H.apply_damage(min(rand(0,damage),0), BRUTE, "l_foot")
-								H.apply_damage(min(rand(0,damage),0), BRUTE, "r_foot")
+								var/damage = 10
+//								H.apply_damage(rand(0,damage), BRUTE, "groin")
+								H.apply_damage(rand(0,damage), BRUTE, "l_leg")
+								H.apply_damage(rand(0,damage), BRUTE, "r_leg")
+								H.apply_damage(rand(0,damage), BRUTE, "l_foot")
+								H.apply_damage(rand(0,damage), BRUTE, "r_foot")
 								H:weakened = max(H:weakened,2)
 								H:updatehealth()
 		return ..()
