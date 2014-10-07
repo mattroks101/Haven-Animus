@@ -26,6 +26,7 @@ datum/shuttle_controller
 	var/always_fake_recall = 0
 	var/deny_shuttle = 0 //for admins not allowing it to be called.
 	var/departed = 0
+	var/last60 = 0
 	// call the shuttle
 	// if not called before, set the endtime to T+600 seconds
 	// otherwise if outgoing, switch to incoming
@@ -38,6 +39,7 @@ datum/shuttle_controller
 		else
 			settimeleft(SHUTTLEARRIVETIME*coeff)
 			online = 1
+			last60 = timeleft()
 			if(always_fake_recall)
 				fake_recall = rand(300,500)		//turning on the red lights in hallways
 		if(alert == 0)
@@ -377,6 +379,24 @@ datum/shuttle_controller/emergency_shuttle/process()
 						D.locked = 1
 
 			if(timeleft>0)
+				if(timeleft > 60)
+					radioalert("Escape Computer", "[round(timeleft()/60,1)] minutes until escape pod launch.")
+					if(timeleft() - 60 > 60)
+						last60 = timeleft() - 60
+					else
+						last60 = 60
+				else if(timeleft > 30)
+					radioalert("Escape Computer", "[round(timeleft(),1)] seconds until escape pod launch.")
+					if(timeleft() - 10 > 10)
+						last60 = timeleft() - 10
+					else
+						last60 = timeleft() - 1
+				else
+					if(timeleft() > 0)
+						radioalert("Escape Computer", "[round(timeleft(),1)] seconds.")
+					else
+						radioalert("Escape Computer", "Escape pods launched.")
+					last60 = timeleft() - 1
 				return 0
 
 			/* --- Shuttle leaves the station, enters transit --- */

@@ -120,6 +120,8 @@
 		new /obj/item/clothing/glasses/meson(src)
 		new /obj/item/weapon/cartridge/engineering(src)
 		new /obj/item/taperoll/engineering(src)
+		new /obj/item/clothing/under/rank/engineer(src)
+		new /obj/item/clothing/shoes/orange(src)
 		return
 /obj/structure/closet/secure_closet/atmos_personal
 	name = "Technician's Locker"

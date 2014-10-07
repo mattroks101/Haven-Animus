@@ -23,10 +23,21 @@
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon_state = "security"
 	item_state = "r_suit"
+	item_color = "red_s"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	flags = FPRINT | TABLEPASS
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/under/rank/security/standard
+	name = "security officer's jumpsuit"
+	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
+	icon_state = "security"
+	item_state = "r_suit"
 	item_color = "secred"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
+
 
 /obj/item/clothing/under/rank/dispatch
 	name = "dispatcher's uniform"
@@ -38,7 +49,7 @@
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/rank/security2
+/obj/item/clothing/under/rank/security/alternative
 	name = "security officer's uniform"
 	desc = "It's made of a slightly sturdier material, to allow for robust protection."
 	icon_state = "redshirt2"
