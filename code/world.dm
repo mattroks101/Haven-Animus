@@ -104,6 +104,8 @@
 			s["player[n]"] = C.key
 			n++
 		s["players"] = n
+
+		if(revdata)	s["revision"] = revdata.revision
 		s["admins"] = admins
 
 		return list2params(s)
