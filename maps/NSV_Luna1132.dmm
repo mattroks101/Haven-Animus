@@ -5145,7 +5145,7 @@
 "bUW" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/obj/machinery/meter{name = "Pressure Meter"},/turf/simulated/wall/r_wall,/area/luna/hallway/primary/services)
 "bUX" = (/obj/machinery/atmospherics/pipe/simple{pipe_color = "blue"; dir = 4; icon_state = "intact-b"; initialize_directions = 6; level = 2; name = "pipe"},/turf/simulated/floor,/area/luna/hallway/primary/services)
 "bUY" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/wall/r_wall,/area/atmos)
-"bUZ" = (/obj/machinery/atmospherics/pipe/manifold{pipe_color = "blue"; dir = 4; icon_state = "manifold-b"; initialize_directions = 11; level = 2; name = "pipe manifold"},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor,/area/atmos)
+"bUZ" = (/obj/machinery/atmospherics/pipe/manifold{pipe_color = "blue"; dir = 4; icon_state = "manifold-b"; initialize_directions = 11; level = 2; name = "pipe manifold"},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/obj/machinery/pipedispenser,/turf/simulated/floor,/area/atmos)
 "bVa" = (/obj/machinery/atmospherics/binary/pump{dir = 0; icon_state = "intact_on"; name = "Waste In"; on = 1},/turf/simulated/floor{tag = "icon-green (EAST)"; icon_state = "green"; dir = 4},/area/atmos)
 "bVb" = (/obj/machinery/atmospherics/pipe/simple{pipe_color = "blue"; icon_state = "intact-b"; level = 2},/turf/simulated/floor,/area/atmos)
 "bVc" = (/obj/machinery/atmospherics/pipe/simple{dir = 9; icon_state = "intact"; level = 2},/turf/simulated/floor,/area/atmos)
