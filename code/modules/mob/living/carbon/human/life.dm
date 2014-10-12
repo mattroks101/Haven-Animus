@@ -140,6 +140,8 @@
 /mob/living/carbon/human
 
 	proc/handle_disabilities()
+		if(zombie)
+			return
 		if (disabilities & EPILEPSY)
 			if ((prob(1) && paralysis < 1))
 				src << "\red You have a seizure!"
@@ -217,6 +219,18 @@
 
 	proc/handle_mutations_and_radiation()
 
+		if(zombie)
+			druggy = 0
+			stunned = 0
+			paralysis = 0
+			handcuffed = 0
+			oxyloss = 0
+			if(l_hand)
+				drop_from_inventory(l_hand)
+			if(r_hand)
+				drop_from_inventory(r_hand)
+
+
 		if(getFireLoss())
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
@@ -228,7 +242,7 @@
 			Weaken(3)
 			emote("collapse")
 
-		if (radiation)
+		if (radiation && !zombie)
 			if (radiation > 100)
 				radiation = 100
 				Weaken(10)
@@ -295,7 +309,7 @@
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
 		// HACK NEED CHANGING LATER
-		if(health < config.health_threshold_crit)
+		if(health < config.health_threshold_crit && !zombie)
 			losebreath++
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
@@ -411,7 +425,7 @@
 				failed_last_breath = 1
 				oxygen_alert = max(oxygen_alert, 1)
 				return 0
-			if(health > config.health_threshold_crit)
+			if(health > config.health_threshold_crit && !zombie)
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 				failed_last_breath = 1
 			else
@@ -999,10 +1013,11 @@
 				handle_blood()
 
 			if(health <= config.health_threshold_dead || brain_op_stage == 4.0)
-				death()
-				blinded = 1
-				silent = 0
-				return 1
+				if(!zombie)
+					death()
+					blinded = 1
+					silent = 0
+					return 1
 
 			// the analgesic effect wears off slowly
 			analgesic = max(0, analgesic - 1)
@@ -1229,6 +1244,11 @@
 				see_in_dark = 8
 				if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
+			if(zombie)
+//				if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
+				sight |= SEE_MOBS
+				see_in_dark = 4
+
 			if(seer==1)
 				var/obj/effect/rune/R = locate() in loc
 				if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
@@ -1300,6 +1320,8 @@
 								if(20 to 40)			healths.icon_state = "health4"
 								if(0 to 20)				healths.icon_state = "health5"
 								else					healths.icon_state = "health6"
+				if(zombie)
+					healths.icon_state = "health7"
 
 			if(nutrition_icon)
 				switch(nutrition)
@@ -1466,6 +1488,7 @@
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode
 		if(analgesic || (species && species.flags & NO_PAIN)) return // analgesic avoids all traumatic shock temporarily
+		if(zombie) return
 
 		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)

@@ -16,6 +16,13 @@
 		return
 	return
 
+/obj/effect/portal/attack_hand(mob/user as mob)
+	if(user)
+		spawn(0)
+			src.teleport(user)
+			return
+		return
+
 /obj/effect/portal/HasEntered(AM as mob|obj)
 	spawn(0)
 		src.teleport(AM)

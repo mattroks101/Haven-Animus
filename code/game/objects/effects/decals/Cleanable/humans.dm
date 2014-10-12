@@ -95,6 +95,19 @@ var/global/list/image/splatter_cache=list()
 		user.update_inv_gloves(1)
 		user.verbs += /mob/living/carbon/human/proc/bloody_doodle
 
+/obj/effect/decal/cleanable/trail_holder //not a child of blood on purpose
+	name = "blood"
+	icon_state = "blank"
+	desc = "Your instincts say you shouldn't be following these."
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	layer = 2
+	random_icon_states = null
+	var/list/existing_dirs = list()
+	blood_DNA = list()
+
+
 /obj/effect/decal/cleanable/blood/splatter
         random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
         amount = 2

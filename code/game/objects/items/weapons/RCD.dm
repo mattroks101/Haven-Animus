@@ -89,7 +89,7 @@ RCD
 
 		switch(mode)
 			if(1)
-				if(istype(A, /turf/space))
+				if(istype(A, /turf/space) || istype(A, /turf/simulated/floor/open))
 					if(useResource(1, user))
 						user << "Building Floor..."
 						activate()
@@ -97,7 +97,7 @@ RCD
 						return 1
 					return 0
 
-				if(istype(A, /turf/simulated/floor))
+				if(istype(A, /turf/simulated/floor) && !istype(A, /turf/simulated/floor/open))
 					if(checkResource(3, user))
 						user << "Building Wall ..."
 						playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
@@ -109,7 +109,7 @@ RCD
 					return 0
 
 			if(2)
-				if(istype(A, /turf/simulated/floor))
+				if(istype(A, /turf/simulated/floor) && !istype(A, /turf/simulated/floor/open))
 					if(checkResource(10, user))
 						user << "Building Airlock..."
 						playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
@@ -136,7 +136,7 @@ RCD
 							return 1
 					return 0
 
-				if(istype(A, /turf/simulated/floor))
+				if(istype(A, /turf/simulated/floor) && !istype(A, /turf/simulated/floor/open))
 					if(checkResource(5, user))
 						user << "Deconstructing Floor..."
 						playsound(src.loc, 'sound/machines/click.ogg', 50, 1)

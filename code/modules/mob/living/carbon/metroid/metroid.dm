@@ -174,6 +174,9 @@
 		return
 	return
 
+/mob/living/carbon/slime/getTrail()
+	return null
+
 /mob/living/carbon/slime/Process_Spacemove()
 	return 2
 

@@ -1041,10 +1041,10 @@ window "mainwindow"
 		macro = "macro"
 		menu = "menu"
 		on-close = ""
-	elem "hotkey_toggle"
+	elem "oocbutton"
 		type = BUTTON
-		pos = 560,420
-		size = 80x20
+		pos = 600,420
+		size = 40x20
 		anchor1 = 100,100
 		anchor2 = none
 		font-family = ""
@@ -1061,9 +1061,9 @@ window "mainwindow"
 		right-click = false
 		saved-params = ""
 		on-size = ""
-		text = "Hotkey Toggle"
+		text = "OOC"
 		image = ""
-		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
+		command = ".winset \"oocbutton.is-checked=true?input.command=\"!ooc \\\"\" saybutton.is-checked=false:input.command=\""
 		is-flat = false
 		stretch = false
 		is-checked = false
@@ -1098,7 +1098,7 @@ window "mainwindow"
 	elem "input"
 		type = INPUT
 		pos = 3,420
-		size = 517x20
+		size = 557x20
 		anchor1 = 0,100
 		anchor2 = 100,100
 		font-family = ""
@@ -1121,7 +1121,7 @@ window "mainwindow"
 		no-command = false
 	elem "saybutton"
 		type = BUTTON
-		pos = 520,420
+		pos = 560,420
 		size = 40x20
 		anchor1 = 100,100
 		anchor2 = none

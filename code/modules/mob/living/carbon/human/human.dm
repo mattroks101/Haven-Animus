@@ -1271,7 +1271,7 @@
 
 	if(istype(src, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = usr
-		src.visible_message("\blue You check yourself for injuries.")
+		src << ("\blue You check yourself for injuries.")
 
 		for(var/datum/organ/external/org in H.organs)
 			var/status = ""

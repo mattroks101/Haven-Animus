@@ -368,10 +368,27 @@
 						M.stop_pulling()
 
 						//this is the gay blood on floor shit -- Added back -- Skie
-						if (M.lying && (prob(M.getBruteLoss() / 6)))
-							var/turf/location = M.loc
-							if (istype(location, /turf/simulated))
-								location.add_blood(M)
+						if (M.lying && (prob(M.getBruteLoss() / 2)))
+							var/blood_exists = 0
+							var/trail_type = M.getTrail()
+							for(var/obj/effect/decal/cleanable/trail_holder/C in M.loc) //checks for blood splatter already on the floor
+								blood_exists = 1
+							if (istype(M.loc, /turf/simulated) && trail_type != null)
+								var/newdir = get_dir(T, M.loc)
+								if(newdir != M.dir)
+									newdir = newdir | M.dir
+									if(newdir == 3) //N + S
+										newdir = NORTH
+									else if(newdir == 12) //E + W
+										newdir = EAST
+								if((newdir in list(1, 2, 4, 8)) && (prob(50)))
+									newdir = turn(get_dir(T, M.loc), 180)
+								if(!blood_exists)
+									new /obj/effect/decal/cleanable/trail_holder(M.loc)
+								for(var/obj/effect/decal/cleanable/trail_holder/H in M.loc)
+									if((!(newdir in H.existing_dirs) || trail_type == "trails_1" || trail_type == "trails_2") && H.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
+										H.existing_dirs += newdir
+										H.overlays.Add(image('icons/effects/blood.dmi',trail_type,dir = newdir))
 						//pull damage with injured people
 							if(prob(25))
 								M.adjustBruteLoss(1)
@@ -654,6 +671,9 @@
 						CM.drop_from_inventory(CM.legcuffed)
 						CM.legcuffed = null
 						CM.update_inv_legcuffed()
+
+/mob/living/proc/getTrail() //silicon and simple_animals don't get blood trails
+    return null
 
 /mob/living/verb/lay_down()
 	set name = "Rest"

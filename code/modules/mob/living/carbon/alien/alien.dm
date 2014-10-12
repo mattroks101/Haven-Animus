@@ -47,6 +47,9 @@
 /mob/living/carbon/alien/eyecheck()
 	return 2
 
+/mob/living/carbon/alien/getTrail()
+	return "xltrails"
+
 /mob/living/carbon/alien/updatehealth()
 	if(status_flags & GODMODE)
 		health = maxHealth

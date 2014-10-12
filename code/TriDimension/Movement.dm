@@ -83,7 +83,7 @@
 					if (controller.down == 1)
 						var/turf/T = locate(usr.x, usr.y, controller.down_target)
 					// You can only jetpack down if you're sitting on space and there's space down below, or hull
-						if(T && (istype(T, /turf/space) || istype(T, /turf/simulated/floor/)) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/space)))
+						if(T && (!T.density) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/simulated/floor/open)))
 							var/blocked = 0
 							for(var/atom/A in T.contents)
 								if(T.density)

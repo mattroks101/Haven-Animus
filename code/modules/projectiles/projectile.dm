@@ -110,10 +110,10 @@
 				if(istype(firer, /mob))
 					M.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src.type]</b>"
 					firer.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src.type]</b>"
-					message_admins("ATTACK: [firer] ([firer.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[firer]'>JMP</A>) shot [M] ([M.ckey]) with [src].") //BS12 EDIT ALG
+					message_admins("ATTACK: [firer] ([firer.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</A>) shot [M] ([M.ckey]) with [src].") //BS12 EDIT ALG
 				else
 					M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
-					message_admins("ATTACK: UNKNOWN (no longer exists) shot [M] ([M.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</A>) with [src].") //BS12 EDIT ALG
+					message_admins("ATTACK: UNKNOWN (no longer exists) shot [M] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>) with [src].") //BS12 EDIT ALG
 		spawn(0)
 
 			if(A)

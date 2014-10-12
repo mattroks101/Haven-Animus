@@ -96,7 +96,7 @@
 	if(!special_check(user))
 		return
 
-	if (!ready_to_fire())
+	if (!ready_to_fire() && !istype(src, /obj/item/weapon/gun/projectile/automatic))
 		if (world.time % 3) //to prevent spam
 			user << "<span class='warning'>[src] is not ready to fire again!"
 		return

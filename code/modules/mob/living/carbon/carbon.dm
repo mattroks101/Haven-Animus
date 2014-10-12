@@ -477,6 +477,16 @@
 			return method ? ">250" : "extremely weak and fast, patient's artery feels like a thread"
 //			output for machines^	^^^^^^^output for people^^^^^^^^^
 
+/mob/living/carbon/getTrail()
+	if(getBruteLoss() < 300)
+		if(prob(50))
+			return "ltrails_1"
+		return "ltrails_2"
+	else if(prob(50))
+		return "trails_1"
+	return "trails_2"
+
+
 /mob/living/carbon/verb/mob_sleep()
 	set name = "Sleep"
 	set category = "IC"
