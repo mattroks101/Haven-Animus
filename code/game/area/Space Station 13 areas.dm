@@ -333,7 +333,6 @@ var/list/ghostteleportlocs = list()
 	luminosity = 1
 	ul_Lighting = 0
 
-
 /area/centcom/control
 	name = "\improper Centcom Control"
 
