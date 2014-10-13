@@ -254,7 +254,7 @@
 			continue
 		var/turf/T = get_turf(temp_vent)
 
-		if(!T || T.z != loc.z)
+		if(!T || T.z > 4)
 			continue
 
 		var/i = 1

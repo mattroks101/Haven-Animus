@@ -3,6 +3,8 @@
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
+	if(zombie)
+		return
 
 	message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
 
