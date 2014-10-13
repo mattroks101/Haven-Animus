@@ -67,6 +67,9 @@
 
 	switch(M.a_intent)
 		if("help")
+			if(M.zombie)
+				zombie_bit(M)
+				return
 			if(health >= config.health_threshold_crit)
 				help_shake_act(M)
 				return 1
@@ -118,10 +121,7 @@
 			log_attack("[M.name] ([M.ckey]) [att_verb]ed [src.name] ([src.ckey])")
 
 			var/damage = rand(0, 10)//BS12 EDIT
-			if(zombie)
-				if(prob(25))
-					zombie_bit(M)
-					return
+			if(M.zombie)
 				att_verb = pick("claw", "slash")
 				sharpness = 1
 			if(!damage)
