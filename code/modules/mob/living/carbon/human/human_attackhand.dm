@@ -111,19 +111,26 @@
 			return 1
 
 		if("hurt")
+			var/att_verb = M.species.attack_verb
+			var/sharpness = 0
+			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[att_verb]ed [src.name] ([src.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [att_verb]ed by [M.name] ([M.ckey])</font>")
+			log_attack("[M.name] ([M.ckey]) [att_verb]ed [src.name] ([src.ckey])")
 
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
-			log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
-
-			var/damage = rand(0, 5)//BS12 EDIT
+			var/damage = rand(0, 10)//BS12 EDIT
+			if(zombie)
+				if(prob(25))
+					zombie_bit(M)
+					return
+				att_verb = pick("claw", "slash")
+				sharpness = 1
 			if(!damage)
 				if(M.species.attack_verb == "punch")
 					playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				else
 					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 
-				visible_message("\red <B>[M] has attempted to [M.species.attack_verb] [src]!</B>")
+				visible_message("\red <B>[M] has attempted to [att_verb] [src]!</B>")
 				return 0
 
 
@@ -133,20 +140,20 @@
 			if(HULK in M.mutations)			damage += 5
 
 
-			if(M.species.attack_verb == "punch")
+			if(att_verb == "punch")
 				playsound(loc, "punch", 25, 1, -1)
 			else
 				playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 
-			visible_message("\red <B>[M] has [M.species.attack_verb]ed [src]!</B>")
+			visible_message("\red <B>[M] has [att_verb]ed [src]!</B>")
 			//Rearranged, so claws don't increase weaken chance.
-			if(damage >= 5 && prob(50))
+			if(damage >= 10 && prob(50))
 				visible_message("\red <B>[M] has weakened [src]!</B>")
 				apply_effect(2, WEAKEN, armor_block)
 
 			if(M.species.punch_damage)
 				damage += M.species.punch_damage
-			apply_damage(damage, BRUTE, affecting, armor_block)
+			apply_damage(damage, BRUTE, affecting, armor_block, sharpness)
 
 
 		if("disarm")

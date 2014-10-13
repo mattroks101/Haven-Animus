@@ -24,16 +24,17 @@ mob/var/zombieimmune = 0
 	update_icons()
 	src << "You have been cured from being a zombie!"
 
-/mob/living/carbon/proc/zombie_bit(var/mob/living/carbon/biter)
+/mob/living/carbon/human/proc/zombie_bit(var/mob/living/carbon/human/biter)
 	var/mob/living/carbon/human/biten = src
-	if(zombie || becoming_zombie || !isliving())
+	if(zombie || becoming_zombie || !ishuman())
+		biter << "\red <b>You mustn't bite [name], he is also infected.</b>"
 		return
 	if(stat > 1)//dead: it takes time to reverse death, but there is no chance of failure
 		sleep(50)
 		zombify()
 		return
-	if(istype(biten.wear_suit, /obj/item/clothing/suit/bio_suit) || (istype(biten.head, /obj/item/clothing/head/bio_hood)))
-		if(istype(biten.head, /obj/item/clothing/head/bio_hood) && (istype(biten.wear_suit, /obj/item/clothing/suit/bio_suit)))
+	if((istype(biten.wear_suit, /obj/item/clothing/suit/bio_suit) || istype(biten.wear_suit, /obj/item/clothing/suit/space)) || (istype(biten.head, /obj/item/clothing/head/bio_hood) || istype(biten.head, /obj/item/clothing/head/space)))
+		if((istype(biten.head, /obj/item/clothing/head/bio_hood) || istype(biten.head, /obj/item/clothing/head/space)) && (istype(biten.wear_suit, /obj/item/clothing/suit/bio_suit) || istype(biten.wear_suit, /obj/item/clothing/suit/space)))
 			if(prob(50))
 				for(var/mob/M in viewers(src, null))
 					if ((M.client && !( M.blinded )))
@@ -49,7 +50,7 @@ mob/var/zombieimmune = 0
 			M << "[biter.name] bites [name]"
 	if(zombieimmune)
 		return
-	if(prob(5))
+	if(prob(3))
 		zombify()
 	else if(prob(5))
 		becoming_zombie = 1

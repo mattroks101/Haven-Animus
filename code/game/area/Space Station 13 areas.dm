@@ -330,6 +330,9 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Centcom"
 	icon_state = "centcom"
 	requires_power = 0
+	luminosity = 1
+	ul_Lighting = 0
+
 
 /area/centcom/control
 	name = "\improper Centcom Control"

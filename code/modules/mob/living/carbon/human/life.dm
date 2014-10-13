@@ -1023,7 +1023,7 @@
 			analgesic = max(0, analgesic - 1)
 
 			//UNCONSCIOUS. NO-ONE IS HOME
-			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
+			if( (getOxyLoss() > 50) || ((config.health_threshold_crit > health) && (!zombie)) )
 				Paralyse(3)
 
 				/* Done by handle_breath()
