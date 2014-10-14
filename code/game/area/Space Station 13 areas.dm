@@ -696,6 +696,10 @@ var/list/ghostteleportlocs = list()
 	name = "Waste Disposal"
 	icon_state = "disposal"
 
+/area/maintenance/aicore
+	name = "AI Core Maintenance"
+	icon_state = "amaint"
+
 //Luna
 
 /area/luna/
