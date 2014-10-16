@@ -1,5 +1,5 @@
 var/list/forbidden_varedit_object_types = list(
-										/datum/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea.
+//										/datum/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea.
 										/obj/machinery/blackbox_recorder,	//Prevents people messing with feedback gathering
 										/datum/feedback_variable			//Prevents people messing with feedback gathering
 									)
@@ -268,7 +268,7 @@ var/list/forbidden_varedit_object_types = list(
 /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
 	if(!check_rights(R_VAREDIT))	return
 
-	var/list/locked = list("vars", "key", "ckey", "client", "firemut", "ishulk", "telekinesis", "xray", "virus", "cuffed", "ka", "last_eaten", "icon", "icon_state", "mutantrace")
+	var/list/locked = list("vars", "key", "ckey", "firemut", "ishulk", "telekinesis", "xray", "virus", "cuffed", "ka", "last_eaten", "icon", "icon_state", "mutantrace")
 
 	for(var/p in forbidden_varedit_object_types)
 		if( istype(O,p) )
@@ -284,7 +284,7 @@ var/list/forbidden_varedit_object_types = list(
 			src << "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])"
 			return
 
-		if(param_var_name == "holder" || (param_var_name in locked))
+		if(param_var_name in locked)
 			if(!check_rights(R_DEBUG))	return
 
 		variable = param_var_name

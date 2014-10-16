@@ -173,6 +173,22 @@
 		var/backlash_amt = 5*multiplier
 		mob.apply_damages(backlash_amt,backlash_amt,backlash_amt,backlash_amt)
 
+/datum/disease2/effect/zombie
+	name = "Tombstone Syndrome"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			if(!H.zombie)
+				H.zombify()
+	deactivate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			if(H.zombie)
+				H.unzombify()
+
+
+
 ////////////////////////STAGE 3/////////////////////////////////
 
 /datum/disease2/effect/bones

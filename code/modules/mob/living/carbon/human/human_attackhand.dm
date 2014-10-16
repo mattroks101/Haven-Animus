@@ -67,9 +67,6 @@
 
 	switch(M.a_intent)
 		if("help")
-			if(M.zombie)
-				zombie_bit(M)
-				return
 			if(health >= config.health_threshold_crit)
 				help_shake_act(M)
 				return 1
@@ -120,12 +117,16 @@
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [att_verb]ed by [M.name] ([M.ckey])</font>")
 			log_attack("[M.name] ([M.ckey]) [att_verb]ed [src.name] ([src.ckey])")
 
-			var/damage = rand(0, 10)//BS12 EDIT
+			var/damage = rand(0, 5)//BS12 EDIT
 			if(M.zombie)
-				att_verb = pick("claw", "slash")
+				damage = rand(0, 7)
+				att_verb = pick("claw", "slash", "scrap")
 				sharpness = 1
+				if(prob(15) && !zombie)
+					zombie_bit(M)
+					return
 			if(!damage)
-				if(M.species.attack_verb == "punch")
+				if(att_verb == "punch")
 					playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				else
 					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)

@@ -177,6 +177,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(O.status & ORGAN_DESTROYED) damage_appearance += "d"
 		else
 			damage_appearance += O.damage_state
+		if(zombie)
+			O.damage_state = "30"
+
 
 	if(damage_appearance == previous_damage_appearance)
 		// nothing to do here

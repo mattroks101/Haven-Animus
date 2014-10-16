@@ -77,7 +77,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(T.z == 6 || T.z > 8)
+		if(T.z > 8)				//To rewrite later, must skip centcomm beacons without skipping pods
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
