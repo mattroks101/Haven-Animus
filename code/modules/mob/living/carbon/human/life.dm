@@ -223,7 +223,6 @@
 			druggy = 0
 			stunned = 0
 			paralysis = 0
-			handcuffed = 0
 			oxyloss = 0
 			if(l_hand)
 				drop_from_inventory(l_hand)
