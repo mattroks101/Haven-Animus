@@ -416,35 +416,73 @@
 
 				if("comms_password")
 					config.comms_password = value
-/*
-				if("irc_bot_host")
-					config.irc_bot_host = value
 
-				if("main_irc")
-					config.main_irc = value
-
-				if("admin_irc")
-					config.admin_irc = value
-
-				if("python_path")
-					if(value)
-						config.python_path = value
-					else
-						if(world.system_type == UNIX)
-							config.python_path = "/usr/bin/env python2"
-						else //probably windows, if not this should work anyway
-							config.python_path = "python"
-*/
 				if("allow_cult_ghostwriter")
 					config.cult_ghostwriter = 1
 
 				if("req_cult_ghostwriter")
 					config.cult_ghostwriter_req_cultists = value
 
+				if("run_speed")
+					config.run_speed = text2num(value)
+
+				if("walk_speed")
+					config.walk_speed = text2num(value)
+
+				if("human_delay")
+					config.human_delay = text2num(value)
+
+				if("robot_delay")
+					config.robot_delay = text2num(value)
+
+				if("monkey_delay")
+					config.monkey_delay = text2num(value)
+
+				if("alien_delay")
+					config.alien_delay = text2num(value)
+
+				if("slime_delay")
+					config.slime_delay = text2num(value)
+
+				if("animal_delay")
+					config.animal_delay = text2num(value)
+
+				if("health_threshold_crit")
+					config.health_threshold_crit = text2num(value)
+
+				if("health_threshold_softcrit")
+					config.health_threshold_softcrit = text2num(value)
+
+				if("health_threshold_dead")
+					config.health_threshold_dead = text2num(value)
+
+				if("revival_pod_plants")
+					config.revival_pod_plants = text2num(value)
+
+				if("revival_cloning")
+					config.revival_cloning = text2num(value)
+
+				if("revival_brain_life")
+					config.revival_brain_life = text2num(value)
+
+				if("organ_health_multiplier")
+					config.organ_health_multiplier = text2num(value) / 100
+
+				if("organ_regeneration_multiplier")
+					config.organ_regeneration_multiplier = text2num(value) / 100
+
+				if("bones_can_break")
+					config.bones_can_break = text2num(value)
+
+				if("limbs_can_break")
+					config.limbs_can_break = text2num(value)
+
+
+
 				else
 					diary << "Unknown setting in configuration: '[name]'"
 
-
+/*
 		else if(type == "game_options")
 			if(!value)
 				diary << "Unknown value for setting [name] in [filename]."
@@ -463,7 +501,7 @@
 					config.revival_cloning = value
 				if("revival_brain_life")
 					config.revival_brain_life = value
-				if("run_speed")
+/*				if("run_speed")
 					config.run_speed = value
 				if("walk_speed")
 					config.walk_speed = value
@@ -479,6 +517,7 @@
 					config.slime_delay = value
 				if("animal_delay")
 					config.animal_delay = value
+					*/
 				if("organ_health_multiplier")
 					config.organ_health_multiplier = value / 100
 				if("organ_regeneration_multiplier")
@@ -489,7 +528,7 @@
 					config.limbs_can_break = value
 				else
 					diary << "Unknown setting in configuration: '[name]'"
-
+*/
 /datum/configuration/proc/loadsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)
 	for(var/t in Lines)
