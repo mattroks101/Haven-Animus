@@ -145,6 +145,12 @@
 
 			AttemptLateSpawn(href_list["SelectedJob"])
 			return
+		if(!ready && href_list["preference"])
+			if(client)
+				client.prefs.process_link(src, href_list)
+		else if(!href_list["late_join"])
+			new_player_panel()
+
 
 	proc/IsJobAvailable(rank)
 		var/datum/job/job = job_master.GetJob(rank)

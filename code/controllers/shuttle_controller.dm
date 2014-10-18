@@ -379,23 +379,24 @@ datum/shuttle_controller/emergency_shuttle/process()
 						D.locked = 1
 
 			if(timeleft>0)
+				var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 				if(timeleft > 60)
-					radioalert("Escape Computer", "[round(timeleft()/60,1)] minutes until escape pod launch.")
+					a.autosay("[round(timeleft()/60,1)] minutes until escape pod launch.", "Escape Computer", )
 					if(timeleft() - 60 > 60)
 						last60 = timeleft() - 60
 					else
 						last60 = 60
 				else if(timeleft > 30)
-					radioalert("Escape Computer", "[round(timeleft(),1)] seconds until escape pod launch.")
+					a.autosay("[round(timeleft(),1)] seconds until escape pod launch.", "Escape Computer", )
 					if(timeleft() - 10 > 10)
 						last60 = timeleft() - 10
 					else
 						last60 = timeleft() - 1
 				else
 					if(timeleft() > 0)
-						radioalert("Escape Computer", "[round(timeleft(),1)] seconds.")
+						a.autosay("[round(timeleft(),1)] seconds.", "Escape Computer", )
 					else
-						radioalert("Escape Computer", "Escape pods launched.")
+						a.autosay("Escape pods launched.", "Escape Computer", )
 					last60 = timeleft() - 1
 				return 0
 
