@@ -11,30 +11,32 @@
 	g_amt = 20
 	icon_action_button = "action_flashlight"
 	var/on = 0
-	var/brightness_on = 4 //luminosity when on
+	var/brightnessred = 4 //luminosity when on			brightness_on
+	var/brightnessgreen = 4
+	var/brightnessblue = 4
 
 /obj/item/device/flashlight/initialize()
 	..()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		SetLuminosity(brightness_on)
+		SetLuminosity(brightnessred, brightnessgreen, brightnessblue)
 	else
 		icon_state = initial(icon_state)
-		SetLuminosity(0)
+		SetLuminosity(0, 0, 0)
 
 /obj/item/device/flashlight/proc/update_brightness(var/mob/user = null)
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		if(loc == user)
-			user.SetLuminosity(user.luminosity + brightness_on)
+			user.SetLuminosity(user.LuminosityRed + brightnessred, user.LuminosityGreen + brightnessgreen, user.LuminosityBlue + brightnessblue)
 		else if(isturf(loc))
-			SetLuminosity(brightness_on)
+			SetLuminosity(brightnessred, brightnessgreen, brightnessblue)
 	else
 		icon_state = initial(icon_state)
 		if(loc == user)
-			user.SetLuminosity(user.luminosity - brightness_on)
+			user.SetLuminosity(user.LuminosityRed - brightnessred, user.LuminosityGreen - brightnessgreen, user.LuminosityBlue - brightnessblue)
 		else if(isturf(loc))
-			SetLuminosity(0)
+			SetLuminosity(0, 0, 0)
 
 /obj/item/device/flashlight/attack_self(mob/user)
 	if(!isturf(user.loc))
@@ -90,14 +92,14 @@
 
 /obj/item/device/flashlight/pickup(mob/user)
 	if(on)
-		user.SetLuminosity(user.luminosity + brightness_on)
-		SetLuminosity(0)
+		user.SetLuminosity(user.LuminosityRed + brightnessred, user.LuminosityGreen + brightnessgreen, user.LuminosityBlue + brightnessblue)
+		SetLuminosity(0, 0, 0)
 
 
 /obj/item/device/flashlight/dropped(mob/user)
 	if(on)
-		user.SetLuminosity(user.luminosity - brightness_on)
-		SetLuminosity(brightness_on)
+		user.SetLuminosity(user.LuminosityRed - brightnessred, user.LuminosityGreen - brightnessgreen, user.LuminosityBlue - brightnessblue)
+		SetLuminosity(brightnessred, brightnessgreen, brightnessblue)
 
 
 /obj/item/device/flashlight/pen
@@ -106,7 +108,9 @@
 	icon_state = "penlight"
 	item_state = ""
 	flags = FPRINT | TABLEPASS | CONDUCT
-	brightness_on = 2
+	brightnessred = 2
+	brightnessgreen = 2
+	brightnessblue = 2
 
 
 // the desk lamps are a bit special
@@ -115,7 +119,9 @@
 	desc = "A desk lamp with an adjustable mount."
 	icon_state = "lamp"
 	item_state = "lamp"
-	brightness_on = 5
+	brightnessred = 6
+	brightnessgreen = 6
+	brightnessblue = 6
 	w_class = 4
 	flags = FPRINT | TABLEPASS | CONDUCT
 	m_amt = 0
@@ -128,7 +134,9 @@
 	desc = "A classic green-shaded desk lamp."
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
-	brightness_on = 5
+	brightnessred = 5
+	brightnessgreen = 5
+	brightnessblue = 4
 
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
@@ -145,7 +153,9 @@
 	name = "flare"
 	desc = "A red Nanotrasen issued flare. There are instructions on the side, it reads 'pull cord, make light'."
 	w_class = 2.0
-	brightness_on = 7 // Pretty bright.
+	brightnessred = 7
+	brightnessgreen = 1
+	brightnessblue = 1
 	icon_state = "flare"
 	item_state = "flare"
 	icon_action_button = null	//just pull it manually, neckbeard.
