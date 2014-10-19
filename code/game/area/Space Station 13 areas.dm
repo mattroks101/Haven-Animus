@@ -1586,6 +1586,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Firing Range"
 	icon_state = "firingrange"
 
+/area/security/interrogation
+	name = "\improper Interrogation"
+	icon_state = "security"
+
 /*
 	New()
 		..()
