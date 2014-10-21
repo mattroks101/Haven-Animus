@@ -1547,7 +1547,7 @@
 "aDM" = (/obj/machinery/door/airlock/glass_security{name = "Prison Wing"; req_access_txt = "2"},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/turf/simulated/floor,/area/security/prison)
 "aDN" = (/obj/machinery/door/airlock/glass_security{name = "Prison Wing"; req_access_txt = "2"},/obj/machinery/atmospherics/pipe/simple/supply/hidden,/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/turf/simulated/floor,/area/security/prison)
 "aDO" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 6},/obj/machinery/computer/secure_data,/turf/simulated/floor,/area/security/prison)
-"aDP" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/box/handcuffs,/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/turf/simulated/floor,/area/security/prison)
+"aDP" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/box/handcuffs,/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/obj/structure/extinguisher_cabinet{pixel_y = 27},/turf/simulated/floor,/area/security/prison)
 "aDQ" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/turf/simulated/wall/r_wall,/area/security/prison)
 "aDR" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/turf/simulated/floor/plating,/area/luna/maintenance/asmaint3)
 "aDS" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/obj/effect/landmark{name = "xeno_spawn"; pixel_x = -1},/turf/simulated/floor/plating,/area/luna/maintenance/asmaint3)
@@ -2060,9 +2060,9 @@
 "aNF" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor{icon_state = "red"},/area/security/main)
 "aNG" = (/obj/machinery/atmospherics/pipe/manifold{pipe_color = "red"; icon_state = "manifold-r-f"; level = 1; name = "pipe manifold"},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor,/area/security/main)
 "aNH" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor,/area/security/main)
-"aNI" = (/obj/structure/stool/bed/chair,/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 9},/turf/simulated/floor,/area/security/main)
-"aNJ" = (/obj/structure/stool/bed/chair,/obj/structure/stool/bed/chair,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor,/area/security/main)
-"aNK" = (/obj/structure/stool/bed/chair,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/security/main)
+"aNI" = (/obj/structure/stool/bed/chair,/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 9},/obj/effect/landmark/start{name = "Security Officer"},/turf/simulated/floor,/area/security/main)
+"aNJ" = (/obj/structure/stool/bed/chair,/obj/structure/stool/bed/chair,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/supply/hidden,/obj/effect/landmark/start{name = "Security Officer"},/turf/simulated/floor,/area/security/main)
+"aNK" = (/obj/structure/stool/bed/chair,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/effect/landmark/start{name = "Security Officer"},/turf/simulated/floor,/area/security/main)
 "aNL" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/security/main)
 "aNM" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/floor,/area/security/main)
 "aNN" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor,/area/security/main)
@@ -2087,7 +2087,7 @@
 "aOg" = (/obj/structure/table/reinforced,/obj/item/weapon/folder/red,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/security/main)
 "aOh" = (/obj/structure/table/reinforced,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor,/area/security/main)
 "aOi" = (/obj/structure/table/reinforced,/obj/item/weapon/book/manual/security_space_law{pixel_x = -3; pixel_y = 5},/turf/simulated/floor,/area/security/main)
-"aOj" = (/obj/structure/stool/bed/chair{dir = 8},/turf/simulated/floor,/area/security/main)
+"aOj" = (/obj/structure/stool/bed/chair{dir = 8},/obj/effect/landmark/start{name = "Warden"},/turf/simulated/floor,/area/security/main)
 "aOk" = (/obj/machinery/hologram/holopad,/turf/simulated/floor,/area/security/main)
 "aOl" = (/obj/structure/table/reinforced,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/device/flash,/turf/simulated/floor,/area/security/main)
 "aOm" = (/obj/structure/closet/bombcloset,/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/security/main)
@@ -2109,8 +2109,8 @@
 "aOC" = (/obj/multiz/ladder,/turf/simulated/floor/plating,/area/luna/maintenance/aft3)
 "aOD" = (/obj/machinery/door/airlock/maintenance,/turf/simulated/floor/plating,/area/luna/maintenance/aft3)
 "aOE" = (/obj/structure/table/reinforced,/obj/machinery/microwave,/obj/machinery/camera/autoname{dir = 4},/turf/simulated/floor{icon_state = "red"; dir = 8},/area/security/main)
-"aOF" = (/obj/structure/stool/bed/chair{dir = 1},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/security/main)
-"aOG" = (/obj/structure/stool/bed/chair{dir = 1},/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor,/area/security/main)
+"aOF" = (/obj/structure/stool/bed/chair{dir = 1},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/landmark/start{name = "Security Officer"},/turf/simulated/floor,/area/security/main)
+"aOG" = (/obj/structure/stool/bed/chair{dir = 1},/obj/machinery/atmospherics/pipe/simple/supply/hidden,/obj/effect/landmark/start{name = "Security Officer"},/turf/simulated/floor,/area/security/main)
 "aOH" = (/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/floor,/area/security/main)
 "aOI" = (/obj/structure/table/reinforced,/obj/machinery/recharger{pixel_y = 0},/obj/machinery/camera/autoname{dir = 1},/turf/simulated/floor,/area/security/main)
 "aOJ" = (/obj/structure/table/reinforced,/obj/item/device/radio/intercom/south,/obj/item/weapon/crowbar,/obj/item/device/radio/off,/obj/item/device/flashlight,/turf/simulated/floor,/area/security/main)
@@ -2973,7 +2973,7 @@
 "bfi" = (/obj/structure/disposalpipe/segment,/turf/simulated/wall,/area/medical/morgue)
 "bfj" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/wall,/area/medical/morgue)
 "bfk" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/medical/virology)
-"bfl" = (/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/machinery/door/window/southright{tag = "icon-left"; name = "Containment Pen"; icon_state = "left"; dir = 2; req_access_txt = "47"},/obj/machinery/door/window/southright{tag = "icon-left (NORTH)"; name = "Containment Pen"; icon_state = "left"; dir = 1; req_access_txt = "47"},/turf/simulated/floor{icon_state = "white"},/area/medical/virology)
+"bfl" = (/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/machinery/door/window/southright{dir = 2; icon_state = "left"; name = "Containment Pen"; req_access_txt = "39"; tag = "icon-left"},/obj/machinery/door/window/southright{dir = 1; icon_state = "left"; name = "Containment Pen"; req_access_txt = "39"; tag = "icon-left (NORTH)"},/turf/simulated/floor{icon_state = "white"},/area/medical/virology)
 "bfm" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/medical/virology)
 "bfn" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/medical/virology)
 "bfo" = (/obj/structure/disposalpipe/segment,/turf/simulated/wall/r_wall,/area/medical/virology)
@@ -3557,7 +3557,7 @@
 "bqu" = (/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/machinery/door/airlock/glass_medical{id_tag = null; name = "Cryogenics"; req_access_txt = "5"},/obj/machinery/atmospherics/pipe/simple{dir = 4; icon_state = "intact"; level = 2},/turf/simulated/floor,/area/medical/sleeper)
 "bqv" = (/obj/machinery/atmospherics/pipe/simple{dir = 9; icon_state = "intact"; level = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/medical/sleeper)
 "bqw" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/wall,/area/medical/genetics)
-"bqx" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/airlock/maintenance{name = "Morgue Maintenance"; req_access_txt = "5"},/obj/structure/disposalpipe/segment,/turf/simulated/floor/plating,/area/medical/genetics)
+"bqx" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment,/obj/machinery/door/airlock/maintenance{name = "Genetics Maintenance"; req_access_txt = "9"},/turf/simulated/floor/plating,/area/medical/genetics)
 "bqy" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 6},/turf/simulated/wall,/area/medical/genetics)
 "bqz" = (/obj/machinery/atmospherics/unary/vent_pump/on{tag = "icon-out (WEST)"; icon_state = "out"; dir = 8},/turf/simulated/floor,/area/medical/genetics)
 "bqA" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/medical/genetics)
@@ -3986,7 +3986,7 @@
 "byH" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor{icon_state = "white"},/area/toxins/lab)
 "byI" = (/obj/machinery/atmospherics/unary/vent_scrubber{dir = 8; on = 1; scrub_N2O = 0; scrub_Toxins = 0},/turf/simulated/floor{icon_state = "white"},/area/toxins/lab)
 "byJ" = (/turf/simulated/floor{icon_state = "white"},/area/toxins/lab)
-"byK" = (/obj/machinery/computer/rdconsole,/turf/simulated/floor,/area/toxins/lab)
+"byK" = (/obj/machinery/computer/rdconsole/core,/turf/simulated/floor,/area/toxins/lab)
 "byL" = (/obj/machinery/r_n_d/circuit_imprinter,/obj/item/weapon/reagent_containers/glass/beaker,/obj/machinery/camera/autoname{dir = 8},/turf/simulated/floor,/area/toxins/lab)
 "byM" = (/obj/multiz/stairs/enter/bottom,/turf/simulated/floor,/area/toxins/lab)
 "byN" = (/obj/machinery/door/firedoor{layer = 2.91; name = "\improper Window Shutter"; req_one_access = null},/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/crew_quarters/observation)
@@ -7339,15 +7339,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaacaHKaIeaIfaIgaIgaIhaIiaIjaIkaIlaImaInaIoaIpaIqaIraIsaItaIuaIuaIuaIvaGVaHRaIwaIxaIyaIzaIwaIxaIyaIzaIAaIxaIyaIBaGUaGUaGUaGUaGUaacaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagfaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaHKaIeaIfaICaICaIhaIDaIEaIFaIGaIHaIHaIIaIJaIKaIHaILaIMaINaIOaIOaIPaIQaIRaISaITaGUaIUaIVaITaGUaIWaIXaITaGUaIYaGUaIZaJaaJbaGUaacaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaHKaJcaIfaJdaJeaIhaIjaIjaJfaJgaJhaJiaJjaJkaJlaJmaJnaGUaJoaJpaJqaGUaJraJsaJtaJuaJvaJwaJxaJuaJyaJwaJzaJAaJBaJCaGUaIZaJDaJEaGUaacaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaJFaJGaJHaJIaJJaIhaIhaJKaJLaJMaJNaJOaJPaJQaJRaJSaJTaJUaJVaJWaJXaJYaJZaKaaKbaKcaKcaKdaKeaKfaKgaKdaKcaKcaKcaKhaKiaKjaKkaJEaGUaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaKlaKmaKnaJmaKoaKpaKqaKraKsaJJaJmaJmaKtaKuaJmaJmaKvaKwaKxaKyaKzaKAaKBaKCaKDaKEaKFaKGaKHaKEaKIaKGaKJaKKaKLaKMaKNaKOaKPaJEaGUaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaKlaKQaKRaKSaJmaJmaKTaKUaKVaKWaKXaKYaKZaLaaLbaLcaLdaLeaLfaLgaLhaLiaLjaLkaLlaITaGUaLmaLlaITaGUaLnaLoaITaGUaLpaGUaLqaLraLsaGUaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaLtaIeaLuaIjaIjaLvaIhaLwaLxaLyaLzaLAaLBaLCaGkaIFaLDaLEaLFaLGaLHaLIaLJaHRaLKaLLaIyaKyaLKaLLaIyaKyaIwaLLaIyaIBaGUaGUaGUaGUaGUaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaHKaLMaLNaLOaLPaLQaLRaLSaLxaLTaLUaLVaLWaLXaGkaIFaLDaLYaLZaMaaMbaLYaMcaHRaIwaMdaMeaMfaMgaMhaMiaMfaMgaMjaMkaMlaGUaacaacaacaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaJFaJGaJHaJIaJJaIhaIhaJKaJLaJMaJNaJOaJPaJQaJRaJSaJTaJUaJVaJWaJXaJYaJZaKaaKbaKcaKcaKdaKeaKfaKgaKdaKcaKcaKcaKhaKiaKjaKkaJEaGUaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaKlaKmaKnaJmaKoaKpaKqaKraKsaJJaJmaJmaKtaKuaJmaJmaKvaKwaKxaKyaKzaKAaKBaKCaKDaKEaKFaKGaKHaKEaKIaKGaKJaKKaKLaKMaKNaKOaKPaJEaGUaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaKlaKQaKRaKSaJmaJmaKTaKUaKVaKWaKXaKYaKZaLaaLbaLcaLdaLeaLfaLgaLhaLiaLjaLkaLlaITaGUaLmaLlaITaGUaLnaLoaITaGUaLpaGUaLqaLraLsaGUaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaLtaIeaLuaIjaIjaLvaIhaLwaLxaLyaLzaLAaLBaLCaGkaIFaLDaLEaLFaLGaLHaLIaLJaHRaLKaLLaIyaKyaLKaLLaIyaKyaIwaLLaIyaIBaGUaGUaGUaGUaGUaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaHKaHKaLMaLNaLOaLPaLQaLRaLSaLxaLTaLUaLVaLWaLXaGkaIFaLDaLYaLZaMaaMbaLYaMcaHRaIwaMdaMeaMfaMgaMhaMiaMfaMgaMjaMkaMlaGUaacaacaacaacaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaHKaMmaMnaMoaMpaMqaIhaMraLxaMsaMtaMuaMvaMwaGkaIFaLDaMxaMyaMyaMyaMyaMzaMAaMBaMCaMxaMxaMxaMxaMxaMxaMxaMxaMxaMxaMxaMxaMxaacaacaacaacaacaacaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaHKaHKaMDaGhaMEaMFaIhaMGaLxaMHaMIaMJaMKaMLaGkaIFaLDaMxaMMaMNaMOaMPaMQaMRaMSaMTaMTaMTaMUaMVaMyaMWaMXaMYaMZaNaaNaaNaaMxaadaadaadaaeaalaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaacaHKaGhaGhaNbaNcaIhaIhaLxaNdaNeaLUaLUaNfaGkaNgaNhaMxaNiaNjaNkaNjaNlaNmaNnaNnaNnaNoaNnaNpaNqaNraNnaNnaNnaNsaNaaNaaMxaacaafaacaaaaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaNtaNtaNuaNvaNwaNcaNxaNxaLCaNyaLWaNzaNAaNBaGkaNCaNDaMxaNEaNFaNGaNHaNIaNJaNKaNLaNMaNNaNMaNOaNPaNQaNMaNMaNRaNSaNTaNUaMxaaoaaoaaoaaoaalaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaHKaHKaMDaGhaMEaMFaIhaMGaLxaMHaMIaMJaMKaMLaGkaIFaLDaMxaMMaMNaMOaMPaMQaMRaMSaMTaMTaMTaMUaMVaMyaMWaMXaMYaMZaNaaNaaNaaMxaadaadaadaadaafaadaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaacaHKaGhaGhaNbaNcaIhaIhaLxaNdaNeaLUaLUaNfaGkaNgaNhaMxaNiaNjaNkaNjaNlaNmaNnaNnaNnaNoaNnaNpaNqaNraNnaNnaNnaNsaNaaNaaMxaacaafaacaacaacaadaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaNtaNtaNuaNvaNwaNcaNxaNxaLCaNyaLWaNzaNAaNBaGkaNCaNDaMxaNEaNFaNGaNHaNIaNJaNKaNLaNMaNNaNMaNOaNPaNQaNMaNMaNRaNSaNTaNUaMxaaoaaoaaoaaoaafaadaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaNtaNVaNWaNXaNYaNZaOaaObaLCaLCaOcaLCaLCaLCaGkaOdaOdaMxaOeaMxaOfaNjaOgaOhaOiaOjaOkaNSaNjaOlaMyaOmaOnaOoaOpaOqaNTaOraMxaacaacaacaaoaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagfaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaNtaOsaOtaOuaOtaOvaOwaOxaOyaOyaOzaOAaOBaOCaODaMraMraNtaNbaMxaOEaNjaOFaOGaOHaNjaNjaNSaOIaOJaOKaOKaOKaOLaOMaONaOOaOOaOOaOOaOOaacaaoaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaacaacaacaacaacaacaacaNtaNtaNtaNtaNtaNtaOPaOQaORaOSaOTaOUaOVaObaNtaMGaMGaNtaNbaMxaOWaOXaOYaOZaNjaNjaNjaPaaOKaOKaOKaPbaPcaOLaPdaPeaPfaPgaPhaPhaOOaacaaoaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
