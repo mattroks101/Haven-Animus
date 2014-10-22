@@ -1588,6 +1588,9 @@ var/list/ghostteleportlocs = list()
 
 /area/security/interrogation
 	name = "\improper Interrogation"
+
+/area/security/brig_auxiliary
+	name = "\improper Brig Auxiliary"
 	icon_state = "security"
 
 /*
