@@ -9,7 +9,7 @@
 	endWhen = rand(10,25) * 3
 
 /datum/event/meteor_wave/announce()
-	command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
+	command_alert("The ship is passing through the meteor belt.", "Meteor Alert")
 	world << sound('sound/AI/meteors.ogg')
 
 /datum/event/meteor_wave/tick()
@@ -17,9 +17,9 @@
 		spawn_meteors(rand(2,5))
 
 /datum/event/meteor_wave/end()
-	command_alert("The station has cleared the meteor storm.", "Meteor Alert")
+	command_alert("The ship has cleared the meteor belt.", "Meteor Alert")
 
-//
+
 /datum/event/meteor_shower
 	startWhen		= 5
 	endWhen 		= 7

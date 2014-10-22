@@ -39,7 +39,7 @@
 		A.power_change()
 
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && C.z == 1)
+		if(C.cell && C.z <= 4)
 			var/area/A = get_area(C)
 
 			var/skip = 0
@@ -58,7 +58,7 @@
 		for(var/mob/M in player_list)
 			M << sound('sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && C.z == 1)
+		if(C.cell && C.z <= 4)
 			C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in world)
 		if(istype(get_area(S), /area/turret_protected) || S.z != 1)

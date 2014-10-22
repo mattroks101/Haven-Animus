@@ -337,7 +337,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 
 	lastmode = mode
-		
+
 	var/title = "Personal Data Assistant"
 
 	var/data[0]  // This is the data that will be sent to the PDA
@@ -366,7 +366,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(mode in cartmodes)
 			data["records"] = cartridge.create_NanoUI_values()
 
-		if(mode == 0)	
+		if(mode == 0)
 			cartdata["name"] = cartridge.name
 			cartdata["access"] = list(\
 					"access_security" = cartridge.access_security,\
@@ -873,7 +873,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P)
 
 	var/t = input(U, "Please enter message", name, null) as text
-	t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+	t = copytext(sanitize_multi(t), 1, MAX_MESSAGE_LEN)
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)

@@ -34,9 +34,11 @@
 		if(copytext(message, 1, 2) != "*")
 			message = slur(message)
 	if(iszombie(src))
+		if (copytext(message, 1, 2) == "*" && !stat)
+			return emote(copytext(message, 2))
 		if(prob(15))
 		//	message = pick("...argh...", "...deaath...", "...haaaww...", "...diee...")
-			message = pick("...беги...", "...голод...", "...не жизнь...", "...убейте...", "...аагрх...", "...смерть...", "...жрать...")
+			message = pick("...беги...", "...голод...", "...не жизнь...", "...убейте...", "...аагрх...", "...смерть...", "...жрать...", "...умрии...")
 		else
 			emote("me", 1, "[pick("roars!", "shouts!", "mutters.", "rawrs.")]")
 			return

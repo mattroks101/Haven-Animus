@@ -35,7 +35,7 @@
 /obj/effect/landmark/zcontroller/process()
 	if (world.time > fast_time)
 		calc(fast)
-		fast_time = world.time + 10
+		fast_time = world.time + 5
 
 	if (world.time > normal_time)
 		calc(normal)

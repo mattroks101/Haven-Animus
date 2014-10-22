@@ -9,7 +9,7 @@
 	var/spamcheck = 0
 	var/emagged = 0
 	var/insults = 0
-	var/list/insultmsg = list("FUCK EVERYONE!", "I'M A TATER!", "ALL SECURITY TO SHOOT ME ON SIGHT!", "I HAVE A BOMB!", "CAPTAIN IS A COMDOM!", "FOR THE SYNDICATE!")
+	var/list/insultmsg = list("янях уси!", "ъ опедюрекэ!", "яа - охднпюяш!", "с лемъ анлаю!", "йюохрюм - цнмднм!", "гю яхмдхйюр!")
 
 /obj/item/device/megaphone/attack_self(mob/living/user as mob)
 	if (user.client)
@@ -25,7 +25,7 @@
 		user << "\red \The [src] needs to recharge!"
 		return
 
-	var/message = copytext(sanitize(input(user, "Shout a message?", "Megaphone", null)  as text),1,MAX_MESSAGE_LEN)
+	var/message = copytext(sanitize_multi(input(user, "Shout a message?", "Megaphone", null)  as text),1,MAX_MESSAGE_LEN)
 	if(!message)
 		return
 	message = capitalize(message)

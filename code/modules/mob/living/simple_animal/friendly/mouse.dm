@@ -97,7 +97,7 @@
 				vents.Add(temp_vent)
 			var/list/choices = list()
 			for(var/obj/machinery/atmospherics/unary/vent_pump/vent in vents)
-				if(vent.loc.z != loc.z)
+				if(vent.loc.z > 4)
 					continue
 				var/atom/a = get_turf(vent)
 				choices.Add(a.loc)
@@ -122,6 +122,7 @@
 	else
 		src << "\blue You must be standing on or beside an air vent to enter it."
 	return
+
 
 //copy paste from alien/larva, if that func is updated please update this one alsoghost
 /mob/living/simple_animal/mouse/verb/hide()

@@ -20,7 +20,7 @@
 /mob/living/proc/alien_talk(var/message)
 
 	log_say("[key_name(src)] : [message]")
-	message = trim(message)
+	message = trim(sanitize_multi(message))
 
 	if (!message)
 		return

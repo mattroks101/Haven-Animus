@@ -113,3 +113,5 @@
 		else
 			user << "\red The plating is going to need some support."
 	return
+
+/turf/simulated/floor/open

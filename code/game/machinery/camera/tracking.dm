@@ -58,9 +58,9 @@
 		var/turf/T = get_turf(M)
 		if(!T)
 			continue
-		if(T.z == 2)
+		if(T.z <= 4)
 			continue
-		if(T.z > 6)
+		if(T.z > 8)
 			continue
 		if(M == usr)
 			continue
