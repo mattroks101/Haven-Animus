@@ -270,7 +270,8 @@
 				popping = 0
 
 /obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
-	src.health -= Proj.damage
+	if(raised)
+		src.health -= Proj.damage
 	..()
 	if(prob(45) && Proj.damage > 0) src.spark_system.start()
 	del (Proj)
