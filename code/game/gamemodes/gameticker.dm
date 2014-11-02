@@ -41,12 +41,12 @@ var/global/datum/controller/gameticker/ticker
 	/*'sound/music/halloween/skeletons.ogg',\
 	'sound/music/halloween/halloween.ogg',\
 	'sound/music/halloween/ghosts.ogg'*/
-	/*'sound/music/space.ogg',\
+	'sound/music/space.ogg',\
 	'sound/music/traitor.ogg',\
 	'sound/music/title2.ogg',\
 	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg'*/ //Ground Control to Major Tom, this song is cool, what's going on?
-	'sound/music/lobby_music.ogg') // Oh luna
+	'sound/music/space_oddity.ogg',\
+	'sound/music/lobby_music.ogg')//Ground Control to Major Tom, this song is cool, what's going on?
 	do
 		pregame_timeleft = 180
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
@@ -170,7 +170,7 @@ var/global/datum/controller/gameticker/ticker
 				M.buckled = temp_buckle				//buckles the mob so it can't do anything
 				if(M.client)
 					M.client.screen += cinematic	//show every client the cinematic
-		else	//nuke kills everyone on z-level 1 to prevent "hurr-durr I survived"
+		else	//nuke kills everyone on z-level of a ship to prevent "hurr-durr I survived"
 			for(var/mob/living/M in living_mob_list)
 				M.buckled = temp_buckle
 				if(M.client)
@@ -179,10 +179,10 @@ var/global/datum/controller/gameticker/ticker
 				switch(M.z)
 					if(0)	//inside a crate or something
 						var/turf/T = get_turf(M)
-						if(T && T.z==1)				//we don't use M.death(0) because it calls a for(/mob) loop and
+						if(T && T.z > 4)				//we don't use M.death(0) because it calls a for(/mob) loop and
 							M.health = 0
 							M.stat = DEAD
-					if(1)	//on a z-level 1 turf.
+					if(1 to 4)	//on a ship's turf.
 						M.health = 0
 						M.stat = DEAD
 
@@ -380,5 +380,7 @@ var/global/datum/controller/gameticker/ticker
 	log_game("Antagonists at round end were...")
 	for(var/i in total_antagonists)
 		log_game("[i]s[total_antagonists[i]].")
+
+	mode.check_round()
 
 	return 1

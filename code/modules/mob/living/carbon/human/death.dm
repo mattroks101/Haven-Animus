@@ -115,6 +115,12 @@
 		update_canmove()
 		if(client)	blind.layer = 0
 
+	if(!suiciding)
+		unlock_medal("Downsizing", 0, "You are no longer a profitable asset.", "easy")
+	else
+		unlock_medal("I can't take it anymore!", 0, "Kill yourself...", "easy")
+
+
 	tod = worldtime2text()		//weasellos time of death patch
 	if(mind)	mind.store_memory("Time of death: [tod]", 0)
 	if(ticker && ticker.mode)

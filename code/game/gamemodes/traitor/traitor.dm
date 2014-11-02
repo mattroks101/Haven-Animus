@@ -223,6 +223,10 @@
 			else
 				text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
 				feedback_add_details("traitor_success","FAIL")
+			for(var/client/C)
+				if(C.key == traitor.key)
+					C.mob.unlock_medal("Oh I'm a terrorist?", 0, "Kinda", "medium")
+
 
 		world << text
 	return 1

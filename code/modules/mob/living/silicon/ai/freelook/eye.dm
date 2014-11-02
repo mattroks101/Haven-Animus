@@ -95,6 +95,7 @@
 		user.sprint = initial
 
 	for(var/i = 0; i < max(user.sprint, initial); i += 20)
+
 		var/turf/step = get_turf(get_step(user.eyeobj, direct))
 		if(step)
 			user.eyeobj.setLoc(step)
@@ -106,6 +107,32 @@
 		user.sprint = initial
 
 	user.cameraFollow = null
+
+/client/proc/AIMoveZ(direct, var/mob/living/silicon/ai/user)
+
+	var/initial = initial(user.sprint)
+	var/turf/controllerlocation = locate(1, 1, usr.z)
+	if(user.cooldown && user.cooldown < world.timeofday) // 3 seconds
+		user.sprint = initial
+
+	for(var/i = 0; i < max(user.sprint, initial); i += 20)
+		switch(direct)
+			if (UP)
+				for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+					if (controller.up)
+						var/turf/T = locate(usr.x, usr.y, controller.up_target)
+						user.eyeobj.setLoc(T)
+			if (DOWN)
+				for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+					if (controller.down)
+						var/turf/T = locate(usr.x, usr.y, controller.down_target)
+						user.eyeobj.setLoc(T)
+
+
+	user.cooldown = world.timeofday + 5
+
+	user.cameraFollow = null
+
 
 	//user.unset_machine() //Uncomment this if it causes problems.
 	//user.lightNearbyCamera()

@@ -794,6 +794,12 @@
 /obj/machinery/bot/mulebot/proc/RunOver(var/mob/living/carbon/human/H)
 	src.visible_message("\red [src] drives over [H]!")
 	playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
+	if(ismob(load))
+		var/mob/M = load
+		if(M.reagents.has_reagent("beer"))
+			M.unlock_medal("DUI", 1, null, "medium")
+		else if(M.reagents.has_reagent("space_drugs") && ishuman(M) && M.mind.assigned_role == "Security Officer")
+			M.unlock_medal("Ridin Dirty", 1, null, "medium")
 
 	var/damage = rand(5,15)
 	H.apply_damage(2*damage, BRUTE, "head")

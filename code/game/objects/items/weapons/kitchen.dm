@@ -62,14 +62,23 @@
 		return ..()
 
 	if (src.icon_state == "forkloaded") //This is a poor way of handling it, but a proper rewrite of the fork to allow for a more varied foodening can happen when I'm in the mood. --NEO
+		if(M.wear_mask && M.wear_mask.flags & MASKCOVERSMOUTH)
+			if(M == user)
+				for(var/mob/O in viewers(M, null))
+					O.show_message(text("\red [] tried to eat a delicious forkful of omelette through the mask! How stupid!", user), 1)
+			else
+				for(var/mob/O in viewers(M, null))
+					O.show_message(text("\red [] tried to feed [] a delicious forkful of omelette through the mask!", user, M), 1)
+		return
+
 		if(M == user)
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\blue [] eats a delicious forkful of omelette!", user), 1)
-				M.reagents.add_reagent("nutriment", 1)
+				M.reagents.add_reagent("nutriment", 2)
 		else
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\blue [] feeds [] a delicious forkful of omelette!", user, M), 1)
-				M.reagents.add_reagent("nutriment", 1)
+				M.reagents.add_reagent("nutriment", 2)
 		src.icon_state = "fork"
 		return
 	else
@@ -90,14 +99,23 @@
 		return ..()
 
 	if (src.icon_state == "forkloaded") //This is a poor way of handling it, but a proper rewrite of the fork to allow for a more varied foodening can happen when I'm in the mood. --NEO
+		if(M.wear_mask && M.wear_mask.flags & MASKCOVERSMOUTH)
+			if(M == user)
+				for(var/mob/O in viewers(M, null))
+					O.show_message(text("\red [] tried to eat a delicious forkful of omelette through the mask! How stupid!", user), 1)
+			else
+				for(var/mob/O in viewers(M, null))
+					O.show_message(text("\red [] tried to feed [] a delicious forkful of omelette through the mask!", user, M), 1)
+			return
+
 		if(M == user)
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\blue [] eats a delicious forkful of omelette!", user), 1)
-				M.reagents.add_reagent("nutriment", 1)
+				M.reagents.add_reagent("nutriment", 2)
 		else
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\blue [] feeds [] a delicious forkful of omelette!", user, M), 1)
-				M.reagents.add_reagent("nutriment", 1)
+				M.reagents.add_reagent("nutriment", 2)
 		src.icon_state = "fork"
 		return
 	else
