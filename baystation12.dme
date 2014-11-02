@@ -12,6 +12,7 @@
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/Rust"
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/ShieldGen"
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/Supermatter_new"
+#define FILE_DIR "code/WorkInProgress/ShieldGenerator"
 #define FILE_DIR "code/WorkInProgress/Susan"
 #define FILE_DIR "code/WorkInProgress/travel"
 #define FILE_DIR "html"
@@ -1420,5 +1421,5 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\test.dmm"
+#include "maps\NSV_Luna11321.dmm"
 // END_INCLUDE
