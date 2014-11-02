@@ -28,13 +28,17 @@
 
 
 /client/Northeast()
+	var/turf/controllerlocation = locate(1, 1, usr.z)
 	var/obj/item/weapon/W = mob.equipped()
-	if (istype(mob, /mob/dead/observer) && mob.z > 1)
-		mob.Move(locate(mob.x, mob.y, mob.z - 1))
-/*	else if (istype(mob, /mob/living/silicon/ai))
+	if (istype(mob, /mob/dead/observer))
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			if (controller.up)
+				var/turf/T = locate(usr.x, usr.y, controller.up_target)
+				mob.Move(T)
+	else if (istype(mob, /mob/living/silicon/ai))
 		var/mob/living/silicon/ai/M = mob
 		if ((!M.current && M.loc.z > 1) || M.current.z > 1)
-			AIMoveZ(UP, mob)		*/
+			AIMoveZ(UP, mob)
 //	else if(isobj(mob.loc))
 //		mob.loc:relaymove(mob,UP)
 	else if(istype(mob, /mob/living/carbon))
@@ -50,13 +54,17 @@
 
 
 /client/Southeast()
+	var/turf/controllerlocation = locate(1, 1, usr.z)
 	var/obj/item/weapon/W = mob.equipped()
-	if (istype(mob, /mob/dead/observer) && mob.z < 4)
-		mob.Move(locate(mob.x, mob.y, mob.z + 1))
-//	else if (istype(mob, /mob/living/silicon/ai))
-//		var/mob/living/silicon/ai/M = mob
-//		if ((!M.current && M.loc.z < 4) || M.current.z < 4)
-//			AIMoveZ(DOWN, mob)
+	if (istype(mob, /mob/dead/observer))
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			if (controller.down)
+				var/turf/T = locate(usr.x, usr.y, controller.down_target)
+				mob.Move(T)
+	else if (istype(mob, /mob/living/silicon/ai))
+		var/mob/living/silicon/ai/M = mob
+		if ((!M.current && M.loc.z < 4) || M.current.z < 4)
+			AIMoveZ(DOWN, mob)
 	else if(istype(mob, /mob/living/carbon) && mob:back && istype(mob:back, /obj/item/weapon/tank/jetpack))
 		mob:back:move_z(DOWN, mob)
 	else if(istype(mob, /mob/living/carbon) && mob:belt && istype(mob:belt, /obj/item/weapon/tank/jetpack))

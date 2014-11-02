@@ -95,6 +95,15 @@
 	if(istype(M,/mob/living))
 		H = M
 
+	if(H.wear_mask && H.wear_mask.flags & MASKCOVERSMOUTH)
+		if(H == user)
+			for(var/mob/O in viewers(H, null))
+				O.show_message("\red [user] tried to eat [src] through the mask! How stupid!", 1)
+		else
+			for(var/mob/O in viewers(H, null))
+				O.show_message("\red [user] tried to feed [H] [src] through the mask!", 1)
+		return
+
 	if(H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
 		H << "\red You lacerate your mouth on a [shard.name] in the sandwich!"
 		H.adjustBruteLoss(5) //TODO: Target head if human.

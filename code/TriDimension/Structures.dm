@@ -58,11 +58,11 @@
 	attack_paw(var/mob/M)
 		return attack_hand(M)
 
-	attackby(obj/item/C as obj, mob/user as mob)
+/*	attackby(obj/item/C as obj, mob/user as mob)
 		(..)
 
-// construction commented out for balance concerns
-/*		if (!target && istype(C, /obj/item/stack/rods))
+ construction commented out for balance concerns
+		if (!target && istype(C, /obj/item/stack/rods))
 			var/turf/controllerlocation = locate(1, 1, z)
 			var/found = 0
 			var/obj/item/stack/rods/S = C
@@ -128,24 +128,70 @@
 		else
 			src.attack_hand(user)
 			return*/
-		src.attack_hand(user)
-		return
 
 	attack_hand(var/mob/M)
+		var/turf/T = target.loc
+		if(M.a_intent == "grab")		// && get_dist(M, src) <= 1
+			var/atom/movable/chosen
+			var/list/avaluable_contents
+			avaluable_contents = new/list()
+			for(var/obj/C in T.contents)
+				if(!C.anchored)
+					avaluable_contents.Add(C)
+			for(var/mob/living/carbon/X in T.contents)
+				if(!X.buckled)
+					avaluable_contents.Add(X)
+			chosen = input("What would you like to pull [src.icon_state == "ladderup" ? "down" : "up"]?", "Cross-ladder Pull", null) as obj|mob in avaluable_contents
+			if(chosen)
+				M.visible_message("\blue \The [M] starts pulling [chosen] [src.icon_state == "ladderup" ? "down" : "up"] \the [src]!", "\blue You start pulling [chosen] [src.icon_state == "ladderup"  ? "down" : "up"] \the [src]!", "You hear some grunting, and clanging of a metal ladder being used.")
+				if(iscarbon(chosen))
+					chosen << "\red A hand appears from \the [src] and starts pulling you inside!"
+				if(do_after(M, 50))
+					if(chosen.loc == T)
+						chosen.Move(src.loc)
+						M.visible_message("\blue \The [M] pulls [chosen] [src.icon_state == "ladderup" ? "down" : "up"] \the [src]!", "\blue You pull [chosen] [src.icon_state == "ladderup"  ? "down" : "up"] \the [src]!", "You hear some grunting, and clanging of a metal ladder being used.")
+						return
+					else
+						M << "\red \The [chosen] moved out of range!"
+						return
+				else
+					return
+
 		if(!target || !istype(target.loc, /turf))
-			M << "The ladder is incomplete and can't be climbed."
+			M << "\ red The ladder is incomplete and can't be climbed."
 		else
-			var/turf/T = target.loc
 			var/blocked = 0
 			for(var/atom/A in T.contents)
 				if(A.density)
 					blocked = 1
 					break
 			if(blocked || istype(T, /turf/simulated/wall))
-				M << "Something is blocking the ladder."
+				M << "\ red Something is blocking the ladder."
 			else
-				M.visible_message("\blue \The [M] climbs [src.icon_state == "ladderup" ? "up" : "down"] \the [src]!", "You climb [src.icon_state == "ladderup"  ? "up" : "down"] \the [src]!", "You hear some grunting, and clanging of a metal ladder being used.")
+				M.visible_message("\blue \The [M] climbs [src.icon_state == "ladderup" ? "up" : "down"] \the [src]!", "\blue You climb [src.icon_state == "ladderup"  ? "up" : "down"] \the [src]!", "You hear some grunting, and clanging of a metal ladder being used.")
 				M.Move(target.loc)
+
+	attackby(obj/item/weapon/W as obj, mob/M as mob)
+		if (istype(W, /obj/item/weapon/grab) && get_dist(src,M)<2)
+			var/obj/item/weapon/grab/G = W
+			if(G.state >= 2)
+				if(!target || !istype(target.loc, /turf))
+					M << "\red The ladder is incomplete and can't be climbed."
+					return
+				var/turf/T = target.loc
+				var/blocked = 0
+				for(var/atom/A in T.contents)
+					if(A.density)
+						blocked = 1
+						break
+				if(blocked || istype(T, /turf/simulated/wall))
+					M << "\red Something is blocking the ladder."
+				else
+					M.visible_message("\blue \The [M] puts [G.affecting] [src.icon_state == "ladderup" ? "up" : "down"] \the [src]!", "\blue You put [G.affecting] [src.icon_state == "ladderup"  ? "up" : "down"] \the [src]!", "You hear some grunting, and clanging of a metal ladder being used.")
+					G.affecting.Move(target.loc)
+					del(W)
+
+
 
 /*	hatch
 		icon_state = "hatchdown"

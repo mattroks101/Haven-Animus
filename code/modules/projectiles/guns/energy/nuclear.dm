@@ -20,7 +20,7 @@
 				charge_cost = 100
 				fire_sound = 'sound/weapons/Laser4.ogg'
 				user << "\red [src.name] is now set to kill."
-				projectile_type = "/obj/item/projectile/energy/egun"
+				projectile_type = "/obj/item/projectile/energy/laser"
 				modifystate = "energykill"
 			if(1)
 				mode = 0

@@ -956,3 +956,7 @@ mob/proc/yank_out_object()
 		if(!pinned.len)
 			anchored = 0
 	return 1
+
+mob/living/verb/head()
+	set hidden = 1
+	usr.unlock_medal("Find Head", 0, "You found head!", "medium")

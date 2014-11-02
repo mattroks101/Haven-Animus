@@ -26,6 +26,15 @@
 			user << "\red None of [src] left, oh no!"
 			return 0
 
+		if(M.wear_mask && M.wear_mask.flags & MASKCOVERSMOUTH)
+			if(M == user)
+				for(var/mob/O in viewers(M, null))
+					O.show_message("\red [user] tried to eat [src] through the mask! How stupid!", 1)
+			else
+				for(var/mob/O in viewers(M, null))
+					O.show_message("\red [user] tried to feed [M] [src] through the mask!", 1)
+			return
+
 		if(M == user)
 			M << "\blue You swallow some of contents of the [src]."
 			if(reagents.total_volume)

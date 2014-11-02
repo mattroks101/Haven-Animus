@@ -35,6 +35,15 @@
 			user << "\red None of [src] left, oh no!"
 			return 0
 
+		if(M.wear_mask && M.wear_mask.flags & MASKCOVERSMOUTH)
+			if(M == user)
+				for(var/mob/O in viewers(M, null))
+					O.show_message("\red [user] tried to drink [src] through the mask! How stupid!", 1)
+			else
+				for(var/mob/O in viewers(M, null))
+					O.show_message("\red [user] tried to feed [M] [src] through the mask!", 1)
+			return
+
 		if(M == user)
 			M << "\blue You swallow a gulp of [src]."
 			if(reagents.total_volume)
@@ -45,7 +54,6 @@
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
 		else if( istype(M, /mob/living/carbon/human) )
-
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message("\red [user] attempts to feed [M] [src].", 1)
 			if(!do_mob(user, M)) return

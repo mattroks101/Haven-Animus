@@ -21,11 +21,16 @@
 //	damage_type = HALLOSS
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
-/obj/item/projectile/energy/egun
-	name = "energy beam"
+/obj/item/projectile/energy/laser
+	name = "laser bolt"
 	icon_state =  "laser2"
 	damage = 40
-	damage_type = BRUTE
+	damage_type = BURN
+
+	process()
+		SetLuminosity(2,0,0)
+		..()
+
 
 
 /obj/item/projectile/energy/declone

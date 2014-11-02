@@ -257,3 +257,17 @@ ALLOW_CULT_GHOSTWRITER
 
 ## Sets the minimum number of cultists needed for ghosts to write in blood.
 REQ_CULT_GHOSTWRITER 6
+
+## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied. 
+RUN_SPEED 1
+WALK_SPEED 3
+
+
+## The variables below affect the movement of specific mob types.
+HUMAN_DELAY 1.5
+ROBOT_DELAY 0
+MONKEY_DELAY 0
+ALIEN_DELAY 0
+METROID_DELAY 0
+ANIMAL_DELAY 0
+

@@ -1945,7 +1945,7 @@ datum
 			id = "nutriment"
 			description = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 			reagent_state = SOLID
-			nutriment_factor = 15 * REAGENTS_METABOLISM
+			nutriment_factor = 35 * REAGENTS_METABOLISM
 			color = "#664330" // rgb: 102, 67, 48
 
 			on_mob_life(var/mob/living/M as mob)
@@ -1973,7 +1973,7 @@ datum
 			id = "lipozine"
 			description = "A chemical compound that causes a powerful fat-burning reaction."
 			reagent_state = LIQUID
-			nutriment_factor = 10 * REAGENTS_METABOLISM
+			nutriment_factor = 25 * REAGENTS_METABOLISM
 			color = "#BBEDA4" // rgb: 187, 237, 164
 			overdose = REAGENTS_OVERDOSE
 
@@ -1991,7 +1991,7 @@ datum
 			id = "soysauce"
 			description = "A salty sauce made from the soy plant."
 			reagent_state = LIQUID
-			nutriment_factor = 2 * REAGENTS_METABOLISM
+			nutriment_factor = 6 * REAGENTS_METABOLISM
 			color = "#792300" // rgb: 121, 35, 0
 
 		ketchup
@@ -1999,7 +1999,7 @@ datum
 			id = "ketchup"
 			description = "Ketchup, catsup, whatever. It's tomato paste."
 			reagent_state = LIQUID
-			nutriment_factor = 5 * REAGENTS_METABOLISM
+			nutriment_factor = 10 * REAGENTS_METABOLISM
 			color = "#731008" // rgb: 115, 16, 8
 
 		capsaicin
@@ -2153,7 +2153,7 @@ datum
 			id = "coco"
 			description = "A fatty, bitter paste made from coco beans."
 			reagent_state = SOLID
-			nutriment_factor = 5 * REAGENTS_METABOLISM
+			nutriment_factor = 10 * REAGENTS_METABOLISM
 			color = "#302000" // rgb: 48, 32, 0
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2166,7 +2166,7 @@ datum
 			id = "hot_coco"
 			description = "Made with love! And cocoa beans."
 			reagent_state = LIQUID
-			nutriment_factor = 2 * REAGENTS_METABOLISM
+			nutriment_factor = 4 * REAGENTS_METABOLISM
 			color = "#403010" // rgb: 64, 48, 16
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2213,18 +2213,18 @@ datum
 			name = "Sprinkles"
 			id = "sprinkles"
 			description = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."
-			nutriment_factor = 1 * REAGENTS_METABOLISM
+			nutriment_factor = 2 * REAGENTS_METABOLISM
 			color = "#FF00FF" // rgb: 255, 0, 255
 
 			on_mob_life(var/mob/living/M as mob)
 				M.nutrition += nutriment_factor
-				/*if(istype(M, /mob/living/carbon/human) && M.job in list("Security Officer", "Head of Security", "Detective", "Warden"))
+				if(istype(M, /mob/living/carbon/human) && M.job in list("Security Officer", "Head of Security", "Detective", "Warden"))
 					if(!M) M = holder.my_atom
 					M.heal_organ_damage(1,1)
 					M.nutrition += nutriment_factor
 					..()
 					return
-				*/
+
 				..()
 
 /*	//removed because of meta bullshit. this is why we can't have nice things.
@@ -2251,7 +2251,7 @@ datum
 			id = "cornoil"
 			description = "An oil derived from various types of corn."
 			reagent_state = LIQUID
-			nutriment_factor = 20 * REAGENTS_METABOLISM
+			nutriment_factor = 30 * REAGENTS_METABOLISM
 			color = "#302000" // rgb: 48, 32, 0
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2298,7 +2298,7 @@ datum
 			id = "dry_ramen"
 			description = "Space age food, since August 25, 1958. Contains dried noodles, vegetables, and chemicals that boil in contact with water."
 			reagent_state = SOLID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
+			nutriment_factor = 3 * REAGENTS_METABOLISM
 			color = "#302000" // rgb: 48, 32, 0
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2311,7 +2311,7 @@ datum
 			id = "hot_ramen"
 			description = "The noodles are boiled, the flavors are artificial, just like being back in school."
 			reagent_state = LIQUID
-			nutriment_factor = 5 * REAGENTS_METABOLISM
+			nutriment_factor = 8 * REAGENTS_METABOLISM
 			color = "#302000" // rgb: 48, 32, 0
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2326,7 +2326,7 @@ datum
 			id = "hell_ramen"
 			description = "The noodles are boiled, the flavors are artificial, just like being back in school."
 			reagent_state = LIQUID
-			nutriment_factor = 5 * REAGENTS_METABOLISM
+			nutriment_factor = 8 * REAGENTS_METABOLISM
 			color = "#302000" // rgb: 48, 32, 0
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2340,7 +2340,7 @@ datum
 			id = "flour"
 			description = "This is what you rub all over yourself to pretend to be a ghost."
 			reagent_state = SOLID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
+			nutriment_factor = 3 * REAGENTS_METABOLISM
 			color = "#FFFFFF" // rgb: 0, 0, 0
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2358,7 +2358,7 @@ datum
 			id = "rice"
 			description = "Enjoy the great taste of nothing."
 			reagent_state = SOLID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
+			nutriment_factor = 3 * REAGENTS_METABOLISM
 			color = "#FFFFFF" // rgb: 0, 0, 0
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2371,7 +2371,7 @@ datum
 			id = "cherryjelly"
 			description = "Totally the best. Only to be spread on foods with excellent lateral symmetry."
 			reagent_state = LIQUID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
+			nutriment_factor = 5 * REAGENTS_METABOLISM
 			color = "#801E28" // rgb: 128, 30, 40
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2388,7 +2388,7 @@ datum
 			id = "drink"
 			description = "Uh, some kind of drink."
 			reagent_state = LIQUID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
+			nutriment_factor = 3 * REAGENTS_METABOLISM
 			color = "#E78108" // rgb: 231, 129, 8
 			var/adj_dizzy = 0
 			var/adj_drowsy = 0
@@ -2520,7 +2520,7 @@ datum
 			name = "Potato Juice"
 			id = "potato"
 			description = "Juice of the potato. Bleh."
-			nutriment_factor = 2 * FOOD_METABOLISM
+			nutriment_factor = 5 * FOOD_METABOLISM
 			color = "#302000" // rgb: 48, 32, 0
 
 		drink/milk
@@ -2558,7 +2558,7 @@ datum
 			name = "Hot Chocolate"
 			id = "hot_coco"
 			description = "Made with love! And cocoa beans."
-			nutriment_factor = 2 * FOOD_METABOLISM
+			nutriment_factor = 4 * FOOD_METABOLISM
 			color = "#403010" // rgb: 64, 48, 16
 			adj_temp = 5
 
@@ -2786,7 +2786,7 @@ datum
 			description = "A gulp a day keeps the MediBot away. That's probably for the best."
 			reagent_state = LIQUID
 			color = "#FF8CFF" // rgb: 255, 140, 255
-			nutriment_factor = 1 * FOOD_METABOLISM
+			nutriment_factor = 3 * FOOD_METABOLISM
 
 			on_mob_life(var/mob/living/M as mob)
 				M:nutrition += nutriment_factor
@@ -2999,7 +2999,7 @@ datum
 			description = "An alcoholic beverage made from malted grains, hops, yeast, and water."
 			color = "#664300" // rgb: 102, 67, 0
 			boozepwr = 1
-			nutriment_factor = 1 * FOOD_METABOLISM
+			nutriment_factor = 2 * FOOD_METABOLISM
 
 			on_mob_life(var/mob/living/M as mob)
 				M:jitteriness = max(M:jitteriness-3,0)
@@ -3577,7 +3577,7 @@ datum
 			reagent_state = LIQUID
 			color = "#664300" // rgb: 102, 67, 0
 			boozepwr = 1.5
-			nutriment_factor = 1 * FOOD_METABOLISM
+			nutriment_factor = 2 * FOOD_METABOLISM
 
 		ethanol/iced_beer
 			name = "Iced Beer"
@@ -3670,7 +3670,7 @@ datum
 			name = "Driest Martini"
 			id = "driestmartini"
 			description = "Only for the experienced. You think you see sand floating in the glass."
-			nutriment_factor = 1 * FOOD_METABOLISM
+			nutriment_factor = 2 * FOOD_METABOLISM
 			color = "#2E6671" // rgb: 46, 102, 113
 			boozepwr = 4
 
@@ -3678,7 +3678,7 @@ datum
 			name = "Banana Mama"
 			id = "bananahonk"
 			description = "A drink from Clown Heaven."
-			nutriment_factor = 1 * REAGENTS_METABOLISM
+			nutriment_factor = 2 * REAGENTS_METABOLISM
 			color = "#FFFF91" // rgb: 255, 255, 140
 			boozepwr = 4
 
@@ -3686,7 +3686,7 @@ datum
 			name = "Silencer"
 			id = "silencer"
 			description = "A drink from Mime Heaven."
-			nutriment_factor = 1 * FOOD_METABOLISM
+			nutriment_factor = 2 * FOOD_METABOLISM
 			color = "#664300" // rgb: 102, 67, 0
 			boozepwr = 4
 

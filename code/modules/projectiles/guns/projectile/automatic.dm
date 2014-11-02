@@ -23,7 +23,9 @@
 	else
 		..()
 
-/obj/item/weapon/gun/projectile/automatic/attack_self(mob/user as mob)
+/obj/item/weapon/gun/projectile/automatic/verb/toggle_fire(mob/user as mob)
+	set name = "Toggle Firing Mode"
+	set category = "Object"
 	if(mode)
 		mode = 0
 		user << "<span class='notice'>The [src] will now fire single shots.</span>"
@@ -107,13 +109,6 @@
 	user << "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>"
 	update_icon()
 
-
-/obj/item/weapon/gun/projectile/automatic/l6_saw/verb/open(mob/user as mob)
-	set name = "Toggle Cover"
-	set category = "Object"
-	cover_open = !cover_open
-	user << "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>"
-	update_icon()
 
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/afterattack(atom/target as mob|obj|turf, mob/living/user as mob|obj, flag, params) //what I tried to do here is just add a check to see if the cover is open or not and add an icon_state change because I can't figure out how c-20rs do it with overlays

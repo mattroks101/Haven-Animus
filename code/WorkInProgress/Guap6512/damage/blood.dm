@@ -112,6 +112,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 					// when death() is called, apparently they will be just fine, and this way it'll
 					// spam deathgasp. Adjusting toxloss ensures the mob will stay dead.
 				//	oxyloss += 300 // just to be safe!
+					src.unlock_medal("We're all sold out on blood", 0, "You bled to death..", "easy")
 					src.death()
 
 		// Without enough blood you slowly go hungry.

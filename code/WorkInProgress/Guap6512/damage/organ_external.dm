@@ -516,6 +516,7 @@ This function completely restores a damaged organ to perfect condition.
 				owner.u_equip(owner.l_ear)
 				owner.u_equip(owner.r_ear)
 				owner.u_equip(owner.wear_mask)
+				owner.death()
 			if(ARM_RIGHT)
 				if(status & ORGAN_ROBOT)
 					organ = new /obj/item/robot_parts/r_arm(owner.loc)
@@ -571,6 +572,8 @@ This function completely restores a damaged organ to perfect condition.
 			"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
 			"You hear a terrible sound of ripping tendons and flesh.")
 
+			owner.unlock_medal("Lost something?", 0, "Lose a limb.", "easy")
+
 			//Throw organs around
 			var/lol = pick(cardinal)
 			step(organ,lol)
@@ -614,7 +617,7 @@ This function completely restores a damaged organ to perfect condition.
 
 	if(owner.species && !(owner.species.flags & NO_PAIN))
 		owner.emote("scream")
-
+	owner.unlock_medal("Broke Yarrr Bones!", 0, "Break a bone.", "easy")
 	status |= ORGAN_BROKEN
 	broken_description = pick("broken","fracture","hairline fracture")
 	perma_injury = brute_dam
