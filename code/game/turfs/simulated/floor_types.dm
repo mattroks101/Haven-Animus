@@ -223,3 +223,11 @@
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
+
+//CATWALKS
+
+/turf/simulated/floor/plating/airless/catwalk
+	icon = 'icons/turf/catwalks.dmi'
+	icon_state = "catwalk0"
+	name = "catwalk"
+	desc = "Cats really don't like these things."
