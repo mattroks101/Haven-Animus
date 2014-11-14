@@ -1,5 +1,7 @@
 /mob/proc/unlock_medal(title, announce, desc, diff)
 
+	return
+
 	spawn ()
 		if (ismob(src) && src.key)
 		//	var/list/keys = list()
@@ -35,6 +37,9 @@
 mob/verb/show_medal()
 	set name = "Show Achievements"
 	set category = "OOC"
+
+	return
+
 	var/DBQuery/xquery = dbcon.NewQuery("SELECT `ckey` FROM `medals` WHERE ckey='[src.ckey]'")
 	var/DBQuery/gquery = dbcon.NewQuery("SELECT * FROM `medals` WHERE ckey='[src.ckey]'")
 	var/list/keys = list()
