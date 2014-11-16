@@ -25,7 +25,27 @@
 /atom/proc/throw_impact(atom/hit_atom, var/speed)
 	if(istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
-		M.hitby(src,speed)
+
+		if(!istype(src, /obj/item)) // this is a big item that's being thrown at them~
+
+			if(istype(M, /mob/living/carbon/human))
+				var/armor_block = M:run_armor_check("chest", "melee")
+				M:apply_damage(rand(20,45), BRUTE, "chest", armor_block)
+
+				visible_message("\red <B>[M] has been knocked down by the force of [src]!</B>")
+				M:apply_effect(rand(4,12), WEAKEN, armor_block)
+
+				M:UpdateDamageIcon()
+			else
+				M.take_organ_damage(rand(20,45))
+		else if(src.vars.Find("throwforce"))
+			M.take_organ_damage(src:throwforce)
+
+			log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
+			//log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
+			msg_admin_attack("[hit_atom] ([M.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[M]'>JMP</A>) was hit by [src] thrown by ([src.fingerprintslast])", 2)
+
+
 
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
