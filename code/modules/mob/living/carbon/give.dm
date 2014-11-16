@@ -43,6 +43,8 @@
 						src.r_hand = I
 					else
 						src.l_hand = I
+				I.dropped(usr)
+				I.pickup(src)
 				I.loc = src
 				I.layer = 20
 				I.add_fingerprint(src)

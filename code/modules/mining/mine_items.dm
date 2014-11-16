@@ -190,9 +190,7 @@ proc/move_mining_shuttle()
 	name = "lantern"
 	icon_state = "lantern"
 	desc = "A mining lantern."
-	brightnessred = 6
-	brightnessgreen = 6
-	brightnessblue = 5
+	brightness_on = 6
 
 /*****************************Pickaxe********************************/
 

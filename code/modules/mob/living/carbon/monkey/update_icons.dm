@@ -5,6 +5,7 @@
 #define M_L_HAND_LAYER			4
 #define M_R_HAND_LAYER			5
 #define TARGETED_LAYER			6
+#define M_FIRE_LAYER			5
 #define M_TOTAL_LAYERS			6
 /////////////////////////////////
 
@@ -41,6 +42,14 @@
 		var/matrix/M = matrix()
 		src.transform = M
 
+/mob/living/carbon/monkey/update_fire()
+	overlays -= overlays_standing[M_FIRE_LAYER]
+	if(on_fire)
+		overlays_standing[M_FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"= -M_FIRE_LAYER)
+		overlays += overlays_standing[M_FIRE_LAYER]
+		return
+	else
+		overlays_standing[M_FIRE_LAYER] = null
 
 ////////
 /mob/living/carbon/monkey/update_inv_wear_mask(var/update_icons=1)
@@ -111,6 +120,7 @@
 	if(update_icons)		update_icons()
 
 //Monkey Overlays Indexes////////
+#undef M_FIRE_LAYER
 #undef M_MASK_LAYER
 #undef M_BACK_LAYER
 #undef M_HANDCUFF_LAYER
@@ -118,4 +128,5 @@
 #undef M_R_HAND_LAYER
 #undef TARGETED_LAYER
 #undef M_TOTAL_LAYERS
+
 

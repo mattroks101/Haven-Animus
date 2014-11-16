@@ -119,6 +119,7 @@ Please contact me on #coderbus IRC. ~Carn x
 #define R_HAND_LAYER			20
 #define TAIL_LAYER				21		//bs12 specific. this hack is probably gonna come back to haunt me
 #define TARGETED_LAYER			22		//BS12: Layer for the target overlay from weapon targeting system
+#define FIRE_LAYER				22		//If you're on fire
 #define TOTAL_LAYERS			22
 //////////////////////////////////
 
@@ -207,6 +208,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(update_icons)   update_icons()
 
+/mob/living/carbon/human/update_fire()
+
+	overlays_standing[FIRE_LAYER] = null
+	if(on_fire)
+		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=-FIRE_LAYER)
+
+	update_icons()
+
+
 //BASE MOB SPRITE
 /mob/living/carbon/human/proc/update_body(var/update_icons=1)
 	if(stand_icon)	del(stand_icon)
@@ -289,6 +299,13 @@ proc/get_damage_icon_part(damage_state, body_part)
 		mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
 		husk_over.Blend(mask, ICON_ADD)
 		stand_icon.Blend(husk_over, ICON_OVERLAY)
+
+	if(zombie)
+		var/icon/mask = new(stand_icon)
+		var/icon/zombie_over = new(race_icon,"overlay_zombie")
+		mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
+		zombie_over.Blend(mask, ICON_ADD)
+		stand_icon.Blend(zombie_over, ICON_OVERLAY)
 
 	if(has_head)
 		//Eyes
@@ -449,6 +466,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	update_inv_handcuffed(0)
 	update_inv_legcuffed(0)
 	update_inv_pockets(0)
+	update_fire()
 	UpdateDamageIcon()
 	update_transform()
 	//Hud Stuff
@@ -770,3 +788,4 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef TAIL_LAYER
 #undef TARGETED_LAYER
 #undef TOTAL_LAYERS
+#undef FIRE_LAYER

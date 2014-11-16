@@ -25,7 +25,7 @@ mob/var/zombieimmune = 0
 	sight &= ~SEE_MOBS
 	src.verbs -= /mob/living/carbon/human/proc/supersuicide
 	update_icons()
-	src << "You have been cured from being a zombie!"
+	src << "\red<font size=3>You have been cured from being a zombie!"
 
 /mob/living/carbon/human/proc/zombie_bit(var/mob/living/carbon/human/biter)
 	var/mob/living/carbon/human/biten = src
@@ -51,6 +51,7 @@ mob/var/zombieimmune = 0
 	D.makezombie()
 	D.infectionchance = 1
 	virus2["[D.uniqueID]"] = D
+	becoming_zombie = 1
 
 /client/proc/admin_infect_zombie(var/mob/M in mob_list)
 	set category = "Admin"
@@ -85,13 +86,13 @@ mob/var/zombieimmune = 0
 		switch(alert(usr,"Are you sure you wanna die?",,"Yes","No"))
 			if("Yes")
 				fireloss = 999
-				src << "/red You died suprised?"
+				src << "\red You died suprised?"
 				return
 			else
-				src << "/ redYou live to see another day."
+				src << "\red You live to see another day."
 				return
 	else
-		src << "/red Only for zombies."
+		src << "\red Only for zombies."
 
 /mob/living/carbon/human/proc/zombierelease()
 	set name = "Zombify"

@@ -126,6 +126,7 @@
 			hud_used.swaphands_hud_object.dir = 1
 			hud_used.l_hand_hud_object.icon_state = "hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "hand_active"
+	unlock_medal("Nice start.", 0, "How to change hands?", "easy")
 	return
 
 /mob/living/carbon/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
