@@ -311,7 +311,7 @@
 "afY" = (/obj/structure/closet/emcloset,/obj/structure/disposalpipe/segment{dir = 4},/obj/structure/cable,/obj/machinery/power/apc{dir = 2; name = "South APC"; pixel_y = -24},/turf/simulated/floor{tag = "icon-red"; icon_state = "red"},/area/bridge)
 "afZ" = (/obj/machinery/alarm{dir = 1; pixel_y = -22},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/structure/disposalpipe/trunk{dir = 8},/obj/machinery/disposal,/turf/simulated/floor{tag = "icon-red"; icon_state = "red"},/area/bridge)
 "aga" = (/obj/machinery/vending/coffee,/turf/simulated/floor{tag = "icon-red (SOUTHEAST)"; icon_state = "red"; dir = 6},/area/bridge)
-"agb" = (/obj/structure/table/woodentable,/obj/item/weapon/pen,/obj/item/weapon/stamp/captain,/obj/item/weapon/paper_bin,/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor/open,/area/crew_quarters/captain)
+"agb" = (/obj/structure/table/woodentable,/obj/item/weapon/pen,/obj/item/weapon/stamp/captain,/obj/item/weapon/paper_bin,/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor/wood,/area/crew_quarters/captain)
 "agc" = (/obj/structure/stool/bed/chair/comfy/brown{dir = 8},/obj/machinery/firealarm{pixel_y = 28},/turf/simulated/floor/wood,/area/crew_quarters/captain)
 "agd" = (/turf/simulated/floor/wood,/area/crew_quarters/captain)
 "age" = (/obj/item/device/radio/intercom{anyai = 1; broadcasting = 0; freerange = 1; listening = 1; name = "Captain's Intercom"; pixel_x = -3; pixel_y = 26},/obj/machinery/camera/autoname,/turf/simulated/floor/wood,/area/crew_quarters/captain)
