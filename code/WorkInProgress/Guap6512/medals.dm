@@ -1,5 +1,5 @@
 /mob/proc/unlock_medal(title, announce, desc, diff)
-
+	return										//TODO: Fix later.
 	spawn ()
 		if (ismob(src) && src.key)
 		//	var/list/keys = list()
