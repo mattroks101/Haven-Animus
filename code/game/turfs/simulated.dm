@@ -25,6 +25,10 @@
 		usr << "\red Movement is admin-disabled." //This is to identify lag problems
 		return
 
+	if(istype(src,/turf/simulated/floor/open))
+		..()
+		return
+
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
 		if(M.lying)        return
@@ -49,6 +53,18 @@
 						O.footstep++
 				else
 					playsound(src, "clownstep", 20, 1)
+			else if(istype(H.shoes, /obj/item/clothing/shoes))
+				var/obj/item/clothing/shoes/S = H.shoes
+				if(H.m_intent == "run")
+					if(S.footstep >= 2)
+						S.footstep = 0
+					else
+						S.footstep++
+					if(S.footstep == 0)
+						playsound(src, "footsteps", 30, 1) // this will get annoying very fast.
+				else
+					playsound(src, "footsteps", 10, 1)
+
 
 			// Tracking blood
 			var/list/bloodDNA = null

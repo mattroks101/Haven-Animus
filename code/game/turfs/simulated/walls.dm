@@ -15,7 +15,7 @@
 	var/walltype = "metal"
 
 	New()
-		health = rand(10,36)
+		health = rand(20,120)
 		..()
 
 /turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)

@@ -183,14 +183,14 @@ Implant Specifics:<BR>"}
 							part.droplimb(1)
 							del(src)
 				if (elevel == "Destroy Body")
-					explosion(get_turf(T), -1, 0, 1, 6)
+					explosion(get_turf(T), 0, 2, 1, 6)
 					T.gib()
 				if (elevel == "Full Explosion")
-					explosion(get_turf(T), 0, 1, 3, 6)
+					explosion(get_turf(T), 1, 3, 4, 6)
 					T.gib()
 
 			else
-				explosion(get_turf(imp_in), 0, 1, 3, 6)
+				explosion(get_turf(imp_in), 1, 3, 4, 6)
 
 		if(need_gib)
 			imp_in.gib()

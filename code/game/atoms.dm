@@ -30,7 +30,7 @@
 
 			if(istype(M, /mob/living/carbon/human))
 				var/armor_block = M:run_armor_check("chest", "melee")
-				M:apply_damage(rand(20,45), BRUTE, "chest", armor_block)
+				M:apply_damage(rand(20,35), BRUTE, "chest", armor_block)
 
 				visible_message("\red <B>[M] has been knocked down by the force of [src]!</B>")
 				M:apply_effect(rand(4,12), WEAKEN, armor_block)
@@ -410,7 +410,6 @@ its easier to just keep the beam vertical.
 	if(istype(blood_DNA, /list))
 		del(blood_DNA)
 		return 1
-
 
 /atom/proc/get_global_map_pos()
 	if(!islist(global_map) || isemptylist(global_map)) return

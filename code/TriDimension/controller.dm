@@ -138,7 +138,7 @@ atom/movable/Move() //Hackish
 
 					var/image/temp = image(below, dir=below.dir, layer = TURF_LAYER + 0.04)
 
-					temp.color = rgb(127,127,127)
+					temp.color = below.color//rgb(127,127,127)
 					temp.overlays += below.overlays
 					t_img += temp
 					T.overlays += t_img
@@ -151,7 +151,7 @@ atom/movable/Move() //Hackish
 					if(o.invisibility) continue
 					new_list = 2
 					var/image/temp2 = image(o, dir=o.dir, layer = TURF_LAYER+0.05*o.layer)
-					temp2.color = rgb(127,127,127)
+					temp2.color = o.color//rgb(127,127,127)
 					temp2.overlays += o.overlays
 					o_img += temp2
 					// you need to add a list to .overlays or it will not display any because space
@@ -166,12 +166,15 @@ atom/movable/Move() //Hackish
 					// only add this tile to fastprocessing if there is a living mob, not a dead one
 					if(istype(m, /mob/living)) new_list = 3
 					var/image/temp2 = image(m, dir=m.dir, layer = TURF_LAYER+0.05*m.layer)
-					temp2.color = rgb(127,127,127)
+					temp2.color = m.color//rgb(127,127,127)
 					temp2.overlays += m.overlays
 					m_img += temp2
 					// you need to add a list to .overlays or it will not display any because space
 				T.overlays += m_img
 				T.z_overlays += m_img
+
+				T.overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
+				T.z_overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
 
 				T.overlays -= below.z_overlays
 				T.z_overlays -= below.z_overlays

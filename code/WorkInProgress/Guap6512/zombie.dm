@@ -1,5 +1,7 @@
 mob/var/zombieleader = 0
 mob/var/zombieimmune = 0
+var/list/datum/zombies = list()
+
 /mob/living/carbon/human/proc/zombify()
 	stat &= 1
 	oxyloss = 0
@@ -17,7 +19,9 @@ mob/var/zombieimmune = 0
 		O.show_message(text("\red <B>[src] seizes up and falls limp, \his eyes dead and lifeless...[src] is ZOMBIE! HARM CLAW! CLAW! CLAW!</B>"), 1)
 //	if(ticker.mode.name == "Zombie Outbreak")
 //		ticker.check_win()
-	AddZombieImages()
+	update_body()
+	zombies.Add(src)
+
 
 /mob/living/carbon/proc/unzombify()
 	zombie = 0

@@ -10,7 +10,7 @@
 	var/d_state = 0
 
 	New()
-		health = rand(20,36)
+		health = rand(60,160)
 		..()
 
 /turf/simulated/wall/r_wall/attack_hand(mob/user as mob)

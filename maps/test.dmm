@@ -6,7 +6,7 @@
 "af" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/security/prison)
 "ag" = (/obj/effect/landmark{name = "JoinLate"},/obj/effect/landmark/start{name = "Captain"},/turf/simulated/floor,/area/security/prison)
 "ah" = (/obj/item/clothing/suit/space/rig/syndi,/obj/item/clothing/mask/breath,/turf/simulated/floor,/area/security/prison)
-"ai" = (/obj/item/weapon/screwdriver,/turf/simulated/floor,/area/security/prison)
+"ai" = (/obj/item/weapon/screwdriver,/obj/structure/toilet,/turf/simulated/floor,/area/security/prison)
 "aj" = (/obj/machinery/power/apc{cell_type = 12500; dir = 1; name = "North APC"; pixel_y = 24; start_charge = 100},/turf/simulated/floor,/area/security/prison)
 "ak" = (/turf/simulated/floor,/area/security/prison)
 "al" = (/obj/machinery/light{dir = 1},/turf/simulated/floor,/area/security/prison)

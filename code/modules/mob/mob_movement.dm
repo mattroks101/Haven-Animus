@@ -36,9 +36,7 @@
 				var/turf/T = locate(usr.x, usr.y, controller.up_target)
 				mob.Move(T)
 	else if (istype(mob, /mob/living/silicon/ai))
-		var/mob/living/silicon/ai/M = mob
-		if ((!M.current && M.loc.z > 1) || M.current.z > 1)
-			AIMoveZ(UP, mob)
+		AIMoveZ(UP, mob)
 //	else if(isobj(mob.loc))
 //		mob.loc:relaymove(mob,UP)
 	else if(istype(mob, /mob/living/carbon))
@@ -62,9 +60,7 @@
 				var/turf/T = locate(usr.x, usr.y, controller.down_target)
 				mob.Move(T)
 	else if (istype(mob, /mob/living/silicon/ai))
-		var/mob/living/silicon/ai/M = mob
-		if ((!M.current && M.loc.z < 4) || M.current.z < 4)
-			AIMoveZ(DOWN, mob)
+		AIMoveZ(DOWN, mob)
 	else if(istype(mob, /mob/living/carbon) && mob:back && istype(mob:back, /obj/item/weapon/tank/jetpack))
 		mob:back:move_z(DOWN, mob)
 	else if(istype(mob, /mob/living/carbon) && mob:belt && istype(mob:belt, /obj/item/weapon/tank/jetpack))
