@@ -131,6 +131,7 @@
 	screen_loc = ui_zonesel
 	var/selecting = "chest"
 
+
 /obj/screen/zone_sel/Click(location, control,params)
 	var/list/PL = params2list(params)
 	var/icon_x = text2num(PL["icon-x"])

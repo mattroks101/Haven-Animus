@@ -161,29 +161,43 @@ datum/hud/New(mob/owner)
 	if(!mymob) return
 	if(ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
-		if(inventory_shown && hud_shown)
-			if(H.s_store)	H.s_store.screen_loc = ui_sstore1
-			if(H.shoes)		H.shoes.screen_loc = ui_shoes
-			if(H.gloves)	H.gloves.screen_loc = ui_gloves
-			if(H.l_ear)		H.l_ear.screen_loc = ui_l_ear
-			if(H.r_ear)		H.r_ear.screen_loc = ui_r_ear
-			if(H.glasses)	H.glasses.screen_loc = ui_glasses
-//			if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing
-//			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
-//			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
-//			if(H.head)		H.head.screen_loc = ui_head
+
+		if(mymob.client.prefs.UI_type == "TG")
+			if(inventory_shown && hud_shown)
+				if(H.shoes)		H.shoes.screen_loc = ui_tg_shoes
+				if(H.gloves)	H.gloves.screen_loc = ui_tg_gloves
+				if(H.l_ear)		H.l_ear.screen_loc = ui_tg_l_ear
+				if(H.r_ear)		H.r_ear.screen_loc = ui_tg_r_ear
+				if(H.glasses)	H.glasses.screen_loc = ui_tg_glasses
+				if(H.w_uniform)	H.w_uniform.screen_loc = ui_tg_iclothing
+				if(H.wear_suit)	H.wear_suit.screen_loc = ui_tg_oclothing
+				if(H.wear_mask)	H.wear_mask.screen_loc = ui_tg_mask
+				if(H.head)		H.head.screen_loc = ui_tg_head
+			else
+				if(H.shoes)		H.shoes.screen_loc = null
+				if(H.gloves)	H.gloves.screen_loc = null
+				if(H.l_ear)		H.l_ear.screen_loc = null
+				if(H.r_ear)		H.r_ear.screen_loc = null
+				if(H.glasses)	H.glasses.screen_loc = null
+				if(H.w_uniform)	H.w_uniform.screen_loc = null
+				if(H.wear_suit)	H.wear_suit.screen_loc = null
+				if(H.wear_mask)	H.wear_mask.screen_loc = null
+				if(H.head)		H.head.screen_loc = null
 		else
-			if(H.s_store)	H.s_store.screen_loc = null
-			if(H.shoes)		H.shoes.screen_loc = null
-			if(H.gloves)	H.gloves.screen_loc = null
-			if(H.l_ear)		H.l_ear.screen_loc = null
-			if(H.r_ear)		H.r_ear.screen_loc = null
-			if(H.glasses)	H.glasses.screen_loc = null
-/*			if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing		//It is no longer hidden.
-			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
-			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
-			if(H.head)		H.head.screen_loc = ui_head
-*/
+			if(inventory_shown && hud_shown)
+				if(H.s_store)	H.s_store.screen_loc = ui_sstore1
+				if(H.shoes)		H.shoes.screen_loc = ui_shoes
+				if(H.gloves)	H.gloves.screen_loc = ui_gloves
+				if(H.l_ear)		H.l_ear.screen_loc = ui_l_ear
+				if(H.r_ear)		H.r_ear.screen_loc = ui_r_ear
+				if(H.glasses)	H.glasses.screen_loc = ui_glasses
+			else
+				if(H.s_store)	H.s_store.screen_loc = null
+				if(H.shoes)		H.shoes.screen_loc = null
+				if(H.gloves)	H.gloves.screen_loc = null
+				if(H.l_ear)		H.l_ear.screen_loc = null
+				if(H.r_ear)		H.r_ear.screen_loc = null
+				if(H.glasses)	H.glasses.screen_loc = null
 
 /datum/hud/proc/persistant_inventory_update()
 	if(!mymob)
@@ -191,26 +205,42 @@ datum/hud/New(mob/owner)
 
 	if(ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
-		if(hud_shown)
-			if(H.wear_id)	H.wear_id.screen_loc = ui_id
-			if(H.belt)		H.belt.screen_loc = ui_belt
-			if(H.back)		H.back.screen_loc = ui_back
-			if(H.l_store)	H.l_store.screen_loc = ui_storage1
-			if(H.r_store)	H.r_store.screen_loc = ui_storage2
-			if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing
-			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
-			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
-			if(H.head)		H.head.screen_loc = ui_head
+		if(mymob.client.prefs.UI_type == "TG")
+			if(hud_shown)
+				if(H.s_store)	H.s_store.screen_loc = ui_tg_sstore1
+				if(H.wear_id)	H.wear_id.screen_loc = ui_tg_id
+				if(H.belt)		H.belt.screen_loc = ui_tg_belt
+				if(H.back)		H.back.screen_loc = ui_tg_back
+				if(H.l_store)	H.l_store.screen_loc = ui_tg_storage1
+				if(H.r_store)	H.r_store.screen_loc = ui_tg_storage2
+			else
+				if(H.s_store)	H.s_store.screen_loc = null
+				if(H.wear_id)	H.wear_id.screen_loc = null
+				if(H.belt)		H.belt.screen_loc = null
+				if(H.back)		H.back.screen_loc = null
+				if(H.l_store)	H.l_store.screen_loc = null
+				if(H.r_store)	H.r_store.screen_loc = null
 		else
-			if(H.wear_id)	H.wear_id.screen_loc = null
-			if(H.belt)		H.belt.screen_loc = null
-			if(H.back)		H.back.screen_loc = null
-			if(H.l_store)	H.l_store.screen_loc = null
-			if(H.r_store)	H.r_store.screen_loc = null
-			if(H.w_uniform)	H.w_uniform.screen_loc = null
-			if(H.wear_suit)	H.wear_suit.screen_loc = null
-			if(H.wear_mask)	H.wear_mask.screen_loc = null
-			if(H.head)		H.head.screen_loc = null
+			if(hud_shown)
+				if(H.wear_id)	H.wear_id.screen_loc = ui_id
+				if(H.belt)		H.belt.screen_loc = ui_belt
+				if(H.back)		H.back.screen_loc = ui_back
+				if(H.l_store)	H.l_store.screen_loc = ui_storage1
+				if(H.r_store)	H.r_store.screen_loc = ui_storage2
+				if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing
+				if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
+				if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
+				if(H.head)		H.head.screen_loc = ui_head
+			else
+				if(H.wear_id)	H.wear_id.screen_loc = null
+				if(H.belt)		H.belt.screen_loc = null
+				if(H.back)		H.back.screen_loc = null
+				if(H.l_store)	H.l_store.screen_loc = null
+				if(H.r_store)	H.r_store.screen_loc = null
+				if(H.w_uniform)	H.w_uniform.screen_loc = null
+				if(H.wear_suit)	H.wear_suit.screen_loc = null
+				if(H.wear_mask)	H.wear_mask.screen_loc = null
+				if(H.head)		H.head.screen_loc = null
 
 
 
@@ -220,9 +250,15 @@ datum/hud/New(mob/owner)
 	var/ui_style = ui_style2icon(mymob.client.prefs.UI_style)
 	var/ui_color = mymob.client.prefs.UI_style_color
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
+	var/ui_type = mymob.client.prefs.UI_type
 
 	if(ishuman(mymob))
-		human_hud(ui_style, ui_color, ui_alpha) // Pass the player the UI style chosen in preferences
+		if(ui_type == "Luna")
+			human_hud_luna(ui_style, ui_color, ui_alpha) // Pass the player the UI style chosen in preferences
+		else if(ui_type == "TG")
+			human_hud_tg(ui_style, ui_color, ui_alpha)
+		else
+			human_hud_luna(ui_style, ui_color, ui_alpha)
 	else if(ismonkey(mymob))
 		monkey_hud(ui_style)
 	else if(isbrain(mymob))
@@ -238,12 +274,119 @@ datum/hud/New(mob/owner)
 	else if(isobserver(mymob))
 		ghost_hud()
 
+/datum/hud/proc/get_slot_loc(var/slot)
+	if(mymob.client.prefs.UI_type == "Luna")
+		switch(slot)
+			if("mask") return ui_mask
+			if("oclothing") return ui_oclothing
+			if("iclothing") return ui_iclothing
+
+			if("sstore1") return ui_sstore1
+			if("id") return ui_id
+			if("belt") return ui_belt
+			if("back") return ui_back
+
+			if("rhand") return ui_rhand
+			if("lhand") return ui_lhand
+
+			if("storage1") return ui_storage1
+			if("storage2") return ui_storage2
+
+			if("shoes") return ui_shoes
+			if("head") return ui_head
+			if("gloves") return ui_gloves
+			if("r_ear") return ui_r_ear
+			if("l_ear") return ui_l_ear
+			if("glasses") return ui_glasses
+
+			if("acti") return ui_acti
+	else
+		switch(slot)
+			if("mask") return ui_tg_mask
+			if("oclothing") return ui_tg_oclothing
+			if("iclothing") return ui_tg_iclothing
+
+			if("sstore1") return ui_tg_sstore1
+			if("id") return ui_tg_id
+			if("belt") return ui_tg_belt
+			if("back") return ui_tg_back
+
+			if("rhand") return ui_tg_rhand
+			if("lhand") return ui_tg_lhand
+
+			if("storage1") return ui_tg_storage1
+			if("storage2") return ui_tg_storage2
+
+			if("shoes") return ui_tg_shoes
+			if("head") return ui_tg_head
+			if("gloves") return ui_tg_gloves
+			if("r_ear") return ui_tg_r_ear
+			if("l_ear") return ui_tg_l_ear
+			if("glasses") return ui_tg_glasses
+
+			if("acti") return ui_tg_acti
+
+/mob/living/carbon/human/proc/get_slot_loc(var/slot)
+	if(src.client.prefs.UI_type == "Luna")
+		switch(slot)
+			if("mask") return ui_mask
+			if("oclothing") return ui_oclothing
+			if("iclothing") return ui_iclothing
+
+			if("sstore1") return ui_sstore1
+			if("id") return ui_id
+			if("belt") return ui_belt
+			if("back") return ui_back
+
+			if("rhand") return ui_rhand
+			if("lhand") return ui_lhand
+
+			if("storage1") return ui_storage1
+			if("storage2") return ui_storage2
+
+			if("shoes") return ui_shoes
+			if("head") return ui_head
+			if("gloves") return ui_gloves
+			if("r_ear") return ui_r_ear
+			if("l_ear") return ui_l_ear
+			if("glasses") return ui_glasses
+
+			if("acti") return ui_acti
+	else
+		switch(slot)
+			if("mask") return ui_tg_mask
+			if("oclothing") return ui_tg_oclothing
+			if("iclothing") return ui_tg_iclothing
+
+			if("sstore1") return ui_tg_sstore1
+			if("id") return ui_tg_id
+			if("belt") return ui_tg_belt
+			if("back") return ui_tg_back
+
+			if("rhand") return ui_tg_rhand
+			if("lhand") return ui_tg_lhand
+
+			if("storage1") return ui_tg_storage1
+			if("storage2") return ui_tg_storage2
+
+			if("shoes") return ui_tg_shoes
+			if("head") return ui_tg_head
+			if("gloves") return ui_tg_gloves
+			if("r_ear") return ui_tg_r_ear
+			if("l_ear") return ui_tg_l_ear
+			if("glasses") return ui_tg_glasses
+
+			if("acti") return ui_tg_acti
+
+
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12(var/full = 0 as null)
 	set name = "F12"
 	set hidden = 1
+	return
 
+	/*
 	if(hud_used)
 		if(ishuman(src))
 			if(!client) return
@@ -300,3 +443,4 @@ datum/hud/New(mob/owner)
 			usr << "\red Inventory hiding is currently only supported for human mobs, sorry."
 	else
 		usr << "\red This mob type does not use a HUD."
+*/
