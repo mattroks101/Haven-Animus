@@ -258,14 +258,14 @@
 			else
 				usr.m_int = null
 
-/*		if("att_intent")
+		if("att_intent")
 			if(istype(usr,/mob/living/carbon))
 				switch(usr.att_intent)
 					if("slash")
 						usr.att_intent = "stab"
 					if("stab")
 						usr.att_intent = "slash"
-				usr.hud_used.att_intent.icon_state = usr.att_intent*/
+				usr.hud_used.att_intent.icon_state = usr.att_intent
 
 		if("walk")
 			usr.m_intent = "walk"
@@ -369,16 +369,16 @@
 			usr.a_intent_change("right")
 		if("help")
 			usr.a_intent = "help"
-			usr.hud_used.action_intent.icon_state = "intent_help"
+			usr.hud_used.action_intent.icon_state = "help"
 		if("harm")
 			usr.a_intent = "hurt"
-			usr.hud_used.action_intent.icon_state = "intent_hurt"
+			usr.hud_used.action_intent.icon_state = "hurt"
 		if("grab")
 			usr.a_intent = "grab"
-			usr.hud_used.action_intent.icon_state = "intent_grab"
+			usr.hud_used.action_intent.icon_state = "grab"
 		if("disarm")
 			usr.a_intent = "disarm"
-			usr.hud_used.action_intent.icon_state = "intent_disarm"
+			usr.hud_used.action_intent.icon_state = "disarm"
 		if("pull")
 			usr.stop_pulling()
 		if("rest")
@@ -419,7 +419,7 @@
 			if(istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(3)
 
-		if("Allow Walking")
+/*		if("Allow Walking")
 			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
 				return
 			if(!istype(usr.equipped(),/obj/item/weapon/gun))
@@ -475,7 +475,7 @@
 			gun_click_time = world.time
 
 		if("Toggle Gun Mode")
-			usr.client.ToggleGunMode()
+			usr.client.ToggleGunMode()*/
 
 		else
 			return 0

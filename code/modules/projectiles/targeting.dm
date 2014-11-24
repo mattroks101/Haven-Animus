@@ -1,10 +1,8 @@
-/obj/item/weapon/gun/verb/toggle_firerate()
+/*obj/item/weapon/gun/verb/toggle_firerate()
 	set name = "Toggle Firerate"
 	set category = "Object"
-
 	firerate = !firerate
-
-	if (firerate)
+	if (firerate == 0)
 		loc << "You will now continue firing when your target moves."
 	else
 		loc << "You will now only fire once, then lower your aim, when your target moves."
@@ -40,8 +38,8 @@
 		for(var/mob/living/M in target)
 			if(M)
 				M.NotTargeted(src) //Untargeting people.
-		del(target)
-
+		del(target)*/
+/*
 //Compute how to fire.....
 /obj/item/weapon/gun/proc/PreFire(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, params)
 	//Lets not spam it.
@@ -69,10 +67,10 @@
 			usr.visible_message("\red <b>[usr] turns \the [src] on [M]!</b>")
 		else
 			usr.visible_message("\red <b>[usr] aims \a [src] at [M]!</b>")
-		M.Targeted(src)
+		M.Targeted(src)*/
 
 //HE MOVED, SHOOT HIM!
-/obj/item/weapon/gun/proc/TargetActed(var/mob/living/T)
+/*obj/item/weapon/gun/proc/TargetActed(var/mob/living/T)
 	var/mob/living/M = loc
 	if(M == T) return
 	if(!istype(M)) return
@@ -96,7 +94,7 @@
 	usr.dir = get_cardinal_dir(src, T)
 
 	if (!firerate) // If firerate is set to lower aim after one shot, untarget the target
-		T.NotTargeted(src)
+		T.NotTargeted(src)*/
 
 //Yay, math!
 
@@ -147,7 +145,7 @@ mob/var
 	last_target_click = -5
 	target_locked = null
 
-mob/living/proc/Targeted(var/obj/item/weapon/gun/I) //Self explanitory.
+/*mob/living/proc/Targeted(var/obj/item/weapon/gun/I) //Self explanitory.
 	if(!I.target)
 		I.target = list(src)
 	else if(I.automatic && I.target.len < 5) //Automatic weapon, they can hold down a room.
@@ -179,7 +177,7 @@ mob/living/proc/Targeted(var/obj/item/weapon/gun/I) //Self explanitory.
 					target_locked = image("icon" = 'icons/effects/Targeted.dmi', "icon_state" = "locked")
 					update_targeted()
 
-	//Adding the buttons to the controller person
+	//Adding the buttons to the controler person
 	var/mob/living/T = I.loc
 	if(T)
 		if(T.client)
@@ -239,8 +237,8 @@ mob/living/Move()
 		if(G.target)
 			for(var/mob/living/M in G.target)
 				if(M && !(M in view(src)))
-					M.NotTargeted(G)
-
+					M.NotTargeted(G)*/
+/*
 //If you move out of range, it isn't going to still stay locked on you any more.
 client/var
 	target_can_move = 0
@@ -250,25 +248,42 @@ client/var
 
 //These are called by the on-screen buttons, adjusting what the victim can and cannot do.
 client/proc/add_gun_icons()
+	if (!usr.item_use_icon)
+		usr.item_use_icon = new /obj/screen/gun/item(null)
+		usr.item_use_icon.icon_state = "no_item[target_can_click]"
+		usr.item_use_icon.name = "[target_can_click ? "Disallow" : "Allow"] Item Use"
+
+	if (!usr.gun_move_icon)
+		usr.gun_move_icon = new /obj/screen/gun/move(null)
+		usr.gun_move_icon.icon_state = "no_walk[target_can_move]"
+		usr.gun_move_icon.name = "[target_can_move ? "Disallow" : "Allow"] Walking"
+
+	if (target_can_move && !usr.gun_run_icon)
+		usr.gun_run_icon = new /obj/screen/gun/run(null)
+		usr.gun_run_icon.icon_state = "no_run[target_can_run]"
+		usr.gun_run_icon.name = "[target_can_run ? "Disallow" : "Allow"] Running"
+
 	screen += usr.item_use_icon
 	screen += usr.gun_move_icon
 	if (target_can_move)
 		screen += usr.gun_run_icon
 
-
-
 client/proc/remove_gun_icons()
-	if(!usr) return 1 // Runtime prevention on N00k agents spawning with SMG
 	screen -= usr.item_use_icon
 	screen -= usr.gun_move_icon
 	if (target_can_move)
 		screen -= usr.gun_run_icon
+	del usr.gun_move_icon
+	del usr.item_use_icon
+	del usr.gun_run_icon
 
-client/verb/ToggleGunMode()
-	set hidden = 1
+client/proc/ToggleGunMode()
+	return	//Blocked. Jarlo.
+/*	set hidden = 1
 	gun_mode = !gun_mode
 	if(gun_mode)
 		usr << "You will now take people captive."
+		add_gun_icons()
 	else
 		usr << "You will now shoot where you target."
 		for(var/obj/item/weapon/gun/G in usr)
@@ -276,7 +291,7 @@ client/verb/ToggleGunMode()
 		remove_gun_icons()
 	if(usr.gun_setting_icon)
 		usr.gun_setting_icon.icon_state = "gun[gun_mode]"
-
+*/
 
 client/verb/AllowTargetMove()
 	set hidden=1
@@ -285,7 +300,7 @@ client/verb/AllowTargetMove()
 	target_can_move = !target_can_move
 	if(target_can_move)
 		usr << "Target may now walk."
-		//usr.gun_run_icon = new /obj/screen/gun/run(null)	//adding icon for running permission
+		usr.gun_run_icon = new /obj/screen/gun/run(null)	//adding icon for running permission
 		screen += usr.gun_run_icon
 	else
 		usr << "Target may no longer move."
@@ -366,3 +381,4 @@ client/verb/AllowTargetClick()
 					M << "Your character may now <b>use items</b> at the discretion of their targeter."
 				else
 					M << "\red <b>Your character will now be shot if they use items.</b>"
+*/
