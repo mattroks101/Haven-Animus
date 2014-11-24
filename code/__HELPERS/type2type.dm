@@ -322,4 +322,4 @@ proc/tg_list2text(list/list, glue=",")
 		if("old")		return 'icons/mob/screen2_Midnight.dmi'
 //		if("Orange")	return 'icons/mob/screen1_Orange.dmi'
 //		if("Midnight")	return 'icons/mob/screen1_Midnight.dmi'
-		else			return 'icons/mob/screen1_Midnight.dmi'
+		else			return 'icons/mob/screen2_Midnight.dmi'

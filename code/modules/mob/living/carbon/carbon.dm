@@ -119,11 +119,11 @@
 	src.hand = !( src.hand )
 	if(hud_used.l_hand_hud_object && hud_used.r_hand_hud_object)
 		if(hand)	//This being 1 means the left hand is in use
-			hud_used.swaphands_hud_object.dir = 2
+//			hud_used.swaphands_hud_object.dir = 2
 			hud_used.l_hand_hud_object.icon_state = "hand_active"
 			hud_used.r_hand_hud_object.icon_state = "hand_inactive"
 		else
-			hud_used.swaphands_hud_object.dir = 1
+//			hud_used.swaphands_hud_object.dir = 1
 			hud_used.l_hand_hud_object.icon_state = "hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "hand_active"
 	unlock_medal("Nice start.", 0, "How to change hands?", "easy")
