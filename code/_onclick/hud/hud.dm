@@ -162,7 +162,7 @@ datum/hud/New(mob/owner)
 	if(ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
 
-		if(mymob.client.prefs.UI_type == "TG")
+		if(mymob.client && mymob.client.prefs.UI_type == "TG")
 			if(inventory_shown && hud_shown)
 				if(H.shoes)		H.shoes.screen_loc = ui_tg_shoes
 				if(H.gloves)	H.gloves.screen_loc = ui_tg_gloves
@@ -205,7 +205,7 @@ datum/hud/New(mob/owner)
 
 	if(ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
-		if(mymob.client.prefs.UI_type == "TG")
+		if(mymob.client && mymob.client.prefs.UI_type == "TG")
 			if(hud_shown)
 				if(H.s_store)	H.s_store.screen_loc = ui_tg_sstore1
 				if(H.wear_id)	H.wear_id.screen_loc = ui_tg_id
@@ -275,32 +275,7 @@ datum/hud/New(mob/owner)
 		ghost_hud()
 
 /datum/hud/proc/get_slot_loc(var/slot)
-	if(mymob.client.prefs.UI_type == "Luna")
-		switch(slot)
-			if("mask") return ui_mask
-			if("oclothing") return ui_oclothing
-			if("iclothing") return ui_iclothing
-
-			if("sstore1") return ui_sstore1
-			if("id") return ui_id
-			if("belt") return ui_belt
-			if("back") return ui_back
-
-			if("rhand") return ui_rhand
-			if("lhand") return ui_lhand
-
-			if("storage1") return ui_storage1
-			if("storage2") return ui_storage2
-
-			if("shoes") return ui_shoes
-			if("head") return ui_head
-			if("gloves") return ui_gloves
-			if("r_ear") return ui_r_ear
-			if("l_ear") return ui_l_ear
-			if("glasses") return ui_glasses
-
-			if("acti") return ui_acti
-	else
+	if(mymob.client && mymob.client.prefs.UI_type == "TG")
 		switch(slot)
 			if("mask") return ui_tg_mask
 			if("oclothing") return ui_tg_oclothing
@@ -326,8 +301,34 @@ datum/hud/New(mob/owner)
 
 			if("acti") return ui_tg_acti
 
+	else
+		switch(slot)
+			if("mask") return ui_mask
+			if("oclothing") return ui_oclothing
+			if("iclothing") return ui_iclothing
+
+			if("sstore1") return ui_sstore1
+			if("id") return ui_id
+			if("belt") return ui_belt
+			if("back") return ui_back
+
+			if("rhand") return ui_rhand
+			if("lhand") return ui_lhand
+
+			if("storage1") return ui_storage1
+			if("storage2") return ui_storage2
+
+			if("shoes") return ui_shoes
+			if("head") return ui_head
+			if("gloves") return ui_gloves
+			if("r_ear") return ui_r_ear
+			if("l_ear") return ui_l_ear
+			if("glasses") return ui_glasses
+
+			if("acti") return ui_acti
+
 /mob/living/carbon/human/proc/get_slot_loc(var/slot)
-	if(src.client.prefs.UI_type == "Luna")
+	if(src.client && src.client.prefs.UI_type == "Luna")
 		switch(slot)
 			if("mask") return ui_mask
 			if("oclothing") return ui_oclothing
