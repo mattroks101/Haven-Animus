@@ -29,6 +29,9 @@
 
 /obj/item/device/radio/headset/syndicate
 	origin_tech = "syndicate=3"
+	icon_state = "syndie_headset"
+	item_state = "syndie_headset"
+
 /obj/item/device/radio/headset/syndicate/New()
 	..()
 	del(keyslot1)
@@ -47,8 +50,8 @@
 /obj/item/device/radio/headset/headset_sec
 	name = "security radio headset"
 	desc = "This is used by your elite security force. To access the security channel, use :s."
-	icon_state = "sec_headset"
-	item_state = "headset"
+	icon_state = "sec_headset_alt"
+	item_state = "sec_headset_alt"
 	keyslot2 = new /obj/item/device/encryptionkey/headset_sec
 
 /obj/item/device/radio/headset/headset_eng
