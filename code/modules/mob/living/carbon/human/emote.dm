@@ -305,6 +305,31 @@
 				if (!muzzled)
 					message = "<B>[src]</B> laughs."
 					m_type = 2
+					call_sound_emote("laugh")
+				else
+					message = "<B>[src]</B> makes a noise."
+					m_type = 2
+
+		if("elaugh")
+			if(miming)
+				message = "<B>[src]</B> acts out a laugh."
+				m_type = 1
+			else if (mind.special_role)
+				if(!(world.time-lastElaugh >= 600))
+					usr << "<span class='warning'>You not ready to laugh again!"
+				else
+					message = "<B>[src]</B> laugh like a true evil! Mu-ha-ha!"
+					m_type = 2
+					call_sound_emote("elaugh")
+					lastElaugh=world.time
+			else
+				if (!muzzled)
+					if (!(world.time-lastElaugh >= 600))
+						usr << "<span class='warning'>You not ready to laugh again!"
+					else
+						message = "<B>[src]</B> laughs."
+						m_type = 2
+						call_sound_emote("laugh")
 				else
 					message = "<B>[src]</B> makes a noise."
 					m_type = 2
@@ -537,6 +562,7 @@
 				if (!muzzled)
 					message = "<B>[src]</B> screams!"
 					m_type = 2
+					call_sound_emote("scream")
 				else
 					message = "<B>[src]</B> makes a very loud noise."
 					m_type = 2
@@ -546,7 +572,7 @@
 		if("fart")
 			if(world.time-lastFart >= 600)
 				if (src.nutrition >= 150)
-					playsound(src.loc, 'fart.ogg', 65, 1)
+					call_sound_emote("fart")
 					m_type = 2
 	//				if(src.butt_op_stage == 4.0)
 	//					src << "\blue You don't have a butt!"
@@ -817,8 +843,28 @@
 
 //SHITTY EMOTES END
 
+		if("z_roar")
+			if (zombie)
+				message = "<font color='red'><B>[src]</B> roars!</font>"
+				m_type = 1
+				call_sound_emote("z_roar")
+		if("z_shout")
+			if (zombie)
+				message = "<font color='red'><B>[src]</B> shouts!</font>"
+				m_type = 1
+				call_sound_emote("z_shout")
+		if("z_mutter")
+			if (zombie)
+				message = "<font color='red'><B>[src]</B> mutters!</font>"
+				m_type = 1
+				call_sound_emote("z_mutter")
+		if("z_rawr")
+			if (zombie)
+				message = "<font color='red'><B>[src]</B> rawrs!</font>"
+				m_type = 1
+
 		if ("help")
-			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,\nwink, yawn. For custom emotes use '*emote.'"
+			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, elaugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, vomit, twitch_s, whimper,\nwink, yawn. For custom emotes use '*emote.'"
 
 		else
 			message = "<B>[src]</B> [act]"
@@ -850,6 +896,33 @@
 				O.show_message(message, m_type)
 
 		emote_cooldown += cooldown
+
+
+/mob/living/carbon/human/proc/call_sound_emote(var/E)
+	switch(E)
+		if("scream")
+			if (src.gender == "male")
+				playsound(src.loc, pick('sound/voice/Screams_Male_1.ogg', 'sound/voice/Screams_Male_2.ogg', 'sound/voice/Screams_Male_3.ogg'), 100, 1)
+			else
+				playsound(src.loc, pick('sound/voice/Screams_Woman_1.ogg', 'sound/voice/Screams_Woman_2.ogg', 'sound/voice/Screams_Woman_3.ogg'), 100, 1)
+
+		if("laugh")
+			playsound(src.loc, pick('sound/voice/laugh1.ogg', 'sound/voice/laugh2.ogg', 'sound/voice/laugh3.ogg'), 100, 1)
+
+		if("fart")
+			playsound(playsound(src.loc, 'fart.ogg', 65, 1))
+
+		if("elaugh")
+			playsound(src.loc, 'sound/voice/elaugh.ogg', 100, 1)
+
+		if("z_roar")
+			playsound(src.loc, 'sound/voice/z_roar.ogg', 100, 1)
+
+		if("z_shout")
+			playsound(src.loc, 'sound/voice/z_shout.ogg', 100, 1)
+
+		if("z_mutter")
+			playsound(src.loc, 'sound/voice/z_mutter.ogg', 100, 1)
 
 
 

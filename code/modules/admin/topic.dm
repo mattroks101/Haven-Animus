@@ -2622,3 +2622,29 @@
 			for(var/row in M.attack_log)
 				text += row + "<BR>"
 		usr << browse(text, "window=mob_attacklog;size=650x620")
+	else if(href_list["listensound"])
+		var/sound/S = sound(locate(href_list["listensound"]))
+		if(!S)
+			return
+		S.channel = 703
+		usr << S
+		usr << "<B><A HREF='?_src_=holder;stoplistensound=1'>Stop listening</A></B>"
+
+	else if(href_list["stoplistensound"])
+		var/sound/S = sound(null)
+		S.channel = 703
+		usr << S
+
+	else if(href_list["wipedata"])
+		var/obj/item/weapon/disk/music/disk = locate(href_list["wipedata"])
+		if(!disk.data)
+			usr << "This disk have no data or wiped."
+			return
+		if(alert("Wipe data written by [(disk.uploader_ckey) ? disk.uploader_ckey : "<b>*NULL*</b>"]?",,"Yes", "No") == "Yes")
+			if(istype(disk.loc, /obj/machinery/party/turntable))
+				var/obj/machinery/party/turntable/T = disk.loc
+				if(T.track && T.track == disk.data)
+					T.track = null
+					T.turn_off()
+			disk.data = null
+			disk.name = "burned disk"

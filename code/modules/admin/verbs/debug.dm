@@ -1011,4 +1011,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			NewObj.vars[V] = O.vars[V]
 			if(hasvar(NewObj, ckey))
 				NewObj.ckey = null
+	for(var/atom/movable/A in NewObj.contents)
+		var/atom/movable/NewContent = new A.type(O)
+		for(var/V in A.vars)
+			if(issaved(A.vars[V]))
+				NewContent.vars[V] = A.vars[V]
 	return

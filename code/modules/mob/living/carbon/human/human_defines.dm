@@ -62,4 +62,4 @@
 	var/image/zombieimage = null
 
 	var/lastFart = 0 // Toxic fart cooldown.
-	var/lastCrap = 0 //To prevent shit all around
+	var/lastElaugh = 0

@@ -53,6 +53,17 @@
 						O.footstep++
 				else
 					playsound(src, "clownstep", 20, 1)
+			else if(istype(H.shoes, /obj/item/clothing/shoes/magboots))
+				var/obj/item/clothing/shoes/S = H.shoes
+				if(H.m_intent == "run")
+					if(S.footstep >= 2)
+						S.footstep = 0
+					else
+						S.footstep++
+					if(S.footstep == 0)
+						playsound(src, "footsteps_magboots", 30, 1)
+				else
+					playsound(src, "footsteps_magboots", 10, 1)
 			else if(istype(H.shoes, /obj/item/clothing/shoes))
 				var/obj/item/clothing/shoes/S = H.shoes
 				if(H.m_intent == "run")
@@ -61,9 +72,19 @@
 					else
 						S.footstep++
 					if(S.footstep == 0)
-						playsound(src, "footsteps", 30, 1) // this will get annoying very fast.
+						if(is_wood_floor())
+							playsound(src, "footsteps_wood", 30, 1) // this will get annoying very fast.
+						else if(is_carpet_floor())
+							playsound(src, "footsteps_carpet", 30, 1) // this will get annoying very fast.
+						else
+							playsound(src, "footsteps_metal", 30, 1) // this will get annoying very fast.
 				else
-					playsound(src, "footsteps", 10, 1)
+					if(is_wood_floor())
+						playsound(src, "footsteps_wood", 10, 1) // this will get annoying very fast.
+					else if(is_carpet_floor())
+						playsound(src, "footsteps_carpet", 10, 1) // this will get annoying very fast.
+					else
+						playsound(src, "footsteps_metal", 10, 1) // this will get annoying very fast.
 
 
 			// Tracking blood
