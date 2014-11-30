@@ -181,6 +181,7 @@
 	clonemind.transfer_to(H)
 	H.ckey = R.ckey
 	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
+	H.unlock_medal("Death is not the end!", 0, "Get a new body.", "medium")
 
 	// -- Mode/mind specific stuff goes here
 

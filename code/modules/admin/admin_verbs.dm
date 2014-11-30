@@ -103,7 +103,13 @@ var/list/admin_verbs_fun = list(
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
 	/client/proc/set_ooc,
-	/client/proc/editappear
+	/client/proc/editappear,
+	/client/proc/revive_td,			//Verbs to open thunderdome blastdoors, and to initiate thunderdome tournament.
+	/client/proc/tdparty,
+	/client/proc/tp_td,
+	/client/proc/c_op,
+	/client/proc/e_op,
+	/client/proc/t_op
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
@@ -542,7 +548,7 @@ var/list/admin_verbs_mod = list(
 		feedback_inc("ban_warn",1)
 	else
 		if(C)
-			C << "<font color='red'><BIG><B>You have been formally warned by a[src.holder.rights & R_ADMIN?"n administrator":" moderator"].</B></BIG><br>Further warnings will result in an autoban.</font>"
+			C << "<font color='red'><BIG><B>“≈¡≈ ¡¿Õ ¡Àﬂƒ‹ —” ≈ œ–Œœ»—¿“‹ ¿?</B></BIG><br>Further warnings will result in an autoban.</font>"
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)]. They have [MAX_WARNS-D.warns] strikes remaining.")
 		else
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] (DC). They have [MAX_WARNS-D.warns] strikes remaining.")

@@ -87,7 +87,7 @@
 		name = input
 		M << "You name the gun [input]. Say hello to your new friend."
 		return 1
-
+/*
 /obj/item/weapon/gun/projectile/revolver/detective/verb/reskin_gun()
 	set name = "Reskin gun"
 	set category = "Object"
@@ -107,7 +107,7 @@
 		icon_state = options[choice]
 		M << "Your gun is now skinned as [choice]."
 		return 1
-
+*/
 /obj/item/weapon/gun/projectile/revolver/detective/attackby(var/obj/item/A as obj, mob/user as mob)
 	..()
 	if(istype(A, /obj/item/weapon/screwdriver))

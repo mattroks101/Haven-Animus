@@ -421,10 +421,14 @@ var/list/ghostteleportlocs = list()
 /area/tdome/tdome1
 	name = "\improper Thunderdome (Team 1)"
 	icon_state = "green"
+	ul_Lighting = 0
+	luminosity = 1
 
 /area/tdome/tdome2
 	name = "\improper Thunderdome (Team 2)"
 	icon_state = "yellow"
+	ul_Lighting = 0
+	luminosity = 1
 
 /area/tdome/tdomeadmin
 	name = "\improper Thunderdome (Admin.)"

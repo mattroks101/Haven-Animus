@@ -56,28 +56,28 @@
 			else if(istype(H.shoes, /obj/item/clothing/shoes/magboots))
 				var/obj/item/clothing/shoes/S = H.shoes
 				if(H.m_intent == "run")
-					if(S.footstep >= 2)
+					if(S.footstep >= 1)
 						S.footstep = 0
 					else
 						S.footstep++
 					if(S.footstep == 0)
-						playsound(src, "footsteps_magboots", 30, 1)
+						playsound(src, "footsteps_magboots", 20, 1)
 				else
 					playsound(src, "footsteps_magboots", 10, 1)
 			else if(istype(H.shoes, /obj/item/clothing/shoes))
 				var/obj/item/clothing/shoes/S = H.shoes
 				if(H.m_intent == "run")
-					if(S.footstep >= 2)
+					if(S.footstep >= 1)
 						S.footstep = 0
 					else
 						S.footstep++
 					if(S.footstep == 0)
 						if(is_wood_floor())
-							playsound(src, "footsteps_wood", 30, 1) // this will get annoying very fast.
+							playsound(src, "footsteps_wood", 20, 1) // this will get annoying very fast.
 						else if(is_carpet_floor())
-							playsound(src, "footsteps_carpet", 30, 1) // this will get annoying very fast.
+							playsound(src, "footsteps_carpet", 20, 1) // this will get annoying very fast.
 						else
-							playsound(src, "footsteps_metal", 30, 1) // this will get annoying very fast.
+							playsound(src, "footsteps_metal", 20, 1) // this will get annoying very fast.
 				else
 					if(is_wood_floor())
 						playsound(src, "footsteps_wood", 10, 1) // this will get annoying very fast.

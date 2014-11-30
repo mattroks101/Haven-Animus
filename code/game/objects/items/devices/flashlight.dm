@@ -15,7 +15,7 @@
 
 /obj/item/device/flashlight/attackby(var/obj/B, var/mob/user)
 	if (istype(B, /obj/item/weapon/storage/toolbox))
-		user << "You are silly? You can't insert this massive toolbox into flashlight."
+		user << "Are you silly? You can't insert this massive toolbox into flashlight."
 		return
 
 /obj/item/device/flashlight/initialize()
@@ -31,21 +31,21 @@
 	if (on)
 		icon_state = "[initial(icon_state)]-on"
 		if(src.loc == user)
-			user.SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + brightness_on, user.LuminosityBlue)
+			user.AddLuminosity(brightness_on, brightness_on, 0)
 		else if (isturf(src.loc))
 			SetLuminosity(brightness_on, brightness_on, 0)
 
 	else
 		icon_state = initial(icon_state)
 		if(src.loc == user)
-			user.SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - brightness_on, user.LuminosityBlue)
+			user.AddLuminosity(-brightness_on, -brightness_on, 0)
 		else if (isturf(src.loc))
 			SetLuminosity(0)
 
 /obj/item/device/flashlight/on_enter_storage()
 	if(on)
 		icon_state = initial(icon_state)
-		usr.SetLuminosity(usr.LuminosityRed - brightness_on, usr.LuminosityGreen - brightness_on, usr.LuminosityBlue)
+		usr.AddLuminosity(-brightness_on, -brightness_on, 0)
 		on = 0
 	..()
 	return
@@ -105,14 +105,14 @@
 
 /obj/item/device/flashlight/pickup(mob/user)
 	if(on)
-		user.SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + brightness_on, user.LuminosityBlue)
+		user.AddLuminosity(brightness_on, brightness_on, 0)
 		src.SetLuminosity(0)
 
 
 /obj/item/device/flashlight/dropped(mob/user)
 	if(on)
-		user.SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - brightness_on, user.LuminosityBlue)
-		src.SetLuminosity(src.LuminosityRed + brightness_on, src.LuminosityGreen + brightness_on, src.LuminosityBlue)
+		user.AddLuminosity(-brightness_on, -brightness_on, 0)
+		src.SetLuminosity(brightness_on, brightness_on, 0)
 
 
 /obj/item/device/flashlight/pen
@@ -192,6 +192,13 @@
 		update_brightness(U)
 	else
 		update_brightness(null)
+
+/obj/item/device/flashlight/flare/attack(mob/living/M as mob, mob/living/user as mob)
+	if(!isliving(M))
+		return
+	M.IgniteMob()
+	..()
+
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
 

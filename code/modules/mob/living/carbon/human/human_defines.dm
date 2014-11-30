@@ -60,6 +60,7 @@
 	var/hand_blood_color
 
 	var/image/zombieimage = null
+	var/tdome_team = 0
 
 	var/lastFart = 0 // Toxic fart cooldown.
 	var/lastElaugh = 0
