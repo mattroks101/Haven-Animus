@@ -967,16 +967,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Experimental shield generator"
 	group = "Engineering"
 	access = access_ce
-
+/*
 /datum/supply_packs/smbig
 	name = "Supermatter Core"
-	contains = list(/obj/machinery/power/supermatter)
+	contains = list(/obj/machinery/engine/supermatter)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/plasma
 	containername = "Supermatter crate (CAUTION)"
 	group = "Engineering"
 	access = access_ce
-
+*/
 
 /* /datum/supply_packs/smsmall // Currently nonfunctional, waiting on virgil
 	name = "Supermatter Shard"

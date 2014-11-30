@@ -408,7 +408,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define GAS_N2O	(1 << 4)
 
 
-var/list/accessable_z_levels = list("1" = 10, "2" = 10, "3" = 10, "4" = 10, "5" = 20, "7" = 40)
+var/list/accessable_z_levels = list("1" = 10, "2" = 10, "3" = 10, "4" = 10, "5" = 20, "8" = 40)
 //This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 //(Exceptions: extended, sandbox and nuke) -Errorage
 //Was list("3" = 30, "4" = 70).
@@ -472,7 +472,7 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
 
-#define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
+#define TRANSITIONEDGE	1 //Distance from edge to move to another z-level
 
 var/list/liftable_structures = list(\
 

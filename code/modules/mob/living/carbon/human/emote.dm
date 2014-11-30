@@ -907,7 +907,10 @@
 				playsound(src.loc, pick('sound/voice/Screams_Woman_1.ogg', 'sound/voice/Screams_Woman_2.ogg', 'sound/voice/Screams_Woman_3.ogg'), 100, 1)
 
 		if("laugh")
-			playsound(src.loc, pick('sound/voice/laugh1.ogg', 'sound/voice/laugh2.ogg', 'sound/voice/laugh3.ogg'), 100, 1)
+			if (src.gender == "male")
+				playsound(src.loc, pick('sound/voice/male_laugh_1.ogg', 'sound/voice/male_laugh_1.ogg', 'sound/voice/male_laugh_1.ogg'), 100, 1)
+			else
+				playsound(src.loc, pick('sound/voice/female_laugh_1.ogg', 'sound/voice/female_laugh_2.ogg'), 100, 1)
 
 		if("fart")
 			playsound(playsound(src.loc, 'fart.ogg', 65, 1))

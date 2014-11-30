@@ -58,6 +58,8 @@
 			L.on = on
 			L.updateicon()
 
+	playsound(src.loc, pick('sound/effects/lightswitch_1.ogg', 'sound/effects/lightswitch_2.ogg', 'sound/effects/lightswitch_3.ogg', 'sound/effects/lightswitch_4.ogg'), 80, 1)
+
 	area.master.power_change()
 
 /obj/machinery/light_switch/power_change()
