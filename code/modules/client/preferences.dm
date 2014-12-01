@@ -42,7 +42,8 @@ datum/preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#b82e00"
 	var/be_special = 0					//Special role selection
-	var/UI_style = "White"
+	var/UI_style = "Luna"
+	var/UI_type = "Luna"
 	var/toggles = TOGGLES_DEFAULT
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
@@ -149,7 +150,7 @@ datum/preferences
 		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a>"
 
 		dat += "<br>"
-		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
+		dat += "<b>UI Type:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_type]</b></a><br>"
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</b></a><br>"
@@ -889,13 +890,16 @@ datum/preferences
 						toggles ^= SOUND_ADMINHELP
 
 					if("ui")
-						switch(UI_style)
-							if("White") //"Orange"
-								UI_style = "old"
-							if("old")
-								UI_style = "White"
+						switch(UI_type)
+							if("Luna") //"Orange"
+								UI_type = "TG"
+								UI_style = "TG"
+							if("TG")
+								UI_type = "Luna"
+								UI_style = "Luna"
 							else
-								UI_style = "old"//"Midnight"
+								UI_type = "Luna"//"Midnight"
+								UI_style = "TG"
   // I don't need this bay12 shit
 
 					if("be_special")

@@ -102,6 +102,9 @@
 
 	handle_stasis_bag()
 
+	//Check if we're on fire
+	handle_fire()
+
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(environment)
 
@@ -221,7 +224,7 @@
 
 		if(zombie)
 			druggy = 0
-			stunned = 0
+			weakened = 0
 			paralysis = 0
 			oxyloss = 0
 			if(l_hand)
@@ -574,25 +577,26 @@
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
 			return
-		if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
-			var/loc_temp = T0C
-			if(istype(loc, /obj/mecha))
-				var/obj/mecha/M = loc
-				loc_temp =  M.return_temperature()
-			else if(istype(get_turf(src), /turf/space))
-			else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-				loc_temp = loc:air_contents.temperature
-			else
-				loc_temp = environment.temperature
+
+		var/loc_temp = T0C
+		if(istype(loc, /obj/mecha))
+			var/obj/mecha/M = loc
+			loc_temp =  M.return_temperature()
+//		else if(istype(get_turf(src), /turf/space))		//space is not meant to change your body temperature.
+		else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
+			loc_temp = loc:air_contents.temperature
+		else
+			loc_temp = environment.temperature
 
 			//world << "Loc temp: [loc_temp] - Body temp: [bodytemperature] - Fireloss: [getFireLoss()] - Thermal protection: [get_thermal_protection()] - Fire protection: [thermal_protection + add_fire_protection(loc_temp)] - Heat capacity: [environment_heat_capacity] - Location: [loc] - src: [src]"
 
 			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
-			if(stat != 2)
-				stabilize_temperature_from_calories()
+		if(stat != 2)
+			stabilize_temperature_from_calories()
 
 	//		log_debug("Adjusting to atmosphere.")
 			//After then, it reacts to the surrounding atmosphere based on your thermal protection
+		if(!on_fire) //If you're on fire, you do not heat up or cool down based on surrounding gases
 			if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
 				var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
@@ -616,8 +620,12 @@
 					apply_damage(HEAT_DAMAGE_LEVEL_1, BURN, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 2)
 				if(400 to 1000)
-					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN, used_weapon = "High Body Temperature")
-					fire_alert = max(fire_alert, 2)
+					if(on_fire)
+						apply_damage(HEAT_DAMAGE_LEVEL_3, BURN, used_weapon = "Skin Burns")
+						fire_alert = max(fire_alert, 2)
+					else
+						apply_damage(HEAT_DAMAGE_LEVEL_2, BURN, used_weapon = "High Body Temperature")
+						fire_alert = max(fire_alert, 2)
 				if(1000 to INFINITY)
 					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 2)
@@ -671,6 +679,16 @@
 		if(environment.toxins > MOLES_PLASMA_VISIBLE)
 			pl_effects()
 		return
+
+///FIRE CODE
+	handle_fire()
+		if(..())
+			return
+		var/thermal_protection = get_heat_protection(30000) //If you don't have fire suit level protection, you get a temperature increase
+		if((1 - thermal_protection) > 0.0001)
+			bodytemperature += BODYTEMP_HEATING_MAX
+		return
+//END FIRE CODE
 
 	/*
 	proc/adjust_body_temperature(current, loc_temp, boost)

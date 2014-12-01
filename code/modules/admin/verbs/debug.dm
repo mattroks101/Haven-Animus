@@ -839,3 +839,18 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		log_admin("[key_name(src)] has toggled [M.key]'s [blockname] block [state]!")
 	else
 		alert("Invalid mob")
+
+/client/proc/CarbonCopy(atom/movable/O as mob|obj in world)
+	set category = "Admin"
+	var/mob/NewObj = new O.type(usr.loc)
+	for(var/V in O.vars)
+		if (issaved(O.vars[V]))
+			NewObj.vars[V] = O.vars[V]
+			if(hasvar(NewObj, ckey))
+				NewObj.ckey = null
+	for(var/atom/movable/A in NewObj.contents)
+		var/atom/movable/NewContent = new A.type(O)
+		for(var/V in A.vars)
+			if(issaved(A.vars[V]))
+				NewContent.vars[V] = A.vars[V]
+	return

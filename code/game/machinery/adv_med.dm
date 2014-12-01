@@ -46,6 +46,8 @@
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
 	usr.client.eye = src
+	for(var/obj/item/I in usr)
+		I.on_enter_storage()
 	usr.loc = src
 	src.occupant = usr
 	src.icon_state = "body_scanner_1"
@@ -83,6 +85,8 @@
 	if (M.client)
 		M.client.perspective = EYE_PERSPECTIVE
 		M.client.eye = src
+	for(var/obj/item/I in M)
+		I.on_enter_storage()
 	M.loc = src
 	src.occupant = M
 	src.icon_state = "body_scanner_1"

@@ -256,6 +256,7 @@
 			src.cover.icon_state = "openTurretCover"
 		spawn(10)
 			if (popping==1) popping = 0
+			raised = 1
 
 /obj/machinery/turret/proc/popDown()
 	if ((!isPopping()) || src.popping==1)
@@ -268,6 +269,7 @@
 			if (popping==-1)
 				invisibility = INVISIBILITY_LEVEL_TWO
 				popping = 0
+				raised = 0
 
 /obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
 	if(raised)

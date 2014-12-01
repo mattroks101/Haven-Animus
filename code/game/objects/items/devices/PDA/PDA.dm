@@ -1300,3 +1300,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/emp_act(severity)
 	for(var/atom/A in src)
 		A.emp_act(severity)
+
+/obj/item/device/pda/on_enter_storage()
+	if(fon)
+		usr.SetLuminosity(usr.LuminosityRed - f_lum, usr.LuminosityGreen - f_lum, usr.LuminosityBlue - f_lum)
+		fon = 0
+	..()
+	return

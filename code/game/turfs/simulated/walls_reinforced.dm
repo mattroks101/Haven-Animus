@@ -9,6 +9,10 @@
 
 	var/d_state = 0
 
+	New()
+		health = rand(60,160)
+		..()
+
 /turf/simulated/wall/r_wall/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
 		if (prob(10) || rotting)
@@ -25,6 +29,10 @@
 		return
 
 	user << "\blue You push the wall but nothing happens!"
+	if(istype(get_area(src),/area/security/prison) && istype(get_area(user),/area/security/prison))
+		health--
+		if(!health)
+			hole_appear(user)
 	playsound(src.loc, 'sound/weapons/Genhit.ogg', 25, 1)
 	src.add_fingerprint(user)
 	return

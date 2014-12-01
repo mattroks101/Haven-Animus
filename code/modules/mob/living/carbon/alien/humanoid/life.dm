@@ -47,6 +47,9 @@
 	//to find it.
 	blinded = null
 
+	//Handle being on fire
+	handle_fire()
+
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(environment)
 

@@ -169,6 +169,46 @@ datum
 
 
 
+		poo
+			name = "poo"
+			id = "poo"
+			description = "It's poo."
+			reagent_state = LIQUID
+			color = "643200"
+//			melting_temp = 310
+//			boiling_temp = 430
+
+			on_mob_life(var/mob/M)
+				if(!M) M = holder.my_atom
+//				if(prob(20))
+//					M.contract_disease(new /datum/disease/gastric_ejections)
+				M:toxloss += 1
+				holder.remove_reagent(src.id, 0.2)
+				..()
+				return
+//TO MAKE add_poo() PROC
+/*			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				src = null
+				if(istype(M, /mob/living/carbon/human) && method==TOUCH)
+					if(M:wear_suit) M:wear_suit.add_poo()
+					if(M:w_uniform) M:w_uniform.add_poo()
+					if(M:shoes) M:shoes.add_poo()
+					if(M:gloves) M:gloves.add_poo()
+					if(M:head) M:head.add_poo()
+				//if(method==INGEST)
+				//	if(prob(20))
+					//	M.contract_disease(new /datum/disease/gastric_ejections)
+					//	holder.add_reagent("gastricejections", 1)
+					//	M:toxloss += 0.1
+					//	holder.remove_reagent(src.id, 0.2)
+*/
+			reaction_turf(var/turf/T, var/volume)
+				src = null
+				if(!istype(T, /turf/space))
+					new /obj/effect/decal/cleanable/poo(T)
+
+
+
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
 
 			Del()
@@ -255,6 +295,14 @@ datum
 					if(!cube.wrapped)
 						cube.Expand()
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with water can help put them out!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(-(volume / 10))
+					if(M.fire_stacks <= 0)
+						M.ExtinguishMob()
+					return
 
 		water/holywater
 			name = "Holy Water"
@@ -907,6 +955,12 @@ datum
 			reaction_turf(var/turf/T, var/volume)
 				new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 10)
+					return
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M.adjustToxLoss(1)
@@ -1557,6 +1611,12 @@ datum
 				fuel.moles = 5
 				napalm.trace_gases += fuel
 				the_turf.assume_air(napalm)
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 5)
+					return
 			reaction_turf(var/turf/T, var/volume)
 				src = null
 				var/datum/gas_mixture/napalm = new
@@ -2961,6 +3021,12 @@ datum
 					else
 						usr << "It wasn't enough..."
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 15)
+					return
 
 		ethanol/beer
 			name = "Beer"

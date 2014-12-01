@@ -1,4 +1,4 @@
-/datum/hud/proc/human_hud(var/ui_style='icons/mob/screen1_Midnight.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
+/datum/hud/proc/human_hud_luna(var/ui_style='icons/mob/screen1_Midnight.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
 
 	src.adding = list()
 	src.other = list()
@@ -400,6 +400,7 @@
 
 	mymob.zone_sel = new /obj/screen/zone_sel( null )
 	mymob.zone_sel.icon = ui_style
+	mymob.zone_sel.screen_loc = ui_zonesel
 	mymob.zone_sel.overlays.Cut()
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 

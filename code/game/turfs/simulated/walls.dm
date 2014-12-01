@@ -4,6 +4,7 @@
 	icon = 'icons/turf/walls.dmi'
 	var/mineral = "metal"
 	var/rotting = 0
+	var/health = 20
 	opacity = 1
 	density = 1
 	blocks_air = 1
@@ -12,6 +13,10 @@
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	var/walltype = "metal"
+
+	New()
+		health = rand(20,120)
+		..()
 
 /turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)
 	if(istype(src,/turf/simulated/wall/r_wall))
@@ -142,6 +147,10 @@
 		return
 
 	user << "\blue You push the wall but nothing happens!"
+	if(istype(get_area(src),/area/security/prison) && istype(get_area(user),/area/security/prison))
+		health--
+		if(!health)
+			hole_appear(user)
 	playsound(src.loc, 'sound/weapons/Genhit.ogg', 25, 1)
 	src.add_fingerprint(user)
 	return
@@ -328,6 +337,17 @@
 			O.density = 1
 			O.layer = 5
 			O.mouse_opacity = 0
+
+/turf/simulated/wall/proc/hole_appear(mob/user as mob)
+	if(mineral == "diamond")
+		return
+	src.ChangeTurf(/turf/simulated/floor/plating)
+	var/turf/simulated/floor/F = src
+	F.burn_tile()
+	F.icon_state = "wall_thermite"
+	user << "<span class='warning'>You manage to make a huge hole in the wall, using only your finger!</span>"
+	return
+
 
 /turf/simulated/wall/proc/thermitemelt(mob/user as mob)
 	if(mineral == "diamond")

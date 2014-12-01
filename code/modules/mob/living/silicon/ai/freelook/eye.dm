@@ -111,21 +111,20 @@
 /client/proc/AIMoveZ(direct, var/mob/living/silicon/ai/user)
 
 	var/initial = initial(user.sprint)
-	var/turf/controllerlocation = locate(1, 1, usr.z)
+	var/turf/controllerlocation = locate(1, 1, user.eyeobj.z)
 	if(user.cooldown && user.cooldown < world.timeofday) // 3 seconds
 		user.sprint = initial
-
 	for(var/i = 0; i < max(user.sprint, initial); i += 20)
 		switch(direct)
 			if (UP)
 				for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 					if (controller.up)
-						var/turf/T = locate(usr.x, usr.y, controller.up_target)
+						var/turf/T = locate(user.eyeobj.x, user.eyeobj.y, controller.up_target)
 						user.eyeobj.setLoc(T)
 			if (DOWN)
 				for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 					if (controller.down)
-						var/turf/T = locate(usr.x, usr.y, controller.down_target)
+						var/turf/T = locate(user.eyeobj.x, user.eyeobj.y, controller.down_target)
 						user.eyeobj.setLoc(T)
 
 

@@ -1,6 +1,7 @@
 /obj/item/clothing
 	name = "clothing"
 	var/list/species_restricted = null //Only these species can wear this kit.
+	var/poop_covering = 0
 
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
@@ -170,6 +171,7 @@ BLIND     // can't see anything
 	siemens_coefficient = 0.9
 	body_parts_covered = FEET
 	slot_flags = SLOT_FEET
+	var/footstep = 1	//used for sounds whilst walking
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN

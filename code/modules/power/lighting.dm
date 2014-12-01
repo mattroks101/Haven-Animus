@@ -224,6 +224,11 @@
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
+	seton(var/s)
+		on = (s && status == LIGHT_OK)
+		update()
+
+
 
 /obj/machinery/light/spot
 	name = "spotlight"
@@ -325,6 +330,7 @@
 // will not switch on if broken/burned/empty
 /obj/machinery/light/proc/seton(var/s)
 	on = (s && status == LIGHT_OK)
+	playsound(src.loc, 'sound/effects/tube_sound.ogg', 80, 1)
 	update()
 
 // examine verb

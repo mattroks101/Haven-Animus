@@ -5,6 +5,7 @@
 #define X_R_HAND_LAYER			4
 #define TARGETED_LAYER			5
 #define X_TOTAL_LAYERS			5
+#define X_FIRE_LAYER			4
 /////////////////////////////////
 
 /mob/living/carbon/alien/humanoid
@@ -37,6 +38,15 @@
 		else						icon_state = "alien[caste]_s"
 		for(var/image/I in overlays_standing)
 			overlays += I
+
+/mob/living/carbon/alien/humanoid/update_fire()
+	overlays -= overlays_standing[X_FIRE_LAYER]
+	if(on_fire)
+		overlays_standing[X_FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"= -X_FIRE_LAYER)
+		overlays += overlays_standing[X_FIRE_LAYER]
+		return
+	else
+		overlays_standing[X_FIRE_LAYER] = null
 
 /mob/living/carbon/alien/humanoid/regenerate_icons()
 	..()
@@ -158,3 +168,4 @@
 #undef X_R_HAND_LAYER
 #undef TARGETED_LAYER
 #undef X_TOTAL_LAYERS
+#undef X_FIRE_LAYER

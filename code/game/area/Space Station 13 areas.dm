@@ -421,10 +421,14 @@ var/list/ghostteleportlocs = list()
 /area/tdome/tdome1
 	name = "\improper Thunderdome (Team 1)"
 	icon_state = "green"
+	ul_Lighting = 0
+	luminosity = 1
 
 /area/tdome/tdome2
 	name = "\improper Thunderdome (Team 2)"
 	icon_state = "yellow"
+	ul_Lighting = 0
+	luminosity = 1
 
 /area/tdome/tdomeadmin
 	name = "\improper Thunderdome (Admin.)"
@@ -441,6 +445,8 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Syndicate Station"
 	icon_state = "yellow"
 	requires_power = 0
+	ul_Lighting = 0
+	luminosity = 1
 
 /area/syndicate_station/start
 	name = "\improper Syndicate Forward Operating Base"

@@ -292,7 +292,7 @@
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		destroy()
-	if(usr.a_intent == "disarm" && get_dist(usr, src) <= 1 && !usr.buckled)
+	if(usr.a_intent == "disarm" && get_dist(usr, src) <= 1 && !usr.buckled && !flipped)
 		if(prob(70))
 			visible_message("<span class='notice'>[user] climbs on the [src].</span>")
 			usr.loc = src.loc
@@ -411,12 +411,13 @@
 				H.updatehealth()
 				playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1, -3)
 			return
-		G.affecting.loc = src.loc
-		G.affecting.Weaken(5)
-		for(var/mob/O in viewers(world.view, src))
-			if (O.client)
-				O << "\red [G.assailant] puts [G.affecting] on the table."
-		del(W)
+		if(!G.affecting.buckled)
+			G.affecting.loc = src.loc
+			G.affecting.Weaken(5)
+			for(var/mob/O in viewers(world.view, src))
+				if (O.client)
+					O << "\red [G.assailant] puts [G.affecting] on the table."
+			del(W)
 		return
 
 	if (istype(W, /obj/item/weapon/wrench))
@@ -608,6 +609,26 @@
 			return
 
 	..()
+
+/obj/structure/table/reinforced/attack_hand(mob/user)
+	if(HULK in user.mutations)
+		health -= rand(30,80)
+		if(health <=0)
+			destroy()
+			visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
+		else
+			visible_message("<span class='danger'>[user] smashes [src]!</span>")
+		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
+		destroy()
+	if(usr.a_intent == "disarm" && get_dist(usr, src) <= 1 && !usr.buckled && !flipped)
+		if(prob(70))
+			visible_message("<span class='notice'>[user] climbs on the [src].</span>")
+			usr.loc = src.loc
+		else
+			sleep(5)
+			visible_message("<span class='warning'>[user] slipped off the edge of the [src].</span>")
+			usr.weakened += 3
+
 
 /*
  * Racks

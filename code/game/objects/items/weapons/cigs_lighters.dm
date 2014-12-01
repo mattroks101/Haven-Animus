@@ -155,6 +155,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/cigarette/process()
 	var/turf/location = get_turf(src)
+	var/mob/living/M = loc
+	if(isliving(loc))
+		M.IgniteMob()
 	smoketime--
 	if(smoketime < 1)
 		die()
@@ -375,7 +378,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 					user.adjustFireLoss(5)
 					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
 
-			user.SetLuminosity(user.luminosity + 2)
+			user.AddLuminosity(2,1,0)
 			processing_objects.Add(src)
 		else
 			lit = 0
@@ -386,7 +389,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			else
 				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].")
 
-			user.SetLuminosity(user.luminosity - 2)
+			user.AddLuminosity(-2,-1,0)
 			processing_objects.Remove(src)
 	else
 		return ..()
@@ -394,8 +397,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 
 /obj/item/weapon/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M, /mob))
+	if(!isliving(M))
 		return
+	M.IgniteMob()
 
 	if(istype(M.wear_mask, /obj/item/clothing/mask/cigarette) && user.zone_sel.selecting == "mouth" && lit)
 		var/obj/item/clothing/mask/cigarette/cig = M.wear_mask

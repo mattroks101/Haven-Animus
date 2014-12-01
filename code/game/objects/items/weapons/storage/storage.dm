@@ -151,6 +151,33 @@
 	src.closer.screen_loc = "[5+cols+1],2"
 	return
 
+/obj/item/weapon/storage/proc/tg_orient_objs(var/rows, var/cols, var/list/obj/item/display_contents)
+	var/cx = 4
+	var/cy = 2+rows
+	src.boxes.screen_loc = "4:16,2:16 to [4+cols]:16,[2+rows]:16"
+
+	if(display_contents_with_number)
+		for(var/datum/numbered_display/ND in display_contents)
+			ND.sample_object.screen_loc = "[cx]:16,[cy]:16"
+			ND.sample_object.maptext = "<font color='white'>[(ND.number > 1)? "[ND.number]" : ""]</font>"
+			ND.sample_object.layer = 20
+			cx++
+			if (cx > (4+cols))
+				cx = 4
+				cy--
+	else
+		for(var/obj/O in contents)
+			O.screen_loc = "[cx]:16,[cy]:16"
+			O.maptext = ""
+			O.layer = 20
+			cx++
+			if (cx > (4+cols))
+				cx = 4
+				cy--
+	src.closer.screen_loc = "[4+cols+1]:16,2:16"
+	return
+
+
 /datum/numbered_display
 	var/obj/item/sample_object
 	var/number
@@ -187,7 +214,10 @@
 	var/col_count = min(7,storage_slots) -1
 	if (adjusted_contents > 7)
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
-	src.standard_orient_objs(row_num, col_count, numbered_contents)
+	if(user && user.client.prefs.UI_type == "TG")
+		src.tg_orient_objs(row_num, col_count, numbered_contents)
+	else
+		src.standard_orient_objs(row_num, col_count, numbered_contents)
 	return
 
 //This proc return 1 if the item can be picked up and 0 if it can't.
@@ -248,11 +278,11 @@
 //such as when picking up all the items on a tile with one click.
 /obj/item/weapon/storage/proc/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
 	if(!istype(W)) return 0
+	W.on_enter_storage(src)
 	if(usr)
 		usr.u_equip(W)
 		usr.update_icons()	//update our overlays
 	W.loc = src
-	W.on_enter_storage(src)
 	if(usr)
 		if (usr.client && usr.s_active != src)
 			usr.client.screen -= W
