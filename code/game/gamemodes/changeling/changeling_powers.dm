@@ -111,7 +111,6 @@
 					T:UpdateDamageIcon()
 					continue
 
-		feedback_add_details("changeling_powers","A[stage]")
 		if(!do_mob(src, T, 150))
 			src << "<span class='warning'>Our absorption of [T] has been interrupted!</span>"
 			changeling.isabsorbing = 0
@@ -192,7 +191,6 @@
 	src.verbs -= /mob/proc/changeling_transform
 	spawn(10)	src.verbs += /mob/proc/changeling_transform
 
-	feedback_add_details("changeling_powers","TR")
 	return 1
 
 
@@ -259,7 +257,6 @@
 
 	O.make_changeling(1)
 	O.verbs += /mob/proc/changeling_lesser_transform
-	feedback_add_details("changeling_powers","LF")
 	del(C)
 	return 1
 
@@ -344,7 +341,6 @@
 	C.mind.transfer_to(O)
 	O.make_changeling()
 
-	feedback_add_details("changeling_powers","LFT")
 	del(C)
 	return 1
 
@@ -391,7 +387,6 @@
 			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
 
 
-	feedback_add_details("changeling_powers","FD")
 	return 1
 
 
@@ -408,7 +403,6 @@
 	changeling.sting_range = 2
 	src.verbs -= /mob/proc/changeling_boost_range
 	spawn(5)	src.verbs += /mob/proc/changeling_boost_range
-	feedback_add_details("changeling_powers","RS")
 	return 1
 
 
@@ -432,7 +426,6 @@
 
 	src.verbs -= /mob/proc/changeling_unstun
 	spawn(5)	src.verbs += /mob/proc/changeling_unstun
-	feedback_add_details("changeling_powers","UNS")
 	return 1
 
 
@@ -468,7 +461,6 @@
 
 	src.verbs -= /mob/proc/changeling_digitalcamo
 	spawn(5)	src.verbs += /mob/proc/changeling_digitalcamo
-	feedback_add_details("changeling_powers","CAM")
 	return 1
 
 
@@ -494,7 +486,6 @@
 
 	src.verbs -= /mob/proc/changeling_rapidregen
 	spawn(5)	src.verbs += /mob/proc/changeling_rapidregen
-	feedback_add_details("changeling_powers","RR")
 	return 1
 
 // HIVE MIND UPLOAD/DOWNLOAD DNA
@@ -528,7 +519,6 @@ var/list/datum/dna/hivemind_bank = list()
 	changeling.chem_charges -= 10
 	hivemind_bank += chosen_dna
 	src << "<span class='notice'>We channel the DNA of [S] to the air.</span>"
-	feedback_add_details("changeling_powers","HU")
 	return 1
 
 /mob/proc/changeling_hivedownload()
@@ -557,7 +547,6 @@ var/list/datum/dna/hivemind_bank = list()
 	changeling.chem_charges -= 20
 	changeling.absorbed_dna += chosen_dna
 	src << "<span class='notice'>We absorb the DNA of [S] from the air.</span>"
-	feedback_add_details("changeling_powers","HD")
 	return 1
 
 // Fake Voice
@@ -584,8 +573,6 @@ var/list/datum/dna/hivemind_bank = list()
 
 	src << "<span class='notice'>We shape our glands to take the voice of <b>[mimic_voice]</b>, this will stop us from regenerating chemicals while active.</span>"
 	src << "<span class='notice'>Use this power again to return to our original voice and reproduce chemicals again.</span>"
-
-	feedback_add_details("changeling_powers","MV")
 
 	spawn(0)
 		while(src && src.mind && src.mind.changeling && src.mind.changeling.mimicing)
@@ -639,7 +626,6 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!T)	return 0
 	spawn(rand(300,600))
 		if(T)	T.hallucination += 400
-	feedback_add_details("changeling_powers","HS")
 	return 1
 
 /mob/proc/changeling_silence_sting()
@@ -650,7 +636,6 @@ var/list/datum/dna/hivemind_bank = list()
 	var/mob/living/carbon/T = changeling_sting(10,/mob/proc/changeling_silence_sting)
 	if(!T)	return 0
 	T.silent += 30
-	feedback_add_details("changeling_powers","SS")
 	return 1
 
 /mob/proc/changeling_blind_sting()
@@ -665,7 +650,6 @@ var/list/datum/dna/hivemind_bank = list()
 	spawn(300)	T.disabilities &= ~NEARSIGHTED
 	T.eye_blind = 10
 	T.eye_blurry = 20
-	feedback_add_details("changeling_powers","BS")
 	return 1
 
 /mob/proc/changeling_deaf_sting()
@@ -678,7 +662,6 @@ var/list/datum/dna/hivemind_bank = list()
 	T << "<span class='danger'>Your ears pop and begin ringing loudly!</span>"
 	T.sdisabilities |= DEAF
 	spawn(300)	T.sdisabilities &= ~DEAF
-	feedback_add_details("changeling_powers","DS")
 	return 1
 
 /mob/proc/changeling_paralysis_sting()
@@ -690,7 +673,6 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!T)	return 0
 	T << "<span class='danger'>Your muscles begin to painfully tighten.</span>"
 	T.Weaken(20)
-	feedback_add_details("changeling_powers","PS")
 	return 1
 
 /mob/proc/changeling_transformation_sting()
@@ -724,7 +706,6 @@ var/list/datum/dna/hivemind_bank = list()
 	T.real_name = chosen_dna.real_name
 	T.UpdateAppearance()
 	domutcheck(T, null)
-	feedback_add_details("changeling_powers","TS")
 	return 1
 
 /mob/proc/changeling_unfat_sting()
@@ -735,9 +716,7 @@ var/list/datum/dna/hivemind_bank = list()
 	var/mob/living/carbon/T = changeling_sting(5,/mob/proc/changeling_unfat_sting)
 	if(!T)	return 0
 	T << "<span class='danger'>you feel a small prick as stomach churns violently and you become to feel skinnier.</span>"
-	T.overeatduration = 0
 	T.nutrition -= 100
-	feedback_add_details("changeling_powers","US")
 	return 1
 
 /mob/proc/changeling_DEATHsting()
@@ -752,7 +731,6 @@ var/list/datum/dna/hivemind_bank = list()
 	T.Paralyse(10)
 	T.make_jittery(1000)
 	if(T.reagents)	T.reagents.add_reagent("lexorin", 40)
-	feedback_add_details("changeling_powers","DTHS")
 	return 1
 
 /mob/proc/changeling_extract_dna_sting()
@@ -772,5 +750,4 @@ var/list/datum/dna/hivemind_bank = list()
 	T.dna.real_name = T.real_name
 	changeling.absorbed_dna |= T.dna
 
-	feedback_add_details("changeling_powers","ED")
 	return 1

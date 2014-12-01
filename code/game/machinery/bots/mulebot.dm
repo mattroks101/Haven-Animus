@@ -354,7 +354,7 @@
 
 			if("destination")
 				refresh=0
-				var/new_dest = input("Enter new destination tag", "Mulebot [suffix ? "([suffix])" : ""]", destination) as text|null
+				var/new_dest = reject_bad_name(input("Enter new destination tag", "Mulebot [suffix ? "([suffix])" : ""]", destination) as text|null,1)
 				refresh=1
 				if(new_dest)
 					set_destination(new_dest)
@@ -362,7 +362,7 @@
 
 			if("setid")
 				refresh=0
-				var/new_id = copytext(sanitize(input("Enter new bot ID", "Mulebot [suffix ? "([suffix])" : ""]", suffix) as text|null),1,MAX_NAME_LEN)
+				var/new_id = reject_bad_name(input("Enter new bot ID", "Mulebot [suffix ? "([suffix])" : ""]", suffix) as text|null,1)
 				refresh=1
 				if(new_id)
 					suffix = new_id
@@ -371,7 +371,7 @@
 
 			if("sethome")
 				refresh=0
-				var/new_home = input("Enter new home tag", "Mulebot [suffix ? "([suffix])" : ""]", home_destination) as text|null
+				var/new_home = reject_bad_name(input("Enter new home tag", "Mulebot [suffix ? "([suffix])" : ""]", home_destination) as text|null,1)
 				refresh=1
 				if(new_home)
 					home_destination = new_home

@@ -9,10 +9,6 @@
 	var/species = "Amorph"
 	age = 30.0
 
-	var/used_skillpoints = 0
-	var/skill_specialization = null
-	var/list/skills = null
-
 	var/obj/item/l_ear = null
 
 	// might use this later to recolor armorphs with icon.SwapColor

@@ -45,7 +45,7 @@
 				return
 			if (!in_range(src, user) && src.loc != user)
 				return
-			t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+			t = reject_bad_text(t)
 			if (t)
 				src.name = "body bag - "
 				src.name += t

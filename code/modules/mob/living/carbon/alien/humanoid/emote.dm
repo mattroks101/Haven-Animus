@@ -119,7 +119,7 @@
 		else
 			message = "<B>[src]</B> [act]."
 	if ((message && src.stat == 0))
-		message = sanitize_multi(message)
+		message = sanitize(message)
 		log_emote("[name]/[key] : [message]")
 		if (act == "roar")
 			playsound(src.loc, 'sound/voice/hiss5.ogg', 40, 1, 1)

@@ -1,7 +1,7 @@
 #define SAY_MINIMUM_PRESSURE 10
 var/list/department_radio_keys = list(
-	  ":r" = "right ear",	"#r" = "right ear",		".r" = "right ear",
-	  ":l" = "left ear",	"#l" = "left ear",		".l" = "left ear",
+	  ":r" = "right hand",	"#r" = "right hand",	".r" = "right hand",
+	  ":l" = "left hand",	"#l" = "left hand",		".l" = "left hand",
 	  ":i" = "intercom",	"#i" = "intercom",		".i" = "intercom",
 	  ":h" = "department",	"#h" = "department",	".h" = "department",
 	  ":c" = "Command",		"#c" = "Command",		".c" = "Command",
@@ -14,10 +14,11 @@ var/list/department_radio_keys = list(
 	  ":a" = "alientalk",	"#a" = "alientalk",		".a" = "alientalk",
 	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
+	  ":v" = "Service",		"#v" = "Service",		".v" = "Service",
 	  ":g" = "changeling",	"#g" = "changeling",	".g" = "changeling",
 
-	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
-	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
+	  ":R" = "right hand",	"#R" = "right hand",	".R" = "right hand",
+	  ":L" = "left hand",	"#L" = "left hand",		".L" = "left hand",
 	  ":I" = "intercom",	"#I" = "intercom",		".I" = "intercom",
 	  ":H" = "department",	"#H" = "department",	".H" = "department",
 	  ":C" = "Command",		"#C" = "Command",		".C" = "Command",
@@ -30,12 +31,13 @@ var/list/department_radio_keys = list(
 	  ":A" = "alientalk",	"#A" = "alientalk",		".A" = "alientalk",
 	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
+	  ":V" = "Service",		"#V" = "Service",		".V" = "Service",
 	  ":G" = "changeling",	"#G" = "changeling",	".G" = "changeling",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right ear",	"#ê" = "right ear",		".ê" = "right ear",
-	  ":ä" = "left ear",	"#ä" = "left ear",		".ä" = "left ear",
+	  ":ê" = "right hand",	"#ê" = "right hand",	".ê" = "right hand",
+	  ":ä" = "left hand",	"#ä" = "left hand",		".ä" = "left hand",
 	  ":ø" = "intercom",	"#ø" = "intercom",		".ø" = "intercom",
 	  ":ð" = "department",	"#ð" = "department",	".ð" = "department",
 	  ":ñ" = "Command",		"#ñ" = "Command",		".ñ" = "Command",
@@ -48,7 +50,25 @@ var/list/department_radio_keys = list(
 	  ":ô" = "alientalk",	"#ô" = "alientalk",		".ô" = "alientalk",
 	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
-	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling"
+	  ":ì" = "Service",		"#ì" = "Service",		".ì" = "Service",
+	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling",
+
+	  ":Ê" = "right hand",	"#Ê" = "right hand",	".Ê" = "right hand",
+	  ":Ä" = "left hand",	"#Ä" = "left hand",		".Ä" = "left hand",
+	  ":Ø" = "intercom",	"#Ø" = "intercom",		".Ø" = "intercom",
+	  ":Ð" = "department",	"#Ð" = "department",	".Ð" = "department",
+	  ":Ñ" = "Command",		"#Ñ" = "Command",		".Ñ" = "Command",
+	  ":Ò" = "Science",		"#Ò" = "Science",		".Ò" = "Science",
+	  ":Ü" = "Medical",		"#Ü" = "Medical",		".Ü" = "Medical",
+	  ":Ó" = "Engineering",	"#Ó" = "Engineering",	".Ó" = "Engineering",
+	  ":Û" = "Security",	"#Û" = "Security",		".Û" = "Security",
+	  ":Ö" = "whisper",		"#Ö" = "whisper",		".Ö" = "whisper",
+	  ":È" = "binary",		"#È" = "binary",		".È" = "binary",
+	  ":Ô" = "alientalk",	"#Ô" = "alientalk",		".Ô" = "alientalk",
+	  ":Å" = "Syndicate",	"#Å" = "Syndicate",		".Å" = "Syndicate",
+	  ":É" = "Supply",		"#É" = "Supply",		".É" = "Supply",
+	  ":Ì" = "Service",		"#Ì" = "Service",		".Ì" = "Service",
+	  ":Ï" = "changeling",	"#Ï" = "changeling",	".Ï" = "changeling"
 )
 
 /mob/living/proc/binarycheck()
@@ -87,7 +107,7 @@ var/list/department_radio_keys = list(
 		Formatting and sanitizing.
 	*/
 
-	message = trim(copytext(sanitize_multi(message), 1, MAX_MESSAGE_LEN))
+	message = trim(sanitize(message))
 
 	/*
 		Sanity checking and speech failure.
@@ -104,13 +124,6 @@ var/list/department_radio_keys = list(
 	else if (stat) // Unconcious.
 		return
 
-	if (src.client)
-		if(client.prefs.muted & MUTE_IC)
-			src << "\red You cannot speak in IC (muted)."
-			return
-		if (src.client.handle_spam_prevention(message, MUTE_IC))
-			return
-
 	// Mute disability
 	if (sdisabilities & MUTE)
 		return
@@ -118,6 +131,13 @@ var/list/department_radio_keys = list(
 	// Muzzled.
 	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
 		return
+
+	if (src.client)
+		if(client.prefs.muted & MUTE_IC)
+			src << "\red No way for u, bastard."
+			return
+		if (src.client.handle_spam_prevention(message, MUTE_IC))
+			return
 
 	// Emotes.
 	if (copytext(message, 1, 2) == "*" && !stat)

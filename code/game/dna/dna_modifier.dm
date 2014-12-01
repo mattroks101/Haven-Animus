@@ -760,7 +760,7 @@
 		if (bufferOption == "changeLabel")
 			var/datum/dna2/record/buf = src.buffers[bufferId]
 			buf.name = buf.name ? src.buffers[bufferId]["label"] : "New Label"
-			buf.name = sanitize_russian(input("New Label:", "Edit Label", buf.name))
+			buf.name = sanitize(input("New Label:", "Edit Label", buf.name))
 			src.buffers[bufferId] = buf
 			return 1
 

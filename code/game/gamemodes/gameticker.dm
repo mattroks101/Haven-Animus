@@ -133,10 +133,7 @@ var/global/datum/controller/gameticker/ticker
 				del(S)
 		world << "<FONT color='blue'><B>Enjoy the game!</B></FONT>"
 		world << sound('sound/AI/welcome.ogg') // Skie
-		//Holiday Round-start stuff	~Carn
-		Holiday_Game_Start()
 
-	//start_events() //handles random events and space dust.
 	//new random event system is handled from the MC.
 
 	supply_shuttle.process() 		//Start the supply shuttle regenerating points -- TLE
@@ -303,17 +300,11 @@ var/global/datum/controller/gameticker/ticker
 				callHook("roundend")
 
 				if (mode.station_was_nuked)
-					feedback_set_details("end_proper","nuke")
 					if(!delay_end)
 						world << "\blue <B>Rebooting due to destruction of the ship in [restart_timeout/10] seconds</B>"
 				else
-					feedback_set_details("end_proper","proper completion")
 					if(!delay_end)
 						world << "\blue <B>Restarting in [restart_timeout/10] seconds</B>"
-
-
-				if(blackbox)
-					blackbox.save_all_data_to_sql()
 
 				if(!delay_end)
 					sleep(restart_timeout)

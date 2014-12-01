@@ -831,8 +831,7 @@ Status: []<BR>"},
 				return
 
 	if (istype(W, /obj/item/weapon/pen)) // you can rename turrets like bots!
-		var/t = input(user, "Enter new turret name", src.name, src.finish_name) as text
-		t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+		var/t = sanitize(input(user, "Enter new turret name", src.name, src.finish_name) as text)
 		if (!t)
 			return
 		if (!in_range(src, usr) && src.loc != usr)

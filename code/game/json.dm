@@ -95,6 +95,3 @@ client/proc/ChangeMap(var/X as text)
 	set name = "Change Map"
 	set category  = "Admin"
 	switchmap(X,X)
-proc/send2adminirc(channel,msg)
-	world << channel << " "<< msg
-	shell("python nudge.py '[channel]' [msg]")

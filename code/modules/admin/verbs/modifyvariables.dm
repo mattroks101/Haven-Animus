@@ -1,17 +1,4 @@
-var/list/forbidden_varedit_object_types = list(
-//										/datum/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea.
-										/obj/machinery/blackbox_recorder,	//Prevents people messing with feedback gathering
-										/datum/feedback_variable			//Prevents people messing with feedback gathering
-									)
-
-/*
-/client/proc/cmd_modify_object_variables(obj/O as obj|mob|turf|area in world)
-	set category = "Debug"
-	set name = "Edit Variables"
-	set desc="(target) Edit a target item's variables"
-	src.modify_variables(O)
-	feedback_add_details("admin_verb","EDITV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-*/
+var/list/forbidden_varedit_object_types = list(/datum/admins)
 
 /client/proc/cmd_modify_ticker_variables()
 	set category = "Debug"
@@ -21,7 +8,6 @@ var/list/forbidden_varedit_object_types = list(
 		src << "Game hasn't started yet."
 	else
 		src.modify_variables(ticker)
-		feedback_add_details("admin_verb","ETV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/mod_list_add_ass() //haha
 
@@ -130,7 +116,7 @@ var/list/forbidden_varedit_object_types = list(
 
 	if(!istype(L,/list)) src << "Not a List."
 
-	var/list/locked = list("vars", "key", "ckey", "client", "firemut", "ishulk", "telekinesis", "xray", "virus", "viruses", "cuffed", "ka", "last_eaten", "urine", "poo", "icon", "icon_state")
+	var/list/locked = list("vars", "key", "ckey", "client", "firemut", "ishulk", "telekinesis", "xray", "virus", "viruses", "cuffed", "ka", "last_eaten", "urine", "poo", "icon", "icon_state", "holder")
 	var/list/names = sortList(L)
 
 	var/variable = input("Which var?","Var") as null|anything in names + "(ADD VAR)"
@@ -147,7 +133,7 @@ var/list/forbidden_varedit_object_types = list(
 	var/dir
 
 	if(variable in locked)
-		if(!check_rights(R_DEBUG))	return
+		if(!check_rights(R_PERMISSIONS))	return
 
 	if(isnull(variable))
 		usr << "Unable to determine variable type."

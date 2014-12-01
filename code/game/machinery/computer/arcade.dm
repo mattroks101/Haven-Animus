@@ -154,7 +154,6 @@
 			src.temp = "[src.enemy_name] has fallen! Rejoice!"
 
 			if(emagged)
-				feedback_inc("arcade_win_emagged")
 				new /obj/effect/spawner/newbomb/timer/syndicate(src.loc)
 				new /obj/item/clothing/head/collectable/petehat(src.loc)
 				message_admins("[key_name_admin(usr)] has outbombed Cuban Pete and been awarded a bomb.")
@@ -162,7 +161,6 @@
 				src.New()
 				emagged = 0
 			else if(!contents.len)
-				feedback_inc("arcade_win_normal")
 				var/prizeselect = pickweight(prizes)
 				new prizeselect(src.loc)
 
@@ -173,7 +171,6 @@
 					new	/obj/item/clothing/head/syndicatefake(src.loc)
 
 			else
-				feedback_inc("arcade_win_normal")
 				var/atom/movable/prize = pick(contents)
 				prize.loc = src.loc
 
@@ -193,10 +190,7 @@
 			sleep(10)
 			src.temp = "You have been drained! GAME OVER"
 			if(emagged)
-				feedback_inc("arcade_loss_mana_emagged")
 				usr.gib()
-			else
-				feedback_inc("arcade_loss_mana_normal")
 
 	else if ((src.enemy_hp <= 10) && (src.enemy_mp > 4))
 		src.temp = "[src.enemy_name] heals for 4 health!"
@@ -212,10 +206,7 @@
 		src.gameover = 1
 		src.temp = "You have been crushed! GAME OVER"
 		if(emagged)
-			feedback_inc("arcade_loss_hp_emagged")
 			usr.gib()
-		else
-			feedback_inc("arcade_loss_hp_normal")
 
 	src.blocked = 0
 	return

@@ -51,7 +51,6 @@
 	var/obj/machinery/machine = null
 	var/other_mobs = null
 	var/memory = ""
-	var/poll_answer = 0.0
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 	var/atom/movable/pulling = null
@@ -93,28 +92,26 @@
 
 	var/name_archive //For admin things like possession
 
-	var/timeofdeath = 0.0//Living
-	var/cpr_time = 1.0//Carbon
+	var/timeofdeath = 0//Living
+	var/cpr_time = 1//Carbon
 
 
 	var/bodytemperature = 310.055	//98.7 F
-	var/drowsyness = 0.0//Carbon
+	var/drowsyness = 0//Carbon
 	var/dizziness = 0//Carbon
 	var/is_dizzy = 0
 	var/is_jittery = 0
 	var/jitteriness = 0//Carbon
-	var/charges = 0.0
-	var/nutrition = 400.0//Carbon
+	var/charges = 0
+	var/nutrition = 400//Carbon
 
-	var/overeatduration = 0		// How long this guy is overeating //Carbon
-	var/paralysis = 0.0
-	var/stunned = 0.0
-	var/weakened = 0.0
-	var/losebreath = 0.0//Carbon
+	var/paralysis = 0
+	var/stunned = 0
+	var/weakened = 0
+	var/losebreath = 0//Carbon
 	var/intent = null//Living
 	var/shakecamera = 0
 	var/a_intent = "help"//Living
-	var/m_int = null//Living
 	var/m_intent = "run"//Living
 	var/att_intent = "slash"
 	var/lastKnownIP = null
@@ -151,7 +148,7 @@
 
 
 	var/datum/dna/dna = null//Carbon
-	var/radiation = 0.0//Carbon
+	var/radiation = 0//Carbon
 
 	var/list/mutations = list() //Carbon -- Doohl
 	//see: setup.dm for list of mutations

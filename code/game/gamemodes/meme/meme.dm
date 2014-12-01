@@ -162,10 +162,8 @@
 			for(var/datum/objective/objective in meme.objectives)
 				if(objective.check_completion())
 					world << "<B>Objective #[count]</B>: [objective.explanation_text] \green <B>Success</B>"
-					feedback_add_details("meme_objective","[objective.type]|SUCCESS")
 				else
 					world << "<B>Objective #[count]</B>: [objective.explanation_text] \red Failed"
-					feedback_add_details("meme_objective","[objective.type]|FAIL")
 					memewin = 0
 				count++
 
@@ -174,8 +172,6 @@
 
 		if(memewin)
 			world << "<B>The meme was successful!<B>"
-			feedback_add_details("meme_success","SUCCESS")
 		else
 			world << "<B>The meme has failed!<B>"
-			feedback_add_details("meme_success","FAIL")
 	return 1

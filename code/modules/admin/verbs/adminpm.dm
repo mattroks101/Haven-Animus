@@ -7,7 +7,6 @@
 		return
 	if( !ismob(M) || !M.client )	return
 	cmd_admin_pm(M.client,null)
-	feedback_add_details("admin_verb","APMM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 //shows a list of clients we could send PMs to, then forwards our choice to cmd_admin_pm
 /client/proc/cmd_admin_pm_panel()
@@ -30,8 +29,6 @@
 	var/list/sorted = sortList(targets)
 	var/target = input(src,"To whom shall we send a message?","Admin PM",null) in sorted|null
 	cmd_admin_pm(targets[target],null)
-	feedback_add_details("admin_verb","APM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 
 //takes input from cmd_admin_pm_context, cmd_admin_pm_panel or /client/Topic and sends them a PM.
 //Fetching a message if needed. src is the sender and C is the target client
@@ -45,17 +42,9 @@
 		else		adminhelp(msg)	//admin we are replying to left. adminhelp instead
 		return
 
-	/*if(C && C.last_pm_recieved + config.simultaneous_pm_warning_timeout > world.time && holder)
-		//send a warning to admins, but have a delay popup for mods
-		if(holder.rights & R_ADMIN)
-			src << "\red <b>Simultaneous PMs warning:</b> that player has been PM'd in the last [config.simultaneous_pm_warning_timeout / 10] seconds by: [C.ckey_last_pm]"
-		else
-			if(alert("That player has been PM'd in the last [config.simultaneous_pm_warning_timeout / 10] seconds by: [C.ckey_last_pm]","Simultaneous PMs warning","Continue","Cancel") == "Cancel")
-				return*/
-
 	//get message text, limit it's length.and clean/escape html
 	if(!msg)
-		msg = sanitize_multi(input(src,"Message:", "Private message to [key_name(C, 0, 0, holder?1:0 )]") as text|null)
+		msg = sanitize_uni(input(src,"Message:", "Private message to [key_name(C, 0, 0, holder?1:0 )]") as text|null)
 
 		if(!msg)	return
 		if(!C)
@@ -68,7 +57,7 @@
 
 	//clean the message if it's not sent by a high-rank admin
 	if(!check_rights(R_SERVER|R_DEBUG,0))
-		msg = copytext(msg,1,MAX_MESSAGE_LEN)
+		msg = sanitize(msg)
 		if(!msg)	return
 
 	var/recieve_color = "purple"
@@ -121,7 +110,7 @@
 	if(C.prefs.toggles & SOUND_ADMINHELP)
 		C << 'sound/effects/adminhelp.ogg'
 
-	log_admin("PM: [key_name(src, real_key = 1)]->[key_name(C, real_key = 1)]: [msg]")
+	log_admin("PM: [key_name(src, 1)]->[key_name(C, 1)]: [msg]")
 
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)

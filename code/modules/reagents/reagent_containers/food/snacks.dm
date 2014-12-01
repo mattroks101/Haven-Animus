@@ -60,13 +60,13 @@
 				M << "\blue You take a bite of [src]."
 			if (fullness > 350 && fullness <= 550)
 				M << "\blue You unwillingly chew a bit of [src]."
-			if (fullness > (550 * (1 + M.overeatduration / 2000)))	// The more you eat - the more you can eat
+			if (fullness > 550)	// The more you eat - the more you can eat
 				M << "\red You cannot force any more of [src] to go down your throat."
 				return 0
 		else
 			if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.
 				var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
-				if (fullness <= (550 * (1 + M.overeatduration / 1000)))
+				if (fullness <= 550)
 					for(var/mob/O in viewers(world.view, user))
 						O.show_message("\red [user] attempts to feed [M] [src].", 1)
 				else

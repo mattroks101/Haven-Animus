@@ -398,7 +398,7 @@
 
 					//Select Your Name
 					if("Sender")
-						customsender 	= input(usr, "Please enter the sender's name.") as text|null
+						customsender 	= reject_bad_name(input(usr, "Please enter the sender's name.") as text|null,1)
 
 					//Select Receiver
 					if("Recepient")
@@ -414,12 +414,12 @@
 
 					//Enter custom job
 					if("RecJob")
-						customjob	 	= input(usr, "Please enter the sender's job.") as text|null
+						customjob = input(usr, "Please enter the sender's job.") as text|null
 
 					//Enter message
 					if("Message")
-						custommessage	= input(usr, "Please enter your message.") as text|null
-						custommessage	= copytext(sanitize_russian(custommessage), 1, MAX_MESSAGE_LEN)
+						custommessage = input(usr, "Please enter your message.") as text|null
+						custommessage = copytext(sanitize_uni(custommessage), 1, MAX_MESSAGE_LEN)
 
 					//Send message
 					if("Send")

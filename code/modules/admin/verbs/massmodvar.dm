@@ -20,13 +20,12 @@
 					return
 
 	src.massmodify_variables(A, var_name, method)
-	feedback_add_details("admin_verb","MEV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 /client/proc/massmodify_variables(var/atom/O, var/var_name = "", var/method = 0)
 	if(!check_rights(R_VAREDIT))	return
 
-	var/list/locked = list("vars", "key", "ckey", "client")
+	var/list/locked = list("vars", "key", "ckey", "client", "holder")
 
 	for(var/p in forbidden_varedit_object_types)
 		if( istype(O,p) )
@@ -51,8 +50,8 @@
 	var/var_value = O.vars[variable]
 	var/dir
 
-	if(variable == "holder" || (variable in locked))
-		if(!check_rights(R_DEBUG))	return
+	if(variable in locked)
+		if(!check_rights(R_PERMISSIONS))	return
 
 	if(isnull(var_value))
 		usr << "Unable to determine variable type."

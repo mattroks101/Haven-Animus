@@ -82,7 +82,7 @@ var/changelog_hash = ""
 var/game_year = (text2num(time2text(world.realtime, "YYYY")) + 544)
 
 var/datum/air_tunnel/air_tunnel1/SS13_airtunnel = null
-var/going = 1.0
+var/going = 1
 var/master_mode = "extended"//"extended"
 var/secret_force_mode = "secret" // if this is anything but "secret", the secret rotation will forceably choose this mode
 
@@ -93,7 +93,6 @@ var/ooc_allowed = 1
 var/dsay_allowed = 1
 var/dooc_allowed = 1
 var/traitor_scaling = 1
-//var/goonsay_allowed = 0
 var/dna_ident = 1
 var/abandon_allowed = 1
 var/enter_allowed = 1
@@ -210,9 +209,9 @@ var/list/awaydestinations = list()	//a list of landmarks that the warpgate can t
 
 	// MySQL configuration
 
-var/sqladdress = "localhost"
+var/sqladdress = "127.0.0.1"
 var/sqlport = "3306"
-var/sqldb = "tgstation"
+var/sqldb = "white"
 var/sqllogin = "root"
 var/sqlpass = ""
 

@@ -1952,37 +1952,6 @@ datum
 				if(!M) M = holder.my_atom
 				if(prob(50)) M.heal_organ_damage(1,0)
 				M.nutrition += nutriment_factor	// For hunger and fatness
-/*
-				// If overeaten - vomit and fall down
-				// Makes you feel bad but removes reagents and some effect
-				// from your body
-				if (M.nutrition > 650)
-					M.nutrition = rand (250, 400)
-					M.weakened += rand(2, 10)
-					M.jitteriness += rand(0, 5)
-					M.dizziness = max (0, (M.dizziness - rand(0, 15)))
-					M.druggy = max (0, (M.druggy - rand(0, 15)))
-					M.adjustToxLoss(rand(-15, -5)))
-					M.updatehealth()
-*/
-				..()
-				return
-
-		lipozine
-			name = "Lipozine" // The anti-nutriment.
-			id = "lipozine"
-			description = "A chemical compound that causes a powerful fat-burning reaction."
-			reagent_state = LIQUID
-			nutriment_factor = 25 * REAGENTS_METABOLISM
-			color = "#BBEDA4" // rgb: 187, 237, 164
-			overdose = REAGENTS_OVERDOSE
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				M.nutrition -= nutriment_factor
-				M.overeatduration = 0
-				if(M.nutrition < 0)//Prevent from going into negatives.
-					M.nutrition = 0
 				..()
 				return
 
