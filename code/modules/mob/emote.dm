@@ -14,13 +14,13 @@
 	else
 		input = message
 	if(input)
-		message = "<B>[src]</B> [input]"
+		message = "<B>[src]</B> [sanitize(input)]"
 	else
 		return
 
 
 	if (message)
-		message = sanitize(message)
+		//message = sanitize(message)
 		log_emote("[name]/[key] : [message]")
 
  //Hearing gasp and such every five seconds is not good emotes were not global for a reason.
