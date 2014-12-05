@@ -729,7 +729,7 @@
 								if(prob(20))
 									switch(pick(1,2,3))
 										if(1)
-											M.say("[M == src ? "&#255;" : src.name] пёрнул!!")
+											M.say("[M == src ? "&#255;" : src.name] пїЅпїЅпїЅпїЅпїЅ!!")
 										if(2)
 											M.emote("giggle")
 										if(3)
@@ -867,7 +867,7 @@
 			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, elaugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, vomit, twitch_s, whimper,\nwink, yawn. For custom emotes use '*emote.'"
 
 		else
-			message = "<B>[src]</B> [act]"
+			message = "<B>[src]</B> [sanitize(act)]"
 			cooldown = 0
 
 
@@ -875,7 +875,7 @@
 
 
 	if (message)
-		message = sanitize(message)
+		message = sanitize_uni(message)
 		log_emote("[name]/[key] : [message]")
 
  //Hearing gasp and such every five seconds is not good emotes were not global for a reason.
