@@ -179,7 +179,7 @@
 
 		src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
 
-		var/obj/item/weapon/lighter/zippo/L = new /obj/item/weapon/lighter/zippo(src)
+		var/obj/item/weapon/flame/lighter/zippo/L = new /obj/item/weapon/flame/lighter/zippo(src)
 		L.lit = 1
 		src.modules += L
 
@@ -233,3 +233,12 @@
 		src.modules += new /obj/item/weapon/wrench(src) //Is a combat android really going to be stopped by a chair?
 		src.emag = new /obj/item/weapon/gun/energy/lasercannon/cyborg(src)
 		return
+
+//checks whether this item is a module of the robot it is located in.
+/obj/item/proc/is_robot_module()
+	if (!istype(src.loc, /mob/living/silicon/robot))
+		return 0
+
+	var/mob/living/silicon/robot/R = src.loc
+
+	return (src in R.module.modules)

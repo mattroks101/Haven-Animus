@@ -194,7 +194,7 @@
 	icon_state = "johann_erzatz_1"
 	volume = 50
 
-/obj/item/weapon/lighter/zippo/fluff/li_matsuda_1 //mangled: Li Matsuda
+/obj/item/weapon/flame/lighter/zippo/fluff/li_matsuda_1 //mangled: Li Matsuda
 	name = "blue zippo lighter"
 	desc = "A zippo lighter made of some blue metal."
 	icon = 'icons/obj/custom_items.dmi'
@@ -202,7 +202,7 @@
 	icon_on = "bluezippoon"
 	icon_off = "bluezippo"
 
-/obj/item/weapon/lighter/zippo/fluff/michael_guess_1 //Dragor23: Michael Guess
+/obj/item/weapon/flame/lighter/zippo/fluff/michael_guess_1 //Dragor23: Michael Guess
 	name = "engraved lighter"
 	desc = "A golden lighter, engraved with some ornaments and a G."
 	icon = 'icons/obj/custom_items.dmi'
@@ -210,7 +210,7 @@
 	icon_on = "guessipon"
 	icon_off = "guessip"
 
-/obj/item/weapon/lighter/zippo/fluff/riley_rohtin_1 //rawrtaicho: Riley Rohtin
+/obj/item/weapon/flame/lighter/zippo/fluff/riley_rohtin_1 //rawrtaicho: Riley Rohtin
 	name = "Riley's black zippo"
 	desc = "A black zippo lighter, which holds some form of sentimental value."
 	icon = 'icons/obj/custom_items.dmi'
@@ -218,7 +218,7 @@
 	icon_on = "blackzippoon"
 	icon_off = "blackzippo"
 
-/obj/item/weapon/lighter/zippo/fluff/fay_sullivan_1 //furohman: Fay Sullivan
+/obj/item/weapon/flame/lighter/zippo/fluff/fay_sullivan_1 //furohman: Fay Sullivan
 	name = "Graduation Lighter"
 	desc = "A silver engraved lighter with 41 on one side and Tharsis University on the other. The lid reads Fay Sullivan, Cybernetic Engineering, 2541"
 	icon = 'icons/obj/custom_items.dmi'
@@ -226,7 +226,7 @@
 	icon_on = "gradzippoon"
 	icon_off = "gradzippo"
 
-/obj/item/weapon/lighter/zippo/fluff/executivekill_1 //executivekill: Hunter Duke
+/obj/item/weapon/flame/lighter/zippo/fluff/executivekill_1 //executivekill: Hunter Duke
 	name = "Gonzo Fist zippo"
 	desc = "A Zippo lighter with the iconic Gonzo Fist on a matte black finish."
 	icon = 'icons/obj/custom_items.dmi'
@@ -234,7 +234,7 @@
 	icon_on = "gonzozippoon"
 	icon_off = "gonzozippo"
 
-/obj/item/weapon/lighter/zippo/fluff/naples_1 //naples: Russell Vierson
+/obj/item/weapon/flame/lighter/zippo/fluff/naples_1 //naples: Russell Vierson
 	name = "Engraved zippo"
 	desc = "A intricately engraved Zippo lighter."
 	icon = 'icons/obj/custom_items.dmi'

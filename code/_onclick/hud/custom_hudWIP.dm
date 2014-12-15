@@ -545,3 +545,103 @@
 	inventory_shown = 0
 
 	return
+
+
+
+
+/datum/global_hud/New()
+	//420erryday psychedellic colours screen overlay for when you are high
+	druggy = new /obj/screen()
+	druggy.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	druggy.icon_state = "druggy"
+	druggy.layer = 17
+	druggy.mouse_opacity = 0
+
+	//that white blurry effect you get when you eyes are damaged
+	blurry = new /obj/screen()
+	blurry.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	blurry.icon_state = "blurry"
+	blurry.layer = 17
+	blurry.mouse_opacity = 0
+
+	//Green filter for the gasmask
+	g_dither = new /obj/screen()
+	g_dither.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	g_dither.name = "gasmask"
+	g_dither.icon_state = "dither12g"
+	g_dither.layer = 17
+	g_dither.mouse_opacity = 0
+
+	//Red filter for the thermal glasses
+	r_dither = new /obj/screen()
+	r_dither.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	r_dither.name = "thermal glasses"
+	r_dither.icon_state = "ditherred"
+	r_dither.layer = 17
+	r_dither.mouse_opacity = 0
+
+	//Gray filter for the sunglasses
+	gray_dither = new /obj/screen()
+	gray_dither.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	gray_dither.name = "sunglasses"
+	gray_dither.icon_state = "dark32"
+	gray_dither.layer = 17
+	gray_dither.mouse_opacity = 0
+
+	//Yellow filter for the mesons
+	lp_dither = new /obj/screen()
+	lp_dither.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	lp_dither.name = "mesons"
+	lp_dither.icon_state = "ditherlimepulse"
+	lp_dither.layer = 17
+	lp_dither.mouse_opacity = 0
+
+
+	var/obj/screen/O
+	var/i
+	//that nasty looking dither you  get when you're short-sighted
+	vimpaired = newlist(/obj/screen,/obj/screen,/obj/screen,/obj/screen)
+	O = vimpaired[1]
+	O.screen_loc = "1,1 to 5,15"
+	O = vimpaired[2]
+	O.screen_loc = "5,1 to 10,5"
+	O = vimpaired[3]
+	O.screen_loc = "6,11 to 10,15"
+	O = vimpaired[4]
+	O.screen_loc = "11,1 to 15,15"
+
+	//welding mask overlay black/dither
+	darkMask = newlist(/obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen)
+	O = darkMask[1]
+	O.screen_loc = "3,3 to 5,13"
+	O = darkMask[2]
+	O.screen_loc = "5,3 to 10,5"
+	O = darkMask[3]
+	O.screen_loc = "6,11 to 10,13"
+	O = darkMask[4]
+	O.screen_loc = "11,3 to 13,13"
+	O = darkMask[5]
+	O.screen_loc = "1,1 to 15,2"
+	O = darkMask[6]
+	O.screen_loc = "1,3 to 2,15"
+	O = darkMask[7]
+	O.screen_loc = "14,3 to 15,15"
+	O = darkMask[8]
+	O.screen_loc = "3,14 to 13,15"
+
+	for(i = 1, i <= 4, i++)
+		O = vimpaired[i]
+		O.icon_state = "dither50"
+		O.layer = 17
+		O.mouse_opacity = 0
+
+		O = darkMask[i]
+		O.icon_state = "dither50"
+		O.layer = 17
+		O.mouse_opacity = 0
+
+	for(i = 5, i <= 8, i++)
+		O = darkMask[i]
+		O.icon_state = "black"
+		O.layer = 17
+		O.mouse_opacity = 0

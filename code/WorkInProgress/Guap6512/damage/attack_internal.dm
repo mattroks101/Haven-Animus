@@ -18,8 +18,8 @@
 		user << "\red You're going to need to remove the eye covering first."
 		return
 
-	if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/slime))//Aliens don't have eyes./N     slimes also don't have eyes!
-		user << "\red You cannot locate any eyes on this creature!"
+	if(!M.has_eyes())
+		user << "\red You cannot locate any eyes on [M]!"
 		return
 
 	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
@@ -46,7 +46,7 @@
 			"\red You stab yourself in the eyes with [src]!" \
 		)
 	if(istype(M, /mob/living/carbon/human))
-		var/datum/organ/internal/eyes/eyes = H.internal_organs["eyes"]
+		var/datum/organ/internal/eyes/eyes = H.internal_organs_by_name["eyes"]
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
 			if(M.stat != 2)
@@ -78,7 +78,7 @@
 
 	var/get_damage = src.force-src.force/3
 	var/mob/living/carbon/human/H = M
-	var/datum/organ/internal/target_o = H.internal_organs[pick("liver", "lungs", "heart")]
+	var/datum/organ/internal/target_o = H.internal_organs_by_name[pick("liver", "lungs", "heart")]
 
 	if(istype(H) && ( \
 			(H.wear_suit && H.wear_suit.body_parts_covered & LOWER_TORSO) || \

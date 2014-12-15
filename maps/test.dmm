@@ -68,7 +68,7 @@
 "bp" = (/turf/simulated/wall,/area/bridge/meeting_room)
 "bq" = (/turf/simulated/floor,/area/bridge/meeting_room)
 "br" = (/obj/machinery/portable_atmospherics/canister/toxins,/turf/simulated/floor,/area/bridge/meeting_room)
-"bs" = (/obj/item/weapon/lighter/zippo,/turf/simulated/floor,/area/bridge/meeting_room)
+"bs" = (/obj/item/weapon/flame/lighter/zippo,/turf/simulated/floor,/area/bridge/meeting_room)
 "bt" = (/obj/multiz/ladder{icon_state = "ladderup"},/turf/simulated/floor,/area/bridge/meeting_room)
 "bu" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor,/area/bridge/meeting_room)
 "bv" = (/obj/effect/landmark/zcontroller{down = 0; down_target = 0; up = 1; up_target = 2},/turf/space,/area)

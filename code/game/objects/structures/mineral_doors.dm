@@ -155,12 +155,6 @@
 				CheckHardness()
 		return
 
-	proc/update_nearby_tiles(need_rebuild) //Copypasta from airlock code
-		if(!air_master)
-			return 0
-		air_master.AddTurfToUpdate(get_turf(src))
-		return 1
-
 /obj/structure/mineral_door/iron
 	mineralType = "metal"
 	hardness = 3
@@ -204,19 +198,14 @@
 
 	proc/TemperatureAct(temperature)
 		for(var/turf/simulated/floor/target_tile in range(2,loc))
-
-			var/datum/gas_mixture/napalm = new
-
 			var/toxinsToDeduce = temperature/10
+			target_tile.assume_gas("plasma", toxinsToDeduce, 200+T0C)
 
-			napalm.toxins = toxinsToDeduce
-			napalm.temperature = 200+T0C
-
-			target_tile.assume_air(napalm)
 			spawn (0) target_tile.hotspot_expose(temperature, 400)
 
 			hardness -= toxinsToDeduce/100
 			CheckHardness()
+
 
 /obj/structure/mineral_door/transparent/diamond
 	mineralType = "diamond"
@@ -260,7 +249,9 @@
 	var/close_delay = 100
 
 	TryToSwitchState(atom/user)
-		if(isalien(user))
+
+		var/mob/living/carbon/M = user
+		if(istype(M) && locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
 			return ..()
 
 	Open()

@@ -229,11 +229,11 @@
 		\[hr\] : Adds a horizontal rule.
 	</BODY></HTML>"}, "window=paper_help")
 
-/obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/lighter/P, mob/user)
+/obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/flame/lighter/P, mob/user)
 	var/class = "<span class='warning'>"
 
 	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/weapon/lighter/zippo))
+		if(istype(P, /obj/item/weapon/flame/lighter/zippo))
 			class = "<span class='rose'>"
 
 		user.visible_message("[class][user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!", \
@@ -337,7 +337,7 @@
 
 		user << "<span class='notice'>You stamp the paper with your rubber stamp.</span>"
 
-	else if(istype(P, /obj/item/weapon/lighter))
+	else if(istype(P, /obj/item/weapon/flame/lighter))
 		burnpaper(P, user)
 
 	add_fingerprint(user)

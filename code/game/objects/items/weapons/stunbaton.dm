@@ -6,6 +6,7 @@
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	force = 15
+	edge = 0
 	throwforce = 7
 	w_class = 3
 	var/charges = 10

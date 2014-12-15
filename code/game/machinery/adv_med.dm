@@ -327,7 +327,7 @@
 							dat += "<td>[e.display_name]</td><td>-</td><td>-</td><td>Not Found</td>"
 						dat += "</tr>"
 					for(var/organ_name in occupant.internal_organs)
-						var/datum/organ/internal/i = occupant.internal_organs[organ_name]
+						var/datum/organ/internal/i = occupant.internal_organs_by_name[organ_name]
 						var/mech = ""
 						if(i.robotic == 1)
 							mech = "Assisted:"

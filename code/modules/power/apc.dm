@@ -108,6 +108,7 @@
 		init()
 	else
 		area = src.loc.loc:master
+		area.apc |= src
 		opened = 1
 		operating = 0
 		name = "[area.name] APC"
@@ -1025,8 +1026,12 @@
 	if(terminal && terminal.powernet)
 		perapc = terminal.powernet.perapc
 
-	//if(debug)
-	//	world.log << "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light] - Longterm: [longtermpower]"
+/*	if(debug)
+		log_debug( "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]")
+
+		if(area.powerupdate)
+			log_debug("power update in [area.name] / [name]")
+*/
 
 	if(cell && !shorted)
 

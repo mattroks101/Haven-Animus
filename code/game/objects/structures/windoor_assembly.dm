@@ -292,11 +292,3 @@ obj/structure/windoor_assembly/Del()
 
 	update_icon()
 	return
-
-/obj/structure/windoor_assembly/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-
-	air_master.AddTurfToUpdate(loc)
-
-	return 1

@@ -6,6 +6,7 @@
 
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
 #define ONE_ATMOSPHERE		101.325	//kPa
+#define IDEAL_GAS_ENTROPY_CONSTANT 	1164	//(mol^3 * s^3) / (kg^3 * L). Equal to (4*pi/(avrogadro's number * planck's constant)^2)^(3/2) / (avrogadro's number * 1000 Liters per m^3).
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
@@ -19,6 +20,9 @@
 #define MOLES_PLASMA_VISIBLE	0.7 //Moles in a standard cell after which plasma is visible
 #define MIN_PLASMA_DAMAGE 1
 #define MAX_PLASMA_DAMAGE 10
+
+#define MIN_TOXIN_DAMAGE 1	//This and MAX_TOXIN_DAMAGE are for when a mob breathes poisonous air
+#define MAX_TOXIN_DAMAGE 10	//This and MIN_TOXIN_DAMAGE are for when a mob breathes poisonous air
 
 #define BREATH_VOLUME 0.5	//liters in a normal breath
 #define BREATH_MOLES (ONE_ATMOSPHERE * BREATH_VOLUME /(T20C*R_IDEAL_GAS_EQUATION))
@@ -44,20 +48,20 @@
 #define BODYTEMP_HEAT_DAMAGE_LIMIT 360.15 // The limit the human body can take before it starts taking damage from heat.
 #define BODYTEMP_COLD_DAMAGE_LIMIT 260.15 // The limit the human body can take before it starts taking damage from coldness.
 
-#define SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
-#define SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
-#define SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE 5000	//These need better heat protect
-#define FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE 30000 //what max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
-#define FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE 30000 //for fire helmet quality items (red and white hardhats)
-#define HELMET_MIN_COLD_PROTECITON_TEMPERATURE 160	//For normal helmets
-#define HELMET_MAX_HEAT_PROTECITON_TEMPERATURE 600	//For normal helmets
-#define ARMOR_MIN_COLD_PROTECITON_TEMPERATURE 160	//For armor
-#define ARMOR_MAX_HEAT_PROTECITON_TEMPERATURE 600	//For armor
+#define SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
+#define SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
+#define SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE 5000	//These need better heat protect
+#define FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE 30000 //what max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
+#define FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 30000 //for fire helmet quality items (red and white hardhats)
+#define HELMET_MIN_COLD_PROTECTION_TEMPERATURE 160	//For normal helmets
+#define HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 600	//For normal helmets
+#define ARMOR_MIN_COLD_PROTECTION_TEMPERATURE 160	//For armor
+#define ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE 600	//For armor
 
-#define GLOVES_MIN_COLD_PROTECITON_TEMPERATURE 2.0	//For some gloves (black and)
-#define GLOVES_MAX_HEAT_PROTECITON_TEMPERATURE 1500		//For some gloves
-#define SHOE_MIN_COLD_PROTECITON_TEMPERATURE 2.0	//For gloves
-#define SHOE_MAX_HEAT_PROTECITON_TEMPERATURE 1500		//For gloves
+#define GLOVES_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For some gloves (black and)
+#define GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For some gloves
+#define SHOE_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For gloves
+#define SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For gloves
 
 
 #define PRESSURE_DAMAGE_COEFFICIENT 8 //The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE
@@ -133,6 +137,11 @@
 #define T20C 293.15					// 20degC
 #define TCMB 2.7					// -270.3degC
 
+//XGM gas flags
+#define XGM_GAS_FUEL 1
+#define XGM_GAS_OXIDIZER 2
+#define XGM_GAS_CONTAMINANT 4
+
 //Used to be used by FEA
 //var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference when atmos wants to remove excess heat.
 
@@ -202,6 +211,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HEADCOVERSMOUTH		2048
 
 #define NOSLIP		1024 		//prevents from slipping on wet floors, in space etc
+#define THICKMATERIAL 1024		//From /tg: prevents syringes, parapens and hypos if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
 
 #define OPENCONTAINER	4096	// is an open container for chemistry purposes
 
@@ -229,6 +239,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HIDESUITSTORAGE	2	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEJUMPSUIT	4	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDESHOES		8	//APPLIES ONLY TO THE EXTERIOR SUIT!!
+#define HIDETAIL 		16	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEMASK	1	//APPLIES ONLY TO HELMETS/MASKS!!
 #define HIDEEARS	2	//APPLIES ONLY TO HELMETS/MASKS!! (ears means headsets and such)
 #define HIDEEYES	4	//APPLIES ONLY TO HELMETS/MASKS!! (eyes means glasses)
@@ -452,6 +463,8 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define CANWEAKEN	2
 #define CANPARALYSE	4
 #define CANPUSH		8
+#define LEAPING		16
+#define PASSEMOTES	32      //Mob has a cortical borer or holders inside of it that need to see emotes.
 #define GODMODE		4096
 #define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
 #define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
@@ -478,7 +491,7 @@ var/list/liftable_structures = list(\
 
 	/obj/machinery/autolathe, \
 	/obj/machinery/constructable_frame, \
-	/obj/machinery/hydroponics, \
+	/obj/machinery/portable_atmospherics/hydroponics, \
 	/obj/machinery/computer, \
 	/obj/machinery/optable, \
 	/obj/structure/dispenser, \
@@ -729,24 +742,23 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define NO_BREATHE 2
 #define NO_SCAN 4
 #define NO_PAIN 8
+#define NO_SLIP 16
+#define NO_POISON 32
 
-#define HAS_SKIN_TONE 16
-#define HAS_LIPS 32
-#define HAS_UNDERWEAR 64
-#define HAS_TAIL 128
-
-#define IS_SLOW 256
-#define IS_PLANT 512
-#define IS_WHITELISTED 1024
-
-#define RAD_ABSORB 2048
-#define REQUIRE_LIGHT 4096
-
-#define IS_SYNTHETIC 8192
+#define HAS_SKIN_TONE 64
+#define HAS_SKIN_COLOR 128
+#define HAS_LIPS 256
+#define HAS_UNDERWEAR 512
+#define IS_PLANT 1024
+#define IS_WHITELISTED 2048
+#define IS_SYNTHETIC 4096
 
 //Language flags.
-#define WHITELISTED 1  // Language is available if the speaker is whitelisted.
-#define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+#define WHITELISTED 1  		// Language is available if the speaker is whitelisted.
+#define RESTRICTED 2   		// Language can only be accquired by spawning or an admin.
+#define NONVERBAL 4    		// Language has a significant non-verbal component. Speech is garbled without line-of-sight
+#define SIGNLANG 8     		// Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
+#define HIVEMIND 16         // Broadcast to all mobs with this language.
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
@@ -761,3 +773,54 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define COLOR_YELLOW 	"#FFFF00"
 #define COLOR_ORANGE 	"#FF9900"
 #define COLOR_WHITE 	"#FFFFFF"
+
+/*
+	Germs and infections
+*/
+
+#define GERM_LEVEL_AMBIENT		110		//maximum germ level you can reach by standing still
+#define GERM_LEVEL_MOVE_CAP		200		//maximum germ level you can reach by running around
+
+#define INFECTION_LEVEL_ONE		100
+#define INFECTION_LEVEL_TWO		500
+#define INFECTION_LEVEL_THREE	1000
+
+//computer3 error codes, move lower in the file when it passes dev -Sayu
+ #define PROG_CRASH      1  // Generic crash
+ #define MISSING_PERIPHERAL  2  // Missing hardware
+ #define BUSTED_ASS_COMPUTER  4  // Self-perpetuating error.  BAC will continue to crash forever.
+ #define MISSING_PROGRAM    8  // Some files try to automatically launch a program.  This is that failing.
+ #define FILE_DRM      16  // Some files want to not be copied/moved.  This is them complaining that you tried.
+ #define NETWORK_FAILURE  32
+
+//Some on_mob_life() procs check for alien races.
+#define IS_DIONA 1
+#define IS_VOX 2
+#define IS_SKRELL 3
+#define IS_UNATHI 4
+#define IS_XENOS 5
+
+
+/*
+	Atmos Machinery
+*/
+#define MAX_SIPHON_FLOWRATE		2500	//L/s	This can be used to balance how fast a room is siphoned. Anything higher than CELL_VOLUME has no effect.
+#define MAX_SCRUBBER_FLOWRATE	200		//L/s	Max flow rate when scrubbing from a turf.
+
+//These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences.
+//Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
+#define ATMOS_PUMP_EFFICIENCY	2.5
+#define ATMOS_FILTER_EFFICIENCY	2.5
+
+//will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
+#define MINUMUM_MOLES_TO_PUMP	0.01
+#define MINUMUM_MOLES_TO_FILTER	0.1
+
+//The flow rate/effectiveness of various atmos devices is limited by their internal volume, so for many atmos devices these will control maximum flow rates in L/s
+#define ATMOS_DEFAULT_VOLUME_PUMP	200	//L
+#define ATMOS_DEFAULT_VOLUME_FILTER	200	//L
+#define ATMOS_DEFAULT_VOLUME_MIXER	200	//L
+#define ATMOS_DEFAULT_VOLUME_PIPE	70	//L
+
+var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+

@@ -18,6 +18,8 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.2
 	species_restricted = null //Workaround for spawning alien ninja without internals.
+	flags_inv = HIDEJUMPSUIT|HIDETAIL
+	supporting_limbs = list()
 
 		//Important parts of the suit.
 	var/mob/living/carbon/affecting = null//The wearer.

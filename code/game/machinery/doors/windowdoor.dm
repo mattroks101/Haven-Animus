@@ -13,15 +13,6 @@
 	explosion_resistance = 5
 	air_properties_vary_with_direction = 1
 
-
-/obj/machinery/door/window/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-
-	air_master.AddTurfToUpdate(get_turf(src))
-
-	return 1
-
 /obj/machinery/door/window/New()
 	..()
 
@@ -169,17 +160,6 @@
 
 /obj/machinery/door/window/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
-
-/obj/machinery/door/window/attack_paw(mob/user as mob)
-	if(istype(user, /mob/living/carbon/alien/humanoid) || istype(user, /mob/living/carbon/slime/adult))
-		if(src.operating)
-			return
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		visible_message("\red <B>[user] smashes against the [src.name].</B>", 1)
-		take_damage(25)
-	else
-		return src.attack_hand(user)
-
 
 /obj/machinery/door/window/attack_hand(mob/user as mob)
 	return src.attackby(user, user)

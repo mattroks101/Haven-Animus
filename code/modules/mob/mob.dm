@@ -23,13 +23,13 @@
 
 	var/t = "\blue Coordinates: [x],[y] \n"
 	t+= "\red Temperature: [environment.temperature] \n"
-	t+= "\blue Nitrogen: [environment.nitrogen] \n"
-	t+= "\blue Oxygen: [environment.oxygen] \n"
-	t+= "\blue Plasma : [environment.toxins] \n"
-	t+= "\blue Carbon Dioxide: [environment.carbon_dioxide] \n"
-	for(var/datum/gas/trace_gas in environment.trace_gases)
+	t+= "\blue Nitrogen: [environment.gas["nitrogen"]] \n"
+	t+= "\blue Oxygen: [environment.gas["oxygen"]] \n"
+	t+= "\blue Plasma : [environment.gas["plasma"]] \n"
+	t+= "\blue Carbon Dioxide: [environment.gas["carbon_dioxide"]] \n"
+/*	for(var/datum/gas/trace_gas in environment.trace_gases)
 		usr << "\blue [trace_gas.type]: [trace_gas.moles] \n"
-
+*/
 	usr.show_message(t, 1)
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -560,6 +560,12 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/is_active()
 	return (0 >= usr.stat)
+
+/mob/proc/is_mechanical()
+	if(mind && (mind.assigned_role == "Cyborg" || mind.assigned_role == "AI"))
+		return 1
+	return istype(src, /mob/living/silicon) || get_species() == "Machine"
+
 
 /mob/proc/see(message)
 	if(!is_active())

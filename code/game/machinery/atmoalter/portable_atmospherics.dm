@@ -26,7 +26,7 @@
 			if(port)
 				connect(port)
 				update_icon()
-	
+
 	process()
 		if(!connected_port) //only react when pipe_network will ont it do it for you
 			//Allow for reactions
@@ -82,6 +82,14 @@
 
 			return 1
 
+/obj/machinery/portable_atmospherics/proc/update_connected_network()
+	if(!connected_port)
+		return
+
+	var/datum/pipe_network/network = connected_port.return_network(src)
+	if (network)
+		network.update = 1
+
 /obj/machinery/portable_atmospherics/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	var/obj/icon = src
 	if ((istype(W, /obj/item/weapon/tank) && !( src.destroyed )))
@@ -118,14 +126,14 @@
 		visible_message("\red [user] has used [W] on \icon[icon]")
 		if(air_contents)
 			var/pressure = air_contents.return_pressure()
-			var/total_moles = air_contents.total_moles()
+			var/total_moles = air_contents.total_moles
 
 			user << "\blue Results of analysis of \icon[icon]"
 			if (total_moles>0)
-				var/o2_concentration = air_contents.oxygen/total_moles
-				var/n2_concentration = air_contents.nitrogen/total_moles
-				var/co2_concentration = air_contents.carbon_dioxide/total_moles
-				var/plasma_concentration = air_contents.toxins/total_moles
+				var/o2_concentration = air_contents.gas["oxygen"]/total_moles
+				var/n2_concentration = air_contents.gas["nitrogen"]/total_moles
+				var/co2_concentration = air_contents.gas["carbon_dioxide"]/total_moles
+				var/plasma_concentration = air_contents.gas["plasma"]/total_moles
 
 				var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
 
@@ -144,3 +152,50 @@
 		return
 
 	return
+
+/obj/machinery/portable_atmospherics/powered
+	var/power_rating
+	var/power_losses
+	var/last_power_draw = 0
+	var/obj/item/weapon/cell/cell
+
+/obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/cell))
+		if(cell)
+			user << "There is already a power cell installed."
+			return
+
+		var/obj/item/weapon/cell/C = I
+
+		user.drop_item()
+		C.add_fingerprint(user)
+		cell = C
+		C.loc = src
+		user.visible_message("\blue [user] opens the panel on [src] and inserts [C].", "\blue You open the panel on [src] and insert [C].")
+		return
+
+	if(istype(I, /obj/item/weapon/screwdriver))
+		if(!cell)
+			user << "\red There is no power cell installed."
+			return
+
+		user.visible_message("\blue [user] opens the panel on [src] and removes [cell].", "\blue You open the panel on [src] and remove [cell].")
+		cell.add_fingerprint(user)
+		cell.loc = src.loc
+		cell = null
+		return
+
+	..()
+
+/obj/machinery/portable_atmospherics/proc/log_open()
+	if(air_contents.gas.len == 0)
+		return
+
+	var/gases = ""
+	for(var/gas in air_contents.gas)
+		if(gases)
+			gases += ", [gas]"
+		else
+			gases = gas
+	log_admin("[usr] ([usr.ckey]) opened '[src.name]' containing [gases].")
+	message_admins("[usr] ([usr.ckey]) opened '[src.name]' containing [gases].")

@@ -23,7 +23,7 @@ datum/event/organ_failure/start()
 
 		// Bruise one of their organs
 		var/O = pick(C.internal_organs)
-		var/datum/organ/internal/I = C.internal_organs[O]
+		var/datum/organ/internal/I = C.internal_organs_by_name[O]
 		I.damage = I.min_bruised_damage
 		candidates.Remove(C)
 		severity--

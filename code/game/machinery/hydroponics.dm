@@ -1,6 +1,6 @@
 #define HYDRO_SPEED_MULTIPLIER 0.25
 
-/obj/machinery/hydroponics
+/obj/machinery/portable_atmospherics/hydroponics
 	name = "hydroponics tray"
 	icon = 'icons/obj/hydroponics.dmi'
 	icon_state = "hydrotray3"
@@ -23,7 +23,7 @@
 	var/harvest = 0 //Ready to harvest?
 	var/obj/item/seeds/myseed = null // The currently planted seed
 
-/obj/machinery/hydroponics/bullet_act(var/obj/item/projectile/Proj) //Works with the Somatoray to modify plant variables.
+/obj/machinery/portable_atmospherics/hydroponics/bullet_act(var/obj/item/projectile/Proj) //Works with the Somatoray to modify plant variables.
 	if(istype(Proj ,/obj/item/projectile/energy/floramut))
 		if(planted)
 			mutate()
@@ -38,7 +38,7 @@
 		..()
 		return
 
-/obj/machinery/hydroponics/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+/obj/machinery/portable_atmospherics/hydroponics/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 
 	if(istype(mover) && mover.checkpass(PASSTABLE))
@@ -766,7 +766,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 		anchored = !anchored
 		user << "You [anchored ? "wrench" : "unwrench"] \the [src]."
 	else if(istype(O, /obj/item/weapon/shovel))
-		if(istype(src, /obj/machinery/hydroponics/soil))
+		if(istype(src, /obj/machinery/portable_atmospherics/hydroponics/soil))
 			user << "You clear up the [src]!"
 			del(src)
 	else if(istype(O, /obj/item/apiary))
@@ -784,7 +784,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	return
 
 
-/obj/machinery/hydroponics/attack_hand(mob/user as mob)
+/obj/machinery/portable_atmospherics/hydroponics/attack_hand(mob/user as mob)
 	if(istype(usr,/mob/living/silicon))		//How does AI know what plant is?
 		return
 	if(harvest)
@@ -814,7 +814,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
 /obj/item/seeds/proc/harvest(mob/user = usr)
 	var/produce = text2path(productname)
-	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	var/obj/machinery/portable_atmospherics/hydroponics/parent = loc //for ease of access
 	var/t_amount = 0
 
 	while ( t_amount < (yield * parent.yieldmod ))
@@ -834,7 +834,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	parent.update_tray()
 
 /obj/item/seeds/grassseed/harvest(mob/user = usr)
-	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	var/obj/machinery/portable_atmospherics/hydroponics/parent = loc //for ease of access
 	var/t_yield = round(yield*parent.yieldmod)
 
 	if(t_yield > 0)
@@ -845,7 +845,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
 /obj/item/seeds/gibtomato/harvest(mob/user = usr)
 	var/produce = text2path(productname)
-	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	var/obj/machinery/portable_atmospherics/hydroponics/parent = loc //for ease of access
 	var/t_amount = 0
 
 	while ( t_amount < (yield * parent.yieldmod ))
@@ -866,7 +866,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
 /obj/item/seeds/nettleseed/harvest(mob/user = usr)
 	var/produce = text2path(productname)
-	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	var/obj/machinery/portable_atmospherics/hydroponics/parent = loc //for ease of access
 	var/t_amount = 0
 
 	while ( t_amount < (yield * parent.yieldmod ))
@@ -886,7 +886,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
 /obj/item/seeds/deathnettleseed/harvest(mob/user = usr) //isn't a nettle subclass yet, so
 	var/produce = text2path(productname)
-	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	var/obj/machinery/portable_atmospherics/hydroponics/parent = loc //for ease of access
 	var/t_amount = 0
 
 	while ( t_amount < (yield * parent.yieldmod ))
@@ -906,7 +906,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
 /obj/item/seeds/eggyseed/harvest(mob/user = usr)
 	var/produce = text2path(productname)
-	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	var/obj/machinery/portable_atmospherics/hydroponics/parent = loc //for ease of access
 	var/t_amount = 0
 
 	while ( t_amount < (yield * parent.yieldmod ))
@@ -915,7 +915,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
 	parent.update_tray()
 
-/obj/machinery/hydroponics/proc/update_tray(mob/user = usr)
+/obj/machinery/portable_atmospherics/hydroponics/proc/update_tray(mob/user = usr)
 	harvest = 0
 	lastproduce = age
 	if((yieldmod * myseed.yield) <= 0 || istype(myseed,/obj/item/seeds/replicapod))
@@ -929,7 +929,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	updateicon()
 
 ///////////////////////////////////////////////////////////////////////////////
-/obj/machinery/hydroponics/soil //Not actually hydroponics at all! Honk!
+/obj/machinery/portable_atmospherics/hydroponics/soil //Not actually hydroponics at all! Honk!
 	name = "soil"
 	icon = 'icons/obj/hydroponics.dmi'
 	icon_state = "soil"

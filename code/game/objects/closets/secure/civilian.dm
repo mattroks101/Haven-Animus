@@ -126,5 +126,5 @@
 		new /obj/item/weapon/storage/bible(src)
 		new /obj/item/device/pda/chaplain(src)
 		new /obj/item/device/radio/headset(src)
-		new /obj/item/weapon/candlepack(src)
-		new /obj/item/weapon/candlepack(src)
+		new /obj/item/weapon/flame/candlepack(src)
+		new /obj/item/weapon/flame/candlepack(src)

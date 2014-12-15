@@ -192,10 +192,10 @@
 		return
 
 	..()
-	
+
 	nanomanager.update_uis(src) // Update all NanoUIs attached to src
-	
-	
+
+
 
 /obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
@@ -220,8 +220,8 @@
 	data["minReleasePressure"] = round(ONE_ATMOSPHERE/10)
 	data["maxReleasePressure"] = round(10*ONE_ATMOSPHERE)
 	data["valveOpen"] = valve_open ? 1 : 0
-	
-	data["hasHoldingTank"] = holding ? 1 : 0	
+
+	data["hasHoldingTank"] = holding ? 1 : 0
 	if (holding)
 		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure()))
 
@@ -240,10 +240,10 @@
 
 /obj/machinery/portable_atmospherics/canister/Topic(href, href_list)
 
-	//Do not use "if(..()) return" here, canisters will stop working in unpowered areas like space or on the derelict.	
+	//Do not use "if(..()) return" here, canisters will stop working in unpowered areas like space or on the derelict.
 	if (!istype(src.loc, /turf))
 		return 0
-		
+
 	if(href_list["toggle"])
 		if (valve_open)
 			if (holding)
@@ -287,18 +287,17 @@
 				src.canister_color = colors[label]
 				src.icon_state = colors[label]
 				src.name = "Canister: [label]"
-	
+
 	src.add_fingerprint(usr)
 	update_icon()
-	
+
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/toxins/New()
 
 	..()
 
-	src.air_contents.toxins = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-	air_contents.update_values()
+	src.air_contents.adjust_gas("plasma", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
 
 	src.update_icon()
 	return 1
@@ -307,8 +306,7 @@
 
 	..()
 
-	src.air_contents.oxygen = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-	air_contents.update_values()
+	src.air_contents.adjust_gas("oxygen", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
 	src.update_icon()
 	return 1
 
@@ -316,10 +314,7 @@
 
 	..()
 
-	var/datum/gas/sleeping_agent/trace_gas = new
-	air_contents.trace_gases += trace_gas
-	trace_gas.moles = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-	air_contents.update_values()
+	air_contents.adjust_gas("sleeping_agent", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
 
 	src.update_icon()
 	return 1
@@ -327,8 +322,7 @@
 //Dirty way to fill room with gas. However it is a bit easier to do than creating some floor/engine/n2o -rastaf0
 /obj/machinery/portable_atmospherics/canister/sleeping_agent/roomfiller/New()
 	..()
-	var/datum/gas/sleeping_agent/trace_gas = air_contents.trace_gases[1]
-	trace_gas.moles = 9*4000
+	air_contents.gas["sleeping_agent"] = 9*4000
 	spawn(10)
 		var/turf/simulated/location = src.loc
 		if (istype(src.loc))
@@ -342,8 +336,7 @@
 
 	..()
 
-	src.air_contents.nitrogen = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-	air_contents.update_values()
+	src.air_contents.adjust_gas("nitrogen", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
 
 	src.update_icon()
 	return 1
@@ -351,9 +344,7 @@
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/New()
 
 	..()
-	src.air_contents.carbon_dioxide = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-	air_contents.update_values()
-
+	src.air_contents.adjust_gas("carbon_dioxide", (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
 	src.update_icon()
 	return 1
 
@@ -361,9 +352,7 @@
 /obj/machinery/portable_atmospherics/canister/air/New()
 
 	..()
-	src.air_contents.oxygen = (O2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-	src.air_contents.nitrogen = (N2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-	air_contents.update_values()
+	src.air_contents.adjust_multi("oxygen", (O2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature), "nitrogen", (N2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
 
 	src.update_icon()
 	return 1

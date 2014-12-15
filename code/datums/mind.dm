@@ -1206,7 +1206,7 @@ datum/mind
 /mob/living/carbon/slime/mind_initialize()
 	..()
 	mind.assigned_role = "slime"
-
+/*
 //XENO
 /mob/living/carbon/alien/mind_initialize()
 	..()
@@ -1228,6 +1228,7 @@ datum/mind
 	..()
 	mind.special_role = "Sentinel"
 	//XENO LARVA
+*/
 /mob/living/carbon/alien/larva/mind_initialize()
 	..()
 	mind.special_role = "Larva"

@@ -109,6 +109,8 @@
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 	force = 5
+	sharp = 1
+	edge = 1
 	w_class = 4.0
 	slot_flags = SLOT_BACK
 	force_unwielded = 10
@@ -149,6 +151,7 @@
 	w_class = 2.0
 	force_unwielded = 3
 	sharp = 1
+	edge = 1
 	force_wielded = 30
 	wieldsound = 'sound/weapons/saberon.ogg'
 	unwieldsound = 'sound/weapons/saberoff.ogg'
@@ -180,19 +183,20 @@
 
 //Ghetto-weapons
 
-//Spears here
-
+//spears, bay edition
 /obj/item/weapon/twohanded/spear
 	icon_state = "spearglass0"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	force = 10
+	force = 14
 	w_class = 4.0
 	slot_flags = SLOT_BACK
+	force_unwielded = 14
+	force_wielded = 22 // Was 13, Buffed - RR
+	throwforce = 20
+	throw_speed = 3
+	edge = 1
 	sharp = 1
-	force_unwielded = 10
-	force_wielded = 18 // Was 13, Buffed - RR
-	throwforce = 15
 	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")

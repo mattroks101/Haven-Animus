@@ -5,6 +5,8 @@
 	var/maxHealth = 100 //Maximum health that should be possible.
 	var/health = 100 	//A mob's health
 
+	var/hud_updateflag = 0
+
 	//Damage related vars, NOTE: THESE SHOULD ONLY BE MODIFIED BY PROCS
 	var/bruteloss = 0.0	//Brutal damage caused by brute force (punching, being clubbed by a toolbox ect... this also accounts for pressure damage)
 	var/oxyloss = 0.0	//Oxygen depravation damage (no air in lungs)
@@ -39,3 +41,13 @@
 
 	var/on_fire = 0 //The "Are we on fire?" var
 	var/fire_stacks = 0 //Tracks how many stacks of fire we have on, max is usually 20
+
+	// Putting these here for attack_animal().
+
+	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
+	var/melee_damage_lower = 0
+	var/melee_damage_upper = 0
+	var/attacktext = "attacks"
+	var/attack_sound = null
+	var/friendly = "nuzzles" //If the mob does no damage with it's attack
+	var/wall_smash = 0 //if they can smash walls

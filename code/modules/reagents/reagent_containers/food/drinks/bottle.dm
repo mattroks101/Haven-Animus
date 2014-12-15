@@ -125,6 +125,8 @@
 	throw_range = 5
 	item_state = "beer"
 	attack_verb = list("slashed", "attacked")
+	sharp = 1
+	edge = 0
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
 /obj/item/weapon/broken_bottle/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)

@@ -87,7 +87,6 @@
 	var/screen = AALARM_SCREEN_MAIN
 	var/area_uid
 	var/area/alarm_area
-	var/danger_level = 0
 	var/buildstage = 2 //2 is built, 1 is building, 0 is frame.
 	var/safe_old = 2
 
@@ -95,6 +94,14 @@
 	var/regulating_temperature = 0
 
 	var/datum/radio_frequency/radio_connection
+
+	var/danger_level = 0
+	var/pressure_dangerlevel = 0
+	var/oxygen_dangerlevel = 0
+	var/co2_dangerlevel = 0
+	var/plasma_dangerlevel = 0
+	var/temperature_dangerlevel = 0
+	var/other_dangerlevel = 0
 
 	var/list/TLV = list()
 	var/const/ALERT_ATMOSPHERE_L = ONE_ATMOSPHERE*0.9
@@ -216,7 +223,7 @@
 			"You hear a click as a faint electronic humming stops.")
 
 	var/old_level = danger_level
-	danger_level = overall_danger_level()
+	danger_level = overall_danger_level(environment)
 
 	if (old_level != danger_level)
 		refresh_danger_level()
@@ -240,34 +247,32 @@
 			remote_control = 1
 
 
-/obj/machinery/alarm/proc/overall_danger_level()
-	var/turf/simulated/location = loc
-	if(!istype(location))	return//returns if loc is not simulated
-
-	var/datum/gas_mixture/environment = location.return_air()
-
+/obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
 	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
 	var/environment_pressure = environment.return_pressure()
-	var/other_moles = 0.0
-	for(var/datum/gas/G in environment.trace_gases)
-		other_moles+=G.moles
+	//var/other_moles = 0.0
+	////for(var/datum/gas/G in environment.trace_gases)
+	//	other_moles+=G.moles
 
-	var/pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
-	var/oxygen_dangerlevel = get_danger_level(environment.oxygen*partial_pressure, TLV["oxygen"])
-	var/co2_dangerlevel = get_danger_level(environment.carbon_dioxide*partial_pressure, TLV["carbon dioxide"])
-	var/plasma_dangerlevel = get_danger_level(environment.toxins*partial_pressure, TLV["plasma"])
-	var/temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
-	var/other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
+	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
+	oxygen_dangerlevel = get_danger_level(environment.gas["oxygen"]*partial_pressure, TLV["oxygen"])
+	co2_dangerlevel = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, TLV["carbon dioxide"])
+	plasma_dangerlevel = get_danger_level(environment.gas["plasma"]*partial_pressure, TLV["plasma"])
+	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
+	//other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
 
 	return max(
 		pressure_dangerlevel,
 		oxygen_dangerlevel,
 		co2_dangerlevel,
 		plasma_dangerlevel,
-		other_dangerlevel,
+		//other_dangerlevel,
 		temperature_dangerlevel
 		)
+
 //Lockdown shit
+	var/turf/simulated/location = loc
+	if(!istype(location))	return//returns if loc is not simulated
 	var/area/A = get_area(location)
 	var/safe = 2
 	var/alert_info = 0
@@ -277,7 +282,7 @@
 		if((environment_pressure < UNSAFE_ATMOSPHERE_L) || (environment_pressure > UNSAFE_ATMOSPHERE_U))
 			safe = 0
 
-	if(safe && ((environment.oxygen < ALERT_O2_L) || (environment.oxygen > ALERT_O2_U)))
+	if(safe && ((environment.gas["oxygen"] < ALERT_O2_L) || (environment.gas["oxygen"] > ALERT_O2_U)))
 		//Oxygen Levels Sensor
 		alert_info = 2
 
@@ -285,11 +290,11 @@
 		//Temperature Sensor
 		alert_info = 3
 
-	if(safe && (environment.carbon_dioxide > 0.05))
+	if(safe && (environment.gas["carbon_dioxide"] > 0.05))
 		//CO2 Levels Sensor
 		alert_info = 4
 
-	if(safe && (environment.toxins > 1))
+	if(safe && (environment.gas["plasma"] > 1))
 		//Plasma Levels Sensor
 		alert_info = 5
 
@@ -739,11 +744,10 @@
 		return "<html><head><title>\The [src]</title></head><body>[return_status()]<hr>[rcon_text()]<hr><i>(Swipe ID card to unlock interface)</i></body></html>"
 	else
 		return "<html><head><title>\The [src]</title></head><body>[return_status()]<hr>[rcon_text()]<hr>[return_controls()]</body></html>"
-
 /obj/machinery/alarm/proc/return_status()
 	var/turf/location = get_turf(src)
 	var/datum/gas_mixture/environment = location.return_air()
-	var/total = environment.oxygen + environment.carbon_dioxide + environment.toxins + environment.nitrogen
+	var/total = environment.total_moles
 	var/output = "<b>Air Status:</b><br>"
 
 	if(total == 0)
@@ -765,22 +769,22 @@
 	var/pressure_dangerlevel = get_danger_level(environment_pressure, current_settings)
 
 	current_settings = TLV["oxygen"]
-	var/oxygen_dangerlevel = get_danger_level(environment.oxygen*partial_pressure, current_settings)
-	var/oxygen_percent = round(environment.oxygen / total * 100, 2)
+	var/oxygen_dangerlevel = get_danger_level(environment.gas["oxygen"]*partial_pressure, current_settings)
+	var/oxygen_percent = round(environment.gas["oxygen"] / total * 100, 2)
 
 	current_settings = TLV["carbon dioxide"]
-	var/co2_dangerlevel = get_danger_level(environment.carbon_dioxide*partial_pressure, current_settings)
-	var/co2_percent = round(environment.carbon_dioxide / total * 100, 2)
+	var/co2_dangerlevel = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
+	var/co2_percent = round(environment.gas["carbon_dioxide"] / total * 100, 2)
 
 	current_settings = TLV["plasma"]
-	var/plasma_dangerlevel = get_danger_level(environment.toxins*partial_pressure, current_settings)
-	var/plasma_percent = round(environment.toxins / total * 100, 2)
+	var/plasma_dangerlevel = get_danger_level(environment.gas["plasma"]*partial_pressure, current_settings)
+	var/plasma_percent = round(environment.gas["plasma"] / total * 100, 2)
 
-	current_settings = TLV["other"]
-	var/other_moles = 0.0
-	for(var/datum/gas/G in environment.trace_gases)
-		other_moles+=G.moles
-	var/other_dangerlevel = get_danger_level(other_moles*partial_pressure, current_settings)
+	//current_settings = TLV["other"]
+	//var/other_moles = 0.0
+	//for(var/datum/gas/G in environment.trace_gases)
+	//	other_moles+=G.moles
+	//var/other_dangerlevel = get_danger_level(other_moles*partial_pressure, current_settings)
 
 	current_settings = TLV["temperature"]
 	var/temperature_dangerlevel = get_danger_level(environment.temperature, current_settings)
@@ -791,25 +795,30 @@ Oxygen: <span class='dl[oxygen_dangerlevel]'>[oxygen_percent]</span>%<br>
 Carbon dioxide: <span class='dl[co2_dangerlevel]'>[co2_percent]</span>%<br>
 Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 "}
-	if (other_dangerlevel==2)
-		output += "Notice: <span class='dl2'>High Concentration of Unknown Particles Detected</span><br>"
-	else if (other_dangerlevel==1)
-		output += "Notice: <span class='dl1'>Low Concentration of Unknown Particles Detected</span><br>"
+	//if (other_dangerlevel==2)
+	//	output += "Notice: <span class='dl2'>High Concentration of Unknown Particles Detected</span><br>"
+	//else if (other_dangerlevel==1)
+	//	output += "Notice: <span class='dl1'>Low Concentration of Unknown Particles Detected</span><br>"
 
 	output += "Temperature: <span class='dl[temperature_dangerlevel]'>[environment.temperature]</span>K ([round(environment.temperature - T0C, 0.1)]C)<br>"
 
-	//Overall status
+	//'Local Status' should report the LOCAL status, damnit.
 	output += "Local Status: "
 	switch(max(pressure_dangerlevel,oxygen_dangerlevel,co2_dangerlevel,plasma_dangerlevel,other_dangerlevel,temperature_dangerlevel))
 		if(2)
-			output += "<span class='dl2'>DANGER: Internals Required</span>"
+			output += "<span class='dl2'>DANGER: Internals Required</span><br>"
 		if(1)
-			output += "<span class='dl1'>Caution</span>"
+			output += "<span class='dl1'>Caution</span><br>"
 		if(0)
-			if(alarm_area.atmosalm)
-				output += {"<span class='dl1'>Caution: Atmos alert in area</span>"}
-			else
-				output += {"<span class='dl0'>Optimal</span>"}
+			output += "<span class='dl0'>Optimal</span><br>"
+
+	output += "Area Status: "
+	if(alarm_area.atmosalm)
+		output += "<span class='dl1'>Atmos alert in area</span>"
+	else if (alarm_area.fire)
+		output += "<span class='dl1'>Fire alarm in area</span>"
+	else
+		output += "No alerts"
 
 	return output
 

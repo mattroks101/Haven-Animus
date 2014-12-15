@@ -147,15 +147,6 @@
 
 /obj/item/attack_paw(mob/user as mob)
 
-	if(isalien(user)) // -- TLE
-		var/mob/living/carbon/alien/A = user
-
-		if(!A.has_fine_manipulation || w_class >= 4)
-			if(src in A.contents) // To stop Aliens having items stuck in their pockets
-				A.drop_from_inventory(src)
-			user << "Your claws aren't capable of such fine manipulation."
-			return
-
 	if (istype(src.loc, /obj/item/weapon/storage))
 		for(var/mob/M in range(1, src.loc))
 			if (M.s_active == src.loc)
@@ -533,7 +524,7 @@
 			"\red You stab yourself in the eyes with [src]!" \
 		)
 	if(istype(M, /mob/living/carbon/human))
-		var/datum/organ/internal/eyes/eyes = H.internal_organs["eyes"]
+		var/datum/organ/internal/eyes/eyes = H.internal_organs_by_name["eyes"]
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
 			if(M.stat != 2)

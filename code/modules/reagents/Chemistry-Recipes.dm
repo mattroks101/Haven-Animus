@@ -401,21 +401,12 @@ datum
 			name = "Napalm"
 			id = "napalm"
 			result = null
-			required_reagents = list("aluminum" = 1, "plasma" = 1, "sacid" = 1 )
+			required_reagents = list("aluminum" = 1, "phoron" = 1, "sacid" = 1 )
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
-
-					var/datum/gas_mixture/napalm = new
-					var/datum/gas/volatile_fuel/fuel = new
-					fuel.moles = created_volume
-					napalm.trace_gases += fuel
-
-					napalm.temperature = 400+T0C
-					napalm.update_values()
-
-					target_tile.assume_air(napalm)
+					target_tile.assume_gas("volatile_fuel", created_volume, 400+T0C)
 					spawn (0) target_tile.hotspot_expose(700, 400)
 				holder.del_reagent("napalm")
 				return
@@ -1068,7 +1059,7 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 
-				/*var/blocked = list(/mob/living/simple_animal/hostile,
+				var/blocked = list(/mob/living/simple_animal/hostile,
 					/mob/living/simple_animal/hostile/pirate,
 					/mob/living/simple_animal/hostile/pirate/ranged,
 					/mob/living/simple_animal/hostile/russian,
@@ -1090,18 +1081,18 @@ datum
 				playsound(get_turf_loc(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 
 				for(var/mob/living/carbon/human/M in viewers(get_turf_loc(holder.my_atom), null))
-					if(M:eyecheck() <= 0)
+					if(M.has_eyes())
 						flick("e_flash", M.flash)
 
-				for(var/i = 1, i <= 5, i++)
+				for(var/i = 1, i <= 3, i++)
 					var/chosen = pick(critters)
 					var/mob/living/simple_animal/hostile/C = new chosen
 					C.faction = "slimesummon"
 					C.loc = get_turf_loc(holder.my_atom)
 					if(prob(50))
 						for(var/j = 1, j <= rand(1, 3), j++)
-							step(C, pick(NORTH,SOUTH,EAST,WEST))*/
-				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
+							step(C, pick(NORTH,SOUTH,EAST,WEST))
+				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))					//TODO: Un-nerf them!
 					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)
 
 //Silver
@@ -1180,18 +1171,12 @@ datum
 			required_container = /obj/item/slime_extract/orange
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
-				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
+				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
 					O.show_message(text("\red The slime extract begins to vibrate violently !"), 1)
 				sleep(50)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
-
-					var/datum/gas_mixture/napalm = new
-
-					napalm.toxins = 25
-					napalm.temperature = 1400
-
-					target_tile.assume_air(napalm)
+					target_tile.assume_gas("plasma", 25, 1400)
 					spawn (0) target_tile.hotspot_expose(700, 400)
 
 //Yellow
@@ -1292,11 +1277,10 @@ datum
 			required_container = /obj/item/slime_extract/red
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
-				for(var/mob/living/carbon/slime/slime in viewers(get_turf_loc(holder.my_atom), null))
-					slime.tame = 0
+				for(var/mob/living/carbon/slime/slime in viewers(get_turf(holder.my_atom), null))
 					slime.rabid = 1
-					for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
-						O.show_message(text("\red The [slime] is driven into a frenzy!."), 1)
+					for(var/mob/O in viewers(get_turf(holder.my_atom), null))
+						O.show_message(text("\red The [slime] is driven into a frenzy!"), 1)
 
 //Pink
 		slimeppotion

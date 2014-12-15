@@ -560,23 +560,19 @@
 		..()
 		reagents.add_reagent("nutriment", 1)*/
 
-/obj/item/weapon/reagent_containers/food/snacks/appendix //yes, this is the same as meat. I might do something different in future
-	name = "appendix"
-	desc = "An appendix which looks perfectly healthy."
+/obj/item/weapon/reagent_containers/food/snacks/organ
+
+	name = "organ"
+	desc = "It's good for you."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "appendix"
 	filling_color = "#E00D34"
 
 	New()
 		..()
-		reagents.add_reagent("nutriment", 3)
+		reagents.add_reagent("nutriment", rand(3,5))
+		reagents.add_reagent("toxin", rand(1,3))
 		src.bitesize = 3
-
-/obj/item/weapon/reagent_containers/food/snacks/appendix/inflamed
-	name = "inflamed appendix"
-	desc = "An appendix which appears to be inflamed."
-	icon_state = "appendixinflamed"
-	filling_color = "#E00D7A"
 
 /obj/item/weapon/reagent_containers/food/snacks/tofu
 	name = "Tofu"
@@ -3230,7 +3226,7 @@
 		del(src)
 
 	//Bun + brain = brainburger
-	else if(istype(W,/obj/item/brain))
+	else if(istype(W,/obj/item/organ/brain))
 		var/turf/spawnloc = foodloc(user, src)
 		new /obj/item/weapon/reagent_containers/food/snacks/brainburger(spawnloc)
 		user << "You make a braingurger."

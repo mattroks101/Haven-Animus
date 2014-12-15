@@ -28,7 +28,7 @@
 	if(E.internal_organs == null)
 		E.internal_organs = list()
 	E.internal_organs += src
-	H.internal_organs[src.name] = src
+	H.internal_organs_by_name[src.name] = src
 	src.owner = H
 
 /datum/organ/internal/proc/take_damage(amount, var/silent=0)
@@ -180,7 +180,7 @@
 				//Damaged one shares the fun
 				else
 					var/victim = pick(owner.internal_organs)
-					var/datum/organ/internal/O = owner.internal_organs[victim]
+					var/datum/organ/internal/O = owner.internal_organs_by_name[victim]
 					O.damage += 0.2  * process_accuracy
 
 			//Detox can heal small amounts of damage

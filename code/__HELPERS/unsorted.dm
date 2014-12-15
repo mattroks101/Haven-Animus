@@ -1241,12 +1241,12 @@ proc/is_hot(obj/item/W as obj)
 				return 3800
 			else
 				return 0
-		if(/obj/item/weapon/lighter)
+		if(/obj/item/weapon/flame/lighter)
 			if(W:lit)
 				return 1500
 			else
 				return 0
-		if(/obj/item/weapon/match)
+		if(/obj/item/weapon/flame/match)
 			if(W:lit)
 				return 1000
 			else
@@ -1264,7 +1264,7 @@ proc/is_hot(obj/item/W as obj)
 			return 0
 
 	return 0
-
+/*
 //Is this even used for anything besides balloons? Yes I took out the W:lit stuff because : really shouldnt be used.
 /proc/is_sharp(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
 	if(W.sharp) return 1
@@ -1273,8 +1273,8 @@ proc/is_hot(obj/item/W as obj)
 		istype(W, /obj/item/weapon/screwdriver)                   || \
 		istype(W, /obj/item/weapon/pen)                           || \
 		istype(W, /obj/item/weapon/weldingtool)					  || \
-		istype(W, /obj/item/weapon/lighter/zippo)				  || \
-		istype(W, /obj/item/weapon/match)            		      || \
+		istype(W, /obj/item/weapon/flame/lighter/zippo)				  || \
+		istype(W, /obj/item/weapon/flame/match)            		      || \
 		istype(W, /obj/item/clothing/mask/cigarette) 		      || \
 		istype(W, /obj/item/weapon/wirecutters)                   || \
 		istype(W, /obj/item/weapon/circular_saw)                  || \
@@ -1291,7 +1291,7 @@ proc/is_hot(obj/item/W as obj)
 		istype(W, /obj/item/weapon/kitchen/utensil/fork) && W.icon_state != "forkloaded" || \
 		istype(W, /obj/item/weapon/twohanded/fireaxe) \
 	)
-
+*/
 /proc/is_surgery_tool(obj/item/W as obj)
 	return (	\
 	istype(W, /obj/item/weapon/scalpel)			||	\
@@ -1375,3 +1375,16 @@ var/list/WALLITEMS = list(
 
 /proc/format_text(text)
 	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
+
+//Whether or not the given item counts as sharp in terms of dealing damage
+/proc/is_sharp(obj/O as obj)
+	if (!O) return 0
+	if (O.sharp) return 1
+	if (O.edge) return 1
+	return 0
+
+//Whether or not the given item counts as cutting with an edge in terms of removing limbs
+/proc/has_edge(obj/O as obj)
+	if (!O) return 0
+	if (O.edge) return 1
+	return 0

@@ -67,7 +67,7 @@
 
 
 /proc/open_blastdoors_by_id(var/id)
-	for(var/obj/machinery/door/poddoor/M in machines)
+	for(var/obj/machinery/door/poddoor/M in world)
 		if(M.id == id)
 			if(M.density)
 				M.open()

@@ -155,7 +155,8 @@ emp_act
 /mob/living/carbon/human/proc/attacked_by(var/obj/item/I, var/mob/living/user, var/def_zone)
 	if(!I || !user)	return 0
 
-	var/target_zone = get_zone_with_miss_chance(user.zone_sel.selecting, src)
+	var/target_zone = def_zone? check_zone(def_zone) : get_zone_with_miss_chance(user.zone_sel.selecting, src)
+
 	if(user == src) // Attacking yourself can't miss
 		target_zone = user.zone_sel.selecting
 	if(!target_zone)
@@ -192,10 +193,17 @@ emp_act
 		visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
 
 	var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].")
+	var/weapon_sharp = is_sharp(I)
+	var/weapon_edge = has_edge(I)
+	if ((weapon_sharp || weapon_edge) && prob(getarmor(target_zone, "melee")))
+		weapon_sharp = 0
+		weapon_edge = 0
+
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
+	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
-	apply_damage(I.force, I.damtype, affecting, armor , is_sharp(I), I)
+	apply_damage(I.force, I.damtype, affecting, armor, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))
@@ -234,12 +242,129 @@ emp_act
 
 			if("chest")//Easier to score a stun but lasts less time
 				if(prob((I.force + 10)))
-					apply_effect(5, WEAKEN, armor)
+					apply_effect(6, WEAKEN, armor)
 					visible_message("\red <B>[src] has been knocked down!</B>")
 
 				if(bloody)
 					bloody_body(src)
+
+	if(Iforce > 10 || Iforce >= 5 && prob(33))
+		forcesay(hit_appends)	//forcesay checks stat already
+
+	//Melee weapon embedded object code.
+	if (I.damtype == BRUTE && !I.is_robot_module())
+		var/damage = I.force
+		if (armor)
+			damage /= armor+1
+
+		//blunt objects should really not be embedding in things unless a huge amount of force is involved
+		var/embed_chance = weapon_sharp? damage/I.w_class : damage/(I.w_class*3)
+		var/embed_threshold = weapon_sharp? 5*I.w_class : 15*I.w_class
+
+		//Sharp objects will always embed if they do enough damage.
+		if((weapon_sharp && damage > (10*I.w_class)) || (damage > embed_threshold && prob(embed_chance)))
+			affecting.embed(I)
 	return 1
+
+
+//this proc handles being hit by a thrown atom
+/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = 5)
+	if(istype(AM,/obj/))
+		var/obj/O = AM
+
+		if(in_throw_mode && !get_active_hand() && speed <= 5)	//empty active hand and we're in throw mode
+			if(canmove && !restrained())
+				if(isturf(O.loc))
+					put_in_active_hand(O)
+					visible_message("<span class='warning'>[src] catches [O]!</span>")
+					throw_mode_off()
+					return
+
+		var/dtype = BRUTE
+		if(istype(O,/obj/item/weapon))
+			var/obj/item/weapon/W = O
+			dtype = W.damtype
+		var/throw_damage = O.throwforce*(speed/5)
+
+		var/zone
+		if (istype(O.thrower, /mob/living))
+			var/mob/living/L = O.thrower
+			zone = check_zone(L.zone_sel.selecting)
+		else
+			zone = ran_zone("chest",75)	//Hits a random part of the body, geared towards the chest
+
+		//check if we hit
+		if (O.throw_source)
+			var/distance = get_dist(O.throw_source, loc)
+			zone = get_zone_with_miss_chance(zone, src, min(15*(distance-2), 0))
+		else
+			zone = get_zone_with_miss_chance(zone, src, 15)
+
+		if(!zone)
+			visible_message("\blue \The [O] misses [src] narrowly!")
+			return
+
+		O.throwing = 0		//it hit, so stop moving
+
+		if ((O.thrower != src) && check_shields(throw_damage, "[O]"))
+			return
+
+		var/datum/organ/external/affecting = get_organ(zone)
+		var/hit_area = affecting.display_name
+
+		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
+		var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
+
+		if(armor < 2)
+			apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
+
+		if(ismob(O.thrower))
+			var/mob/M = O.thrower
+			var/client/assailant = M.client
+			if(assailant)
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with a [O], thrown by [M.name] ([assailant.ckey])</font>")
+				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with a thrown [O]</font>")
+				if(!istype(src,/mob/living/simple_animal/mouse))
+					msg_admin_attack("[src.name] ([src.ckey]) was hit by a [O], thrown by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+
+		//thrown weapon embedded object code.
+		if(dtype == BRUTE && istype(O,/obj/item))
+			var/obj/item/I = O
+			if (!I.is_robot_module())
+				var/sharp = is_sharp(I)
+				var/damage = throw_damage
+				if (armor)
+					damage /= armor+1
+
+				//blunt objects should really not be embedding in things unless a huge amount of force is involved
+				var/embed_chance = sharp? damage/I.w_class : damage/(I.w_class*3)
+				var/embed_threshold = sharp? 5*I.w_class : 15*I.w_class
+
+				//Sharp objects will always embed if they do enough damage.
+				//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
+				if((sharp && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
+					affecting.embed(I)
+
+		// Begin BS12 momentum-transfer code.
+		if(O.throw_source && speed >= 15)
+			var/obj/item/weapon/W = O
+			var/momentum = speed/2
+			var/dir = get_dir(O.throw_source, src)
+
+			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
+			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+
+			if(!W || !src) return
+
+			if(W.loc == src && W.sharp) //Projectile is embedded and suitable for pinning.
+				var/turf/T = near_wall(dir,2)
+
+				if(T)
+					src.loc = T
+					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
+					src.anchored = 1
+					src.pinned += O
+
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 	if (gloves)
@@ -259,3 +384,15 @@ emp_act
 	if(w_uniform)
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
+
+/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage)
+
+	if(!wear_suit) return
+	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
+	if(damtype != BURN && damtype != BRUTE) return
+
+	var/obj/item/clothing/suit/space/SS = wear_suit
+	var/penetrated_dam = max(0,(damage - SS.breach_threshold)) // - SS.damage)) - Consider uncommenting this if suits seem too hardy on dev.
+
+	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)
+

@@ -45,6 +45,38 @@
 				return
 	..(message)
 
+/mob/living/carbon/human/proc/forcesay(list/append)
+	if(stat == CONSCIOUS)
+		if(client)
+			var/virgin = 1	//has the text been modified yet?
+			var/temp = winget(client, "input", "text")
+			if(findtextEx(temp, "Say \"", 1, 7) && length(temp) > 5)	//case sensitive means
+
+				temp = replacetext(temp, ";", "")	//general radio
+
+				if(findtext(trim_left(temp), ":", 6, 7))	//dept radio
+					temp = copytext(trim_left(temp), 8)
+					virgin = 0
+
+				if(virgin)
+					temp = copytext(trim_left(temp), 6)	//normal speech
+					virgin = 0
+
+				while(findtext(trim_left(temp), ":", 1, 2))	//dept radio again (necessary)
+					temp = copytext(trim_left(temp), 3)
+
+				if(findtext(temp, "*", 1, 2))	//emotes
+					return
+				temp = copytext(trim_left(temp), 1, rand(5,8))
+
+				var/trimmed = trim_left(temp)
+				if(length(trimmed))
+					if(append)
+						temp += pick(append)
+
+					say(temp)
+				winset(client, "input", "text=[null]")
+
 /mob/living/carbon/human/say_understands(var/other,var/datum/language/speaking = null)
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
@@ -81,3 +113,47 @@
 
 /mob/living/carbon/human/proc/GetSpecialVoice()
 	return special_voice
+
+/mob/living/carbon/human/proc/handle_speech_problems(var/message)
+	var/list/returns[3]
+	var/verb = "says"
+	var/handled = 0
+	if(silent)
+		message = ""
+		handled = 1
+	if(sdisabilities & MUTE)
+		message = ""
+		handled = 1
+	if(wear_mask)
+		if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
+			var/obj/item/clothing/mask/horsehead/hoers = wear_mask
+			if(hoers.voicechange)
+				if(mind && mind.changeling && department_radio_keys[copytext(message, 1, 3)] != "changeling")
+					message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+					verb = pick("whinnies","neighs", "says")
+					handled = 1
+
+	if((HULK in mutations) && health >= 25 && length(message))
+		message = "[uppertext(message)]!!!"
+		verb = pick("yells","roars","hollers")
+		handled = 1
+	if(slurring)
+		message = slur(message)
+		verb = pick("stammers","stutters")
+		handled = 1
+
+	var/braindam = getBrainLoss()
+	if(braindam >= 60)
+		handled = 1
+		if(prob(braindam/4))
+			message = stutter(message)
+			verb = pick("stammers", "stutters")
+		if(prob(braindam))
+			message = uppertext(message)
+			verb = pick("yells like an idiot","says rather loudly")
+
+	returns[1] = message
+	returns[2] = verb
+	returns[3] = handled
+
+	return returns

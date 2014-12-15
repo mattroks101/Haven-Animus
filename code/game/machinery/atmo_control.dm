@@ -25,54 +25,53 @@ obj/machinery/air_sensor
 	update_icon()
 		icon_state = "gsensor[on]"
 
-	process()
-		if(on)
-			var/datum/signal/signal = new
-			signal.transmission_method = 1 //radio signal
-			signal.data["tag"] = id_tag
-			signal.data["timestamp"] = world.time
+/obj/machinery/air_sensor/process()
+	if(on)
+		var/datum/signal/signal = new
+		signal.transmission_method = 1 //radio signal
+		signal.data["tag"] = id_tag
+		signal.data["timestamp"] = world.time
 
-			var/datum/gas_mixture/air_sample = return_air()
+		var/datum/gas_mixture/air_sample = return_air()
 
-			if(output&1)
-				signal.data["pressure"] = num2text(round(air_sample.return_pressure(),0.1),)
-			if(output&2)
-				signal.data["temperature"] = round(air_sample.temperature,0.1)
+		if(output&1)
+			signal.data["pressure"] = num2text(round(air_sample.return_pressure(),0.1),)
+		if(output&2)
+			signal.data["temperature"] = round(air_sample.temperature,0.1)
 
-			if(output>4)
-				var/total_moles = air_sample.total_moles()
-				if(total_moles > 0)
-					if(output&4)
-						signal.data["oxygen"] = round(100*air_sample.oxygen/total_moles,0.1)
-					if(output&8)
-						signal.data["toxins"] = round(100*air_sample.toxins/total_moles,0.1)
-					if(output&16)
-						signal.data["nitrogen"] = round(100*air_sample.nitrogen/total_moles,0.1)
-					if(output&32)
-						signal.data["carbon_dioxide"] = round(100*air_sample.carbon_dioxide/total_moles,0.1)
-				else
-					signal.data["oxygen"] = 0
-					signal.data["toxins"] = 0
-					signal.data["nitrogen"] = 0
-					signal.data["carbon_dioxide"] = 0
-			signal.data["sigtype"]="status"
-			radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		if(output>4)
+			var/total_moles = air_sample.total_moles
+			if(total_moles > 0)
+				if(output&4)
+					signal.data["oxygen"] = round(100*air_sample.gas["oxygen"]/total_moles,0.1)
+				if(output&8)
+					signal.data["phoron"] = round(100*air_sample.gas["phoron"]/total_moles,0.1)
+				if(output&16)
+					signal.data["nitrogen"] = round(100*air_sample.gas["nitrogen"]/total_moles,0.1)
+				if(output&32)
+					signal.data["carbon_dioxide"] = round(100*air_sample.gas["carbon_dioxide"]/total_moles,0.1)
+			else
+				signal.data["oxygen"] = 0
+				signal.data["phoron"] = 0
+				signal.data["nitrogen"] = 0
+				signal.data["carbon_dioxide"] = 0
+		signal.data["sigtype"]="status"
+		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
 
 
-	proc
-		set_frequency(new_frequency)
-			radio_controller.remove_object(src, frequency)
-			frequency = new_frequency
-			radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+/obj/machinery/air_sensor/proc/set_frequency(new_frequency)
+	radio_controller.remove_object(src, frequency)
+	frequency = new_frequency
+	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-	initialize()
+/obj/machinery/air_sensor/initialize()
+	set_frequency(frequency)
+
+/obj/machinery/air_sensor/New()
+	..()
+
+	if(radio_controller)
 		set_frequency(frequency)
-
-	New()
-		..()
-
-		if(radio_controller)
-			set_frequency(frequency)
 
 obj/machinery/computer/general_air_control
 	icon = 'icons/obj/computer.dmi'

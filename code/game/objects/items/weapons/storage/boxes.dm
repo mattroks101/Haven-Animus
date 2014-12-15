@@ -422,10 +422,10 @@
 	New()
 		..()
 		for(var/i=1; i <= storage_slots; i++)
-			new /obj/item/weapon/match(src)
+			new /obj/item/weapon/flame/match(src)
 
-	attackby(obj/item/weapon/match/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/weapon/match) && W.lit == 0)
+	attackby(obj/item/weapon/flame/match/W as obj, mob/user as mob)
+		if(istype(W, /obj/item/weapon/flame/match) && W.lit == 0)
 			W.lit = 1
 			W.icon_state = "match_lit"
 			processing_objects.Add(W)

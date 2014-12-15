@@ -78,6 +78,8 @@
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	force = 4
+	sharp = 1
+	edge = 1
 	throwforce = 1
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "sliced", "torn", "ripped", "diced", "cut")
@@ -98,6 +100,8 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	force = 55
+	sharp = 1
+	edge = 1
 	throwforce = 10
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "sliced", "torn", "ripped", "diced", "cut")
@@ -121,6 +125,8 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 55
+	sharp = 1
+	edge = 1
 	throwforce = 10
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "sliced", "torn", "ripped", "diced", "cut")
@@ -139,6 +145,7 @@
 /obj/item/weapon/harpoon
 	name = "harpoon"
 	sharp = 1
+	edge = 0
 	desc = "Tharr she blows!"
 	icon_state = "harpoon"
 	item_state = "harpoon"

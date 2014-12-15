@@ -145,7 +145,7 @@ REAGENT SCANNER
 		user.show_message("\blue Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.")
 	if (M.has_brain_worms())
 		user.show_message("\red Subject suffering from aberrant brain activity. Recommend further scanning.")
-	else if (M.getBrainLoss() >= 100 || istype(M, /mob/living/carbon/human) && M:brain_op_stage == 4.0)
+	else if (M.getBrainLoss() >= 100 || !M.has_brain())
 		user.show_message("\red Subject is brain dead.")
 	else if (M.getBrainLoss() >= 60)
 		user.show_message("\red Severe brain damage detected. Subject likely to have mental retardation.")
@@ -159,7 +159,7 @@ REAGENT SCANNER
 			if(e.status & ORGAN_BROKEN)
 				if(((e.name == "l_arm") || (e.name == "r_arm") || (e.name == "l_leg") || (e.name == "r_leg")) && (!(e.status & ORGAN_SPLINTED)))
 					user << "\red Unsecured fracture in subject [limb]. Splinting recommended for transport."
-			if(e.is_infected())
+			if(e.has_infected_wound())
 				user << "\red Infected wound detected in subject [limb]. Disinfection recommended."
 
 		for(var/name in H.organs_by_name)
@@ -227,7 +227,7 @@ REAGENT SCANNER
 	var/datum/gas_mixture/environment = location.return_air()
 
 	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles()
+	var/total_moles = environment.total_moles
 
 	user.show_message("\blue <B>Results:</B>", 1)
 	if(abs(pressure - ONE_ATMOSPHERE) < 10)
@@ -235,32 +235,8 @@ REAGENT SCANNER
 	else
 		user.show_message("\red Pressure: [round(pressure,0.1)] kPa", 1)
 	if(total_moles)
-		var/o2_concentration = environment.oxygen/total_moles
-		var/n2_concentration = environment.nitrogen/total_moles
-		var/co2_concentration = environment.carbon_dioxide/total_moles
-		var/plasma_concentration = environment.toxins/total_moles
-
-		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
-		if(abs(n2_concentration - N2STANDARD) < 20)
-			user.show_message("\blue Nitrogen: [round(n2_concentration*100)]%", 1)
-		else
-			user.show_message("\red Nitrogen: [round(n2_concentration*100)]%", 1)
-
-		if(abs(o2_concentration - O2STANDARD) < 2)
-			user.show_message("\blue Oxygen: [round(o2_concentration*100)]%", 1)
-		else
-			user.show_message("\red Oxygen: [round(o2_concentration*100)]%", 1)
-
-		if(co2_concentration > 0.01)
-			user.show_message("\red CO2: [round(co2_concentration*100)]%", 1)
-		else
-			user.show_message("\blue CO2: [round(co2_concentration*100)]%", 1)
-
-		if(plasma_concentration > 0.01)
-			user.show_message("\red Plasma: [round(plasma_concentration*100)]%", 1)
-
-		if(unknown_concentration > 0.01)
-			user.show_message("\red Unknown: [round(unknown_concentration*100)]%", 1)
+		for(var/g in environment.gas)
+			user.show_message("\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles)*100)]%", 1)
 
 		user.show_message("\blue Temperature: [round(environment.temperature-T0C)]&deg;C", 1)
 

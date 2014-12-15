@@ -103,6 +103,7 @@
 		L.fields["b_dna"]		= H.dna.unique_enzymes
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning
 		L.fields["identity"]	= H.dna.UI // "
+		L.fields["species"]		= H.get_species()
 		L.fields["image"]		= getFlatIcon(H,0)	//This is god-awful
 		locked += L
 	return

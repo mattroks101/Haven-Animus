@@ -72,75 +72,9 @@ datum/pipe_network
 			gases += line_member.air
 
 	proc/reconcile_air()
-		//Perfectly equalize all gases members instantly
+		equalize_gases(gases)
 
-		//Calculate totals from individual components
-		var/total_thermal_energy = 0
-		var/total_heat_capacity = 0
-
-		air_transient.volume = 0
-
-		air_transient.oxygen = 0
-		air_transient.nitrogen = 0
-		air_transient.toxins = 0
-		air_transient.carbon_dioxide = 0
-
-
-		air_transient.trace_gases = list()
-
-		for(var/datum/gas_mixture/gas in gases)
-			air_transient.volume += gas.volume
-			var/temp_heatcap = gas.heat_capacity()
-			total_thermal_energy += gas.temperature*temp_heatcap
-			total_heat_capacity += temp_heatcap
-
-			air_transient.oxygen += gas.oxygen
-			air_transient.nitrogen += gas.nitrogen
-			air_transient.toxins += gas.toxins
-			air_transient.carbon_dioxide += gas.carbon_dioxide
-
-			if(gas.trace_gases.len)
-				for(var/datum/gas/trace_gas in gas.trace_gases)
-					var/datum/gas/corresponding = locate(trace_gas.type) in air_transient.trace_gases
-					if(!corresponding)
-						corresponding = new trace_gas.type()
-						air_transient.trace_gases += corresponding
-
-					corresponding.moles += trace_gas.moles
-
-		if(air_transient.volume > 0)
-
-			if(total_heat_capacity > 0)
-				air_transient.temperature = total_thermal_energy/total_heat_capacity
-
-				//Allow air mixture to react
-				if(air_transient.react())
-					update = 1
-
-			else
-				air_transient.temperature = 0
-
-			//Update individual gas_mixtures by volume ratio
-			for(var/datum/gas_mixture/gas in gases)
-				gas.oxygen = air_transient.oxygen*gas.volume/air_transient.volume
-				gas.nitrogen = air_transient.nitrogen*gas.volume/air_transient.volume
-				gas.toxins = air_transient.toxins*gas.volume/air_transient.volume
-				gas.carbon_dioxide = air_transient.carbon_dioxide*gas.volume/air_transient.volume
-
-				gas.temperature = air_transient.temperature
-
-				if(air_transient.trace_gases.len)
-					for(var/datum/gas/trace_gas in air_transient.trace_gases)
-						var/datum/gas/corresponding = locate(trace_gas.type) in gas.trace_gases
-						if(!corresponding)
-							corresponding = new trace_gas.type()
-							gas.trace_gases += corresponding
-
-						corresponding.moles = trace_gas.moles*gas.volume/air_transient.volume
-				gas.update_values()
-		air_transient.update_values()
-		return 1
-
+/*
 proc/equalize_gases(datum/gas_mixture/list/gases)
 	//Perfectly equalize all gases members instantly
 
@@ -204,3 +138,4 @@ proc/equalize_gases(datum/gas_mixture/list/gases)
 			gas.update_values()
 
 	return 1
+	*/

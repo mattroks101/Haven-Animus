@@ -75,6 +75,15 @@ atom/proc/SetLuminosity(var/Red, var/Green = Red, var/Blue = Red)
 
 	return
 
+atom/proc/SetLuminocity_NewColor(var/textcolor = "")	//To use one var instead of three.
+	if(!textcolor)
+		return
+	var/red = text2num(copytext(textcolor, 1, 2))
+	var/green = text2num(copytext(textcolor, 2, 3))
+	var/blue = text2num(copytext(textcolor, 3, 4))
+	SetLuminosity(red, green, blue)
+	return
+
 atom/proc/AddLuminosity(var/Red, var/Green = Red, var/Blue = Red)
 	SetLuminosity(LuminosityRed + Red, LuminosityGreen + Green, LuminosityBlue + Blue)
 

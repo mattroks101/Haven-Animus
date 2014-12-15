@@ -170,7 +170,9 @@
 
 
 /obj/structure/window/attack_slime(mob/user as mob)
-	if(!isslimeadult(user)) return
+	var/mob/living/carbon/slime/S = user
+	if (!S.is_adult)
+		return
 	attack_generic(user, rand(10, 15))
 
 
@@ -328,14 +330,6 @@
 	dir = ini_dir
 	update_nearby_tiles(need_rebuild=1)
 
-
-//This proc has to do with airgroups and atmos, it has nothing to do with smoothwindows, that's update_nearby_tiles().
-/obj/structure/window/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-	air_master.AddTurfToUpdate(get_turf(src))
-
-	return 1
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()

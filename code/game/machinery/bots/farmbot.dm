@@ -265,7 +265,7 @@
 		target = null
 		return 0
 
-	if ( !emagged && !istype(target,/obj/machinery/hydroponics) && !istype(target,/obj/structure/sink) ) // Humans are not plants!
+	if ( !emagged && !istype(target,/obj/machinery/portable_atmospherics/hydroponics) && !istype(target,/obj/structure/sink) ) // Humans are not plants!
 		mode = 0
 		target = null
 		return 0
@@ -315,7 +315,7 @@
 				target = source
 				mode = FARMBOT_MODE_REFILL
 				return 1
-		for ( var/obj/machinery/hydroponics/tray in view(7,src) )
+		for ( var/obj/machinery/portable_atmospherics/hydroponics/tray in view(7,src) )
 			var newMode = GetNeededMode(tray)
 			if ( newMode )
 				mode = newMode
@@ -403,7 +403,7 @@
 		return 1
 
 	else // feed them plants~
-		var /obj/machinery/hydroponics/tray = target
+		var /obj/machinery/portable_atmospherics/hydroponics/tray = target
 		tray.nutrilevel = 10
 		tray.yieldmod = fert.yieldmod
 		tray.mutmod = fert.mutmod
@@ -448,7 +448,7 @@
 		spawn(FARMBOT_ACTION_DELAY)
 			mode = 0
 
-		var /obj/machinery/hydroponics/tray = target
+		var /obj/machinery/portable_atmospherics/hydroponics/tray = target
 		tray.weedlevel = 0
 		tray.updateicon()
 
@@ -477,7 +477,7 @@
 		spawn(FARMBOT_EMAG_DELAY)
 			mode = 0
 	else
-		var /obj/machinery/hydroponics/tray = target
+		var /obj/machinery/portable_atmospherics/hydroponics/tray = target
 		var/b_amount = tank.reagents.get_reagent_amount("water")
 		if(b_amount > 0 && tray.waterlevel < 100)
 			if(b_amount + tray.waterlevel > 100)

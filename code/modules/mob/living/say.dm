@@ -236,12 +236,6 @@ var/list/department_radio_keys = list(
 				robot_talk(message)
 			return
 
-		if ("alientalk")
-			if(alien_talk_understand || hivecheck())
-			//message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN)) //seems redundant
-				alien_talk(message)
-			return
-
 		if ("department")
 			if(istype(src, /mob/living/carbon))
 				if (src:l_ear && istype(src:l_ear,/obj/item/device/radio))

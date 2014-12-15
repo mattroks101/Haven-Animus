@@ -21,6 +21,7 @@ var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mob
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
+var/global/list/language_keys[0]					//table of say codes for all languages
 var/global/list/whitelisted_species = list("Human")
 
 // Posters
@@ -92,9 +93,18 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/language/L = new T
 		all_languages[L.name] = L
 
+	for (var/language_name in all_languages)
+		var/datum/language/L = all_languages[language_name]
+		language_keys[":[lowertext(L.key)]"] = L
+		language_keys[".[lowertext(L.key)]"] = L
+		language_keys["#[lowertext(L.key)]"] = L
+
+	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species
 	for(var/T in paths)
+		rkey++
 		var/datum/species/S = new T
+		S.race_key = rkey //Used in mob icon caching.
 		all_species[S.name] = S
 
 		if(S.flags & IS_WHITELISTED)
