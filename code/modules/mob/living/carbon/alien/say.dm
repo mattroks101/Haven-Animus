@@ -7,15 +7,12 @@
 			src << "\red You cannot speak in IC (Muted)."
 			return
 
-<<<<<<< HEAD
 	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-=======
-	log_say("[key_name(src)] : [message]")
-	message = trim(sanitize(message))
 
 	if (!message)
 		return
->>>>>>> dde28ee9dad4e35aa3f95fb108f9f5fed1f03a1f
+
+	log_say("[key_name(src)] : [message]")
 
 	if(stat == 2)
 		return say_dead(message)

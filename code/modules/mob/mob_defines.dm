@@ -97,13 +97,10 @@
 
 
 	var/bodytemperature = 310.055	//98.7 F
-<<<<<<< HEAD
 	var/old_x = 0
 	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
-=======
-	var/drowsyness = 0//Carbon
->>>>>>> dde28ee9dad4e35aa3f95fb108f9f5fed1f03a1f
+
 	var/dizziness = 0//Carbon
 	var/is_dizzy = 0
 	var/is_jittery = 0

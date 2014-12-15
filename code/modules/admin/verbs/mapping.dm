@@ -119,11 +119,7 @@ var/intercom_range_display_status = 0
 					del(F)
 
 var/list/debug_verbs = list (
-<<<<<<< HEAD
         /client/proc/do_not_use_these
-=======
-	/client/proc/do_not_use_these
->>>>>>> dde28ee9dad4e35aa3f95fb108f9f5fed1f03a1f
         ,/client/proc/camera_view
         ,/client/proc/sec_camera_report
         ,/client/proc/intercom_view
@@ -133,11 +129,6 @@ var/list/debug_verbs = list (
         ,/client/proc/count_objects_on_z_level
         ,/client/proc/count_objects_all
         ,/client/proc/cmd_assume_direct_control
-<<<<<<< HEAD
-        ,/client/proc/jump_to_dead_group
-        ,/client/proc/startSinglo
-=======
->>>>>>> dde28ee9dad4e35aa3f95fb108f9f5fed1f03a1f
         ,/client/proc/ticklag
         ,/client/proc/cmd_admin_grantfullaccess
         ,/client/proc/kaboom
@@ -229,12 +220,8 @@ var/list/debug_verbs = list (
 	for(var/turf/T in location.zone.contents)
 		images += image(green, T,"zasdebug", TURF_LAYER)
 		testZAScolors_turfs += T
-<<<<<<< HEAD
 	for(var/connection_edge/zone/edge in location.zone.edges)
 		var/zone/Z = edge.get_connected_zone(location.zone)
-=======
-	for(var/zone/Z in location.zone.connected_zones)
->>>>>>> dde28ee9dad4e35aa3f95fb108f9f5fed1f03a1f
 		testZAScolors_zones += Z
 		for(var/turf/T in Z.contents)
 			images += image(blue, T,"zasdebug",TURF_LAYER)
