@@ -5,7 +5,7 @@
 
 	if(!check_rights(R_ADMIN))	return
 
-	msg = copytext(sanitize_multi(html_decode(msg)), 1, MAX_MESSAGE_LEN)
+	msg = sanitize_uni(msg)
 	if(!msg)	return
 
 	log_admin("[key_name(src)] : [msg]")
@@ -16,8 +16,6 @@
 			if(R_ADMIN & C.holder.rights)
 				C << msg
 
-	feedback_add_details("admin_verb","M") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 /client/proc/cmd_mod_say(msg as text)
 	set category = "Special Verbs"
 	set name = "Msay"
@@ -25,7 +23,7 @@
 
 	if(!check_rights(R_ADMIN|R_MOD))	return
 
-	msg = copytext(sanitize_multi(html_decode(msg)), 1, MAX_MESSAGE_LEN)
+	msg = sanitize_uni(msg)
 	log_admin("MOD: [key_name(src)] : [msg]")
 
 	if (!msg)

@@ -146,10 +146,6 @@
 	S["gen_record"]			>> gen_record
 	S["be_special"]			>> be_special
 	S["disabilities"]		>> disabilities
-	S["player_alt_titles"]		>> player_alt_titles
-	S["used_skillpoints"]	>> used_skillpoints
-	S["skills"]				>> skills
-	S["skill_specialization"] >> skill_specialization
 	S["organ_data"]			>> organ_data
 
 	S["nanotrasen_relation"] >> nanotrasen_relation
@@ -193,10 +189,7 @@
 	job_engsec_med = sanitize_integer(job_engsec_med, 0, 65535, initial(job_engsec_med))
 	job_engsec_low = sanitize_integer(job_engsec_low, 0, 65535, initial(job_engsec_low))
 
-	if(!skills) skills = list()
-	if(!used_skillpoints) used_skillpoints= 0
 	if(isnull(disabilities)) disabilities = 0
-	if(!player_alt_titles) player_alt_titles = new()
 	if(!organ_data) src.organ_data = list()
 	//if(!skin_style) skin_style = "Default"
 
@@ -245,12 +238,8 @@
 	S["med_record"]			<< med_record
 	S["sec_record"]			<< sec_record
 	S["gen_record"]			<< gen_record
-	S["player_alt_titles"]		<< player_alt_titles
 	S["be_special"]			<< be_special
 	S["disabilities"]		<< disabilities
-	S["used_skillpoints"]	<< used_skillpoints
-	S["skills"]				<< skills
-	S["skill_specialization"] << skill_specialization
 	S["organ_data"]			<< organ_data
 
 	S["nanotrasen_relation"] << nanotrasen_relation

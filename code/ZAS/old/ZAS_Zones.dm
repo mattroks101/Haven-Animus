@@ -417,11 +417,15 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 		if(unsimulated_tiles && unsimulated_tiles.len)
 			UpdateUnsimAvg()
-			air.copy_from(air_unsim)
+			if(air_unsim)
+				air.copy_from(air_unsim)
+			else
+				air_unsim = new
 
 		if(!archived_air)
 			archived_air = new
-		archived_air.copy_from(air)
+		if(air)
+			archived_air.copy_from(air)
 
 
 /zone/proc/CheckStatus()

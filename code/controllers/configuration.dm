@@ -28,7 +28,6 @@
 	var/vote_autotransfer_interval = 66000 // length of time before next sequential autotransfer vote
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
-//	var/enable_authentication = 0		// goon authentication
 	var/del_new_on_log = 1				// del's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
@@ -81,8 +80,6 @@
 
 	var/forbid_singulo_possession = 0
 
-	//game_options.txt configs
-
 	var/health_threshold_softcrit = 0
 	var/health_threshold_crit = 0
 	var/health_threshold_dead = -100
@@ -113,8 +110,6 @@
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
 	var/use_age_restriction_for_jobs = 0 //Do jobs use account age restrictions? --requires database
 
-	var/simultaneous_pm_warning_timeout = 100
-
 	var/use_recursive_explosions //Defines whether the server uses recursive or circular explosions.
 
 	var/assistant_maint = 0 //Do assistants get maint access?
@@ -122,13 +117,7 @@
 	var/ghost_interaction = 1
 
 	var/comms_password = ""
-/*
-	var/use_irc_bot = 0
-	var/irc_bot_host = ""
-	var/main_irc = ""
-	var/admin_irc = ""
-	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
-*/
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -147,7 +136,7 @@
 		del(M)
 	src.votable_modes += "secret"
 
-/datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
+/datum/configuration/proc/load(filename, type = "config")
 	var/list/Lines = file2list(filename)
 
 	for(var/t in Lines)
@@ -230,10 +219,7 @@
 
 				if ("log_hrefs")
 					config.log_hrefs = 1
-/*
-				if ("log_runtime")
-					config.log_runtime = 1
-*/
+
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
 
@@ -273,9 +259,6 @@
 				if ("allow_ai")
 					config.allow_ai = 1
 
-//				if ("authentication")
-//					config.enable_authentication = 1
-
 				if ("norespawn")
 					config.respawn = 0
 
@@ -284,10 +267,7 @@
 
 				if ("serversuffix")
 					config.server_suffix = 1
-/*
-				if ("nudge_script_path")
-					config.nudge_script_path = value
-*/
+
 				if ("hostedby")
 					config.hostedby = value
 
@@ -368,9 +348,6 @@
 
 				if("popup_admin_pm")
 					config.popup_admin_pm = 1
-
-				if("allow_holidays")
-					Holiday = 1
 
 				if("ticklag")
 					Ticklag = text2num(value)
@@ -482,53 +459,6 @@
 				else
 					diary << "Unknown setting in configuration: '[name]'"
 
-/*
-		else if(type == "game_options")
-			if(!value)
-				diary << "Unknown value for setting [name] in [filename]."
-			value = text2num(value)
-
-			switch(name)
-				if("health_threshold_crit")
-					config.health_threshold_crit = value
-				if("health_threshold_softcrit")
-					config.health_threshold_softcrit = value
-				if("health_threshold_dead")
-					config.health_threshold_dead = value
-				if("revival_pod_plants")
-					config.revival_pod_plants = value
-				if("revival_cloning")
-					config.revival_cloning = value
-				if("revival_brain_life")
-					config.revival_brain_life = value
-/*				if("run_speed")
-					config.run_speed = value
-				if("walk_speed")
-					config.walk_speed = value
-				if("human_delay")
-					config.human_delay = value
-				if("robot_delay")
-					config.robot_delay = value
-				if("monkey_delay")
-					config.monkey_delay = value
-				if("alien_delay")
-					config.alien_delay = value
-				if("slime_delay")
-					config.slime_delay = value
-				if("animal_delay")
-					config.animal_delay = value
-					*/
-				if("organ_health_multiplier")
-					config.organ_health_multiplier = value / 100
-				if("organ_regeneration_multiplier")
-					config.organ_regeneration_multiplier = value / 100
-				if("bones_can_break")
-					config.bones_can_break = value
-				if("limbs_can_break")
-					config.limbs_can_break = value
-				else
-					diary << "Unknown setting in configuration: '[name]'"
-*/
 /datum/configuration/proc/loadsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)
 	for(var/t in Lines)
@@ -566,49 +496,7 @@
 				sqlpass = value
 			else
 				diary << "Unknown setting in configuration: '[name]'"
-/*
-/datum/configuration/proc/loadforumsql(filename)  // -- TLE
-	var/list/Lines = file2list(filename)
-	for(var/t in Lines)
-		if(!t)	continue
 
-		t = trim(t)
-		if (length(t) == 0)
-			continue
-		else if (copytext(t, 1, 2) == "#")
-			continue
-
-		var/pos = findtext(t, " ")
-		var/name = null
-		var/value = null
-
-		if (pos)
-			name = lowertext(copytext(t, 1, pos))
-			value = copytext(t, pos + 1)
-		else
-			name = lowertext(t)
-
-		if (!name)
-			continue
-
-		switch (name)
-			if ("address")
-				forumsqladdress = value
-			if ("port")
-				forumsqlport = value
-			if ("database")
-				forumsqldb = value
-			if ("login")
-				forumsqllogin = value
-			if ("password")
-				forumsqlpass = value
-			if ("activatedgroup")
-				forum_activated_group = value
-			if ("authenticatedgroup")
-				forum_authenticated_group = value
-			else
-				diary << "Unknown setting in configuration: '[name]'"
-*/
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).

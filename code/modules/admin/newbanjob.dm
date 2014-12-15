@@ -6,9 +6,9 @@ var/savefile/Banlistjob
 	ClearTempbansjob()
 	var/id = clientvar.computer_id
 	var/key = clientvar.ckey
-	if (guest_jobbans(rank))
-		if(config.guest_jobban && IsGuestKey(key))
-			return 1
+
+	if(IsGuestKey(key))
+		return 1
 	Banlistjob.cd = "/base"
 	if (Banlistjob.dir.Find("[key][id][rank]"))
 		return 1
@@ -176,8 +176,6 @@ var/savefile/Banlistjob
 		log_admin("[key_name_admin(usr)] unjobbanned [key] from [rank]")
 		message_admins("[key_name_admin(usr)] unjobbanned:[key] from [rank]")
 		ban_unban_log_save("[key_name_admin(usr)] unjobbanned [key] from [rank]")
-		feedback_inc("ban_job_unban",1)
-		feedback_add_details("ban_job_unban","- [rank]")
 
 	for (var/A in Banlistjob.dir)
 		Banlistjob.cd = "/base/[A]"

@@ -92,15 +92,9 @@ datum/preferences
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
 
-	var/used_skillpoints = 0
-	var/skill_specialization = null
-	var/list/skills = list() // skills can range from 0 to 3
-
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
 	var/list/organ_data = list()
-
-	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
 	var/med_record = ""
 	var/sec_record = ""
@@ -996,9 +990,6 @@ datum/preferences
 
 		character.h_style = h_style
 		character.f_style = f_style
-
-
-		character.skills = skills
 
 		// Destroy/cyborgize organs
 

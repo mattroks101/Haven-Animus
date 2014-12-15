@@ -5,16 +5,12 @@ var/global/normal_ooc_colour = "#002eb8"
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
 	set category = "OOC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
-
 	if(!mob)	return
 	if(IsGuestKey(key))
 		src << "Guests may not use OOC."
 		return
 
-	msg = copytext(sanitize_multi(msg), 1, MAX_MESSAGE_LEN)
+	msg = sanitize(msg)
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_OOC))

@@ -245,4 +245,3 @@
 /datum/nanomanager/proc/send_resources(client)
 	for(var/file in asset_files)
 		client << browse_rsc(file)	// send the file to the client
-

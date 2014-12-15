@@ -34,56 +34,33 @@
 			index = findtext(t, char)
 	return t
 
-proc/sanitize_russian(var/msg)
+proc/sanitize_PDA(var/msg)
 	var/index = findtext(msg, "ÿ")
 	while(index)
-		msg = copytext(msg, 1, index) + "&#255;" + copytext(msg, index+1)
+		msg = copytext(msg, 1, index) + "&#1103;" + copytext(msg, index+1)
 		index = findtext(msg, "ÿ")
+	index = findtext(msg, "&#255;")
+	while(index)
+		msg = copytext(msg, 1, index) + "&#1103;" + copytext(msg, index+1)
+		index = findtext(msg, "&#255;")
 	return msg
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ï¿½"="ï¿½"))
+/proc/sanitize(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ÿ"="&#255;"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
 			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
 			index = findtext(t, char)
-	return html_encode(t)
+	return strip_html_simple(t)
 
-/proc/sanitize_simple_uni(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
-	for(var/char in repl_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
-			index = findtext(t, char)
-	return html_encode(t)
-
-/proc/sanitize_multi(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ï¿½"="ï¿½"))
-	t = sanitize_russian(t)
+/proc/sanitize_uni(var/t,var/list/repl_chars = list("ÿ"="&#255;"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
 			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
 			index = findtext(t, char)
 	return t
-
-//Runs byond's sanitization proc along-side sanitize_simple
-/proc/sanitize(var/t,var/list/repl_chars = null)
-	return sanitize_simple(t,repl_chars)
-
-/proc/sanitize_uni(var/t,var/list/repl_chars = null)
-	return sanitize_simple(t,repl_chars)
-
-//Runs sanitize and strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
-/proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((sanitize(strip_html_simple(t))),1,limit)
-
-//Runs byond's sanitization proc along-side strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
-/proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((sanitize(strip_html_simple(t))),1,limit)
-
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(var/text, var/max_length=512)
@@ -136,16 +113,9 @@ proc/sanitize_russian(var/msg)
 				number_of_alphanumeric++
 				last_char_group = 3
 
-			// '  -  .
-			if(39,45,46)			//Common name punctuation
+			// '  -
+			if(39,45)			//Common name punctuation
 				if(!last_char_group) continue
-				t_out += ascii2text(ascii_char)
-				last_char_group = 2
-
-			// ~   |   @  :  #  $  %  &  *  +
-			if(126,124,64,58,35,36,37,38,42,43)			//Other symbols that we'll allow (mainly for AI)
-				if(!last_char_group)		continue	//suppress at start of string
-				if(!allow_numbers)			continue
 				t_out += ascii2text(ascii_char)
 				last_char_group = 2
 
@@ -171,7 +141,7 @@ proc/sanitize_russian(var/msg)
 //if tag is not in whitelist (var/list/paper_tag_whitelist in global.dm)
 //relpaces < with &lt;
 proc/checkhtml(var/t)
-	t = sanitize_simple(t, list("&#"="."))
+	t = html_encode(sanitize_uni(t, list("&#"=".")))
 	var/p = findtext(t,"<",1)
 	while (p)	//going through all the tags
 		var/start = p++

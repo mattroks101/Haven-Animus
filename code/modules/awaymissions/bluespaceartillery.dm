@@ -50,16 +50,3 @@
 			var/loc = pick(L)
 			explosion(loc,2,5,11)
 			reload = 0
-
-/*mob/proc/openfire()
-	var/A
-	A = input("Area to jump bombard", "Open Fire", A) in teleportlocs
-	var/area/thearea = teleportlocs[A]
-	command_alert("Bluespace artillery fire detected. Brace for impact.")
-	spawn(30)
-	var/list/L = list()
-
-	for(var/turf/T in get_area_turfs(thearea.type))
-		L+=T
-	var/loc = pick(L)
-	explosion(loc,2,5,11)*/

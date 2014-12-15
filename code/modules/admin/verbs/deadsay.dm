@@ -26,7 +26,7 @@
 	if (src.holder.rights & R_ADMIN)
 		stafftype = "ADMIN"
 
-	msg = copytext(sanitize_multi(html_decode(msg)), 1, MAX_MESSAGE_LEN)
+	msg = sanitize_uni(msg)
 	log_admin("[key_name(src)] : [msg]")
 
 	if (!msg)
@@ -43,5 +43,3 @@
 
 		else if(M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD)) // show the message to regular ghosts who have deadchat toggled on
 			M.show_message(rendered, 2)
-
-	feedback_add_details("admin_verb","D") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

@@ -1009,6 +1009,7 @@
 		if(status_flags & GODMODE)	return 0	//godmode
 		adjustToxLoss(total_plasmaloss)
 
+<<<<<<< HEAD
 		var/datum/organ/internal/diona/node/light_organ = locate() in internal_organs
 		if(light_organ && !light_organ.is_broken())
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
@@ -1064,11 +1065,14 @@
 				update_inv_w_uniform(0)
 				update_inv_wear_suit()
 */
+=======
+>>>>>>> dde28ee9dad4e35aa3f95fb108f9f5fed1f03a1f
 
 		// nutrition decrease
 		if (nutrition > 0 && stat != 2)
 			nutrition = max (0, nutrition - HUNGER_FACTOR)
 
+<<<<<<< HEAD
 		if (nutrition > 450)
 			if(overeatduration < 600) //capped so people don't take forever to unfat
 				overeatduration++
@@ -1077,6 +1081,9 @@
 				overeatduration -= 2 //doubled the unfat rate
 
 		if(species.flags & IS_PLANT && (!light_organ || light_organ.is_broken()))
+=======
+		if(species.flags & REQUIRE_LIGHT)
+>>>>>>> dde28ee9dad4e35aa3f95fb108f9f5fed1f03a1f
 			if(nutrition < 200)
 				take_overall_damage(2,0)
 				traumatic_shock++

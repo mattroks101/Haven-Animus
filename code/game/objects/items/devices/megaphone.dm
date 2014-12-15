@@ -9,7 +9,7 @@
 	var/spamcheck = 0
 	var/emagged = 0
 	var/insults = 0
-	var/list/insultmsg = list("ÑÎÑÈ ÕÓÉ!", "ß ÏĞÅÄÀÒÅËÜ!", "ÑÁ - ÏÈÄÎĞÀÑÛ!", "Ó ÌÅÍß ÁÎÌÁÀ!", "ÊÀÏÈÒÀÍ - ÃÎÍÄÎÍ!", "ÇÀ ÑÈÍÄÈÊÀÒ!")
+	var/list/insultmsg = list("ÑÈÍÄÈÊÀÒ - ÑÈËÀ, ÍÒ - ÌÎÃÈËÀ!", "ÑÁ - ÏÈÄÎĞÀÑÛ!", "ÊÀÏÈÒÀÍ - ÃÎÍÄÎÍ!", "ÕÎÑ - ÕÓÅÑÎÑ!")
 
 /obj/item/device/megaphone/attack_self(mob/living/user as mob)
 	if (user.client)
@@ -22,10 +22,10 @@
 	if(user.silent)
 		return
 	if(spamcheck)
-		user << "\red \The [src] needs to recharge!"
+		user << "\red Íå òàê áûñòğî, êîâáîé!"
 		return
 
-	var/message = copytext(sanitize_multi(input(user, "Shout a message?", "Megaphone", null)  as text),1,MAX_MESSAGE_LEN)
+	var/message = sanitize(input(user, "Shout a message?", "Megaphone", null)  as text)
 	if(!message)
 		return
 	message = capitalize(message)
@@ -34,7 +34,7 @@
 			if(insults)
 				for(var/mob/O in (viewers(user)))
 					O.show_message("<B>[user]</B> broadcasts, <FONT size=3>\"[pick(insultmsg)]\"</FONT>",2) // 2 stands for hearable message
-				insults--
+				//insults--
 			else
 				user << "\red *BZZZZzzzzzt*"
 		else
@@ -50,6 +50,6 @@
 	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
 		user << "\red You overload \the [src]'s voice synthesizer."
 		emagged = 1
-		insults = rand(1, 3)//to prevent dickflooding
+		insults = 1//to prevent dickflooding
 		return
 	return

@@ -52,7 +52,7 @@
 			m_type = 1
 
 		if ("custom")
-			var/input = copytext(sanitize_multi(input("Choose an emote to display.") as text|null),1,MAX_MESSAGE_LEN)
+			var/input = sanitize(input("Choose an emote to display.") as text|null)
 			if (!input)
 				return
 			var/input2 = input("Is this a visible or hearable emote?") in list("Visible","Hearable")
@@ -729,7 +729,7 @@
 								if(prob(20))
 									switch(pick(1,2,3))
 										if(1)
-											M.say("[M == src ? "&#255;" : src.name] пёрнул!!")
+											M.say("[M == src ? "&#255;" : src.name] пїЅпїЅпїЅпїЅпїЅ!!")
 										if(2)
 											M.emote("giggle")
 										if(3)
@@ -867,7 +867,7 @@
 			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, elaugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, vomit, twitch_s, whimper,\nwink, yawn. For custom emotes use '*emote.'"
 
 		else
-			message = "<B>[src]</B> [act]"
+			message = "<B>[src]</B> [sanitize(act)]"
 			cooldown = 0
 
 
@@ -875,7 +875,7 @@
 
 
 	if (message)
-		message = sanitize_multi(message)
+		message = sanitize_uni(message)
 		log_emote("[name]/[key] : [message]")
 
  //Hearing gasp and such every five seconds is not good emotes were not global for a reason.
@@ -934,4 +934,4 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  copytext(sanitize_multi(input(usr, "This is [src]. \He is...", "Pose", null)  as text), 1, MAX_MESSAGE_LEN)
+	pose =  sanitize(input(usr, "This is [src]. \He is...", "Pose", null)  as text)

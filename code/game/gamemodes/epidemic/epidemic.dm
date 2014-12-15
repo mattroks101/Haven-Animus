@@ -107,8 +107,6 @@
 		world << "\red There aren't enough players for this mode!"
 		world << "\red Rebooting world in 5 seconds."
 
-		if(blackbox)
-			blackbox.save_all_data_to_sql()
 		sleep(50)
 		world.Reboot()
 
@@ -215,10 +213,8 @@
 //////////////////////////////////////////////////////////////////////
 /datum/game_mode/epidemic/declare_completion()
 	if(finished == 1)
-		feedback_set_details("round_end_result","win - epidemic cured")
 		world << "\red <FONT size = 3><B> The virus outbreak was contained! The crew wins!</B></FONT>"
 	else if(finished == 2)
-		feedback_set_details("round_end_result","loss - rev heads killed")
 		world << "\red <FONT size = 3><B> The crew succumbed to the epidemic!</B></FONT>"
 	..()
 	return 1

@@ -21,14 +21,6 @@
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
 /turf/simulated/Entered(atom/A, atom/OL)
-	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "\red Movement is admin-disabled." //This is to identify lag problems
-		return
-
-	if(istype(src,/turf/simulated/floor/open))
-		..()
-		return
-
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
 		if(M.lying)        return
@@ -53,39 +45,6 @@
 						O.footstep++
 				else
 					playsound(src, "clownstep", 20, 1)
-			else if(istype(H.shoes, /obj/item/clothing/shoes/magboots))
-				var/obj/item/clothing/shoes/S = H.shoes
-				if(H.m_intent == "run")
-					if(S.footstep >= 1)
-						S.footstep = 0
-					else
-						S.footstep++
-					if(S.footstep == 0)
-						playsound(src, "footsteps_magboots", 20, 1)
-				else
-					playsound(src, "footsteps_magboots", 10, 1)
-			else if(istype(H.shoes, /obj/item/clothing/shoes))
-				var/obj/item/clothing/shoes/S = H.shoes
-				if(H.m_intent == "run")
-					if(S.footstep >= 1)
-						S.footstep = 0
-					else
-						S.footstep++
-					if(S.footstep == 0)
-						if(is_wood_floor())
-							playsound(src, "footsteps_wood", 20, 1) // this will get annoying very fast.
-						else if(is_carpet_floor())
-							playsound(src, "footsteps_carpet", 20, 1) // this will get annoying very fast.
-						else
-							playsound(src, "footsteps_metal", 20, 1) // this will get annoying very fast.
-				else
-					if(is_wood_floor())
-						playsound(src, "footsteps_wood", 10, 1) // this will get annoying very fast.
-					else if(is_carpet_floor())
-						playsound(src, "footsteps_carpet", 10, 1) // this will get annoying very fast.
-					else
-						playsound(src, "footsteps_metal", 10, 1) // this will get annoying very fast.
-
 
 			// Tracking blood
 			var/list/bloodDNA = null

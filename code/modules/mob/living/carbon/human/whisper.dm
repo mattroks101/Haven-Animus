@@ -1,12 +1,9 @@
 /mob/living/carbon/human/whisper(message as text)
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
 	if(zombie)
 		return
 
-	message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
+	message = trim(sanitize(message))
 
 	if (!message || silent || miming)
 		return
@@ -61,7 +58,7 @@
 			message = replacetext(message, "u", "µ")
 			message = replacetext(message, "b", "ß")
 
-	message = sanitize_multi(message)
+	message = sanitize(message)
 
 	if (src.stuttering)
 		message = stutter(message)
@@ -112,7 +109,7 @@
 		var/message_a = message
 
 		if (italics)
-			message_a = "<i>[sanitize_multi(message_a)]</i>"
+			message_a = "<i>[sanitize(message_a)]</i>"
 		//This appears copied from carbon/living say.dm so the istype check for mob is probably not needed. Appending for src is also not needed as the game will check that automatically.
 		rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] whispers, <span class='message'>\"[message_a]\"</span></span>"
 

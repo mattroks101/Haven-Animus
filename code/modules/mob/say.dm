@@ -9,20 +9,14 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
+
 	usr.say(message)
 
 /mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
-
-	message = trim(copytext(sanitize_multi(message), 1, MAX_MESSAGE_LEN))
+	message = trim(sanitize(message))
 
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
@@ -32,10 +26,6 @@
 /mob/proc/say_dead(var/message)
 	var/name = src.real_name
 	var/alt_name = ""
-
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
-		return
 
 	if(!src.client.holder)
 		if(!dsay_allowed)

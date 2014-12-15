@@ -477,6 +477,7 @@ What are the archived variables for?
 	//Inputs: Gas to copy
 	//Outputs: 1
 
+	if(!sample) return 0
 	oxygen = sample.oxygen
 	carbon_dioxide = sample.carbon_dioxide
 	nitrogen = sample.nitrogen

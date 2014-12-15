@@ -10,10 +10,10 @@ ALERT_RED_DOWNTO The self-destruct mechanism has been deactivated, there is stil
 ALERT_DELTA The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
-ADMIN_LEGACY_SYSTEM
+#ADMIN_LEGACY_SYSTEM
 
 ## Add a # infront of this if you want to use the SQL based banning system. The legacy systems use the files in the data folder. You need to set up your database to use the SQL based system.
-BAN_LEGACY_SYSTEM
+#BAN_LEGACY_SYSTEM
 
 ## Add a # here if you wish to use the setup where jobs have more access. This is intended for servers with low populations - where there are not enough players to fill all roles, so players need to do more than just one job. Also for servers where they don't want people to hide in their own departments.
 JOBS_HAVE_MINIMAL_ACCESS
@@ -59,16 +59,16 @@ LOG_ATTACK
 LOG_PDA
 
 ## log all Topic() calls (for use by coders in tracking down Topic issues)
-# LOG_HREFS
+LOG_HREFS
 
 ## log world.log and runtime errors to a file
-# LOG_RUNTIME
+LOG_RUNTIME
 
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
 ## sql switching
-# SQL_ENABLED
+SQL_ENABLED
 
 ## disconnect players who did nothing during 10 minutes
 # KICK_INACTIVE
@@ -197,10 +197,10 @@ GUEST_BAN
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
 ##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.9
+TICKLAG 0.5
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
-TICKCOMP 0
+TICKCOMP 1
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0
@@ -271,3 +271,69 @@ ALIEN_DELAY 0
 METROID_DELAY 0
 ANIMAL_DELAY 0
 
+### HEALTH ###
+
+## level of health at which a mob goes into continual shock (soft crit)
+HEALTH_THRESHOLD_SOFTCRIT 0
+
+## level of health at which a mob becomes unconscious (crit)
+HEALTH_THRESHOLD_CRIT -50
+
+## level of health at which a mob becomes dead
+HEALTH_THRESHOLD_DEAD -100
+
+## Determines whether bones can be broken through excessive damage to the organ
+## 0 means bones can't break, 1 means they can
+BONES_CAN_BREAK 1
+## Determines whether limbs can be amputated through excessive damage to the organ
+## 0 means limbs can't be amputated, 1 means they can
+LIMBS_CAN_BREAK 1
+
+## multiplier which enables organs to take more damage before bones breaking or limbs being destroyed
+## 100 means normal, 50 means half
+ORGAN_HEALTH_MULTIPLIER 100
+
+## multiplier which influences how fast organs regenerate naturally
+## 100 means normal, 50 means half
+ORGAN_REGENERATION_MULTIPLIER 75
+
+### REVIVAL ###
+
+## whether pod plants work or not
+REVIVAL_POD_PLANTS 1
+
+## whether cloning tubes work or not
+REVIVAL_CLONING 1
+
+## amount of time (in hundredths of seconds) for which a brain retains the "spark of life" after the person's death (set to -1 for infinite)
+REVIVAL_BRAIN_LIFE -1
+
+
+
+### MOB MOVEMENT ###
+
+## We suggest editing these variabled in-game to find a good speed for your server. To do this you must be a high level admin. Open the 'debug' tab ingame. Select "Debug Controller" and then, in the popup, select "Configuration". These variables should have the same name.
+
+## These values get directly added to values and totals in-game. To speed things up make the number negative, to slow things down, make the number positive.
+
+
+## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied. 
+RUN_SPEED 2
+WALK_SPEED 5
+
+
+## The variables below affect the movement of specific mob types.
+HUMAN_DELAY 0
+ROBOT_DELAY 0
+MONKEY_DELAY 0
+ALIEN_DELAY 0
+METROID_DELAY 0
+ANIMAL_DELAY 0
+
+
+### Miscellaneous ###
+
+## Config options which, of course, don't fit into previous categories.
+
+## Remove the # in front of this config option to have loyalty implants spawn by default on your server.
+#USE_LOYALTY_IMPLANTS

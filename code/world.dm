@@ -26,14 +26,10 @@
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
-/*
-	if(config && config.log_runtime)
-		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
-*/
+
 	callHook("startup")
 	//Emergency Fix
 	load_admins()
-	load_mods()
 	//end-emergency fix
 
 	src.update_status()
@@ -49,8 +45,6 @@
 	spawn(3000)		//so we aren't adding to the round-start lag
 		if(config.ToRban)
 			ToRban_autoupdate()
-		if(config.kick_inactive)
-			KickInactiveClients()
 
 #undef RECOMMENDED_VERSION
 
@@ -122,22 +116,6 @@
 
 	..(reason)
 
-
-#define INACTIVITY_KICK	6000	//10 minutes in ticks (approx.)
-/world/proc/KickInactiveClients()
-	spawn(-1)
-		set background = 1
-		while(1)
-			sleep(INACTIVITY_KICK)
-			for(var/client/C in clients)
-				if(C.is_afk(INACTIVITY_KICK))
-					if(!istype(C.mob, /mob/dead))
-						log_access("AFK: [key_name(C)]")
-						C << "\red You have been inactive for more than 10 minutes and have been disconnected."
-						del(C)
-#undef INACTIVITY_KICK
-
-
 /hook/startup/proc/loadMode()
 	world.load_mode()
 	return 1
@@ -159,38 +137,14 @@
 	return 1
 
 /world/proc/load_motd()
-	join_motd = sanitize_russian(file2text("config/motd.txt"))
+	join_motd = sanitize_uni(file2text("config/motd.txt"))
 
 /world/proc/load_configuration()
 	config = new /datum/configuration()
 	config.load("config/config.txt")
-	config.load("config/game_options.txt","game_options")
 	config.loadsql("config/dbconfig.txt")
-//	config.loadforumsql("config/forumdbconfig.txt")
 	// apply some settings from config..
 	abandon_allowed = config.respawn
-
-/hook/startup/proc/loadMods()
-	world.load_mods()
-	return 1
-/world/proc/load_mods()
-	if(config.admin_legacy_system)
-		var/text = file2text("config/moderators.txt")
-		if (!text)
-			diary << "Failed to load config/mods.txt\n"
-		else
-			var/list/lines = text2list(text, "\n")
-			for(var/line in lines)
-				if (!line)
-					continue
-
-				if (copytext(line, 1, 2) == ";")
-					continue
-
-				var/rights = admin_ranks["Moderator"]
-				var/ckey = copytext(line, 1, length(line)+1)
-				var/datum/admins/D = new /datum/admins("Moderator", rights, ckey)
-				D.associate(directory[ckey])
 
 /world/proc/update_status()
 	var/s = ""
@@ -235,12 +189,6 @@
 	else if (n > 0)
 		features += "~[n] player"
 
-	/*
-	is there a reason for this? the byond site shows 'hosted by X' when there is a proper host already.
-	if (host)
-		features += "hosted by <b>[host]</b>"
-	*/
-
 	if (!host && config && config.hostedby)
 		features += "hosted by <b>[config.hostedby]</b>"
 
@@ -260,8 +208,8 @@ var/failed_db_connections = 0
 	else
 		world.log << "Feedback database connection established."
 	return 1
-proc/setup_database_connection()
 
+proc/setup_database_connection()
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
 		return 0
 
@@ -281,14 +229,12 @@ proc/setup_database_connection()
 	else
 		failed_db_connections++		//If it failed, increase the failed connections counter.
 		world.log << dbcon.ErrorMsg()
-
 	return .
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
 proc/establish_db_connection()
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
-
 	if(!dbcon || !dbcon.IsConnected())
 		return setup_database_connection()
 	else
