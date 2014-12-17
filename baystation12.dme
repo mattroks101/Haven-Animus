@@ -900,6 +900,7 @@
 #include "code\modules\mob\abilities.dm"
 #include "code\modules\mob\death.dm"
 #include "code\modules\mob\emote.dm"
+#include "code\modules\mob\hear_say.dm"
 #include "code\modules\mob\holder.dm"
 #include "code\modules\mob\inventory.dm"
 #include "code\modules\mob\language.dm"
@@ -1427,5 +1428,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\NSV_Luna11321.dmm"
+#include "maps\test.dmm"
 // END_INCLUDE

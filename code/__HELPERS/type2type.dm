@@ -169,6 +169,20 @@
 		#undef S4
 		#undef S1
 
+//Attaches each element of a list to a single string seperated by 'seperator'.
+/proc/dd_list2text(var/list/the_list, separator)
+	var/total = the_list.len
+	if(!total)
+		return
+	var/count = 2
+	var/newText = "[the_list[1]]"
+	while(count <= total)
+		if(separator)
+			newText += separator
+		newText += "[the_list[count]]"
+		count++
+	return newText
+
 
 //slower then list2text, but correctly processes associative lists.
 proc/tg_list2text(list/list, glue=",")
@@ -192,6 +206,29 @@ proc/tg_list2text(list/list, glue=",")
 		. += copytext(text, last_found, found)
 		last_found = found + delim_len
 	while(found)
+
+/proc/dd_text2list(text, separator, var/list/withinList)
+	var/textlength = length(text)
+	var/separatorlength = length(separator)
+	if(withinList && !withinList.len) withinList = null
+	var/list/textList = new()
+	var/searchPosition = 1
+	var/findPosition = 1
+	var/loops = 0
+	while(1)
+		if(loops >= 1000)
+			break
+		loops++
+
+		findPosition = findtext(text, separator, searchPosition, 0)
+		var/buggyText = copytext(text, searchPosition, findPosition)
+		if(!withinList || (buggyText in withinList)) textList += "[buggyText]"
+		if(!findPosition) return textList
+		searchPosition = findPosition + separatorlength
+		if(searchPosition > textlength)
+			textList += ""
+			return textList
+	return
 
 //Case Sensitive!
 /proc/text2listEx(text, delimiter="\n")

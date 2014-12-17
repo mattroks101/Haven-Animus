@@ -301,3 +301,57 @@ proc/checkhtml(var/t)
 	for(var/i = length(text); i > 0; i--)
 		new_text += copytext(text, i, i+1)
 	return new_text
+
+/proc/upperrustext(text as text)
+	var/t = ""
+	for(var/i = 1, i <= length(text), i++)
+		var/a = text2ascii(text, i)
+		if (a > 223)
+			t += ascii2text(a - 32)
+		else if (a == 184)
+			t += ascii2text(168)
+		else t += ascii2text(a)
+	t = replacetext(t,"&#255;","ß")
+	return t
+
+
+/proc/lowerrustext(text as text)
+	var/t = ""
+	for(var/i = 1, i <= length(text), i++)
+		var/a = text2ascii(text, i)
+		if (a > 191 && a < 224)
+			t += ascii2text(a + 32)
+		else if (a == 168)
+			t += ascii2text(184)
+		else t += ascii2text(a)
+	return t
+
+/proc/rhtml_encode(var/msg)
+        var/list/c = text2list(msg, "ÿ")
+        if(c.len == 1)
+                c = text2list(msg, "&#255;")
+                if(c.len == 1)
+                        return html_encode(msg)
+        var/out = ""
+        var/first = 1
+        for(var/text in c)
+                if(!first)
+                        out += "&#255;"
+                first = 0
+                out += html_encode(text)
+        return out
+
+/proc/rhtml_decode(var/msg)
+        var/list/c = text2list(msg, "ÿ")
+        if(c.len == 1)
+                c = text2list(msg, "&#255;")
+                if(c.len == 1)
+                        return html_decode(msg)
+        var/out = ""
+        var/first = 1
+        for(var/text in c)
+                if(!first)
+                        out += "&#255;"
+                first = 0
+                out += html_decode(text)
+        return out
