@@ -244,11 +244,11 @@
 		message = "[uppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		handled = 1
-	if(slurring)
+/*	if(slurring)
 		message = slur(message)
-		verb = pick("stammers","stutters")
+		verb = pick("stammers","stutters")		//Bydlocoded it into living/say.dm
 		handled = 1
-
+*/
 	var/braindam = getBrainLoss()
 	if(braindam >= 60)
 		handled = 1

@@ -237,15 +237,25 @@ proc/hasorgans(A)
 	return t
 
 // For drunken speak, etc
-proc/slur(phrase) // using cp1251!
-	phrase = rhtml_decode(phrase)
-	var/leng=lentext(phrase)
-	var/counter=lentext(phrase)
-	var/newphrase=""
-	var/newletter=""
+proc/slur(phrase)
+	phrase = html_decode(phrase)
+	var/index = findtext(phrase, "&#255;")
+	while(index)
+		phrase = copytext(phrase, 1, index) + "я" + copytext(phrase, index+1)
+		index = findtext(phrase, "&#255;")
+	var
+		leng=lentext(phrase)
+		counter=lentext(phrase)
+		newphrase=""
+		newletter=""
+
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
-		if(rand(1,3)==3)
+		if(prob(33))
+			if(lowerrustext(newletter)=="о")	newletter="у"
+			if(lowerrustext(newletter)=="ы")	newletter="i"
+			if(lowerrustext(newletter)=="р")	newletter="r"
+			if(lowerrustext(newletter)=="л")	newletter="ль"
 			if(lowerrustext(newletter)=="з")	newletter="с"
 			if(lowerrustext(newletter)=="в")	newletter="ф"
 			if(lowerrustext(newletter)=="б")	newletter="п"
@@ -259,7 +269,12 @@ proc/slur(phrase) // using cp1251!
 			if(9,10)	newletter="<b>[newletter]</b>"
 			if(11,12)	newletter="<big>[newletter]</big>"
 			if(13)	newletter="<small>[newletter]</small>"
-		newphrase+="[newletter]";counter-=1
+		newphrase+="[newletter]"
+		counter-=1
+	index = findtext(newphrase, "я")
+	while(index)
+		newphrase = copytext(newphrase, 1, index) + "&#255;" + copytext(newphrase, index+1)
+		index = findtext(newphrase, "я")
 	return newphrase
 
 /proc/stutter(phrase)
