@@ -21,6 +21,10 @@
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
+/mob/living/silicon/New()
+	..()
+	add_language("Galactic Common")
+
 /mob/living/silicon/proc/cancelAlarm()
 	return
 

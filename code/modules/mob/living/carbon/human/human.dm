@@ -1197,32 +1197,52 @@
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species)
+/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
 
-	if(!new_species)
-		new_species = "Human"
+	if(!dna)
+		if(!new_species)
+			new_species = "Human"
+	else
+		if(!new_species)
+			new_species = dna.species
+		else
+			dna.species = new_species
 
-	if(species && (species.name && species.name == new_species))
-		return
+	if(species)
 
-	if(species && species.language)
-		remove_language(species.language)
+		if(species.name && species.name == new_species)
+			return
+		if(species.language)
+			remove_language(species.language)
+
+		if(species.default_language)
+			remove_language(species.default_language)
+
+		// Clear out their species abilities.
+		species.remove_inherent_verbs(src)
 
 	species = all_species[new_species]
+
+	species.create_organs(src)
 
 	if(species.language)
 		add_language(species.language)
 
-	species.create_organs(src)
+	if(species.default_language)
+		add_language(species.default_language)
+
+	species.handle_post_spawn(src)
 
 	spawn(0)
-		update_icons()
+		regenerate_icons()
+		vessel.add_reagent("blood",560-vessel.total_volume)
+		fixblood()
 
 	if(species)
-		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0
+
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"

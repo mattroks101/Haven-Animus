@@ -92,6 +92,15 @@ var/list/ai_list = list()
 	aiRadio = new(src)
 	aiRadio.myAi = src
 
+	//Languages
+	add_language("Robot Talk", 1)
+	add_language("Galactic Common", 0)
+	add_language("Sol Common", 0)
+	add_language("Sinta'unathi", 0)
+	add_language("Siik'tajr", 0)
+	add_language("Skrellian", 0)
+	add_language("Tradeband", 1)
+	add_language("Gutter", 0)
 
 	if (istype(loc, /turf))
 		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \

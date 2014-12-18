@@ -2,7 +2,6 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	// 0 = old radios
 	// 1 = new radios (subspace technology)
 
-
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
 	name = "ship bounced radio"
@@ -214,11 +213,11 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	Broadcast_Message(connection, A,
 						0, "*garbled automated announcement*", src,
 						message, from, "Automated Announcement", from, "synthesized voice",
-						4, 0, list(1,2,3,4,5,7), 1459)
+						4, 0, list(1), 1459)
 	del(A)
 	return
 
-/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel)
+/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, var/verb = "says", var/datum/language/speaking = null)
 	if(!on) return // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return
@@ -416,7 +415,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						  src, message, displayname, jobname, real_name, M.voice_name,
-		                  filter_type, signal.data["compression"], list(position.z), connection.frequency)
+						  filter_type, signal.data["compression"], list(position.z), connection.frequency,verb,speaking)
 
 
 

@@ -37,7 +37,7 @@
 			var/mob/living/simple_animal/S = speaker
 			message = pick(S.speak)
 		else
-			message = message//stars(message)
+			message = stars(message)
 
 	if(language)
 		style = language.colour
