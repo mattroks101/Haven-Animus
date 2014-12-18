@@ -68,6 +68,11 @@
 	real_name = name
 	..()
 
+/mob/dead/observer/Topic(href, href_list)
+	if (href_list["track"])
+		var/mob/target = locate(href_list["track"]) in mob_list
+		if(target)
+			ManualFollow(target)
 
 /mob/dead/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/weapon/tome))
@@ -382,17 +387,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		following = target
 		src << "\blue Now following [target]"
 		spawn(0)
-			var/turf/pos = get_turf(src)
-			while(loc == pos && target && following == target && client)
+			while(target && following == target && client)
 				var/turf/T = get_turf(target)
 				if(!T)
 					break
 				// To stop the ghost flickering.
 				if(loc != T)
 					loc = T
-				pos = loc
 				sleep(15)
-			following = null
 
 
 /mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
