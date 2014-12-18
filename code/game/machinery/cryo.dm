@@ -198,6 +198,9 @@
 	if(air_contents.total_moles < 10)
 		return
 	if(occupant)
+		if(istype(occupant, /mob/living))
+			var/mob/living/Li = occupant
+			Li.ExtinguishMob()
 		if(occupant.stat == 2)
 			return
 		occupant.bodytemperature += 2*(air_contents.temperature - occupant.bodytemperature)*current_heat_capacity/(current_heat_capacity + air_contents.heat_capacity())
