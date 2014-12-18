@@ -2,7 +2,6 @@
 	layer = 3
 	var/last_move = null
 	var/anchored = 0
-	// var/elevation = 2    - not used anywhere
 	var/move_speed = 10
 	var/l_move_time = 1
 	var/m_flag = 1
@@ -13,6 +12,7 @@
 	var/throw_range = 7
 	var/moved_recently = 0
 	var/mob/pulledby = null
+	glide_size = 8
 
 /atom/movable/Move()
 	var/atom/A = src.loc

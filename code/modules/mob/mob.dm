@@ -871,10 +871,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/get_species()
 	return ""
 
-/mob/proc/flash_weak_pain()
-	flick("weak_pain",pain)
-
-mob/proc/yank_out_object()
+/mob/proc/yank_out_object()
 	set category = "Object"
 	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
@@ -963,7 +960,7 @@ mob/proc/yank_out_object()
 			anchored = 0
 	return 1
 
-mob/living/verb/head()
+/mob/living/verb/head()
 	set hidden = 1
 	usr.unlock_medal("Find Head", 0, "You found head!", "medium")
 

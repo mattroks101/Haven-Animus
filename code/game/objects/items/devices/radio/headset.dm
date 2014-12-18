@@ -110,6 +110,16 @@
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/heads/rd
 
+/obj/item/device/radio/headset/heads/ai_integrated //No need to care about icons, it should be hidden inside the AI anyway.
+	name = "AI Subspace Transceiver"
+	desc = "Integrated AI radio transceiver."
+	icon = 'icons/obj/robot_component.dmi'
+	icon_state = "radio"
+	item_state = "headset"
+	keyslot2 = new /obj/item/device/encryptionkey/heads/captain
+	var/myAi = null    // Atlantis: Reference back to the AI which has this radio.
+	var/disabledAi = 0 // Atlantis: Used to manually disable AI's integrated radio via intellicard menu.
+
 /obj/item/device/radio/headset/heads/hos
 	name = "head of security's headset"
 	desc = "The headset of the man who protects your worthless lifes. To access the security channel, use :s. For command, use :c."

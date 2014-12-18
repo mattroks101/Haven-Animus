@@ -1,6 +1,9 @@
 mob/proc/flash_pain()
 	flick("pain",pain)
 
+mob/proc/flash_weak_pain()
+	flick("weak_pain",pain)
+
 mob/var/list/pain_stored = list()
 mob/var/last_pain_message = ""
 mob/var/next_pain_time = 0

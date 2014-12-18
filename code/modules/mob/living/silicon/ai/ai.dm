@@ -31,6 +31,7 @@ var/list/ai_list = list()
 	var/icon/holo_icon//Default is assigned when AI is created.
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
+	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
 	var/custom_sprite = 0 //For our custom sprites
 //Hud stuff
 
@@ -88,6 +89,9 @@ var/list/ai_list = list()
 	aiPDA.name = name + " (" + aiPDA.ownjob + ")"
 
 	aiMulti = new(src)
+	aiRadio = new(src)
+	aiRadio.myAi = src
+
 
 	if (istype(loc, /turf))
 		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
@@ -689,6 +693,17 @@ var/list/ai_list = list()
 				src.current.SetLuminosity(AI_CAMERA_LUMINOSITY)
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
 
+/mob/living/silicon/ai/proc/control_integrated_radio()
+	set name = "Radio Settings"
+	set desc = "Allows you to change settings of your radio."
+	set category = "AI Commands"
+
+	if(stat == DEAD)
+		return
+
+	src << "Accessing Subspace Transceiver control..."
+	if (src.aiRadio)
+		src.aiRadio.interact(src)
 
 /mob/living/silicon/ai/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))

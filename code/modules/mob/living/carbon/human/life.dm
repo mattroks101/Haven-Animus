@@ -1304,9 +1304,9 @@
 			if(hurtdamage)
 				var/image/I
 				switch(hurtdamage)
-					if(10 to 25)
-						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay1")
-					if(25 to 40)
+//					if(10 to 25)
+//						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay1")
+					if(10 to 40)
 						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay2")
 					if(40 to 55)
 						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay3")

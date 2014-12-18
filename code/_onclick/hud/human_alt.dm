@@ -436,6 +436,11 @@
 	mymob.flash.layer = 17
 
 	mymob.pain = new /obj/screen( null )
+	mymob.pain.icon = ui_style
+	mymob.pain.icon_state = "blank"
+	mymob.pain.name = "pain"
+	mymob.pain.screen_loc = "1,1 to 15,15"
+	mymob.pain.layer = 17
 
 	mymob.zone_sel = new /obj/screen/zone_sel( null )
 	mymob.zone_sel.icon = ui_style
@@ -469,7 +474,7 @@
 */
 	mymob.client.screen = null
 
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.pressure, mymob.toxin, mymob.bodytemp, mymob.internals, mymob.fire, mymob.healths, mymob.nutrition_icon, mymob.pullin, mymob.blind, mymob.flash, mymob.damageoverlay)// mymob.gun_setting_icon, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.pressure, mymob.toxin, mymob.bodytemp, mymob.internals, mymob.fire, mymob.healths, mymob.nutrition_icon, mymob.pullin, mymob.blind, mymob.flash, mymob.damageoverlay, mymob.pain)// mymob.gun_setting_icon, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
 	mymob.client.screen += src.adding + src.hotkeybuttons
 	inventory_shown = 0;
 

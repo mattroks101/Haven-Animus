@@ -11,6 +11,16 @@
 	var/list/alarm_types_show = list("Motion" = 0, "Fire" = 0, "Atmosphere" = 0, "Power" = 0, "Camera" = 0)
 	var/list/alarm_types_clear = list("Motion" = 0, "Fire" = 0, "Atmosphere" = 0, "Power" = 0, "Camera" = 0)
 
+	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
+
+	//Used in say.dm.
+	var/speak_statement = "states"
+	var/speak_exclamation = "declares"
+	var/speak_query = "queries"
+	var/pose //Yes, now AIs can pose too.
+	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
+	var/local_transmit //If set, can only speak to others of the same type within a short range.
+
 /mob/living/silicon/proc/cancelAlarm()
 	return
 

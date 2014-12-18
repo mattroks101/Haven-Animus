@@ -1037,9 +1037,11 @@
 		O.status &= ~ORGAN_BROKEN
 		O.status &= ~ORGAN_BLEEDING
 		O.status &= ~ORGAN_SPLINTED
+		O.status &= ~ORGAN_CUT_AWAY
 		O.status &= ~ORGAN_ATTACHABLE
 		if (!O.amputated)
 			O.status &= ~ORGAN_DESTROYED
+			O.destspawn = 0
 		O.wounds.Cut()
 		O.heal_damage(1000,1000,1,1)
 
@@ -1057,8 +1059,7 @@
 					H.brainmob.mind.transfer_to(src)
 					del(H)
 
-	for(var/E in internal_organs)
-		var/datum/organ/internal/I = internal_organs_by_name[E]
+	for(var/datum/organ/internal/I in internal_organs)
 		I.damage = 0
 
 	for (var/datum/disease/virus in viruses)
@@ -1068,7 +1069,6 @@
 		V.cure(src)
 
 	..()
-
 /mob/living/carbon/human/proc/is_lung_ruptured()
 	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 	return L && L.is_bruised()
