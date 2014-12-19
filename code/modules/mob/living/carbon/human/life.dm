@@ -443,7 +443,6 @@
 
 
 	proc/handle_breath(datum/gas_mixture/breath)
-
 		if(status_flags & GODMODE)
 			return
 
@@ -706,7 +705,9 @@
 
 			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
 			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-			//world << "Environment: [loc_temp], [src]: [bodytemperature], Adjusting: [temp_adj]"
+
+			world << "Environment: [loc_temp], [src]: [bodytemperature], Adjusting: [temp_adj]"
+
 			bodytemperature += temp_adj
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.

@@ -242,6 +242,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 
 /mob/dead/observer/Move(NewLoc, direct)
+	following = null
 	dir = direct
 	if(NewLoc)
 		loc = NewLoc
@@ -367,6 +368,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(!L || !L.len)
 		usr << "No area available."
 
+	following = null
 	usr.loc = pick(L)
 
 /mob/dead/observer/verb/follow()
@@ -420,6 +422,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
 				A.loc = T
+				following = null
 			else
 				A << "This mob is not located in the game world."
 /*
