@@ -706,7 +706,7 @@
 			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
 			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
 
-			world << "Environment: [loc_temp], [src]: [bodytemperature], Adjusting: [temp_adj]"
+//			world << "Environment: [loc_temp], [src]: [bodytemperature], Adjusting: [temp_adj]"
 
 			bodytemperature += temp_adj
 
