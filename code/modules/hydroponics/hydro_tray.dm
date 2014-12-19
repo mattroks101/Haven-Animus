@@ -270,7 +270,7 @@
 		var/light_amount
 		if(A.ul_Lighting)
 			light_amount = (T.ul_GetRed() + T.ul_GetGreen() + T.ul_GetBlue())/3
-			light_available = max(0,min(10,light_amount)-5)
+			light_available = max(0,min(10,light_amount))
 		else
 			light_available =  5
 		if(abs(light_available - seed.ideal_light) > seed.light_tolerance)
@@ -765,7 +765,7 @@
 			if(A)
 				if(A.ul_Lighting)
 					light_amount = (T.ul_GetRed() + T.ul_GetGreen() + T.ul_GetBlue())/3
-					light_available = max(0,min(10,light_amount)-5)
+					light_available = max(0,min(10,light_amount))
 				else
 					light_available =  5
 
