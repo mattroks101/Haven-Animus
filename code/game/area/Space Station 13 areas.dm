@@ -511,6 +511,8 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
 	requires_power = 0
+	ul_Lighting = 0
+	luminosity = 1
 
 /area/vox_station/transit
 	name = "\improper hyperspace"
