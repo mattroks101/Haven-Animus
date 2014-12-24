@@ -4,7 +4,7 @@
 /obj/machinery/computer/security
 	name = "Security Cameras"
 	desc = "Used to access the various cameras on the station."
-	icon_state = "cameras"
+	icon_state = "seccam"
 	var/obj/machinery/camera/current = null
 	var/last_pic = 1.0
 	var/list/network = list("SS13")

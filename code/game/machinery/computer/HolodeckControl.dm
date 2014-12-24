@@ -422,9 +422,6 @@
 /obj/structure/table/holotable/attack_paw(mob/user as mob)
 	return attack_hand(user)
 
-/obj/structure/table/holotable/attack_alien(mob/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
-	return attack_hand(user)
-
 /obj/structure/table/holotable/attack_animal(mob/living/simple_animal/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
 	return attack_hand(user)
 

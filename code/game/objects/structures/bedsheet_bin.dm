@@ -14,8 +14,11 @@ LINEN BINS
 	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
-	w_class = 1.0
+	w_class = 2.0
 	item_color = "white"
+//	pressure_resistance = 1
+//	slot_flags = SLOT_OCLOTHING
+//	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | HEAD
 
 
 /obj/item/weapon/bedsheet/attack_self(mob/user as mob)

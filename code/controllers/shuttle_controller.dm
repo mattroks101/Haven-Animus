@@ -52,12 +52,13 @@ datum/shuttle_controller/proc/shuttlealert(var/X)
 
 
 datum/shuttle_controller/proc/recall()
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 	if(direction == 1)
 		var/timeleft = timeleft()
 		if(alert == 0)
 			if(timeleft >= 600)
 				return
-			captain_announce("The escape pods launch has been canceled.")
+			a.autosay("The escape pods launch has been canceled.", "Escape Computer")
 			world << sound('sound/AI/shuttlerecalled.ogg')
 			setdirection(-1)
 			online = 1
@@ -66,7 +67,7 @@ datum/shuttle_controller/proc/recall()
 					A.readyreset()
 			return
 		else //makes it possible to send shuttle back.
-			captain_announce("The escape pods launch has been canceled.")
+			a.autosay("The escape pods launch has been canceled.", "Escape Computer")
 			setdirection(-1)
 			online = 1
 			alert = 0 // set alert back to 0 after an admin recall
@@ -106,8 +107,29 @@ datum/shuttle_controller/emergency_shuttle/process()
 	if(!online)
 		return
 	var/timeleft = timeleft()
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 	if(timeleft > 1e5)		// midnight rollover protection
 		timeleft = 0
+	if((online) && (timeleft() < last60) && (direction == 1))
+		if(timeleft > 60)
+			a.autosay("[round(timeleft()/60,1)] minutes until escape pod launch.", "Escape Computer")
+			if(timeleft() - 60 > 60)
+				last60 = timeleft() - 60
+			else
+				last60 = 60
+		else if(timeleft > 30)
+			a.autosay("[round(timeleft(),1)] seconds until escape pod launch.", "Escape Computer")
+			if(timeleft() - 10 > 10)
+				last60 = timeleft() - 10
+			else
+				last60 = timeleft() - 1
+		else
+			if(timeleft() > 0)
+				a.autosay("[round(timeleft(),1)] seconds.", "Escape Computer")
+			else
+				a.autosay("Escape pods launched.", "Escape Computer")
+			last60 = timeleft() - 1
+
 	switch(location)
 		if(0)
 
@@ -231,7 +253,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 
 					online = 0
 
-					captain_announce("The Escape Pods have docked with the Central Command.")
+					a.autosay("The Escape Pods have docked with the Central Command.", "Escape Computer")
 
 					return 1
 
@@ -362,14 +384,9 @@ datum/shuttle_controller/emergency_shuttle/process()
 						if(!M.buckled)
 							M.Weaken(5)
 
-				captain_announce("The Escape Pods have left the ship. Estimate [round(timeleft()/60,1)] minutes until they dock at Central Command.")
-
 				return 1
 
 		else
-			return 1
-
-
 			// Just before it leaves, close the damn doors!
 			if(timeleft == 2 || timeleft == 1)
 				var/area/start_location = locate(/area/shuttle/escape/station)
@@ -377,28 +394,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 					spawn(0)
 						D.close()
 						D.locked = 1
-
-			if(timeleft>0)
-				var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
-				if(timeleft > 60)
-					a.autosay("[round(timeleft()/60,1)] minutes until escape pod launch.", "Escape Computer", )
-					if(timeleft() - 60 > 60)
-						last60 = timeleft() - 60
-					else
-						last60 = 60
-				else if(timeleft > 30)
-					a.autosay("[round(timeleft(),1)] seconds until escape pod launch.", "Escape Computer", )
-					if(timeleft() - 10 > 10)
-						last60 = timeleft() - 10
-					else
-						last60 = timeleft() - 1
-				else
-					if(timeleft() > 0)
-						a.autosay("[round(timeleft(),1)] seconds.", "Escape Computer", )
-					else
-						a.autosay("Escape pods launched.", "Escape Computer", )
-					last60 = timeleft() - 1
-				return 0
+				return 1
 
 			/* --- Shuttle leaves the station, enters transit --- */
 

@@ -237,7 +237,7 @@
 
 	playsound(src.loc, 'sound/machines/warning-buzzer.ogg', 75)
 
-	var/obj/item/device/radio/a = new /obj/item/device/radio/(null)
+	var/obj/item/device/radio/a = new /obj/item/device/radio(null)
 	a.autosay("CORE VENTS CYCLING", "Core control computer")
 
 	if(toggled == "1")

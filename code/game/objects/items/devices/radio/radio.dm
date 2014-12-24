@@ -194,7 +194,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 			updateDialog()
 	add_fingerprint(usr)
 
-/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
+/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/verbage = "states") //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
 		if (channel == "department")
@@ -210,10 +210,11 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 		return
 
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
+//	world << "Broadcast_Message([connection], [A],0, *garbled automated announcement*, [src],[message], [from], Automated Announcement, from, synthesized voice,4, 0, list(1), 1459"
 	Broadcast_Message(connection, A,
 						0, "*garbled automated announcement*", src,
 						message, from, "Automated Announcement", from, "synthesized voice",
-						4, 0, list(1), 1459)
+						4, 0, list(1,2,3,4,8), 1459, verbage)
 	del(A)
 	return
 

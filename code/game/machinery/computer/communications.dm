@@ -29,6 +29,7 @@
 	var/const/STATE_CONFIRM_LEVEL = 9
 	var/const/STATE_CREWTRANSFER = 10
 
+	var/obj/item/device/radio/a = new /obj/item/device/radio(null)
 	var/status_display_freq = "1435"
 	var/stat_msg1
 	var/stat_msg2
@@ -419,6 +420,7 @@
 		PS.allowedtocall = !(PS.allowedtocall)
 
 /proc/call_shuttle_proc(var/mob/user)
+	var/obj/item/device/radio/a = new /obj/item/device/radio(null)
 	if ((!( ticker ) || emergency_shuttle.location))
 		return
 
@@ -445,7 +447,7 @@
 	emergency_shuttle.incall()
 	log_game("[key_name(user)] has launched the pods.")
 	message_admins("[key_name_admin(user)] has launched the pods.", 1)
-	captain_announce("The Escape Pods Launch Sequence has been activated. Estimate [round(emergency_shuttle.timeleft()/60)] minutes untill the Escape Pods Launch.")
+	a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	return
@@ -547,12 +549,13 @@
 	emergency_shuttle.incall(2)
 	log_game("All the AIs, comm consoles and boards are destroyed. Pods launch started.")
 	message_admins("All the AIs, comm consoles and boards are destroyed. Pods launch started.", 1)
-	captain_announce("The escape pods launch has been initiated. They will be launched in [round(emergency_shuttle.timeleft()/60)] minutes.")
+	a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	..()
 
 /obj/item/weapon/circuitboard/communications/Del()
+	var/obj/item/device/radio/a = new /obj/item/device/radio(null)
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(istype(commconsole.loc,/turf))
@@ -572,7 +575,7 @@
 	emergency_shuttle.incall(2)
 	log_game("All the AIs, comm consoles and boards are destroyed. Pods launch started.")
 	message_admins("All the AIs, comm consoles and boards are destroyed. Pods launch started.", 1)
-	captain_announce("The escape pods launch has been initiated. They will be launched in [round(emergency_shuttle.timeleft()/60)] minutes.")
+	a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	..()

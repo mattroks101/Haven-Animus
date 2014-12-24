@@ -290,6 +290,30 @@
 		src.die()
 	return
 
+/obj/machinery/turret/attack_hand(var/mob/living/carbon/human/user)
+
+	if(!istype(user))
+		return ..()
+
+	if(user.species.can_shred(user) && !(stat & BROKEN))
+		playsound(src.loc, 'sound/weapons/slash.ogg', 25, 1, -1)
+		visible_message("\red <B>[user] has slashed at [src]!</B>")
+		src.health -= 15
+	return
+
+/obj/machinery/turret/attack_animal(mob/living/simple_animal/M as mob)
+	if(M.melee_damage_upper == 0)	return
+	if(!(stat & BROKEN))
+		visible_message("\red <B>[M] [M.attacktext] [src]!</B>")
+		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+		//src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
+		src.health -= M.melee_damage_upper
+		if (src.health <= 0)
+			src.die()
+	else
+		M << "\red That object is useless to you."
+	return
+
 /obj/machinery/turret/emp_act(severity)
 	switch(severity)
 		if(1)
@@ -408,36 +432,6 @@
 	user << browse(t, "window=turretid")
 	onclose(user, "turretid")
 
-
-/obj/machinery/turret/attack_animal(mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-	if(!(stat & BROKEN))
-		visible_message("\red <B>[M] [M.attacktext] [src]!</B>")
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-		//src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-		src.health -= M.melee_damage_upper
-		if (src.health <= 0)
-			src.die()
-	else
-		M << "\red That object is useless to you."
-	return
-
-
-
-
-/obj/machinery/turret/attack_alien(mob/living/carbon/alien/humanoid/M as mob)
-	if(!(stat & BROKEN))
-		playsound(src.loc, 'sound/weapons/slash.ogg', 25, 1, -1)
-		visible_message("\red <B>[] has slashed at []!</B>", M, src)
-		src.health -= 15
-		if (src.health <= 0)
-			src.die()
-	else
-		M << "\green That object is useless to you."
-	return
-
-
-
 /obj/machinery/turretid/Topic(href, href_list)
 	..()
 	if (src.locked)
@@ -545,12 +539,6 @@
 
 	attack_ai(mob/user as mob)
 		return attack_hand(user)
-
-
-	attack_alien(mob/user as mob)
-		user.visible_message("[user] slashes at [src]", "You slash at [src]")
-		src.take_damage(15)
-		return
 
 	Topic(href, href_list)
 		if(href_list["power"])

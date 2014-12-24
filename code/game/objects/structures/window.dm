@@ -44,11 +44,6 @@
 				del(src)
 				return
 
-/obj/structure/window/Bumped(AM as mob|obj)
-	if(ismob(AM) && iszombie(AM))
-		src.attack_hand(AM)
-	return ..()
-
 /obj/structure/window/blob_act()
 	new /obj/item/weapon/shard(loc)
 	if(reinf) new /obj/item/stack/rods(loc)
@@ -131,6 +126,13 @@
 			del(src)
 			return
 	else if (usr.a_intent == "hurt")
+
+		if (istype(usr,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = usr
+			if(H.species.can_shred(H))
+				attack_generic(H,25)
+				return
+
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		usr.visible_message("\red [usr.name] bangs against the [src.name]!", \
 							"\red You bang against the [src.name]!", \
@@ -140,6 +142,7 @@
 		usr.visible_message("[usr.name] knocks on the [src.name].", \
 							"You knock on the [src.name].", \
 							"You hear a knocking sound.")
+
 	return
 
 /obj/structure/window/attack_paw(mob/user as mob)

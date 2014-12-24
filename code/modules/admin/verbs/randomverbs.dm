@@ -751,6 +751,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/admin_call_shuttle()
 	set category = "Admin"
 	set name = "Call Shuttle"
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 
 	if ((!( ticker ) || emergency_shuttle.location))
 		return
@@ -768,7 +769,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			return
 
 	emergency_shuttle.incall()
-	captain_announce("The Escape Pods Launch Sequence has been activated. Estimate [round(emergency_shuttle.timeleft()/60)] minutes untill the Escape Pods Launch.")
+	a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	world << sound('sound/AI/shuttlecalled.ogg')
 	log_admin("[key_name(usr)] admin-called the emergency shuttle.")
 	message_admins("\blue [key_name_admin(usr)] admin-called the emergency shuttle.", 1)

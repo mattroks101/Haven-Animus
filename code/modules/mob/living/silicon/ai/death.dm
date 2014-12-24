@@ -15,21 +15,21 @@
 	var/callshuttle = 0
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
-		if(commconsole.z == 2)
+		if(commconsole.z == 6)
 			continue
 		if(istype(commconsole.loc,/turf))
 			break
 		callshuttle++
 
 	for(var/obj/item/weapon/circuitboard/communications/commboard in world)
-		if(commboard.z == 2)
+		if(commboard.z == 6)
 			continue
 		if(istype(commboard.loc,/turf) || istype(commboard.loc,/obj/item/weapon/storage))
 			break
 		callshuttle++
 
 	for(var/mob/living/silicon/ai/shuttlecaller in player_list)
-		if(shuttlecaller.z == 2)
+		if(shuttlecaller.z == 6)
 			continue
 		if(!shuttlecaller.stat && shuttlecaller.client && istype(shuttlecaller.loc,/turf))
 			break
@@ -39,10 +39,11 @@
 		callshuttle = 0
 
 	if(callshuttle == 3) //if all three conditions are met
+		var/obj/item/device/radio/a = new /obj/item/device/radio(null)
 		emergency_shuttle.incall(2)
 		log_game("All the AIs, comm consoles and boards are destroyed. Pods launched.")
 		message_admins("All the AIs, comm consoles and boards are destroyed. Pods launched.", 1)
-		captain_announce("The escape pods launch has been initiated. They will be launched in [round(emergency_shuttle.timeleft()/60)] minutes.")
+		a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 		world << sound('sound/AI/shuttlecalled.ogg')
 
 	if(explosive)

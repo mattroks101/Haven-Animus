@@ -795,6 +795,13 @@ Oxygen: <span class='dl[oxygen_dangerlevel]'>[oxygen_percent]</span>%<br>
 Carbon dioxide: <span class='dl[co2_dangerlevel]'>[co2_percent]</span>%<br>
 Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 "}
+
+	if(alarm_area.atmosalm)
+		output += "<a href='?src=\ref[src];atmos_reset=1'>Reset - Atmospheric Alarm</a><hr>"
+	else
+		output += "<a href='?src=\ref[src];atmos_alarm=1'>Activate - Atmospheric Alarm</a><hr>"
+
+
 	//if (other_dangerlevel==2)
 	//	output += "Notice: <span class='dl2'>High Concentration of Unknown Particles Detected</span><br>"
 	//else if (other_dangerlevel==1)
@@ -850,10 +857,10 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 
 	switch(screen)
 		if (AALARM_SCREEN_MAIN)
-			if(alarm_area.atmosalm)
-				output += "<a href='?src=\ref[src];atmos_reset=1'>Reset - Atmospheric Alarm</a><hr>"
-			else
-				output += "<a href='?src=\ref[src];atmos_alarm=1'>Activate - Atmospheric Alarm</a><hr>"
+//			if(alarm_area.atmosalm)
+//				output += "<a href='?src=\ref[src];atmos_reset=1'>Reset - Atmospheric Alarm</a><hr>"
+//			else
+//				output += "<a href='?src=\ref[src];atmos_alarm=1'>Activate - Atmospheric Alarm</a><hr>"
 
 			output += {"
 <a href='?src=\ref[src];screen=[AALARM_SCREEN_SCRUB]'>Scrubbers Control</a><br>

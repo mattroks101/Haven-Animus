@@ -147,6 +147,7 @@
 		edit_admin_permissions()
 
 	else if(href_list["call_shuttle"])
+		var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 		if(!check_rights(R_ADMIN))	return
 
 		if( ticker.mode.name == "blob" )
@@ -158,7 +159,7 @@
 				if ((!( ticker ) || emergency_shuttle.location))
 					return
 				emergency_shuttle.incall()
-				captain_announce("The Escape Pods Launch Sequence has been activated. Estimate [round(emergency_shuttle.timeleft()/60)] minutes untill the Escape Pods Launch.")
+				a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 				log_admin("[key_name(usr)] called the Emergency Shuttle")
 				message_admins("\blue [key_name_admin(usr)] initiated the Escape Pods Launch.", 1)
 
@@ -168,7 +169,7 @@
 				switch(emergency_shuttle.direction)
 					if(-1)
 						emergency_shuttle.incall()
-						captain_announce("The Escape Pods Launch Sequence has been activated. Estimate [round(emergency_shuttle.timeleft()/60)] minutes untill the Escape Pods Launch.")
+						a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 						log_admin("[key_name(usr)] initiated the Escape Pods Launch.")
 						message_admins("\blue [key_name_admin(usr)] initiated the Escape Pods Launch.", 1)
 					if(1)
@@ -179,11 +180,12 @@
 		href_list["secretsadmin"] = "check_antagonist"
 
 	else if(href_list["edit_shuttle_time"])
+		var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 		if(!check_rights(R_SERVER))	return
 
 		emergency_shuttle.settimeleft( input("Enter new shuttle duration (seconds):","Edit Shuttle Timeleft", emergency_shuttle.timeleft() ) as num )
 		log_admin("[key_name(usr)] edited the Escape Pods timeleft to [emergency_shuttle.timeleft()]")
-		captain_announce("The Escape Pods Launch Sequence has been activated. Estimate [round(emergency_shuttle.timeleft()/60)] minutes untill the Escape Pods Launch.")
+		a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 		message_admins("\blue [key_name_admin(usr)] edited the Escape Pods timeleft to [emergency_shuttle.timeleft()]", 1)
 		href_list["secretsadmin"] = "check_antagonist"
 

@@ -212,8 +212,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		If 0, the signal is audible
 		If nonzero, the signal may be partially inaudible or just complete gibberish.
 
-	@param level:
-		The list of Z levels that the sending radio is broadcasting to. Having 0 in the list broadcasts on all levels
+
 
 	@param freq
 		The frequency of the signal

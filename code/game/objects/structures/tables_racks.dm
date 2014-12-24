@@ -19,7 +19,7 @@
 	anchored = 1.0
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.")
-	var/parts = /obj/item/weapon/table_parts
+	parts = /obj/item/weapon/table_parts
 	var/flipped = 0
 	var/dented = 0
 	var/health = 100
@@ -41,16 +41,6 @@
 /obj/structure/table/Del()
 	update_adjacent()
 	..()
-
-/obj/structure/table/proc/destroy()
-	new parts(loc)
-	density = 0
-	del(src)
-
-/obj/structure/rack/proc/destroy()
-	new parts(loc)
-	density = 0
-	del(src)
 
 /obj/structure/table/update_icon()
 	spawn(2) //So it properly updates when deleting
@@ -642,7 +632,7 @@
 	flags = FPRINT
 	anchored = 1.0
 	throwpass = 1	//You can throw objects over this, despite it's density.
-	var/parts = /obj/item/weapon/rack_parts
+	parts = /obj/item/weapon/rack_parts
 
 /obj/structure/rack/ex_act(severity)
 	switch(severity)
