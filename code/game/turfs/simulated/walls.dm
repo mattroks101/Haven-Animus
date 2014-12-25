@@ -13,6 +13,8 @@
 
 	var/max_temperature = 1800 //K, walls will take damage if they're next to a fire hotter than this
 
+	layer = 2.01
+
 	opacity = 1
 	density = 1
 	blocks_air = 1

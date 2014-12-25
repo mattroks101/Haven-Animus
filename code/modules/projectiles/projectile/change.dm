@@ -33,7 +33,7 @@
 
 		var/mob/living/new_mob
 
-		var/randomize = pick("monkey","robot","metroid","xeno","human")
+		var/randomize = pick("monkey","robot","xeno","human")
 		switch(randomize)
 			if("monkey")
 				new_mob = new /mob/living/carbon/monkey(M.loc)

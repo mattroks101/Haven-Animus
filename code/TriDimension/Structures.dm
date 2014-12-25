@@ -316,6 +316,7 @@
 	name = "Stairs"
 	desc = "Stairs.  You walk up and down them."
 	icon_state = "ramptop"
+	layer = 2
 
 /obj/multiz/stairs/New()
 	icon_state = istop ^ istype(src, /obj/multiz/stairs/active) ? "ramptop" : "rampbottom"
@@ -332,7 +333,7 @@
 	//If it's the top, they can fall down just fine.
 	if(ismob(M) && M:client)
 		M:client.moving = 1
-	M.Move(locate(src.x, src.y, targetZ()))
+	M.loc = (locate(src.x, src.y, targetZ()))
 	if (ismob(M) && M:client)
 		M:client.moving = 0
 
