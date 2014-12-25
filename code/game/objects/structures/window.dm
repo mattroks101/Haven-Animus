@@ -161,10 +161,6 @@
 		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
 
 
-/obj/structure/window/attack_alien(mob/user as mob)
-	if(islarva(user)) return
-	attack_generic(user, 15)
-
 /obj/structure/window/attack_animal(mob/user as mob)
 	if(!isanimal(user)) return
 	var/mob/living/simple_animal/M = user

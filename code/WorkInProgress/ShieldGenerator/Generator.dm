@@ -55,9 +55,6 @@
 /obj/machinery/shielding/energyconverter/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/shielding/energyconverter/attack_alien(mob/user as mob)
-	return attack_hand(user)
-
 #ifdef DEBUG
 /obj/machinery/shielding/energyconverter/verb/scramble()
 	set src in view()

@@ -126,13 +126,13 @@ var/list/department_radio_keys = list(
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
 	spawn(30) del(speech_bubble)
 
-	if(slurring)
-		message = slur(message)
-		verb = pick("stammers","stutters")		//Bydlocoded it here to avoid sanitization.
-
 	if(stuttering)
 		message = stutter(message)
 		verb = pick("stammers","stutters")
+
+	if(slurring)
+		message = slur(message)
+		verb = pick("stammers","stutters")		//Bydlocoded it here to avoid sanitization.
 
 	for(var/mob/M in listening)
 		M << speech_bubble

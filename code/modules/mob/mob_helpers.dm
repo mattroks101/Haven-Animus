@@ -21,8 +21,10 @@
 	return 0
 
 /proc/isalienadult(A)
-	if(istype(A, /mob/living/carbon/alien/humanoid))
-		return 1
+	if(ishuman(A))
+		var/mob/living/carbon/human/H = A
+		if(istype(H.species, /datum/species/xenos))
+			return 1
 	return 0
 
 /proc/islarva(A)

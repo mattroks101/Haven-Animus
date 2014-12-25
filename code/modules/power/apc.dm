@@ -452,15 +452,16 @@
 // attack with hand - remove cell (if cover open) or interact with the APC
 
 /obj/machinery/power/apc/attack_hand(mob/user)
-//	if (!can_use(user)) This already gets called in interact() and in topic()
-//		return
+
 	if(!user)
 		return
+
 	src.add_fingerprint(user)
 
-	//Synthetic human mob goes here.
+	//Human mob special interaction goes here.
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
+
 		if(H.species.flags & IS_SYNTHETIC && H.a_intent == "grab")
 			if(emagged || stat & BROKEN)
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -481,12 +482,35 @@
 					user << "\blue You slot your fingers into the APC interface and siphon off some of the stored charge for your own use."
 					if(src.cell.charge < 0) src.cell.charge = 0
 					if(H.nutrition > 500) H.nutrition = 500
+					src.charging = 1
 
 				else
 					user << "\blue You are already fully charged."
 			else
 				user << "There is no charge to draw from that APC."
 			return
+		else if(H.species.can_shred(H))
+			user.visible_message("\red [user.name] slashes at the [src.name]!", "\blue You slash at the [src.name]!")
+			playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
+			var/allcut = 1
+			for(var/wire in apcwirelist)
+				if(!isWireCut(apcwirelist[wire]))
+					allcut = 0
+					break
+			if(beenhit >= pick(3, 4) && wiresexposed != 1)
+				wiresexposed = 1
+				src.update_icon()
+				src.visible_message("\red The [src.name]'s cover flies open, exposing the wires!")
+
+			else if(wiresexposed == 1 && allcut == 0)
+				for(var/wire in apcwirelist)
+					cut(apcwirelist[wire])
+				src.update_icon()
+				src.visible_message("\red The [src.name]'s wires are shredded!")
+			else
+				beenhit += 1
+			return
+
 
 	if(usr == user && opened && (!issilicon(user)))
 		if(cell)
@@ -504,33 +528,8 @@
 		return
 
 	// do APC interaction
-	user.set_machine(src)
+	//user.set_machine(src)
 	src.interact(user)
-
-/obj/machinery/power/apc/attack_alien(mob/living/carbon/alien/humanoid/user)
-	if(!user)
-		return
-	user.visible_message("\red [user.name] slashes at the [src.name]!", "\blue You slash at the [src.name]!")
-	playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-	var/allcut = 1
-	for(var/wire in apcwirelist)
-		if(!isWireCut(apcwirelist[wire]))
-			allcut = 0
-			break
-	if(beenhit >= pick(3, 4) && wiresexposed != 1)
-		wiresexposed = 1
-		src.update_icon()
-		src.visible_message("\red The [src.name]'s cover flies open, exposing the wires!")
-
-	else if(wiresexposed == 1 && allcut == 0)
-		for(var/wire in apcwirelist)
-			cut(apcwirelist[wire])
-		src.update_icon()
-		src.visible_message("\red The [src.name]'s wires are shredded!")
-	else
-		beenhit += 1
-	return
-
 
 
 /obj/machinery/power/apc/interact(mob/user)

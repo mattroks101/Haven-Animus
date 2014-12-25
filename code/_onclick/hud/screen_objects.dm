@@ -244,8 +244,8 @@
 					if("walk")
 						usr.m_intent = "run"
 						usr.hud_used.move_intent.icon_state = "running"
-				if(istype(usr,/mob/living/carbon/alien/humanoid))
-					usr.update_icons()
+//				if(istype(usr,/mob/living/carbon/alien/humanoid))
+//					usr.update_icons()
 
 		if("att_intent")
 			if(istype(usr,/mob/living/carbon))

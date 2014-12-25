@@ -116,7 +116,7 @@
 		if("help")
 			src << "choke, collapse, dance, deathgasp, drool, gasp, shiver, gnarl, jump, paw, moan, nod, roar, roll, scratch,\nscretch, shake, sign-#, sit, sulk, sway, tail, twitch, whimper"
 		else
-			src << text("Invalid Emote: []", act)
+			message = "<B>[src]</B> [sanitize(act)]"
 	if ((message && src.stat == 0))
 		if(src.client)
 			log_emote("[name]/[key] : [message]")
