@@ -207,6 +207,8 @@
 		return
 
 	if(M == assailant && state >= GRAB_AGGRESSIVE)
+		var/can_eat
+
 		if((FAT in user.mutations) && ismonkey(affecting))
 			can_eat = 1
 		else
