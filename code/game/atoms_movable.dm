@@ -14,6 +14,10 @@
 	var/mob/pulledby = null
 //	glide_size = 8
 
+	// Garbage collection (controller).
+	var/timeDestroyed
+
+
 /atom/movable/Move()
 	var/atom/A = src.loc
 	. = ..()

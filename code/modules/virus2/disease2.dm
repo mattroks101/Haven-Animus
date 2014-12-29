@@ -221,3 +221,11 @@ proc/virus2_greater_infection()
 	candidates = shuffle(candidates)
 
 	infect_mob_random_greater(candidates[1])
+
+proc/virology_letterhead(var/report_name)
+	return {"
+		<center><h1><b>[report_name]</b></h1></center>
+		<center><small><i>[station_name()] Virology Lab</i></small></center>
+		<hr>
+"}
+

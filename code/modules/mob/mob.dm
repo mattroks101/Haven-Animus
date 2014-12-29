@@ -670,6 +670,13 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
 				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
+				stat(null, "garbage collector - [master_controller.garbageCollectorCost]")
+				stat(null, "\tqdel - [garbageCollector.del_everything ? "off" : "on"]")
+				stat(null, "\ton queue - [garbageCollector.queue.len]")
+				stat(null, "\ttotal delete - [garbageCollector.dels_count]")
+				stat(null, "\tsoft delete - [garbageCollector.dels_count - garbageCollector.hard_dels]")
+				stat(null, "\thard delete - [garbageCollector.hard_dels]")
+				stat(null, "ALL - [master_controller.total_cost]")
 			else
 				stat(null,"MasterController-ERROR")
 

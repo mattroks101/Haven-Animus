@@ -29,7 +29,7 @@
 	var/const/STATE_CONFIRM_LEVEL = 9
 	var/const/STATE_CREWTRANSFER = 10
 
-	var/obj/item/device/radio/a = new /obj/item/device/radio(null)
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 	var/status_display_freq = "1435"
 	var/stat_msg1
 	var/stat_msg2
@@ -420,7 +420,7 @@
 		PS.allowedtocall = !(PS.allowedtocall)
 
 /proc/call_shuttle_proc(var/mob/user)
-	var/obj/item/device/radio/a = new /obj/item/device/radio(null)
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 	if ((!( ticker ) || emergency_shuttle.location))
 		return
 
@@ -555,7 +555,7 @@
 	..()
 
 /obj/item/weapon/circuitboard/communications/Del()
-	var/obj/item/device/radio/a = new /obj/item/device/radio(null)
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(istype(commconsole.loc,/turf))

@@ -124,6 +124,7 @@ var/list/admin_verbs_server = list(
 	/client/proc/toggle_random_events,
 	)
 var/list/admin_verbs_debug = list(
+	/client/proc/qdel_toggle,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/Debug2,
 	/client/proc/kill_air,

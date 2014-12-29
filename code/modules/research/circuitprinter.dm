@@ -40,10 +40,10 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 
 	blob_act()
 		if (prob(50))
-			del(src)
+			qdel(src)
 
 	meteorhit()
-		del(src)
+		qdel(src)
 		return
 
 	proc/TotalMaterials()

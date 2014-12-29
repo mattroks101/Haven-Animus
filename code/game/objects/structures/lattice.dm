@@ -11,7 +11,7 @@
 /obj/structure/lattice/New()
 	..()
 ///// Z-Level Stuff
-	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/floor/open)))
+	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/floor/open || istype(src.loc, /turf/simulated/floor/engine/vacuum/hull))))
 ///// Z-Level Stuff
 		del(src)
 	for(var/obj/structure/lattice/LAT in src.loc)
@@ -35,16 +35,16 @@
 	..()
 
 /obj/structure/lattice/blob_act()
-	del(src)
+	qdel(src)
 	return
 
 /obj/structure/lattice/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
-			del(src)
+			qdel(src)
 			return
 		if(3.0)
 			return

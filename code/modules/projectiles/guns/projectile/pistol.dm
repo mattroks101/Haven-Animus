@@ -107,6 +107,15 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/pistol
+	name = "\improper TSP-12 pistol"
+	desc = "A small, easily concealable gun. Uses 9mm rounds."
+	icon_state = "pistol1"
+	w_class = 2
+	silenced = 0
+	origin_tech = "combat=2;materials=2;syndicate=2"
+	mag_type = /obj/item/ammo_magazine/external/mc9mm
+
+/obj/item/weapon/gun/projectile/automatic/pistol/stechtkin
 	name = "\improper Stechtkin pistol"
 	desc = "A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"

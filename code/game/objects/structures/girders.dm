@@ -13,7 +13,7 @@
 			..()
 			if(health <= 0)
 				new /obj/item/stack/sheet/metal(get_turf(src))
-				del(src)
+				qdel(src)
 
 			return
 
@@ -169,25 +169,25 @@
 
 	blob_act()
 		if(prob(40))
-			del(src)
+			qdel(src)
 
 
 	ex_act(severity)
 		switch(severity)
 			if(1.0)
-				del(src)
+				qdel(src)
 				return
 			if(2.0)
 				if (prob(30))
 					var/remains = pick(/obj/item/stack/rods,/obj/item/stack/sheet/metal)
 					new remains(loc)
-					del(src)
+					qdel(src)
 				return
 			if(3.0)
 				if (prob(5))
 					var/remains = pick(/obj/item/stack/rods,/obj/item/stack/sheet/metal)
 					new remains(loc)
-					del(src)
+					qdel(src)
 				return
 			else
 		return
@@ -233,31 +233,31 @@
 
 	blob_act()
 		if(prob(40))
-			del(src)
+			qdel(src)
 
 	bullet_act(var/obj/item/projectile/Proj) //No beam check- How else will you destroy the cult girder with silver bullets?????
 		health -= Proj.damage
 		..()
 		if(health <= 0)
 			new /obj/item/stack/sheet/metal(get_turf(src))
-			del(src)
+			qdel(src)
 
 		return
 
 	ex_act(severity)
 		switch(severity)
 			if(1.0)
-				del(src)
+				qdel(src)
 				return
 			if(2.0)
 				if (prob(30))
 					new /obj/effect/decal/remains/human(loc)
-					del(src)
+					qdel(src)
 				return
 			if(3.0)
 				if (prob(5))
 					new /obj/effect/decal/remains/human(loc)
-					del(src)
+					qdel(src)
 				return
 			else
 		return

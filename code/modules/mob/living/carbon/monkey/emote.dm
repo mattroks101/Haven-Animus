@@ -50,11 +50,20 @@
 		if("tail")
 			message = "<B>The [src.name]</B> waves his tail."
 			m_type = 1
+		if ("giggle")
+			message = "<B>[src]</B> giggles."
+			m_type = 2
+		if ("laugh")
+			message = "<B>[src]</B> makes a noise."
+			m_type = 2
 		if("gasp")
 			message = "<B>The [src.name]</B> gasps."
 			m_type = 2
 		if("shiver")
 			message = "<B>The [src.name]</B> shivers."
+			m_type = 2
+		if ("sneeze")
+			message = "<B>[src]</B> sneezes."
 			m_type = 2
 		if("drool")
 			message = "<B>The [src.name]</B> drools."
@@ -96,6 +105,16 @@
 			if (!src.restrained())
 				message = "<B>The [src.name]</B> rolls."
 				m_type = 1
+		if ("twitch")
+			message = "<B>[src]</B> twitches violently."
+			m_type = 1
+
+		if ("twitch_s")
+			message = "<B>[src]</B> twitches."
+			m_type = 1
+		if ("cough")
+			message = "<B>[src]</B> coughs!"
+			m_type = 2
 		if("shake")
 			message = "<B>The [src.name]</B> shakes his head."
 			m_type = 1

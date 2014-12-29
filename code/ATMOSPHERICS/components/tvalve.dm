@@ -337,7 +337,7 @@ obj/machinery/atmospherics/tvalve
 				"\blue You have unfastened \the [src].", \
 				"You hear ratchet.")
 			new /obj/item/pipe(loc, make_from=src)
-			del(src)
+			qdel(src)
 
 obj/machinery/atmospherics/tvalve/mirrored
 	icon_state = "tvalvem0"

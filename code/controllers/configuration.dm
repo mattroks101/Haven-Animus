@@ -133,7 +133,7 @@
 				src.probabilities[M.config_tag] = M.probability
 				if (M.votable)
 					src.votable_modes += M.config_tag
-		del(M)
+		qdel(M)
 	src.votable_modes += "secret"
 
 /datum/configuration/proc/load(filename, type = "config")

@@ -102,12 +102,13 @@
 /obj/machinery/camera/attack_hand(mob/living/carbon/human/user as mob)
 	if(!istype(user))
 		return
-	status = 0
-	visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
-	playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-	icon_state = "[initial(icon_state)]1"
-	add_hiddenprint(user)
-	deactivate(user,0)
+	if(user.species.can_shred(user))
+		status = 0
+		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
+		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
+		icon_state = "[initial(icon_state)]1"
+		add_hiddenprint(user)
+		deactivate(user,0)
 
 /obj/machinery/camera/attackby(W as obj, mob/living/user as mob)
 

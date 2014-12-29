@@ -373,26 +373,26 @@
 		var/o_a =  (O.gender == PLURAL) ? "" : "a "
 		var/o_do = (O.gender == PLURAL) ? "don't" : "doesn't"
 
-		if(target.species.has_organ[O.organ_tag])
+//		if(target.species.has_organ[O.organ_tag])
 
-			if(!O.health)
-				user << "\red \The [O.organ_tag] [o_is] in no state to be transplanted."
-				return 2
-
-			if(!target.internal_organs_by_name[O.organ_tag])
-				organ_missing = 1
-			else
-				user << "\red \The [target] already has [o_a][O.organ_tag]."
-				return 2
-
-			if(O.organ_data && affected.name == O.organ_data.parent_organ)
-				organ_compatible = 1
-			else
-				user << "\red \The [O.organ_tag] [o_do] normally go in \the [affected.display_name]."
-				return 2
-		else
-			user << "\red You're pretty sure [target.species.name_plural] don't normally have [o_a][O.organ_tag]."
+		if(!O.health)
+			user << "\red \The [O.organ_tag] [o_is] in no state to be transplanted."
 			return 2
+
+		if(!target.internal_organs_by_name[O.organ_tag])
+			organ_missing = 1
+		else
+			user << "\red \The [target] already has [o_a][O.organ_tag]."
+			return 2
+
+		if(O.organ_data && affected.name == O.organ_data.parent_organ)
+			organ_compatible = 1
+		else
+			user << "\red \The [O.organ_tag] [o_do] normally go in \the [affected.display_name]."
+			return 2
+//		else
+//			user << "\red You're pretty sure [target.species.name_plural] don't normally have [o_a][O.organ_tag]."
+//			return 2
 
 		return ..() && organ_missing && organ_compatible
 

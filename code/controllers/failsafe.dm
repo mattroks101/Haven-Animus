@@ -1,8 +1,8 @@
 var/datum/controller/failsafe/Failsafe
 
 /datum/controller/failsafe // This thing pretty much just keeps poking the master controller
-	var/processing = 0
-	var/processing_interval = 100	//poke the MC every 10 seconds
+	processing = 0
+	processing_interval = 100	//poke the MC every 10 seconds
 
 	var/MC_iteration = 0
 	var/MC_defcon = 0			//alert level. For every poke that fails this is raised by 1. When it reaches 5 the MC is replaced with a new one. (effectively killing any master_controller.process() and starting a new one)
@@ -14,7 +14,7 @@ var/datum/controller/failsafe/Failsafe
 	//There can be only one failsafe. Out with the old in with the new (that way we can restart the Failsafe by spawning a new one)
 	if(Failsafe != src)
 		if(istype(Failsafe))
-			del(Failsafe)
+			qdel(Failsafe)
 	Failsafe = src
 	Failsafe.process()
 

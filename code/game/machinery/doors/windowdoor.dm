@@ -134,7 +134,7 @@
 			ae.icon_state = "door_electronics_smoked"
 			operating = 0
 		src.density = 0
-		del(src)
+		qdel(src)
 		return
 
 /obj/machinery/door/window/bullet_act(var/obj/item/projectile/Proj)

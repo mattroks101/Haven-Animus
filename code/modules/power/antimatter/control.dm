@@ -108,7 +108,7 @@
 			AMS.blob_act()
 		spawn(0)
 			//Likely explode
-			del(src)
+			qdel(src)
 		return
 	check_stability()
 	return
