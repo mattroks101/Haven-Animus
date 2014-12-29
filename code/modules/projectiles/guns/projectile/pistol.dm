@@ -109,7 +109,7 @@
 /obj/item/weapon/gun/projectile/automatic/pistol
 	name = "\improper TSP-12 pistol"
 	desc = "A small, easily concealable gun. Uses 9mm rounds."
-	icon_state = "pistol1"
+	icon_state = "pistol"
 	w_class = 2
 	silenced = 0
 	origin_tech = "combat=2;materials=2;syndicate=2"
@@ -118,7 +118,7 @@
 /obj/item/weapon/gun/projectile/automatic/pistol/stechtkin
 	name = "\improper Stechtkin pistol"
 	desc = "A small, easily concealable gun. Uses 9mm rounds."
-	icon_state = "pistol"
+	icon_state = "pistol1"
 	w_class = 2
 	silenced = 0
 	origin_tech = "combat=2;materials=2;syndicate=2"

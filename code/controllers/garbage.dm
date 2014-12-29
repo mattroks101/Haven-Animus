@@ -4,7 +4,7 @@
 //#define GC_DEBUG
 var/list/meowww = new
 var/datum/garbage_collector/garbageCollector
-
+/*
 /client/verb/bwoink()
 	set name = "bwoink"
 	set desc = "bwoink"
@@ -12,6 +12,7 @@ var/datum/garbage_collector/garbageCollector
 
 	for(var/A in meowww)
 		usr << A
+*/
 
 /datum/garbage_collector
 	var/list/queue = new
