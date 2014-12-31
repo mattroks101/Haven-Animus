@@ -159,7 +159,7 @@ var/list/datum/donator/donators = list()
 		var/obj/spawned = new path(user.loc)
 
 		if(spawned)
-			var/where = user.equip_in_one_of_slots(spawned, slots, del_on_fail=0, disable_warning=1)
+			var/where = user.equip_in_one_of_slots(spawned, slots, del_on_fail=0)
 			if (!where)
 				spawned.loc = user.loc
 				usr << "\blue Your [name] has been spawned!"
