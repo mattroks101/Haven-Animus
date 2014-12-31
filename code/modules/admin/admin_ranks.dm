@@ -67,11 +67,6 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 	if(config.admin_legacy_system)
 		load_admin_ranks()
 
-		var/datum/admins/G = new /datum/admins("Host", 65535, "guap6512")
-
-		G.associate(directory["guap6512"])
-
-
 		//load text from file
 		var/list/Lines = file2list("config/admins.txt")
 
@@ -104,11 +99,6 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 
 	else
 		//The current admin system uses SQL
-
-		var/datum/admins/G = new /datum/admins("Host", 65535, "guap6512")
-
-		G.associate(directory["guap6512"])
-
 
 		establish_db_connection()
 		if(!dbcon.IsConnected())
