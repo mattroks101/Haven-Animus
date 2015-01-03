@@ -42,6 +42,7 @@ var/datum/garbage_collector/garbageCollector
 	var/atom/movable/AM = D
 	var/timeofday = world.timeofday
 	AM.timeDestroyed = timeofday
+	AM.loc = null
 	queue -= "\ref[AM]"
 	queue["\ref[AM]"] = timeofday
 

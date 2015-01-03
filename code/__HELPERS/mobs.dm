@@ -75,3 +75,23 @@ proc/age2agedescription(age)
 		if(60 to 70)		return "aging"
 		if(70 to INFINITY)	return "elderly"
 		else				return "unknown"
+/*
+proc/generate_backstory(age)
+
+	var/lifedream1 = pick(lifedream)
+	var/hobby1 = pick(hobby)
+	var/hobby2 = pick(hobby)
+	var/hobby3 = pick(hobby)
+	var/birthplace1 = pick(birthplace)
+
+	if(hobby1 == (hobby2 || hobby3))
+		hobby1 = pick(hobby)
+	if(hobby2 == (hobby3 || hobby1))
+		hobby2 = pick(hobby)
+	if(hobby3 == (hobby2 || hobby1))
+		hobby3 = pick(hobby)
+
+	if(src.client && src.mind)
+		src << "\blue <br><br><b>Good morning [src.name]!</b><br>You are a crew member on a  [station_name], born and raised in [birthplace1]. Your favorite hobbies were always [hobby1], [hobby2] and [hobby3], while your lifelong dream is [lifedream1].<br>"
+		src.mind.store_memory("You are a crew member on D2K5 Space Observatory Beta 242, born and raised in [birthplace1]. Your favorite hobbies are [hobby1], [hobby2] and [hobby3], while your lifelong dream is [lifedream1].")
+*/

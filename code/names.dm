@@ -9,6 +9,9 @@ var/list/first_names_female = file2list("config/names/first_female.txt")
 var/list/last_names = file2list("config/names/last.txt")
 var/list/clown_names = file2list("config/names/clown.txt")
 
+var/list/birthplace = file2list("config/names/birthplace.txt")
+var/list/hobby = file2list("config/names/hobby.txt")
+var/list/lifedream = file2list("config/names/lifedream.txt")
 
 var/list/verbs = file2list("config/names/verbs.txt")
 var/list/adjectives = file2list("config/names/adjectives.txt")

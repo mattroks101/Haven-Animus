@@ -343,7 +343,7 @@
 //////////////////////////////////////////////////////////////////////
 /datum/game_mode/revolution/declare_completion()
 	if(finished == 1)
-		world << "\red <FONT size = 3><B> The heads of staff were killed or abandoned the ship! The revolutionaries win!</B></FONT>"
+		world << "\red <FONT size = 3><B> The heads of staff were killed or abandoned the [vessel_type]! The revolutionaries win!</B></FONT>"
 	else if(finished == 2)
 		world << "\red <FONT size = 3><B> The heads of staff managed to stop the revolution!</B></FONT>"
 	..()
@@ -361,7 +361,7 @@
 				if(headrev.current.stat == DEAD)
 					text += "died"
 				else if(headrev.current.z > 4)
-					text += "fled the ship"
+					text += "fled the [vessel_type]"
 				else
 					text += "survived the revolution"
 				if(headrev.current.real_name != headrev.name)
@@ -384,7 +384,7 @@
 				if(rev.current.stat == DEAD)
 					text += "died"
 				else if(rev.current.z > 4)
-					text += "fled the ship"
+					text += "fled the [vessel_type]"
 				else
 					text += "survived the revolution"
 				if(rev.current.real_name != rev.name)
@@ -409,7 +409,7 @@
 				if(head.current.stat == DEAD)
 					text += "died"
 				else if(head.current.z > 4)
-					text += "fled the ship"
+					text += "fled the [vessel_type]"
 				else
 					text += "survived the revolution"
 				if(head.current.real_name != head.name)

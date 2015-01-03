@@ -157,7 +157,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/protectStation/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
-	var/law = "Protect the space ship against damage. Anyone you see harming the ship is to be no longer considered human, and is a threat to the ship which must be neutralized."
+	var/law = "Protect the space [vessel_type] against damage. Anyone you see harming the [vessel_type] is to be no longer considered human, and is a threat to the [vessel_type] which must be neutralized."
 	target << law
 	target.add_supplied_law(5, law)
 

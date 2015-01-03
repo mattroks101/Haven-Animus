@@ -90,7 +90,7 @@
 	desc = "A small, well-used sketchbook."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "johnathan_notebook"
-	dat = "In the notebook there are numerous drawings of various crew-mates, locations, and scenes on the ship. They are of fairly good quality."
+	dat = "In the notebook there are numerous drawings of various crew-mates, locations, and scenes on the [vessel_type]. They are of fairly good quality."
 	author = "Johnathan Falcian"
 	title = "Falcian's sketchbook"
 

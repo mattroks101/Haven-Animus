@@ -490,7 +490,7 @@ datum/objective/steal
 		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
 		"a functional AI" = /obj/item/device/aicard,
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
-		"the ship blueprints" = /obj/item/blueprints,
+		"the [vessel_type] blueprints" = /obj/item/blueprints,
 		"a nasa voidsuit" = /obj/item/clothing/suit/space/nasavoid,
 		"28 moles of plasma (full tank)" = /obj/item/weapon/tank,
 //		"a sample of slime extract" = /obj/item/slime_extract,
@@ -875,7 +875,7 @@ datum/objective/heist/salvage
 				target = "diamond"
 				target_amount = 20
 
-		explanation_text = "Ransack the ship and escape with [target_amount] [target]."
+		explanation_text = "Ransack the [vessel_type] and escape with [target_amount] [target]."
 
 	check_completion()
 

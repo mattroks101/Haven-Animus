@@ -78,6 +78,7 @@ var/diary = null
 var/diaryofmeanpeople = null
 var/href_logfile = null
 var/station_name = "NSV Luna"
+var/vessel_type = "ship"
 var/game_version = "Baystation12"
 var/changelog_hash = ""
 var/game_year = (text2num(time2text(world.realtime, "YYYY")) + 544)

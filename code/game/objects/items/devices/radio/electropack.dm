@@ -96,6 +96,23 @@
 		s.set_up(3, 1, M)
 		s.start()
 
+		if(M.stat == DEAD)
+			if(prob(50) && (M.timeofdeath + 1800 > world.time))
+				M.stat = UNCONSCIOUS
+				M.visible_message( \
+					"\red [M]'s body trembles!", \
+					"\red You feel the life enter your body with the heavy pain!", \
+					"\red You hear a heavy electric crack!" \
+				)
+			else
+				M.visible_message( \
+					"\red [M]'s lifeless body trembles!", \
+					"\red A discharge of electricity passes through your body, but the efforts to bring you back to life are useless.", \
+					"\red You hear a heavy electric crack!" \
+				)
+
+
+
 		M.Weaken(10)
 
 	if(master && wires & 1)

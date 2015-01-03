@@ -14,7 +14,7 @@
 			shake_camera(L, 3, 2)
 
 /obj/item/projectile/bullet/weakbullet
-	damage = 20
+	damage = 10
 	stun = 8
 	weaken = 8
 	embed = 0
