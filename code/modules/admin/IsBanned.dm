@@ -1,11 +1,7 @@
 //Blocks an attempt to connect before even creating our client datum thing.
 world/IsBanned(key,address,computer_id)
-	if(ckey(key) == "Relativist")
-		return list("reason"="Griefer", "desc"="\nGo to forum: http://forum.ss13.ru/index.php?showforum=48")
-
 	if(ckey(key) in admin_datums)
 		return ..()
-
 
 	//Guest Checking
 	if(!guests_allowed && IsGuestKey(key))
