@@ -35,7 +35,7 @@ emp_act
 				return -1 // complete projectile permutation
 	if(istype(P, /obj/item/projectile/energy/electrode))
 		if(src.stat == DEAD)
-			if(prob(50) && (src.timeofdeath + 1800 > world.time))
+			if(prob(30) && (src.timeofdeath + 1800 > world.time) && !(NOCLONE in src.mutations))
 				src.stat = UNCONSCIOUS
 				src.visible_message( \
 					"\red [src]'s body trembles!", \
