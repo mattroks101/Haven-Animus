@@ -15,6 +15,7 @@
 //	glide_size = 8
 
 	// Garbage collection (controller).
+	var/gcDestroyed
 	var/timeDestroyed
 
 
@@ -40,6 +41,19 @@
 		return
 	..()
 	return
+
+/atom/movable/Destroy()
+	gcDestroyed = "bye world!"
+	tag = null
+	loc = null
+	..()
+
+/atom/movable/Del()
+	// Pass to Destroy().
+	if(!gcDestroyed)
+		Destroy()
+
+	..()
 
 /atom/movable/proc/forceMove(atom/destination)
 	if(destination)

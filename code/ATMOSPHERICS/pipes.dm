@@ -1140,4 +1140,4 @@ obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/u
 			if (meter.target == src)
 				new /obj/item/pipe_meter(T)
 				del(meter)
-		qdel(src)
+		del(src)
