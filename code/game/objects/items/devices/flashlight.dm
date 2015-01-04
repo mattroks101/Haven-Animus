@@ -11,7 +11,7 @@
 	g_amt = 20
 	icon_action_button = "action_flashlight"
 	var/on = 0
-	var/brightness_on = 4 //luminosity when on
+	var/brightness_on = 3 //luminosity when on
 
 /obj/item/device/flashlight/attackby(var/obj/B, var/mob/user)
 	if (istype(B, /obj/item/weapon/storage/toolbox))
