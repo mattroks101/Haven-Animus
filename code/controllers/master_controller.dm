@@ -74,6 +74,14 @@ datum/controller/game_controller/proc/setup()
 		global.garbageCollector = new
 		garbageCollector = global.garbageCollector
 
+	world << "\red \b Setting up shields.."
+	var/start_shieldnetwork = world.timeofday
+	ShieldNetwork = new /datum/shieldnetwork()
+
+	ShieldNetwork.makenetwork()
+
+	world << "\red \b Shield network set up in [(world.timeofday - start_shieldnetwork)/10] seconds"
+
 	setup_objects()
 	setupgenetics()
 	setupfactions()
@@ -88,6 +96,7 @@ datum/controller/game_controller/proc/setup()
 	spawn(0)
 		if(ticker)
 			ticker.pregame()
+
 
 //	lighting_controller.Initialize()
 

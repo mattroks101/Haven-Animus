@@ -1139,6 +1139,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Messaging Server Room"
 	icon_state = "server"
 
+/area/shieldgen
+	name = "\improper Shield Generator Room"
+	icon_state = "server"
+
 //Crew
 
 /area/crew_quarters
@@ -2244,6 +2248,7 @@ var/list/the_station_areas = list (
 	/area/shuttle/specops/station,
 	/area/atmos,
 	/area/maintenance,
+	/area/shieldgen,
 	/area/hallway,
 	/area/bridge,
 	/area/crew_quarters,

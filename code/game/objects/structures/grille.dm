@@ -36,25 +36,21 @@
 
 /obj/structure/grille/attack_hand(mob/user as mob)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	var/damage_dealt
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
-			damage_dealt = 5
+			src.health -= rand(4,8)
 			user.visible_message("<span class='warning'>[user] mangles [src].</span>", \
 					 "<span class='warning'>You mangle [src].</span>", \
 					 "You hear twisting metal.")
-	if(!damage_dealt)
-		user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
-						 "<span class='warning'>You kick [src].</span>", \
-						 "You hear twisting metal.")
+
 	if(shock(user, 70))
 		return
 	if(iszombie(usr))			//If it's a zombie
 		user.visible_message("<span class='danger'>[user] [pick("bangs on","slashes against")] the [src.name]!</span>", \
 						 "<span class='warning'>You bang on the [src.name].</span>", \
 						 "You hear twisting metal.")
-		src.health -= pick(3,4)
+		src.health -= rand(3,5)
 		healthcheck()
 		return
 	if(HULK in user.mutations)		//Or hulk
@@ -65,7 +61,7 @@
 		health -= 10
 		return
 	else
-		health -= pick(1,2)
+		health -= rand(1,2)
 		user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
 						 "<span class='warning'>You kick [src].</span>", \
 						 "You hear twisting metal.")
