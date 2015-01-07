@@ -34,7 +34,7 @@
 		else
 			update_icon()
 
-	Del()
+	Destroy()
 		del(air_contents)
 
 		..()

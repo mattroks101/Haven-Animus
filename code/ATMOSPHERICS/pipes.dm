@@ -49,9 +49,9 @@ obj/machinery/atmospherics/pipe
 
 		return parent.return_network(reference)
 
-	Del()
+	Destroy()
 		del(parent)
-		if(air_temporary)
+		if(air_temporary && loc)
 			loc.assume_air(air_temporary)
 
 		..()
@@ -172,7 +172,7 @@ obj/machinery/atmospherics/pipe
 			else if(dir==12)
 				dir = 4
 
-		Del()
+		Destroy()
 			if(node1)
 				node1.disconnect(src)
 			if(node2)
@@ -443,7 +443,7 @@ obj/machinery/atmospherics/pipe
 	                           				"nitrogen",(start_pressure*N2STANDARD)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
 				..()
 
-		Del()
+		Destroy()
 			if(node1)
 				node1.disconnect(src)
 
@@ -542,7 +542,7 @@ obj/machinery/atmospherics/pipe
 			else if (nodealert)
 				nodealert = 0
 */
-		Del()
+		Destroy()
 			if(node1)
 				node1.disconnect(src)
 
@@ -653,7 +653,7 @@ obj/machinery/atmospherics/pipe
 			else if (nodealert)
 				nodealert = 0
 */
-		Del()
+		Destroy()
 			if(node1)
 				node1.disconnect(src)
 			if(node2)
@@ -879,7 +879,7 @@ obj/machinery/atmospherics/pipe
 			else if (nodealert)
 				nodealert = 0
 */
-		Del()
+		Destroy()
 			if(node1)
 				node1.disconnect(src)
 			if(node2)
@@ -1065,7 +1065,7 @@ obj/machinery/atmospherics/pipe
 				..()
 			else
 				. = PROCESS_KILL
-		Del()
+		Destroy()
 			if(node)
 				node.disconnect(src)
 

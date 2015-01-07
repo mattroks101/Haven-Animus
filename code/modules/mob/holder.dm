@@ -10,7 +10,7 @@
 	..()
 	processing_objects.Add(src)
 
-/obj/item/weapon/holder/Del()
+/obj/item/weapon/holder/Destroy()
 	processing_objects.Remove(src)
 	..()
 

@@ -78,7 +78,7 @@
 	update_icon()
 
 
-/obj/structure/cable/Del()						// called when a cable is deleted
+/obj/structure/cable/Destroy()						// called when a cable is deleted
 	if(!defer_powernet_rebuild)					// set if network will be rebuilt manually
 		if(powernet)
 			powernet.cut_cable(src)				// update the powernets
@@ -141,7 +141,7 @@
 					var/turf/below = locate(src.x, src.y, controller.down_target)
 					for(var/obj/structure/cable/c in below)
 						if(c.d1 == 12 || c.d2 == 12)
-							c.Del()
+							c.Destroy()
 ///// Z-Level Stuff
 
 		del(src)

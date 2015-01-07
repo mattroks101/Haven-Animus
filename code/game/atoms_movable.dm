@@ -43,6 +43,9 @@
 	return
 
 /atom/movable/Destroy()
+	if(src.LuminosityRed || src.LuminosityGreen || src.LuminosityBlue)
+		ul_Extinguish()
+
 	gcDestroyed = "bye world!"
 	tag = null
 	loc = null
