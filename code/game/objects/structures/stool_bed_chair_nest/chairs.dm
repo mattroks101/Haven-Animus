@@ -158,3 +158,79 @@
 			..()
 			return
 
+//Church pews
+/obj/structure/stool/bed/chair/wood/pew
+	name = "pew"
+	desc = "A bench for sleeping at masses."
+	icon_state = "pews"
+
+/obj/structure/stool/bed/chair/comfy/brown
+	icon_state = "comfychair_brown"
+
+/obj/structure/stool/bed/chair/comfy/beige
+	icon_state = "comfychair_beige"
+
+/obj/structure/stool/bed/chair/comfy/teal
+	icon_state = "comfychair_teal"
+
+/obj/structure/stool/bed/chair/office
+	anchored = 0
+
+/obj/structure/stool/bed/chair/comfy/black
+	icon_state = "comfychair_black"
+
+/obj/structure/stool/bed/chair/comfy/lime
+	icon_state = "comfychair_lime"
+
+/obj/structure/stool/bed/chair/office/Move()
+	..()
+	handle_rotation()
+
+/obj/structure/stool/bed/chair/office/light
+	icon_state = "officechair_white"
+
+/obj/structure/stool/bed/chair/office/dark
+	icon_state = "officechair_dark"
+
+//COUCHES:
+/obj/structure/stool/bed/chair/comfy/couch
+	name = "couch"
+//BLACK///////////////////////////////////////////////
+/obj/structure/stool/bed/chair/comfy/couch/black/right
+	icon_state = "couchblack_right"
+
+/obj/structure/stool/bed/chair/comfy/couch/black/left
+	icon_state = "couchblack_left"
+
+/obj/structure/stool/bed/chair/comfy/couch/black/middle
+	icon_state = "couchblack_middle"
+
+//BROWN///////////////////////////////////////////////
+/obj/structure/stool/bed/chair/comfy/couch/brown/right
+	icon_state = "couchbrown_right"
+
+/obj/structure/stool/bed/chair/comfy/couch/brown/left
+	icon_state = "couchbrown_left"
+
+/obj/structure/stool/bed/chair/comfy/couch/brown/middle
+	icon_state = "couchbrown_middle"
+
+//BEIGE///////////////////////////////////////////////
+/obj/structure/stool/bed/chair/comfy/couch/beige/right
+	icon_state = "couchbeige_right"
+
+/obj/structure/stool/bed/chair/comfy/couch/beige/left
+	icon_state = "couchbeige_left"
+
+/obj/structure/stool/bed/chair/comfy/couch/beige/middle
+	icon_state = "couchbeige_middle"
+
+//TEAL//////////////////////////////////////////////////
+/obj/structure/stool/bed/chair/comfy/couch/teal/right
+	icon_state = "couchteal_right"
+
+/obj/structure/stool/bed/chair/comfy/couch/teal/left
+	icon_state = "couchteal_left"
+
+/obj/structure/stool/bed/chair/comfy/couch/teal/middle
+	icon_state = "couchteal_middle"
