@@ -219,7 +219,7 @@
 	if (src.lasers)
 		switch(lasertype)
 			if(1)
-				A = new /obj/item/projectile/beam( loc )
+				A = new /obj/item/projectile/energy/laser( loc )
 			if(2)
 				A = new /obj/item/projectile/beam/heavylaser( loc )
 			if(3)
