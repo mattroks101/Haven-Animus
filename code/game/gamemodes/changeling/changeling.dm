@@ -41,7 +41,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 
 /datum/game_mode/changeling/announce()
 	world << "<B>The current game mode is - Changeling!</B>"
-	world << "<B>There are alien changelings on the station. Do not let the changelings succeed!</B>"
+	world << "<B>There are alien changelings on the [vessel_type]. Do not let the changelings succeed!</B>"
 
 /datum/game_mode/changeling/pre_setup()
 

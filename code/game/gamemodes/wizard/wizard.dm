@@ -21,7 +21,7 @@
 
 /datum/game_mode/wizard/announce()
 	world << "<B>The current game mode is - Wizard!</B>"
-	world << "<B>There is a \red SPACE WIZARD\black on the station. You can't let him achieve his objective!</B>"
+	world << "<B>There is a \red SPACE WIZARD\black on the [vessel_type]. You can't let him achieve his objective!</B>"
 
 
 /datum/game_mode/wizard/can_start()//This could be better, will likely have to recode it later

@@ -226,7 +226,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 			if(win_type == "Minor")
 
 				win_type = "Major"
-			win_msg += "<B>The Vox Raiders escaped the station!</B>"
+			win_msg += "<B>The Vox Raiders escaped the [vessel_type]!</B>"
 		else
 			win_msg += "<B>The Vox Raiders were repelled!</B>"
 
