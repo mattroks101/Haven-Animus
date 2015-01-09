@@ -504,7 +504,7 @@
 				O.show_message(text("\red <B>[] resists!</B>", L), 1)
 
 
-	//unbuckling yourself
+/*	//unbuckling yourself
 	if(L.buckled && (L.last_special <= world.time) )
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
@@ -523,7 +523,7 @@
 						C << "\blue You successfully unbuckle yourself."
 						C.buckled.manual_unbuckle(C)
 		else
-			L.buckled.manual_unbuckle(L)
+			L.buckled.manual_unbuckle(L)*/
 
 	//Breaking out of a locker?
 	else if( src.loc && (istype(src.loc, /obj/structure/closet)) )
@@ -636,13 +636,23 @@
 				for(var/mob/O in viewers(CM))
 					O.show_message( "\red <B>[usr] attempts to remove \the [HC]!</B>", 1)
 				spawn(0)
-					if(do_after(CM, breakouttime))
-						if(!CM.handcuffed || CM.buckled)
-							return // time leniency for lag which also might make this whole thing pointless but the server
-						for(var/mob/O in viewers(CM))//                                         lags so hard that 40s isn't lenient enough - Quarxink
-							O.show_message("\red <B>[CM] manages to remove the handcuffs!</B>", 1)
-						CM << "\blue You successfully remove \the [CM.handcuffed]."
-						CM.drop_from_inventory(CM.handcuffed)
+					var/increment = 150
+					for(var/i = 0, i < breakouttime, i += increment)
+						if(!do_after(CM, increment))
+							return
+						else
+							CM << pick("You hear something click, but it doesn't open yet.",	// - Uristqwerty
+										"The latch resists!",									// - IRC: BowlSoldier
+										"The chain is starting to give!",						// - IRC: BowlSoldier
+										"The chain bends a little.",							// - IRC: STALKER
+										"Your wrist hurts.",									// - IRC: STALKER
+										"Unnng")												// - IRC: Doug_H_Nuts
+
+					if(!CM:handcuffed) return
+					for(var/mob/O in viewers(CM))//                                         lags so hard that 40s isn't lenient enough - Quarxink
+						O.show_message("\red <B>[CM] manages to remove the handcuffs!</B>", 1)
+					CM << "\blue You successfully remove \the [CM.handcuffed]."
+					CM.drop_from_inventory(CM.handcuffed)
 
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100

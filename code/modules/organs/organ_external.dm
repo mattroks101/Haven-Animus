@@ -1046,32 +1046,39 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 ****************************************************/
 
 obj/item/weapon/organ/l_arm
-	name = "left arm"
+	name = "severed left arm"
 	icon_state = "l_arm"
+
 obj/item/weapon/organ/l_foot
-	name = "left foot"
+	name = "severed left foot"
 	icon_state = "l_foot"
+
 obj/item/weapon/organ/l_hand
-	name = "left hand"
+	name = "severed left hand"
 	icon_state = "l_hand"
+
 obj/item/weapon/organ/l_leg
-	name = "left leg"
+	name = "severed left leg"
 	icon_state = "l_leg"
+
 obj/item/weapon/organ/r_arm
-	name = "right arm"
+	name = "severed right arm"
 	icon_state = "r_arm"
+
 obj/item/weapon/organ/r_foot
-	name = "right foot"
+	name = "severed right foot"
 	icon_state = "r_foot"
+
 obj/item/weapon/organ/r_hand
-	name = "right hand"
+	name = "severed right hand"
 	icon_state = "r_hand"
+
 obj/item/weapon/organ/r_leg
-	name = "right leg"
+	name = "severed right leg"
 	icon_state = "r_leg"
 
 obj/item/weapon/organ/head
-	name = "head"
+	name = "severed head"
 	icon_state = "head_m"
 	var/mob/living/carbon/brain/brainmob
 	var/brain_op_stage = 0
@@ -1110,6 +1117,8 @@ obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 	//		H.icon_state = "head_f"
 	//	H.overlays += H.generate_head_icon()
 	transfer_identity(H)
+
+	dir = 2
 
 	name = "[H.real_name]'s head"
 

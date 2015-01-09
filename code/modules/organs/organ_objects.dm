@@ -1,5 +1,5 @@
 /obj/item/organ
-	name = "organ"
+	name = "severed organ"
 	desc = "It looks like it probably just plopped out."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "appendix"
