@@ -1411,6 +1411,8 @@
 #include "code\WorkInProgress\spacepods\equipment.dm"
 #include "code\WorkInProgress\spacepods\parts.dm"
 #include "code\WorkInProgress\spacepods\spacepods.dm"
+#include "code\WorkInProgress\spacepods\weaponry.dm"
+#include "code\WorkInProgress\spacepods\tools\drill.dm"
 #include "code\WorkInProgress\Wrongnumber\weldbackpack.dm"
 #include "code\ZAS\_docs.dm"
 #include "code\ZAS\_gas_mixture_xgm.dm"
