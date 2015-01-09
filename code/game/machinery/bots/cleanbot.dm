@@ -317,9 +317,6 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	if(istype(target,/obj/effect/decal/cleanable/dirt))		// Clean Dirt much faster
 		cleantime = 10
 	spawn(cleantime)
-		if(istype(loc,/turf/simulated))
-			var/turf/simulated/f = loc
-			f.dirt = 0
 		cleaning = 0
 		del(target)
 		icon_state = "cleanbot[on]"

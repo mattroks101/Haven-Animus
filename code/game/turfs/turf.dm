@@ -22,8 +22,6 @@
 	var/icon_old = null
 	var/pathweight = 1
 
-	var/dirt = 0
-
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)

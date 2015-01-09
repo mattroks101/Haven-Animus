@@ -247,7 +247,7 @@
 		if ((M.client && !( M.blinded )))
 			M.show_message(text("\red [] has been hit by []", src, O), 1)
 	if (health > 0)
-		adjustBruteLoss((istype(O, /obj/effect/meteor/small) ? 10 : 25))
+		adjustBruteLoss(25)
 		adjustFireLoss(30)
 
 		updatehealth()
