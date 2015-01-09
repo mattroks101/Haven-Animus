@@ -846,7 +846,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(ismob(W.loc))
 		var/mob/living/H = W.loc
 		H.drop_item()
-	W.loc = owner
+	if(W) // Some items are destroyed when dropped
+		W.loc = owner
 
 /****************************************************
 			   ORGAN DEFINES
