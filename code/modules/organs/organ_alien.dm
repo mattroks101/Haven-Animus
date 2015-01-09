@@ -192,7 +192,7 @@
 	organ_tag = "hive node"
 
 /obj/item/organ/xenos/resinspinner
-	name = "hive node"
+	name = "resin spinner"
 	icon_state = "xgibmid2"
 	organ_tag = "resin spinner"
 
