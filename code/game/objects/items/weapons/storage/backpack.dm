@@ -67,6 +67,17 @@
 			crit_fail = 1
 			icon_state = "brokenpack"
 
+/obj/item/weapon/storage/backpack/holding/belt //It is here instead of belts so it works with all the BoH code.
+	name = "belt of holding"
+	desc = "An experimental belt that opens into a small, localized pocket of Blue Space."
+	icon_state = "holdingbelt"
+	item_state = "holdingbelt"
+	max_w_class = 3 //It is a backpack for your belt!
+	max_combined_w_class = 28
+	storage_slots = 14
+
+	slot_flags = SLOT_BELT
+
 
 /obj/item/weapon/storage/backpack/santabag
 	name = "Santa's Gift Bag"
