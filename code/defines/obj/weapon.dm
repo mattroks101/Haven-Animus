@@ -609,6 +609,7 @@
 
 /obj/item/weapon/stock_parts/capacitor/adv
 	name = "advanced capacitor"
+	icon_state = "adv_capacitor"
 	desc = "An advanced capacitor used in the construction of a variety of devices."
 	origin_tech = "powerstorage=3"
 	rating = 2
@@ -617,6 +618,7 @@
 
 /obj/item/weapon/stock_parts/scanning_module/adv
 	name = "advanced scanning module"
+	icon_state = "adv_scan_module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."
 	icon_state = "scan_module"
 	origin_tech = "magnets=3"
@@ -653,6 +655,7 @@
 
 /obj/item/weapon/stock_parts/capacitor/super
 	name = "super capacitor"
+	icon_state = "super_capacitor"
 	desc = "A super-high capacity capacitor used in the construction of a variety of devices."
 	origin_tech = "powerstorage=5;materials=4"
 	rating = 3
@@ -661,6 +664,7 @@
 
 /obj/item/weapon/stock_parts/scanning_module/phasic
 	name = "phasic scanning module"
+	icon_state = "super_scan_module"
 	desc = "A compact, high resolution phasic scanning module used in the construction of certain devices."
 	origin_tech = "magnets=5"
 	rating = 3
