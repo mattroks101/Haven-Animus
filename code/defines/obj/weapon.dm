@@ -761,3 +761,20 @@
 	icon_state = "capacitor"
 	desc = "A debug item for research."
 	origin_tech = "materials=8;programming=8;magnets=8;powerstorage=8;bluespace=8;combat=8;biotech=8;syndicate=8"
+
+
+/obj/item/weapon/storage/part_replacer
+	name = "Rapid Part Exchange Device"
+	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
+	icon_state = "RPED"
+	item_state = "RPED"
+	w_class = 5
+	can_hold = list(/obj/item/weapon/stock_parts)
+	storage_slots = 21
+	use_to_pickup = 1
+	allow_quick_gather = 1
+	allow_quick_empty = 1
+	collection_mode = 1
+	display_contents_with_number = 1
+	max_w_class = 3
+	max_combined_w_class = 42

@@ -56,7 +56,6 @@
 	var/has_electronics = 0 // 0 - none, 1 - plugged in, 2 - secured by screwdriver
 	var/overload = 1 //used for the Blackout malf module
 	var/beenhit = 0 // used for counting how many times it has been hit, used for Aliens at the moment
-	var/mob/living/silicon/ai/occupant = null
 	var/list/apcwirelist = list(
 		"Orange" = 1,
 		"Dark red" = 2,
