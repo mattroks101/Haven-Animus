@@ -616,7 +616,7 @@
 					O.show_message(text("\red <B>[] is trying to break the handcuffs!</B>", CM), 1)
 				spawn(0)
 					if(do_after(CM, 50))
-						if(!CM.handcuffed || CM.buckled)
+						if(!CM.handcuffed)// || CM.buckled)
 							return
 						for(var/mob/O in viewers(CM))
 							O.show_message(text("\red <B>[] manages to break the handcuffs!</B>", CM), 1)
@@ -752,7 +752,7 @@
 			continue
 		var/turf/T = get_turf(temp_vent)
 
-		if(!T || T.z != loc.z)
+		if(!T || T.z > 4)
 			continue
 
 		var/i = 1
