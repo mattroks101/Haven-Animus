@@ -598,7 +598,7 @@
 	//breaking out of handcuffs
 	else if(iscarbon(L))
 		var/mob/living/carbon/CM = L
-		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
+		if(CM.handcuffed && !(CM.stat || CM.stunned || CM.weakened || CM.paralysis || CM.sleeping || (CM.status_flags & FAKEDEATH)) && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
 
@@ -672,7 +672,7 @@
 					O.show_message(text("\red <B>[] is trying to break the legcuffs!</B>", CM), 1)
 				spawn(0)
 					if(do_after(CM, 50))
-						if(!CM.legcuffed || CM.buckled)
+						if(!CM.legcuffed)// || CM.buckled)
 							return
 						for(var/mob/O in viewers(CM))
 							O.show_message(text("\red <B>[] manages to break the legcuffs!</B>", CM), 1)
