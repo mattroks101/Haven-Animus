@@ -341,4 +341,3 @@
 		Move(get_step(src,direction))
 		scrambling = 0
 		dir = 2
-
