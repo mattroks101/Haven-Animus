@@ -333,6 +333,7 @@ Class Procs:
 	return 0
 
 /obj/machinery/proc/exchange_parts(mob/user, var/obj/item/weapon/storage/part_replacer/W)
+	var/shouldplaysound = 0
 	if(istype(W) && component_parts)
 		if(panel_open)
 			var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
@@ -351,14 +352,18 @@ Class Procs:
 							component_parts += B
 							B.loc = null
 							user << "<span class='notice'>[A.name] replaced with [B.name].</span>"
+							shouldplaysound = 1 //Only play the sound when parts are actually replaced!
 							break
 			RefreshParts()
+			if(shouldplaysound)
+				W.play_rped_sound()
 		else
 			user << "<span class='notice'>Following parts detected in the machine:</span>"
 			for(var/var/obj/item/C in component_parts)
 				user << "<span class='notice'>    [C.name]</span>"
 		return 1
 	return 0
+
 
 //called on machinery construction (i.e from frame to machinery) but not on initialization
 /obj/machinery/proc/construction()

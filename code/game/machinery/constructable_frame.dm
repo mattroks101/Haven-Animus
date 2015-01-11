@@ -18,223 +18,273 @@
 	var/pattern_idx=0
 
 
-	proc/update_desc()
-		var/D
-		if(req_components)
-			D = "Requires "
-			var/first = 1
-			for(var/I in req_components)
-				if(req_components[I] > 0)
-					D += "[first?"":", "][num2text(req_components[I])] [req_component_names[I]]"
-					first = 0
-			if(first) // nothing needs to be added, then
-				D += "nothing"
-			D += "."
-		desc = D
+// unfortunately, we have to instance the objects really quickly to get the names
+// fortunately, this is only called once when the board is added and the items are immediately GC'd
+// and none of the parts do much in their constructors
+/obj/machinery/constructable_frame/proc/update_namelist()
+	if(!req_components)
+		return
 
-/obj/machinery/constructable_frame/machine_frame
+	req_component_names = new()
+	for(var/tname in req_components)
+		var/path = tname
+		var/obj/O = new path()
+		req_component_names[tname] = O.name
 
-	proc/find_square()
-		// This is fucking stupid but what the hell.
+/obj/machinery/constructable_frame/proc/get_req_components_amt()
+	var/amt = 0
+	for(var/path in req_components)
+		amt += req_components[path]
+	return amt
 
-		// This corresponds to indicies from alldirs.
-		//                         1      2      3     4     5          6          7          8
-		// var/list/alldirs = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
-		var/valid_patterns=list(
-			list(1,3,5), //SW - NORTH,EAST,NORTHEAST
-			list(2,3,7), //NW - SOUTH,EAST,SOUTHEAST
-			list(1,4,6), //SE - NORTH,WEST,NORTHWEST
-			list(2,4,8)  //NE - SOUTH,WEST,SOUTHWEST
-		)
-		var/detected_parts[8]
-		var/tally=0
-		var/turf/T
-		var/obj/machinery/constructable_frame/machine_frame/friend
-		for(var/i=1;i<=8;i++)
-			T=get_step(src.loc,alldirs[i])
-			friend = locate() in T
-			if(friend)
-				detected_parts[i]=friend
-				tally++
-		// Need at least 3 connections to make a square
-		if(tally<3)
-			return
-		// Find stuff in the patterns indicated
-		for(var/i=1;i<=4;i++)
-			var/list/scanidxs=valid_patterns[i]
-			var/list/new_connected=list()
-			var/allfound=1
-			for(var/diridx in scanidxs)
-				if(detected_parts[diridx]==null)
-					allfound=0
-					break
-				new_connected.Add(detected_parts[diridx])
-			if(allfound)
-				connected_parts=new_connected
-				pattern_idx=i
-				return 1
-		return 0
+// update description of required components remaining
+/obj/machinery/constructable_frame/proc/update_req_desc()
+	if(!req_components || !req_component_names)
+		return
 
-	attackby(obj/item/P as obj, mob/user as mob)
-		if(P.crit_fail)
-			user << "\red This part is faulty, you cannot add this to the machine!"
-			return
-		switch(state)
-			if(1)
-				if(istype(P, /obj/item/weapon/cable_coil))
-					var/obj/item/weapon/cable_coil/C = P
-					if(C.amount >= 5)
-						playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-						user << "\blue You start to add cables to the frame."
-						if(do_after(user, 20))
-							if(C)
-								C.amount -= 5
-								if(!C.amount) del(C)
-								user << "\blue You add cables to the frame."
-								state = 2
-								icon_state = "box_1"
-				else if(istype(P, /obj/item/stack/rods))
-					var/obj/item/stack/rods/R=P
-					if(R.amount<10)
-						user << "\red You need 10 rods to assemble a pod frame."
-						return
-					if(!find_square())
-						user << "\red You cannot assemble a pod frame without a 2x2 square of machine frames."
-						return
+	var/hasContent = 0
+	desc = "Requires"
+	for(var/i = 1 to req_components.len)
+		var/tname = req_components[i]
+		var/amt = req_components[tname]
+		if(amt == 0)
+			continue
+		var/use_and = i == req_components.len
+		desc += "[(hasContent ? (use_and ? ", and" : ",") : "")] [amt] [amt == 1 ? req_component_names[tname] : "[req_component_names[tname]]\s"]"
+		hasContent = 1
 
-					var/turf/T=get_turf(src)
-					if(!istype(T, /turf/space) && !istype(T, /turf/simulated/floor/engine/vacuum/hull) && !istype(T,/turf/simulated/floor/plating/airless/asteroid))
-						user << "\red You can assemble a pod only on the hull plating."
-						return
+	if(!hasContent)
+		desc = "Does not require any more components."
+	else
+		desc += "."
 
-					R.use(10)
+/obj/machinery/constructable_frame/machine_frame/proc/find_square()
+	// This is fucking stupid but what the hell.
 
-					for(var/obj/machinery/constructable_frame/machine_frame/F in connected_parts)
-						del(F)
+	// This corresponds to indicies from alldirs.
+	//                         1      2      3     4     5          6          7          8
+	// var/list/alldirs = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+	var/valid_patterns=list(
+		list(1,3,5), //SW - NORTH,EAST,NORTHEAST
+		list(2,3,7), //NW - SOUTH,EAST,SOUTHEAST
+		list(1,4,6), //SE - NORTH,WEST,NORTHWEST
+		list(2,4,8)  //NE - SOUTH,WEST,SOUTHWEST
+	)
+	var/detected_parts[8]
+	var/tally=0
+	var/turf/T
+	var/obj/machinery/constructable_frame/machine_frame/friend
+	for(var/i=1;i<=8;i++)
+		T=get_step(src.loc,alldirs[i])
+		friend = locate() in T
+		if(friend)
+			detected_parts[i]=friend
+			tally++
+	// Need at least 3 connections to make a square
+	if(tally<3)
+		return
+	// Find stuff in the patterns indicated
+	for(var/i=1;i<=4;i++)
+		var/list/scanidxs=valid_patterns[i]
+		var/list/new_connected=list()
+		var/allfound=1
+		for(var/diridx in scanidxs)
+			if(detected_parts[diridx]==null)
+				allfound=0
+				break
+			new_connected.Add(detected_parts[diridx])
+		if(allfound)
+			connected_parts=new_connected
+			pattern_idx=i
+			return 1
+	return 0
 
-					// Offset frame (if needed) so it doesn't look wonky when it spawns.
-					switch(pattern_idx)
-						if(2)
-							T=get_step(T,SOUTH)
-						if(3)
-							T=get_step(T,WEST)
-						if(4)
-							T=get_step(T,SOUTHWEST)
-
-					new /obj/structure/spacepod_frame(T)
-					user << "\blue You assemble the pod frame."
-					playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-					del(src)
+/obj/machinery/constructable_frame/machine_frame/attackby(obj/item/P as obj, mob/user as mob)
+	if(P.crit_fail)
+		user << "\red This part is faulty, you cannot add this to the machine!"
+		return
+	switch(state)
+		if(1)
+			if(istype(P, /obj/item/weapon/cable_coil))
+				var/obj/item/weapon/cable_coil/C = P
+				if(C.amount >= 5)
+					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					user << "\blue You start to add cables to the frame."
+					if(do_after(user, 20))
+						if(C)
+							C.amount -= 5
+							if(!C.amount) del(C)
+							user << "\blue You add cables to the frame."
+							state = 2
+							icon_state = "box_1"
+			else if(istype(P, /obj/item/stack/rods))
+				var/obj/item/stack/rods/R=P
+				if(R.amount<10)
+					user << "\red You need 10 rods to assemble a pod frame."
 					return
+				if(!find_square())
+					user << "\red You cannot assemble a pod frame without a 2x2 square of machine frames."
+					return
+
+				var/turf/T=get_turf(src)
+				if(!istype(T, /turf/space) && !istype(T, /turf/simulated/floor/engine/vacuum/hull) && !istype(T,/turf/simulated/floor/plating/airless/asteroid))
+					user << "\red You can assemble a pod only on the hull plating."
+					return
+
+				R.use(10)
+
+				for(var/obj/machinery/constructable_frame/machine_frame/F in connected_parts)
+					del(F)
+
+				// Offset frame (if needed) so it doesn't look wonky when it spawns.
+				switch(pattern_idx)
+					if(2)
+						T=get_step(T,SOUTH)
+					if(3)
+						T=get_step(T,WEST)
+					if(4)
+						T=get_step(T,SOUTHWEST)
+
+				new /obj/structure/spacepod_frame(T)
+				user << "\blue You assemble the pod frame."
+				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+				del(src)
+				return
+			else
+				if(istype(P, /obj/item/weapon/wrench))
+					playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+					user << "\blue You dismantle the frame"
+					new /obj/item/stack/sheet/metal(src.loc, 5)
+					del(src)
+		if(2)
+			if(istype(P, /obj/item/weapon/circuitboard))
+				var/obj/item/weapon/circuitboard/B = P
+				if(B.board_type == "machine")
+					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					user << "\blue You add the circuit board to the frame."
+					circuit = P
+					user.drop_item()
+					P.loc = src
+					icon_state = "box_2"
+					state = 3
+					components = list()
+					req_components = circuit.req_components.Copy()
+					for(var/A in circuit.req_components)
+						req_components[A] = circuit.req_components[A]
+					req_component_names = circuit.req_components.Copy()
+					for(var/A in req_components)
+						if(!ispath(A))
+							A = text2path(A)
+						var/obj/ct = new A() // have to quickly instantiate it get name
+						req_component_names[A] = ct.name
+					if(circuit.frame_desc)
+						desc = circuit.frame_desc
+					else
+						update_req_desc()
+					user << desc
 				else
-					if(istype(P, /obj/item/weapon/wrench))
-						playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-						user << "\blue You dismantle the frame"
-						new /obj/item/stack/sheet/metal(src.loc, 5)
-						del(src)
-			if(2)
-				if(istype(P, /obj/item/weapon/circuitboard))
-					var/obj/item/weapon/circuitboard/B = P
-					if(B.board_type == "machine")
+					user << "\red This frame does not accept circuit boards of this type!"
+			else
+				if(istype(P, /obj/item/weapon/wirecutters))
+					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
+					user << "\blue You remove the cables."
+					state = 1
+					icon_state = "box_0"
+					var/obj/item/weapon/cable_coil/A = new /obj/item/weapon/cable_coil( src.loc )
+					A.amount = 5
+
+		if(3)
+			if(istype(P, /obj/item/weapon/crowbar))
+				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+				state = 2
+				circuit.loc = src.loc
+				circuit = null
+				if(components.len == 0)
+					user << "\blue You remove the circuit board."
+				else
+					user << "\blue You remove the circuit board and other components."
+					for(var/obj/item/weapon/W in components)
+						W.loc = src.loc
+				desc = initial(desc)
+				req_components = null
+				components = null
+				icon_state = "box_1"
+			else if(istype(P, /obj/item/weapon/screwdriver))
+				var/component_check = 1
+				for(var/R in req_components)
+					if(req_components[R] > 0)
+						component_check = 0
+						break
+				if(component_check)
+					playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+					var/obj/machinery/new_machine = new src.circuit.build_path(src.loc)
+					for(var/obj/O in new_machine.component_parts)
+						del(O)
+					new_machine.component_parts = list()
+					for(var/obj/O in src)
+						if(circuit.contain_parts) // things like disposal don't want their parts in them
+							O.loc = new_machine
+						else
+							O.loc = null
+						new_machine.component_parts += O
+					if(circuit.contain_parts)
+						circuit.loc = new_machine
+					else
+						circuit.loc = null
+					new_machine.RefreshParts()
+					del(src)
+			else if(istype(P, /obj/item/weapon/storage/part_replacer) && P.contents.len && get_req_components_amt())
+				var/obj/item/weapon/storage/part_replacer/replacer = P
+				var/list/added_components = list()
+				var/list/part_list = list()
+
+				//Assemble a list of current parts, then sort them by their rating!
+				for(var/obj/item/weapon/stock_parts/co in replacer)
+					part_list += co
+				//Sort the parts. This ensures that higher tier items are applied first.
+				part_list = sortTim(part_list, /proc/cmp_rped_sort)
+
+				for(var/path in req_components)
+					while(req_components[path] > 0 && (locate(path) in part_list))
+						var/obj/item/part = (locate(path) in part_list)
+						if(!part.crit_fail)
+							added_components[part] = path
+							replacer.remove_from_storage(part, src)
+							req_components[path]--
+							part_list -= part
+
+				for(var/obj/item/weapon/stock_parts/part in added_components)
+					components += part
+					user << "<span class='notice'>[part.name] applied.</span>"
+				replacer.play_rped_sound()
+
+				update_req_desc()
+				return
+			else if(istype(P, /obj/item/weapon) && get_req_components_amt())
+				for(var/I in req_components)
+					if(istype(P, text2path(I)) && (req_components[I] > 0))
 						playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-						user << "\blue You add the circuit board to the frame."
-						circuit = P
+						if(istype(P, /obj/item/weapon/cable_coil))
+							var/obj/item/weapon/cable_coil/CP = P
+							if(CP.amount > 1)
+								var/camt = min(CP.amount, req_components[I]) // amount of cable to take, idealy amount required, but limited by amount provided
+								var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src)
+								CC.amount = camt
+								CC.update_icon()
+								CP.use(camt)
+								components += CC
+								req_components[I] -= camt
+								update_req_desc()
+								break
 						user.drop_item()
 						P.loc = src
-						icon_state = "box_2"
-						state = 3
-						components = list()
-						req_components = circuit.req_components.Copy()
-						for(var/A in circuit.req_components)
-							req_components[A] = circuit.req_components[A]
-						req_component_names = circuit.req_components.Copy()
-						for(var/A in req_components)
-							var/cp = text2path(A)
-							var/obj/ct = new cp() // have to quickly instantiate it get name
-							req_component_names[A] = ct.name
-						if(circuit.frame_desc)
-							desc = circuit.frame_desc
-						else
-							update_desc()
-						user << desc
-					else
-						user << "\red This frame does not accept circuit boards of this type!"
-				else
-					if(istype(P, /obj/item/weapon/wirecutters))
-						playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-						user << "\blue You remove the cables."
-						state = 1
-						icon_state = "box_0"
-						var/obj/item/weapon/cable_coil/A = new /obj/item/weapon/cable_coil( src.loc )
-						A.amount = 5
-
-			if(3)
-				if(istype(P, /obj/item/weapon/crowbar))
-					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-					state = 2
-					circuit.loc = src.loc
-					circuit = null
-					if(components.len == 0)
-						user << "\blue You remove the circuit board."
-					else
-						user << "\blue You remove the circuit board and other components."
-						for(var/obj/item/weapon/W in components)
-							W.loc = src.loc
-					desc = initial(desc)
-					req_components = null
-					components = null
-					icon_state = "box_1"
-				else
-					if(istype(P, /obj/item/weapon/screwdriver))
-						var/component_check = 1
-						for(var/R in req_components)
-							if(req_components[R] > 0)
-								component_check = 0
-								break
-						if(component_check)
-							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc)
-							for(var/obj/O in new_machine.component_parts)
-								del(O)
-							new_machine.component_parts = list()
-							for(var/obj/O in src)
-								if(circuit.contain_parts) // things like disposal don't want their parts in them
-									O.loc = new_machine
-								else
-									O.loc = null
-								new_machine.component_parts += O
-							if(circuit.contain_parts)
-								circuit.loc = new_machine
-							else
-								circuit.loc = null
-							new_machine.RefreshParts()
-							del(src)
-					else
-						if(istype(P, /obj/item/weapon))
-							for(var/I in req_components)
-								if(istype(P, text2path(I)) && (req_components[I] > 0))
-									playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-									if(istype(P, /obj/item/weapon/cable_coil))
-										var/obj/item/weapon/cable_coil/CP = P
-										if(CP.amount > 1)
-											var/camt = min(CP.amount, req_components[I]) // amount of cable to take, idealy amount required, but limited by amount provided
-											var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src)
-											CC.amount = camt
-											CC.update_icon()
-											CP.use(camt)
-											components += CC
-											req_components[I] -= camt
-											update_desc()
-											break
-									user.drop_item()
-									P.loc = src
-									components += P
-									req_components[I]--
-									update_desc()
-									break
-							user << desc
-							if(P && P.loc != src && !istype(P, /obj/item/weapon/cable_coil))
-								user << "\red You cannot add that component to the machine!"
+						components += P
+						req_components[I]--
+						update_req_desc()
+						break
+				user << desc
+				if(P && P.loc != src && !istype(P, /obj/item/weapon/cable_coil))
+					user << "\red You cannot add that component to the machine!"
 
 
 //Machine Frame Circuit Boards
@@ -390,6 +440,15 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/micro_laser = 1,
 							/obj/item/weapon/cable_coil = 2,
 							/obj/item/weapon/stock_parts/console_screen = 1)
+
+/obj/item/weapon/circuitboard/mech_recharger
+	name = "circuit board (Mechbay Recharger)"
+	build_path = /obj/machinery/mech_bay_recharge_port
+	board_type = "machine"
+	origin_tech = "programming=3;powerstorage=4;engineering=4"
+	req_components = list(
+							/obj/item/weapon/cable_coil = 1,
+							/obj/item/weapon/stock_parts/capacitor = 5)
 
 
 // Telecomms circuit boards:

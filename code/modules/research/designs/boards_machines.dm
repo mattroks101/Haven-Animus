@@ -101,6 +101,15 @@
 ////////////Power Stuff//////////////////
 /////////////////////////////////////////
 
+/datum/design/mech_recharger
+	name = "Machine Design (Mechbay Recharger Board)"
+	desc = "The circuit board for a Mechbay Recharger."
+	id = "mech_recharger"
+	req_tech = list("programming" = 3, "powerstorage" = 4, "engineering" = 4)
+	build_type = IMPRINTER
+	materials = list("$glass" = 1000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/mech_recharger
+
 /datum/design/pacman
 	name = "Machine Design (PACMAN-type Generator Board)"
 	desc = "The circuit board that for a PACMAN-type portable generator."
