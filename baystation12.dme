@@ -215,6 +215,8 @@
 #include "code\datums\spells\trigger.dm"
 #include "code\datums\spells\turf_teleport.dm"
 #include "code\datums\spells\wizard.dm"
+#include "code\datums\wires\autolathe.dm"
+#include "code\datums\wires\wires.dm"
 #include "code\defines\obj.dm"
 #include "code\defines\obj\weapon.dm"
 #include "code\defines\procs\announce.dm"
