@@ -56,6 +56,9 @@
 		CtrlClickOn(A)
 		return
 
+	if(lying && istype(A, /turf/) && !istype(A, /turf/space/))
+		scramble(A)
+
 	if(stat || paralysis || stunned || weakened)
 		return
 
@@ -297,7 +300,7 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)
-	if( stat || buckled || !A || !x || !y || !A.x || !A.y ) return
+	if( stat || buckled || lying || !A || !x || !y || !A.x || !A.y ) return
 	var/dx = A.x - x
 	var/dy = A.y - y
 	if(!dx && !dy) return
@@ -308,3 +311,34 @@
 	else
 		if(dx > 0)	usr.dir = EAST
 		else		usr.dir = WEST
+
+/mob/proc/scramble(var/atom/A)
+	var/direction
+	if(stat || buckled || paralysis || stunned || sleeping || (status_flags & FAKEDEATH) || restrained())
+		return
+	if(!istype(src.loc, /turf/))
+		return
+	if(!A || !x || !y || !A.x || !A.y) return
+	if(scrambling)
+		return
+	if(!has_limbs)
+		src << "\red You can't even move yourself - you have no limbs!"
+	var/dx = A.x - x
+	var/dy = A.y - y
+	if(!dx && !dy) return
+
+	if(abs(dx) < abs(dy))
+		if(dy > 0)	direction = NORTH
+		else		direction = SOUTH
+	else
+		if(dx > 0)	direction = EAST
+		else		direction = WEST
+	if(direction)
+		scrambling = 1
+		sleep(2)
+		src << "\red <b>[src]</b> scrambles!"
+		sleep(5)
+		Move(get_step(src,direction))
+		scrambling = 0
+		dir = 2
+

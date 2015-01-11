@@ -371,7 +371,7 @@
 		else if(src.occupant!=usr)
 			usr << "[src.occupant] was faster. Try better next time, loser."
 	else
-		usr << "You stop entering the exosuit."
+		usr << "You stop entering the spacepod."
 	return
 
 /obj/spacepod/verb/exit_pod()

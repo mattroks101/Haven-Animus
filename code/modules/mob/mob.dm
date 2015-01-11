@@ -736,7 +736,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 		canmove = 0
 	else if(!can_stand)
 		lying = 90
-		canmove = has_limbs
+		canmove = 0
 	else
 		lying = 0
 		canmove = 1

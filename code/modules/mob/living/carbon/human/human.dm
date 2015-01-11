@@ -819,7 +819,7 @@
 
 
 /mob/living/carbon/human/IsAdvancedToolUser()
-	return 1//Humans can use guns and such
+	return species.has_fine_manipulation
 
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
