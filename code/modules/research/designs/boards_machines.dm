@@ -79,6 +79,16 @@
 	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/biogenerator
 
+/datum/design/chem_dispenser
+	name = "Machine Design (Portable Chem Dispenser Board)"
+	desc = "The circuit board for a portable chem dispenser."
+	id = "chem_dispenser"
+	req_tech = list("programming" = 4, "biotech" = 3, "engineering" = 4, "materials" = 4, "plasmatech" = 3)
+	build_type = IMPRINTER
+	materials = list("$glass" = 1000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/chem_dispenser
+
+
 /////////////////////////////////////////
 ////////////Power Stuff//////////////////
 /////////////////////////////////////////

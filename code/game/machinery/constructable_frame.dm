@@ -369,6 +369,19 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
 
+/obj/item/weapon/circuitboard/chem_dispenser
+	name = "circuit board (Portable Chem Dispenser)"
+	build_path = /obj/machinery/chem_dispenser/constructable
+	board_type = "machine"
+	origin_tech = "materials=4;engineering=4;programming=4;plasmatech=3;biotech=3"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/capacitor = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1,
+							/obj/item/weapon/cell = 1)
+
+
 // Telecomms circuit boards:
 
 /obj/item/weapon/circuitboard/telecomms/receiver
