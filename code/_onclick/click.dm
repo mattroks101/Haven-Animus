@@ -314,7 +314,7 @@
 
 /mob/proc/scramble(var/atom/A)
 	var/direction
-	if(stat || buckled || paralysis || stunned || sleeping || (status_flags & FAKEDEATH) || restrained())
+	if(stat || buckled || paralysis || stunned || sleeping || (status_flags & FAKEDEATH) || restrained() || (weakened > 5))
 		return
 	if(!istype(src.loc, /turf/))
 		return
@@ -336,8 +336,8 @@
 	if(direction)
 		scrambling = 1
 		sleep(2)
-		src << "\red <b>[src]</b> scrambles!"
-		sleep(5)
+		src.visible_message("\red <b>[src]</b> scrambles!")
+		sleep(11)
 		Move(get_step(src,direction))
 		scrambling = 0
 		dir = 2
