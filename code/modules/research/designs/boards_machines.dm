@@ -70,6 +70,14 @@
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mechfab
 
+/datum/design/biogenerator
+	name = "Biogenerator Board"
+	desc = "The circuit board for a biogenerator."
+	id = "biogenerator"
+	req_tech = list("programming" = 3, "biotech" = 2, "materials" = 3)
+	build_type = IMPRINTER
+	materials = list("$glass" = 1000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/biogenerator
 
 /////////////////////////////////////////
 ////////////Power Stuff//////////////////
