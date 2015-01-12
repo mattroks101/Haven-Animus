@@ -210,29 +210,19 @@
 				components = null
 				icon_state = "box_1"
 			else if(istype(P, /obj/item/weapon/screwdriver))
-				var/component_check = 1
-				for(var/R in req_components)
-					if(req_components[R] > 0)
-						component_check = 0
-						break
-				if(component_check)
+				if(!get_req_components_amt())
 					playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 					var/obj/machinery/new_machine = new src.circuit.build_path(src.loc)
+					new_machine.construction()
 					for(var/obj/O in new_machine.component_parts)
-						del(O)
+						qdel(O)
 					new_machine.component_parts = list()
 					for(var/obj/O in src)
-						if(circuit.contain_parts) // things like disposal don't want their parts in them
-							O.loc = new_machine
-						else
-							O.loc = null
+						O.loc = null
 						new_machine.component_parts += O
-					if(circuit.contain_parts)
-						circuit.loc = new_machine
-					else
-						circuit.loc = null
+					circuit.loc = null
 					new_machine.RefreshParts()
-					del(src)
+					qdel(src)
 			else if(istype(P, /obj/item/weapon/storage/part_replacer) && P.contents.len && get_req_components_amt())
 				var/obj/item/weapon/storage/part_replacer/replacer = P
 				var/list/added_components = list()

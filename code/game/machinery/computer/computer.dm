@@ -9,8 +9,16 @@
 	var/obj/item/weapon/circuitboard/circuit = null //if circuit==null, computer can't disassembly
 	var/processing = 0
 
-/obj/machinery/computer/New()
-	..()
+/obj/machinery/computer/New(location, var/obj/item/weapon/circuitboard/C)
+	..(location)
+	if(C && istype(C))
+		circuit = C
+	else if(ispath(circuit))
+		circuit = new circuit(null)
+	else if(ispath(text2path(circuit)))
+		circuit = text2path(circuit)
+		circuit = new circuit(null)
+
 	if(ticker)
 		initialize()
 
@@ -100,32 +108,27 @@
 	update_icon()
 
 
+
+
 /obj/machinery/computer/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		user << "<span class='notice'> You start to disconnect the monitor.</span>"
 		if(do_after(user, 20))
 			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			var/obj/item/weapon/circuitboard/M = new circuit( A )
-			A.circuit = M
+			A.circuit = circuit
 			A.anchored = 1
+			circuit = null
 			for (var/obj/C in src)
 				C.loc = src.loc
 			if (src.stat & BROKEN)
-				user << "\blue The broken glass falls out."
+				user << "<span class='notice'> The broken glass falls out.</span>"
 				new /obj/item/weapon/shard( src.loc )
 				A.state = 3
 				A.icon_state = "3"
 			else
-				user << "\blue You disconnect the monitor."
+				user << "<span class='notice'> You disconnect the monitor.</span>"
 				A.state = 4
 				A.icon_state = "4"
-			del(src)
-	else
-		src.attack_hand(user)
+			qdel(src)
 	return
-
-
-
-
-
-
