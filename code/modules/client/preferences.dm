@@ -97,6 +97,8 @@ datum/preferences
 	// will probably not be able to do this for head and torso ;)
 	var/list/organ_data = list()
 
+	var/list/flavor_texts = list()
+
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -254,6 +256,8 @@ datum/preferences
 
 		dat += "<b><a href=\"byond://?src=\ref[user];preference=antagoptions;active=0\">Set Antag Options</b></a><br>"
 		dat += "<br>"
+
+		dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 
 		dat += "<br><b>Hair</b><br>"
 		dat += "<a href='?_src_=prefs;preference=hair;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'><tr><td>__</td></tr></table></font> "
@@ -455,6 +459,45 @@ datum/preferences
 		user << browse(HTML, "window=antagoptions")
 		return
 
+	proc/SetFlavorText(mob/user)
+		var/HTML = "<body>"
+		HTML += "<tt><center>"
+		HTML += "<b>Set Flavour Text</b> <hr />"
+		HTML += "<br></center>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=general'>General:</a> "
+		HTML += TextPreview(flavor_texts["general"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=head'>Head:</a> "
+		HTML += TextPreview(flavor_texts["head"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=face'>Face:</a> "
+		HTML += TextPreview(flavor_texts["face"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=eyes'>Eyes:</a> "
+		HTML += TextPreview(flavor_texts["eyes"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=torso'>Body:</a> "
+		HTML += TextPreview(flavor_texts["torso"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=arms'>Arms:</a> "
+		HTML += TextPreview(flavor_texts["arms"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=hands'>Hands:</a> "
+		HTML += TextPreview(flavor_texts["hands"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=legs'>Legs:</a> "
+		HTML += TextPreview(flavor_texts["legs"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=feet'>Feet:</a> "
+		HTML += TextPreview(flavor_texts["feet"])
+		HTML += "<br>"
+		HTML += "<hr />"
+		HTML +="<a href='?src=\ref[user];preference=flavor_text;task=done'>\[Done\]</a>"
+		HTML += "<tt>"
+		user << browse(null, "window=preferences")
+		user << browse(HTML, "window=flavor_text;size=430x300")
+		return
+
 	proc/SetJob(mob/user, role)
 		var/datum/job/job = job_master.GetJob(role)
 		if(!job)
@@ -599,6 +642,30 @@ datum/preferences
 				else
 					SetChoices(user)
 			return 1
+
+		else if(href_list["preference"] == "flavor_text")
+			switch(href_list["task"])
+				if("open")
+					SetFlavorText(user)
+					return
+				if("done")
+					user << browse(null, "window=flavor_text")
+					ShowChoices(user)
+					return
+				if("general")
+					var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+					if(msg != null)
+						msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+						msg = html_encode(msg)
+					flavor_texts[href_list["task"]] = msg
+				else
+					var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+					if(msg != null)
+						msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+						msg = html_encode(msg)
+					flavor_texts[href_list["task"]] = msg
+			SetFlavorText(user)
+			return
 
 		else if(href_list["preference"] == "records")
 			if(text2num(href_list["record"]) >= 1)
@@ -966,6 +1033,16 @@ datum/preferences
 		character.name = character.real_name
 		if(character.dna)
 			character.dna.real_name = character.real_name
+
+		character.flavor_texts["general"] = flavor_texts["general"]
+		character.flavor_texts["head"] = flavor_texts["head"]
+		character.flavor_texts["face"] = flavor_texts["face"]
+		character.flavor_texts["eyes"] = flavor_texts["eyes"]
+		character.flavor_texts["torso"] = flavor_texts["torso"]
+		character.flavor_texts["arms"] = flavor_texts["arms"]
+		character.flavor_texts["hands"] = flavor_texts["hands"]
+		character.flavor_texts["legs"] = flavor_texts["legs"]
+		character.flavor_texts["feet"] = flavor_texts["feet"]
 
 		character.med_record = med_record
 		character.sec_record = sec_record

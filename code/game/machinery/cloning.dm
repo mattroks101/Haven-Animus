@@ -217,8 +217,9 @@
 
 	H.set_species(R.dna.species)
 
-	//for(var/datum/language/L in languages)
-	//	H.add_language(L.name)
+	for(var/datum/language/L in R.languages)
+		H.add_language(L.name)
+	H.flavor_texts = R.flavor.Copy()
 	H.suiciding = 0
 	src.attempting = 0
 	return 1

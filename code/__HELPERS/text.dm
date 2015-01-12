@@ -355,3 +355,14 @@ proc/checkhtml(var/t)
                 first = 0
                 out += html_decode(text)
         return out
+
+//Used in preferences' SetFlavorText and human's set_flavor verb
+//Previews a string of len or less length
+proc/TextPreview(var/string,var/len=40)
+	if(lentext(string) <= len)
+		if(!lentext(string))
+			return "\[...\]"
+		else
+			return string
+	else
+		return "[sanitize(copytext(string, 1, 37))]..."
