@@ -365,7 +365,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 				if(nuke_code)//If there is a nuke device in world and we got the code.
 					var/datum/objective/nuclear/ninja_objective = new//Fun.
 					ninja_objective.owner = ninja_mind
-					ninja_objective.explanation_text = "Destroy the station with a nuclear device. The code is [nuke_code]." //Let them know what the code is.
+					ninja_objective.explanation_text = "Destroy the [vessel_type] with a nuclear device. The code is [nuke_code]." //Let them know what the code is.
 
 			//Finally add a survival objective since it's usually broad enough for any round type.
 			var/datum/objective/survive/ninja_objective = new

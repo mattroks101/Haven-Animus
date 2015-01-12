@@ -52,31 +52,19 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 	attackby(var/obj/item/O as obj, var/mob/user as mob)
 		if (shocked)
 			shock(user,50)
-		if (istype(O, /obj/item/weapon/screwdriver))
-			if (!opened)
-				opened = 1
-				if(linked_console)
-					linked_console.linked_imprinter = null
-					linked_console = null
-				icon_state = "circuit_imprinter_t"
-				user << "You open the maintenance hatch of [src]."
-			else
-				opened = 0
-				icon_state = "circuit_imprinter"
-				user << "You close the maintenance hatch of [src]."
+		if (default_deconstruction_screwdriver(user, "circuit_imprinter_t", "circuit_imprinter", O))
+			if(linked_console)
+				linked_console.linked_imprinter = null
+				linked_console = null
 			return
-		if (opened)
+
+		if(exchange_parts(user, O))
+			return
+
+		if (panel_open)
 			if(istype(O, /obj/item/weapon/crowbar))
-				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
-				M.state = 2
-				M.icon_state = "box_1"
-				for(var/obj/I in component_parts)
-					if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-						reagents.trans_to(I, reagents.total_volume)
-					if(I.reliability != 100 && crit_fail)
-						I.crit_fail = 1
-					I.loc = src.loc
+				for(var/obj/item/weapon/reagent_containers/glass/G in component_parts)
+					reagents.trans_to(G, G.reagents.maximum_volume)
 				if(g_amount >= 3750)
 					var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
 					G.amount = round(g_amount / 3750)
@@ -86,14 +74,12 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 				if(diamond_amount >= 2000)
 					var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
 					G.amount = round(diamond_amount / 2000)
-				if(uranium_amount >= 2000)
-					var/obj/item/stack/sheet/mineral/uranium/G = new /obj/item/stack/sheet/mineral/uranium(src.loc)
-					G.amount = round(uranium_amount / 2000)
-				del(src)
-				return 1
+				default_deconstruction_crowbar(O)
+				return
 			else
-				user << "\red You can't load the [src.name] while it's opened."
-				return 1
+				user << "<span class='warning'>You can't load the [src.name] while it's opened.</span>"
+				return
+
 		if (disabled)
 			user << "\The [name] appears to not be working!"
 			return

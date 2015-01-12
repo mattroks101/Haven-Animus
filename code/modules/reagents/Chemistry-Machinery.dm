@@ -17,7 +17,9 @@
 	var/accept_glass = 0
 	var/beaker = null
 	var/recharged = 0
+	var/recharge_delay = 15  //Time it game ticks between recharges
 	var/hackedcheck = 0
+	var/image/icon_beaker = null //cached overlay
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
 	"sodium","aluminum","silicon","phosphorus","sulfur","chlorine","potassium","iron",
 	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten")
@@ -45,7 +47,7 @@
 
 	if(recharged <= 0)
 		recharge()
-		recharged = 15
+		recharged = recharge_delay
 	else
 		recharged -= 1
 
@@ -177,6 +179,7 @@
 			B.loc = loc
 			B.layer = src.layer+1
 			beaker = null
+			overlays.Cut()
 
 	add_fingerprint(usr)
 	return 1 // update UIs attached to this object
@@ -209,6 +212,12 @@
 		user << "You set [B] on the machine."
 		nanomanager.update_uis(src) // update all UIs attached to src
 		return
+
+		if(!accept_glass)
+			if(!icon_beaker)
+				icon_beaker = image('icons/obj/chemical.dmi', src, "disp_beaker") //randomize beaker overlay position.
+			icon_beaker.pixel_x = rand(-10,5)
+			overlays += icon_beaker
 
 /obj/machinery/chem_dispenser/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -271,6 +280,71 @@
 				dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
 				hackedcheck = 0
 				return
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/obj/machinery/chem_dispenser/constructable
+	name = "portable chem dispenser"
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "minidispenser"
+	energy = 5
+	max_energy = 5
+	amount = 5
+	recharge_delay = 30
+	dispensable_reagents = list()
+	var/list/special_reagents = list(list("hydrogen", "oxygen", "silicon", "phosphorus", "sulfur", "carbon", "nitrogen"),
+						 		list("lithium", "sugar", "sacid", "water", "copper", "mercury", "sodium"),
+								list("ethanol", "chlorine", "potassium", "aluminium", "radium", "fluorine", "iron"))
+
+/obj/machinery/chem_dispenser/constructable/New()
+	..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/chem_dispenser(null)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+	component_parts += new /obj/item/weapon/stock_parts/capacitor(null)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
+	component_parts += new /obj/item/weapon/cell/high(null)
+	RefreshParts()
+
+/obj/machinery/chem_dispenser/constructable/RefreshParts()
+	var/time = 0
+	var/temp_energy = 0
+	var/i
+	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
+		temp_energy += M.rating
+	temp_energy--
+	max_energy = temp_energy * 5  //max energy = (bin1.rating + bin2.rating - 1) * 5, 5 on lowest 25 on highest
+	for(var/obj/item/weapon/stock_parts/capacitor/C in component_parts)
+		time += C.rating
+	for(var/obj/item/weapon/cell/P in component_parts)
+		time += round(P.maxcharge, 10000) / 10000
+	recharge_delay /= time/2         //delay between recharges, double the usual time on lowest 50% less than usual on highest
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		for(i=1, i<=M.rating, i++)
+			dispensable_reagents = sortList(dispensable_reagents | special_reagents[i])
+
+/obj/machinery/chem_dispenser/constructable/attackby(var/obj/item/I, var/mob/user)
+	..()
+	if(default_deconstruction_screwdriver(user, "minidispenser-o", "minidispenser", I))
+		return
+
+	if(exchange_parts(user, I))
+		return
+
+	if(panel_open)
+		if(istype(I, /obj/item/weapon/crowbar))
+			if(beaker)
+				var/obj/item/weapon/reagent_containers/glass/B = beaker
+				B.loc = loc
+				beaker = null
+			default_deconstruction_crowbar(I)
+			return 1
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

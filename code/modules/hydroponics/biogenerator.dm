@@ -1,6 +1,6 @@
 /obj/machinery/biogenerator
-	name = "Biogenerator"
-	desc = ""
+	name = "biogenerator"
+	desc = "Converts plants into biomass, which can be used to construct useful items."
 	icon = 'icons/obj/biogenerator.dmi'
 	icon_state = "biogen-stand"
 	density = 1
@@ -11,25 +11,43 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/points = 0
 	var/menustat = "menu"
+	var/efficiency = 0
+	var/productivity = 0
 
-	New()
+/obj/machinery/biogenerator/New()
 		..()
-		var/datum/reagents/R = new/datum/reagents(1000)
-		reagents = R
-		R.my_atom = src
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+		create_reagents(1000)
+		component_parts = list()
+		component_parts += new /obj/item/weapon/circuitboard/biogenerator(null)
+		component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+		component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+		component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
+		component_parts += new /obj/item/weapon/cable_coil(null, 1)
+		RefreshParts()
 
-	on_reagent_change()			//When the reagents change, change the icon as well.
-		update_icon()
+/obj/machinery/biogenerator/RefreshParts()
+	var/E = 0
+	var/P = 0
+	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
+		P += B.rating
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		E += M.rating
+	efficiency = E
+	productivity = P
 
+/obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()
-		if(!src.beaker)
-			icon_state = "biogen-empty"
-		else if(!src.processing)
-			icon_state = "biogen-stand"
-		else
-			icon_state = "biogen-work"
-		return
+
+/obj/machinery/biogenerator/update_icon()
+	if(panel_open)
+		icon_state = "biogen-empty-o"
+	else if(!beaker)
+		icon_state = "biogen-empty"
+	else if(!processing)
+		icon_state = "biogen-stand"
+	else
+		icon_state = "biogen-work"
+	return
 
 /obj/machinery/biogenerator/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
@@ -59,9 +77,7 @@
 				user << "\blue You empty the plant bag into the biogenerator."
 
 
-	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
-		user << "\red You cannot put this in [src.name]"
-	else
+	else if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
@@ -71,6 +87,18 @@
 			user.before_take_item(O)
 			O.loc = src
 			user << "\blue You put [O.name] in [src.name]"
+	if(!processing)
+		if(default_deconstruction_screwdriver(user, "biogen-empty-o", "biogen-empty", O))
+			if(beaker)
+				var/obj/item/weapon/reagent_containers/glass/B = beaker
+				B.loc = loc
+				beaker = null
+
+	if(exchange_parts(user, O))
+		return
+
+	default_deconstruction_crowbar(O)
+
 	update_icon()
 	return
 
@@ -122,9 +150,9 @@
 	interact(user)
 
 /obj/machinery/biogenerator/proc/activate()
-	if (usr.stat != 0)
+	if(usr.stat)
 		return
-	if (src.stat != 0) //NOPOWER etc
+	if(src.stat) //NOPOWER etc
 		return
 	if(src.processing)
 		usr << "\red The biogenerator is in the process of working."
@@ -133,8 +161,8 @@
 	for(var/obj/item/weapon/reagent_containers/food/snacks/grown/I in contents)
 		S += 5
 		if(I.reagents.get_reagent_amount("nutriment") < 0.1)
-			points += 1
-		else points += I.reagents.get_reagent_amount("nutriment")*10
+			points += 1*productivity
+		else points += I.reagents.get_reagent_amount("nutriment")*10*productivity
 		del(I)
 	if(S)
 		processing = 1
@@ -142,7 +170,7 @@
 		updateUsrDialog()
 		playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
 		use_power(S*30)
-		sleep(S+15)
+		sleep((S+15)/productivity)
 		processing = 0
 		update_icon()
 	else

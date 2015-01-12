@@ -40,14 +40,15 @@
 //	else if(isobj(mob.loc))
 //		mob.loc:relaymove(mob,UP)
 	else if(istype(mob, /mob/living/carbon))
-		if (mob:back && istype(mob:back, /obj/item/weapon/tank/jetpack))
+		if (("back" in mob.vars) && istype(mob:back, /obj/item/weapon/tank/jetpack))
 			mob:back:move_z(UP, mob)
-		else if(mob:belt && istype(mob:belt, /obj/item/weapon/tank/jetpack))
+		else if(("belt" in mob.vars) && istype(mob:belt, /obj/item/weapon/tank/jetpack))
 			mob:belt:move_z(UP, mob)
-		else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
-			W:move_z(UP, mob)
 		else
 			mob:swap_hand()
+
+	else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
+		W:move_z(UP, mob)
 	return
 
 
@@ -61,15 +62,15 @@
 				mob.Move(T)
 	else if (istype(mob, /mob/living/silicon/ai))
 		AIMoveZ(DOWN, mob)
-	else if(istype(mob, /mob/living/carbon) && mob:back && istype(mob:back, /obj/item/weapon/tank/jetpack))
-		mob:back:move_z(DOWN, mob)
-	else if(istype(mob, /mob/living/carbon) && mob:belt && istype(mob:belt, /obj/item/weapon/tank/jetpack))
-		mob:belt:move_z(DOWN, mob)
-//	else if(isobj(mob.loc))
-//		mob.loc:relaymove(mob,DOWN)
-	else if(istype(W, /obj/item/weapon/extinguisher))
+	else if(istype(mob, /mob/living/carbon))
+		if (("back" in mob.vars) && istype(mob:back, /obj/item/weapon/tank/jetpack))
+			mob:back:move_z(DOWN, mob)
+		else if(("belt" in mob.vars) && istype(mob:belt, /obj/item/weapon/tank/jetpack))
+			mob:belt:move_z(DOWN, mob)
+
+	else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
 		W:move_z(DOWN, mob)
-	else if (W)
+	else if(W)
 		W.attack_self(mob)
 	return
 

@@ -110,7 +110,7 @@
 		var/explanation
 		switch(objectives[obj_count])
 			if("survive")
-				explanation = "Our knowledge must live on. Make sure at least [acolytes_needed] acolytes escape on the shuttle to spread their work on an another station."
+				explanation = "Our knowledge must live on. Make sure at least [acolytes_needed] acolytes escape on the shuttle to spread their work on an another [vessel_type]."
 			if("sacrifice")
 				if(sacrifice_target)
 					explanation = "Sacrifice [sacrifice_target.name], the [sacrifice_target.assigned_role]. You will need the sacrifice rune (Hell blood join) and three acolytes to do so."
@@ -146,7 +146,7 @@
 	if (!where)
 		mob << "Unfortunately, you weren't able to get a talisman. This is very bad and you should adminhelp immediately."
 	else
-		mob << "You have a talisman in your [where], one that will help you start the cult on this station. Use it well and remember - there are others."
+		mob << "You have a talisman in your [where], one that will help you start the cult on this [vessel_type]. Use it well and remember - there are others."
 		mob.update_icons()
 		return 1
 

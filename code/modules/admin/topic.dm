@@ -971,8 +971,14 @@
 			usr << "This cannot be used on instances of type /mob/living/silicon/ai"
 			return
 
+		if(!prisonwarp || !prisonwarp.len)
+			usr << "No admin prison markers found on map."
+			return
+
 		var/turf/prison_cell = pick(prisonwarp)
-		if(!prison_cell)	return
+		if(!prison_cell)
+			usr << "No admin prison markers found on map."
+			return
 
 		var/obj/structure/closet/secure_closet/brig/locker = new /obj/structure/closet/secure_closet/brig(prison_cell)
 		locker.opened = 0
@@ -989,10 +995,8 @@
 
 		//so they black out before warping
 		M.Paralyse(5)
-		sleep(5)
-		if(!M)	return
-
 		M.loc = prison_cell
+
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/prisoner = M
 			prisoner.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(prisoner), slot_w_uniform)

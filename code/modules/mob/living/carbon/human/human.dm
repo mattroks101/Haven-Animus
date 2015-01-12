@@ -270,9 +270,6 @@
 		if (istype(O, /obj/effect/immovablerod))
 			if(affecting.take_damage(101, 0))
 				UpdateDamageIcon()
-		else
-			if(affecting.take_damage((istype(O, /obj/effect/meteor/small) ? 10 : 25), 30))
-				UpdateDamageIcon()
 		updatehealth()
 	return
 

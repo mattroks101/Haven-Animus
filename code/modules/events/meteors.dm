@@ -30,7 +30,7 @@
 	waves = rand(1,4)
 
 /datum/event/meteor_shower/announce()
-	command_alert("The station is now in a meteor shower.", "Meteor Alert")
+	command_alert("The [vessel_type] is now in a meteor shower.", "Meteor Alert")
 
 //meteor showers are lighter and more common,
 /datum/event/meteor_shower/tick()
@@ -44,4 +44,4 @@
 			endWhen = next_meteor + 1
 
 /datum/event/meteor_shower/end()
-	command_alert("The station has cleared the meteor shower", "Meteor Alert")
+	command_alert("The [vessel_type] has cleared the meteor shower", "Meteor Alert")
