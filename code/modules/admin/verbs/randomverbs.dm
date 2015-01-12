@@ -31,7 +31,7 @@
 	if(usr)
 		if (usr.client)
 			if(usr.client.holder)
-				M << "\bold Ты слышишь голос в своей голове: \italic \"[sanitize_uni(msg)]\""
+				M << "\bold Ты думаешь: \italic \"[sanitize_uni(msg)]\""
 
 	log_admin("SubtlePM: [key_name(usr)] -> [key_name(M)] : [msg]")
 	message_admins("\blue \bold Внушение: [key_name_admin(usr)] -> [key_name_admin(M)] : [sanitize_uni(msg)]", 1)

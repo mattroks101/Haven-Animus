@@ -5787,7 +5787,7 @@
 "cho" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/luna/hallway/primary/services)
 "chp" = (/obj/structure/disposalpipe/trunk{dir = 4},/obj/machinery/disposal,/turf/simulated/floor,/area/luna/hallway/primary/services)
 "chq" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/wall,/area/luna/hallway/primary/services)
-"chr" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/camera/autoname{dir = 4},/turf/simulated/floor,/area/storage/primary)
+"chr" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/camera/autoname{dir = 4},/obj/machinery/autolathe,/turf/simulated/floor,/area/storage/primary)
 "chs" = (/obj/structure/disposalpipe/junction,/turf/simulated/floor,/area/storage/primary)
 "cht" = (/obj/machinery/light,/turf/simulated/floor,/area/storage/primary)
 "chu" = (/obj/structure/table,/obj/item/weapon/storage/belt/utility,/obj/item/weapon/storage/belt/utility,/obj/item/weapon/storage/belt/utility,/turf/simulated/floor,/area/storage/primary)
