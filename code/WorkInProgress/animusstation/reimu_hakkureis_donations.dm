@@ -235,7 +235,10 @@ proc/build_prizes_list()
 	if (!donators[ckey]) //It doesn't exist yet
 		if (load_donator(ckey))
 			var/datum/donator/D = donators[ckey]
-			D.show()
+			if(D)
+				D.show()
+			else
+				usr << browse ("<b>You have not donated or the database is inaccessible.</b>", "window=donatorpanel")
 		else
 			usr << browse ("<b>You have not donated or the database is inaccessible.</b>", "window=donatorpanel")
 	else

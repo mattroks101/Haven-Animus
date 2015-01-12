@@ -5,7 +5,7 @@
 /mob/living/carbon/update_transform()
 	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
 	var/final_pixel_y = pixel_y
-	var/final_dir = dir
+	var/final_dir = SOUTH
 	var/changed = 0
 
 	if(lying != lying_prev)
@@ -17,8 +17,8 @@
 			if(lying_prev == 0) //Standing to lying
 				final_pixel_y -= 6
 
-		if(dir & (EAST|WEST)) //Facing east or west
-			final_dir = pick(NORTH, SOUTH) //So you fall on your side rather than your face or ass
+//		if(dir & (EAST|WEST)) //Facing east or west
+//			final_dir = pick(NORTH, SOUTH) //So you fall on your side rather than your face or ass
 		lying_prev = lying	//so we don't try to animate until there's been another change.
 
 	if(changed)

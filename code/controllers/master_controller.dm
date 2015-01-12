@@ -74,6 +74,14 @@ datum/controller/game_controller/proc/setup()
 		global.garbageCollector = new
 		garbageCollector = global.garbageCollector
 
+	world << "\red \b Setting up shields.."
+	var/start_shieldnetwork = world.timeofday
+	ShieldNetwork = new /datum/shieldnetwork()
+
+	ShieldNetwork.makenetwork()
+
+	world << "\red \b Shield network set up in [(world.timeofday - start_shieldnetwork)/10] seconds"
+
 	setup_objects()
 	setupgenetics()
 	setupfactions()
@@ -88,6 +96,7 @@ datum/controller/game_controller/proc/setup()
 	spawn(0)
 		if(ticker)
 			ticker.pregame()
+
 
 //	lighting_controller.Initialize()
 
@@ -112,6 +121,10 @@ datum/controller/game_controller/proc/setup_objects()
 		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
+
+//	world << "\red \b Generating map"
+//	sleep(-1)
+//	mapGen()
 
 	world << "\red \b Initializations complete."
 	sleep(-1)

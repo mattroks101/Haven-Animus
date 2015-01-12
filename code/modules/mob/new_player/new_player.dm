@@ -227,11 +227,11 @@
 
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
 			if(emergency_shuttle.direction == 2) //Shuttle is going to centcomm, not recalled
-				dat += "<font color='red'><b>The ship has been evacuated.</b></font><br>"
+				dat += "<font color='red'><b>The [vessel_type] has been evacuated.</b></font><br>"
 			if(emergency_shuttle.direction == 1 && emergency_shuttle.timeleft() < 300 && emergency_shuttle.alert == 0) // Emergency shuttle is past the point of no recall
-				dat += "<font color='red'>The ship is currently undergoing evacuation procedures.</font><br>"
+				dat += "<font color='red'>The [vessel_type] is currently undergoing evacuation procedures.</font><br>"
 			if(emergency_shuttle.direction == 1 && emergency_shuttle.alert == 1) // Crew transfer initiated
-				dat += "<font color='red'>The ship is currently undergoing crew transfer procedures.</font><br>"
+				dat += "<font color='red'>The [vessel_type] is currently undergoing crew transfer procedures.</font><br>"
 
 		dat += "Choose from the following open positions:<br>"
 		for(var/datum/job/job in job_master.occupations)

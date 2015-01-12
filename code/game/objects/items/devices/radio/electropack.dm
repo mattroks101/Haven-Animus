@@ -96,6 +96,25 @@
 		s.set_up(3, 1, M)
 		s.start()
 
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.stat == DEAD)
+				if(prob(30) && (H.timeofdeath + 1800 > world.time) && !(NOCLONE in H.mutations))
+					H.stat = UNCONSCIOUS
+					H.visible_message( \
+						"\red [H]'s body trembles!", \
+						"\red You feel the life enter your body with the heavy pain!", \
+						"\red You hear a heavy electric crack!" \
+					)
+				else
+					H.visible_message( \
+						"\red [H]'s lifeless body trembles!", \
+						"\red A discharge of electricity passes through your body, but the efforts to bring you back to life are useless.", \
+						"\red You hear a heavy electric crack!" \
+					)
+
+
+
 		M.Weaken(10)
 
 	if(master && wires & 1)

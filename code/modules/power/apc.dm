@@ -1196,7 +1196,7 @@
 
 	switch(severity)
 		if(1.0)
-			//set_broken() //now Del() do what we need
+			//set_broken() //now Destroy() do what we need
 			if (cell)
 				cell.ex_act(1.0) // more lags woohoo
 			qdel(src)
@@ -1245,7 +1245,7 @@
 					L.broken()
 					sleep(1)
 
-/obj/machinery/power/apc/Del()
+/obj/machinery/power/apc/Destroy()
 	if(malfai && operating)
 		if (ticker.mode.config_tag == "malfunction")
 			if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))

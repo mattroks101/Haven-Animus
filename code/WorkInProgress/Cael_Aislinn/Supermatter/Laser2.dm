@@ -84,15 +84,15 @@
 
 /atom/proc/laser_act(var/obj/beam/e_beam/b)
 	return
-
-/*mob/living/carbon/laser_act(var/obj/beam/e_beam/b)
+/*
+/mob/living/carbon/laser_act(var/obj/beam/e_beam/b)
 	for(var/t in organs)
 		var/datum/organ/external/affecting = organs["[t]"]
 		if (affecting.take_damage(0, b.power/400,0,0))
 			UpdateDamageIcon()
 		else
-			UpdateDamage()*/
-
+			UpdateDamage()
+*/
 /obj/beam/e_beam/Bump(atom/Obstacle)
 	Obstacle.laser_act(src)
 	del(src)
@@ -117,7 +117,7 @@
 		return
 	return
 
-/obj/beam/e_beam/Del()
+/obj/beam/e_beam/Destroy()
 	if(next)
 		del(next)
 	..()

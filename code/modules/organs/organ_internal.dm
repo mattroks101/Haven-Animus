@@ -73,7 +73,7 @@
 		// Process unsuitable transplants. TODO: consider some kind of
 		// immunosuppressant that changes transplant data to make it match.
 		if(transplant_data)
-			if(!rejecting && prob(20) && owner.dna && blood_incompatible(transplant_data["blood_type"],owner.dna.b_type,owner.species,transplant_data["species"]))
+			if(!rejecting && prob(20) && owner.dna && blood_incompatible(transplant_data["blood_type"],owner.dna.b_type))//,owner.species,transplant_data["species"]))
 				rejecting = 1
 			else
 				rejecting++ //Rejection severity increases over time.

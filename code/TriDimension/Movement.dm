@@ -74,9 +74,9 @@
 							if(!blocked)
 								user.Move(T)
 						else
-							user << "\red You bump into the ship's plating."
+							user << "\red You bump into the [vessel_type]'s plating."
 					else
-						user << "\red The ship's gravity well keeps you in orbit!"
+						user << "\red The [vessel_type]'s gravity well keeps you in orbit!"
 
 			if (DOWN) // Going down!
 				for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -93,6 +93,6 @@
 							if(!blocked)
 								user.Move(T)
 						else
-							user << "\red You bump into the ship's plating."
+							user << "\red You bump into the [vessel_type]'s plating."
 					else
-						user << "\red The ship's gravity well keeps you in orbit!"
+						user << "\red The [vessel_type]'s gravity well keeps you in orbit!"

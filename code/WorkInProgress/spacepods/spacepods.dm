@@ -12,9 +12,11 @@
 	unacidable = 1
 	layer = 3.9
 	infra_luminosity = 15
+	var/list/log = new
+	var/list/proc_res = list() //stores proc owners, like proc_res["functionname"] = owner reference
 	var/mob/living/carbon/occupant
 	var/datum/spacepod/equipment/equipment_system
-	var/obj/item/weapon/cell/high/battery
+	var/obj/item/weapon/cell/battery
 	var/datum/gas_mixture/cabin_air
 	var/obj/machinery/portable_atmospherics/canister/internal_tank
 	var/datum/effect/effect/system/ion_trail_follow/space_trail/ion_trail
@@ -26,6 +28,11 @@
 	var/next_firetime = 0
 	var/list/pod_overlays
 	var/health = 400
+
+	var/max_equip = 1
+	var/list/equipment = new
+	var/obj/item/device/spacepod_equipment/selected
+
 
 /obj/spacepod/New()
 	. = ..()
@@ -46,6 +53,40 @@
 	pr_int_temp_processor = new /datum/global_iterator/pod_preserve_temp(list(src))
 	pr_give_air = new /datum/global_iterator/pod_tank_give_air(list(src))
 	equipment_system = new(src)
+
+/obj/spacepod/proc/click_action(atom/target,mob/user)
+	if(!src.occupant || src.occupant != user )
+		return
+	if(user.stat)
+		return
+	if(hatch_open)
+		occupant_message("<font color='red'>Maintenance protocols in effect, close the hatch!</font>")
+		return
+	if(!get_charge())
+		return
+	if(src == target)
+		return
+	var/dir_to_target = get_dir(src,target)
+	if(dir_to_target && !(dir_to_target & src.dir))//wrong direction
+		return
+/*	if(hasInternalDamage(MECHA_INT_CONTROL_LOST))
+		target = safepick(view(3,target))
+		if(!target)
+			return*/
+	if(!target.Adjacent(src.get_active_part(1)) && !target.Adjacent(src.get_active_part(2)))
+		if(selected && selected.is_ranged())
+			selected.action(target)
+	else if(selected && selected.is_melee())
+		selected.action(target)
+	else
+		src.melee_action(target)
+	return
+
+/obj/spacepod/proc/melee_action(atom/target)
+	return
+
+/obj/spacepod/proc/range_action(atom/target)
+	return
 
 /obj/spacepod/proc/update_icons()
 	if(!pod_overlays)
@@ -117,6 +158,7 @@
 		user << "<span class='notice'>You [hatch_open ? "open" : "close"] the maintenance hatch.</span>"
 	if(istype(W, /obj/item/weapon/cell))
 		if(!hatch_open)
+			user << "<span class='warning'>Open the maintenance hatch first!</span>"
 			return ..()
 		if(battery)
 			user << "<span class='notice'>The pod already has a battery.</span>"
@@ -126,25 +168,18 @@
 		W.loc = src
 		return
 	if(istype(W, /obj/item/device/spacepod_equipment))
+		var/obj/item/device/spacepod_equipment/E = W
 		if(!hatch_open)
+			user << "<span class='warning'>Open the maintenance hatch first!</span>"
 			return ..()
-		if(!equipment_system)
-			user << "<span class='warning'>The pod has no equipment datum, yell at pomf</span>"
-			return
-		if(istype(W, /obj/item/device/spacepod_equipment/weaponry))
-			if(equipment_system.weapon_system)
-				user << "<span class='notice'>The pod already has a weapon system, remove it first.</span>"
-				return
-			else
-				user << "<span class='notice'>You insert \the [W] into the equipment system.</span>"
-				user.drop_item(W)
-				W.loc = equipment_system
-				equipment_system.weapon_system = W
-				equipment_system.weapon_system.my_atom = src
-				var/path = text2path("[W.type]/proc/fire_weapon_system")
-				if(path)
-					verbs += path//obj/spacepod/proc/fire_weapons
-				return
+		if(E.can_attach(src))
+			user.drop_item()
+			E.attach(src)
+			user.visible_message("[user] attaches [W] to [src]", "You attach [W] to [src]")
+		else
+			user << "You were unable to attach [W] to [src]"
+		return
+
 
 
 /obj/spacepod/attack_hand(mob/user as mob)
@@ -174,7 +209,7 @@
 			SPE = equipment_system.weapon_system
 			if(user.put_in_any_hand_if_possible(SPE))
 				user << "<span class='notice'>You remove \the [SPE] from the equipment system.</span>"
-				SPE.my_atom = null
+				SPE.chassis = null
 				equipment_system.weapon_system = null
 			else
 				user << "<span class='warning'>You need an open hand to do that.</span>"
@@ -214,7 +249,7 @@
 		if("pod_mil")
 			desc = "A dark grey space pod brandishing the Nanotrasen Military insignia"
 		if("pod_synd")
-			desc = "A menacing military space pod with Fuck NT stenciled onto the side"
+			desc = "A menacing military space pod with \"Fuck NT\" stenciled onto the side"
 		if("pod_gold")
 			desc = "A civilian space pod with a gold body, must have cost somebody a pretty penny"
 		if("pod_industrial")
@@ -336,7 +371,7 @@
 		else if(src.occupant!=usr)
 			usr << "[src.occupant] was faster. Try better next time, loser."
 	else
-		usr << "You stop entering the exosuit."
+		usr << "You stop entering the spacepod."
 	return
 
 /obj/spacepod/verb/exit_pod()
@@ -410,6 +445,7 @@
 	..()
 	if(dir == 1 || dir == 4)
 		src.loc.Entered(src)
+
 /obj/spacepod/proc/Process_Spacemove(var/check_drift = 0, mob/user)
 	var/dense_object = 0
 	if(!user)
@@ -425,28 +461,30 @@
 	return 1
 
 /obj/spacepod/relaymove(mob/user, direction)
-	if(battery && battery.charge && health)
+	var/moveship = 1
+	if(battery && battery.charge >= 3 && health)
 		src.dir = direction
 		switch(direction)
 			if(1)
 				if(inertia_dir == 2)
 					inertia_dir = 0
-					return 0
+					moveship = 0
 			if(2)
 				if(inertia_dir == 1)
 					inertia_dir = 0
-					return 0
+					moveship = 0
 			if(4)
 				if(inertia_dir == 8)
 					inertia_dir = 0
-					return 0
+					moveship = 0
 			if(8)
 				if(inertia_dir == 4)
 					inertia_dir = 0
-					return 0
-		step(src, direction)
-		if(istype(src.loc, /turf/space))
-			inertia_dir = direction
+					moveship = 0
+		if(moveship)
+			step(src, direction)
+			if(istype(src.loc, /turf/space))
+				inertia_dir = direction
 	else
 		if(!battery)
 			user << "<span class='warning'>No energy cell detected.</span>"
@@ -457,7 +495,80 @@
 		else
 			user << "<span class='warning'>Unknown error has occurred, yell at pomf.</span>"
 		return 0
-	battery.use(3)
+	battery.charge = max(0, battery.charge - 3)
+
+
+////////////////////////////////
+/////// Messages and Log ///////
+////////////////////////////////
+
+/obj/spacepod/proc/occupant_message(message as text)
+	if(message)
+		if(src.occupant && src.occupant.client)
+			src.occupant << "\icon[src] [message]"
+	return
+
+/obj/spacepod/proc/log_message(message as text,red=null)
+	log.len++
+	log[log.len] = list("time"=world.timeofday,"message"="[red?"<font color='red'>":null][message][red?"</font>":null]")
+	return log.len
+
+/obj/spacepod/proc/log_append_to_last(message as text,red=null)
+	var/list/last_entry = src.log[src.log.len]
+	last_entry["message"] += "<br>[red?"<font color='red'>":null][message][red?"</font>":null]"
+	return
+
+
+///////////////////////
+///// Power stuff /////
+///////////////////////
+
+/obj/spacepod/proc/has_charge(amount)
+	return (get_charge()>=amount)
+
+/obj/spacepod/proc/get_charge()
+	return call((proc_res["dyngetcharge"]||src), "dyngetcharge")()
+
+/obj/spacepod/proc/dyngetcharge()//returns null if no powercell, else returns cell.charge
+	if(!src.battery) return
+	return max(0, src.battery.charge)
+
+/obj/spacepod/proc/use_power(amount)
+	return call((proc_res["dynusepower"]||src), "dynusepower")(amount)
+
+/obj/spacepod/proc/dynusepower(amount)
+	if(get_charge())
+		battery.use(amount)
+		return 1
+	return 0
+
+
+/obj/spacepod/proc/get_active_part(var/num = 1)
+	var/first
+	var/second
+	switch(dir)
+		if(NORTH)
+			first = get_step(src, NORTH)
+			second = get_step(first,EAST)
+		if(SOUTH)
+			first = get_turf(src)
+			second = get_step(first,EAST)
+		if(EAST)
+			first = get_turf(src)
+			first = get_step(first, EAST)
+			second = get_step(first,NORTH)
+		if(WEST)
+			first = get_turf(src)
+			second = get_step(first,NORTH)
+	if(num == 1)
+		return first
+	else
+		return second
+
+
+////////////////////////////////
+/////// Other shit	//// ///////
+////////////////////////////////
 
 /obj/effect/landmark/spacepod/random
 	name = "spacepod spawner"
@@ -468,6 +579,15 @@
 
 /obj/effect/landmark/spacepod/random/New()
 	..()
+
+/turf/Enter(var/obj/spacepod/S)
+	if(!istype(S))
+		return ..()
+	if(!istype(src, /turf/space) && !istype(src, /turf/simulated/floor/engine/vacuum/hull) && !istype(src,/turf/simulated/floor/plating/airless/asteroid) && !istype(src, /turf/simulated/floor/open))
+		return 0
+	else
+		return ..()
+
 
 #undef DAMAGE
 #undef FIRE

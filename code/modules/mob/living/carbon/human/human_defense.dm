@@ -33,6 +33,22 @@ emp_act
 					P.xo = new_x - curloc.x
 
 				return -1 // complete projectile permutation
+	if(istype(P, /obj/item/projectile/energy/electrode))
+		if(src.stat == DEAD)
+			if(prob(30) && (src.timeofdeath + 1800 > world.time) && !(NOCLONE in src.mutations))
+				src.stat = UNCONSCIOUS
+				src.visible_message( \
+					"\red [src]'s body trembles!", \
+					"\red You feel the life enter your body with the heavy pain!", \
+					"\red You hear a heavy electric crack!" \
+				)
+			else
+				src.visible_message( \
+					"\red [src]'s lifeless body trembles!", \
+					"\red A discharge of electricity passes through your body, but the efforts to bring you back to life are useless.", \
+					"\red You hear a heavy electric crack!" \
+				)
+
 
 	if(check_shields(P.damage, "the [P.name]"))
 		P.on_hit(src, 2)

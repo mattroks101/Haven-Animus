@@ -66,7 +66,7 @@ var/list/beam_master = list()
 		cleanup(reference)
 		return
 
-	Del()
+	Destroy()
 		cleanup("\ref[src]")
 		..()
 
@@ -121,7 +121,22 @@ var/list/beam_master = list()
 		if(istype(target, /turf/simulated/mineral))
 			var/turf/simulated/mineral/turf = target
 			turf.GetDrilled()
+/*
+/obj/item/projectile/beam/emitter/core
+	name = "emitter beam"
+	icon_state = "emitter"
+	damage = 40
+	var/obj/machinery/engine/laser/master = null
+	var/power
+	var/freq = 50000
 
+
+	on_hit(var/atom/target, var/blocked = 0)
+		..()
+		if(istype(target, /turf/simulated/mineral))
+			var/turf/simulated/mineral/turf = target
+			turf.GetDrilled()
+*/
 
 /obj/item/projectile/beam/lastertag/blue
 	name = "lasertag beam"

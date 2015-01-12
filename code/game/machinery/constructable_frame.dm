@@ -102,12 +102,16 @@
 						user << "\red You cannot assemble a pod frame without a 2x2 square of machine frames."
 						return
 
+					var/turf/T=get_turf(src)
+					if(!istype(T, /turf/space) && !istype(T, /turf/simulated/floor/engine/vacuum/hull) && !istype(T,/turf/simulated/floor/plating/airless/asteroid))
+						user << "\red You can assemble a pod only on the hull plating."
+						return
+
 					R.use(10)
 
 					for(var/obj/machinery/constructable_frame/machine_frame/F in connected_parts)
 						del(F)
 
-					var/turf/T=get_turf(src)
 					// Offset frame (if needed) so it doesn't look wonky when it spawns.
 					switch(pattern_idx)
 						if(2)

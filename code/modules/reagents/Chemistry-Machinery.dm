@@ -175,7 +175,7 @@
 		if(beaker)
 			var/obj/item/weapon/reagent_containers/B = beaker
 			B.loc = loc
-			B.layer = src.layer+0.1
+			B.layer = src.layer+1
 			beaker = null
 
 	add_fingerprint(usr)

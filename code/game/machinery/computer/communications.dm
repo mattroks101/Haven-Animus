@@ -98,7 +98,7 @@
 		if("announce")
 			if(src.authenticated==2)
 				if(message_cooldown)	return
-				var/input = stripped_input(usr, "Please choose a message to announce to the ship's crew.", "What?")
+				var/input = stripped_input(usr, "Please choose a message to announce to the [vessel_type]'s crew.", "What?")
 				if(!input || !(usr in view(1,src)))
 					return
 				captain_announce(input)//This should really tell who is, IE HoP, CE, HoS, RD, Captain
@@ -529,7 +529,7 @@
 	frequency.post_signal(src, status_signal)
 
 
-/obj/machinery/computer/communications/Del()
+/obj/machinery/computer/communications/Destroy()
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(istype(commconsole.loc,/turf) && commconsole != src)
@@ -554,7 +554,7 @@
 
 	..()
 
-/obj/item/weapon/circuitboard/communications/Del()
+/obj/item/weapon/circuitboard/communications/Destroy()
 	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 
 	for(var/obj/machinery/computer/communications/commconsole in world)

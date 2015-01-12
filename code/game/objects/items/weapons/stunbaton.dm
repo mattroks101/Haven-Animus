@@ -87,6 +87,21 @@
 			charges--
 		H.visible_message("<span class='danger'>[M] has been stunned with the [src] by [user]!</span>")
 
+		if(H.stat == DEAD)
+			if(prob(30) && (H.timeofdeath + 1800 > world.time) && !(NOCLONE in H.mutations))
+				H.stat = UNCONSCIOUS
+				H.visible_message( \
+					"\red [H]'s body trembles!", \
+					"\red You feel the life enter your body with the heavy pain!", \
+					"\red You hear a heavy electric crack!" \
+				)
+			else
+				H.visible_message( \
+					"\red [H]'s lifeless body trembles!", \
+					"\red A discharge of electricity passes through your body, but the efforts to bring you back to life are useless.", \
+					"\red You hear a heavy electric crack!" \
+				)
+
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [H.name] ([H.ckey]) with [src.name]</font>"
 		H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by [user.name] ([user.ckey]) with [src.name]</font>"
 		log_attack("[user.name] ([user.ckey]) stunned [H.name] ([H.ckey]) with [src.name]")

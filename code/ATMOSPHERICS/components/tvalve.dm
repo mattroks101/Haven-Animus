@@ -78,7 +78,7 @@ obj/machinery/atmospherics/tvalve
 
 		return null
 
-	Del()
+	Destroy()
 		loc = null
 
 		if(node1)
@@ -337,7 +337,7 @@ obj/machinery/atmospherics/tvalve
 				"\blue You have unfastened \the [src].", \
 				"You hear ratchet.")
 			new /obj/item/pipe(loc, make_from=src)
-			qdel(src)
+			del(src)
 
 obj/machinery/atmospherics/tvalve/mirrored
 	icon_state = "tvalvem0"

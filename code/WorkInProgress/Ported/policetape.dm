@@ -43,6 +43,21 @@
 	req_one_access = list(access_engine,access_atmospherics)
 	icon_base = "engineering"
 
+/obj/item/taperoll/medical
+	name = "quarantine tape"
+	desc = "A roll of quarantine tape used to block off quarantine zones from the public."
+	icon_state = "medical_start"
+	tape_type = /obj/item/tape/medical
+	icon_base = "medical"
+
+/obj/item/tape/medical
+	name = "quarantine tape"
+	desc = "A length of quarantine tape. Diseases are beyond."
+	req_one_access = list(access_medical)
+	icon_base = "medical"
+
+
+
 /obj/item/taperoll/attack_self(mob/user as mob)
 	if(icon_state == "[icon_base]_start")
 		start = get_turf(src)

@@ -4,6 +4,7 @@
 	anchored = 1
 	New()
 		ChangeSign(pick("pinkflamingo", "magmasea", "limbo", "rustyaxe", "armokbar", "brokendrum", "meadbay", "thedamnwall", "thecavern", "cindikate", "theorchard", "thesaucyclown", "theclownshead"))
+		SetLuminosity(0,3,0)
 		return
 	proc/ChangeSign(var/Text)
 		src.icon_state = "[Text]"

@@ -62,7 +62,7 @@
 		if("shiver")
 			message = "<B>The [src.name]</B> shivers."
 			m_type = 2
-		if ("sneeze")
+		if("sneeze")
 			message = "<B>[src]</B> sneezes."
 			m_type = 2
 		if("drool")

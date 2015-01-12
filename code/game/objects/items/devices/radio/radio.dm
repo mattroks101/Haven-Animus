@@ -147,7 +147,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				usr.machine = usr
 
 			while (usr:cameraFollow == target)
-				usr << "Target is not on or near any active cameras on the ship. We'll check again in 5 seconds (unless you use the cancel-camera verb)."
+				usr << "Target is not on or near any active cameras on the [vessel_type]. We'll check again in 5 seconds (unless you use the cancel-camera verb)."
 				sleep(40)
 				continue
 

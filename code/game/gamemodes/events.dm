@@ -245,7 +245,7 @@
 			continue
 		M.apply_effect((rand(15,75)),IRRADIATE,0)
 	sleep(100)
-	command_alert("High levels of radiation detected near the ship. Please report to the Med-bay if you feel strange.", "Anomaly Alert")
+	command_alert("High levels of radiation detected near the [vessel_type]. Please report to the Med-bay if you feel strange.", "Anomaly Alert")
 	for(var/mob/M in player_list)
 		M << sound('sound/AI/radiation.ogg')
 
@@ -286,7 +286,7 @@
 				temp_timer.releasetime = 1
 
 		sleep(150)
-		command_alert("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend ship's AI involvement.", "Security Alert")
+		command_alert("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend [vessel_type]'s AI involvement.", "Security Alert")
 	else
 		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
 
@@ -366,9 +366,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			switch(rand(1,14))
 				if(1)
 					M << "<br>"
-					M << "\red THERE ARE [amount] [who2] ON THE SHIP...LAWS UPDATED"
+					M << "\red THERE ARE [amount] [who2] ON THE VESSEL...LAWS UPDATED"
 					M << "<br>"
-					M.add_ion_law("THERE ARE [amount] [who2] ON THE SHIP")
+					M.add_ion_law("THERE ARE [amount] [who2] ON THE VESSEL")
 				if(2)
 					M << "<br>"
 					M << "\red [what2] ARE DANGEROUS TO HUMANS...LAWS UPDATED"
@@ -376,9 +376,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("[what2] ARE DANGEROUS TO HUMANS")
 				if(3)
 					M << "<br>"
-					M << "\red THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE SHIP...LAWS UPDATED"
+					M << "\red THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE VESSEL...LAWS UPDATED"
 					M << "<br>"
-					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE SHIP")
+					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE VESSEL")
 				if(4)
 					M << "<br>"
 					M << "\red HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE...LAWS UPDATED"
@@ -391,9 +391,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("THE CAPTAIN, HOP AND HOS ARE [who2]")
 				if(6)
 					M << "<br>"
-					M << "\red THE SHIP IS BUILT FOR [who2]...LAWS UPDATED"
+					M << "\red THE VESSEL IS BUILT FOR [who2]...LAWS UPDATED"
 					M << "<br>"
-					M.add_ion_law("THE SHIP IS BUILT FOR [who2]")
+					M.add_ion_law("THE VESSEL IS BUILT FOR [who2]")
 				if(7)
 					M << "<br>"
 					M << "\red YOU ARE [amount] [who2]...LAWS UPDATED"
@@ -431,9 +431,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("[crew] is [allergysev] to [allergy]")
 				if(14)
 					M << "<br>"
-					M << "\red THE SHIP IS [who2pref] [who2]...LAWS UPDATED"
+					M << "\red THE VESSEL IS [who2pref] [who2]...LAWS UPDATED"
 					M << "<br>"
-					M.add_ion_law("THE SHIP IS [who2pref] [who2]")
+					M.add_ion_law("THE VESSEL IS [who2pref] [who2]")
 
 	if(botEmagChance)
 		for(var/obj/machinery/bot/bot in machines)

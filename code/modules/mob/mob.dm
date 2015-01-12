@@ -1,4 +1,4 @@
-/mob/Del()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
@@ -52,9 +52,7 @@
 				if ((type & 1 && sdisabilities & BLIND))
 					return
 	// Added voice muffling for Issue 41.
-	if(stat == UNCONSCIOUS || sleeping > 0)
-		src << "<I>... You can almost hear someone talking ...</I>"
-	else
+	if(!(stat == UNCONSCIOUS || sleeping > 0))
 		src << msg
 	return
 
@@ -670,6 +668,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
 				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
+			if(master_controller.garbageCollector)
 				stat(null, "garbage collector - [master_controller.garbageCollectorCost]")
 				stat(null, "\tqdel - [garbageCollector.del_everything ? "off" : "on"]")
 				stat(null, "\ton queue - [garbageCollector.queue.len]")
@@ -737,7 +736,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 		canmove = 0
 	else if(!can_stand)
 		lying = 90
-		canmove = has_limbs
+		canmove = 0
 	else
 		lying = 0
 		canmove = 1

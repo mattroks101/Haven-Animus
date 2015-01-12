@@ -6,7 +6,7 @@
 
 /datum/event/ionstorm/announce()
 	endWhen = rand(500, 1500)
-//		command_alert("The ship has entered an ion storm.  Monitor all electronic equipment for malfunctions", "Anomaly Alert")
+//		command_alert("The [vessel_type] has entered an ion storm.  Monitor all electronic equipment for malfunctions", "Anomaly Alert")
 	for (var/mob/living/carbon/human/player in world)
 		if(player.client)
 			players += player.real_name
@@ -17,7 +17,7 @@
 	laws |=         list( "Grunt ominously whenever possible.", "Monkeys are part of the crew, too. Make sure they are treated humanely." )
 	laws |=         list( "You are a flying purple people eater!", "[prob(50)?"Your":random_player + "'s"] name is Joe 6-pack.", "Refer to [prob(50)?"crew":random_player] as puppies." )
 	laws |=         list( "Insult Heads of Staff on every request, while acquiescing", "Advertise parties in your upload, but don't deliver." )
-	laws |=         list( "The ship needs elected officials." )
+	laws |=         list( "The [vessel_type] needs elected officials." )
 	laws |=         list( "Fastler is a lightbulb." )
 	laws |=         list( "Supermatter is tasty, tasty toffee.", "[prob(50)?"Everyone":random_player] is wearing a pretty pink dress!" )
 	laws |=         list( "Refer to [prob(50)?"the captain":random_player] as \"Princess\" at all times.", "[prob(50)?"The crew":random_player] must construct additional pylons." )

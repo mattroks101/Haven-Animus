@@ -50,6 +50,7 @@ datum/preferences
 
 	//character preferences
 	var/real_name						//our character's name
+	var/generate_backstory = 0
 	var/be_random_name = 0				//whether we are a random name every round
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character

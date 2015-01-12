@@ -113,11 +113,28 @@
 		paralysis = 10
 
 	//Check arms and legs for existence
-	can_stand = 2 //can stand on both legs
+	var/limbs_count = 4
+	can_stand = 1 //can stand on both legs
 	var/datum/organ/external/E = organs_by_name["l_foot"]
 	if(E.status & ORGAN_DESTROYED)
 		can_stand--
+		limbs_count--
 
 	E = organs_by_name["r_foot"]
 	if(E.status & ORGAN_DESTROYED)
 		can_stand--
+		limbs_count--
+
+	E = organs_by_name["r_hand"]
+	if(E.status & ORGAN_DESTROYED)
+		limbs_count--
+
+	E = organs_by_name["l_hand"]
+	if(E.status & ORGAN_DESTROYED)
+		limbs_count--
+
+	if(can_stand < 0)
+		can_stand = 0
+
+	if(limbs_count == 0)
+		has_limbs = 0
