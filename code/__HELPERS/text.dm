@@ -363,6 +363,6 @@ proc/TextPreview(var/string,var/len=40)
 		if(!lentext(string))
 			return "\[...\]"
 		else
-			return string
+			return sanitize(string)
 	else
 		return "[sanitize(copytext(string, 1, 37))]..."

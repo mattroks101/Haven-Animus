@@ -294,12 +294,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 			if(part.status & ORGAN_DESTROYED)
 				continue
 
-			if (istype(part, /datum/organ/external/groin) || istype(part, /datum/organ/external/head))
-				temp = part.get_icon(race_icon,deform_icon,g)
-			else if(gender == FEMALE || istype(part, /datum/organ/external/l_arm) || istype(part, /datum/organ/external/r_arm) || istype(part, /datum/organ/external/l_leg) || istype(part, /datum/organ/external/r_leg) || istype(part, /datum/organ/external/l_foot) || istype(part, /datum/organ/external/r_foot) || istype(part, /datum/organ/external/l_hand) || istype(part, /datum/organ/external/r_hand))
-				temp = part.get_icon(race_icon,deform_icon,g)
-			else
-				temp = part.get_icon(race_icon,deform_icon)
+			temp = part.get_icon(race_icon,deform_icon,g)
 
 			if(part.status & ORGAN_DEAD)
 				temp.ColorTone(necrosis_color_mod)
