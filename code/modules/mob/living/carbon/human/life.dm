@@ -114,6 +114,7 @@
 	handle_environment(environment)
 
 	//Status updates, death etc.
+	UpdateLuminosity()
 	handle_regular_status_updates()		//TODO: optimise ~Carn
 	update_canmove()
 

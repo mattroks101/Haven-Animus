@@ -71,12 +71,14 @@
 	icon_state = "rig0-white"
 	item_state = "ce_helm"
 	item_color = "white"
+	armor = list(melee = 50, bullet = 20, laser = 20,energy = 30, bomb = 50, bio = 100, rad = 100)
 
 /obj/item/clothing/suit/space/rig/elite
 	icon_state = "rig-white"
 	name = "advanced hardsuit"
 	desc = "An advanced suit that protects against hazardous, low pressure environments. Shines with a high polish."
 	item_state = "ce_hardsuit"
+	armor = list(melee = 50, bullet = 20, laser = 30,energy = 30, bomb = 50, bio = 100, rad = 100)
 
 
 //Mining rig
@@ -164,6 +166,7 @@
 	icon_state = "rig0-medical"
 	item_state = "medical_helm"
 	item_color = "medical"
+	armor = list(melee = 20, bullet = 5, laser = 5, energy = 5, bomb = 15, bio = 80, rad = 60)
 
 /obj/item/clothing/suit/space/rig/medical
 	icon_state = "rig-medical"
@@ -171,23 +174,24 @@
 	desc = "A special suit that protects against hazardous, low pressure environments. Has minor radiation shielding."
 	item_state = "medical_hardsuit"
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
+	armor = list(melee = 20, bullet = 5, laser = 5, energy = 5, bomb = 15, bio = 80, rad = 60)
 
 
 	//Security
 /obj/item/clothing/head/helmet/space/rig/security
 	name = "security hardsuit helmet"
 	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has an additional layer of armor."
-	icon_state = "rig0-sec"
-	item_state = "sec_helm"
+	icon_state = "rig0-secTG"
+	item_state = "rig-secTG"
 	item_color = "sec"
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/suit/space/rig/security
-	icon_state = "rig-sec"
+	icon_state = "rig-secTG"
 	name = "security hardsuit"
 	desc = "A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor."
-	item_state = "sec_hardsuit"
+	item_state = "rig-secTG"
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/melee/baton)
 	siemens_coefficient = 0.7

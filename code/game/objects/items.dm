@@ -118,6 +118,11 @@
 			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
 			return
 
+	if(istype(user, /mob/living/carbon/human))
+		if(!(user.IsAdvancedToolUser()) && (src.w_class < 4) && !(istype(src, /obj/item/clothing/mask/facehugger)))
+			user << "<span class='notice'>Your claws aren't capable of such a manipulation!"
+			return
+
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
 		S.remove_from_storage(src)
