@@ -787,16 +787,16 @@
 				src << browse(null, "window=flavor_changes")
 				return
 			if("general")
-				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message)
+				var/msg = input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
 				if(msg != null)
-					msg = sanitize_uni(copytext(msg, 1, MAX_MESSAGE_LEN))
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
 			else
-				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",sanitize_uni(html_decode(flavor_texts[href_list["flavor_change"]]))) as message)
+				var/msg = input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message
 				if(msg != null)
-					msg = sanitize_uni(copytext(msg, 1, MAX_MESSAGE_LEN))
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 					msg = html_encode(msg)
 				flavor_texts[href_list["flavor_change"]] = msg
 				set_flavor()
@@ -1410,7 +1410,7 @@
 	for (var/T in flavor_texts)
 		if(flavor_texts[T] && flavor_texts[T] != "")
 			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
-				flavor_text += sanitize(flavor_texts[T])
+				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
 	return ..()
 
