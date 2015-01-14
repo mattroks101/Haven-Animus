@@ -345,13 +345,6 @@
 	..()
 	recalibrate()
 
-/obj/machinery/computer/telescience/Destroy()
-	eject()
-	if(inserted_gps)
-		inserted_gps.loc = loc
-		inserted_gps = null
-	..()
-
 /obj/machinery/computer/telescience/examine()
 	..()
 	usr << "There are [crystals.len ? crystals.len : "no"] bluespace crystals in the crystal slots."
@@ -648,7 +641,6 @@
 		if(..())
 			return
 		z_co = Clamp(round(new_z), 1, 10)
-	    updateDialog()
 
 	if(href_list["send"])
 		sending = 1
