@@ -528,3 +528,15 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/subspace/filter = 1,
 							/obj/item/weapon/stock_parts/subspace/crystal = 1,
 							/obj/item/weapon/stock_parts/micro_laser/high = 2)
+
+/obj/item/weapon/circuitboard/telesci_pad
+	name = "circuit board (Telepad)"
+	build_path = /obj/machinery/telepad
+	board_type = "machine"
+	origin_tech = "programming=4;engineering=3;materials=3;bluespace=4"
+	frame_desc = "Requires 2 Bluespace crystal, 1 Cable Coil, 1 Capacitor and 1 Console screen. "
+	req_components = list(
+							/obj/item/weapon/stock_parts/bluespace_crystal = 2,
+							/obj/item/weapon/stock_parts/capacitor = 1,
+							/obj/item/weapon/cable_coil = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1)
