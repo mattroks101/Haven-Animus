@@ -48,8 +48,8 @@
 	MASK_TYPE = /obj/item/clothing/mask/gas
 
 /obj/machinery/suit_storage_unit/engineering_unit
-	SUIT_TYPE = /obj/item/clothing/suit/space/rig
-	HELMET_TYPE = /obj/item/clothing/head/helmet/space/rig
+	SUIT_TYPE = /obj/item/clothing/suit/space/engie
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/engie
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	STORAGE_TYPE = /obj/item/clothing/shoes/magboots
 
