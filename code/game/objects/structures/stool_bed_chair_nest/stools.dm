@@ -77,7 +77,3 @@
 /obj/structure/stool/barstool
 	name = "barstool"
 	icon_state = "barstool"
-
-/obj/structure/stool/barstool2
-	name = "barstool"
-	icon_state = "barstool2"

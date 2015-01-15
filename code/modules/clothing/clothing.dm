@@ -16,9 +16,6 @@
 			exclusive = 1
 
 		if(H.species)
-			if(istype(H.species, /datum/species/xenos))		//A little dirty, but...
-				M << "\red How do you imagine wearing [src]?"
-				return 0
 			if(exclusive)
 				if(!(H.species.name in species_restricted))
 					wearable = 1

@@ -306,7 +306,7 @@ var/list/slot_equipment_priority = list( \
 	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null
 
 	if(msg != null)
-		msg = sanitize_uni(copytext(msg, 1, MAX_MESSAGE_LEN))
+		msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 		msg = html_encode(msg)
 
 		flavor_text = msg
@@ -317,14 +317,12 @@ var/list/slot_equipment_priority = list( \
 		src << "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>"
 
 /mob/proc/print_flavor_text()
-	if(flavor_text && flavor_text != "")
-		var/msg = sanitize_uni(replacetext(flavor_text, "\n", " "))
+	if (flavor_text && flavor_text != "")
+		var/msg = replacetext(flavor_text, "\n", " ")
 		if(lentext(msg) <= 40)
 			return "\blue [msg]"
 		else
 			return "\blue [copytext(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
-	else
-		return 0
 
 /mob/verb/abandon_mob()
 	set name = "Respawn"
@@ -514,7 +512,7 @@ var/list/slot_equipment_priority = list( \
 		src << browse(null, t1)
 
 	if(href_list["flavor_more"])
-		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, sanitize_uni(replacetext(flavor_text), "\n", "<BR>")), text("window=[];size=500x200", name))
+		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, replacetext(sanitize(flavor_text), "\n", "<BR>")), text("window=[];size=500x200", name))
 		onclose(usr, "[name]")
 	if(href_list["flavor_change"])
 		update_flavor_text()
@@ -1045,8 +1043,3 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(paralysis)
 		AdjustParalysis(-1)
 	return paralysis
-
-
-/mob/proc/UpdateLuminosity()			//Не уверен, что требуется, но на всякий случай спиздил с ферна.
-	SetLuminosity(LuminosityRed, LuminosityGreen, LuminosityBlue)
-	return 1
