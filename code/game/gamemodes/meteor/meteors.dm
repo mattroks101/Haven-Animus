@@ -34,8 +34,7 @@
 	var/max_i = 10//number of tries to spawn meteor.
 	var/meteor_z = 1
 
-	if(vessel_type == "ship")
-		meteor_z = pick(1, 2, 3, 4)
+	meteor_z = pick(vessel_z)
 
 	while (!istype(pickedstart, /turf/space))
 		var/startSide = pick(cardinal)

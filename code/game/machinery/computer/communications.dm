@@ -45,8 +45,8 @@
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
 		return
-	if (src.z > 4)
-		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+	if (!(src.z in vessel_z))
+		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
 		return
 	usr.set_machine(src)
 

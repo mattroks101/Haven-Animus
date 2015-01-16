@@ -333,7 +333,7 @@
 /datum/game_mode/revolution/proc/check_heads_victory()
 	for(var/datum/mind/rev_mind in head_revolutionaries)
 		var/turf/T = get_turf(rev_mind.current)
-		if((rev_mind) && (rev_mind.current) && (rev_mind.current.stat != 2) && T && (T.z > 4))
+		if((rev_mind) && (rev_mind.current) && (rev_mind.current.stat != 2) && T && !(T.z in vessel_z))
 			if(ishuman(rev_mind.current))
 				return 0
 	return 1
@@ -360,7 +360,7 @@
 			if(headrev.current)
 				if(headrev.current.stat == DEAD)
 					text += "died"
-				else if(headrev.current.z > 4)
+				else if(!(headrev.current.z in vessel_z))
 					text += "fled the [vessel_type]"
 				else
 					text += "survived the revolution"
@@ -383,7 +383,7 @@
 			if(rev.current)
 				if(rev.current.stat == DEAD)
 					text += "died"
-				else if(rev.current.z > 4)
+				else if(!(rev.current.z in vessel_z))
 					text += "fled the [vessel_type]"
 				else
 					text += "survived the revolution"
@@ -408,7 +408,7 @@
 			if(head.current)
 				if(head.current.stat == DEAD)
 					text += "died"
-				else if(head.current.z > 4)
+				else if(!(head.current.z in vessel_z))
 					text += "fled the [vessel_type]"
 				else
 					text += "survived the revolution"
