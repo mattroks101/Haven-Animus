@@ -117,7 +117,7 @@ var/list/ai_list = list()
 			if (B.brainmob.mind)
 				B.brainmob.mind.transfer_to(src)
 
-			src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
+			src << "<B>You are playing the [vessel_type]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
 			src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
 			src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
 			src << "To use something, simply click on it."

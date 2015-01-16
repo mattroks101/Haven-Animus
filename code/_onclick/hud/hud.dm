@@ -253,6 +253,9 @@ datum/hud/New(mob/owner)
 	var/ui_type = mymob.client.prefs.UI_type
 
 	if(ishuman(mymob))
+		var/mob/living/carbon/human/H = mymob
+		if(istype(H.species, /datum/species/xenos))
+			alien_hud()
 		if(ui_type == "Luna")
 			human_hud_luna(ui_style, ui_color, ui_alpha) // Pass the player the UI style chosen in preferences
 		else if(ui_type == "TG")

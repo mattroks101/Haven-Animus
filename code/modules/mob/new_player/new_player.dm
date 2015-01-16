@@ -129,7 +129,7 @@
 
 				var/datum/species/S = all_species[client.prefs.species]
 				if(!(S.flags & IS_WHITELISTED))
-					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+					src << alert("Your current species,[client.prefs.species], is not available for play on the [vessel_type].")
 					return 0
 
 			LateChoices()
@@ -151,7 +151,7 @@
 
 				var/datum/species/S = all_species[client.prefs.species]
 				if(!(S.flags & IS_WHITELISTED))
-					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+					src << alert("Your current species,[client.prefs.species], is not available for play on the [vessel_type].")
 					return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"])

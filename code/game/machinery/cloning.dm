@@ -13,7 +13,6 @@
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "pod_0"
 	req_access = list(access_genetics) //For premature unlocking.
-	var/mob/living/occupant
 	var/heal_level = 90 //The clone is released once its health reaches this level.
 	var/locked = 0
 	var/obj/machinery/computer/cloning/connected = null //So we remember the connected clone machine.
@@ -217,8 +216,9 @@
 
 	H.set_species(R.dna.species)
 
-	//for(var/datum/language/L in languages)
-	//	H.add_language(L.name)
+	for(var/datum/language/L in R.languages)
+		H.add_language(L.name)
+	H.flavor_texts = R.flavor.Copy()
 	H.suiciding = 0
 	src.attempting = 0
 	return 1

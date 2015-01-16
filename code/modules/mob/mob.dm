@@ -299,6 +299,33 @@ var/list/slot_equipment_priority = list( \
 	if (popup)
 		memory()
 
+/mob/proc/update_flavor_text()
+	set src in usr
+	if(usr != src)
+		usr << "No."
+	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null
+
+	if(msg != null)
+		msg = sanitize_uni(copytext(msg, 1, MAX_MESSAGE_LEN))
+		msg = html_encode(msg)
+
+		flavor_text = msg
+
+/mob/proc/warn_flavor_changed()
+	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
+		src << "<h2 class='alert'>OOC Warning:</h2>"
+		src << "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>"
+
+/mob/proc/print_flavor_text()
+	if(flavor_text && flavor_text != "")
+		var/msg = sanitize_uni(replacetext(flavor_text, "\n", " "))
+		if(lentext(msg) <= 40)
+			return "\blue [msg]"
+		else
+			return "\blue [copytext(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
+	else
+		return 0
+
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
@@ -485,6 +512,12 @@ var/list/slot_equipment_priority = list( \
 		var/t1 = text("window=[href_list["mach_close"]]")
 		unset_machine()
 		src << browse(null, t1)
+
+	if(href_list["flavor_more"])
+		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, sanitize_uni(replacetext(flavor_text), "\n", "<BR>")), text("window=[];size=500x200", name))
+		onclose(usr, "[name]")
+	if(href_list["flavor_change"])
+		update_flavor_text()
 	return
 
 
@@ -1012,3 +1045,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(paralysis)
 		AdjustParalysis(-1)
 	return paralysis
+
+
+/mob/proc/UpdateLuminosity()			//Не уверен, что требуется, но на всякий случай спиздил с ферна.
+	SetLuminosity(LuminosityRed, LuminosityGreen, LuminosityBlue)
+	return 1

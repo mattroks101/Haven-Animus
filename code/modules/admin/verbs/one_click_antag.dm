@@ -318,9 +318,9 @@ client/proc/one_click_antag()
 	var/list/mob/dead/observer/candidates = list()
 	var/mob/dead/observer/theghost = null
 	var/time_passed = world.time
-	var/input = "Purify the station."
+	var/input = "Purify the [vessel_type]."
 	if(prob(10))
-		input = "Save Runtime and any other cute things on the station."
+		input = "Save Runtime and any other cute things on the [vessel_type]."
 
 	var/syndicate_leader_selected = 0 //when the leader is chosen. The last person spawned.
 
@@ -444,7 +444,7 @@ client/proc/one_click_antag()
 	//Generates a list of candidates from active ghosts.
 	for(var/mob/dead/observer/G in player_list)
 		spawn(0)
-			switch(alert(G,"Do you wish to be considered for a vox raiding party arriving on the station?","Please answer in 30 seconds!","Yes","No"))
+			switch(alert(G,"Do you wish to be considered for a vox raiding party arriving on the [vessel_type]?","Please answer in 30 seconds!","Yes","No"))
 				if("Yes")
 					if((world.time-time_passed)>300)//If more than 30 game seconds passed.
 						return

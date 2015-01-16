@@ -62,6 +62,8 @@
 	var/mob/remoteview_target = null
 	var/hand_blood_color
 
+	var/list/flavor_texts = list()
+
 	var/image/zombieimage = null
 	var/tdome_team = 0
 

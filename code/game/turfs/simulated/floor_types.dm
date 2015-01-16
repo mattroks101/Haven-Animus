@@ -54,6 +54,9 @@
 	thermal_conductivity = 0.025
 	heat_capacity = 325000
 
+/turf/simulated/floor/engine/ex_act(severity)
+	return ..(severity+1) //stronger than regular floors
+
 /turf/simulated/floor/engine/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	if(!C)
 		return

@@ -23,14 +23,6 @@
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
 		if(M.lying)        return
-		dirt++
-		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
-		if (dirt >= 50)
-			if (!dirtoverlay)
-				dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
-				dirtoverlay.alpha = 15
-			else if (dirt > 50)
-				dirtoverlay.alpha = min(dirtoverlay.alpha+5, 255)
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M

@@ -250,7 +250,7 @@ rcd light flash thingy on matter drain
 		if (!already)
 			usr:current_modules += new /datum/AI_Module/large/disable_rcd
 			usr.verbs += /client/proc/disable_rcd
-			src.temp = 	"Send a specialised pulse to break all RCD devices on the station."
+			src.temp = 	"Send a specialised pulse to break all RCD devices on the [vessel_type]."
 		else src.temp = "Additional use added to RCD disabler."
 		src.processing_time -= 50
 
@@ -275,7 +275,7 @@ rcd light flash thingy on matter drain
 				already = 1
 		if (!already)
 			usr.verbs += /client/proc/blackout
-			src.temp = "Attempts to overload the lighting circuits on the station, destroying some bulbs. 3 uses."
+			src.temp = "Attempts to overload the lighting circuits on the [vessel_type], destroying some bulbs. 3 uses."
 			usr:current_modules += new /datum/AI_Module/small/blackout
 		else src.temp = "Three additional uses added to Blackout module."
 		src.processing_time -= 15

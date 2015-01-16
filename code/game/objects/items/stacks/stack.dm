@@ -163,14 +163,17 @@
 	return
 
 /obj/item/stack/proc/use(var/amount)
-	src.amount-=amount
+	if(src.amount < amount)
+		return 0
+
+	src.amount -= amount
 	if (src.amount<=0)
 		var/oldsrc = src
 		src = null //dont kill proc after del()
 		if(usr)
 			usr.before_take_item(oldsrc)
 		del(oldsrc)
-	return
+	return 1
 
 /obj/item/stack/proc/get_amount()
 	return amount

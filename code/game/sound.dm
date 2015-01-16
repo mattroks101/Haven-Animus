@@ -22,7 +22,7 @@
 	S.volume = vol
 
 	if (vary)
-		S.frequency = rand(32000, 55000)
+		S.frequency = get_rand_frequency()
 
 	for (var/A in range(world.view+extrarange, source))       // Plays for people in range.
 
@@ -85,12 +85,16 @@
 	S.volume = vol
 
 	if (vary)
-		S.frequency = rand(32000, 55000)
+		S.frequency = get_rand_frequency()
 	if(isturf(source))
 		var/dx = source.x - src.x
 		S.pan = max(-100, min(100, dx/8.0 * 100))
 
 	src << S
+
+
+/proc/get_rand_frequency()
+	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.
 
 /client/proc/playtitlemusic()
 	if(!ticker || !ticker.login_music)	return

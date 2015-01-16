@@ -16,6 +16,8 @@
 	var/implant=null
 	var/ckey=null
 	var/mind=null
+	var/languages=null
+	var/list/flavor=null
 
 /datum/dna2/record/proc/GetData()
 	var/list/ser=list("data" = null, "owner" = null, "label" = null, "type" = null, "ue" = 0)
@@ -45,7 +47,6 @@
 	idle_power_usage = 50
 	active_power_usage = 300
 	var/locked = 0
-	var/mob/living/carbon/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/opened = 0
 

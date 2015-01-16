@@ -17,6 +17,7 @@
 	var/global/list/acceptable_items // List of the items you can put in
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0
+	var/efficiency = 0
 
 
 // see code/modules/food/recipes_microwave.dm for recipes
@@ -48,12 +49,40 @@
 		// impure carbon. ~Z
 		acceptable_items |= /obj/item/weapon/holder
 
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/microwave(null)
+	component_parts += new /obj/item/weapon/stock_parts/micro_laser(null)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
+	component_parts += new /obj/item/weapon/cable_coil(null, 2)
+	RefreshParts()
+
+/obj/machinery/microwave/RefreshParts()
+	var/E
+	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts)
+		E += M.rating
+	efficiency = E
+
+
 /*******************
 *   Item Adding
 ********************/
 
 /obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(src.broken > 0)
+	if(operating)
+		return
+
+	if(!broken && dirty<100)
+		if(default_deconstruction_screwdriver(user, "mw-o", "mw", O))
+			return
+		if(default_unfasten_wrench(user, O))
+			return
+		if(exchange_parts(user, O))
+			return
+
+	if(default_deconstruction_crowbar(O))
+		return
+
+	if(broken)
 		if(src.broken == 2 && istype(O, /obj/item/weapon/screwdriver)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
 				"\blue [user] starts to fix part of the microwave.", \
@@ -270,10 +299,12 @@
 			cooked = fail()
 			cooked.loc = src.loc
 			return
-		cooked = recipe.make_food(src)
+
+		for(var/i=0,i<efficiency,i++)
+			cooked = recipe.make_food(src)
+			if(cooked)
+				cooked.loc = src.loc
 		stop()
-		if(cooked)
-			cooked.loc = src.loc
 		return
 
 /obj/machinery/microwave/proc/wzhzhzh(var/seconds as num)
@@ -355,7 +386,7 @@
 		del(O)
 	src.reagents.clear_reagents()
 	ffuu.reagents.add_reagent("carbon", amount)
-	ffuu.reagents.add_reagent("toxin", amount/10)
+	ffuu.reagents.add_reagent("toxin", (amount/10)*efficiency)
 	return ffuu
 
 /obj/machinery/microwave/Topic(href, href_list)

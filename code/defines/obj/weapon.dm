@@ -532,18 +532,6 @@
 
 	var/obj/machinery/machine
 
-/obj/item/weapon/plastique
-	name = "plastic explosives"
-	desc = "Used to put holes in specific areas without too much extra hole."
-	gender = PLURAL
-	icon = 'icons/obj/assemblies.dmi'
-	icon_state = "plastic-explosive0"
-	item_state = "plasticx"
-	flags = FPRINT | TABLEPASS | NOBLUDGEON
-	w_class = 2.0
-	origin_tech = "syndicate=2"
-	var/timer = 10
-	var/atom/target = null
 
 ///////////////////////////////////////Stock Parts /////////////////////////////////
 
@@ -609,6 +597,7 @@
 
 /obj/item/weapon/stock_parts/capacitor/adv
 	name = "advanced capacitor"
+	icon_state = "adv_capacitor"
 	desc = "An advanced capacitor used in the construction of a variety of devices."
 	origin_tech = "powerstorage=3"
 	rating = 2
@@ -617,6 +606,7 @@
 
 /obj/item/weapon/stock_parts/scanning_module/adv
 	name = "advanced scanning module"
+	icon_state = "adv_scan_module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."
 	icon_state = "scan_module"
 	origin_tech = "magnets=3"
@@ -653,6 +643,7 @@
 
 /obj/item/weapon/stock_parts/capacitor/super
 	name = "super capacitor"
+	icon_state = "super_capacitor"
 	desc = "A super-high capacity capacitor used in the construction of a variety of devices."
 	origin_tech = "powerstorage=5;materials=4"
 	rating = 3
@@ -661,6 +652,7 @@
 
 /obj/item/weapon/stock_parts/scanning_module/phasic
 	name = "phasic scanning module"
+	icon_state = "super_scan_module"
 	desc = "A compact, high resolution phasic scanning module used in the construction of certain devices."
 	origin_tech = "magnets=5"
 	rating = 3
@@ -761,3 +753,29 @@
 	icon_state = "capacitor"
 	desc = "A debug item for research."
 	origin_tech = "materials=8;programming=8;magnets=8;powerstorage=8;bluespace=8;combat=8;biotech=8;syndicate=8"
+
+
+/obj/item/weapon/storage/part_replacer
+	name = "Rapid Part Exchange Device"
+	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
+	icon_state = "RPED"
+	item_state = "RPED"
+	w_class = 5
+	can_hold = list(/obj/item/weapon/stock_parts)
+	storage_slots = 21
+	use_to_pickup = 1
+	allow_quick_gather = 1
+	allow_quick_empty = 1
+	collection_mode = 1
+	display_contents_with_number = 1
+	max_w_class = 3
+	max_combined_w_class = 42
+
+/obj/item/weapon/storage/part_replacer/proc/play_rped_sound()
+	//Plays the sound for RPED exhanging or installing parts.
+	playsound(src, 'sound/items/rped.ogg', 40, 1)
+
+//Sorts stock parts inside an RPED by their rating.
+//Only use /obj/item/weapon/stock_parts/ with this sort proc!
+/proc/cmp_rped_sort(var/obj/item/weapon/stock_parts/A, var/obj/item/weapon/stock_parts/B)
+	return B.rating - A.rating

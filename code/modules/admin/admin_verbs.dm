@@ -99,8 +99,15 @@ var/list/admin_verbs_fun = list(
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
 	/client/proc/set_ooc,
-	/client/proc/editappear
+	/client/proc/editappear,
+	/client/proc/tdparty,
+	/client/proc/revive_td,
+	/client/proc/tp_td,
+	/client/proc/c_op,
+	/client/proc/e_op,
+	/client/proc/t_op
 	)
+
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
 	/client/proc/respawn_character

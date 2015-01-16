@@ -105,6 +105,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 		vox.set_species("Vox")
 		vox.languages = list() // Removing language from chargen.
 		vox.add_language("Vox-pidgin")
+		vox.flavor_text = ""
 		vox.h_style = "Short Vox Quills"
 		vox.f_style = "Shaved"
 		for(var/datum/organ/external/limb in vox.organs)
@@ -226,7 +227,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 			if(win_type == "Minor")
 
 				win_type = "Major"
-			win_msg += "<B>The Vox Raiders escaped the station!</B>"
+			win_msg += "<B>The Vox Raiders escaped the [vessel_type]!</B>"
 		else
 			win_msg += "<B>The Vox Raiders were repelled!</B>"
 

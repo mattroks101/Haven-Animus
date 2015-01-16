@@ -7,7 +7,7 @@
 	language = "Hivemind"
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
-	hud_type = /datum/hud_data/alien
+//	hud_type = /datum/hud_data/alien
 	rarity_value = 3
 
 	has_fine_manipulation = 0
