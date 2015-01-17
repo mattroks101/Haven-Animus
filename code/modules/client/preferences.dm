@@ -42,8 +42,8 @@ datum/preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#b82e00"
 	var/be_special = 0					//Special role selection
-	var/UI_style = "Luna"
-	var/UI_type = "Luna"
+	var/UI_style = "TG"
+	var/UI_type = "TG"
 	var/toggles = TOGGLES_DEFAULT
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
@@ -967,7 +967,7 @@ datum/preferences
 								UI_style = "Luna"
 							else
 								UI_type = "Luna"//"Midnight"
-								UI_style = "TG"
+								UI_style = "Luna"
   // I don't need this bay12 shit
 
 					if("be_special")
