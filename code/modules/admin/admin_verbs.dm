@@ -64,8 +64,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggleattacklogs,
 	/client/proc/toggledebuglogs,
 	/client/proc/toggleghostwriters,
-	/client/proc/man_up,
-	/client/proc/global_man_up,
 	/client/proc/response_team, // Response Teams admin verb
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
@@ -77,8 +75,8 @@ var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans,
 	/client/proc/unjobban_panel,
-	// /client/proc/late_ban,
-	// /client/proc/DB_ban_panel
+//	/client/proc/late_ban,
+	/client/proc/DB_ban_panel
 	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
@@ -99,6 +97,9 @@ var/list/admin_verbs_fun = list(
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
 	/client/proc/set_ooc,
+	/client/proc/man_up,
+	/client/proc/global_man_up,
+	/client/proc/admin_infect_zombie,
 	/client/proc/editappear,
 	/client/proc/tdparty,
 	/client/proc/revive_td,
@@ -359,8 +360,6 @@ var/list/admin_verbs_mod = list(
 	verbs -= /client/proc/show_verbs
 	add_admin_verbs()
 	src << "<span class='interface'>All of your adminverbs are now visible.</span>"
-
-
 
 
 
