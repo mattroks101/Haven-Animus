@@ -52,6 +52,90 @@
 					usr << "\red Unfortunately there weren't enough candidates available."
 		return
 
+	else if(href_list["dbsearchckey"] || href_list["dbsearchadmin"])
+		var/adminckey = href_list["dbsearchadmin"]
+		var/playerckey = href_list["dbsearchckey"]
+
+		DB_ban_panel(playerckey, adminckey)
+		return
+
+	else if(href_list["dbbanedit"])
+		var/banedit = href_list["dbbanedit"]
+		var/banid = text2num(href_list["dbbanid"])
+		if(!banedit || !banid)
+			return
+
+		DB_ban_edit(banid, banedit)
+		return
+
+	else if(href_list["dbbanaddtype"])
+
+		var/bantype = text2num(href_list["dbbanaddtype"])
+		var/banckey = href_list["dbbanaddckey"]
+		var/banip = href_list["dbbanaddip"]
+		var/bancid = href_list["dbbanaddcid"]
+		var/banduration = text2num(href_list["dbbaddduration"])
+		var/banjob = href_list["dbbanaddjob"]
+		var/banreason = href_list["dbbanreason"]
+
+		banckey = ckey(banckey)
+
+		switch(bantype)
+			if(BANTYPE_PERMA)
+				if(!banckey || !banreason)
+					usr << "Not enough parameters (Requires ckey and reason)"
+					return
+				banduration = null
+				banjob = null
+			if(BANTYPE_TEMP)
+				if(!banckey || !banreason || !banduration)
+					usr << "Not enough parameters (Requires ckey, reason and duration)"
+					return
+				banjob = null
+			if(BANTYPE_JOB_PERMA)
+				if(!banckey || !banreason || !banjob)
+					usr << "Not enough parameters (Requires ckey, reason and job)"
+					return
+				banduration = null
+			if(BANTYPE_JOB_TEMP)
+				if(!banckey || !banreason || !banjob || !banduration)
+					usr << "Not enough parameters (Requires ckey, reason and job)"
+					return
+			if(BANTYPE_APPEARANCE)
+				if(!banckey || !banreason)
+					usr << "Not enough parameters (Requires ckey and reason)"
+					return
+				banduration = null
+				banjob = null
+			if(BANTYPE_ADMIN_PERMA)
+				if(!banckey || !banreason)
+					usr << "Not enough parameters (Requires ckey and reason)"
+					return
+				banduration = null
+				banjob = null
+			if(BANTYPE_ADMIN_TEMP)
+				if(!banckey || !banreason || !banduration)
+					usr << "Not enough parameters (Requires ckey, reason and duration)"
+					return
+				banjob = null
+
+		var/mob/playermob
+
+		for(var/mob/M in player_list)
+			if(M.ckey == banckey)
+				playermob = M
+				break
+
+		if(!playermob)
+			if(banip)
+				banreason = "[banreason]"
+			if(bancid)
+				banreason = "[banreason]"
+		else
+			message_admins("Ban process: A mob matching [playermob.ckey] was found at location [playermob.x], [playermob.y], [playermob.z]. Custom ip and computer id fields replaced with the ip and computer id from the located mob")
+
+		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
+
 	else if(href_list["editrights"])
 		if(!check_rights(R_PERMISSIONS))
 			message_admins("[key_name_admin(usr)] attempted to edit the admin permissions without sufficient rights.")
@@ -1907,7 +1991,7 @@
 				message_admins("[key_name_admin(usr)] made the floor LAVA! It'll last [length] seconds and it will deal [damage] damage to everyone.", 1)
 
 				for(var/turf/simulated/floor/F in world)
-					if(F.z == 1)
+					if(F.z in vessel_z)
 						F.name = "lava"
 						F.desc = "The floor is LAVA!"
 						F.overlays += "lava"
@@ -1932,7 +2016,7 @@
 						sleep(10)
 
 					for(var/turf/simulated/floor/F in world) // Reset everything.
-						if(F.z == 1)
+						if(F.z in vessel_z)
 							F.name = initial(F.name)
 							F.desc = initial(F.desc)
 							F.overlays.Cut()
@@ -1956,7 +2040,7 @@
 
 			if("eagles")//SCRAW
 				for(var/obj/machinery/door/airlock/W in world)
-					if(W.z == 1 && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
+					if(W.z in vessel_z && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
 						W.req_access = list()
 				message_admins("[key_name_admin(usr)] activated Egalitarian Station mode")
 				command_alert("Centcomm airlock control override activated. Please take this time to get acquainted with your coworkers.")

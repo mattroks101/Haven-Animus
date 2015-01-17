@@ -151,7 +151,7 @@
 		var/turf/T = get_turf(H)
 		if(!T)
 			continue
-		if(T.z > 4)
+		if(!(T.z in vessel_z))
 			continue
 		for(var/datum/disease/D in H.viruses)
 			foundAlready = 1

@@ -752,7 +752,7 @@
 			continue
 		var/turf/T = get_turf(temp_vent)
 
-		if(!T || T.z > 4)
+		if(!T || !(T.z in vessel_z))
 			continue
 
 		var/i = 1

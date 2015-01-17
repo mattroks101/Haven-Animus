@@ -147,6 +147,14 @@ datum/preferences
 		preview_icon = new /icon(icobase, "torso_[g]")
 		preview_icon.Blend(new /icon(icobase, "groin_[g]"), ICON_OVERLAY)
 		preview_icon.Blend(new /icon(icobase, "head_[g]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "l_arm_[g]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "r_arm_[g]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "l_leg_[g]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "r_leg_[g]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "l_foot_[g]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "r_foot_[g]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "l_hand_[g]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "r_hand_[g]"), ICON_OVERLAY)
 
 		for(var/name in list("l_arm","r_arm","l_leg","r_leg","l_foot","r_foot","l_hand","r_hand"))
 			// make sure the organ is added to the list so it's drawn

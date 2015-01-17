@@ -173,15 +173,14 @@ var/global/datum/controller/gameticker/ticker
 				if(M.client)
 					M.client.screen += cinematic
 
-				switch(M.z)
-					if(0)	//inside a crate or something
-						var/turf/T = get_turf(M)
-						if(T && T.z > 4)				//we don't use M.death(0) because it calls a for(/mob) loop and
-							M.health = 0
-							M.stat = DEAD
-					if(1 to 4)	//on a ship's turf.
+				if(M.z == 0)	//inside a crate or something
+					var/turf/T = get_turf(M)
+					if(T && !(T.z in vessel_z))				//we don't use M.death(0) because it calls a for(/mob) loop and
 						M.health = 0
 						M.stat = DEAD
+				else if(M.z in vessel_z)	//on a ship's turf.
+					M.health = 0
+					M.stat = DEAD
 
 		//Now animate the cinematic
 		switch(station_missed)

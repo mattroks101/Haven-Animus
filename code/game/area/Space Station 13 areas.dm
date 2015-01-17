@@ -65,7 +65,7 @@ var/list/teleportlocs = list()
 		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
 		if(teleportlocs.Find(AR.name)) continue
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z == 1 || picked.z == 2 || picked.z == 3 || picked.z == 4 || picked.z == 5 || picked.z == 7)
+		if (picked.z in vessel_z || picked.z == asteroid_z)
 			teleportlocs += AR.name
 			teleportlocs[AR.name] = AR
 
@@ -82,7 +82,7 @@ var/list/ghostteleportlocs = list()
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z == 1 || picked.z == 2 || picked.z == 3 || picked.z == 4 || picked.z == 5 || picked.z == 7)
+		if (picked.z in vessel_z || picked.z == asteroid_z)
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 

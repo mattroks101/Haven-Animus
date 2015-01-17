@@ -96,7 +96,7 @@
 					continue
 			var/turf/T = get_turf(M)
 			if(T)	continue
-			if(T.z == 6)	continue
+			if(T.z == centcomm_z)	continue
 			var/tmpname = M.real_name
 			if(areaindex[tmpname])
 				tmpname = "[tmpname] ([++areaindex[tmpname]])"
