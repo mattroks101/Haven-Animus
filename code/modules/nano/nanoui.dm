@@ -479,7 +479,7 @@ nanoui is used to open and update nano browser uis
 		var/newz = input("Choose Z-Level to view.","Z-Levels",1) as null|anything in list(1,2,3,4,5,7,8)
 		if(!newz || isnull(newz))
 			return 0
-		if(newz < 1 || newz > 8 || newz == 6)
+		if(newz < 1 || newz > 8 || newz == centcomm_z)
 			usr << "\red <b>Unable to establish a connection</b>"
 			return 0
 		if(newz != map_z_level)

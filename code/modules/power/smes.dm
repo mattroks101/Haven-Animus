@@ -256,7 +256,7 @@
 
 
 /obj/machinery/power/smes/proc/ion_act()
-	if(src.z == 1)
+	if(src.z in vessel_z)
 		if(prob(1)) //explosion
 //			world << "\red SMES explosion in [src.loc.loc]"
 			for(var/mob/M in viewers(src))
