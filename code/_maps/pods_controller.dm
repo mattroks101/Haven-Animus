@@ -6,7 +6,7 @@
 // these define the time taken for the shuttle to get to SS13
 // and the time before it leaves again
 #define SHUTTLEARRIVETIME 600		// 10 minutes = 600 seconds
-#define SHUTTLELEAVETIME 180		// 3 minutes = 180 seconds
+#define SHUTTLELEAVETIME 0		// 3 minutes = 180 seconds
 #define SHUTTLETRANSITTIME 120		// 2 minutes = 120 seconds
 
 var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
@@ -26,6 +26,7 @@ datum/shuttle_controller
 	var/always_fake_recall = 0
 	var/deny_shuttle = 0 //for admins not allowing it to be called.
 	var/departed = 0
+	var/last60 = 0
 	// call the shuttle
 	// if not called before, set the endtime to T+600 seconds
 	// otherwise if outgoing, switch to incoming
@@ -38,6 +39,7 @@ datum/shuttle_controller
 		else
 			settimeleft(SHUTTLEARRIVETIME*coeff)
 			online = 1
+			last60 = timeleft()
 			if(always_fake_recall)
 				fake_recall = rand(300,500)		//turning on the red lights in hallways
 		if(alert == 0)
@@ -50,12 +52,13 @@ datum/shuttle_controller/proc/shuttlealert(var/X)
 
 
 datum/shuttle_controller/proc/recall()
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 	if(direction == 1)
 		var/timeleft = timeleft()
 		if(alert == 0)
 			if(timeleft >= 600)
 				return
-			captain_announce("The emergency shuttle has been recalled.")
+			a.autosay("The escape pods launch has been canceled.", "Escape Computer")
 			world << sound('sound/AI/shuttlerecalled.ogg')
 			setdirection(-1)
 			online = 1
@@ -64,7 +67,7 @@ datum/shuttle_controller/proc/recall()
 					A.readyreset()
 			return
 		else //makes it possible to send shuttle back.
-			captain_announce("The shuttle has been recalled.")
+			a.autosay("The escape pods launch has been canceled.", "Escape Computer")
 			setdirection(-1)
 			online = 1
 			alert = 0 // set alert back to 0 after an admin recall
@@ -104,8 +107,29 @@ datum/shuttle_controller/emergency_shuttle/process()
 	if(!online)
 		return
 	var/timeleft = timeleft()
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 	if(timeleft > 1e5)		// midnight rollover protection
 		timeleft = 0
+	if((online) && (timeleft() < last60) && (direction == 1))
+		if(timeleft > 60)
+			a.autosay("[round(timeleft()/60,1)] minutes until escape pod launch.", "Escape Computer")
+			if(timeleft() - 60 > 60)
+				last60 = timeleft() - 60
+			else
+				last60 = 60
+		else if(timeleft > 30)
+			a.autosay("[round(timeleft(),1)] seconds until escape pod launch.", "Escape Computer")
+			if(timeleft() - 10 > 10)
+				last60 = timeleft() - 10
+			else
+				last60 = timeleft() - 1
+		else
+			if(timeleft() > 0)
+				a.autosay("[round(timeleft(),1)] seconds.", "Escape Computer")
+			else
+				a.autosay("Escape pods launched.", "Escape Computer")
+			last60 = timeleft() - 1
+
 	switch(location)
 		if(0)
 
@@ -229,6 +253,8 @@ datum/shuttle_controller/emergency_shuttle/process()
 
 					online = 0
 
+					a.autosay("The Escape Pods have docked with the Central Command.", "Escape Computer")
+
 					return 1
 
 					/* --- Shuttle has docked centcom after being recalled --- */
@@ -244,66 +270,9 @@ datum/shuttle_controller/emergency_shuttle/process()
 				fake_recall = 0
 				return 0
 
-					/* --- Shuttle has docked with the station - begin countdown to transit --- */
+					/* --- Time out, shooting off pods - begin countdown to transit --- */
+
 			else if(timeleft <= 0)
-				location = 1
-				var/area/start_location = locate(/area/shuttle/escape/centcom)
-				var/area/end_location = locate(/area/shuttle/escape/station)
-
-				var/list/dstturfs = list()
-				var/throwy = world.maxy
-
-				for(var/turf/T in end_location)
-					dstturfs += T
-					if(T.y < throwy)
-						throwy = T.y
-
-				// hey you, get out of the way!
-				for(var/turf/T in dstturfs)
-					// find the turf to move things to
-					var/turf/D = locate(T.x, throwy - 1, 1)
-					//var/turf/E = get_step(D, SOUTH)
-					for(var/atom/movable/AM as mob|obj in T)
-						AM.Move(D)
-						// NOTE: Commenting this out to avoid recreating mass driver glitch
-						/*
-						spawn(0)
-							AM.throw_at(E, 1, 1)
-							return
-						*/
-
-					if(istype(T, /turf/simulated))
-						del(T)
-
-				for(var/mob/living/carbon/bug in end_location) // If someone somehow is still in the shuttle's docking area...
-					bug.gib()
-
-				for(var/mob/living/simple_animal/pest in end_location) // And for the other kind of bug...
-					pest.gib()
-
-				start_location.move_contents_to(end_location)
-				settimeleft(SHUTTLELEAVETIME)
-				//send2irc("Server", "The Emergency Shuttle has docked with the station.")
-				captain_announce("The Emergency Shuttle has docked with the station. You have [round(timeleft()/60,1)] minutes to board the Emergency Shuttle.")
-				world << sound('sound/AI/shuttledock.ogg')
-
-				return 1
-
-		if(1)
-
-			// Just before it leaves, close the damn doors!
-			if(timeleft == 2 || timeleft == 1)
-				var/area/start_location = locate(/area/shuttle/escape/station)
-				for(var/obj/machinery/door/unpowered/shuttle/D in start_location)
-					spawn(0)
-						D.close()
-						D.locked = 1
-
-			if(timeleft>0)
-				return 0
-
-			/* --- Shuttle leaves the station, enters transit --- */
-			else
 
 				// Turn on the star effects
 
@@ -345,7 +314,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 				//pods
 				start_location = locate(/area/shuttle/escape_pod1/station)
 				end_location = locate(/area/shuttle/escape_pod1/transit)
-				start_location.move_contents_to(end_location, null, NORTH)
+				start_location.move_contents_to(end_location, /turf/simulated/floor/engine/vacuum/hull, NORTH)
 				for(var/obj/machinery/door/D in end_location)
 					spawn(0)
 						D.close()
@@ -363,7 +332,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 
 				start_location = locate(/area/shuttle/escape_pod2/station)
 				end_location = locate(/area/shuttle/escape_pod2/transit)
-				start_location.move_contents_to(end_location, null, NORTH)
+				start_location.move_contents_to(end_location, /turf/simulated/floor/engine/vacuum/hull, NORTH)
 				for(var/obj/machinery/door/D in end_location)
 					spawn(0)
 						D.close()
@@ -381,7 +350,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 
 				start_location = locate(/area/shuttle/escape_pod3/station)
 				end_location = locate(/area/shuttle/escape_pod3/transit)
-				start_location.move_contents_to(end_location, null, NORTH)
+				start_location.move_contents_to(end_location, /turf/simulated/floor/engine/vacuum/hull, NORTH)
 				for(var/obj/machinery/door/D in end_location)
 					spawn(0)
 						D.close()
@@ -399,7 +368,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 
 				start_location = locate(/area/shuttle/escape_pod5/station)
 				end_location = locate(/area/shuttle/escape_pod5/transit)
-				start_location.move_contents_to(end_location, null, EAST)
+				start_location.move_contents_to(end_location, /turf/simulated/floor/engine/vacuum/hull, EAST)
 				for(var/obj/machinery/door/D in end_location)
 					spawn(0)
 						D.close()
@@ -415,12 +384,21 @@ datum/shuttle_controller/emergency_shuttle/process()
 						if(!M.buckled)
 							M.Weaken(5)
 
-				captain_announce("The Emergency Shuttle has left the station. Estimate [round(timeleft()/60,1)] minutes until the shuttle docks at Central Command.")
-
 				return 1
 
 		else
-			return 1
+			// Just before it leaves, close the damn doors!
+			if(timeleft == 2 || timeleft == 1)
+				var/area/start_location = locate(/area/shuttle/escape/station)
+				for(var/obj/machinery/door/unpowered/shuttle/D in start_location)
+					spawn(0)
+						D.close()
+						D.locked = 1
+				return 1
+
+			/* --- Shuttle leaves the station, enters transit --- */
+
+			//I've copied it to previos section
 
 
 /*
@@ -474,4 +452,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 		spawn()
 			S.startmove()
 
+/proc/radioalert(var/message,var/from)
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
+	a.autosay(message, from)
 

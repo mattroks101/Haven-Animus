@@ -9,7 +9,8 @@
 //These would be what you would get at point blank, decreases with distance
 #define DETONATION_RADS 200
 #define DETONATION_HALLUCINATION 600
-
+#define DAMAGE_RATE_LIMIT 3
+#define CRITICAL_TEMPERATURE 800
 
 #define WARNING_DELAY 30 		//seconds between warnings.
 
@@ -37,7 +38,7 @@
 
 	var/emergency_issued = 0
 
-	var/explosion_power = 5
+	var/explosion_power = 6
 
 	var/lastwarning = 0                        // Time in 1/10th of seconds since the last sent warning
 	var/power = 0
@@ -119,12 +120,17 @@
 				mob.apply_effect(rads, IRRADIATE)
 
 			explode()
-
 	//Ok, get the air from the turf
-	var/datum/gas_mixture/env = L.return_air()
+	var/datum/gas_mixture/removed = null
+	var/datum/gas_mixture/env = null
 
-	//Remove gas from surrounding area
-	var/datum/gas_mixture/removed = env.remove(gasefficency * env.total_moles)
+	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
+	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 300 (based on testing, equals roughly 5% per SM alert announcement).
+	var/damage_inc_limit = (power/300)*(explosion_point/1000)*DAMAGE_RATE_LIMIT
+
+	if(!istype(L, /turf/space))
+		env = L.return_air()
+		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
 
 	if(!removed || !removed.total_moles)
 		damage += max((power-1600)/10, 0)
@@ -135,10 +141,10 @@
 		return 1
 
 	damage_archived = damage
-	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
+	damage = max( damage + min( ( (removed.temperature - CRITICAL_TEMPERATURE) / 150 ), damage_inc_limit ) , 0 )
 	//Ok, 100% oxygen atmosphere = best reaction
 	//Maxes out at 100% oxygen pressure
-	oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
+	oxygen = max(min((removed.gas["oxygen"] - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / removed.total_moles, 1), 0)
 
 	var/temp_factor = 100
 
@@ -164,14 +170,13 @@
 
 	//Also keep in mind we are only adding this temperature to (efficiency)% of the one tile the rock
 	//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
-	removed.temperature += (device_energy / THERMAL_RELEASE_MODIFIER)
-
-	removed.temperature = max(0, min(removed.temperature, 2500))
 
 	//Calculate how much gas to release
-	removed.toxins += max(device_energy / PLASMA_RELEASE_MODIFIER, 0)
 
-	removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
+	removed.adjust_multi("plasma", max(device_energy / PLASMA_RELEASE_MODIFIER, 0), \
+	                     "oxygen", max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0))
+
+	//Calculate how much gas to release
 
 	removed.update_values()
 
@@ -220,7 +225,7 @@
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
 	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
-		"<span class=\"danger\">You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
+		"<span class=\"danger\">You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"Oh, fuck.\"</span>",\
 		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 
 	Consume(user)

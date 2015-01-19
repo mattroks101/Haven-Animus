@@ -115,3 +115,7 @@
 		l.gib()
 
 	return 1
+
+/proc/radioalert(var/message,var/from)
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
+	a.autosay(message, from)

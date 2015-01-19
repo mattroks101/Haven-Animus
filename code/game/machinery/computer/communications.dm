@@ -282,7 +282,10 @@
 	var/dat = "<head><title>Communications Console</title></head><body>"
 	if (emergency_shuttle.online && emergency_shuttle.location==0)
 		var/timeleft = emergency_shuttle.timeleft()
-		dat += "<B>Escape Pods</B>\n<BR>\nETA: [timeleft / 60 % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
+		if(evac_type == "pods")
+			dat += "<B>Escape Pods</B>\n<BR>\nETA: [timeleft / 60 % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
+		else
+			dat += "<B>Escape Shuttle</B>\n<BR>\nETA: [timeleft / 60 % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
 
 	if (istype(user, /mob/living/silicon))
 		var/dat2 = src.interact_ai(user) // give the AI a different interact proc to limit its access
@@ -307,9 +310,9 @@
 				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=changeseclevel'>Change alert level</A> \]"
 				if(emergency_shuttle.location==0)
 					if (emergency_shuttle.online)
-						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=cancelshuttle'>Cancel Escape Pods Launch</A> \]"
+						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=cancelshuttle'>Cancel Evacuation Sequence</A> \]"
 					else
-						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=callshuttle'>Launch Escape Pods</A> \]"
+						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=callshuttle'>Launch Evacuation Sequence</A> \]"
 
 				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=status'>Set Status Display</A> \]"
 			else
@@ -374,7 +377,7 @@
 	switch(src.aistate)
 		if(STATE_DEFAULT)
 			if(emergency_shuttle.location==0 && !emergency_shuttle.online)
-				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-callshuttle'>Launch Escape Pods</A> \]"
+				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-callshuttle'>Launch Escape </A> \]"
 			dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-messagelist'>Message List</A> \]"
 			dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-status'>Set Status Display</A> \]"
 		if(STATE_CALLSHUTTLE)
@@ -447,7 +450,10 @@
 	emergency_shuttle.incall()
 	log_game("[key_name(user)] has launched the pods.")
 	message_admins("[key_name_admin(user)] has launched the pods.", 1)
-	a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+	if(evac_type == "pods")
+		a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+	else
+		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	return
@@ -549,7 +555,10 @@
 	emergency_shuttle.incall(2)
 	log_game("All the AIs, comm consoles and boards are destroyed. Pods launch started.")
 	message_admins("All the AIs, comm consoles and boards are destroyed. Pods launch started.", 1)
-	a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+	if(evac_type == "pods")
+		a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+	else
+		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	..()
@@ -575,7 +584,10 @@
 	emergency_shuttle.incall(2)
 	log_game("All the AIs, comm consoles and boards are destroyed. Pods launch started.")
 	message_admins("All the AIs, comm consoles and boards are destroyed. Pods launch started.", 1)
-	a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+	if(evac_type == "pods")
+		a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+	else
+		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	..()

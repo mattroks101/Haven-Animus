@@ -6493,7 +6493,7 @@
 "cuS" = (/obj/machinery/power/emitter{anchored = 1; dir = 4; state = 2},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/engine/engine_room)
 "cuT" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/poddoor/shutters{dir = 4; id = "EngineShutter"; name = "Engine Shutters"},/turf/simulated/floor/plating,/area/engine/engine_room)
 "cuU" = (/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 8},/area/engine/engine_room)
-"cuV" = (/obj/machinery/engine/supermatter{layer = 4},/obj/machinery/mass_driver{id = "enginecore"},/turf/simulated/floor/greengrid,/area/engine/engine_room)
+"cuV" = (/obj/machinery/mass_driver{id = "enginecore"},/obj/machinery/power/supermatter,/turf/simulated/floor/greengrid,/area/engine/engine_room)
 "cuW" = (/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 4},/area/engine/engine_room)
 "cuX" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/poddoor/shutters{dir = 8; id = "EngineShutter"; name = "Engine Shutters"},/turf/simulated/floor/plating,/area/engine/engine_room)
 "cuY" = (/obj/machinery/atmospherics/binary/pump{dir = 2; icon_state = "intact_off"; layer = 2; name = "Engine Filter Outpump"; on = 0},/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 8},/area/engine/engine_room)
