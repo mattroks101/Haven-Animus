@@ -23,10 +23,22 @@
 	desc = "Optical Meson Scanner with prescription lenses."
 	prescription = 1
 
+/obj/item/clothing/glasses/meson/gar
+	name = "Gar Mesons"
+	icon_state = "garm"
+	item_state = "garm"
+	desc = "Do the impossible, see the invisible!"
+
 /obj/item/clothing/glasses/science
 	name = "Science Goggles"
 	desc = "nothing"
 	icon_state = "purple"
+	item_state = "glasses"
+
+/obj/item/clothing/glasses/threed
+	name = "3D glasses"
+	desc = "A pair of glasses used to watch films in red-cyan anaglyph 3D."
+	icon_state = "threed"
 	item_state = "glasses"
 
 /obj/item/clothing/glasses/night
@@ -70,11 +82,59 @@
 	icon_state = "hipster_glasses"
 	item_state = "hipster_glasses"
 
-/obj/item/clothing/glasses/gglasses
+/obj/item/clothing/glasses/greenglasses
 	name = "Green Glasses"
-	desc = "Forest green glasses, like the kind you'd wear when hatching a nasty scheme."
-	icon_state = "gglasses"
-	item_state = "gglasses"
+	desc = "Green-framed prescription glasses, like the kind you'd wear when hatching a nasty scheme."
+	icon_state = "greenglasses"
+	item_state = "greenglasses"
+
+/obj/item/clothing/glasses/redglasses
+	name = "Red Glasses"
+	desc = "Red-framed prescription glasses."
+	icon_state = "redglasses"
+	item_state = "redglasses"
+
+/obj/item/clothing/glasses/blueglasses
+	name = "Blue Glasses"
+	desc = "Blue-framed prescription glasses."
+	icon_state = "blueglasses"
+	item_state = "blueglasses"
+
+/obj/item/clothing/glasses/yellowglasses
+	name = "Yellow Glasses"
+	desc = "Yellow-framed prescription glasses."
+	icon_state = "yellowglasses"
+	item_state = "yellowglasses"
+
+/obj/item/clothing/glasses/brownglasses
+	name = "Brown Glasses"
+	desc = "Brown-framed prescription glasses."
+	icon_state = "brownglasses"
+	item_state = "brownglasses"
+
+/obj/item/clothing/glasses/pinkglasses
+	name = "Pink Glasses"
+	desc = "Pink-framed prescription glasses."
+	icon_state = "pinkglasses"
+	item_state = "pinkglasses"
+
+/obj/item/clothing/glasses/orangeglasses
+	name = "Orange Glasses"
+	desc = "Orange-framed prescription glasses."
+	icon_state = "orangeglasses"
+	item_state = "orangeglasses"
+
+/obj/item/clothing/glasses/purpleglasses
+	name = "Purple Glasses"
+	desc = "Purple-framed prescription glasses."
+	icon_state = "purpleglasses"
+	item_state = "purpleglasses"
+
+/obj/item/clothing/glasses/clearglasses
+	name = "Clear Glasses"
+	desc = "Clear-framed prescription glasses."
+	icon_state = "clearglasses"
+	item_state = "clearglasses"
 
 /obj/item/clothing/glasses/sunglasses
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes."
@@ -82,6 +142,48 @@
 	icon_state = "sun"
 	item_state = "sunglasses"
 	darkness_view = -1
+
+/obj/item/clothing/glasses/sunglasses/garb
+	desc = "Go beyond impossible and kick reason to the curb!"
+	name = "black gar glasses"
+	icon_state = "garb"
+	item_state = "garb"
+	force = 10
+	throwforce = 10
+	darkness_view = -1
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+/obj/item/clothing/glasses/sunglasses/supergarb
+	desc = "Believe in us humans."
+	name = "black super gar glasses"
+	icon_state = "supergarb"
+	item_state = "garb"
+	force = 12
+	throwforce = 12
+	darkness_view = -1
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+/obj/item/clothing/glasses/sunglasses/gar
+	desc = "Just who the hell do you think I am?!"
+	name = "gar glasses"
+	icon_state = "gar"
+	item_state = "gar"
+	force = 10
+	throwforce = 10
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+/obj/item/clothing/glasses/sunglasses/supergar
+	desc = "We evolve past the person we were a minute before. Little by little we advance with each turn. That's how a drill works!"
+	name = "super gar glasses"
+	icon_state = "supergar"
+	item_state = "gar"
+	force = 12
+	throwforce = 12
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/clothing/glasses/welding
 	name = "welding goggles"
@@ -199,3 +301,9 @@
 	desc = "A set of implantable lenses designed to augment your vision"
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
+
+/obj/item/clothing/glasses/hypno
+	name = "hypno-spectacles"
+	desc = "A pair of glasses which claim to have the ability to hypnotize people."
+	icon_state = "hypnospecs"
+	item_state = "glasses"
