@@ -83,11 +83,43 @@
 				holder.icon_state = "hudhealthy"
 			C.images += holder
 
+/obj/item/clothing/glasses/hud/health/night
+	name = "Night Vision Health Scanner HUD"
+	desc = "An advanced medical head-up display that allows doctors to find patients in complete darkness."
+	icon_state = "healthhudnight"
+	item_state = "glasses"
+	darkness_view = 4
 
 /obj/item/clothing/glasses/hud/security
 	name = "Security HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their ID status and security records."
 	icon_state = "securityhud"
+
+/obj/item/clothing/glasses/hud/security/night
+	name = "Night Vision Security HUD"
+	desc = "An advanced heads-up display which provides id data and vision in complete darkness."
+	icon_state = "securityhudnight"
+	darkness_view = 4
+
+obj/item/clothing/glasses/hud/security/gars
+	name = "HUD GAR glasses"
+	desc = "GAR glasses with a HUD."
+	icon_state = "gars"
+	item_state = "garb"
+	force = 10
+	throwforce = 10
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+obj/item/clothing/glasses/hud/security/supergars
+	name = "SUPER HUD GAR glasses"
+	desc = "SUPER GAR glasses with a HUD."
+	icon_state = "supergars"
+	item_state = "garb"
+	force = 12
+	throwforce = 12
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/clothing/glasses/hud/security/jensenshades
 	name = "Augmented shades"
@@ -96,6 +128,43 @@
 	item_state = "jensenshades"
 	vision_flags = SEE_MOBS
 	invisa_view = 2
+
+/obj/item/clothing/glasses/hud/security/solideye
+	name = "Solid Eye"
+	desc = "An eye patch combined Enhanced Night Vision Goggles light amplification, termal imaging technology, and also allowed for binocular security functionality."
+	origin_tech = "magnets=4"
+	action_button_name = "Change Visor Mode"
+	icon_state = "solideye-n"
+	item_state = "solideye-n"
+	var/solidmode = 0
+
+/obj/item/clothing/glasses/hud/security/solideye/attack_self()
+	toggle()
+
+/obj/item/clothing/glasses/hud/security/solideye/verb/toggle()
+	set category = "Object"
+	set name = "Change Visor Mode"
+	set src in usr
+	solidtoggle()
+
+/obj/item/clothing/glasses/hud/security/solideye/proc/solidtoggle()			//Loly: proc to change solid eye type.
+	if (solidmode)
+		solidmode = !solidmode
+		icon_state = "solideye-n"
+		item_state = "solideye-n"
+		darkness_view = 8
+		usr << "You change [src] mode to Night Vision."
+		update_icon()
+		usr.update_inv_glasses(0)
+	else
+		solidmode = !solidmode
+		icon_state = "solideye-t"
+		item_state = "solideye-t"
+		vision_flags = SEE_MOBS
+		invisa_view = 2
+		usr << "You change [src] mode to Thermal."
+		update_icon()
+		usr.update_inv_glasses(0)
 
 /obj/item/clothing/glasses/hud/security/process_hud(var/mob/M)
 	if(!M)	return
