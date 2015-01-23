@@ -1,13 +1,13 @@
 /obj/item/weapon/storage/belt
-	name = "belt"
-	desc = "Can hold various things."
+	name = "leather belt"
+	desc = "A leather belt with extra wide pouches that can hold a variety of items."
 	icon = 'icons/obj/clothing/belts.dmi'
-	icon_state = "utilitybelt"
-	item_state = "utility"
+	icon_state = "leatherbelt"
+	item_state = "leather"
+	storage_slots = 5
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
-
 
 /obj/item/weapon/storage/belt/proc/can_use()
 	if(!ismob(loc)) return 0
@@ -236,3 +236,33 @@
 					"\blue You draw \the [holstered], pointing it at the ground.")
 				usr.put_in_hands(holstered)
 			holstered = null
+
+/obj/item/weapon/storage/belt/military
+	name = "military belt"
+	desc = "A syndicate combat belt designed to hold a large variety of weapons and gadgets. Property of the Gorlex Marauders."
+	icon_state = "militarybelt"
+	item_state = "military"
+	storage_slots = 7
+
+/obj/item/weapon/storage/belt/military/snake
+	name = "sneak belt"
+	desc = "An old combat belt designed to hold a large variety of weapons and gadgets."
+	icon_state = "securitybelt"
+	item_state = "security"
+	storage_slots = 7
+	max_w_class = 5.0
+
+/obj/item/weapon/storage/belt/janitor
+	name = "janibelt"
+	desc = "A purple leather belt designed to hold most janitorial supplies."
+	icon_state = "janibelt"
+	item_state = "janibelt"
+	storage_slots = 6
+	max_w_class = 4 // Set to this so the  light replacer can fit.
+	can_hold = list(
+		/obj/item/weapon/grenade/chem_grenade/cleaner,
+		/obj/item/device/lightreplacer,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/reagent_containers/spray,
+		/obj/item/weapon/soap,
+		)

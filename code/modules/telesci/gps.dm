@@ -55,6 +55,7 @@ var/list/GPS_list = list()
 				t += "<BR>[tracked_gpstag]: [format_text(gps_area.name)] ([pos.x], [pos.y], [pos.z])"
 
 	var/datum/browser/popup = new(user, "GPS", name, 600, 450)
+
 	popup.set_content(t)
 	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
@@ -76,3 +77,4 @@ var/list/GPS_list = list()
 /obj/item/device/gps/engineering
 	icon_state = "gps-e"
 	gpstag = "ENG0"
+	desc = "A positioning system helpful for rescuing trapped or injured miners, keeping one on you at all times while mining might just save your life."

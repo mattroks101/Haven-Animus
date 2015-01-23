@@ -60,3 +60,13 @@
 	item_state = "ggloves"
 	permeability_coefficient = 0.9
 	siemens_coefficient = 0.9
+
+/obj/item/clothing/gloves/fingerless
+	desc = "These gloves have the fingers cut off!"
+	name = "fingerless gloves"
+	icon_state = "fingerless"
+	item_state = "fingerless"
+	item_color = null	//So they don't wash.
+	permeability_coefficient = 0.9
+	siemens_coefficient = 0.9
+	flags = FPRINT
