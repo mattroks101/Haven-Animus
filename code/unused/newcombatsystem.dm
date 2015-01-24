@@ -74,12 +74,12 @@
 	for(var/mob/O in viewers(src,7))
 		O << "\red \b [user.name] attacks [target.name] in the [target_area] with [src.name]!"
 	if(!target.stat && target.zone_sel.selecting == target_area) //parrying occurs here
-		if(istype(target.r_hand,/obj/item/weapon/training)
+		if(istype(target.r_hand,/obj/item/weapon/training))
 			if(prob(target.r_hand:chance_parry))
 				for(var/mob/O in viewers(src,7))
 					O << "\red \b [target.name] deftly parries the attack with [target.r_hand.name]!"
 					return
-		if(istype(target.l_hand,/obj/item/weapon/training)
+		if(istype(target.l_hand,/obj/item/weapon/training))
 			if(prob(target.l_hand:chance_parry))
 				for(var/mob/O in viewers(src,7))
 					O << "\red \b [target.name] deftly parries the attack with [target.l_hand.name]!"

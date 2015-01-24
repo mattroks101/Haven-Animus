@@ -2,13 +2,12 @@
 ///// Part Fabricator ///////
 /////////////////////////////
 
-/obj/machinery/r_n_d/fabricator/pod
+/obj/machinery/mecha_part_fabricator/pod
 	name = "Spacepod Fabricator"
 	desc = "Used for producing all the spacepod goodies."
 	icon = 'icons/obj/robotics.dmi'
-	icon_state = "fab"
-	build_number = 32
-	nano_file = "podfab.tmpl"
+//	build_number = 32
+//	nano_file = "podfab.tmpl"
 	part_sets = list( //set names must be unique
 	"Pod_Frame" = list(
 						/obj/item/pod_parts/pod_frame/fore_port,
@@ -29,7 +28,7 @@
 						)
 	)
 
-	research_flags = NANOTOUCH | HASOUTPUT | HASMAT_OVER | TAKESMATIN | ACCESS_EMAG | LOCKBOXES
+//	research_flags = NANOTOUCH | HASOUTPUT | HASMAT_OVER | TAKESMATIN | ACCESS_EMAG | LOCKBOXES
 
 
 /obj/machinery/r_n_d/fabricator/pod/New()

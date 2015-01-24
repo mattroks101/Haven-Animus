@@ -154,7 +154,7 @@
 
 	proc/fixText(text,user)
 		text = replacetext(text,"{USER}","[user]")
-		text = replacetext(text,"{HOLDER}","[holder]")
+		text = replacetext(text,"{HOLDER}","[holder.name]")
 		return text
 
 	custom_action(index, diff, used_atom, var/mob/user)

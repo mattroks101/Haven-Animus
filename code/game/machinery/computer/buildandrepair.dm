@@ -43,6 +43,10 @@
 	var/locked = 1
 	var/emagged = 0
 
+/obj/item/weapon/circuitboard/mining
+	name = "circuit board (Outpost Status Display)"
+	build_path = /obj/machinery/computer/security/mining
+
 /obj/item/weapon/circuitboard/aicore
 	name = "Circuit board (AI core)"
 	origin_tech = "programming=4;biotech=2"

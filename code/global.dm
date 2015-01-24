@@ -77,13 +77,7 @@ var/blobevent = 0
 var/diary = null
 var/diaryofmeanpeople = null
 var/href_logfile = null
-/*
-var/station_name = "NSV Luna"
-var/vessel_type = "ship"
-var/list/vessel_z = list(1,2,3,4)
-var/asteroid_z = 8
-var/centcomm_z = 6
-*/
+
 var/game_version = "Animus Station 13"
 var/changelog_hash = ""
 var/game_year = (text2num(time2text(world.realtime, "YYYY")) + 544)

@@ -331,7 +331,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				// We store things that would otherwise be kept in the actual mob
 				// so that they can be logged even AFTER the mob is deleted or something
 
-			  // Other tags:
+			 	//Other tags:
 				"compression" = rand(45,50), // compressed radio signal
 				"message" = message, // the actual sent message
 				"connection" = connection, // the radio connection to use

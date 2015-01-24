@@ -217,6 +217,11 @@
 	freq_listening = list(1359)
 	autolinkers = list("security")
 
+/obj/machinery/telecomms/server/presets/service
+	id = "Service Server"
+	freq_listening = list(1349)
+	autolinkers = list("service")
+
 /obj/machinery/telecomms/server/presets/centcomm
 	id = "CentComm Server"
 	freq_listening = list(1345, 1341)

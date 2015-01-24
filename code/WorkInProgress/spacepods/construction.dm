@@ -1,4 +1,4 @@
-/obj/structure/spacepod_frame
+/obj/structure/spacepod/frame
 	density = 1
 	opacity = 0
 
@@ -10,7 +10,7 @@
 
 	var/datum/construction/construct
 
-/obj/structure/spacepod_frame/New()
+/obj/structure/spacepod/frame/New()
 	..()
 	bound_width = 64
 	bound_height = 64
@@ -19,21 +19,69 @@
 
 	dir = EAST
 
-/obj/structure/spacepod_frame/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/spacepod/frame/attackby(obj/item/W as obj, mob/user as mob)
 	if(!construct || !construct.action(W, user))
 		..()
 	return
 
-/obj/structure/spacepod_frame/attack_hand()
+/obj/structure/spacepod/attack_hand()
 	return
 
+/obj/structure/spacepod/base
+	name = "\improper spacepod base"
+	desc = "A space pod with sealed bulkhead panelling exposed."
 
+	density = 1
+	opacity = 0
+
+	anchored = 1
+	layer = 3.9
+
+	icon = 'icons/48x48/pod_construction.dmi'
+	icon_state = "pod_9"
+
+	var/obj/item/pod_parts/armor/arm
+	var/state = 0
+
+/obj/structure/spacepod/base/New()
+	..()
+	bound_width = 64
+	bound_height = 64
+	dir = EAST
+
+
+/obj/structure/spacepod/base/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/pod_parts/armor))
+		var/obj/item/pod_parts/armor/A = W
+		src.arm = A
+		user.drop_item()
+		A.loc = src
+		user.visible_message("[user] installs the [src]'s armor plating.")
+		src.icon_state = "pod_10"
+		src.desc = "A space pod with unsecured armor."
+	if(istype(W, /obj/item/weapon/wrench))
+		if(state == 1)
+			user.visible_message("[user] bolts down the [src]'s armor.")
+			src.icon_state = "pod_11"
+			src.state = 2
+	if(istype(W,/obj/item/weapon/weldingtool))
+		if(state == 2)
+			user.visible_message("[user] welds the [src]'s armor.")
+			if(src.arm.pod_type == "industrial")
+				new /obj/spacepod/industrial(src.loc)
+				del(src)
+			else if(src.arm.pod_type == "civilian")
+				new /obj/spacepod/civilian(src.loc)
+				del(src)
+			else
+				user << "BUG: Unknown armour type. Tell Guap6512."
+				del(src)
 
 /////////////////////////////////
 // CONSTRUCTION STEPS
 /////////////////////////////////
 /datum/construction/reversible2/pod
-	result = /obj/spacepod/civilian
+	result = /obj/structure/spacepod/base
 	base_icon="pod"
 	//taskpath = /datum/job_objective/make_pod
 	steps = list(
@@ -49,7 +97,7 @@
 				// 2. Crudely Wired
 				list(
 					"desc" = "A crudely-wired pod frame.",
-					state_prev = list(
+						state_prev = list(
 						"key"      = /obj/item/weapon/wirecutters,
 						"vis_msg"  = "{USER} cuts out the {HOLDER}'s wiring.",
 						"self_msg" = "You remove the {HOLDER}'s wiring."
@@ -169,7 +217,10 @@
 						"vis_msg"  = "{USER} seals the {HOLDER}'s bulkhead panelling with a weld.",
 						"self_msg" = "You seal the {HOLDER}'s bulkhead panelling with a weld."
 					)
-				),
+				)
+
+			)
+/*
 				// 10. Welded bulkhead
 				list(
 					"desc" = "A space pod with sealed bulkhead panelling exposed.",
@@ -217,8 +268,8 @@
 				)
 				// EOF
 			)
-
+*/
 	spawn_result(mob/user as mob)
 		..()
-		feedback_inc("spacepod_created",1)
+		feedback_inc("spacepod_base_created",1)
 		return

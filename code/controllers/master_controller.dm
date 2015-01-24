@@ -123,6 +123,11 @@ datum/controller/game_controller/proc/setup_objects()
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
 
+	world << "\red \b Making a mess..."
+	sleep(-1)
+	for(var/turf/simulated/floor/F in world)
+		F.MakeDirty()
+
 //	world << "\red \b Generating map"
 //	sleep(-1)
 //	mapGen()

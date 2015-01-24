@@ -15,6 +15,7 @@
 	var/list/log = new
 	var/list/proc_res = list() //stores proc owners, like proc_res["functionname"] = owner reference
 	var/mob/living/carbon/occupant
+	var/mob/living/carbon/passenger
 	var/datum/spacepod/equipment/equipment_system
 	var/obj/item/weapon/cell/battery
 	var/datum/gas_mixture/cabin_air
@@ -53,6 +54,10 @@
 	pr_int_temp_processor = new /datum/global_iterator/pod_preserve_temp(list(src))
 	pr_give_air = new /datum/global_iterator/pod_tank_give_air(list(src))
 	equipment_system = new(src)
+
+/obj/spacepod/Destroy()
+	del(ion_trail)
+	..()
 
 /obj/spacepod/proc/click_action(atom/target,mob/user)
 	if(!src.occupant || src.occupant != user )
@@ -111,28 +116,38 @@
 	var/oldhealth = health
 	health = max(0, health - damage)
 	var/percentage = (health / initial(health)) * 100
-	if(occupant && oldhealth > health && percentage <= 25 && percentage > 0)
+	if((occupant || passenger) && oldhealth > health && percentage <= 25 && percentage > 0)
 		var/sound/S = sound('sound/effects/engine_alert2.ogg')
 		S.wait = 0 //No queue
 		S.channel = 0 //Any channel
 		S.volume = 50
-		occupant << S
-	if(occupant && oldhealth > health && !health)
+		if(occupant)
+			occupant << S
+		if(passenger)
+			passenger << S
+	if((occupant || passenger) && oldhealth > health && !health)
 		var/sound/S = sound('sound/effects/engine_alert1.ogg')
 		S.wait = 0
 		S.channel = 0
 		S.volume = 50
-		occupant << S
+		if(occupant)
+			occupant << S
+		if(passenger)
+			passenger << S
 	if(!health)
 		spawn(0)
 			if(occupant)
 				occupant << "<big><span class='warning'>Critical damage to the vessel detected, core explosion imminent!</span></big>"
-				for(var/i = 10, i >= 0; --i)
-					if(occupant)
-						occupant << "<span class='warning'>[i]</span>"
-					if(i == 0)
-						explosion(loc, 2, 4, 8)
-					sleep(10)
+			if(passenger)
+				passenger << "<big><span class='warning'>Critical damage to the vessel detected, core explosion imminent!</span></big>"
+			for(var/i = 10, i >= 0; --i)
+				if(occupant)
+					occupant << "<span class='warning'>[i]</span>"
+				if(passenger)
+					passenger << "<span class='warning'>[i]</span>"
+				if(i == 0)
+					explosion(loc, 2, 4, 8)
+				sleep(10)
 
 	update_icons()
 
@@ -140,10 +155,15 @@
 	switch(severity)
 		if(1)
 			var/mob/living/carbon/human/H = occupant
+			var/mob/living/carbon/human/H2 = passenger
 			if(H)
 				H.loc = get_turf(src)
 				H.ex_act(severity + 1)
 				H << "<span class='warning'>You are forcefully thrown from \the [src]!</span>"
+			if(H2)
+				H2.loc = get_turf(src)
+				H2.ex_act(severity + 1)
+				H2 << "<span class='warning'>You are forcefully thrown from \the [src]!</span>"
 			del(ion_trail)
 			del(src)
 		if(2)
@@ -235,9 +255,15 @@
 /obj/spacepod/civilian
 	icon_state = "pod_civ"
 	desc = "A sleek civilian space pod."
+
+/obj/spacepod/industrial
+	icon_state = "pod_industrial"
+	desc = "A rough looking space pod meant for industrial work."
+
 /obj/spacepod/random
 	icon_state = "pod_civ"
 // placeholder
+
 /obj/spacepod/random/New()
 	..()
 	icon_state = pick("pod_civ", "pod_black", "pod_mil", "pod_synd", "pod_gold", "pod_industrial")
@@ -247,23 +273,25 @@
 		if("pod_black")
 			desc = "An all black space pod with no insignias."
 		if("pod_mil")
-			desc = "A dark grey space pod brandishing the Nanotrasen Military insignia"
+			desc = "A dark grey space pod brandishing the Nanotrasen Military insignia."
 		if("pod_synd")
-			desc = "A menacing military space pod with \"Fuck NT\" stenciled onto the side"
+			desc = "A menacing military space pod with \"Fuck NT\" stenciled onto the side."
 		if("pod_gold")
-			desc = "A civilian space pod with a gold body, must have cost somebody a pretty penny"
+			desc = "A civilian space pod with a gold body, must have cost somebody a pretty penny."
 		if("pod_industrial")
-			desc = "A rough looking space pod meant for industrial work"
+			desc = "A rough looking space pod meant for industrial work."
 
 /obj/spacepod/verb/toggle_internal_tank()
 	set name = "Toggle internal airtank usage"
 	set category = "Spacepod"
 	set src = usr.loc
 	set popup_menu = 0
-	if(usr!=src.occupant)
+	if(usr!=src.occupant && usr!=src.passenger)
 		return
 	use_internal_tank = !use_internal_tank
-	src.occupant << "<span class='notice'>Now taking air from [use_internal_tank?"internal airtank":"environment"].</span>"
+
+	occupant_message("<span class='notice'>Now taking air from [use_internal_tank?"internal airtank":"environment"].</span>")
+
 	return
 
 /obj/spacepod/proc/add_cabin()
@@ -317,7 +345,7 @@
 			. = t_air.temperature
 	return
 
-/obj/spacepod/proc/moved_inside(var/mob/living/carbon/human/H as mob)
+/obj/spacepod/proc/moved_inside(var/mob/living/carbon/human/H as mob,var/seat = 1)
 	if(H && H.client && H in range(1))
 		H.reset_view(src)
 		/*
@@ -326,9 +354,13 @@
 		*/
 		H.stop_pulling()
 		H.forceMove(src)
-		src.occupant = H
 		src.add_fingerprint(H)
-		src.forceMove(src.loc)
+		if(seat == 1)
+			src.occupant = H
+			src.forceMove(src.loc)
+		else
+			src.passenger = H
+			src.forceMove(src.loc)
 		//dir = dir_in
 		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 		return 1
@@ -349,8 +381,16 @@
 		return
 	if (usr.stat || !ishuman(usr))
 		return
-	if (src.occupant)
-		usr << "\blue <B>The [src.name] is already occupied!</B>"
+	var/target_place = "Driver's"
+
+	if(istype(src, /obj/spacepod/civilian))
+		target_place = alert(usr, "What seat would you like to occupy?",,"Driver's","Passenger's")
+
+	if (target_place == "Driver's" && src.occupant)
+		usr << "\blue <B>The [src.name]'s cabin is already occupied!</B>"
+		return
+	else if(target_place == "Passenger's" && src.passenger)
+		usr << "\blue <B>The [src.name]'s passenger seat is already occupied!</B>"
 		return
 /*
 	if (usr.abiotic())
@@ -363,13 +403,22 @@
 			return
 //	usr << "You start climbing into [src.name]"
 
-	visible_message("\blue [usr] starts to climb into [src.name]")
+	if(target_place == "Driver's")
+		visible_message("\blue [usr] starts to climb into [src.name]")
+	else if(target_place == "Passenger's")
+		visible_message("\blue [usr] starts to enter the [src.name]'s passenger's door.")
 
 	if(enter_after(40,usr))
-		if(!src.occupant)
-			moved_inside(usr)
-		else if(src.occupant!=usr)
-			usr << "[src.occupant] was faster. Try better next time, loser."
+		if(target_place == "Driver's")
+			if(!src.occupant)
+				moved_inside(usr,1)
+			else if(src.occupant!=usr)
+				usr << "[src.occupant] was faster. Try better next time, loser."
+		else if(target_place == "Passenger's")
+			if(!src.passenger)
+				moved_inside(usr,2)
+			else if(src.passenger!=usr)
+				usr << "[src.passenger] was faster. Try better next time, loser."
 	else
 		usr << "You stop entering the spacepod."
 	return
@@ -379,12 +428,16 @@
 	set category = "Spacepod"
 	set src = usr.loc
 
-	if(usr != src.occupant)
+	if(usr != src.occupant && usr != src.passenger)
 		return
-	inertia_dir = 0 // engage reverse thruster and power down pod
-	src.occupant.loc = src.loc
-	src.occupant = null
-	usr << "<span class='notice'>You climb out of the pod</span>"
+	if(usr == src.passenger)
+		src.passenger.loc = src.loc
+		usr << "<span class='notice'>You climb out of the pod</span>"
+	else if(usr == src.occupant)
+		inertia_dir = 0 // engage reverse thruster and power down pod
+		src.occupant.loc = src.loc
+		src.occupant = null
+		usr << "<span class='notice'>You climb out of the pod</span>"
 	return
 
 /obj/spacepod/proc/enter_after(delay as num, var/mob/user as mob, var/numticks = 5)
@@ -462,6 +515,9 @@
 
 /obj/spacepod/relaymove(mob/user, direction)
 	var/moveship = 1
+	if(user == passenger)
+		user << "<span class='warning'>You are not driving this pod!</span>"
+		return
 	if(battery && battery.charge >= 3 && health)
 		src.dir = direction
 		switch(direction)
@@ -506,6 +562,8 @@
 	if(message)
 		if(src.occupant && src.occupant.client)
 			src.occupant << "\icon[src] [message]"
+		if(src.passenger && src.passenger.client)
+			src.passenger << "\icon[src] [message]"
 	return
 
 /obj/spacepod/proc/log_message(message as text,red=null)

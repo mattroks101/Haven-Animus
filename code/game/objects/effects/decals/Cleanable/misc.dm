@@ -104,6 +104,13 @@
 			D.cure(0)
 		..()
 
+/obj/effect/decal/cleanable/vomit/old
+	name = "crusty dried vomit"
+	desc = "You try not to look at the chunks, and fail."
+	New()
+		..()
+		icon_state += "-old"
+
 /obj/effect/decal/cleanable/tomato_smudge
 	name = "tomato smudge"
 	desc = "It's red."

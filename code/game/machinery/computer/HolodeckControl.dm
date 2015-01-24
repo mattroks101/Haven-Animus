@@ -611,6 +611,23 @@
 	desc = "Here's your chance, do your dance at the Space Jam."
 	w_class = 4 //Stops people from hiding it in their bags/pockets
 
+/obj/item/weapon/beach_ball/holoball/dodgeball
+	name = "dodgeball"
+	icon_state = "dodgeball"
+	item_state = "dodgeball"
+	desc = "Used for playing the most violent and degrading of childhood games."
+
+/obj/item/weapon/beach_ball/holoball/dodgeball/throw_impact(atom/hit_atom)
+	if((ishuman(hit_atom)))
+		var/mob/living/carbon/M = hit_atom
+		playsound(src, 'sound/items/dodgeball.ogg', 50, 1)
+		M.halloss += rand(8, 12)
+		M.UpdateDamageIcon()
+		M.updatehealth()
+		if(prob(5))
+			M.Weaken(3)
+			visible_message("<span class='danger'>[M] is knocked right off \his feet!</span>", 3)
+
 /obj/structure/holohoop
 	name = "basketball hoop"
 	desc = "Boom, Shakalaka!."

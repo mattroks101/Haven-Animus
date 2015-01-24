@@ -1206,9 +1206,9 @@ table tr:first-child th:first-child { border: none;}
 	air_doors_close(manual)
 		var/area/A = get_area(loc)
 		for(var/obj/machinery/door/airlock/E in A.master.all_doors)
-			var/obj/LightTest = locate(/obj/alertlighting/atmoslight) in E.loc
+			var/obj/LightTest = locate(/obj/effect/alertlighting/atmoslight) in E.loc
 			if(isnull(LightTest))
-				var/obj/alertlighting/atmoslight/F = new/obj/alertlighting/atmoslight(E.loc)
+				var/obj/effect/alertlighting/atmoslight/F = new/obj/effect/alertlighting/atmoslight(E.loc)
 				var/image/imagelight = image('alert.dmi',F,icon_state = "blueold")
 				world << imagelight
 			if((!E.arePowerSystemsOn()) || (E.stat & NOPOWER)) continue
@@ -1265,9 +1265,9 @@ table tr:first-child th:first-child { border: none;}
 		for(var/area/RA in A.related)
 			for(var/turf/T in RA)
 				if(T.density != 1)
-					var/obj/LightTest = locate(/obj/alertlighting/atmoslight) in T
+					var/obj/LightTest = locate(/obj/effect/alertlighting/atmoslight) in T
 					if(isnull(LightTest))
-						var/obj/alertlighting/atmoslight/F = new/obj/alertlighting/atmoslight(T)
+						var/obj/effect/alertlighting/atmoslight/F = new/obj/effect/alertlighting/atmoslight(T)
 						var/image/imagelight = image('alert.dmi',F,icon_state = "blueold")
 						world << imagelight
 			RA.activate_air_doors(manual*5)
@@ -1278,7 +1278,7 @@ table tr:first-child th:first-child { border: none;}
 			var/area/B = get_area(E.loc)
 			if(B.air_doors_activated != 1)
 				var/turf/C = E.loc
-				for (var/obj/alertlighting/atmoslight/G in C)
+				for (var/obj/effect/alertlighting/atmoslight/G in C)
 					del(G)
 				if((!E.arePowerSystemsOn()) || (E.stat & NOPOWER)) continue
 					//E.locked = 0
@@ -1297,7 +1297,7 @@ table tr:first-child th:first-child { border: none;}
 							D.open()
 		for(var/area/RA in A.related)
 			for(var/turf/T in RA)
-				for (var/obj/alertlighting/atmoslight/F in T)
+				for (var/obj/effect/alertlighting/atmoslight/F in T)
 					del(F)
 			RA.deactivate_air_doors(manual*5)
 

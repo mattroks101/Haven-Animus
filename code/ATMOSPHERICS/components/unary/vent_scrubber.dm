@@ -250,3 +250,6 @@
 		initial_loc.air_scrub_names -= id_tag
 	..()
 	return
+
+/obj/machinery/atmospherics/unary/vent_scrubber/on
+	on = 1

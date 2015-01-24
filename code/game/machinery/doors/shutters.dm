@@ -4,6 +4,11 @@
 	icon_state = "shutter1"
 	power_channel = ENVIRON
 
+/obj/machinery/door/poddoor/shutters/preopen
+	icon_state = "open"
+	density = 0
+	opacity = 0
+
 /obj/machinery/door/poddoor/shutters/New()
 	..()
 	layer = 3.1

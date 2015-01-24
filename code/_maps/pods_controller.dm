@@ -451,8 +451,3 @@ datum/shuttle_controller/emergency_shuttle/process()
 		S.direction = spawndir
 		spawn()
 			S.startmove()
-
-/proc/radioalert(var/message,var/from)
-	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
-	a.autosay(message, from)
-

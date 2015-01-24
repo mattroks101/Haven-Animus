@@ -77,7 +77,7 @@
 	//Get the collective laser power
 	for(var/dir in cardinal)
 		var/turf/T = get_step(L, dir)
-		for(var/obj/beam/e_beam/item in T)
+		for(var/obj/effect/beam/e_beam/item in T)
 			power += item.power*2
 
 	//Ok, 100% oxygen atmosphere = best reaction

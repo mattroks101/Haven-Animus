@@ -44,11 +44,10 @@
 			mob:back:move_z(UP, mob)
 		else if(("belt" in mob.vars) && istype(mob:belt, /obj/item/weapon/tank/jetpack))
 			mob:belt:move_z(UP, mob)
+		else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
+			W:move_z(UP, mob)
 		else
 			mob:swap_hand()
-
-	else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
-		W:move_z(UP, mob)
 	return
 
 
@@ -67,11 +66,10 @@
 			mob:back:move_z(DOWN, mob)
 		else if(("belt" in mob.vars) && istype(mob:belt, /obj/item/weapon/tank/jetpack))
 			mob:belt:move_z(DOWN, mob)
-
-	else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
-		W:move_z(DOWN, mob)
-	else if(W)
-		W.attack_self(mob)
+		else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
+			W:move_z(DOWN, mob)
+		else if(W)
+			W.attack_self(mob)
 	return
 
 

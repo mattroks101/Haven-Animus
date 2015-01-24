@@ -1084,3 +1084,65 @@
 				</body>
 				</html>
 			"}
+
+// Wiki books that are linked to the configured wiki link.
+
+// A book that links to the wiki
+/obj/item/weapon/book/manual/wiki
+	var/page_link = ""
+//	window_size = "970x710"
+
+/obj/item/weapon/book/manual/wiki/attack_self()
+	if(!dat)
+		initialize_wikibook()
+	..()
+
+/obj/item/weapon/book/manual/wiki/proc/initialize_wikibook()
+	if(config.wikiurl)
+		dat = {"
+
+			<html><head>
+			</head>
+
+			<body>
+			<iframe width='100%' height='97%' src="http://www.ss13.eu/wiki/index.php?title=[page_link]&printable=yes&remove_links=1&cc=1" frameborder="0" id="main_frame"></iframe>
+			</body>
+
+			</html>
+
+			"}
+
+/obj/item/weapon/book/manual/wiki/engineering_construction
+	name = "Station Repairs and Construction"
+	icon_state ="bookEngineering"
+	author = "Engineering Encyclopedia"
+	title = "Station Repairs and Construction"
+	page_link = "Guide_to_construction"
+
+/obj/item/weapon/book/manual/wiki/engineering_guide
+	name = "Engineering Textbook"
+	icon_state ="bookEngineering2"
+	author = "Engineering Encyclopedia"
+	title = "Engineering Textbook"
+	page_link = "Guide_to_engineering"
+
+/obj/item/weapon/book/manual/wiki/infections
+	name = "Infections - Making your own pandemic!"
+	icon_state = "bookInfections"
+	author = "Infections Encyclopedia"
+	title = "Infections - Making your own pandemic!"
+	page_link = "Infections"
+
+/obj/item/weapon/book/manual/wiki/telescience
+	name = "Teleportation Science - Bluespace for dummies!"
+	icon_state = "book7"
+	author = "University of Bluespace"
+	title = "Teleportation Science - Bluespace for dummies!"
+	page_link = "Guide_to_telescience"
+
+/obj/item/weapon/book/manual/wiki/engineering_hacking
+	name = "Hacking"
+	icon_state ="bookHacking"
+	author = "Engineering Encyclopedia"
+	title = "Hacking"
+	page_link = "Hacking"

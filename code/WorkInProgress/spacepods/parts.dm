@@ -9,7 +9,7 @@
 	origin_tech = "materials=4;plasma=3;bluespace=2;engineering=3"
 
 /obj/item/pod_parts/pod_frame
-	name = "Space Pod Frame"
+	name = "\improper Space Pod Frame"
 	icon_state = ""
 	flags = CONDUCT
 	density = 0
@@ -26,11 +26,11 @@
 	this 4-part loop, starting from any part of the frame, can determine if all the parts are properly in place and aligned
 	it also checks that each part is unique, and that all the parts are there for the spacepod itself
 	*/
-	var/neededparts = list(/obj/item/pod_parts/pod_frame/aft_port, /obj/item/pod_parts/pod_frame/aft_starboard, /obj/item/pod_parts/pod_frame/fore_port, /obj/item/pod_parts/pod_frame/fore_starboard)
+	var/list/neededparts = list(/obj/item/pod_parts/pod_frame/aft_port, /obj/item/pod_parts/pod_frame/aft_starboard, /obj/item/pod_parts/pod_frame/fore_port, /obj/item/pod_parts/pod_frame/fore_starboard)
 	var/turf/T
 	var/obj/item/pod_parts/pod_frame/linked
 	var/obj/item/pod_parts/pod_frame/pointer
-	var/connectedparts =  list()
+	var/list/connectedparts = list()
 	neededparts -= src
 	//log_admin("Starting with [src]")
 	linked = src
@@ -45,6 +45,8 @@
 			linked = pointer
 			pointer = null
 	//log_admin("Parts left: [neededparts.len]") //len not working
+	if(!connectedparts.len)
+		return 0
 	for(var/i = 1; i <=4; i++)
 		var/obj/item/pod_parts/pod_frame/F = connectedparts[i]
 		if(F.type in neededparts) //if one of the items can be founded in neededparts
@@ -61,7 +63,7 @@
 		if(!linkedparts)
 			user << "<span class='rose'>You cannot assemble a pod frame because you do not have the necessary assembly.</span>"
 			return
-		var/obj/structure/spacepod_frame/pod = new /obj/structure/spacepod_frame(src.loc)
+		var/obj/structure/spacepod/frame/pod = new /obj/structure/spacepod/frame(src.loc)
 		pod.dir = src.dir
 		user << "<span class='notice'>You strut the pod frame together.</span>"
 		R.use(10)
@@ -123,3 +125,11 @@
 	icon = 'icons/pods/pod_parts.dmi'
 	icon_state = "pod_armor_civ"
 	desc = "Spacepod armor. This is the civilian version. It looks rather flimsy."
+	var/pod_type = "civilian"
+
+/obj/item/pod_parts/armor/mining
+	name = "mining pod armor"
+	icon = 'icons/pods/pod_parts.dmi'
+	icon_state = "pod_armor_civ"
+	desc = "Spacepod armor. This is the industrial version. It looks rather rough."
+	pod_type = "industrial"

@@ -187,7 +187,20 @@ var/list/ghostteleportlocs = list()
 /area/shuttle/escape_pod3/transit
 	icon_state = "shuttle"
 
-/area/shuttle/escape_pod5 //Pod 4 was lost to meteors
+/area/shuttle/escape_pod4
+	name = "\improper Escape Pod C"
+	music = "music/escape.ogg"
+
+/area/shuttle/escape_pod4/station
+	icon_state = "shuttle2"
+
+/area/shuttle/escape_pod4/centcom
+	icon_state = "shuttle"
+
+/area/shuttle/escape_pod4/transit
+	icon_state = "shuttle"
+
+/area/shuttle/escape_pod5 //Pod 4 was lost to meteors		//No - Guap6512
 	name = "\improper Escape Pod E"
 	music = "music/escape.ogg"
 
@@ -356,6 +369,9 @@ var/list/ghostteleportlocs = list()
 
 /area/centcom/living
 	name = "\improper Centcom Living Quarters"
+
+/area/centcom/prison
+	name = "\improper Admin Prison"
 
 /area/centcom/specops
 	name = "\improper Centcom Special Ops"
@@ -2058,6 +2074,10 @@ var/list/ghostteleportlocs = list()
 /area/turret_protected/tcomeast
 	name = "\improper Telecommunications Satellite East Wing"
 	icon_state = "tcomsateast"
+
+/area/tcommsat/server
+	name = "\improper Telecoms Server Room"
+	icon_state = "tcomsatcham"
 
 /area/tcommsat/computer
 	name = "\improper Telecoms Control Room"

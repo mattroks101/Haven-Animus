@@ -27,56 +27,58 @@
 "aA" = (/obj/multiz/ladder,/turf/simulated/floor,/area/security/prison)
 "aB" = (/obj/machinery/computer/communications,/turf/simulated/floor,/area/security/prison)
 "aC" = (/obj/item/weapon/gun/energy/gun,/turf/simulated/floor,/area/security/prison)
-"aD" = (/obj/item/weapon/reagent_containers/glass/beaker,/turf/simulated/floor,/area/security/prison)
-"aE" = (/obj/effect/landmark/start{name = "AI"},/turf/simulated/floor,/area/security/prison)
-"aF" = (/obj/machinery/dna_scannernew,/turf/simulated/floor{icon_state = "white"},/area/security/prison)
-"aG" = (/obj/machinery/computer/scan_consolenew,/turf/simulated/floor{icon_state = "white"},/area/security/prison)
-"aH" = (/obj/item/weapon/reagent_containers/glass/bottle/urine,/turf/simulated/floor,/area/security/prison)
-"aI" = (/turf/simulated/floor/open,/area/security/prison)
-"aJ" = (/obj/machinery/door/poddoor{icon_state = "pdoor1"; id = "EngineVent"; name = "Engine Core Vent"; p_open = 0},/turf/simulated/floor,/area/security/prison)
-"aK" = (/turf/simulated/shuttle/wall{dir = 8; icon_state = "wall_space"},/area/shuttle/escape_pod1/station)
-"aL" = (/turf/simulated/shuttle/wall{tag = "icon-wall"; icon_state = "wall"; dir = 2},/area/shuttle/escape_pod1/station)
-"aM" = (/obj/structure/shuttle/window{icon = 'icons/turf/shuttle.dmi'; icon_state = "window1"},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"aN" = (/obj/machinery/door/unpowered/shuttle,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"aO" = (/turf/simulated/shuttle/wall{dir = 1; icon_state = "wall_space"},/area/shuttle/escape_pod1/station)
-"aP" = (/turf/space/transit/west/shuttlespace_we11,/area/shuttle/escape_pod1/transit)
-"aQ" = (/turf/space/transit/west/shuttlespace_we12,/area/shuttle/escape_pod1/transit)
-"aR" = (/turf/space/transit/west/shuttlespace_we13,/area/shuttle/escape_pod1/transit)
-"aS" = (/turf/space/transit/west/shuttlespace_we1,/area/shuttle/escape_pod1/transit)
-"aT" = (/turf/space/transit/west/shuttlespace_we2,/area/shuttle/escape_pod1/transit)
-"aU" = (/turf/space/transit/west/shuttlespace_we3,/area/shuttle/escape_pod1/transit)
-"aV" = (/turf/space/transit/west/shuttlespace_we4,/area/shuttle/escape_pod1/transit)
-"aW" = (/obj/machinery/light{dir = 1},/obj/structure/stool/bed/chair,/obj/machinery/camera/autoname,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"aX" = (/obj/structure/stool/bed/chair,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"aY" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/stool/bed/chair,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"aZ" = (/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"ba" = (/obj/machinery/light{dir = 1},/obj/structure/stool/bed/chair,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"bb" = (/turf/simulated/shuttle/wall{tag = "icon-wall (EAST)"; icon_state = "wall"; dir = 4},/area/shuttle/escape_pod1/station)
-"bc" = (/turf/space/transit/west/shuttlespace_we6,/area/shuttle/escape_pod1/transit)
-"bd" = (/turf/space/transit/west/shuttlespace_we7,/area/shuttle/escape_pod1/transit)
-"be" = (/turf/space/transit/west/shuttlespace_we8,/area/shuttle/escape_pod1/transit)
-"bf" = (/turf/space/transit/west/shuttlespace_we9,/area/shuttle/escape_pod1/transit)
-"bg" = (/turf/space/transit/west/shuttlespace_we10,/area/shuttle/escape_pod1/transit)
-"bh" = (/turf/space/transit/west/shuttlespace_we14,/area/shuttle/escape_pod1/transit)
-"bi" = (/obj/machinery/camera/autoname{dir = 8},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"bj" = (/turf/space/transit/west/shuttlespace_we15,/area/shuttle/escape_pod1/transit)
-"bk" = (/obj/machinery/light,/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"bl" = (/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"bm" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
-"bn" = (/turf/space/transit/west/shuttlespace_we5,/area/shuttle/escape_pod1/transit)
-"bo" = (/turf/simulated/shuttle/wall{icon_state = "wall_space"},/area/shuttle/escape_pod1/station)
-"bp" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "wall_space"},/area/shuttle/escape_pod1/station)
-"bq" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 3; up = 0; up_target = 0},/turf/space,/area)
-"br" = (/turf/simulated/wall,/area/bridge/meeting_room)
-"bs" = (/turf/simulated/floor,/area/bridge/meeting_room)
-"bt" = (/obj/machinery/portable_atmospherics/canister/toxins,/turf/simulated/floor,/area/bridge/meeting_room)
-"bu" = (/obj/item/weapon/flame/lighter/zippo,/turf/simulated/floor,/area/bridge/meeting_room)
-"bv" = (/obj/multiz/ladder{icon_state = "ladderup"},/turf/simulated/floor,/area/bridge/meeting_room)
-"bw" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor,/area/bridge/meeting_room)
-"bx" = (/obj/effect/landmark/zcontroller{down = 0; down_target = 0; up = 1; up_target = 2},/turf/space,/area)
-"by" = (/turf/space,/area/chapel/main)
-"bz" = (/turf/simulated/floor/engine/vacuum,/area)
-"bA" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 3},/turf/space,/area)
+"aD" = (/obj/item/stack/sheet/glass{amount = 50},/turf/simulated/floor,/area/security/prison)
+"aE" = (/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/stack/sheet/metal{amount = 50},/turf/simulated/floor,/area/security/prison)
+"aF" = (/obj/item/stack/sheet/plasteel{amount = 50},/turf/simulated/floor,/area/security/prison)
+"aG" = (/obj/effect/landmark/start{name = "AI"},/turf/simulated/floor,/area/security/prison)
+"aH" = (/obj/machinery/mecha_part_fabricator/pod,/turf/simulated/floor{icon_state = "white"},/area/security/prison)
+"aI" = (/turf/simulated/floor{icon_state = "white"},/area/security/prison)
+"aJ" = (/obj/item/weapon/reagent_containers/glass/bottle/urine,/turf/simulated/floor,/area/security/prison)
+"aK" = (/turf/simulated/floor/open,/area/security/prison)
+"aL" = (/obj/machinery/door/poddoor{icon_state = "pdoor1"; id = "EngineVent"; name = "Engine Core Vent"; p_open = 0},/turf/simulated/floor,/area/security/prison)
+"aM" = (/turf/simulated/shuttle/wall{dir = 8; icon_state = "wall_space"},/area/shuttle/escape_pod1/station)
+"aN" = (/turf/simulated/shuttle/wall{tag = "icon-wall"; icon_state = "wall"; dir = 2},/area/shuttle/escape_pod1/station)
+"aO" = (/obj/structure/shuttle/window{icon = 'icons/turf/shuttle.dmi'; icon_state = "window1"},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"aP" = (/obj/machinery/door/unpowered/shuttle,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"aQ" = (/turf/simulated/shuttle/wall{dir = 1; icon_state = "wall_space"},/area/shuttle/escape_pod1/station)
+"aR" = (/turf/space/transit/west/shuttlespace_we11,/area/shuttle/escape_pod1/transit)
+"aS" = (/turf/space/transit/west/shuttlespace_we12,/area/shuttle/escape_pod1/transit)
+"aT" = (/turf/space/transit/west/shuttlespace_we13,/area/shuttle/escape_pod1/transit)
+"aU" = (/turf/space/transit/west/shuttlespace_we1,/area/shuttle/escape_pod1/transit)
+"aV" = (/turf/space/transit/west/shuttlespace_we2,/area/shuttle/escape_pod1/transit)
+"aW" = (/turf/space/transit/west/shuttlespace_we3,/area/shuttle/escape_pod1/transit)
+"aX" = (/turf/space/transit/west/shuttlespace_we4,/area/shuttle/escape_pod1/transit)
+"aY" = (/obj/machinery/light{dir = 1},/obj/structure/stool/bed/chair,/obj/machinery/camera/autoname,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"aZ" = (/obj/structure/stool/bed/chair,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"ba" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/stool/bed/chair,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"bb" = (/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"bc" = (/obj/machinery/light{dir = 1},/obj/structure/stool/bed/chair,/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"bd" = (/turf/simulated/shuttle/wall{tag = "icon-wall (EAST)"; icon_state = "wall"; dir = 4},/area/shuttle/escape_pod1/station)
+"be" = (/turf/space/transit/west/shuttlespace_we6,/area/shuttle/escape_pod1/transit)
+"bf" = (/turf/space/transit/west/shuttlespace_we7,/area/shuttle/escape_pod1/transit)
+"bg" = (/turf/space/transit/west/shuttlespace_we8,/area/shuttle/escape_pod1/transit)
+"bh" = (/turf/space/transit/west/shuttlespace_we9,/area/shuttle/escape_pod1/transit)
+"bi" = (/turf/space/transit/west/shuttlespace_we10,/area/shuttle/escape_pod1/transit)
+"bj" = (/turf/space/transit/west/shuttlespace_we14,/area/shuttle/escape_pod1/transit)
+"bk" = (/obj/machinery/camera/autoname{dir = 8},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"bl" = (/turf/space/transit/west/shuttlespace_we15,/area/shuttle/escape_pod1/transit)
+"bm" = (/obj/machinery/light,/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"bn" = (/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"bo" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod1/station)
+"bp" = (/turf/space/transit/west/shuttlespace_we5,/area/shuttle/escape_pod1/transit)
+"bq" = (/turf/simulated/shuttle/wall{icon_state = "wall_space"},/area/shuttle/escape_pod1/station)
+"br" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "wall_space"},/area/shuttle/escape_pod1/station)
+"bs" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 3; up = 0; up_target = 0},/turf/space,/area)
+"bt" = (/turf/simulated/wall,/area/bridge/meeting_room)
+"bu" = (/turf/simulated/floor,/area/bridge/meeting_room)
+"bv" = (/obj/machinery/portable_atmospherics/canister/toxins,/turf/simulated/floor,/area/bridge/meeting_room)
+"bw" = (/obj/item/weapon/flame/lighter/zippo,/turf/simulated/floor,/area/bridge/meeting_room)
+"bx" = (/obj/multiz/ladder{icon_state = "ladderup"},/turf/simulated/floor,/area/bridge/meeting_room)
+"by" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor,/area/bridge/meeting_room)
+"bz" = (/obj/effect/landmark/zcontroller{down = 0; down_target = 0; up = 1; up_target = 2},/turf/space,/area)
+"bA" = (/turf/space,/area/chapel/main)
+"bB" = (/turf/simulated/floor/engine/vacuum,/area)
+"bC" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 3},/turf/space,/area)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -139,15 +141,15 @@ aaaaaaaaaaaaaaaaaaaaacacadacacaeafagacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaacahaiajakalamananacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aoaoaoaoaoaoaoaoaoaaacapaqanarasananatacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aoaoaoaoaoaoaoaoaoaaacauavawaxayazaAanacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aoaoaoaoaoaoaoaoaoaaacaBanaCanaDananaEacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aoaoaoaoaoaoaoaoaoaaacacacacanaFaGaHanacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aoaoaoaoaoaoaoaoaoaaacaIaIacananananatacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaacacacacacaJacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaKaLaMaLaNaLaMaLaOaaaaaaaaaaaaaPaQaRaSaTaSaTaUaVaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaMaWaXaYaZaYaXbabbaaaaaaaaaaaabcbdbebfbgaPaQaRbhaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaMaZaZaZaZaZaZbibbaaaaaaaaaaaabdbebfbgaPaQaRbhbjaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaMbkblbmaZbmblbkbbaaaaaaaaaaaaaTaUaVbnbcbdbebfbgaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaboaLaMaLaNaLaMaLbpaaaaaaaaaaaabfbgaPaQaRbhbjaSaTaaaaaaaaaa
+aoaoaoaoaoaoaoaoaoaaacaBanaCaDaEaFanaGacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aoaoaoaoaoaoaoaoaoaaacacacacanaHaIaJanacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aoaoaoaoaoaoaoaoaoaaacaKaKacananananatacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaacacacacacaLacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaMaNaOaNaPaNaOaNaQaaaaaaaaaaaaaRaSaTaUaVaUaVaWaXaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaOaYaZbabbbaaZbcbdaaaaaaaaaaaabebfbgbhbiaRaSaTbjaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaObbbbbbbbbbbbbkbdaaaaaaaaaaaabfbgbhbiaRaSaTbjblaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaObmbnbobbbobnbmbdaaaaaaaaaaaaaVaWaXbpbebfbgbhbiaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaabqaNaOaNaPaNaOaNbraaaaaaaaaaaabhbiaRaSaTbjblaUaVaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -161,7 +163,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-bqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+bsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
 
 (1,1,3) = {"
@@ -178,14 +180,14 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabrbrbrbrbrbrbrbrbrbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabrbsbsbsbsbsbsbsbsbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabrbsbsbsbsbsbtbsbsbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabrbsbsbsbsbtbubvbsbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabrbsbsbsbsbsbwbsbsbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabrbsbsbsbsbsbsbsbsbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabrbsbsbsbsbsbsbsbsbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabrbrbrbrbrbrbrbrbrbraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaabtbtbtbtbtbtbtbtbtbtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaabtbububububububububtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaabtbubububububvbububtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaabtbububububvbwbxbubtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaabtbubububububybububtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaabtbububububububububtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaabtbububububububububtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaabtbtbtbtbtbtbtbtbtbtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -204,7 +206,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-bxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+bzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
 
 (1,1,4) = {"
@@ -221,15 +223,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabybzbzbzbzbzbzbzbzbzbzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabybzbzbzbzbzbzbzbzbzbzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabybzbzbzbzbzbzbzbzbzbzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabybzbzbzbzbzbzbzbzbzbzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabybzbzbzbzbzbzbzbzbzbzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabybzbzbzbzbzbzbzbzbzbzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabybzbzbzbzbzbzbzbzbzbzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabybzbzbzbzbzbzbzbzbzbzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaabyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAbBbBbBbBbBbBbBbBbBbBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAbBbBbBbBbBbBbBbBbBbBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAbBbBbBbBbBbBbBbBbBbBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAbBbBbBbBbBbBbBbBbBbBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAbBbBbBbBbBbBbBbBbBbBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAbBbBbBbBbBbBbBbBbBbBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAbBbBbBbBbBbBbBbBbBbBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAbBbBbBbBbBbBbBbBbBbBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaabAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -247,7 +249,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-bAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+bCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
 
 (1,1,5) = {"
