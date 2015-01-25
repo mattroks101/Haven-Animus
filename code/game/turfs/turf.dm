@@ -22,6 +22,10 @@
 	var/icon_old = null
 	var/pathweight = 1
 
+	// Decal shit.
+	var/list/decals
+
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
@@ -285,6 +289,21 @@
 		W.levelupdate()
 		return W
 
+/turf/proc/AddDecal(const/image/decal)
+	if(!decals)
+		decals = new
+
+	decals += decal
+	overlays += decal
+
+/turf/proc/ClearDecals()
+	if(!decals)
+		return
+
+	for(var/image/decal in decals)
+		overlays -= decal
+
+	decals = 0
 
 //Commented out by SkyMarshal 5/10/13 - If you are patching up space, it should be vacuum.
 //  If you are replacing a wall, you have increased the volume of the room without increasing the amount of gas in it.

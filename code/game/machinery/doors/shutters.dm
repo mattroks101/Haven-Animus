@@ -1,7 +1,7 @@
 /obj/machinery/door/poddoor/shutters
 	name = "Shutters"
-	icon = 'icons/obj/doors/rapid_pdoor.dmi'
-	icon_state = "shutter1"
+	icon = 'icons/obj/doors/shutters.dmi'
+	icon_state = "closed"
 	power_channel = ENVIRON
 
 /obj/machinery/door/poddoor/shutters/preopen
@@ -20,8 +20,8 @@
 	if(density && (stat & NOPOWER) && !operating)
 		operating = 1
 		spawn(-1)
-			flick("shutterc0", src)
-			icon_state = "shutter0"
+			flick("opening", src)
+			icon_state = "open"
 			sleep(15)
 			density = 0
 			SetOpacity(0)
@@ -36,8 +36,8 @@
 		return 0
 	if(!operating) //in case of emag
 		operating = 1
-	flick("shutterc0", src)
-	icon_state = "shutter0"
+	flick("opening", src)
+	icon_state = "open"
 	sleep(10)
 	density = 0
 	SetOpacity(0)
@@ -54,8 +54,8 @@
 	if(operating)
 		return
 	operating = 1
-	flick("shutterc1", src)
-	icon_state = "shutter1"
+	flick("closing", src)
+	icon_state = "closed"
 	density = 1
 	if(visible)
 		SetOpacity(1)

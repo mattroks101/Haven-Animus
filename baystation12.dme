@@ -93,7 +93,6 @@
 #include "code\__HELPERS\sorts\MergeSort.dm"
 #include "code\__HELPERS\sorts\TimSort.dm"
 #include "code\_maps\exodus.dm"
-#include "code\_maps\mapfiles\efficiency.1.1.3.dmm"
 #include "code\_onclick\adjacent.dm"
 #include "code\_onclick\ai.dm"
 #include "code\_onclick\click.dm"
@@ -1463,4 +1462,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
+#include "maps\efficiency.1.1.3.dmm"
 // END_INCLUDE
