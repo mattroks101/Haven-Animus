@@ -266,6 +266,15 @@
 	build_path = /obj/machinery/computer/telescience
 	origin_tech = "programming=3;bluespace=2"
 
+/obj/item/weapon/circuitboard/ore_redemption
+	name = "Machine Design (Ore Redemption Board)"
+	build_path = /obj/item/weapon/circuitboard/ore_redemption
+	origin_tech = "programming=1;engineering=2"
+
+/obj/item/weapon/circuitboard/mining_equipment_vendor
+	name = "Machine Design (Mining Rewards Vender Board)"
+	build_path = /obj/item/weapon/circuitboard/mining_equipment_vendor
+	origin_tech = "programming=1;engineering=2"
 
 /obj/item/weapon/circuitboard/supplycomp/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I,/obj/item/device/multitool))

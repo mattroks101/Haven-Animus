@@ -167,6 +167,99 @@ obj/item/weapon/gun/energy/staff
 	projectile_type = "/obj/item/projectile/beam/mindflayer"
 	fire_sound = 'sound/weapons/Laser.ogg'
 
+/obj/item/weapon/gun/energy/kinetic_accelerator
+	name = "proto-kinetic accelerator"
+	desc = "According to Nanotrasen accounting, this is mining equipment. It's been modified for extreme power output to crush rocks, but often serves as a miner's first defense against hostile alien life; it's not very powerful unless used in a low pressure environment."
+	icon_state = "kineticgun"
+	item_state = "kineticgun"
+	projectile_type = "/obj/item/projectile/kinetic"
+	cell_type = "/obj/item/weapon/stock_parts/cell/crap"
+	fire_sound = 'sound/weapons/Gunshot4.ogg'
+	var/overheat = 0
+	var/recent_reload = 1
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/process_chambered()
+	overheat = 1
+	spawn(20)
+		overheat = 0
+		recent_reload = 0
+	..()
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+	if(flag)	return
+	if(istype(target, /obj/machinery/recharger))	return
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/attack_self(mob/living/user)
+	if(overheat || recent_reload)
+		return
+	power_supply.give(500)
+	playsound(user, 'sound/weapons/kenetic_reload.ogg', 60, 1)
+	recent_reload = 1
+	update_icon()
+	return
+
+/obj/item/weapon/gun/energy/plasmacutter
+	name = "plasma cutter"
+	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	icon_state = "plasmacutter"
+	item_state = "plasmacutter"
+	force = 15
+	modifystate = -1
+	charge_cost = 2
+	origin_tech = "combat=1;materials=3;magnets=2;plasmatech=2;engineering=1"
+	projectile_type = "/obj/item/projectile/plasma"
+	fire_sound = 'plasma_cutter.ogg'
+	flags = CONDUCT | OPENCONTAINER
+	attack_verb = list("attacked", "slashed", "cut", "sliced")
+	var/volume = 20
+
+/obj/item/weapon/gun/energy/plasmacutter/New()
+	..()
+	create_reagents(volume)
+
+	if(!reagents.get_reagent_amount("plasma") >= charge_cost)
+		return
+
+	reagents.remove_reagent("plasma", charge_cost)
+	Fire()
+	return
+
+/obj/item/weapon/gun/energy/plasmacutter/examine()
+	..()
+	usr << "Has [reagents.get_reagent_amount("plasma")] unit\s of plasma left."
+	return
+
+/obj/item/weapon/gun/energy/plasmacutter/attackby(var/obj/item/A, var/mob/user)
+	if(reagents.maximum_volume > reagents.total_volume)
+		if(istype(A, /obj/item/stack/sheet/mineral/plasma))
+			var/obj/item/stack/sheet/S = A
+			S.use(1)
+			reagents.add_reagent("plasma", 20)
+			user << "<span class='info'>You refill [src] with [S]. [reagents.get_reagent_amount("plasma")] units of plasma left.</span>"
+		if(istype(A, /obj/item/weapon/ore/plasma))
+			qdel(A)
+			reagents.add_reagent("plasma", 10)
+			user << "<span class='info'>You refill [src] with [A]. [reagents.get_reagent_amount("plasma")] units of plasma left.</span>"
+		if(istype(A, /obj/item/weapon/storage/bag/ore))
+			if(locate(/obj/item/weapon/ore/plasma) in A)
+				attackby(locate(/obj/item/weapon/ore/plasma) in A, user)
+	..()
+
+/obj/item/weapon/gun/energy/plasmacutter/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+	if(flag)	return
+	if(istype(target, /obj/machinery/recharger))	return
+
+/obj/item/weapon/gun/energy/plasmacutter/charged/New()
+	..()
+	reagents.add_reagent("plasma", volume)
+
+/obj/item/weapon/gun/energy/plasmacutter/adv
+	name = "advanced plasma cutter"
+	icon_state = "adv_plasmacutter"
+	origin_tech = "combat=3;materials=4;magnets=3;plasmatech=3;engineering=2"
+	projectile_type = "/obj/item/projectile/plasma/adv"
+	volume = 40
+
 obj/item/weapon/gun/energy/staff/focus
 	name = "mental focus"
 	desc = "An artefact that channels the will of the user into destructive bolts of force. If you aren't careful with it, you might poke someone's brain out."

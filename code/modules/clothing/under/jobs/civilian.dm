@@ -10,11 +10,18 @@
 
 
 /obj/item/clothing/under/rank/captain //Alright, technically not a 'civilian' but its better then giving a .dm file for a single define.
-	desc = "It's a green jumpsuit with some gold markings denoting the rank of \"Captain\"."
 	name = "captain's jumpsuit"
+	desc = "It's a blue jumpsuit with some gold markings denoting the rank of \"Captain\"."
 	icon_state = "captain"
 	item_state = "caparmor"
 	item_color = "captain"
+	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/under/rank/captain/green
+	desc = "It's a green jumpsuit with some gold markings denoting the rank of \"Captain\"."
+	icon_state = "captain_green"
+	item_state = "caparmor_green"
+	item_color = "captain_green"
 	flags = FPRINT | TABLEPASS
 
 

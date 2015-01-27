@@ -33,6 +33,7 @@
 		sleep(1)
 		new /obj/item/clothing/mask/breath( src )
 		new /obj/item/weapon/tank/emergency_oxygen( src )
+		new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
 		return
 
 /obj/item/weapon/storage/box/engineer/
@@ -42,6 +43,7 @@
 		sleep(1)
 		new /obj/item/clothing/mask/breath( src )
 		new /obj/item/weapon/tank/emergency_oxygen/engi( src )
+		new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
 		return
 
 
@@ -89,6 +91,34 @@
 		new /obj/item/weapon/reagent_containers/syringe( src )
 		new /obj/item/weapon/reagent_containers/syringe( src )
 		new /obj/item/weapon/reagent_containers/syringe( src )
+
+/obj/item/weapon/storage/box/medipens
+	name = "box of medipens"
+	desc = "A box full of epinephrine MediPens."
+	icon_state = "syringe"
+
+/obj/item/weapon/storage/box/medipens/New()
+	..()
+	new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen( src )
+
+/obj/item/weapon/storage/box/medipens/utility
+	name = "medipens kit"
+	desc = "A box with several utility medipens for the economical miner."
+	icon_state = "syringe"
+
+/obj/item/weapon/storage/box/medipens/utility/New()
+	..()
+	new /obj/item/weapon/reagent_containers/hypospray/medipen/leporazine( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen/leporazine( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen/stimpack( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen/stimpack( src )
+	new /obj/item/weapon/reagent_containers/hypospray/medipen/stimpack( src )
 
 /obj/item/weapon/storage/box/beakers
 	name = "box of beakers"
@@ -431,15 +461,6 @@
 			processing_objects.Add(W)
 		W.update_icon()
 		return
-
-/obj/item/weapon/storage/box/autoinjectors
-	name = "box of injectors"
-	desc = "Contains autoinjectors."
-	icon_state = "syringe"
-	New()
-		..()
-		for (var/i; i < storage_slots; i++)
-			new /obj/item/weapon/reagent_containers/hypospray/autoinjector(src)
 
 /obj/item/weapon/storage/box/lights
 	name = "box of replacement bulbs"

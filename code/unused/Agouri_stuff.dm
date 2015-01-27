@@ -812,7 +812,7 @@
 			user << "\blue You need more welding fuel to complete this task."
 			return
 
-	else if (istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+	else if (istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		var/turf/T = user.loc
 		if (!( istype(T, /turf) ))
 			return
@@ -971,7 +971,7 @@
 				user << "\blue You removed the support rods."
 			W:welding = 1
 
-	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		var/turf/T = user.loc
 		if (!( istype(T, /turf) ))
 			return
