@@ -45,7 +45,7 @@
 				new/obj/item/weapon/reagent_containers/glass/beaker/noreact(src)
 		if(11 to 12)
 			for(var/i = 0, i < 9, i++)
-				new/obj/item/bluespace_crystal(src)
+				new/obj/item/weapon/stock_parts/bluespace_crystal(src)
 			new/obj/item/clothing/glasses/sunglasses/gar(src)
 		if(13)
 			new/obj/item/weapon/melee/classic_baton(src)
