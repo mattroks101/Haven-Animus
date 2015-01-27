@@ -424,8 +424,9 @@
 
 /proc/call_shuttle_proc(var/mob/user)
 	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
-	if ((!( ticker ) || emergency_shuttle.location))
+	if ((!( ticker ) || !emergency_shuttle.location()))
 		return
+
 
 	if(sent_strike_team == 1)
 		user << "Centcom will not allow the pods to be launched. Consider all contracts terminated."
@@ -447,7 +448,7 @@
 		user << "Under directive 7-10, [station_name()] is quarantined until further notice."
 		return
 
-	emergency_shuttle.incall()
+	emergency_shuttle.call_evac()
 	log_game("[key_name(user)] has launched the pods.")
 	message_admins("[key_name_admin(user)] has launched the pods.", 1)
 	if(evac_type == "pods")
@@ -459,7 +460,7 @@
 	return
 
 /proc/init_shift_change(var/mob/user, var/force = 0)
-	if ((!( ticker ) || emergency_shuttle.location))
+	if ((!( ticker ) || emergency_shuttle.location()))
 		return
 
 	if(emergency_shuttle.direction == -1)
@@ -493,7 +494,7 @@
 			return
 
 	emergency_shuttle.shuttlealert(1)
-	emergency_shuttle.incall()
+	emergency_shuttle.call_evac()
 	log_game("[key_name(user)] has launched the pods.")
 	message_admins("[key_name_admin(user)] has launched the pods.", 1)
 	captain_announce("A crew transfer has been initiated. The escape pods will be launched in [round(emergency_shuttle.timeleft()/60)] minutes.")

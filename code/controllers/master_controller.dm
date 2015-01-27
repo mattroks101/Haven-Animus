@@ -33,6 +33,8 @@ datum/controller/game_controller
 	var/last_thing_processed
 	var/rebuild_active_areas = 0
 
+	var/list/shuttle_list	                    // For debugging and VV
+
 	var/global/datum/garbage_collector/garbageCollector
 
 datum/controller/game_controller/New()
@@ -51,8 +53,8 @@ datum/controller/game_controller/New()
 
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
-	if(!emergency_shuttle)
-		emergency_shuttle = new /datum/shuttle_controller/emergency_shuttle()
+	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller()
+	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
 
 	if(global.garbageCollector)
 		garbageCollector = global.garbageCollector
