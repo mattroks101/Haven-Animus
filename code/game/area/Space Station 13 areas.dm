@@ -749,11 +749,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "hangar"
 
 /area/luna/hangar/escape
-	name = "Escape Hangar"
+	name = "Escape Hangar A"
 	icon_state = "hangar"
 
 /area/luna/hangar/escape/crew
-	name = "Escape Hangar"
+	name = "Escape Hangar B"
 	icon_state = "hangar"
 
 /area/luna/hallway/primary/admin
