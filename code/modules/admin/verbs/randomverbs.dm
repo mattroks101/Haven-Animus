@@ -701,7 +701,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Call Shuttle"
 	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 
-	if ((!( ticker ) || emergency_shuttle.location()))
+	if ((!( ticker ) || emergency_shuttle.location))
 		return
 
 	if(!check_rights(R_ADMIN))	return
@@ -712,11 +712,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || ticker.mode.name == "confliction")
 		var/choice = input("The shuttle will just return if you call it. Call anyway?") in list("Confirm", "Cancel")
 		if(choice == "Confirm")
-			emergency_shuttle.auto_recall = 1
+			emergency_shuttle.fake_recall = rand(300,500)
 		else
 			return
 
-	emergency_shuttle.call_evac()
+	emergency_shuttle.incall()
+	a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+	world << sound('sound/AI/shuttlecalled.ogg')
 	log_admin("[key_name(usr)] admin-called the emergency shuttle.")
 	message_admins("\blue [key_name_admin(usr)] admin-called the emergency shuttle.", 1)
 	return
@@ -729,7 +731,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if(alert(src, "You sure?", "Confirm", "Yes", "No") != "Yes") return
 
-	if(!ticker || !emergency_shuttle.can_recall())
+	if(!ticker || emergency_shuttle.location || emergency_shuttle.direction == 0)
 		return
 
 	emergency_shuttle.recall()

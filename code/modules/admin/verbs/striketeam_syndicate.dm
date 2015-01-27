@@ -35,7 +35,7 @@ var/global/sent_syndicate_strike_team = 0
 
 	sent_syndicate_strike_team = 1
 
-	if (emergency_shuttle.can_recall())
+	if (emergency_shuttle.direction == 1 && emergency_shuttle.online == 1)
 		emergency_shuttle.recall()
 
 	var/syndicate_commando_number = syndicate_commandos_possible //for selecting a leader

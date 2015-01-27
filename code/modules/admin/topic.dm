@@ -231,6 +231,7 @@
 		edit_admin_permissions()
 
 	else if(href_list["call_shuttle"])
+		var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 		if(!check_rights(R_ADMIN))	return
 
 		if( ticker.mode.name == "blob" )
@@ -239,25 +240,26 @@
 
 		switch(href_list["call_shuttle"])
 			if("1")
-				if ((!( ticker ) || !emergency_shuttle.location()))
+				if ((!( ticker ) || emergency_shuttle.location))
 					return
-				if (emergency_shuttle.can_call())
-					emergency_shuttle.call_evac()
-					log_admin("[key_name(usr)] called the Emergency Shuttle")
-					message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
+				emergency_shuttle.incall()
+				a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+				log_admin("[key_name(usr)] called the Emergency Shuttle")
+				message_admins("\blue [key_name_admin(usr)] initiated the Escape Pods Launch.", 1)
 
 			if("2")
-				if (!( ticker ) || !emergency_shuttle.location())
+				if ((!( ticker ) || emergency_shuttle.location || emergency_shuttle.direction == 0))
 					return
-				if (emergency_shuttle.can_call())
-					emergency_shuttle.call_evac()
-					log_admin("[key_name(usr)] called the Emergency Shuttle")
-					message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
-
-				else if (emergency_shuttle.can_recall())
-					emergency_shuttle.recall()
-					log_admin("[key_name(usr)] sent the Emergency Shuttle back")
-					message_admins("\blue [key_name_admin(usr)] sent the Emergency Shuttle back", 1)
+				switch(emergency_shuttle.direction)
+					if(-1)
+						emergency_shuttle.incall()
+						a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
+						log_admin("[key_name(usr)] initiated the Escape Pods Launch.")
+						message_admins("\blue [key_name_admin(usr)] initiated the Escape Pods Launch.", 1)
+					if(1)
+						emergency_shuttle.recall()
+						log_admin("[key_name(usr)] aborted the Escape Pods launch")
+						message_admins("\blue [key_name_admin(usr)] aborted the Escape Pods launch", 1)
 
 		href_list["secretsadmin"] = "check_antagonist"
 

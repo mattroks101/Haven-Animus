@@ -6,4 +6,4 @@ var/centcomm_z = 2
 var/evac_type = "shuttle"
 var/accessable_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" = 60)
 
-//#include "shuttle_controller.dm"
+#include "shuttle_controller.dm"
