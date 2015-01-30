@@ -20,6 +20,15 @@
 	materials = list("$metal" = 6000, "$glass" = 1000) //expensive, but no need for miners.
 	build_path = /obj/item/weapon/pickaxe/drill
 
+/datum/design/kinetic_accelerator
+	name = "Proto-kinetic accelerator"
+	desc = "According to Nanotrasen accounting, this is mining equipment. It's been modified for extreme power output to crush rocks, but often serves as a miner's first defense against hostile alien life; it's not very powerful unless used in a low pressure environment"
+	id = "kineticgun"
+	req_tech = list("materials" = 3, "powerstorage" = 2, "engineering" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 2000, "$glass" = 500, "$silver" = 500)
+	build_path = /obj/item/weapon/gun/energy/kinetic_accelerator
+
 /datum/design/plasmacutter
 	name = "Plasma Cutter"
 	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
@@ -28,7 +37,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 1500, "$glass" = 500, "$gold" = 500, "$plasma" = 500)
 	reliability_base = 79
-	build_path = /obj/item/weapon/pickaxe/plasmacutter
+	build_path = /obj/item/weapon/gun/energy/plasmacutter
 
 /datum/design/pick_diamond
 	name = "Diamond Pickaxe"
@@ -36,7 +45,7 @@
 	id = "pick_diamond"
 	req_tech = list("materials" = 6)
 	build_type = PROTOLATHE
-	materials = list("$diamond" = 3000)
+	materials = list("$metal" = 500, "$diamond" = 3000)
 	build_path = /obj/item/weapon/pickaxe/diamond
 
 /datum/design/drill_diamond

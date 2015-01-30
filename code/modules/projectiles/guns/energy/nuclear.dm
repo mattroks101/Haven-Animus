@@ -1,9 +1,9 @@
 /obj/item/weapon/gun/energy/gun
 	name = "energy gun"
-	desc = "A basic energy-based gun with two settings: Stun and kill."
+	desc = "A basic hybrid energy gun with two settings: Stun and kill."
 	icon_state = "energystun100"
-	item_state = "gun"	//so the human update icon uses the icon_state instead.(if null)
-	fire_sound = 'sound/weapons/Taser.ogg'
+	item_state = null	//so the human update icon uses the icon_state instead.(if null)
+	fire_sound = 'sound/weapons/Taser3.ogg'
 
 	charge_cost = 100 //How much energy is needed to fire.
 	projectile_type = "/obj/item/projectile/energy/electrode"
@@ -25,10 +25,37 @@
 			if(1)
 				mode = 0
 				charge_cost = 100
-				fire_sound = 'sound/weapons/Taser.ogg'
+				fire_sound = 'sound/weapons/Taser3.ogg'
 				user << "\red [src.name] is now set to stun."
 				projectile_type = "/obj/item/projectile/energy/electrode"
 				modifystate = "energystun"
+		update_icon()
+
+/obj/item/weapon/gun/energy/gun/old
+	name = "old energy gun"
+	desc = "An old energy-based gun with two settings: Stun and kill."
+	icon_state = "oldenergystun100"
+	item_state = "gun"
+	fire_sound = 'sound/weapons/Taser.ogg'
+
+	modifystate = "oldenergystun"
+
+	attack_self(mob/living/user as mob)
+		switch(mode)
+			if(0)
+				mode = 1
+				charge_cost = 100
+				fire_sound = 'sound/weapons/Laser5.ogg'
+				user << "\red [src.name] is now set to kill."
+				projectile_type = "/obj/item/projectile/energy/laser"
+				modifystate = "oldenergykill"
+			if(1)
+				mode = 0
+				charge_cost = 100
+				fire_sound = 'sound/weapons/Taser.ogg'
+				user << "\red [src.name] is now set to stun."
+				projectile_type = "/obj/item/projectile/energy/electrode"
+				modifystate = "oldenergystun"
 		update_icon()
 
 /obj/item/weapon/gun/energy/gun/private

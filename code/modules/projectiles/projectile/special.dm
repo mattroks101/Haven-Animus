@@ -11,6 +11,48 @@
 		empulse(target, 1, 1)
 		return 1
 
+/obj/item/projectile/kinetic
+	name = "kinetic force"
+	icon_state = null
+	damage = 15
+	damage_type = BRUTE
+	flag = "bomb"
+	range = 3
+
+obj/item/projectile/kinetic/New()
+	var/turf/proj_turf = get_turf(src)
+	if(!istype(proj_turf, /turf))
+		return
+	var/datum/gas_mixture/environment = proj_turf.return_air()
+	var/pressure = environment.return_pressure()
+	if(pressure < 50)
+		name = "full strength kinetic force"
+		damage = 30
+	..()
+
+/obj/item/projectile/kinetic/Range()
+	range--
+	if(range <= 0)
+		new /obj/item/effect/kinetic_blast(src.loc)
+		qdel(src)
+
+/obj/item/projectile/kinetic/on_hit(atom/target)
+	var/turf/target_turf= get_turf(target)
+	if(istype(target_turf, /turf/simulated/mineral))
+		var/turf/simulated/mineral/M = target_turf
+		M.GetDrilled()
+	new /obj/item/effect/kinetic_blast(target_turf)
+	..()
+
+/obj/item/effect/kinetic_blast
+	name = "kinetic explosion"
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "kinetic_blast"
+	layer = 4.1
+
+/obj/item/effect/kinetic_blast/New()
+	spawn(4)
+		qdel(src)
 
 /obj/item/projectile/bullet/gyro
 	name ="explosive bolt"
@@ -139,3 +181,39 @@
 			var/mob/living/carbon/human/M = target
 			M.adjustBrainLoss(20)
 			M.hallucination += 20
+
+/obj/item/projectile/plasma
+	name = "plasma blast"
+	icon_state = "plasmacutter"
+	damage_type = BURN
+	damage = 10
+	range = 6
+	var/power = 9
+
+/obj/item/projectile/plasma/on_hit(var/atom/target)
+	if(istype(target, /turf/simulated/mineral))
+		while(target && target.density && range > 0 && power > 0)
+			power -= 1
+			var/turf/simulated/mineral/M = target
+			M.GetDrilled()
+		if(range > 0 && power > 0)
+			return -1
+	return ..()
+
+/obj/item/projectile/plasma/adv
+	range = 9
+	power = 12
+	damage = 15
+
+/obj/item/projectile/plasma/adv/on_hit(var/atom/target)
+	if(!ismob(target) && !istype(target, /turf/simulated/mineral))
+		target.ex_act(3)
+		power -= 10
+		if(range > 0 && power > 0 && (!target || !target.density))
+			return -1
+	return ..()
+
+
+/obj/item/projectile/plasma/adv/mech
+	range = 12
+	power = 18

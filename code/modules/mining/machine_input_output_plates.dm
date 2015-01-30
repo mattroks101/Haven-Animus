@@ -17,3 +17,9 @@
 	anchored = 1.0
 	New()
 		icon_state = "blank"
+
+/obj/machinery/mineral/proc/unload_mineral(var/atom/movable/S, var/obj/machinery/mineral/output/O)
+	S.loc = loc
+	var/turf/T = get_step(src,O)
+	if(T)
+		S.loc = T

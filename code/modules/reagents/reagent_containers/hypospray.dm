@@ -49,37 +49,63 @@
 
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector
-	name = "autoinjector"
-	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
+
+/obj/item/weapon/reagent_containers/hypospray/medipen
+	name = "medipen"
+	desc = "A rapid and safe way to stabilize patients in critical condition for personnel without advanced medical knowledge."
 	icon_state = "autoinjector"
 	item_state = "autoinjector"
-	amount_per_transfer_from_this = 5
-	volume = 5
+	amount_per_transfer_from_this = 10
+	volume = 10
+	flags = null
+	var/starting_reagent = "tricordrazine"
+	var/starting_amount = 10
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
+/obj/item/weapon/reagent_containers/hypospray/medipen/New()
 	..()
-	reagents.remove_reagent("tricordrazine", 30)
-	reagents.add_reagent("inaprovaline", 5)
+	reagents.add_reagent(starting_reagent, starting_amount)
 	update_icon()
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/reagent_containers/hypospray/medipen/attack(mob/M as mob, mob/user as mob)
 	..()
 	if(reagents.total_volume <= 0) //Prevents autoinjectors to be refilled.
 		flags &= ~OPENCONTAINER
 	update_icon()
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/update_icon()
+/obj/item/weapon/reagent_containers/hypospray/medipen/update_icon()
 	if(reagents.total_volume > 0)
 		icon_state = "[initial(icon_state)]1"
 	else
 		icon_state = "[initial(icon_state)]0"
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/examine()
+/obj/item/weapon/reagent_containers/hypospray/medipen/examine()
 	..()
 	if(reagents && reagents.reagent_list.len)
-		usr << "\blue It is currently loaded."
+		usr << "<span class='notice'>It is currently loaded.</span>"
 	else
-		usr << "\blue It is spent."
+		usr << "<span class='notice'>It is spent.</span>"
+
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/leporazine //basilisks
+	name = "leporazine medipen"
+	desc = "A rapid way to regulate your body's temperature in the event of a hardsuit malfunction at the cost of some shortness of breath."
+	starting_reagent = "leporazine"
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/stimpack //goliath kiting
+	name = "stimpack medipen"
+	desc = "A rapid way to stimulate your body's adrenaline, allowing for freer movement in restrictive armor at the cost of some shortness of breath."
+	starting_reagent = "synaptizine"
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/morphine
+	name = "morphine medipen"
+	desc = "A rapid way to get you out of a tight situation and fast! You'll feel rather drowsy, though."
+	starting_reagent = "hyperzine"
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/admin // for admin using
+	name = "advanced medipen"
+	desc = "A rapid and safe way to stabilize patients in critical condition for personnel without advanced medical knowledge. Filled with adminordrazine."
+	amount_per_transfer_from_this = 25
+	volume = 25
+	starting_reagent = "adminordrazine"

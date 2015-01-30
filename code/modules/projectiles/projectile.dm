@@ -51,7 +51,20 @@
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
 
+	var/range = 0
+	var/proj_hit = 0
 
+	proc/Range()
+		if(range)
+			range--
+			if(range <= 0)
+				on_range()
+		else
+			return
+
+	proc/on_range() //if we want there to be effects when they reach the end of their range
+		proj_hit = 1
+		qdel(src)
 
 	proc/on_hit(var/atom/target, var/blocked = 0)
 		if(blocked >= 2)		return 0//Full block
