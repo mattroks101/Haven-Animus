@@ -4046,7 +4046,7 @@
 "bzP" = (/turf/simulated/floor{dir = 1; icon_state = "warning"; tag = "icon-caution_east"},/area/toxins/lab)
 "bzQ" = (/obj/machinery/door/poddoor/four_tile_ver/podlock{id = "podbay_ext"},/turf/simulated/floor/engine{icon_state = "engine_new"},/area/assembly/podbay)
 "bzR" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/engine{tag = "icon-enginewarn (EAST)"; icon_state = "enginewarn"; dir = 4},/area/assembly/podbay)
-"bzS" = (/obj/machinery/mecha_part_fabricator/pod{eject_dir = 4},/turf/simulated/floor{icon_state = "dark"},/area/assembly/podbay)
+"bzS" = (/obj/machinery/mecha_part_fabricator/pod{eject_dir = 4; req_access = list(10)},/turf/simulated/floor{icon_state = "dark"},/area/assembly/podbay)
 "bzT" = (/obj/effect/decal/warning_stripes{tag = "icon-bot"; icon_state = "bot"},/turf/simulated/floor{icon_state = "dark"},/area/assembly/podbay)
 "bzU" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor{icon_state = "dark"},/area/assembly/podbay)
 "bzV" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor{icon_state = "dark"},/area/assembly/podbay)
