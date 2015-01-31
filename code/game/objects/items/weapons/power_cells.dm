@@ -37,6 +37,12 @@
 	origin_tech = "powerstorage=1"
 	maxcharge = 1000 // 10 shots
 
+/obj/item/weapon/cell/crap/plasmacutter
+	maxcharge = 16 // shoot cost 2, yeah
+
+/obj/item/weapon/cell/crap/adv_plasmacutter
+	maxcharge = 30 // same here
+
 /obj/item/weapon/cell/crap/empty/New()
 	..()
 	charge = 0

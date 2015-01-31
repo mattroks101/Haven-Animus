@@ -213,7 +213,7 @@
 		new /obj/item/clothing/head/helmet/swat(src)
 		new /obj/item/device/radio/headset/heads/captain(src)
 		new /obj/item/clothing/shoes/jackboots(src)
-		new /obj/item/clothing/under/rank/captain(src)
+		new /obj/item/clothing/under/rank/captain/green(src)
 
 /obj/item/wardrobe/hop
 	name = "\improper Head of Personnel Wardrobe"

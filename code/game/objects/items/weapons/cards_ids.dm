@@ -127,6 +127,7 @@
 	icon_state = "id"
 	item_state = "card-id"
 	var/access = list()
+	var/mining_points = 0		//For redeeming at mining equipment lockers
 	var/registered_name = "Unknown" // The name registered_name on the card
 	slot_flags = SLOT_ID
 

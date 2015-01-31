@@ -382,6 +382,102 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /**********************Asteroid**************************/
 
+/turf/simulated/floor/plating/airless/asteroid/cave
+	var/length = 100
+	var/mob_spawn_list = list("Goldgrub" = 1, "Goliath" = 5, "Basilisk" = 4, "Hivelord" = 3)
+	var/sanity = 1
+
+/turf/simulated/floor/plating/airless/asteroid/cave/New(loc, var/length, var/go_backwards = 1, var/exclude_dir = -1)
+
+	// If length (arg2) isn't defined, get a random length; otherwise assign our length to the length arg.
+	if(!length)
+		src.length = rand(25, 50)
+	else
+		src.length = length
+
+	// Get our directiosn
+	var/forward_cave_dir = pick(alldirs - exclude_dir)
+	// Get the opposite direction of our facing direction
+	var/backward_cave_dir = angle2dir(dir2angle(forward_cave_dir) + 180)
+
+	// Make our tunnels
+	make_tunnel(forward_cave_dir)
+	if(go_backwards)
+		make_tunnel(backward_cave_dir)
+	// Kill ourselves by replacing ourselves with a normal floor.
+	SpawnFloor(src)
+	..()
+
+/turf/simulated/floor/plating/airless/asteroid/cave/proc/make_tunnel(var/dir)
+
+	var/turf/simulated/mineral/tunnel = src
+	var/next_angle = pick(45, -45)
+
+	for(var/i = 0; i < length; i++)
+		if(!sanity)
+			break
+
+		var/list/L = list(45)
+		if(IsOdd(dir2angle(dir))) // We're going at an angle and we want thick angled tunnels.
+			L += -45
+
+		// Expand the edges of our tunnel
+		for(var/edge_angle in L)
+			var/turf/simulated/mineral/edge = get_step(tunnel, angle2dir(dir2angle(dir) + edge_angle))
+			if(istype(edge))
+				SpawnFloor(edge)
+
+		// Move our tunnel forward
+		tunnel = get_step(tunnel, dir)
+
+		if(istype(tunnel))
+			// Small chance to have forks in our tunnel; otherwise dig our tunnel.
+			if(i > 3 && prob(20))
+				new src.type(tunnel, rand(10, 15), 0, dir)
+			else
+				SpawnFloor(tunnel)
+		else //if(!istype(tunnel, src.parent)) // We hit space/normal/wall, stop our tunnel.
+			break
+
+		// Chance to change our direction left or right.
+		if(i > 2 && prob(33))
+			// We can't go a full loop though
+			next_angle = -next_angle
+			dir = angle2dir(dir2angle(dir) + next_angle)
+
+
+/turf/simulated/floor/plating/airless/asteroid/cave/proc/SpawnFloor(var/turf/T)
+	for(var/turf/S in range(2,T))
+		if(istype(S, /turf/space) || istype(S.loc, /area/mine/explored))
+			sanity = 0
+			break
+	if(!sanity)
+		return
+
+	SpawnMonster(T)
+/*	var/turf/simulated/floor/t = new /turf/simulated/floor/plating/airless/asteroid(T)
+	spawn(2)
+		t.fullUpdateMineralOverlays()*/
+
+/turf/simulated/floor/plating/airless/asteroid/cave/proc/SpawnMonster(var/turf/T)
+	if(prob(30))
+		if(istype(loc, /area/mine/explored))
+			return
+		for(var/atom/A in range(30,T))//Lowers chance of mob clumps
+			if(istype(A, /mob/living/simple_animal/hostile/asteroid))
+				return
+		var/randumb = pickweight(mob_spawn_list)
+		switch(randumb)
+			if("Goliath")
+				new /mob/living/simple_animal/hostile/asteroid/goliath(T)
+			if("Goldgrub")
+				new /mob/living/simple_animal/hostile/asteroid/goldgrub(T)
+			if("Basilisk")
+				new /mob/living/simple_animal/hostile/asteroid/basilisk(T)
+			if("Hivelord")
+				new /mob/living/simple_animal/hostile/asteroid/hivelord(T)
+	return
+
 
 /turf/simulated/floor/plating/airless/asteroid //floor piece
 	name = "Asteroid"
