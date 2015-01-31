@@ -3730,7 +3730,7 @@
 "btL" = (/obj/structure/disposalpipe/segment,/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/poddoor/shutters/preopen{id = "surgery"},/turf/simulated/floor/plating,/area/medical/surgery)
 "btM" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/medical/medbay)
 "btN" = (/obj/machinery/iv_drip,/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
-"btO" = (/obj/structure/table,/obj/item/weapon/storage/box/cdeathalarm_kit,/obj/item/weapon/storage/box/autoinjectors{pixel_x = 4; pixel_y = 4},/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
+"btO" = (/obj/structure/table,/obj/item/weapon/storage/box/cdeathalarm_kit,/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
 "btP" = (/obj/structure/table,/obj/item/weapon/gun/syringe,/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
 "btQ" = (/obj/structure/table,/obj/item/weapon/storage/firstaid/regular{pixel_x = 1; pixel_y = 2},/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
 "btR" = (/obj/structure/table,/obj/item/stack/sheet/mineral/plasma{amount = 5},/turf/simulated/floor{icon_state = "white"},/area/medical/chemistry)
