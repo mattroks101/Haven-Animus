@@ -169,7 +169,7 @@
 		if(SP.Process_Spacemove(1))
 			SP.inertia_dir = 0
 			return
-		spawn(5)
+		spawn(SP.move_delay)
 			if((SP && (SP.loc == src)))
 				if(SP.inertia_dir)
 					step(SP, SP.inertia_dir)

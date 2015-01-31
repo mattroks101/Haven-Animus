@@ -1,55 +1,58 @@
 /obj/item/device/spacepod_equipment/tool/drill
 	name = "Drill"
-	desc = "This is the drill that'll pierce the heavens! (Can be attached to: Combat and Engineering Spacepods)"
-	icon_state = "mecha_drill"
-	equip_cooldown = 30
+	desc = "This is the drill that'll pierce the heavens! (Can be attached to: Industrial Spacepods)"
+	icon_state = "pod_taser"
+	overlay_icon = "pod_tool_drill"
+	equip_cooldown = 15
 	energy_drain = 10
 	force = 15
+	construction_cost = list("metal"=10000)
 
 	action(atom/target)
 		if(!action_checks(target)) return
-		if(isobj(target))
-			var/obj/target_obj = target
-			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
+//		if(isobj(target))
+//			var/obj/target_obj = target
+//			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<font color='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
-		occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
+		chassis.visible_message("<font color='red'><b>[chassis] powers it's drill!</b></font>", "You hear the drill.")
+		occupant_message("<font color='red'><b>You start to drill!</b></font>")
 		var/T = chassis.loc
-		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
-				if(istype(target, /turf/simulated/wall/r_wall))
-					occupant_message("<font color='red'>[target] is too durable to drill through.</font>")
-				else if(istype(target, /turf/simulated/mineral))
-					for(var/turf/simulated/mineral/M in range(chassis.get_active_part(1),1)|range(chassis.get_active_part(2),1))
-						if(get_dir(chassis,M)&chassis.dir)
-							M.GetDrilled()
-					log_message("Drilled through [target]")
+				var/turf/T1 = get_turf(get_step(chassis.get_active_part(1), chassis.dir))
+				var/turf/T2 = get_turf(get_step(chassis.get_active_part(2), chassis.dir))
+				if(!istype(T1, /turf/simulated/wall/r_wall))
+					T1.ex_act(2)
+				else
+					occupant_message("<font color='red'>[T1] is too durable to drill through.</font>")
+				if(!istype(T2, /turf/simulated/wall/r_wall))
+					T2.ex_act(2)
+				else
+					occupant_message("<font color='red'>[T2] is too durable to drill through.</font>")
+				for(var/atom/movable/A in T1.contents|T2.contents)
+					if(isobj(A))
+						var/obj/target_obj = A
+						if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	continue
+					log_message("Drilled through [A]")
+					A.ex_act(2)
+/*				if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
+					var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
+					if(ore_box)
+						for(var/obj/item/weapon/ore/ore in range(chassis,1))
+							if(get_dir(chassis,ore)&chassis.dir)
+								ore.Move(ore_box)*/
+
 /*					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 						if(ore_box)
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)*/
-				else if(istype(target, /turf/simulated/floor/plating/airless/asteroid))
-					for(var/turf/simulated/floor/plating/airless/asteroid/M in range(chassis,1))
-						if(get_dir(chassis,M)&chassis.dir)
-							M.gets_dug()
-					log_message("Drilled through [target]")
-/*					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
-						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
-						if(ore_box)
-							for(var/obj/item/weapon/ore/ore in range(chassis,1))
-								if(get_dir(chassis,ore)&chassis.dir)
-									ore.Move(ore_box)*/
-				else if(target.loc == C)
-					log_message("Drilled through [target]")
-					target.ex_act(2)
 		return 1
 
-/*	can_attach(obj/mecha/M as obj)
+	can_attach(obj/spacepod/SP as obj)
 		if(..())
-			if(istype(M, /obj/mecha/working) || istype(M, /obj/mecha/combat))
+			if(istype(SP, /obj/spacepod/industrial))
 				return 1
-		return 0*/
+		return 0

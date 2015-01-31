@@ -11,6 +11,9 @@
 
 /obj/item/device/spacepod_equipment
 	name = "equipment"
+	icon = 'icons/pods/ship.dmi'
+	var/construction_cost = list("metal"=10000)
+	var/overlay_icon
 	var/obj/spacepod/chassis
 	var/range = MELEE //bitflags
 	var/equip_cooldown = 0
@@ -35,7 +38,18 @@
 	SP.log_message("[src] initialized.")
 	if(!SP.selected)
 		SP.selected = src
-//	src.update_chassis_page()
+	return
+
+/obj/item/device/spacepod_equipment/proc/detach(atom/moveto=null)
+	moveto = moveto || get_turf(chassis)
+	if(src.Move(moveto))
+		chassis.equipment -= src
+		if(chassis.selected == src)
+			chassis.selected = null
+		chassis.log_message("[src] removed from equipment.")
+		chassis.update_icons()
+		chassis = null
+		set_ready_state(1)
 	return
 
 /obj/item/device/spacepod_equipment/proc/is_ranged()//add a distance restricted equipment. Why not?

@@ -7,6 +7,7 @@
 	icon_state = "core"
 	flags = FPRINT | CONDUCT
 	origin_tech = "materials=4;plasma=3;bluespace=2;engineering=3"
+	construction_cost = list("metal"=20000,"glass"=10000, "plasma"=5000)
 
 /obj/item/pod_parts/pod_frame
 	name = "\improper Space Pod Frame"
@@ -14,6 +15,7 @@
 	flags = CONDUCT
 	density = 0
 	anchored = 0
+	construction_cost = list("metal"=30000)
 	var/link_to = null
 	var/link_angle = 0
 
@@ -125,11 +127,13 @@
 	icon = 'icons/pods/pod_parts.dmi'
 	icon_state = "pod_armor_civ"
 	desc = "Spacepod armor. This is the civilian version. It looks rather flimsy."
+	construction_cost = list("metal"=20000,"glass"=10000)
 	var/pod_type = "civilian"
 
 /obj/item/pod_parts/armor/mining
-	name = "mining pod armor"
+	name = "industrial pod armor"
 	icon = 'icons/pods/pod_parts.dmi'
-	icon_state = "pod_armor_civ"
+	icon_state = "pod_armor_ind"
 	desc = "Spacepod armor. This is the industrial version. It looks rather rough."
 	pod_type = "industrial"
+	construction_cost = list("metal"=30000,"glass"=10000, "plasma"=1000)

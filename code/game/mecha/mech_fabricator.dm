@@ -128,11 +128,6 @@
 						),
 
 
-	"Space Pod" = list(
-						/obj/item/pod_parts/core
-						),
-
-
 	"Misc"=list(/obj/item/mecha_parts/mecha_tracking)
 	)
 

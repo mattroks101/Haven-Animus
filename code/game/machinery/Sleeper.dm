@@ -9,6 +9,7 @@
 	var/obj/machinery/sleeper/connected = null
 	anchored = 1 //About time someone fixed this.
 	density = 1
+	dir = 8
 
 /obj/machinery/sleep_console/process()
 	if(stat & (NOPOWER|BROKEN))
@@ -145,6 +146,7 @@
 	name = "sleeper"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "sleeper-open"
+	dir = 8
 	density = 1
 	anchored = 1
 	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")

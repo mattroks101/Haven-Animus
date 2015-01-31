@@ -79,7 +79,7 @@
 	src.operating = 0
 	return
 
-/*
+
 /obj/machinery/door/poddoor/two_tile_hor/open()
 	if (src.operating == 1) //doors can still open when emag-disabled
 		return
@@ -139,16 +139,16 @@
 	src.icon_state = "pdoor0"
 	sleep(10)
 	src.density = 0
-	src.sd_SetOpacity(0)
+	src.SetOpacity(0)
 
 	f1.density = 0
-	f1.sd_SetOpacity(0)
+	f1.SetOpacity(0)
 	f2.density = 0
-	f2.sd_SetOpacity(0)
+	f2.SetOpacity(0)
 	f3.density = 0
-	f3.sd_SetOpacity(0)
+	f3.SetOpacity(0)
 	f4.density = 0
-	f4.sd_SetOpacity(0)
+	f4.SetOpacity(0)
 
 	update_nearby_tiles()
 
@@ -168,16 +168,16 @@
 	src.density = 1
 
 	f1.density = 1
-	f1.sd_SetOpacity(1)
+	f1.SetOpacity(1)
 	f2.density = 1
-	f2.sd_SetOpacity(1)
+	f2.SetOpacity(1)
 	f3.density = 1
-	f3.sd_SetOpacity(1)
+	f3.SetOpacity(1)
 	f4.density = 1
-	f4.sd_SetOpacity(1)
+	f4.SetOpacity(1)
 
 	if (src.visible)
-		src.sd_SetOpacity(1)
+		src.SetOpacity(1)
 	update_nearby_tiles()
 
 	sleep(10)
@@ -195,12 +195,12 @@
 	src.icon_state = "pdoor0"
 	sleep(10)
 	src.density = 0
-	src.sd_SetOpacity(0)
+	src.SetOpacity(0)
 
 	f1.density = 0
-	f1.sd_SetOpacity(0)
+	f1.SetOpacity(0)
 	f2.density = 0
-	f2.sd_SetOpacity(0)
+	f2.SetOpacity(0)
 
 	update_nearby_tiles()
 
@@ -220,12 +220,12 @@
 	src.density = 1
 
 	f1.density = 1
-	f1.sd_SetOpacity(1)
+	f1.SetOpacity(1)
 	f2.density = 1
-	f2.sd_SetOpacity(1)
+	f2.SetOpacity(1)
 
 	if (src.visible)
-		src.sd_SetOpacity(1)
+		src.SetOpacity(1)
 	update_nearby_tiles()
 
 	sleep(10)
@@ -243,16 +243,16 @@
 	src.icon_state = "pdoor0"
 	sleep(10)
 	src.density = 0
-	src.sd_SetOpacity(0)
+	src.SetOpacity(0)
 
 	f1.density = 0
-	f1.sd_SetOpacity(0)
+	f1.SetOpacity(0)
 	f2.density = 0
-	f2.sd_SetOpacity(0)
+	f2.SetOpacity(0)
 	f3.density = 0
-	f3.sd_SetOpacity(0)
+	f3.SetOpacity(0)
 	f4.density = 0
-	f4.sd_SetOpacity(0)
+	f4.SetOpacity(0)
 
 	update_nearby_tiles()
 
@@ -272,16 +272,16 @@
 	src.density = 1
 
 	f1.density = 1
-	f1.sd_SetOpacity(1)
+	f1.SetOpacity(1)
 	f2.density = 1
-	f2.sd_SetOpacity(1)
+	f2.SetOpacity(1)
 	f3.density = 1
-	f3.sd_SetOpacity(1)
+	f3.SetOpacity(1)
 	f4.density = 1
-	f4.sd_SetOpacity(1)
+	f4.SetOpacity(1)
 
 	if (src.visible)
-		src.sd_SetOpacity(1)
+		src.SetOpacity(1)
 	update_nearby_tiles()
 
 	sleep(10)
@@ -302,8 +302,8 @@
 		f2 = new/obj/machinery/door/poddoor/filler_object (get_step(src,EAST))
 		f1.density = density
 		f2.density = density
-		f1.sd_SetOpacity(opacity)
-		f2.sd_SetOpacity(opacity)
+		f1.SetOpacity(opacity)
+		f2.SetOpacity(opacity)
 
 	Destroy()
 		del f1
@@ -321,8 +321,8 @@
 		f2 = new/obj/machinery/door/poddoor/filler_object (get_step(src,NORTH))
 		f1.density = density
 		f2.density = density
-		f1.sd_SetOpacity(opacity)
-		f2.sd_SetOpacity(opacity)
+		f1.SetOpacity(opacity)
+		f2.SetOpacity(opacity)
 
 	Destroy()
 		del f1
@@ -346,10 +346,10 @@
 		f2.density = density
 		f3.density = density
 		f4.density = density
-		f1.sd_SetOpacity(opacity)
-		f2.sd_SetOpacity(opacity)
-		f4.sd_SetOpacity(opacity)
-		f3.sd_SetOpacity(opacity)
+		f1.SetOpacity(opacity)
+		f2.SetOpacity(opacity)
+		f4.SetOpacity(opacity)
+		f3.SetOpacity(opacity)
 
 	Destroy()
 		del f1
@@ -375,10 +375,10 @@
 		f2.density = density
 		f3.density = density
 		f4.density = density
-		f1.sd_SetOpacity(opacity)
-		f2.sd_SetOpacity(opacity)
-		f4.sd_SetOpacity(opacity)
-		f3.sd_SetOpacity(opacity)
+		f1.SetOpacity(opacity)
+		f2.SetOpacity(opacity)
+		f4.SetOpacity(opacity)
+		f3.SetOpacity(opacity)
 
 	Destroy()
 		del f1
@@ -386,7 +386,10 @@
 		del f3
 		del f4
 		..()
-*/
+
+/obj/machinery/door/poddoor/four_tile_ver/podlock
+	icon = 'icons/obj/doors/1x4blast_pod_vert.dmi'
+
 /obj/machinery/door/poddoor/filler_object
 	name = ""
 	icon_state = ""

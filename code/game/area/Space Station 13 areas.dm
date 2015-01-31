@@ -1367,6 +1367,15 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Chief Engineer's office"
 		icon_state = "engine_control"
 
+/area/propulsion
+	name = "Propulsion Hangar"
+	icon_state = "propulsion"
+
+/area/propulsion/left
+	name = "Left Propulsion Hangar"
+
+/area/propulsion/right
+	name = "Right Propulsion Hangar"
 
 //Solars
 
@@ -1426,6 +1435,10 @@ var/list/ghostteleportlocs = list()
 
 /area/assembly/robotics
 	name = "\improper Robotics Lab"
+	icon_state = "ass_line"
+
+area/assembly/podbay
+	name = "\improper Pod Bay"
 	icon_state = "ass_line"
 
 /area/assembly/assembly_line //Derelict Assembly Line
@@ -2291,6 +2304,7 @@ var/list/the_station_areas = list (
 	/area/janitor,
 	/area/hydroponics,
 	/area/toxins,
+	/area/propulsion,
 	/area/storage,
 	/area/construction,
 	/area/ai_monitored/storage/eva, //do not try to simplify to "/area/ai_monitored" --rastaf0

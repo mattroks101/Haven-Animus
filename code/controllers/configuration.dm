@@ -117,6 +117,7 @@
 	var/ghost_interaction = 1
 
 	var/comms_password = ""
+	var/use_overmap = 0
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -453,6 +454,9 @@
 
 				if("limbs_can_break")
 					config.limbs_can_break = text2num(value)
+
+				if("use_overmap")
+					config.use_overmap = 1
 
 
 

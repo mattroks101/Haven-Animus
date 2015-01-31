@@ -177,3 +177,9 @@
 
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)
+
+/turf/simulated/proc/gets_dug()
+	return
+
+/turf/simulated/proc/GetDrilled()
+	return

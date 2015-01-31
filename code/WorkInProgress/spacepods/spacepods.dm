@@ -1,6 +1,7 @@
 // honk
 #define DAMAGE			1
 #define FIRE			2
+#define EQUIP			3
 
 /obj/spacepod
 	name = "\improper space pod"
@@ -28,7 +29,9 @@
 	var/hatch_open = 0
 	var/next_firetime = 0
 	var/list/pod_overlays
-	var/health = 400
+	var/health = 200
+	var/can_move = 1
+	var/move_delay = 2
 
 	var/max_equip = 1
 	var/list/equipment = new
@@ -37,13 +40,14 @@
 
 /obj/spacepod/New()
 	. = ..()
+	name = "Pod-[rand(100,999)]"
 	if(!pod_overlays)
 		pod_overlays = new/list(2)
 		pod_overlays[DAMAGE] = image(icon, icon_state="pod_damage")
 		pod_overlays[FIRE] = image(icon, icon_state="pod_fire")
 	bound_width = 64
 	bound_height = 64
-	dir = EAST
+//	dir = EAST
 	battery = new()
 	add_cabin()
 	add_airtank()
@@ -98,6 +102,11 @@
 		pod_overlays = new/list(2)
 		pod_overlays[DAMAGE] = image(icon, icon_state="pod_damage")
 		pod_overlays[FIRE] = image(icon, icon_state="pod_fire")
+
+	if(selected && selected.overlay_icon)
+		pod_overlays.len = 3
+		pod_overlays[EQUIP] = image(icon, icon_state="[src.selected.overlay_icon]")
+		overlays += pod_overlays[EQUIP]
 
 	if(health <= round(initial(health)/2))
 		overlays += pod_overlays[DAMAGE]
@@ -175,7 +184,7 @@
 /obj/spacepod/attackby(obj/item/W as obj, mob/user as mob)
 	if(iscrowbar(W))
 		hatch_open = !hatch_open
-		user << "<span class='notice'>You [hatch_open ? "open" : "close"] the maintenance hatch.</span>"
+		user.visible_message("<span class='notice'>[user] [hatch_open ? "opens" : "closes"] [src]'s maintenance hatch.</span>")
 	if(istype(W, /obj/item/weapon/cell))
 		if(!hatch_open)
 			user << "<span class='warning'>Open the maintenance hatch first!</span>"
@@ -186,6 +195,7 @@
 		user.drop_item(W)
 		battery = W
 		W.loc = src
+		user.visible_message("<span class='notice'>[user] inserts [W] into [src].</span>")
 		return
 	if(istype(W, /obj/item/device/spacepod_equipment))
 		var/obj/item/device/spacepod_equipment/E = W
@@ -196,6 +206,7 @@
 			user.drop_item()
 			E.attach(src)
 			user.visible_message("[user] attaches [W] to [src]", "You attach [W] to [src]")
+			update_icons()
 		else
 			user << "You were unable to attach [W] to [src]"
 		return
@@ -211,7 +222,7 @@
 	var/list/possible = list()
 	if(battery)
 		possible.Add("Energy Cell")
-	if(equipment_system.weapon_system)
+	if(selected)
 		possible.Add("Weapon System")
 	/* Not yet implemented
 	if(equipment_system.engine_system)
@@ -226,13 +237,10 @@
 				user << "<span class='notice'>You remove \the [battery] from the space pod</span>"
 				battery = null
 		if("Weapon System")
-			SPE = equipment_system.weapon_system
-			if(user.put_in_any_hand_if_possible(SPE))
-				user << "<span class='notice'>You remove \the [SPE] from the equipment system.</span>"
-				SPE.chassis = null
-				equipment_system.weapon_system = null
-			else
-				user << "<span class='warning'>You need an open hand to do that.</span>"
+			SPE = selected
+			SPE.detach()
+			user.put_in_any_hand_if_possible(SPE)
+			user << "<span class='notice'>You remove \the [SPE] from the equipment system.</span>"
 		/*
 		if("engine system")
 			SPE = equipment_system.engine_system
@@ -254,11 +262,21 @@
 
 /obj/spacepod/civilian
 	icon_state = "pod_civ"
-	desc = "A sleek civilian space pod."
+	desc = "A civilian-class vehicle pod, often used for exploration and trading."
+
+	New()
+		..()
+		name = "Pod C-[rand(100,999)]"
 
 /obj/spacepod/industrial
 	icon_state = "pod_industrial"
-	desc = "A rough looking space pod meant for industrial work."
+	desc = "A slow yet sturdy industrial pod, designed for hazardous work in asteroid belts."
+	health = 400
+	move_delay = 3
+
+	New()
+		..()
+		name = "Pod I-[rand(100,999)]"
 
 /obj/spacepod/random
 	icon_state = "pod_civ"
@@ -404,7 +422,7 @@
 //	usr << "You start climbing into [src.name]"
 
 	if(target_place == "Driver's")
-		visible_message("\blue [usr] starts to climb into [src.name]")
+		visible_message("\blue [usr] starts to climb into the [src.name].")
 	else if(target_place == "Passenger's")
 		visible_message("\blue [usr] starts to enter the [src.name]'s passenger's door.")
 
@@ -412,11 +430,13 @@
 		if(target_place == "Driver's")
 			if(!src.occupant)
 				moved_inside(usr,1)
+				visible_message("\blue [usr] climbs into the [src.name].")
 			else if(src.occupant!=usr)
 				usr << "[src.occupant] was faster. Try better next time, loser."
 		else if(target_place == "Passenger's")
 			if(!src.passenger)
 				moved_inside(usr,2)
+				visible_message("\blue [usr] climbs into the [src.name] through it's passenger's door.")
 			else if(src.passenger!=usr)
 				usr << "[src.passenger] was faster. Try better next time, loser."
 	else
@@ -513,11 +533,72 @@
 	inertia_dir = 0
 	return 1
 
+/obj/spacepod/proc/canmove_over_z(var/direction)
+	var/turf/controllerlocation = locate(1, 1, src.z)
+	if(!isturf(src.loc))
+		return 0
+	if(!direction)
+		return 0
+	var/list/probable_block = new/list(4)
+	var/free_cells = 0
+	var/turf/T1 = get_turf(src)
+	var/turf/T2 = locate(get_step(T1, NORTH))
+	var/turf/T3 = locate(get_step(T1, EAST))
+	var/turf/T4 = locate(get_step(T2, EAST))
+
+	if(direction == UP)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			if (controller.up)
+				T1 = locate(T1.x, T1.y, controller.up_target)
+				T2 = locate(T2.x, T2.y, controller.up_target)
+				T3 = locate(T3.x, T3.y, controller.up_target)
+				T4 = locate(T4.x, T4.y, controller.up_target)
+				probable_block.Add(T1,T2,T3,T4)
+				for(var/turf/T in probable_block)
+					if(istype(T, /turf/space) || istype(T, /turf/simulated/floor/open))
+						var/blocked = 0
+						for(var/atom/A in T.contents)
+							if(T.density)
+								blocked = 1
+								break
+						if(!blocked)
+							free_cells++
+	else if(direction == DOWN)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			if (controller.down)
+				T1 = locate(T1.x, T1.y, controller.down_target)
+				T2 = locate(T2.x, T2.y, controller.down_target)
+				T3 = locate(T3.x, T3.y, controller.down_target)
+				T4 = locate(T4.x, T4.y, controller.down_target)
+				probable_block.Add(T1,T2,T3,T4)
+				for(var/turf/T in probable_block)
+					if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/floor/open)))
+						return 0
+					if(istype(T, /turf/space) || istype(T, /turf/simulated/floor/open))
+						var/blocked = 0
+						for(var/atom/A in T.contents)
+							if(T.density)
+								blocked = 1
+								break
+						if(!blocked)
+							free_cells++
+	if(free_cells == 4)
+		return 1
+	else
+		return 0
+
+
 /obj/spacepod/relaymove(mob/user, direction)
 	var/moveship = 1
+	var/turf/controllerlocation = locate(1, 1, src.z)
+
 	if(user == passenger)
 		user << "<span class='warning'>You are not driving this pod!</span>"
 		return
+
+	if(!can_move)
+		return
+
 	if(battery && battery.charge >= 3 && health)
 		src.dir = direction
 		switch(direction)
@@ -537,10 +618,30 @@
 				if(inertia_dir == 4)
 					inertia_dir = 0
 					moveship = 0
+			if(UP)
+				if(canmove_over_z(UP))
+					for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+						var/turf/T = locate(x, y, controller.up_target)
+						Move(T, dir)
+						moveship = 0
+				else
+					occupant_message("Something is blocking the way up!")
+			if(DOWN)
+				if(canmove_over_z(DOWN))
+					for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+						var/turf/T = locate(x, y, controller.down_target)
+						Move(T, dir)
+						moveship = 0
+				else
+					occupant_message("Something is blocking the way down!")
+
 		if(moveship)
 			step(src, direction)
 			if(istype(src.loc, /turf/space))
 				inertia_dir = direction
+			can_move = 0
+			sleep(move_delay)
+			can_move = 1
 	else
 		if(!battery)
 			user << "<span class='warning'>No energy cell detected.</span>"
@@ -553,6 +654,26 @@
 		return 0
 	battery.charge = max(0, battery.charge - 3)
 
+
+/obj/spacepod/verb/toggleDoors()
+	set name = "Toggle Nearby Pod Doors"
+	set category = "Spacepod"
+	set src = usr.loc
+
+	for(var/obj/machinery/door/poddoor/P in oview(3,src))
+		if(istype(P, /obj/machinery/door/poddoor/four_tile_ver/podlock))
+			var/mob/living/carbon/human/L = usr
+			if(P.check_access(L.get_active_hand()) || P.check_access(L.wear_id))
+				if(P.density)
+					P.open()
+					return 1
+				else
+					P.close()
+					return 1
+			usr << "<span class='warning'>Access denied.</span>"
+			return
+	usr << "<span class='warning'>You are not close to any pod doors.</span>"
+	return
 
 ////////////////////////////////
 /////// Messages and Log ///////
@@ -604,25 +725,41 @@
 /obj/spacepod/proc/get_active_part(var/num = 1)
 	var/first
 	var/second
+	var/third
+	var/fourth
+
 	switch(dir)
 		if(NORTH)
 			first = get_step(src, NORTH)
 			second = get_step(first,EAST)
+			third = get_step(src, EAST)
+			fourth = get_turf(src)
 		if(SOUTH)
 			first = get_turf(src)
 			second = get_step(first,EAST)
+			third = get_step(src, NORTH)
+			fourth = get_step(second, NORTH)
 		if(EAST)
 			first = get_turf(src)
 			first = get_step(first, EAST)
 			second = get_step(first,NORTH)
+			third = get_step(first, WEST)
+			fourth = get_step(second, WEST)
 		if(WEST)
 			first = get_turf(src)
 			second = get_step(first,NORTH)
-	if(num == 1)
-		return first
-	else
-		return second
+			third = get_step(first, EAST)
+			fourth = get_step(second, EAST)
 
+	switch(num)
+		if(1)
+			return first
+		if(2)
+			return second
+		if(3)
+			return third
+		if(4)
+			return fourth
 
 ////////////////////////////////
 /////// Other shit	//// ///////
@@ -641,7 +778,7 @@
 /turf/Enter(var/obj/spacepod/S)
 	if(!istype(S))
 		return ..()
-	if(!istype(src, /turf/space) && !istype(src, /turf/simulated/floor/engine/vacuum/hull) && !istype(src,/turf/simulated/floor/plating/airless/asteroid) && !istype(src, /turf/simulated/floor/open))
+	if(!istype(src, /turf/space) && !istype(src, /turf/simulated/floor/engine) && !istype(src,/turf/simulated/floor/plating) && !istype(src, /turf/simulated/floor/open))
 		return 0
 	else
 		return ..()
@@ -649,3 +786,4 @@
 
 #undef DAMAGE
 #undef FIRE
+#undef EQUIP

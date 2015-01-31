@@ -9,23 +9,18 @@
 //	build_number = 32
 //	nano_file = "podfab.tmpl"
 	part_sets = list( //set names must be unique
-	"Pod_Frame" = list(
+	"Spacepod Frame" = list(
 						/obj/item/pod_parts/pod_frame/fore_port,
 						/obj/item/pod_parts/pod_frame/fore_starboard,
 						/obj/item/pod_parts/pod_frame/aft_port,
 						/obj/item/pod_parts/pod_frame/aft_starboard
 						),
-	"Pod_Armor" = list(
-						/obj/item/pod_parts/armor
+	"Spacepod Armor" = list(
+						/obj/item/pod_parts/armor,
 						),
-	"Pod_Parts" = list(
-						/obj/item/pod_parts/core
-						),
-	"Pod_Weaponry" = list(
-						/obj/item/device/spacepod_equipment/weaponry/taser
-						),
-	"Misc" = list(
-						)
+	"Spacepod Parts" = list(),
+	"Spacepod Weaponry" = list(),
+	"Spacepod Tools" = list()
 	)
 
 //	research_flags = NANOTOUCH | HASOUTPUT | HASMAT_OVER | TAKESMATIN | ACCESS_EMAG | LOCKBOXES
@@ -46,3 +41,17 @@
 	)
 
 	RefreshParts()
+
+
+/obj/machinery/mecha_part_fabricator/pod/convert_designs()
+	if(!files) return
+	var/i = 0
+	for(var/datum/design/D in files.known_designs)
+		if(D.build_type&32)
+			if(D.category in part_sets)//Checks if it's a valid category
+				if(add_part_to_set(D.category, text2path(D.build_path)))//Adds it to said category
+					i++
+			else
+				if(add_part_to_set("Misc", text2path(D.build_path)))//If in doubt, chunk it into the Misc
+					i++
+	return i

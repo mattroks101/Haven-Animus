@@ -254,7 +254,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		return O
 
 
-	proc/GetDrilled(var/artifact_fail = 0)
+	GetDrilled(var/artifact_fail = 0)
 		//var/destroyed = 0 //used for breaking strange rocks
 		if (mineral && mineral.result_amount)
 
@@ -483,7 +483,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		..(W,user)
 	return
 
-/turf/simulated/floor/plating/airless/asteroid/proc/gets_dug()
+/turf/simulated/floor/plating/airless/asteroid/gets_dug()
 	if(dug)
 		return
 	new/obj/item/weapon/ore/glass(src)

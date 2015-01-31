@@ -1,15 +1,4 @@
-#if !defined(MAP_FILE)
-
-    #include "mapfiles\NSV_Luna11321.dmm"
-
-    #define MAP_FILE "NSV_Luna11321.dmm"
-    #define MAP_NAME "NSV Luna"
-
-#elif !defined(MAP_OVERRIDE)
-
-	#warn a map has already been included, ignoring NSV Luna.
-
-#endif
+#include "pods_controller.dm"
 
 var/station_name = "NSV Luna"
 var/vessel_type = "ship"
@@ -19,4 +8,16 @@ var/centcomm_z = 6
 var/evac_type = "pods"
 var/list/accessable_z_levels = list("1" = 10, "2" = 10, "3" = 10, "4" = 10, "5" = 20, "8" = 40)
 
-#include "pods_controller.dm"
+
+/obj/effect/mapinfo/ship/luna
+	name = "NSV Luna"
+//	landing_area = /area/ship/scrap/shuttle/ingoing
+	obj_type = /obj/effect/map/ship/luna
+	mapx = 4
+	mapy = 4
+
+/obj/effect/map/ship/luna
+	name = "generic ship"
+	desc = "Space faring vessel."
+	icon = 'maps/overmap/bearcat/bearcat.dmi'
+	icon_state = "ship"

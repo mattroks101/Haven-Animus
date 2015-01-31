@@ -482,5 +482,6 @@
 	pod
 		name = "Circuit board (Space Pod Mainboard)"
 		icon_state = "mainboard"
+		origin_tech = "programming=3"
 
 

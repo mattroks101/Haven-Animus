@@ -117,7 +117,7 @@
 
 	if (href_list["add"])
 		var/datum/data/record/R = new()
-		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text
+		var/sec_name = input("Input navigation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text
 		if(!sec_name)
 			sec_name = "Sector #[known_sectors.len]"
 		R.fields["name"] = sec_name

@@ -1248,8 +1248,9 @@
 
 		update_action_buttons()
 
-		if(damageoverlay.overlays)
-			damageoverlay.overlays = list()
+		if(damageoverlay)
+			if(damageoverlay.overlays)
+				damageoverlay.overlays = list()
 
 		if (rest) rest.icon_state = text("rest[resting]")
 

@@ -174,6 +174,7 @@
 			SetLuminosity(0,0,0)
 			del(src)
 		if(kill_count < 1)
+			SetLuminosity(0,0,0)
 			del(src)
 		kill_count--
 		spawn while(loc)
