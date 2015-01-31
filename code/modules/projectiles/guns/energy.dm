@@ -9,6 +9,7 @@
 	var/cell_type = "/obj/item/weapon/cell"
 	var/projectile_type = "/obj/item/projectile/beam/practice"
 	var/modifystate
+	var/nomodifystate = 0
 
 	emp_act(severity)
 		power_supply.use(round(power_supply.maxcharge / severity))
@@ -40,5 +41,7 @@
 		ratio = round(ratio, 0.25) * 100
 		if(modifystate)
 			icon_state = "[modifystate][ratio]"
+		else if(nomodifystate == 1)
+			icon_state = "[initial(icon_state)]"
 		else
 			icon_state = "[initial(icon_state)][ratio]"

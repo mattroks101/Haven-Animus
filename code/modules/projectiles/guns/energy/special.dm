@@ -172,11 +172,15 @@ obj/item/weapon/gun/energy/staff
 	desc = "According to Nanotrasen accounting, this is mining equipment. It's been modified for extreme power output to crush rocks, but often serves as a miner's first defense against hostile alien life; it's not very powerful unless used in a low pressure environment."
 	icon_state = "kineticgun"
 	item_state = "kineticgun"
+	charge_cost = 500
 	projectile_type = "/obj/item/projectile/kinetic"
-	cell_type = "/obj/item/weapon/stock_parts/cell/crap"
+	cell_type = "/obj/item/weapon/cell/crap"
 	fire_sound = 'sound/weapons/Gunshot4.ogg'
 	var/overheat = 0
 	var/recent_reload = 1
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/emp_act()
+	return // so it stops breaking from EMPs
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/process_chambered()
 	overheat = 1
@@ -186,79 +190,69 @@ obj/item/weapon/gun/energy/staff
 	..()
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+	..()
 	if(flag)	return
 	if(istype(target, /obj/machinery/recharger))	return
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/attack_self(mob/living/user)
 	if(overheat || recent_reload)
 		return
-	power_supply.give(500)
-	playsound(user, 'sound/weapons/kenetic_reload.ogg', 60, 1)
-	recent_reload = 1
-	update_icon()
-	return
+	else
+		power_supply.give(500)
+		playsound(user, 'sound/weapons/kenetic_reload.ogg', 60, 1)
+		recent_reload = 1
+		update_icon()
+		return
 
 /obj/item/weapon/gun/energy/plasmacutter
 	name = "plasma cutter"
 	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	icon_state = "plasmacutter"
 	item_state = "plasmacutter"
+	nomodifystate = 1
 	force = 15
-	modifystate = -1
 	charge_cost = 2
 	origin_tech = "combat=1;materials=3;magnets=2;plasmatech=2;engineering=1"
 	projectile_type = "/obj/item/projectile/plasma"
+	cell_type = "/obj/item/weapon/cell/crap/plasmacutter"
 	fire_sound = 'plasma_cutter.ogg'
 	flags = CONDUCT | OPENCONTAINER
 	attack_verb = list("attacked", "slashed", "cut", "sliced")
-	var/volume = 20
 
-/obj/item/weapon/gun/energy/plasmacutter/New()
-	..()
-	create_reagents(volume)
-
-	if(!reagents.get_reagent_amount("plasma") >= charge_cost)
-		return
-
-	reagents.remove_reagent("plasma", charge_cost)
-	Fire()
-	return
 
 /obj/item/weapon/gun/energy/plasmacutter/examine()
 	..()
-	usr << "Has [reagents.get_reagent_amount("plasma")] unit\s of plasma left."
+	usr << "Has [power_supply.charge] unit\s of plasma left."
 	return
 
 /obj/item/weapon/gun/energy/plasmacutter/attackby(var/obj/item/A, var/mob/user)
-	if(reagents.maximum_volume > reagents.total_volume)
+	if(power_supply.charge < power_supply.maxcharge)
 		if(istype(A, /obj/item/stack/sheet/mineral/plasma))
 			var/obj/item/stack/sheet/S = A
 			S.use(1)
-			reagents.add_reagent("plasma", 20)
-			user << "<span class='info'>You refill [src] with [S]. [reagents.get_reagent_amount("plasma")] units of plasma left.</span>"
+			power_supply.give(2)
+			user << "<span class='info'>You refill [src] with solid plasma. [power_supply.charge] units of plasma left.</span>"
 		if(istype(A, /obj/item/weapon/ore/plasma))
+			power_supply.give(1)
+			user << "<span class='info'>You refill [src] with plasma ore. [power_supply.charge] units of plasma left.</span>"
 			qdel(A)
-			reagents.add_reagent("plasma", 10)
-			user << "<span class='info'>You refill [src] with [A]. [reagents.get_reagent_amount("plasma")] units of plasma left.</span>"
 		if(istype(A, /obj/item/weapon/storage/bag/ore))
 			if(locate(/obj/item/weapon/ore/plasma) in A)
 				attackby(locate(/obj/item/weapon/ore/plasma) in A, user)
 	..()
 
 /obj/item/weapon/gun/energy/plasmacutter/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+	..()
 	if(flag)	return
 	if(istype(target, /obj/machinery/recharger))	return
 
-/obj/item/weapon/gun/energy/plasmacutter/charged/New()
-	..()
-	reagents.add_reagent("plasma", volume)
 
 /obj/item/weapon/gun/energy/plasmacutter/adv
 	name = "advanced plasma cutter"
 	icon_state = "adv_plasmacutter"
 	origin_tech = "combat=3;materials=4;magnets=3;plasmatech=3;engineering=2"
 	projectile_type = "/obj/item/projectile/plasma/adv"
-	volume = 40
+	cell_type = "/obj/item/weapon/cell/crap/adv_plasmacutter"
 
 obj/item/weapon/gun/energy/staff/focus
 	name = "mental focus"
