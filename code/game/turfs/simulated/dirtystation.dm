@@ -64,24 +64,24 @@
 
 	if(istype(A, /area/engine) || istype(A,/area/assembly) || istype(A,/area/maintenance) || istype(A,/area/construction))
 	 	//Blood, sweat, and oil.  Oh, and dirt.
-		if(prob(3))
-			new /obj/effect/decal/cleanable/blood/old(src)
-		else
-			if(prob(35))
-				if(prob(4))
-					new /obj/effect/decal/remains/robot/old(src)
-				else
-					new /obj/effect/decal/cleanable/blood/oil(src)
+//		if(prob(3))
+//			new /obj/effect/decal/cleanable/blood/old(src)
+//		else
+		if(prob(35))
+			if(prob(4))
+				new /obj/effect/decal/remains/robot/old(src)
 			else
-				new /obj/effect/decal/cleanable/dirt(src)
+				new /obj/effect/decal/cleanable/blood/oil(src)
+		else
+			new /obj/effect/decal/cleanable/dirt(src)
 		return
 
 	if(istype(A, /area/crew_quarters/toilet) || istype(A, /area/crew_quarters/locker/locker_toilet) || istype(A, /area/crew_quarters/bar))
 		if(prob(40))
 			if(prob(90))
 				new /obj/effect/decal/cleanable/vomit/old(src)
-			else
-				new /obj/effect/decal/cleanable/blood/old(src)
+//			else
+//				new /obj/effect/decal/cleanable/blood/old(src)
 		else
 			new /obj/effect/decal/cleanable/dirt(src)
 		return
@@ -104,8 +104,8 @@
 		if(prob(20))
 			if(prob(5))
 				new /obj/effect/decal/cleanable/blood/gibs/old(src)
-			else
-				new /obj/effect/decal/cleanable/blood/old(src)
+//			else
+//				new /obj/effect/decal/cleanable/blood/old(src)
 		else
 			new /obj/effect/decal/cleanable/dirt(src)
 		return
@@ -125,8 +125,8 @@
 		if(prob(66))
 			if(prob(5))
 				new /obj/effect/decal/cleanable/blood/gibs/old(src)
-			else
-				new /obj/effect/decal/cleanable/blood/old(src)
+//			else
+//				new /obj/effect/decal/cleanable/blood/old(src)
 		else
 			if(prob(30))
 				if(istype(A, /area/medical/morgue))

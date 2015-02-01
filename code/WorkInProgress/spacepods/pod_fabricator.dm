@@ -6,6 +6,7 @@
 	name = "Spacepod Fabricator"
 	desc = "Used for producing all the spacepod goodies."
 	icon = 'icons/obj/robotics.dmi'
+	req_access = list(10)
 //	build_number = 32
 //	nano_file = "podfab.tmpl"
 	part_sets = list( //set names must be unique
@@ -26,7 +27,7 @@
 //	research_flags = NANOTOUCH | HASOUTPUT | HASMAT_OVER | TAKESMATIN | ACCESS_EMAG | LOCKBOXES
 
 
-/obj/machinery/r_n_d/fabricator/pod/New()
+/obj/machinery/mecha_part_fabricator/pod/New()
 	. = ..()
 
 	component_parts = newlist(
