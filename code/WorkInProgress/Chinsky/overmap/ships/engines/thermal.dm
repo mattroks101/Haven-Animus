@@ -47,6 +47,7 @@
 	desc = "Simple thermal nozzle, uses heated gast to propell the ship."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle"
+	density = 1
 	var/on = 1
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
 	var/nominal_thrust = 3000

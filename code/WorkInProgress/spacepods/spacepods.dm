@@ -542,9 +542,9 @@
 	var/list/probable_block = new/list(4)
 	var/free_cells = 0
 	var/turf/T1 = get_turf(src)
-	var/turf/T2 = locate(get_step(T1, NORTH))
-	var/turf/T3 = locate(get_step(T1, EAST))
-	var/turf/T4 = locate(get_step(T2, EAST))
+	var/turf/T2 = locate(T1.x, (T1.y+1), T1.z)
+	var/turf/T3 = locate((T1.x+1), T1.y, T1.z)
+	var/turf/T4 = locate((T1.x+1), (T1.y+1), T1.z)
 
 	if(direction == UP)
 		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -600,6 +600,7 @@
 		return
 
 	if(battery && battery.charge >= 3 && health)
+		var/olddir = dir
 		src.dir = direction
 		switch(direction)
 			if(1)
@@ -619,21 +620,29 @@
 					inertia_dir = 0
 					moveship = 0
 			if(UP)
-				if(canmove_over_z(UP))
-					for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-						var/turf/T = locate(x, y, controller.up_target)
-						Move(T, dir)
-						moveship = 0
-				else
-					occupant_message("Something is blocking the way up!")
+				for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+					if(controller.up)
+						if(canmove_over_z(UP))
+							var/turf/T = locate(x, y, controller.up_target)
+							Move(T, dir)
+							dir = olddir
+							moveship = 0
+						else
+							occupant_message("\red Something is blocking the way up!")
+					else
+						occupant_message("\blue There is nothing of interest in this direction.")
 			if(DOWN)
-				if(canmove_over_z(DOWN))
-					for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-						var/turf/T = locate(x, y, controller.down_target)
-						Move(T, dir)
-						moveship = 0
-				else
-					occupant_message("Something is blocking the way down!")
+				for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+					if(controller.down)
+						if(canmove_over_z(DOWN))
+							var/turf/T = locate(x, y, controller.down_target)
+							Move(T, dir)
+							dir = olddir
+							moveship = 0
+						else
+							occupant_message("\red Something is blocking the way down!")
+					else
+						occupant_message("\blue There is nothing of interest in this direction.")
 
 		if(moveship)
 			step(src, direction)
