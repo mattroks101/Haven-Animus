@@ -213,7 +213,7 @@
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)
 		if (ticker.current_state == GAME_STATE_PLAYING)
 			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// BS12 EDIT Arrivals Announcement Computer, rather than the AI.
-			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] has arrived on the ship.", "Arrivals Announcement Computer")
+			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] has arrived on the [vessel_type].", "Arrivals Announcement Computer")
 			del(a)
 
 	proc/LateChoices()

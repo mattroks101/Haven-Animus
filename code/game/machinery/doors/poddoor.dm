@@ -60,8 +60,8 @@
 	if(operating == 1) //emag again
 		src.operating = 0
 	if(autoclose)
-		spawn(150)
-			autoclose()
+		spawn(30)
+			close()
 	return 1
 
 /obj/machinery/door/poddoor/close()
