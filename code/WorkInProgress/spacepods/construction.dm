@@ -59,6 +59,7 @@
 		user.visible_message("[user] installs the [src]'s armor plating.")
 		src.icon_state = "pod_10"
 		src.desc = "A space pod with unsecured armor."
+		src.state = 1
 	if(istype(W, /obj/item/weapon/wrench))
 		if(state == 1)
 			user.visible_message("[user] bolts down the [src]'s armor.")

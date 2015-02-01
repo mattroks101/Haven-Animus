@@ -382,9 +382,9 @@ to destroy them and players will be able to make replacements.
 	origin_tech = "programming=3;engineering=3"
 	frame_desc = "Requires 3 Matter Bins, 2 Manipulators, and 2 Micro-Lasers."
 	req_components = list(
-							"/obj/item/weapon/stock_parts/matter_bin" = 3,
-							"/obj/item/weapon/stock_parts/manipulator" = 2,
-							"/obj/item/weapon/stock_parts/micro_laser" = 2)
+							/obj/item/weapon/stock_parts/matter_bin = 3,
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/stock_parts/micro_laser = 2)
 
 /obj/item/weapon/circuitboard/clonepod
 	name = "circuit board (Clone Pod)"

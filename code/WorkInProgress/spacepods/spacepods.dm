@@ -452,6 +452,7 @@
 		return
 	if(usr == src.passenger)
 		src.passenger.loc = src.loc
+		src.passenger = null
 		usr << "<span class='notice'>You climb out of the pod</span>"
 	else if(usr == src.occupant)
 		inertia_dir = 0 // engage reverse thruster and power down pod

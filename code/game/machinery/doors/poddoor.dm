@@ -388,6 +388,7 @@
 		..()
 
 /obj/machinery/door/poddoor/four_tile_ver/podlock
+	autoclose = 1
 	icon = 'icons/obj/doors/1x4blast_pod_vert.dmi'
 
 /obj/machinery/door/poddoor/filler_object
