@@ -48,11 +48,11 @@
 	if(!files) return
 	var/i = 0
 	for(var/datum/design/D in files.known_designs)
-		if(D.build_type&32)
+		if(D.build_type & 32)		//PODFAB
 			if(D.category in part_sets)//Checks if it's a valid category
-				if(add_part_to_set(D.category, text2path(D.build_path)))//Adds it to said category
+				if(add_part_to_set(D.category, D.build_path))//Adds it to said category
 					i++
 			else
-				if(add_part_to_set("Misc", text2path(D.build_path)))//If in doubt, chunk it into the Misc
+				if(add_part_to_set("Misc", D.build_path))//If in doubt, chunk it into the Misc
 					i++
 	return i

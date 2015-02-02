@@ -829,3 +829,18 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 
 var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 
+///////////////////////
+///////RESEARCH////////
+///////////////////////
+//used in rdmachines, to define certain behaviours
+//bitflags are my waifu - Comic
+
+//NB TRUELOCKS should ONLY be used for machines that produce stuff that's not good in an emergency i.e. a gun fabricator. Be very careful with it
+#define CONSOLECONTROL		1	//does the console control it? can't be interacted if not linked
+#define HASOUTPUT			2	//does it have an output? - mainly for fabricators
+#define TAKESMATIN			4	//does it takes materials (sheets) - mainly for fabricators
+#define NANOTOUCH			8	//does it have a nanoui when you smack it with your hand? - mainly for fabricators
+#define HASMAT_OVER			16	//does it have overlays for when you load materials in? - mainly for fabricators
+#define ACCESS_EMAG			32	//does it lose all its access when smacked by an emag? incompatible with CONSOLECONTROl, for obvious reasons
+#define LOCKBOXES			64	//does it spawn a lockbox around a design which is said to be locked? - for fabricators
+#define TRUELOCKS			128 //does it make a truly locked lockbox? If not set, the lockboxes made are unlockable by any crew with an ID
