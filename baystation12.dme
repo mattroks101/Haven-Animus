@@ -1461,7 +1461,6 @@
 #include "code\WorkInProgress\spacepods\parts.dm"
 #include "code\WorkInProgress\spacepods\pod_fabricator.dm"
 #include "code\WorkInProgress\spacepods\spacepods.dm"
-#include "code\WorkInProgress\spacepods\weaponry.dm"
 #include "code\WorkInProgress\spacepods\tools\drill.dm"
 #include "code\WorkInProgress\spacepods\tools\weapons\weapons.dm"
 #include "code\WorkInProgress\Wrongnumber\weldbackpack.dm"
