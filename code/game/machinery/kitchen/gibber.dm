@@ -13,6 +13,7 @@
 	idle_power_usage = 2
 	active_power_usage = 500
 
+
 //auto-gibs anything that bumps into it
 /obj/machinery/gibber/autogibber
 	var/turf/input_plate
@@ -78,6 +79,10 @@
 		src.startgibbing(user)
 
 /obj/machinery/gibber/attackby(obj/item/weapon/grab/G as obj, mob/user as mob)
+
+	if(default_unfasten_wrench(user, G))
+		return
+
 	if(src.occupant)
 		user << "\red The gibber is full, empty it first!"
 		return
