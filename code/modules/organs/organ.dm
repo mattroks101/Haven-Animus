@@ -1,5 +1,6 @@
 /datum/organ
 	var/name = "organ"
+	var/list/active_procs = new/list()
 	var/mob/living/carbon/human/owner = null
 	var/status = 0
 	var/vital //Lose a vital limb, die immediately.
@@ -74,6 +75,8 @@
 	//processing internal organs is pretty cheap, do that first.
 	for(var/datum/organ/internal/I in internal_organs)
 		I.process()
+		if(I.active_procs)
+			verbs += I.active_procs
 
 	if(!force_process && !bad_external_organs.len)
 		return

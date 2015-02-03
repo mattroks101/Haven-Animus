@@ -129,6 +129,7 @@
 	name = "egg sac"
 	parent_organ = "groin"
 	removed_type = /obj/item/organ/xenos/eggsac
+	active_procs = list(/mob/living/carbon/human/proc/lay_egg)
 
 /datum/organ/internal/xenos/plasmavessel
 	name = "plasma vessel"
@@ -155,6 +156,10 @@
 	name = "acid gland"
 	parent_organ = "head"
 	removed_type = /obj/item/organ/xenos/acidgland
+	active_procs = list(
+						/mob/living/carbon/human/proc/corrosive_acid,
+						/mob/living/carbon/human/proc/neurotoxin
+						)
 
 /datum/organ/internal/xenos/hivenode
 	name = "hive node"
@@ -165,6 +170,10 @@
 	name = "resin spinner"
 	parent_organ = "head"
 	removed_type = /obj/item/organ/xenos/resinspinner
+	active_procs = list(
+						/mob/living/carbon/human/proc/plant,
+						/mob/living/carbon/human/proc/resin
+						)
 
 /obj/item/organ/xenos
 	name = "xeno organ"

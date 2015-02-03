@@ -571,7 +571,7 @@
 		return
 
 	//if we haven't made our blood_overlay already
-	if( !blood_overlay )
+	if(!blood_overlay )
 		generate_blood_overlay()
 
 	//apply the blood-splatter overlay if it isn't already in there

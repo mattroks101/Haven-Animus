@@ -134,8 +134,8 @@
 		/mob/living/carbon/human/proc/plant,
 		/mob/living/carbon/human/proc/transfer_plasma,
 		/mob/living/carbon/human/proc/evolve,
-		/mob/living/carbon/human/proc/resin,
-		/mob/living/carbon/human/proc/corrosive_acid
+//		/mob/living/carbon/human/proc/resin,
+//		/mob/living/carbon/human/proc/corrosive_acid
 		)
 
 /datum/species/xenos/drone/handle_post_spawn(var/mob/living/carbon/human/H)
@@ -198,9 +198,9 @@
 		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/regurgitate,
-		/mob/living/carbon/human/proc/transfer_plasma,
-		/mob/living/carbon/human/proc/corrosive_acid,
-		/mob/living/carbon/human/proc/neurotoxin
+		/mob/living/carbon/human/proc/transfer_plasma
+//		/mob/living/carbon/human/proc/corrosive_acid,
+//		/mob/living/carbon/human/proc/neurotoxin
 		)
 
 /datum/species/xenos/queen
@@ -232,12 +232,12 @@
 		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/psychic_whisper,
 		/mob/living/carbon/human/proc/regurgitate,
-		/mob/living/carbon/human/proc/lay_egg,
-		/mob/living/carbon/human/proc/plant,
-		/mob/living/carbon/human/proc/transfer_plasma,
-		/mob/living/carbon/human/proc/corrosive_acid,
-		/mob/living/carbon/human/proc/neurotoxin,
-		/mob/living/carbon/human/proc/resin
+//		/mob/living/carbon/human/proc/lay_egg,
+//		/mob/living/carbon/human/proc/plant,
+		/mob/living/carbon/human/proc/transfer_plasma
+//		/mob/living/carbon/human/proc/corrosive_acid,
+//		/mob/living/carbon/human/proc/neurotoxin,
+//		/mob/living/carbon/human/proc/resin
 		)
 
 	//maxHealth = 250
