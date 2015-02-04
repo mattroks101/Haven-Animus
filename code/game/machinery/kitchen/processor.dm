@@ -105,6 +105,10 @@
 	return 0
 
 /obj/machinery/processor/attackby(var/obj/item/O as obj, var/mob/user as mob)
+
+	if(default_unfasten_wrench(user, O))
+		return
+
 	if(src.processing)
 		user << "\red The processor is in the process of processing."
 		return 1
