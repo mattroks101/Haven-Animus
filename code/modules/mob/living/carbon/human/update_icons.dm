@@ -227,7 +227,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
-	var/necrosis_color_mod = rgb(10,50,0)
+	var/necrosis_color_mod = rgb(164,32,32)
 
 	var/husk = (HUSK in src.mutations)
 	var/fat = (FAT in src.mutations)

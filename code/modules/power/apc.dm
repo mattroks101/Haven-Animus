@@ -66,6 +66,9 @@
 	var/updating_icon = 0
 	//var/debug = 0
 
+/obj/machinery/power/apc/worn_out
+	start_charge = 0
+
 /proc/RandomAPCWires()
 	//to make this not randomize the wires, just set index to 1 and increment it in the flag for loop (after doing everything else).
 	var/list/apcwires = list(0, 0, 0, 0)

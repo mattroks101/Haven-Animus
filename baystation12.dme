@@ -1121,7 +1121,9 @@
 #include "code\modules\nano\nanoexternal.dm"
 #include "code\modules\nano\nanomanager.dm"
 #include "code\modules\nano\nanoui.dm"
+#include "code\modules\organs\bioprinter.dm"
 #include "code\modules\organs\blood.dm"
+#include "code\modules\organs\debug.dm"
 #include "code\modules\organs\organ.dm"
 #include "code\modules\organs\organ_alien.dm"
 #include "code\modules\organs\organ_external.dm"
@@ -1485,4 +1487,5 @@
 #include "interface\skin.dmf"
 #include "maps\NSV_Luna11321.dmm"
 #include "maps\overmap\examples.dm"
+#include "maps\overmap\bearcat\bearcat.dm"
 // END_INCLUDE

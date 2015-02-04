@@ -658,7 +658,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			spawn(10)
 				del(spark_system)
 
-		owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
+		owner.visible_message("\red [owner.name]'s [display_name] flies off in bloody arc.",\
 		"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
 		"You hear a terrible sound of ripping tendons and flesh.")
 

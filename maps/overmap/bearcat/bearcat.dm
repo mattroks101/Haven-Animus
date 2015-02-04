@@ -13,8 +13,6 @@
 
 /obj/machinery/computer/shuttle_control/explore/bearcat
 	name = "exploration shuttle console"
-	shuttle_tag = "Exploration"
-	landing_type = /area/ship/scrap/shuttle/outgoing
 
 
 
@@ -108,7 +106,6 @@
 /area/ship/scrap/shuttle/
 	requires_power = 0
 	luminosity = 1
-	lighting_use_dynamic = 0
 
 /area/ship/scrap/shuttle/ingoing
 	name = "\improper Docking Bay #1"

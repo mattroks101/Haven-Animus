@@ -6,7 +6,7 @@ var/list/vessel_z = list(1,2,3,4)
 var/asteroid_z = 8
 var/centcomm_z = 6
 var/evac_type = "pods"
-var/list/accessable_z_levels = list("1" = 10, "2" = 10, "3" = 10, "4" = 10, "5" = 20, "8" = 40)
+var/list/accessable_z_levels = list("1" = 10, "2" = 10, "3" = 10, "4" = 10, "5" = 20, "7" = 20, "8" = 20)
 
 
 /obj/effect/mapinfo/ship/luna

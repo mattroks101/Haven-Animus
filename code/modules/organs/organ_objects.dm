@@ -24,6 +24,7 @@
 
 /obj/item/organ/New()
 	..()
+	organ_data = new organ_data
 	create_reagents(5)
 	if(!robotic)
 		processing_objects += src
