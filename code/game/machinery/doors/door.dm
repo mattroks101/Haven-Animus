@@ -298,6 +298,9 @@
 			source.thermal_conductivity = initial(source.thermal_conductivity)
 
 /obj/machinery/door/proc/autoclose()
+//	if(!istype(src,/obj/machinery/door/airlock))
+//		close()
+//		return
 	var/obj/machinery/door/airlock/A = src
 	if(!A.density && !A.operating && !A.locked && !A.welded && A.autoclose)
 		close()

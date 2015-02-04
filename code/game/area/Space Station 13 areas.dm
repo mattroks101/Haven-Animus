@@ -2072,6 +2072,14 @@ area/assembly/podbay
 	name = "\improper Telecoms Central Compartment"
 	icon_state = "tcomsatcham"
 
+/area/tcomms/chamber
+	name = "\improper Telecoms Chamber"
+	icon_state = "ai"
+
+/area/tcomms/storage
+	name = "\improper Telecoms Storage"
+	icon_state = "primarystorage"
+
 /area/turret_protected/tcomsat
 	name = "\improper Telecoms Satellite"
 	icon_state = "tcomsatlob"
@@ -2295,6 +2303,7 @@ var/list/the_station_areas = list (
 	/area/chapel,
 	/area/lawoffice,
 	/area/engine,
+	/area/tcomms,		//The in-station telecomms, not the satellite
 	/area/solar,
 	/area/assembly,
 	/area/teleporter,

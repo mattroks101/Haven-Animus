@@ -60,7 +60,7 @@
 	if(operating == 1) //emag again
 		src.operating = 0
 	if(autoclose)
-		spawn(150)
+		spawn(30)
 			autoclose()
 	return 1
 
@@ -259,7 +259,7 @@
 	if(operating == 1) //emag again
 		src.operating = 0
 	if(autoclose)
-		spawn(150)
+		spawn(35)
 			autoclose()
 	return 1
 
@@ -394,3 +394,9 @@
 /obj/machinery/door/poddoor/filler_object
 	name = ""
 	icon_state = ""
+
+/obj/machinery/door/poddoor/autoclose()
+	var/obj/machinery/door/poddoor/A = src
+	if(!A.density && !A.operating && !A.locked && A.autoclose)
+		close()
+	return

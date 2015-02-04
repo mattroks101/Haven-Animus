@@ -842,12 +842,18 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 /client/proc/CarbonCopy(atom/movable/O as mob|obj in world)
 	set category = "Admin"
+
+	message_admins("[key_name_admin(src)] has used CarbonCopy on [O]! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
+	log_admin("[key_name_admin(src)] has used CarbonCopy on [O]!")
+
 	var/mob/NewObj = new O.type(usr.loc)
+
 	for(var/V in O.vars)
 		if (issaved(O.vars[V]))
 			NewObj.vars[V] = O.vars[V]
 			if(hasvar(NewObj, ckey))
 				NewObj.ckey = null
+
 	for(var/atom/movable/A in NewObj.contents)
 		var/atom/movable/NewContent = new A.type(O)
 		for(var/V in A.vars)

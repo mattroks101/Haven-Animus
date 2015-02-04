@@ -100,13 +100,13 @@ var/list/admin_verbs_fun = list(
 	/client/proc/man_up,
 	/client/proc/global_man_up,
 	/client/proc/admin_infect_zombie,
-	/client/proc/editappear,
-	/client/proc/tdparty,
-	/client/proc/revive_td,
-	/client/proc/tp_td,
-	/client/proc/c_op,
-	/client/proc/e_op,
-	/client/proc/t_op
+	/client/proc/editappear
+//	/client/proc/tdparty,
+//	/client/proc/revive_td,
+//	/client/proc/tp_td,
+//	/client/proc/c_op,
+//	/client/proc/e_op,
+//	/client/proc/t_op
 	)
 
 var/list/admin_verbs_spawn = list(
@@ -132,6 +132,7 @@ var/list/admin_verbs_server = list(
 	/client/proc/toggle_random_events,
 	)
 var/list/admin_verbs_debug = list(
+	/client/proc/CarbonCopy,
 	/client/proc/qdel_toggle,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/Debug2,

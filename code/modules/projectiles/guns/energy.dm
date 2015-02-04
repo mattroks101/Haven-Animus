@@ -1,5 +1,6 @@
 /obj/item/weapon/gun/energy
-	icon_state = "energy"
+	icon_state = "oldenergy"
+	item_state = "energy"
 	name = "energy gun"
 	desc = "A basic energy-based gun."
 	fire_sound = 'sound/weapons/Taser.ogg'

@@ -342,7 +342,8 @@ datum
 						reagent_list -= A
 						del(A)
 						update_total()
-						my_atom.on_reagent_change()
+						if(my_atom)
+							my_atom.on_reagent_change()
 						return 0
 
 

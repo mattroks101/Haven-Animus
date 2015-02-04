@@ -299,7 +299,7 @@ datum
 				if(!istype(M, /mob/living))
 					return
 				if(method == TOUCH)
-					M.adjust_fire_stacks(-(volume / 10))
+					M.adjust_fire_stacks(-(volume))
 					if(M.fire_stacks <= 0)
 						M.ExtinguishMob()
 					return

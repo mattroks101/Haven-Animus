@@ -25,12 +25,27 @@
 	var/corpseidicon = null //For setting it to be a gold, silver, centcomm etc ID
 	var/mutantrace = "human"
 
+	var/corpsehaircolor = null
+	var/corpsehairstyle = null
+	var/corpsefhairstyle = null
+
 /obj/effect/landmark/corpse/initialize()
 	createCorpse()
 
 /obj/effect/landmark/corpse/proc/createCorpse() //Creates a mob and checks for gear in each slot before attempting to equip it.
 	var/mob/living/carbon/human/M = new /mob/living/carbon/human (src.loc)
 	M.dna.mutantrace = mutantrace
+	if(src.corpsehaircolor)
+		M.r_facial = hex2num(copytext(corpsehaircolor, 2, 4))
+		M.g_facial = hex2num(copytext(corpsehaircolor, 4, 6))
+		M.b_facial = hex2num(copytext(corpsehaircolor, 6, 8))
+		M.r_hair = M.r_facial
+		M.g_hair = M.g_facial
+		M.b_hair = M.b_facial
+	if(src.corpsehairstyle)
+		M.h_style = corpsehairstyle
+	if(src.corpsefhairstyle)
+		M.f_style = corpsefhairstyle
 	M.real_name = src.name
 	M.death(1) //Kills the new mob
 	if(src.corpseuniform)
@@ -231,3 +246,11 @@
 	corpseid = 1
 	corpseidjob = "Commander"
 	corpseidaccess = "Captain"
+
+
+/obj/effect/landmark/corpse/captain_will
+	name = "William Wilkerson"
+	corpseradio = /obj/item/device/radio/headset/heads/captain
+	corpsehaircolor = "#808000"
+	corpsehairstyle = "Long Hair"
+	corpsefhairstyle = "Goatee"

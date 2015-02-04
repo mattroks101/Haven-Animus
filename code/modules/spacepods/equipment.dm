@@ -13,6 +13,7 @@
 	name = "equipment"
 	icon = 'icons/pods/ship.dmi'
 	var/construction_cost = list("metal"=10000)
+	var/construction_time = 100
 	var/overlay_icon
 	var/obj/spacepod/chassis
 	var/range = MELEE //bitflags
