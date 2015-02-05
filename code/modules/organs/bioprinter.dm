@@ -38,6 +38,7 @@
 
 		if(prints_prosthetics)
 			O.robotic = 2
+			O.roboticize()
 		else if(loaded_dna)
 			visible_message("The printer would be using the DNA sample if it was coded.")
 			//TODO: Copy DNA hash or donor reference over to new organ.

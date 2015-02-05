@@ -11,7 +11,7 @@
 	var/robotic                               // Is the limb prosthetic?
 	var/organ_tag                             // What slot does it go in?
 	var/organ_type = /datum/organ/internal    // Used to spawn the relevant organ data when produced via a machine or spawn().
-	var/datum/organ/internal/organ_data       // Stores info when removed.
+	var/datum/organ/internal/organ_data =  /datum/organ/internal      // Stores info when removed.
 	var/prosthetic_name = "prosthetic organ"  // Flavour string for robotic organ.
 	var/prosthetic_icon                       // Icon for robotic organ.
 
@@ -94,6 +94,7 @@
 	organ_tag = "heart"
 	fresh = 6 // Juicy.
 	dead_icon = "heart-off"
+	organ_data = /datum/organ/internal/heart
 
 /obj/item/organ/lungs
 	name = "lungs"
@@ -102,6 +103,7 @@
 	prosthetic_name = "gas exchange system"
 	prosthetic_icon = "lungs-prosthetic"
 	organ_tag = "lungs"
+	organ_data = /datum/organ/internal/lungs
 
 /obj/item/organ/kidneys
 	name = "kidneys"
@@ -110,6 +112,7 @@
 	prosthetic_name = "prosthetic kidneys"
 	prosthetic_icon = "kidneys-prosthetic"
 	organ_tag = "kidneys"
+	organ_data = /datum/organ/internal/kidney
 
 /obj/item/organ/eyes
 	name = "eyeballs"
@@ -118,6 +121,7 @@
 	prosthetic_name = "visual prosthesis"
 	prosthetic_icon = "eyes-prosthetic"
 	organ_tag = "eyes"
+	organ_data = /datum/organ/internal/eyes
 
 	var/eye_colour
 
@@ -127,11 +131,13 @@
 	prosthetic_name = "toxin filter"
 	prosthetic_icon = "liver-prosthetic"
 	organ_tag = "liver"
+	organ_data = /datum/organ/internal/liver
 
 /obj/item/organ/appendix
 	name = "appendix"
 	icon_state = "appendix"
 	organ_tag = "appendix"
+	organ_data = /datum/organ/internal/appendix
 
 //These are here so they can be printed out via the fabricator.
 /obj/item/organ/heart/prosthetic
