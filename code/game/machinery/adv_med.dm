@@ -285,11 +285,10 @@
 		"paralysis" = H.paralysis,
 		"bodytemp" = H.bodytemperature,
 		"borer_present" = H.has_brain_worms(),
-		"inaprovaline_amount" = H.reagents.get_reagent_amount("inaprovaline"),
-		"dexalin_amount" = H.reagents.get_reagent_amount("dexalin"),
+		"ephedrine_amount" = H.reagents.get_reagent_amount("ephedrine"),
+		"salbutamol_amount" = H.reagents.get_reagent_amount("salbutamol"),
 		"stoxin_amount" = H.reagents.get_reagent_amount("stoxin"),
-		"bicaridine_amount" = H.reagents.get_reagent_amount("bicaridine"),
-		"dermaline_amount" = H.reagents.get_reagent_amount("dermaline"),
+		"salglu_solution_amount" = H.reagents.get_reagent_amount("salglu_solution"),
 		"blood_amount" = H.vessel.get_reagent_amount("blood"),
 		"disabilities" = H.sdisabilities,
 //		"tg_diseases_list" = H.viruses.Copy(),
@@ -338,11 +337,10 @@
 
 	dat += text("[]\tBlood Level %: [] ([] units)</FONT><BR>", (occ["blood_amount"] > 448 ?"<font color='blue'>" : "<font color='red'>"), occ["blood_amount"]*100 / 560, occ["blood_amount"])
 
-	dat += text("Inaprovaline: [] units<BR>", occ["inaprovaline_amount"])
+	dat += text("Ephedrine: [] units<BR>", occ["ephedrine_amount"])
 	dat += text("Soporific: [] units<BR>", occ["stoxin_amount"])
-	dat += text("[]\tDermaline: [] units</FONT><BR>", (occ["dermaline"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["dermaline"])
-	dat += text("[]\tBicaridine: [] units<BR>", (occ["bicaridine"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["bicaridine"])
-	dat += text("[]\tDexalin: [] units<BR>", (occ["dexalin"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["dexalin"])
+	dat += text("[]\tSalglu Solution: [] units<BR>", (occ["salglu_solution_amount"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["salglu_solution_amount"])
+	dat += text("[]\tSalbutamol: [] units<BR>", (occ["salbutamol_amount"] < 30 ? "<font color='black'>" : "<font color='red'>"), occ["salbutamol_amount"])
 
 /*	for(var/datum/disease/D in occ["tg_diseases_list"])
 		if(!D.hidden[SCANNER])

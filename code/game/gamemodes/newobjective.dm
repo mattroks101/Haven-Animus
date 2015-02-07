@@ -1139,7 +1139,7 @@ datum
 					..()
 					var/list/items = list("Sulphuric acid", "Polytrinic acid", "Space Lube", "Unstable mutagen",\
 					 "Leporazine", "Cryptobiolin", "Lexorin ",\
-					  "Kelotane", "Dexalin", "Tricordrazine")
+					  "Salglu Solution", "Salbutamol", "Omnizine")
 					target_name = pick(items)
 					switch(target_name)
 						if("Sulphuric acid")
@@ -1156,12 +1156,12 @@ datum
 							steal_target =/datum/reagent/cryptobiolin
 						if("Lexorin")
 							steal_target = /datum/reagent/lexorin
-						if("Kelotane")
-							steal_target = /datum/reagent/kelotane
+						if("Salglu Solution")
+							steal_target = /datum/reagent/salglu_solution
 						if("Dexalin")
-							steal_target = /datum/reagent/dexalin
-						if("Tricordrazine")
-							steal_target = /datum/reagent/tricordrazine
+							steal_target = /datum/reagent/salbutamol
+						if("Omnizine")
+							steal_target = /datum/reagent/omnizine
 
 					explanation_text = "Steal a container filled with [target_name]."
 

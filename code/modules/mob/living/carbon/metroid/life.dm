@@ -200,7 +200,7 @@
 
 	else if(src.health < config.health_threshold_crit)
 
-		if(!src.reagents.has_reagent("inaprovaline"))
+		if(!src.reagents.has_reagent("epinephrine"))
 			src.adjustOxyLoss(10)
 
 		if(src.stat != DEAD)

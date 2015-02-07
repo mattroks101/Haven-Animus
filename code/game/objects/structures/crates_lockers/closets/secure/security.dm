@@ -105,6 +105,7 @@
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
 		new /obj/item/clothing/head/helmet/HoS(src)
+		new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
 		new /obj/item/clothing/suit/armor/vest(src)
 		new /obj/item/clothing/under/rank/head_of_security/jensen(src)
 		new /obj/item/clothing/under/rank/head_of_security/corp(src)
@@ -147,6 +148,7 @@
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
 		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
 		new /obj/item/clothing/under/rank/warden(src)
 		new /obj/item/clothing/under/rank/warden/corp(src)
 		new /obj/item/clothing/suit/armor/vest/warden(src)
@@ -188,6 +190,7 @@
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/weapon/storage/belt/security(src)
 		new /obj/item/device/flash(src)
+		new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
 		new /obj/item/weapon/reagent_containers/spray/pepper(src)
 		new /obj/item/weapon/grenade/flashbang(src)
 		new /obj/item/weapon/melee/baton(src)
@@ -248,6 +251,7 @@
 		..()
 		sleep(2)
 		new /obj/item/clothing/under/det(src)
+		new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
 		new /obj/item/clothing/under/det/black(src)
 		new /obj/item/clothing/under/det/slob(src)
 		new /obj/item/clothing/suit/storage/det_suit(src)

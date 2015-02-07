@@ -264,8 +264,8 @@
 			src.occupant.adjustBrainLoss(-1)
 
 			//So clones don't die of oxyloss in a running pod.
-			if (src.occupant.reagents.get_reagent_amount("inaprovaline") < 30)
-				src.occupant.reagents.add_reagent("inaprovaline", 60)
+			if (src.occupant.reagents.get_reagent_amount("epinephrine") < 30)
+				src.occupant.reagents.add_reagent("epinephrine", 60)
 
 			//So clones will remain asleep for long enough to get them into cryo (Bay RP edit)
 			if (src.occupant.reagents.get_reagent_amount("stoxin") < 10)
@@ -273,7 +273,7 @@
 			if (src.occupant.reagents.get_reagent_amount("chloralhydrate") < 1)
 				src.occupant.reagents.add_reagent("chloralhydrate", 1)
 
-			//Also heal some oxyloss ourselves because inaprovaline is so bad at preventing it!!
+			//Also heal some oxyloss ourselves because epinephrine is so bad at preventing it!!
 			src.occupant.adjustOxyLoss(-4)
 
 			use_power(7500) //This might need tweaking.

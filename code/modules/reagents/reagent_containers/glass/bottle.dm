@@ -24,15 +24,15 @@
 			var/image/lid = image(icon, src, "lid_bottle")
 			overlays += lid
 
-/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline
-	name = "inaprovaline bottle"
-	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
+/obj/item/weapon/reagent_containers/glass/bottle/epinephrine
+	name = "epinephrine bottle"
+	desc = "A small bottle. Contains epinephrine - used to stabilize patients."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle16"
 
 	New()
 		..()
-		reagents.add_reagent("inaprovaline", 30)
+		reagents.add_reagent("epinephrine", 30)
 
 /obj/item/weapon/reagent_containers/glass/bottle/urine
 	name = "urine bottle"
@@ -83,16 +83,6 @@
 	New()
 		..()
 		reagents.add_reagent("chloralhydrate", 15)		//Intentionally low since it is so strong. Still enough to knock someone out.
-
-/obj/item/weapon/reagent_containers/glass/bottle/antitoxin
-	name = "anti-toxin bottle"
-	desc = "A small bottle of Anti-toxins. Counters poisons, and repairs damage, a wonder drug."
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
-
-	New()
-		..()
-		reagents.add_reagent("anti_toxin", 30)
 
 /obj/item/weapon/reagent_containers/glass/bottle/mutagen
 	name = "unstable mutagen bottle"
@@ -324,3 +314,72 @@
 	New()
 		..()
 		reagents.add_reagent("frostoil", 30)
+
+//GOON
+
+/obj/item/weapon/reagent_containers/glass/bottle/morphine
+	name = "morphine bottle"
+	desc = "A small bottle of morphine."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle20"
+	list_reagents = list("morphine" = 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/traitor
+	name = "syndicate bottle"
+	desc = "A small bottle. Contains a random nasty chemical."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle16"
+	var/extra_reagent = null
+
+/obj/item/weapon/reagent_containers/glass/bottle/traitor/New()
+	..()
+	extra_reagent = pick("polonium", "histamine", "formaldehyde", "venom", "neurotoxin2", "cyanide")
+	reagents.add_reagent("[extra_reagent]", 3)
+
+/obj/item/weapon/reagent_containers/glass/bottle/polonium
+	name = "polonium bottle"
+	desc = "A small bottle. Contains Polonium."
+	icon_state = "bottle16"
+	list_reagents = list("polonium" = 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/venom
+	name = "venom bottle"
+	desc = "A small bottle. Contains Venom."
+	icon_state = "bottle16"
+	list_reagents = list("venom" = 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/neurotoxin2
+	name = "neurotoxin bottle"
+	desc = "A small bottle. Contains Neurotoxin."
+	icon_state = "bottle16"
+	list_reagents = list("neurotoxin2" = 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/formaldehyde
+	name = "formaldehyde bottle"
+	desc = "A small bottle. Contains Formaldehyde."
+	icon_state = "bottle16"
+	list_reagents = list("formaldehyde" = 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/histamine
+	name = "histamine bottle"
+	desc = "A small bottle. Contains Histamine."
+	icon_state = "bottle16"
+	list_reagents = list("histamine" = 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/diphenhydramine
+	name = "antihistamine bottle"
+	desc = "A small bottle of diphenhydramine."
+	icon_state = "bottle20"
+	list_reagents = list("diphenhydramine" = 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/salglu_solution
+	name = "saline-glucose solution bottle"
+	desc = "A small bottle of saline-glucose solution."
+	icon_state = "bottle1"
+	list_reagents = list("salglu_solution" = 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/atropine
+	name = "atropine bottle"
+	desc = "A small bottle of atropine."
+	icon_state = "bottle12"
+	list_reagents = list("atropine" = 30)

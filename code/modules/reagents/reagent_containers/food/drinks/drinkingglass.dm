@@ -1,5 +1,5 @@
- 
- 
+
+
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
@@ -166,7 +166,7 @@
 					icon_state = "beepskysmashglass"
 					name = "Beepsky Smash"
 					desc = "Heavy, hot and strong. Just like the Iron fist of the LAW."
-				if("doctorsdelight")
+				if("omnizine")
 					icon_state = "doctorsdelightglass"
 					name = "Doctor's Delight"
 					desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."

@@ -11,9 +11,9 @@
 	1.7	* src.getCloneLoss() + 		\
 	2	* src.halloss
 
-	if(reagents.has_reagent("alkysine"))
+	if(reagents.has_reagent("mannitol"))
 		src.traumatic_shock -= 10
-	if(reagents.has_reagent("inaprovaline"))
+	if(reagents.has_reagent("epinephrine"))
 		src.traumatic_shock -= 25
 	if(reagents.has_reagent("synaptizine"))
 		src.traumatic_shock -= 40

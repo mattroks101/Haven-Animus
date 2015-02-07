@@ -108,7 +108,7 @@
 				if (src.connected.occupant)
 					if (src.connected.occupant.stat == DEAD)
 						usr << "\red \b This person has no life for to preserve anymore. Take them to a department capable of reanimating them."
-					else if(src.connected.occupant.health > 0 || href_list["chemical"] == "inaprovaline")
+					else if(src.connected.occupant.health > 0 || href_list["chemical"] == "epinephrine")
 						src.connected.inject_chemical(usr,href_list["chemical"],text2num(href_list["amount"]))
 					else
 						usr << "\red \b This person is not in good enough condition for sleepers to be effective! Use another means of treatment, such as cryogenics!"
@@ -149,7 +149,7 @@
 	dir = 8
 	density = 1
 	anchored = 1
-	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")
+	var/available_chemicals = list("ephedrine" = "Ephedrine", "stoxin" = "Soporific", "paracetamol" = "Paracetamol", "charcoal" = "Charcoal", "salbutamol" = "Salbutamol")
 	var/amounts = list(5, 10)
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
@@ -286,8 +286,8 @@
 	M.Paralyse(1)
 	M.Weaken(1)
 	M.Stun(1)
-	if (M:reagents.get_reagent_amount("inaprovaline") < 5)
-		M:reagents.add_reagent("inaprovaline", 5)
+	if (M:reagents.get_reagent_amount("epinephrine") < 5)
+		M:reagents.add_reagent("epinephrine", 5)
 	return
 
 /obj/machinery/sleeper/proc/toggle_filter()

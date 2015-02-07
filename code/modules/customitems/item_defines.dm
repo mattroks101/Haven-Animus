@@ -372,7 +372,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1/New()
 	..()
-	reagents.remove_reagent("tricordrazine", 30)
+	reagents.remove_reagent("omnizine", 30)
 	reagents.add_reagent("oxycodone", 15)
 	update_icon()
 	return
@@ -940,11 +940,11 @@
 
 	New()
 		..()
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 14, "Bicaridine")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 15, "Dermaline")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 16, "Dylovene")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 17, "Dexalin Plus")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 18, "Tricordrazine")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 14, "Saline-Glucose Solution")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 15, "Saline-Glucose Solution")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 16, "Charcoal")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 17, "Salbutamol")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 18, "Omnizine")
 		new /obj/item/weapon/reagent_containers/syringe/(src)
 		new /obj/item/device/healthanalyzer(src)
 

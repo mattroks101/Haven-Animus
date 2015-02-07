@@ -502,8 +502,8 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 						else 			user << "Nothing happens..."
 
 				// Antitoxin binds shit pretty well. So the tox goes significantly down
-				if(S.reagents.has_reagent("anti_toxin", 1))
-					toxic -= round(S.reagents.get_reagent_amount("anti_toxin")*2)
+				if(S.reagents.has_reagent("charcoal", 1))
+					toxic -= round(S.reagents.get_reagent_amount("charcoal")*2)
 
 				// NIGGA, YOU JUST WENT ON FULL RETARD.
 				if(S.reagents.has_reagent("toxin", 1))

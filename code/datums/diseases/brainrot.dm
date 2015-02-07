@@ -3,8 +3,8 @@
 	max_stages = 4
 	spread = "On contact"
 	spread_type = CONTACT_GENERAL
-	cure = "Alkysine"
-	cure_id = list("alkysine")
+	cure = "Mannitol"
+	cure_id = list("mannitol")
 	agent = "Cryptococcus Cosmosis"
 	affected_species = list("Human")
 	curable = 0

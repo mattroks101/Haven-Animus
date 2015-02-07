@@ -41,71 +41,66 @@
 		M.drop_from_inventory(src)	//so icons update :[
 		del(src)
 		return 0
-	if(istype(M, /mob/living/carbon/human))
-		if(M.wear_mask && M.wear_mask.flags & MASKCOVERSMOUTH)
-			if(M == user)
-				for(var/mob/O in viewers(M, null))
-					O.show_message("\red [user] tried to eat [src] through the mask! How stupid!", 1)
-			else
-				for(var/mob/O in viewers(M, null))
-					O.show_message("\red [user] tried to feed [M] [src] through the mask!", 1)
-			return
-		if(M == user)								//If you're eating it yourself.
+
+		if(!canconsume(M, user))
+			return 0
+
+	if(M == user)								//If you're eating it yourself.
+		var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
+		if (fullness <= 50)
+			M << "\red You hungrily chew out a piece of [src] and gobble it!"
+		if (fullness > 50 && fullness <= 150)
+			M << "\blue You hungrily begin to eat [src]."
+		if (fullness > 150 && fullness <= 350)
+			M << "\blue You take a bite of [src]."
+		if (fullness > 350 && fullness <= 550)
+			M << "\blue You unwillingly chew a bit of [src]."
+		if (fullness > 550)	// The more you eat - the more you can eat
+			M << "\red You cannot force any more of [src] to go down your throat."
+			return 0
+	else
+		if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.
 			var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
-			if (fullness <= 50)
-				M << "\red You hungrily chew out a piece of [src] and gobble it!"
-			if (fullness > 50 && fullness <= 150)
-				M << "\blue You hungrily begin to eat [src]."
-			if (fullness > 150 && fullness <= 350)
-				M << "\blue You take a bite of [src]."
-			if (fullness > 350 && fullness <= 550)
-				M << "\blue You unwillingly chew a bit of [src]."
-			if (fullness > 550)	// The more you eat - the more you can eat
-				M << "\red You cannot force any more of [src] to go down your throat."
-				return 0
-		else
-			if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.
-				var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
-				if (fullness <= 550)
-					for(var/mob/O in viewers(world.view, user))
-						O.show_message("\red [user] attempts to feed [M] [src].", 1)
-				else
-					for(var/mob/O in viewers(world.view, user))
-						O.show_message("\red [user] cannot force anymore of [src] down [M]'s throat.", 1)
-						return 0
-
-				if(!do_mob(user, M)) return
-
-				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
-				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-				log_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
-
+			if (fullness <= 550)
 				for(var/mob/O in viewers(world.view, user))
-					O.show_message("\red [user] feeds [M] [src].", 1)
-
+					O.show_message("\red [user] attempts to feed [M] [src].", 1)
 			else
-				user << "This creature does not seem to have a mouth!"
-				return
+				for(var/mob/O in viewers(world.view, user))
+					O.show_message("\red [user] cannot force anymore of [src] down [M]'s throat.", 1)
+					return 0
 
-		if(reagents)								//Handle ingestion of the reagent.
-			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
+			if(!do_mob(user, M)) return
 
-			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					if(reagents.total_volume > bitesize)
-						/*
-						 * I totally cannot understand what this code supposed to do.
-						 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
-						var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
-						reagents.trans_to(M, temp_bitesize)
-						*/
-						reagents.trans_to(M, bitesize)
-					else
-						reagents.trans_to(M, reagents.total_volume)
-					bitecount++
-					On_Consume(M)
-			return 1
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
+			log_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
+
+			for(var/mob/O in viewers(world.view, user))
+				O.show_message("\red [user] feeds [M] [src].", 1)
+
+		else
+			user << "This creature does not seem to have a mouth!"
+			return
+
+	if(reagents)								//Handle ingestion of the reagent.
+		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
+
+		if(reagents.total_volume)
+			reagents.reaction(M, INGEST)
+			spawn(5)
+				if(reagents.total_volume > bitesize)
+					/*
+					 * I totally cannot understand what this code supposed to do.
+					 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
+					var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
+					reagents.trans_to(M, temp_bitesize)
+					*/
+					reagents.trans_to(M, bitesize)
+				else
+					reagents.trans_to(M, reagents.total_volume)
+				bitecount++
+				On_Consume(M)
+		return 1
 
 	return 0
 
@@ -235,7 +230,7 @@
 
 //Notes by Darem: Food in the "snacks" subtype can hold a maximum of 50 units Generally speaking, you don't want to go over 40
 //	total for the item because you want to leave space for extra condiments. If you want effect besides healing, add a reagent for
-//	it. Try to stick to existing reagents when possible (so if you want a stronger healing effect, just use Tricordrazine). On use
+//	it. Try to stick to existing reagents when possible (so if you want a stronger healing effect, just use Omnizine). On use
 //	effect (such as the old officer eating a donut code) requires a unique reagent (unless you can figure out a better way).
 
 //The nutriment reagent and bitesize variable replace the old heal_amt and amount variables. Each unit of nutriment is equal to
@@ -267,8 +262,8 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 8)
-		reagents.add_reagent("doctorsdelight", 8)
-		reagents.add_reagent("tricordrazine", 8)
+		reagents.add_reagent("omnizine", 8)
+		reagents.add_reagent("omnizine", 8)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/candy
@@ -407,7 +402,7 @@
 			if(9)
 				reagents.add_reagent("berryjuice", 3)
 			if(10)
-				reagents.add_reagent("tricordrazine", 3)
+				reagents.add_reagent("omnizine", 3)
 		if(prob(30))
 			src.icon_state = "donut2"
 			src.name = "Frosted Chaos Donut"
@@ -664,7 +659,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 12)
-		reagents.add_reagent("hyperzine", 5)
+		reagents.add_reagent("morphine", 5)
 		src.bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/xenomeat
@@ -715,7 +710,7 @@
 		if (src.warm)
 			spawn( 4200 )
 				src.warm = 0
-				src.reagents.del_reagent("tricordrazine")
+				src.reagents.del_reagent("omnizine")
 				src.name = "donk-pocket"
 		return
 
@@ -728,7 +723,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 6)
-		reagents.add_reagent("alkysine", 6)
+		reagents.add_reagent("mannitol", 6)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/ghostburger
@@ -1064,7 +1059,7 @@
 			name = "exceptional plump pie"
 			desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
 			reagents.add_reagent("nutriment", 8)
-			reagents.add_reagent("tricordrazine", 5)
+			reagents.add_reagent("omnizine", 5)
 			reagents.add_reagent("dwine", 10)
 			bitesize = 2
 		else
@@ -1223,7 +1218,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 4)
-		reagents.add_reagent("doctorsdelight", 5)
+		reagents.add_reagent("omnizine", 5)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/loadedbakedpotato
@@ -1303,8 +1298,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("toxin", 1)
-		reagents.add_reagent("carbon", 3)
+		reagents.add_reagent("????", 30)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/meatsteak
@@ -1437,7 +1431,7 @@
 		..()
 		reagents.add_reagent("nutriment", 8)
 		reagents.add_reagent("water", 5)
-		reagents.add_reagent("tricordrazine", 5)
+		reagents.add_reagent("omnizine", 5)
 		bitesize = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/mysterysoup
@@ -1462,7 +1456,7 @@
 			if(3)
 				reagents.add_reagent("nutriment", 5)
 				reagents.add_reagent("water", 5)
-				reagents.add_reagent("tricordrazine", 5)
+				reagents.add_reagent("omnizine", 5)
 			if(4)
 				reagents.add_reagent("nutriment", 5)
 				reagents.add_reagent("water", 10)
@@ -1484,7 +1478,7 @@
 			if(10)
 				reagents.add_reagent("nutriment", 6)
 				reagents.add_reagent("tomatojuice", 5)
-				reagents.add_reagent("imidazoline", 5)
+				reagents.add_reagent("oculine", 5)
 		bitesize = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/wishsoup
@@ -1774,7 +1768,7 @@
 		..()
 		reagents.add_reagent("nutriment", 10)
 		reagents.add_reagent("tomatojuice", 5)
-		reagents.add_reagent("imidazoline", 5)
+		reagents.add_reagent("oculine", 5)
 		reagents.add_reagent("water", 5)
 		bitesize = 10
 
@@ -1946,7 +1940,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 3)
-		reagents.add_reagent("imidazoline", 3)
+		reagents.add_reagent("oculine", 3)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/superbiteburger
@@ -2072,7 +2066,7 @@
 			desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump helmet biscuit!"
 			reagents.add_reagent("nutriment", 8)
 			reagents.add_reagent("dwine", 5)
-			reagents.add_reagent("tricordrazine", 5)
+			reagents.add_reagent("omnizine", 5)
 			bitesize = 2
 		else
 			reagents.add_reagent("nutriment", 5)
@@ -2250,7 +2244,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 25)
-		reagents.add_reagent("imidazoline", 10)
+		reagents.add_reagent("oculine", 10)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/carrotcakeslice
@@ -2271,7 +2265,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 25)
-		reagents.add_reagent("alkysine", 10)
+		reagents.add_reagent("mannitol", 10)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/braincakeslice
@@ -2611,7 +2605,7 @@
 		..()
 		reagents.add_reagent("nutriment", 30)
 		reagents.add_reagent("tomatojuice", 6)
-		reagents.add_reagent("imidazoline", 12)
+		reagents.add_reagent("oculine", 12)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/vegetablepizzaslice

@@ -9,6 +9,9 @@
 	item_state = "pill"
 	possible_transfer_amounts = null
 	volume = 50
+	var/apply_type = INGEST
+	var/apply_method = "swallow"
+
 
 	New()
 		..()
@@ -19,7 +22,7 @@
 		return
 	attack(mob/M as mob, mob/user as mob, def_zone)
 		if(M == user)
-			M << "\blue You swallow [src]."
+			M << "<span class='notice'>You [apply_method] [src].</span>"
 			M.drop_from_inventory(src) //icon update
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
@@ -30,28 +33,29 @@
 				del(src)
 			return 1
 
-		else if(istype(M, /mob/living/carbon/human) )
-
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] attempts to force [M] to swallow [src].", 1)
+		else
+			M.visible_message("<span class='danger'>[user] attempts to force [M] to [apply_method] [src].</span>", \
+								"<span class='userdanger'>[user] attempts to force [M] to [apply_method] [src].</span>")
 
 			if(!do_mob(user, M)) return
 
+			M.visible_message("<span class='danger'>[user] forces [M] to [apply_method] [src].</span>", \
+								"<span class='userdanger'>[user] forces [M] to [apply_method] [src].</span>")
+
+
 			user.drop_from_inventory(src) //icon update
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] forces [M] to swallow [src].", 1)
 
 			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
 			msg_admin_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to(M, reagents.total_volume)
-					del(src)
-			else
-				del(src)
+		if(reagents.total_volume)
+			reagents.reaction(M, apply_type)
+			spawn(5)
+				reagents.trans_to(M, reagents.total_volume)
+				qdel(src)
+		else
+			qdel(src)
 
 			return 1
 
@@ -84,12 +88,12 @@
 
 //Pills
 /obj/item/weapon/reagent_containers/pill/antitox
-	name = "Anti-toxins pill"
+	name = "Charcoal pill"
 	desc = "Neutralizes many common toxins."
 	icon_state = "pill17"
 	New()
 		..()
-		reagents.add_reagent("anti_toxin", 25)
+		reagents.add_reagent("charcoal", 25)
 
 /obj/item/weapon/reagent_containers/pill/tox
 	name = "Toxins pill"
@@ -115,13 +119,18 @@
 		..()
 		reagents.add_reagent("adminordrazine", 50)
 
-/obj/item/weapon/reagent_containers/pill/stox
-	name = "Sleeping pill"
+/obj/item/weapon/reagent_containers/pill/morphine
+	name = "morphine pill"
 	desc = "Commonly used to treat insomnia."
 	icon_state = "pill8"
-	New()
-		..()
-		reagents.add_reagent("stoxin", 15)
+	list_reagents = list("morphine" = 30)
+
+/obj/item/weapon/reagent_containers/pill/stimulant
+	name = "stimulant pill"
+	desc = "Often taken by overworked employees, athletes, and the inebriated. You'll snap to attention immediately!"
+	icon_state = "pill19"
+	list_reagents = list("ephedrine" = 10, "ethylredoxrazine" = 10, "coffee" = 30)
+
 
 /obj/item/weapon/reagent_containers/pill/kelotane
 	name = "Kelotane pill"
@@ -129,7 +138,7 @@
 	icon_state = "pill11"
 	New()
 		..()
-		reagents.add_reagent("kelotane", 15)
+		reagents.add_reagent("salglu_solution", 15)
 
 /obj/item/weapon/reagent_containers/pill/paracetamol
 	name = "Paracetamol pill"
@@ -164,22 +173,20 @@
 		..()
 		reagents.add_reagent("citalopram", 15)
 
-
-/obj/item/weapon/reagent_containers/pill/inaprovaline
-	name = "Inaprovaline pill"
+/obj/item/weapon/reagent_containers/pill/epinephrine
+	name = "epinephrine pill"
 	desc = "Used to stabilize patients."
-	icon_state = "pill20"
-	New()
-		..()
-		reagents.add_reagent("inaprovaline", 30)
+	icon_state = "pill5"
+	list_reagents = list("epinephrine" = 25)
 
-/obj/item/weapon/reagent_containers/pill/dexalin
-	name = "Dexalin pill"
+/obj/item/weapon/reagent_containers/pill/salbutamol
+	name = "Salbutamol pill"
 	desc = "Used to treat oxygen deprivation."
 	icon_state = "pill16"
 	New()
 		..()
-		reagents.add_reagent("dexalin", 15)
+		reagents.add_reagent("salbutamol", 15)
+
 
 /obj/item/weapon/reagent_containers/pill/bicaridine
 	name = "Bicaridine pill"
@@ -206,4 +213,28 @@
 		..()
 		reagents.add_reagent("impedrezene", 10)
 		reagents.add_reagent("synaptizine", 5)
-		reagents.add_reagent("hyperzine", 5)
+		reagents.add_reagent("morphine", 5)
+
+/obj/item/weapon/reagent_containers/pill/salicyclic
+	name = "salicyclic acid pill"
+	desc = "Used to dull pain."
+	icon_state = "pill5"
+	list_reagents = list("sal_acid" = 50)
+
+/obj/item/weapon/reagent_containers/pill/mutadone
+	name = "mutadone pill"
+	desc = "Used to treat genetic damage."
+	icon_state = "pill20"
+	list_reagents = list("mutadone" = 50)
+
+/obj/item/weapon/reagent_containers/pill/mannitol
+	name = "mannitol pill"
+	desc = "Used to treat brain damage."
+	icon_state = "pill17"
+	list_reagents = list("mannitol" = 50)
+
+/obj/item/weapon/reagent_containers/pill/charcoal
+	name = "Charcoal pill"
+	desc = "Neutralizes many common toxins."
+	icon_state = "pill17"
+	list_reagents = list("charcoal" = 50)

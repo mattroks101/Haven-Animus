@@ -107,7 +107,7 @@
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0
 	if(reagents)
-		if(reagents.has_reagent("hyperzine")) return -1
+		if(reagents.has_reagent("morphine")) return -1
 
 		if(reagents.has_reagent("nuka_cola")) return -1
 
@@ -438,6 +438,8 @@
 
 /mob/living/carbon/monkey/IsAdvancedToolUser()//Unless its monkey mode monkeys cant use advanced tools
 	if(!ticker)	return 0
-	if(!ticker.mode.name == "monkey")	return 0
-	return 1
+	if(!ticker.mode.name == "monkey")	return 1
+	return 0
 
+/mob/living/carbon/monkey/SpeciesCanConsume()
+	return 1 // Monkeys can eat, drink, and be forced to do so

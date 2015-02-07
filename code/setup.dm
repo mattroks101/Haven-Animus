@@ -467,6 +467,7 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define CANPUSH		8
 #define LEAPING		16
 #define PASSEMOTES	32      //Mob has a cortical borer or holders inside of it that need to see emotes.
+#define GOTTAGOFAST	64
 #define GODMODE		4096
 #define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
 #define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
@@ -727,7 +728,7 @@ var/list/be_special_flags = list(
 #define PULSE_2FAST		4	//>120 bpm
 #define PULSE_THREADY	5	//occurs during hypovolemic shock
 //feel free to add shit to lists below
-var/list/tachycardics = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine")	//increase heart rate
+var/list/tachycardics = list("coffee", "epinephrine", "morphine", "nitroglycerin", "thirteenloko", "nicotine")	//increase heart rate
 var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")					//decrease heart rate
 var/list/heartstopper = list("potassium_phorochloride", "zombie_powder") //this stops the heart
 var/list/cheartstopper = list("potassium_chloride") //this stops the heart when overdose is met -- c = conditional

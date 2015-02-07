@@ -230,8 +230,8 @@
 		M.Paralyse(2)
 		M.Weaken(2)
 		M.Stun(2)
-		if(M.reagents.get_reagent_amount("inaprovaline") < 5)
-			M.reagents.add_reagent("inaprovaline", 5)
+		if(M.reagents.get_reagent_amount("ephedrine") < 5)
+			M.reagents.add_reagent("ephedrine", 5)
 		S.chassis.use_power(S.energy_drain)
 		S.update_equip_info()
 		return
@@ -408,7 +408,7 @@
 		..()
 		flags |= NOREACT
 		syringes = new
-		known_reagents = list("inaprovaline"="Inaprovaline","anti_toxin"="Anti-Toxin (Dylovene)")
+		known_reagents = list("ephedrine"="Ephedrine","charcoal"="Charcoal")
 		processed_reagents = new
 		create_reagents(max_volume)
 		synth = new (list(src),0)

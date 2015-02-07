@@ -211,7 +211,7 @@ proc/populate_seed_list()
 	if(additional_chems)
 		var/list/possible_chems = list(
 			"bicaridine",
-			"hyperzine",
+			"morphine",
 			"cryoxadone",
 			"blood",
 			"water",
@@ -219,23 +219,23 @@ proc/populate_seed_list()
 			"plasticide",
 			"slimetoxin",
 			"aslimetoxin",
-			"inaprovaline",
+			"epinephrine",
 			"space_drugs",
 			"paroxetine",
 			"mercury",
 			"sugar",
 			"radium",
-			"ryetalyn",
-			"alkysine",
+			"mutadone",
+			"mannitol",
 			"thermite",
 			"tramadol",
 			"cryptobiolin",
-			"dermaline",
-			"dexalin",
+			"salglu_solution",
+			"salbutamol",
 			"plasma",
 			"synaptizine",
 			"impedrezene",
-			"hyronalin",
+			"pen_acid",
 			"peridaxon",
 			"toxin",
 			"rezadone",
@@ -945,7 +945,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-ambrosiavulgaris"
 	plant_icon = "ambrosiavulgaris"
 	harvest_repeat = 1
-	chems = list("nutriment" = list(1), "space_drugs" = list(1,8), "kelotane" = list(1,8,1), "bicaridine" = list(1,10,1), "toxin" = list(1,10))
+	chems = list("nutriment" = list(1), "space_drugs" = list(1,8), "salglu_solution" = list(1,8,1), "salglu_solution" = list(1,10,1), "vitamin" = list(1,10))
 
 	lifespan = 60
 	maturation = 6
@@ -961,7 +961,7 @@ proc/populate_seed_list()
 	mutants = null
 	packet_icon = "seed-ambrosiadeus"
 	plant_icon = "ambrosiadeus"
-	chems = list("nutriment" = list(1), "bicaridine" = list(1,8), "synaptizine" = list(1,8,1), "hyperzine" = list(1,10,1), "space_drugs" = list(1,10))
+	chems = list("omnizine" = list(1), "synaptizine" = list(1,8), "morphine" = list(1,8,1), "space_drugs" = list(1,10,1), "vitamin" = list(1,10))
 
 //Mushrooms/varieties.
 /datum/seed/mushroom
@@ -1203,7 +1203,7 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/greengrapes)
 	mutants = null
 	plant_icon = "greengrape"
-	chems = list("nutriment" = list(1,10), "kelotane" = list(3,5))
+	chems = list("nutriment" = list(1,10), "salglu_solution" = list(3,5))
 
 //Everything else
 /datum/seed/peanuts
@@ -1262,7 +1262,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-mtear"
 	products = list(/obj/item/stack/medical/ointment/tajaran)
 	plant_icon = "mtear"
-	chems = list("honey" = list(1,10), "kelotane" = list(3,5))
+	chems = list("honey" = list(1,10), "salglu_solution" = list(3,5))
 
 	lifespan = 50
 	maturation = 3
@@ -1372,7 +1372,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-carrot"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/carrot)
 	plant_icon = "carrot"
-	chems = list("nutriment" = list(1,20), "imidazoline" = list(3,5))
+	chems = list("nutriment" = list(1,20), "oculine" = list(3,5))
 
 	lifespan = 25
 	maturation = 10
@@ -1567,7 +1567,7 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/kudzupod)
 	plant_icon = "kudzu"
 	product_colour = "#96D278"
-	chems = list("nutriment" = list(1,50), "anti_toxin" = list(1,25))
+	chems = list("nutriment" = list(1,50), "charcoal" = list(1,25))
 
 	lifespan = 20
 	maturation = 6

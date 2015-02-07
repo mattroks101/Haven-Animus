@@ -17,12 +17,12 @@
 	var/accept_glass = 0
 	var/beaker = null
 	var/recharged = 0
-	var/recharge_delay = 15  //Time it game ticks between recharges
+	var/recharge_delay = 5  //Time it game ticks between recharges
 	var/hackedcheck = 0
 	var/image/icon_beaker = null //cached overlay
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
 	"sodium","aluminum","silicon","phosphorus","sulfur","chlorine","potassium","iron",
-	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten")
+	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten","fuel","silver","iodine","bromine","stable_plasma")
 	var/list/broken_requirements = list()
 	var/broken_on_spawn = 0
 
@@ -147,7 +147,7 @@
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_title, 380, 650)
+		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_title, 490, 710)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
 		// open the new ui window
@@ -241,20 +241,21 @@
 	max_energy = 100
 	dispensable_reagents = list("water","ice","coffee","cream","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
 
-	/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You change the mode from 'McNano' to 'Pizza King'."
-				dispensable_reagents += list("thirteenloko","grapesoda")
-				hackedcheck = 1
-				return
+/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+	..()
+	if(istype(B, /obj/item/device/multitool))
+		if(hackedcheck == 0)
+			user << "You change the mode from 'McNano' to 'Pizza King'."
+			dispensable_reagents += list("thirteenloko","grapesoda")
+			hackedcheck = 1
+			return
 
-			else
-				user << "You change the mode from 'Pizza King' to 'McNano'."
-				dispensable_reagents -= list("thirteenloko")
-				hackedcheck = 0
-				return
+		else
+			user << "You change the mode from 'Pizza King' to 'McNano'."
+			dispensable_reagents -= list("thirteenloko")
+			hackedcheck = 0
+			return
+
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
 	name = "booze dispenser"
@@ -554,6 +555,26 @@
 			else
 				var/obj/item/weapon/reagent_containers/food/condiment/P = new/obj/item/weapon/reagent_containers/food/condiment(src.loc)
 				reagents.trans_to(P,50)
+		else if(href_list["createpatch"])
+			if(reagents.total_volume == 0) return
+			var/amount = 1
+			var/vol_each = min(reagents.total_volume, 50)
+			if(text2num(href_list["many"]))
+				amount = min(max(round(input(usr, "Amount:", "How many patches?", amount) as num|null), 0), 10)
+				if(!amount)
+					return
+				vol_each = min(reagents.total_volume/amount, 50)
+			var/name = stripped_input(usr,"Name:","Name your patch!", "[reagents.get_master_reagent_name()] ([vol_each]u)", MAX_NAME_LEN)
+			if(!name)
+				return
+			var/obj/item/weapon/reagent_containers/pill/P
+
+			for(var/i = 0; i < amount; i++)
+				P = new/obj/item/weapon/reagent_containers/pill/patch(src.loc)
+				P.name = trim("[name] patch")
+				P.pixel_x = rand(-7, 7) //random position
+				P.pixel_y = rand(-7, 7)
+				reagents.trans_to(P,vol_each)
 		else if(href_list["change_pill"])
 			#define MAX_PILL_SPRITE 20 //max icon state of the pill sprites
 			var/dat = "<table>"
@@ -638,6 +659,8 @@
 		if(!condi)
 			dat += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (50 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
 			dat += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
+			dat += "<HR><BR><A href='?src=\ref[src];createpatch=1;many=0'>Create patch (50 units max)</A><BR>"
+			dat += "<A href='?src=\ref[src];createpatch=1;many=1'>Create patches (10 patches max)</A><BR><BR>"
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (30 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"bottle[bottlesprite].png\" /></A>"
 		else
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"
@@ -1338,3 +1361,150 @@
 		O.reagents.trans_to(beaker, amount)
 		if(!O.reagents.total_volume)
 			remove_object(O)
+
+
+/obj/machinery/chem_heater
+	name = "chemical heater"
+	density = 1
+	anchored = 1
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "mixer0b"
+	use_power = 1
+	idle_power_usage = 40
+	var/obj/item/weapon/reagent_containers/beaker = null
+	var/temperature = 300
+	var/rate = 10 //heating/cooling rate, default is 10 kelvin per tick
+	var/on = FALSE
+
+/obj/machinery/chem_heater/New()
+	..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/chem_heater(null)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
+	RefreshParts()
+
+/obj/machinery/chem_heater/RefreshParts()
+	rate = 10
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		rate *= M.rating
+
+/obj/machinery/chem_heater/process()
+	..()
+	if(stat & NOPOWER)
+		return
+	var/state_change = 0
+	if(on)
+		if(beaker)
+			if(beaker.reagents.chem_temp > temperature)
+				beaker.reagents.chem_temp = max(beaker.reagents.chem_temp-rate, temperature)
+				beaker.reagents.handle_reactions()
+				state_change = 1
+			else if(beaker.reagents.chem_temp < temperature)
+				beaker.reagents.chem_temp = min(beaker.reagents.chem_temp+rate, temperature)
+				beaker.reagents.handle_reactions()
+				state_change = 1
+	if(state_change)
+		nanomanager.update_uis(src)
+
+/obj/machinery/chem_heater/proc/eject_beaker()
+	if(beaker)
+		beaker.loc = get_turf(src)
+		beaker.reagents.handle_reactions()
+		beaker = null
+		icon_state = "mixer0b"
+		nanomanager.update_uis(src)
+
+/obj/machinery/chem_heater/power_change()
+	if(powered())
+		stat &= ~NOPOWER
+	else
+		spawn(rand(0, 15))
+			stat |= NOPOWER
+	nanomanager.update_uis(src)
+
+/obj/machinery/chem_heater/attackby(var/obj/item/I as obj, var/mob/user as mob)
+	if(isrobot(user))
+		return
+
+	if(istype(I, /obj/item/weapon/reagent_containers/glass))
+		if(beaker)
+			user << "<span class='notice'>A beaker is already loaded into the machine.</span>"
+			return
+
+		if(user.drop_item())
+			beaker = I
+			I.loc = src
+			user << "<span class='notice'>You add the beaker to the machine!</span>"
+			icon_state = "mixer1b"
+			nanomanager.update_uis(src)
+
+	if(default_deconstruction_screwdriver(user, "mixer0b", "mixer0b", I))
+		return
+
+	if(exchange_parts(user, I))
+		return
+
+	if(panel_open)
+		if(istype(I, /obj/item/weapon/crowbar))
+			eject_beaker()
+			default_deconstruction_crowbar(I)
+			return 1
+
+/obj/machinery/chem_heater/attack_ai(mob/user as mob)
+	src.add_hiddenprint(user)
+	return src.attack_hand(user)
+
+/obj/machinery/chem_heater/attack_paw(mob/user as mob)
+	return src.attack_hand(user)
+
+/obj/machinery/chem_heater/attack_hand(var/mob/user as mob)
+	if(stat & BROKEN)
+		return
+	user.set_machine(src)
+
+	var/dat = ""
+	if(!beaker)
+		dat = "Please insert beaker.<BR>"
+	else
+		var/datum/reagents/R = beaker.reagents
+		if(!R.total_volume)
+			dat += "<BR><b>Beaker is empty.</b><BR>"
+		else
+			dat += "<BR><b>Current temperature </b>: [beaker.reagents.chem_temp]<BR>"
+
+		if(!on)
+			dat += "<A href='?src=\ref[src];adjust_temperature=1'>Adjust Temperature</A><BR>"
+			dat += "<A href='?src=\ref[src];toggle_on=1'>Toggle On</A><BR>"
+			dat += "<BR><BR><A href='?src=\ref[src];eject_beaker=1'>Eject beaker</A><BR>"
+		else
+			dat += "Reagents heating in progress...<BR>"
+			dat += "<BR><BR><A href='?src=\ref[src];toggle_on=1'>Toggle Off</A><BR>"
+
+	dat += "<A href='?src=\ref[src];close=1'>Close</A>"
+	user << browse("<TITLE>Chemical Heater</TITLE>ChemHeater menu:<BR><BR>[dat]", "window=chem_heater;size=350x200")
+
+/obj/machinery/chem_heater/Topic(href, href_list)
+	if(..())
+		return 0
+	if(href_list["toggle_on"])
+		on = !on
+		. = 1
+	if(href_list["adjust_temperature"])
+		var/val = Clamp(input("Please input the target temperature", name) as num, 0, 1000)
+		if(isnum(val))
+			temperature = Clamp(val, 0, 1000) //WHO THE FUCK THOUGHT THAT TEMPERATURE+VAL IS NORMAL?!
+		else
+			return 0
+		. = 1
+	if(href_list["eject_beaker"])
+		eject_beaker()
+		. = 0 //updated in eject_beaker() already
+	if(href_list["close"])
+		usr << browse(null, "window=chem_heater")
+		usr.unset_machine()
+		return
+	src.updateUsrDialog()
+	return
+
+
