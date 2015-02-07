@@ -1470,13 +1470,15 @@
 			dat += "<BR><b>Beaker is empty.</b><BR>"
 		else
 			dat += "<BR><b>Current temperature </b>: [beaker.reagents.chem_temp]<BR>"
-			if(!on)
-				dat += "<A href='?src=\ref[src];adjust_temperature=1'>Adjust Temperature</A><BR>"
-				dat += "<A href='?src=\ref[src];toggle_on=1'>Toggle On</A><BR>"
-				dat += "<BR><BR><A href='?src=\ref[src];eject_beaker=1'>Eject beaker</A><BR>"
-			else
-				dat += "Reagents heating in progress...<BR>"
-				dat += "<BR><BR><A href='?src=\ref[src];toggle_on=1'>Toggle Off</A><BR>"
+
+		if(!on)
+			dat += "<A href='?src=\ref[src];adjust_temperature=1'>Adjust Temperature</A><BR>"
+			dat += "<A href='?src=\ref[src];toggle_on=1'>Toggle On</A><BR>"
+			dat += "<BR><BR><A href='?src=\ref[src];eject_beaker=1'>Eject beaker</A><BR>"
+		else
+			dat += "Reagents heating in progress...<BR>"
+			dat += "<BR><BR><A href='?src=\ref[src];toggle_on=1'>Toggle Off</A><BR>"
+
 	dat += "<A href='?src=\ref[src];close=1'>Close</A>"
 	user << browse("<TITLE>Chemical Heater</TITLE>ChemHeater menu:<BR><BR>[dat]", "window=chem_heater;size=350x200")
 
