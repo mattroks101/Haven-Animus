@@ -552,6 +552,29 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/cable_coil = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /obj/item/weapon/circuitboard/thermomachine
 	name = "circuit board (Freezer)"
 	desc = "Use screwdriver to switch between heating and cooling modes."
