@@ -50,6 +50,7 @@ datum/reagent/crank/on_mob_life(var/mob/living/M as mob)
 	M.AdjustWeakened(-2)
 	..()
 	return
+
 datum/reagent/crank/overdose_process(var/mob/living/M as mob)
 	M.adjustBrainLoss(rand(1,10)*REM)
 	M.adjustToxLoss(rand(1,10)*REM)

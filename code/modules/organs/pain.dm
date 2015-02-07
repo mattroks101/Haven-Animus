@@ -20,6 +20,8 @@ mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0
 		return
 	if(reagents.has_reagent("oxycodone"))
 		return
+	if(reagents.has_reagent("morphine"))
+		return
 	if(analgesic)
 		return
 	if(world.time < next_pain_time && !force)

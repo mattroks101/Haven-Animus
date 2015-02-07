@@ -47,7 +47,7 @@
 /obj/item/weapon/reagent_containers/hypospray/medipen
 	name = "medipen"
 	desc = "A rapid and safe way to stabilize patients in critical condition for personnel without advanced medical knowledge."
-	icon_state = "autoinjector"
+	icon_state = "autoinjector1"
 	item_state = "autoinjector"
 	amount_per_transfer_from_this = 10
 	volume = 10
@@ -110,3 +110,9 @@
 	amount_per_transfer_from_this = 25
 	volume = 25
 	list_reagents = list("adminordrazine")
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/combat
+	name = "combat medipen"
+	desc = "A rapid way to get you out of a tight situation and fast!"
+	volume = 15
+	list_reagents = list("morphine" = 10, "crank" = 5)
