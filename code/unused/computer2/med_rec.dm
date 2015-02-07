@@ -188,7 +188,7 @@
 					src.temp = {"<b>Name:</b> Plasmatoid
 <BR><b>Number of stages:</b> 3
 <BR><b>Spread:</b> Airborne Transmission
-<BR><b>Possible Cure:</b> Inaprovaline
+<BR><b>Possible Cure:</b> Epinephrine
 <BR><b>Affected Species:</b> Human and Monkey
 <BR>
 <BR><b>Notes:</b> With this disease the victim will need plasma to breathe.

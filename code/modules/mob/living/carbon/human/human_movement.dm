@@ -1,6 +1,9 @@
 /mob/living/carbon/human/movement_delay()
 	var/tally = 0
 
+	if(status_flags & GOTTAGOFAST)
+		tally -= 1
+
 	if(species.slowdown)
 		tally = species.slowdown
 
@@ -9,9 +12,9 @@
 	if(embedded_flag)
 		handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
 
-	if(reagents.has_reagent("hyperzine")) return -1
+//	if(reagents.has_reagent("morphine")) return -1
 
-	if(reagents.has_reagent("nuka_cola")) return -1
+//	if(reagents.has_reagent("nuka_cola")) return -1
 
 	var/health_deficiency = (100 - health - halloss)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)

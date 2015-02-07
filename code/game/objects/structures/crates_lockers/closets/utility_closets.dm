@@ -239,5 +239,5 @@
 		if(prob(20)) new/obj/item/weapon/reagent_containers/pill/antitox(src)
 		if(prob(20)) new/obj/item/stack/medical/splint(src)
 		if(prob(20)) new/obj/item/weapon/reagent_containers/hypospray/medipen(src)
-		if(prob(10)) new/obj/item/weapon/reagent_containers/pill/inaprovaline(src)
+		if(prob(10)) new/obj/item/weapon/reagent_containers/pill/epinephrine(src)
 		if(prob(5)) new/obj/item/weapon/tank/anesthetic(src)

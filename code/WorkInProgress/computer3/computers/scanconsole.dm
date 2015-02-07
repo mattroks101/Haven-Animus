@@ -276,8 +276,8 @@
 			status_html = "<div class='line'><div class='statusLabel'>Health:</div><div class='progressBar'><div style='width: [occupant.health]%;' class='progressFill good'></div></div><div class='statusValue'>[occupant.health]%</div></div>"
 			status_html += "<div class='line'><div class='statusLabel'>Radiation Level:</div><div class='progressBar'><div style='width: [occupant.radiation]%;' class='progressFill bad'></div></div><div class='statusValue'>[occupant.radiation]%</div></div>"
 			if(ishuman(occupant))
-				var/rejuvenators = round(occupant.reagents.get_reagent_amount("inaprovaline") / REJUVENATORS_MAX * 100)
-				status_html += "<div class='line'><div class='statusLabel'>Rejuvenators:</div><div class='progressBar'><div style='width: [rejuvenators]%;' class='progressFill highlight'></div></div><div class='statusValue'>[occupant.reagents.get_reagent_amount("inaprovaline")] units</div></div>"
+				var/rejuvenators = round(occupant.reagents.get_reagent_amount("epinephrine") / REJUVENATORS_MAX * 100)
+				status_html += "<div class='line'><div class='statusLabel'>Rejuvenators:</div><div class='progressBar'><div style='width: [rejuvenators]%;' class='progressFill highlight'></div></div><div class='statusValue'>[occupant.reagents.get_reagent_amount("epinephrine")] units</div></div>"
 
 			if (dna_summary)
 				status_html += "<div class='line'><div class='statusLabel'>Unique Enzymes :</div><div class='statusValue'><span class='highlight'>[uppertext(occupant.dna.unique_enzymes)]</span></div></div>"
@@ -515,12 +515,12 @@
 			popup.open()
 		var/mob/living/carbon/human/H = scanner.occupant
 		if(istype(H))
-			var/inap = H.reagents.get_reagent_amount("inaprovaline") // oh my *god* this section was ugly before I shortened it
+			var/inap = H.reagents.get_reagent_amount("epinephrine") // oh my *god* this section was ugly before I shortened it
 
 			if (inap < (REJUVENATORS_MAX - REJUVENATORS_INJECT))
-				H.reagents.add_reagent("inaprovaline", REJUVENATORS_INJECT)
+				H.reagents.add_reagent("epinephrine", REJUVENATORS_INJECT)
 			else
-				H.reagents.add_reagent("inaprovaline", max(REJUVENATORS_MAX - inap,0))
+				H.reagents.add_reagent("epinephrine", max(REJUVENATORS_MAX - inap,0))
 
 /*
 /obj/machinery/computer/scan_consolenew/Topic(href, href_list)
@@ -736,12 +736,12 @@
 			popup.open()
 		else
 			if(human_occupant)
-				if (human_occupant.reagents.get_reagent_amount("inaprovaline") < REJUVENATORS_MAX)
-					if (human_occupant.reagents.get_reagent_amount("inaprovaline") < (REJUVENATORS_MAX - REJUVENATORS_INJECT))
-						human_occupant.reagents.add_reagent("inaprovaline", REJUVENATORS_INJECT)
+				if (human_occupant.reagents.get_reagent_amount("epinephrine") < REJUVENATORS_MAX)
+					if (human_occupant.reagents.get_reagent_amount("epinephrine") < (REJUVENATORS_MAX - REJUVENATORS_INJECT))
+						human_occupant.reagents.add_reagent("epinephrine", REJUVENATORS_INJECT)
 					else
-						human_occupant.reagents.add_reagent("inaprovaline", round(REJUVENATORS_MAX - human_occupant.reagents.get_reagent_amount("inaprovaline")))
-				//usr << text("Occupant now has [] units of rejuvenation in his/her bloodstream.", human_occupant.reagents.get_reagent_amount("inaprovaline"))
+						human_occupant.reagents.add_reagent("epinephrine", round(REJUVENATORS_MAX - human_occupant.reagents.get_reagent_amount("epinephrine")))
+				//usr << text("Occupant now has [] units of rejuvenation in his/her bloodstream.", human_occupant.reagents.get_reagent_amount("epinephrine"))
 
 	////////////////////////////////////////////////////////
 	if (href_list["strucmenuplus"])
@@ -1216,8 +1216,8 @@
 		scanner_status_html = "<div class='line'><div class='statusLabel'>Health:</div><div class='progressBar'><div style='width: [occupant.health]%;' class='progressFill good'></div></div><div class='statusValue'>[occupant.health]%</div></div>"
 		scanner_status_html += "<div class='line'><div class='statusLabel'>Radiation Level:</div><div class='progressBar'><div style='width: [occupant.radiation]%;' class='progressFill bad'></div></div><div class='statusValue'>[occupant.radiation]%</div></div>"
 		if(human_occupant)
-			var/rejuvenators = round(human_occupant.reagents.get_reagent_amount("inaprovaline") / REJUVENATORS_MAX * 100)
-			scanner_status_html += "<div class='line'><div class='statusLabel'>Rejuvenators:</div><div class='progressBar'><div style='width: [rejuvenators]%;' class='progressFill highlight'></div></div><div class='statusValue'>[human_occupant.reagents.get_reagent_amount("inaprovaline")] units</div></div>"
+			var/rejuvenators = round(human_occupant.reagents.get_reagent_amount("epinephrine") / REJUVENATORS_MAX * 100)
+			scanner_status_html += "<div class='line'><div class='statusLabel'>Rejuvenators:</div><div class='progressBar'><div style='width: [rejuvenators]%;' class='progressFill highlight'></div></div><div class='statusValue'>[human_occupant.reagents.get_reagent_amount("epinephrine")] units</div></div>"
 
 		if (current_screen == "mainmenu")
 			scanner_status_html += "<div class='line'><div class='statusLabel'>Unique Enzymes :</div><div class='statusValue'><span class='highlight'>[uppertext(occupant.dna.unique_enzymes)]</span></div></div>"

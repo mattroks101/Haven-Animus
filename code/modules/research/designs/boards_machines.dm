@@ -205,3 +205,12 @@
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telecomms/broadcaster
+
+/datum/design/chem_heater
+	name = "Machine Design (Chemical Heater Board)"
+	desc = "The circuit board for a chemical heater."
+	id = "chem_heater"
+	req_tech = list("engineering" = 2, "materials" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 1000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/chem_heater

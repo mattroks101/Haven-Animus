@@ -3,7 +3,7 @@
 	max_stages = 4
 	spread = "Contact"
 	spread_type = CONTACT_GENERAL
-	cure = "Rest or an injection of ryetalyn"
+	cure = "Rest or an injection of mutadone"
 	cure_chance = 6
 	agent = ""
 	affected_species = list("Human")
@@ -18,8 +18,8 @@
 		..()
 		agent = "Virus class [pick("A","B","C","D","E","F")][pick("A","B","C","D","E","F")]-[rand(50,300)]"
 		if(prob(40))
-			cure_id = list("ryetalyn")
-			cure_list = list("ryetalyn")
+			cure_id = list("mutadone")
+			cure_list = list("mutadone")
 		else
 			restcure = 1
 

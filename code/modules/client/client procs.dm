@@ -319,6 +319,7 @@
 		'nano/templates/crew_monitor_map_header.tmpl',
 		'nano/templates/canister.tmpl',
 		'nano/templates/chem_dispenser.tmpl',
+		'nano/templates/chem_heater.tmpl',
 		'nano/templates/crew_monitor.tmpl',
 		'nano/templates/cryo.tmpl',
 		'nano/templates/dna_modifier.tmpl',

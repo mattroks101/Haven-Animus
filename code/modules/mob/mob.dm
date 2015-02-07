@@ -92,6 +92,13 @@
 //		organStructure.ProcessOrgans()
 	return
 
+/mob/proc/get_item_by_slot(slot_id)
+	switch(slot_id)
+		if(slot_l_hand)
+			return l_hand
+		if(slot_r_hand)
+			return r_hand
+	return null
 
 /mob/proc/restrained()
 	return
@@ -650,7 +657,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 // jitteriness - copy+paste of dizziness
 
-/mob/proc/make_jittery(var/amount)
+/mob/proc/Jitter(var/amount)
 	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get dizzy
 		return
 
@@ -906,6 +913,12 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/AdjustResting(amount)
 	resting = max(resting + amount,0)
 	return
+
+/mob/proc/Dizzy(amount)
+	dizziness = max(dizziness,amount,0)
+
+/mob/proc/SpeciesCanConsume()
+	return 0
 
 /mob/proc/get_species()
 	return ""

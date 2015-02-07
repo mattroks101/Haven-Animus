@@ -383,21 +383,21 @@
 
 
 
-/obj/item/weapon/reagent_containers/syringe/inaprovaline
-	name = "Syringe (inaprovaline)"
-	desc = "Contains inaprovaline - used to stabilize patients."
+/obj/item/weapon/reagent_containers/syringe/epinephrine
+	name = "Syringe (epinephrine)"
+	desc = "Contains epinephrine - used to stabilize patients."
 	New()
 		..()
-		reagents.add_reagent("inaprovaline", 15)
+		reagents.add_reagent("epinephrine", 15)
 		mode = SYRINGE_INJECT
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/antitoxin
-	name = "Syringe (anti-toxin)"
-	desc = "Contains anti-toxins."
+	name = "Syringe (charcoal)"
+	desc = "Contains liquid charcoal."
 	New()
 		..()
-		reagents.add_reagent("anti_toxin", 15)
+		reagents.add_reagent("charcoal", 15)
 		mode = SYRINGE_INJECT
 		update_icon()
 
@@ -425,25 +425,25 @@
 	desc = "Contains anti-toxins."
 	New()
 		..()
-		reagents.add_reagent("anti_toxin", 15)
+		reagents.add_reagent("charcoal", 15)
 		mode = SYRINGE_INJECT
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/robot/inoprovaline
-	name = "Syringe (inoprovaline)"
-	desc = "Contains inaprovaline - used to stabilize patients."
+	name = "Syringe (epinephrine)"
+	desc = "Contains epinephrine - used to stabilize patients."
 	New()
 		..()
-		reagents.add_reagent("inaprovaline", 15)
+		reagents.add_reagent("epinephrine", 15)
 		mode = SYRINGE_INJECT
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/robot/mixed
 	name = "Syringe (mixed)"
-	desc = "Contains inaprovaline & anti-toxins."
+	desc = "Contains epinephrine & charcoal."
 	New()
 		..()
-		reagents.add_reagent("inaprovaline", 7)
-		reagents.add_reagent("anti_toxin", 8)
+		reagents.add_reagent("epinephrine", 7)
+		reagents.add_reagent("charcoal", 8)
 		mode = SYRINGE_INJECT
 		update_icon()

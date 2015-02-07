@@ -839,6 +839,8 @@
 /mob/living/carbon/human/IsAdvancedToolUser()
 	return species.has_fine_manipulation
 
+/mob/living/carbon/human/SpeciesCanConsume()
+	return 1 // Humans can eat, drink, and be forced to do so
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
 	if(full_body && ((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )) || (src.back || src.wear_mask || src.head || src.shoes || src.w_uniform || src.wear_suit || src.glasses || src.l_ear || src.r_ear || src.gloves)))
@@ -1359,6 +1361,13 @@
 			src << output(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.display_name,status),1)
 //		if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 //			H.play_xylophone()
+
+/mob/living/carbon/human/has_brain()
+	if(internal_organs_by_name["brain"])
+		var/datum/organ/internal/brain = internal_organs_by_name["brain"]
+		if(brain && istype(brain))
+			return 1
+	return 0
 
 /mob/living/carbon/human/has_brain()
 	if(internal_organs_by_name["brain"])

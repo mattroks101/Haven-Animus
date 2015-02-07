@@ -17,12 +17,6 @@
 /obj/item/weapon/reagent_containers/hypospray/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
-
-/obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
-	..()
-	reagents.add_reagent("tricordrazine", 30)
-	return
-
 /obj/item/weapon/reagent_containers/hypospray/attack(mob/M as mob, mob/user as mob)
 	if(!reagents.total_volume)
 		user << "\red [src] is empty."
@@ -58,12 +52,10 @@
 	amount_per_transfer_from_this = 10
 	volume = 10
 	flags = null
-	var/starting_reagent = "tricordrazine"
-	var/starting_amount = 10
+	list_reagents = list("epinephrine" = 10)
 
 /obj/item/weapon/reagent_containers/hypospray/medipen/New()
 	..()
-	reagents.add_reagent(starting_reagent, starting_amount)
 	update_icon()
 	return
 
@@ -87,25 +79,34 @@
 	else
 		usr << "<span class='notice'>It is spent.</span>"
 
+/obj/item/weapon/reagent_containers/hypospray/combat
+	name = "combat stimulant injector"
+	desc = "A modified air-needle autoinjector, used by support operatives to quickly heal injuries in combat."
+	amount_per_transfer_from_this = 10
+	icon_state = "combat_hypo"
+	volume = 60
+//	ignore_flags = 1 // So they can heal their comrades.
+	list_reagents = list("epinephrine" = 15, "salglu_solution" = 15)
 
 /obj/item/weapon/reagent_containers/hypospray/medipen/leporazine //basilisks
 	name = "leporazine medipen"
 	desc = "A rapid way to regulate your body's temperature in the event of a hardsuit malfunction at the cost of some shortness of breath."
-	starting_reagent = "leporazine"
+	icon_state = "lepopen"
+	list_reagents = list("leporazine" = 9, "lexorin" = 1)
 
 /obj/item/weapon/reagent_containers/hypospray/medipen/stimpack //goliath kiting
 	name = "stimpack medipen"
 	desc = "A rapid way to stimulate your body's adrenaline, allowing for freer movement in restrictive armor at the cost of some shortness of breath."
-	starting_reagent = "synaptizine"
+	list_reagents = list("ephedrine" = 9, "lexorin" = 1)
 
 /obj/item/weapon/reagent_containers/hypospray/medipen/morphine
 	name = "morphine medipen"
 	desc = "A rapid way to get you out of a tight situation and fast! You'll feel rather drowsy, though."
-	starting_reagent = "hyperzine"
+	list_reagents = list("morphine" = 10)
 
 /obj/item/weapon/reagent_containers/hypospray/medipen/admin // for admin using
 	name = "advanced medipen"
 	desc = "A rapid and safe way to stabilize patients in critical condition for personnel without advanced medical knowledge. Filled with adminordrazine."
 	amount_per_transfer_from_this = 25
 	volume = 25
-	starting_reagent = "adminordrazine"
+	list_reagents = list("adminordrazine")

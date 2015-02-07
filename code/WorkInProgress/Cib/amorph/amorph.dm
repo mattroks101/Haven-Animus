@@ -103,7 +103,7 @@
 	var/tally = 2 // amorphs are a bit slower than humans
 	var/mob/M = pulling
 
-	if(reagents.has_reagent("hyperzine")) return -1
+	if(reagents.has_reagent("morphine")) return -1
 
 	if(reagents.has_reagent("nuka_cola")) return -1
 

@@ -190,7 +190,7 @@
 						continue
 					O.show_message(text("\red <B>[src] starts having a seizure!"), 1)
 				Paralyse(10)
-				make_jittery(1000)
+				Jitter(1000)
 		if (disabilities & COUGHING)
 			if ((prob(5) && paralysis <= 1))
 				drop_item()
@@ -349,7 +349,7 @@
 		var/datum/gas_mixture/breath
 
 		// HACK NEED CHANGING LATER
-		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))
+		if(health < config.health_threshold_crit && !reagents.has_reagent("epinephrine"))
 			losebreath++
 
 		if(losebreath>0) //Suffocating so do not take a breath
@@ -1135,7 +1135,7 @@
 				if( health <= 20 && prob(1) )
 					spawn(0)
 						emote("gasp")
-				if(!reagents.has_reagent("inaprovaline"))
+				if(!reagents.has_reagent("epinephrine"))
 					adjustOxyLoss(1)*/
 
 			if(hallucination)
@@ -1680,7 +1680,7 @@
 				break
 		for(var/datum/reagent/R in reagents.reagent_list) //Conditional heart-stoppage
 			if(R.id in cheartstopper)
-				if(R.volume >= R.overdose)
+				if(R.volume >= R.overdose_threshold)
 					temp = PULSE_NONE
 					break
 
