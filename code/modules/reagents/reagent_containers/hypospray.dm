@@ -47,7 +47,7 @@
 /obj/item/weapon/reagent_containers/hypospray/medipen
 	name = "medipen"
 	desc = "A rapid and safe way to stabilize patients in critical condition for personnel without advanced medical knowledge."
-	icon_state = "autoinjector1"
+	icon_state = "autoinjector"
 	item_state = "autoinjector"
 	amount_per_transfer_from_this = 10
 	volume = 10

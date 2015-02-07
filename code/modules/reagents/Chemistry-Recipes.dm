@@ -179,7 +179,7 @@ datum
 			name = "Peridaxon"
 			id = "peridaxon"
 			result = "peridaxon"
-			required_reagents = list("bicaridine" = 2, "clonexadone" = 2)
+			required_reagents = list("salglu_solution" = 2, "clonexadone" = 2)
 			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
