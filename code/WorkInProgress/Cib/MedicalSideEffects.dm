@@ -82,7 +82,7 @@
 // ========
 /datum/medical_effect/headache
 	name = "Headache"
-	triggers = list("cryoxadone" = 10, "bicaridine" = 15, "omnizine" = 15)
+	triggers = list("cryoxadone" = 10, "salglu_solution" = 15, "omnizine" = 15)
 	cures = list("mannitol", "tramadol", "paracetamol", "oxycodone")
 	cure_message = "Your head stops throbbing..."
 

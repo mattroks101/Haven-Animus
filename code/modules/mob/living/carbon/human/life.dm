@@ -180,7 +180,7 @@
 /mob/living/carbon/human
 
 	proc/handle_disabilities()
-		if(zombie)
+		if(iszombie(src))
 			return
 		if (disabilities & EPILEPSY)
 			if ((prob(1) && paralysis < 1))
@@ -261,7 +261,7 @@
 
 	proc/handle_mutations_and_radiation()
 
-		if(zombie)
+		if(iszombie(src))
 			druggy = 0
 			weakened = 0
 			paralysis = 0
@@ -445,6 +445,8 @@
 
 	proc/handle_breath(datum/gas_mixture/breath)
 		if(status_flags & GODMODE)
+			return
+		if(mNobreath in src.mutations)
 			return
 
 		if(!breath || (breath.total_moles == 0) || suiciding)
@@ -1118,7 +1120,7 @@
 				handle_blood()
 
 			if(health <= config.health_threshold_dead || (species.has_organ["brain"] && !has_brain()))
-				if(!zombie)
+				if(iszombie(src))
 					death()
 					blinded = 1
 					silent = 0
@@ -1351,7 +1353,7 @@
 				see_in_dark = 8
 				if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-			if(zombie)
+			if(iszombie(src))
 //				if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
 				sight |= SEE_MOBS
 				see_in_dark = 4
@@ -1427,7 +1429,7 @@
 								if(20 to 40)			healths.icon_state = "health4"
 								if(0 to 20)				healths.icon_state = "health5"
 								else					healths.icon_state = "health6"
-				if(zombie)
+				if(iszombie(src))
 					healths.icon_state = "health7"
 
 			if(nutrition_icon)
@@ -1595,7 +1597,7 @@
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode
 		if(analgesic || (species && species.flags & NO_PAIN)) return // analgesic avoids all traumatic shock temporarily
-		if(zombie) return
+		if(iszombie(src)) return
 
 		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)
@@ -1652,7 +1654,7 @@
 		if(stat == DEAD)
 			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse
 
-		if(zombie)
+		if(iszombie(src))
 			return PULSE_NONE
 
 		var/temp = PULSE_NORM

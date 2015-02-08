@@ -119,13 +119,6 @@ datum
 		//	required_reagents = list("hydrogen" = 1, "carbon" = 1, "nitrogen" = 1)
 		//	result_amount = 1
 
-		water //I can't believe we never had this.
-			name = "Water"
-			id = "water"
-			result = null
-			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
-			result_amount = 1
-
 		thermite
 			name = "Thermite"
 			id = "thermite"

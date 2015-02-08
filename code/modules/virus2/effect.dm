@@ -179,12 +179,12 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			if(!H.zombie)
+			if(!iszombie(H))
 				H.zombify()
 	deactivate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			if(H.zombie)
+			if(iszombie(H))
 				H.unzombify()
 
 

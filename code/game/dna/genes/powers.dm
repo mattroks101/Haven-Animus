@@ -22,6 +22,10 @@
 		..(M,connected,flags)
 		M.verbs += /mob/living/carbon/human/proc/remoteobserve
 
+	deactivate(var/mob/M, var/connected, var/flags)
+		..(M,connected,flags)
+		M.verbs -= /mob/living/carbon/human/proc/remoteobserve
+
 /datum/dna/gene/basic/regenerate
 	name="Regenerate"
 	activation_messages=list("You feel better.")

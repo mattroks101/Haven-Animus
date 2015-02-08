@@ -1775,6 +1775,20 @@ datum/reagent/nutriment
 		..()
 		return
 
+datum/reagent/vitamin
+	name = "Vitamin"
+	id = "vitamin"
+	description = "All the best vitamins, minerals, and carbohydrates the body needs in pure form."
+	reagent_state = SOLID
+	color = "#664330" // rgb: 102, 67, 48
+	nutriment_factor = 25 * REAGENTS_METABOLISM
+
+	on_mob_life(var/mob/living/M as mob)
+		if(prob(50))
+			M.heal_organ_damage(1,1)
+		..()
+		return
+
 datum/reagent/soysauce
 	name = "Soysauce"
 	id = "soysauce"

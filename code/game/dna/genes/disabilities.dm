@@ -56,6 +56,10 @@
 	New()
 		block=HALLUCINATIONBLOCK
 
+	OnMobLife(var/mob/living/carbon/human/M)
+		if(!istype(M)) return
+		M.hallucination = 25
+
 /datum/dna/gene/disability/epilepsy
 	name="Epilepsy"
 	activation_message="You get a headache."

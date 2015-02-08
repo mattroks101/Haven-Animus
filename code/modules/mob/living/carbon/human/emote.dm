@@ -844,22 +844,22 @@
 //SHITTY EMOTES END
 
 		if("z_roar")
-			if (zombie)
+			if(iszombie(src))
 				message = "<font color='red'><B>[src]</B> roars!</font>"
 				m_type = 1
 				call_sound_emote("z_roar")
 		if("z_shout")
-			if (zombie)
+			if(iszombie(src))
 				message = "<font color='red'><B>[src]</B> shouts!</font>"
 				m_type = 1
 				call_sound_emote("z_shout")
 		if("z_mutter")
-			if (zombie)
+			if(iszombie(src))
 				message = "<font color='red'><B>[src]</B> mutters!</font>"
 				m_type = 1
 				call_sound_emote("z_mutter")
 		if("z_rawr")
-			if (zombie)
+			if(iszombie(src))
 				message = "<font color='red'><B>[src]</B> rawrs!</font>"
 				m_type = 1
 

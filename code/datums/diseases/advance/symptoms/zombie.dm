@@ -31,7 +31,7 @@ Bonus
 		if(A.stage == 5)
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(!H.zombie)
+				if(!iszombie(H))
 					H.zombify()
 		else
 			M.toxloss++

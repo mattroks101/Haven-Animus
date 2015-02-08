@@ -210,7 +210,7 @@ proc/populate_seed_list()
 
 	if(additional_chems)
 		var/list/possible_chems = list(
-			"bicaridine",
+			"salglu_solution",
 			"morphine",
 			"cryoxadone",
 			"blood",
@@ -1156,7 +1156,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-poppy"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/poppy)
 	plant_icon = "poppy"
-	chems = list("nutriment" = list(1,20), "bicaridine" = list(1,10))
+	chems = list("nutriment" = list(1,20), "salglu_solution" = list(1,10))
 
 	lifespan = 25
 	potency = 20
@@ -1246,7 +1246,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-shand"
 	products = list(/obj/item/stack/medical/bruise_pack/tajaran)
 	plant_icon = "shand"
-	chems = list("bicaridine" = list(0,10))
+	chems = list("salglu_solution" = list(0,10))
 
 	lifespan = 50
 	maturation = 3

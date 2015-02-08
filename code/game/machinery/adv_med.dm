@@ -295,7 +295,7 @@
 		"lung_ruptured" = H.is_lung_ruptured(),
 		"external_organs" = H.organs.Copy(),
 		"internal_organs" = H.internal_organs.Copy(),
-		"zombie" = H.zombie,
+		"zombie" = iszombie(H),
 		"becoming_zombie" = H.becoming_zombie,
 		"species_organs" = H.species.has_organ //Just pass a reference for this, it shouldn't ever be modified outside of the datum.
 		)

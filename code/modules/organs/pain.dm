@@ -12,7 +12,7 @@ mob/var/next_pain_time = 0
 // amount is a num from 1 to 100
 mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0)
 	if(stat >= 2) return
-	if(zombie) return
+	if(iszombie(src)) return
 
 	if(reagents.has_reagent("paracetamol"))
 		return
@@ -62,7 +62,7 @@ mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0
 // flash_strength is 0 for weak pain flash, 1 for strong pain flash
 mob/living/carbon/human/proc/custom_pain(var/message, var/flash_strength)
 	if(stat >= 1) return
-	if(zombie) return
+	if(iszombie(src)) return
 
 	if(species && species.flags & NO_PAIN) return
 
@@ -88,7 +88,7 @@ mob/living/carbon/human/proc/handle_pain()
 	if(species && species.flags & NO_PAIN) return
 
 	if(stat >= 2) return
-	if(zombie) return
+	if(iszombie(src)) return
 
 	if(reagents.has_reagent("tramadol"))
 		return

@@ -150,6 +150,16 @@
 	key = "a"
 	flags = RESTRICTED | HIVEMIND
 
+/datum/language/zombie
+	name = "Horde"
+	desc = "Zombies' ability to communicate."
+	speech_verb = "roars"
+	ask_verb = "rawrs"
+	exclaim_verb = "roars"
+	colour = "alien"
+	key = "z"
+	flags = RESTRICTED | HIVEMIND
+
 /datum/language/xenos/check_special_condition(var/mob/other)
 
 	var/mob/living/carbon/M = other

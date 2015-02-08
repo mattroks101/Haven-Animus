@@ -214,6 +214,24 @@
 	//If you wanted to add a species-level ability:
 	/*abilities = list(/client/proc/test_ability)*/
 
+/datum/species/human/zombie
+	name = "Zombie"
+	name_plural = "Zombies"
+	language = "Horde"
+	icobase = 'icons/mob/human_races/r_human_zombie.dmi'
+	deform = 'icons/mob/human_races/r_human_zombie.dmi'
+	slowdown = 4
+	primitive = /mob/living/carbon/monkey
+	unarmed_type = /datum/unarmed_attack/claws/zombie
+	secondary_unarmed_type = /datum/unarmed_attack/claws/zombie
+	darksight = 3
+
+	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
+
+	//If you wanted to add a species-level ability:
+	/*abilities = list(/client/proc/test_ability)*/
+
+
 /datum/species/unathi
 	name = "Unathi"
 	name_plural = "Unathi"
@@ -498,6 +516,9 @@
 	var/sharp = 0
 	var/edge = 0
 
+/datum/unarmed_attack/proc/special_act(var/mob/living/carbon/human/target)
+	return
+
 /datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user)
 	if(user.restrained())
 		return 0
@@ -526,6 +547,18 @@
 		return 0
 	return 1
 
+/datum/unarmed_attack/bite/zombie
+	attack_verb = list("bite") // 'x has biteed y', needs work.
+	attack_sound = 'sound/weapons/bite.ogg'
+	shredding = 0
+	damage = 5
+	sharp = 1
+	edge = 1
+
+	special_act(var/mob/living/carbon/human/target)
+		target.zombie_infect()
+
+
 /datum/unarmed_attack/punch
 	attack_verb = list("punch")
 	damage = 3
@@ -535,7 +568,7 @@
 	damage = 5
 
 /datum/unarmed_attack/claws
-	attack_verb = list("scratch", "claw")
+	attack_verb = list("scratch", "claw","slash")
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	damage = 5
@@ -543,8 +576,11 @@
 	edge = 1
 
 /datum/unarmed_attack/claws/strong
-	attack_verb = list("slash")
 	damage = 10
+	shredding = 1
+
+/datum/unarmed_attack/claws/zombie
+	damage = 8
 	shredding = 1
 
 /datum/unarmed_attack/bite/strong

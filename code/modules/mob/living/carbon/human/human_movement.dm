@@ -1,8 +1,7 @@
 /mob/living/carbon/human/movement_delay()
 	var/tally = 0
 
-	if(status_flags & GOTTAGOFAST)
-		tally -= 1
+	if(status_flags & GOTTAGOFAST) return -1
 
 	if(species.slowdown)
 		tally = species.slowdown

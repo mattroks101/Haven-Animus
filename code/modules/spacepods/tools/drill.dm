@@ -2,7 +2,7 @@
 	name = "Drill"
 	desc = "This is the drill that'll pierce the heavens! (Can be attached to: Industrial Spacepods)"
 	icon_state = "pod_taser"
-	overlay_icon = "pod_tool_drill"
+	overlay_icon = "pod_weapon_drills"
 	equip_cooldown = 15
 	energy_drain = 10
 	force = 15

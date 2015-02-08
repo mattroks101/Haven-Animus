@@ -36,10 +36,17 @@
 	species = new /datum/species/diona(src)
 	..()
 
-/mob/living/carbon/human/New()
+/mob/living/carbon/human/New(var/new_loc, var/new_species = null)
+
+	if(!dna)
+		dna = new /datum/dna(null)
+		// Species name is handled by set_species()
 
 	if(!species)
-		set_species()
+		if(new_species)
+			set_species(new_species)
+		else
+			set_species()
 
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R

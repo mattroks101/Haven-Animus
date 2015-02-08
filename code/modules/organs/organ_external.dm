@@ -446,11 +446,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
 		if(W.internal && owner.bodytemperature >= 170)
-			var/bicardose = owner.reagents.get_reagent_amount("bicaridine")
+			var/bicardose = owner.reagents.get_reagent_amount("salglu_solution")
 			var/epinephrine = owner.reagents.get_reagent_amount("epinephrine")
-			if(!(W.can_autoheal() || (bicardose && epinephrine)))	//bicaridine and epinephrine stop internal wounds from growing bigger with time, unless it is so small that it is already healing
+			if(!(W.can_autoheal() || (bicardose && epinephrine)))	//salglu_solution and epinephrine stop internal wounds from growing bigger with time, unless it is so small that it is already healing
 				W.open_wound(0.1 * wound_update_accuracy)
-			if(bicardose >= 30)	//overdose of bicaridine begins healing IB
+			if(bicardose >= 30)	//overdose of salglu_solution begins healing IB
 				W.damage = max(0, W.damage - 0.2)
 
 			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
@@ -467,7 +467,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
 		heal_amt = heal_amt * wound_update_accuracy
 		//configurable regen speed woo, no-regen hardcore or instaheal hugbox, choose your destiny
-		heal_amt = heal_amt * config.organ_regeneration_multiplier
+		if(mRegen in owner.mutations)
+			heal_amt = heal_amt * 2
+			if(config.organ_regeneration_multiplier > 1)
+				heal_amt = heal_amt * config.organ_regeneration_multiplier
+		else
+			heal_amt = heal_amt * config.organ_regeneration_multiplier
 		// amount of healing is spread over all the wounds
 		heal_amt = heal_amt / (wounds.len + 1)
 		// making it look prettier on scanners
@@ -799,8 +804,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return 0
 
 /datum/organ/external/get_icon(var/icon/race_icon, var/icon/deform_icon,gender="")
-	if(istype(owner.species, /datum/species/xenos))
-		return new /icon(race_icon, "[icon_name]")
+	if(!(istype(owner.species, /datum/species/human)) && !(istype(owner.species, /datum/species/human)))
+		gender=""
 	if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
 		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 

@@ -139,12 +139,13 @@
 
 			visible_message("\red <B>[M] [pick(attack.attack_verb)]ed [src]!</B>")
 			//Rearranged, so claws don't increase weaken chance.
-			if(damage >= 5 && prob(50))
+			if(damage >= 7 && prob(50))
 				visible_message("\red <B>[M] has weakened [src]!</B>")
 				apply_effect(3, WEAKEN, armor_block)
 
 			damage += attack.damage
 			apply_damage(damage, BRUTE, affecting, armor_block, sharp=attack.sharp, edge=attack.edge)
+			attack.special_act(src)
 
 
 		if("disarm")

@@ -34,6 +34,8 @@ emp_act
 
 				return -1 // complete projectile permutation
 	if(istype(P, /obj/item/projectile/energy/electrode))
+		if(mShock in src.mutations) //shockproof
+			return -1
 		if(src.stat == DEAD)
 			if(prob(30) && (src.timeofdeath + 1800 > world.time) && !(NOCLONE in src.mutations))
 				src.stat = UNCONSCIOUS
