@@ -220,7 +220,7 @@
 	language = "Horde"
 	icobase = 'icons/mob/human_races/r_human_zombie.dmi'
 	deform = 'icons/mob/human_races/r_human_zombie.dmi'
-	slowdown = 4
+	slowdown = 2
 	primitive = /mob/living/carbon/monkey
 	unarmed_type = /datum/unarmed_attack/claws/zombie
 	secondary_unarmed_type = /datum/unarmed_attack/claws/zombie

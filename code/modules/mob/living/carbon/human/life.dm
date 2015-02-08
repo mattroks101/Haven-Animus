@@ -1120,12 +1120,16 @@
 				handle_blood()
 
 			if(health <= config.health_threshold_dead || (species.has_organ["brain"] && !has_brain()))
-				if(iszombie(src))
+				if(!iszombie(src))
 					death()
 					blinded = 1
 					silent = 0
 					return 1
-
+				else if(health <= (config.health_threshold_dead-130) || (species.has_organ["brain"] && !has_brain()))
+					death()
+					blinded = 1
+					silent = 0
+					return 1
 			// the analgesic effect wears off slowly
 			analgesic = max(0, analgesic - 1)
 
