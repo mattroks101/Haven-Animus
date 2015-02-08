@@ -346,11 +346,16 @@
 
 ////////////////////////STAGE 1/////////////////////////////////
 
-/datum/disease2/effect/sneeze
+//datum/disease2/effect/sneeze
 	name = "Coldingtons Effect"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
+		if (prob(30))
+			mob << "<span class='warning'>You feel like you are about to sneeze!</span>"
+		sleep(5)
 		mob.say("*sneeze")
+		for(var/mob/living/carbon/M in get_step(mob,mob.dir))
+			mob.spread_disease_to(M)
 		if (prob(50))
 			var/obj/effect/decal/cleanable/mucus/M = new(get_turf(mob))
 			M.virus2 = virus_copylist(mob.virus2)
