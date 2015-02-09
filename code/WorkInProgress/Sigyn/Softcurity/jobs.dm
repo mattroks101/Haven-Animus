@@ -7,7 +7,7 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#ffdddd"
-	idtype = /obj/item/weapon/card/id/silver
+	idtype = /obj/item/weapon/card/id/hos
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -131,7 +131,7 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#ddddff"
-	idtype = /obj/item/weapon/card/id/silver
+	idtype = /obj/item/weapon/card/id/hop
 
 
 	equip(var/mob/living/carbon/human/H)

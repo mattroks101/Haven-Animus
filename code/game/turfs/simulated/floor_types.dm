@@ -194,6 +194,7 @@
 
 /turf/simulated/floor/carpet
 	name = "Carpet"
+	icon = 'icons/turf/carpet.dmi'
 	icon_state = "carpet"
 	floor_tile = new/obj/item/stack/tile/carpet
 

@@ -8,7 +8,7 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#ffddf0"
-	idtype = /obj/item/weapon/card/id/silver
+	idtype = /obj/item/weapon/card/id/cmo
 	access = list(access_medical, access_morgue, access_genetics, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist)
@@ -47,6 +47,7 @@
 	spawn_positions = 3
 	supervisors = "the research director"
 	selection_color = "#ffeef0"
+	idtype = /obj/item/weapon/card/id/med
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_morgue, access_surgery, access_virology)
 
@@ -82,6 +83,7 @@
 	spawn_positions = 2
 	supervisors = "the research director"
 	selection_color = "#ffeef0"
+	idtype = /obj/item/weapon/card/id/chem
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_chemistry)
 
@@ -110,6 +112,7 @@
 	spawn_positions = 2
 	supervisors = "the research director"
 	selection_color = "#ffeef0"
+	idtype = /obj/item/weapon/card/id/gene
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 
@@ -137,6 +140,7 @@
 	spawn_positions = 1
 	supervisors = "the research director"
 	selection_color = "#ffeef0"
+	idtype = /obj/item/weapon/card/id/viro
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_virology)
 
