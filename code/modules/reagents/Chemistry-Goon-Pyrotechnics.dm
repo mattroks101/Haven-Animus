@@ -87,6 +87,7 @@
 /datum/reagent/sorium/reaction_turf(var/turf/simulated/T, var/volume)
 	if(istype(T, /turf/simulated/floor/))
 		goonchem_vortex(T, 1, 5, 3)
+
 /datum/reagent/sorium/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 	if(!istype(M, /mob/living))
 		return

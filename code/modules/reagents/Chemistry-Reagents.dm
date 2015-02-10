@@ -1757,6 +1757,15 @@ datum/reagent/toxin/acid/polyacid
 	toxpwr = 2
 	meltprob = 30
 
+datum/reagent/toxin/acid/fluacid
+	name = "Fluorosulfuric acid"
+	id = "facid"
+	description = "Fluorosulfuric acid is a an extremely corrosive chemical substance."
+	color = "#8E18A9" // rgb: 142, 24, 169
+	toxpwr = 2
+	meltprob = 20
+
+
 /////////////////////////Food Reagents////////////////////////////
 // Part of the food code. Nutriment is used instead of the old "heal_amt" code. Also is where all the food
 // 	condiments, additives, and such go.
