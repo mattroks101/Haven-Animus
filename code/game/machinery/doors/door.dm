@@ -9,6 +9,7 @@
 	opacity = 1
 	density = 1
 	layer = 2.7
+	var/open_layer = 2.8
 
 	var/secondsElectrified = 0
 	var/visible = 1
@@ -33,7 +34,7 @@
 		explosion_resistance = initial(explosion_resistance)
 		update_heat_protection(get_turf(src))
 	else
-		layer = 2.7 //Under all objects if opened. 2.7 due to tables being at 2.6
+		layer = open_layer //Under all objects if opened. 2.7 due to tables being at 2.6
 		explosion_resistance = 0
 
 
@@ -236,7 +237,7 @@
 	icon_state = "door0"
 	src.SetOpacity(0)
 	sleep(10)
-	src.layer = 2.8
+	src.layer = open_layer
 	src.density = 0
 	explosion_resistance = 0
 	update_icon()

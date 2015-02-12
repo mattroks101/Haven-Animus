@@ -8,8 +8,8 @@
 		canopened = 1
 		underlays += image('icons/obj/drinks.dmi', icon_state = "grenade_ing")
 
-	else if(istype(I, /obj/item/weapon/cable_coil) && assemblystate == 1)
-		var/obj/item/weapon/cable_coil/C = I
+	else if(istype(I, /obj/item/stack/cable_coil) && assemblystate == 1)
+		var/obj/item/stack/cable_coil/C = I
 		if(!C.use(2)) return
 
 		assemblystate++

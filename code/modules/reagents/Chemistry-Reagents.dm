@@ -1357,7 +1357,7 @@ datum/reagent/toxin/plasma
 				egg.Hatch()*/
 		if((!O) || (!volume))	return 0
 		var/turf/the_turf = get_turf(O)
-		the_turf.assume_gas("volatile_fuel", volume, T20C)
+		the_turf.assume_gas("plasma", volume, T20C)
 	reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
 		if(!istype(M, /mob/living))
 			return
@@ -1366,7 +1366,7 @@ datum/reagent/toxin/plasma
 			return
 	reaction_turf(var/turf/T, var/volume)
 		src = null
-		T.assume_gas("volatile_fuel", volume, T20C)
+		T.assume_gas("plasma", volume, T20C)
 		return
 
 datum/reagent/toxin/lexorin

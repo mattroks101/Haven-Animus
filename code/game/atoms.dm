@@ -432,3 +432,6 @@ its easier to just keep the beam vertical.
 
 /atom/proc/handle_fall()
 	return
+
+/atom/proc/CheckParts()
+	return

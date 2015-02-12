@@ -78,3 +78,10 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	caliber = ".12"
 	max_ammo = 2
+
+/obj/item/ammo_magazine/internal/improvised
+	name = "improvised shotgun internal magazine"
+	desc = "This doesn't even exist"
+	ammo_type = /obj/item/ammo_casing/shotgun/improvised
+	caliber = ".12"
+	max_ammo = 1

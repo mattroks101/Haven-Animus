@@ -176,8 +176,8 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	if(.)
 		tick_progress = "processing fire zones"
 
-	for(var/zone/Z in active_fire_zones)
-		Z.process_fire()
+//	for(var/zone/Z in active_fire_zones)
+//		Z.process_fire()
 
 	//Process hotspots.
 	if(.)

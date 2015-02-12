@@ -36,6 +36,7 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/weapon/reagent_containers/syringe(), \
 		new /obj/item/ammo_casing/shotgun/blank(), \
 		new /obj/item/ammo_casing/shotgun/beanbag(), \
+		new /obj/item/ammo_casing/shotgun/improvised(), \
 		new /obj/item/device/taperecorder(), \
 		new /obj/item/device/assembly/igniter(), \
 		new /obj/item/device/assembly/signaler(), \
@@ -55,6 +56,8 @@ var/global/list/autolathe_recipes_hidden = list( \
 		new /obj/item/weapon/rcd(), \
 		new /obj/item/device/radio/electropack(), \
 		new /obj/item/weapon/weldingtool/largetank(), \
+		new /obj/item/weaponcrafting/reciever(), \
+		new /obj/item/weaponcrafting/stock(), \
 		new /obj/item/weapon/handcuffs(), \
 		new /obj/item/ammo_magazine/box/a357(), \
 		new /obj/item/ammo_casing/shotgun(), \

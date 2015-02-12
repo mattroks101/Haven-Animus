@@ -171,8 +171,8 @@
 			var/spawntype=state["spawn"]
 			var/atom/A = new spawntype(holder.loc)
 			if("amount" in state)
-				if(istype(A,/obj/item/weapon/cable_coil))
-					var/obj/item/weapon/cable_coil/C=A
+				if(istype(A,/obj/item/stack/cable_coil))
+					var/obj/item/stack/cable_coil/C=A
 					C.amount=state["amount"]
 				if(istype(A,/obj/item/stack))
 					var/obj/item/stack/S=A

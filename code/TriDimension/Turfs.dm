@@ -47,8 +47,8 @@
 //								H.apply_damage(rand(0,damage), BRUTE, "groin")
 								H.apply_damage(rand(0,damage), BRUTE, "l_leg")
 								H.apply_damage(rand(0,damage), BRUTE, "r_leg")
-								H.apply_damage(rand(0,damage), BRUTE, "l_foot")
-								H.apply_damage(rand(0,damage), BRUTE, "r_foot")
+								H.apply_damage(rand(2,damage), BRUTE, "l_foot")
+								H.apply_damage(rand(2,damage), BRUTE, "r_foot")
 								H:weakened = max(H:weakened,2)
 								H:updatehealth()
 		return ..()
@@ -73,7 +73,7 @@
 
 //overwrite the attackby of space to transform it to openspace if necessary
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/weapon/cable_coil))
+	if (istype(C, /obj/item/stack/cable_coil))
 		var/turf/simulated/floor/open/W = src.ChangeTurf(/turf/simulated/floor/open)
 		W.attackby(C, user)
 		return
@@ -85,8 +85,8 @@
 
 /turf/simulated/floor/open/attackby(obj/item/C as obj, mob/user as mob)
 	(..)
-	if (istype(C, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/cable = C
+	if (istype(C, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/cable = C
 		cable.turf_place(src, user)
 		return
 
@@ -113,5 +113,3 @@
 		else
 			user << "\red The plating is going to need some support."
 	return
-
-/turf/simulated/floor/open
