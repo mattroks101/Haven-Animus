@@ -407,7 +407,7 @@
 				user << "<span class='notice'>You unfasten the circuit board.</span>"
 				src.state = 1
 				src.icon_state = "1"
-			if(istype(P, /obj/item/weapon/cable_coil))
+			if(istype(P, /obj/item/stack/cable_coil))
 				if(P:amount >= 5)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					user << "<span class='notice'>You start adding cables to the frame.</span>"
@@ -426,7 +426,7 @@
 				user << "<span class='notice'>You remove the cables.</span>"
 				src.state = 2
 				src.icon_state = "2"
-				new /obj/item/weapon/cable_coil(src.loc, 5)
+				new /obj/item/stack/cable_coil(src.loc, 5)
 
 			if(istype(P, /obj/item/stack/sheet/glass))
 				var/obj/item/stack/sheet/glass/G = P

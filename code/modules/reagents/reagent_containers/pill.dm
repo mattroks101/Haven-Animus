@@ -25,7 +25,7 @@
 			M << "<span class='notice'>You [apply_method] [src].</span>"
 			M.drop_from_inventory(src) //icon update
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
+				reagents.reaction(M, apply_type)
 				spawn(5)
 					reagents.trans_to(M, reagents.total_volume)
 					del(src)
@@ -34,6 +34,7 @@
 			return 1
 
 		else
+
 			M.visible_message("<span class='danger'>[user] attempts to force [M] to [apply_method] [src].</span>", \
 								"<span class='userdanger'>[user] attempts to force [M] to [apply_method] [src].</span>")
 
@@ -188,13 +189,13 @@
 		reagents.add_reagent("salbutamol", 15)
 
 
-/obj/item/weapon/reagent_containers/pill/bicaridine
-	name = "Bicaridine pill"
+/obj/item/weapon/reagent_containers/pill/salglu_solution
+	name = "salglu_solution pill"
 	desc = "Used to treat physical injuries."
 	icon_state = "pill18"
 	New()
 		..()
-		reagents.add_reagent("bicaridine", 20)
+		reagents.add_reagent("salglu_solution", 20)
 
 /obj/item/weapon/reagent_containers/pill/happy
 	name = "Happy pill"

@@ -18,8 +18,8 @@
 	else if(istype(used_atom, /obj/item/weapon/wirecutters))
 		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
 
-	else if(istype(used_atom, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/C = used_atom
+	else if(istype(used_atom, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = used_atom
 		if(C.amount<4)
 			user << ("There's not enough cable to finish the task.")
 			return 0
@@ -51,8 +51,8 @@
 	else if(istype(used_atom, /obj/item/weapon/wirecutters))
 		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
 
-	else if(istype(used_atom, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/C = used_atom
+	else if(istype(used_atom, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = used_atom
 		if(C.amount<4)
 			user << ("There's not enough cable to finish the task.")
 			return 0
@@ -146,7 +146,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //12
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //13
@@ -190,7 +190,7 @@
 					holder.icon_state = "ripley4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "ripley2"
 			if(10)
@@ -373,7 +373,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //18
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //19
@@ -417,7 +417,7 @@
 					holder.icon_state = "gygax4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "gygax2"
 			if(16)
@@ -630,7 +630,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //13
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //14
@@ -674,7 +674,7 @@
 					holder.icon_state = "fireripley4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "fireripley2"
 			if(11)
@@ -938,7 +938,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //18
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //19
@@ -983,7 +983,7 @@
 					holder.icon_state = "durand4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "durand2"
 			if(16)
@@ -1212,7 +1212,7 @@
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The wiring is added"),
 					 //12
-					 list("key"=/obj/item/weapon/cable_coil,
+					 list("key"=/obj/item/stack/cable_coil,
 					 		"backkey"=/obj/item/weapon/screwdriver,
 					 		"desc"="The hydraulic systems are active."),
 					 //13
@@ -1256,7 +1256,7 @@
 					holder.icon_state = "odysseus4"
 				else
 					user.visible_message("[user] removes the wiring from [holder].", "You remove the wiring from [holder].")
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil(get_turf(holder))
+					var/obj/item/stack/cable_coil/coil = new /obj/item/stack/cable_coil(get_turf(holder))
 					coil.amount = 4
 					holder.icon_state = "odysseus2"
 			if(10)

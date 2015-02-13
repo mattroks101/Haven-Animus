@@ -254,7 +254,7 @@ var/list/forbidden_varedit_object_types = list(/datum/admins)
 /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
 	if(!check_rights(R_VAREDIT))	return
 
-	var/list/locked = list("vars", "key", "ckey", "firemut", "ishulk", "telekinesis", "xray", "virus", "cuffed", "ka", "last_eaten", "icon", "icon_state", "mutantrace")
+	var/list/locked = list("vars", "firemut", "ishulk", "telekinesis", "xray", "virus", "cuffed", "ka", "last_eaten", "icon", "icon_state", "mutantrace")
 
 	for(var/p in forbidden_varedit_object_types)
 		if( istype(O,p) )

@@ -31,6 +31,9 @@
 	//Emergency Fix
 	load_admins()
 	//end-emergency fix
+	LoadBansjob()
+	jobban_loadbanfile()
+	jobban_updatelegacybans()
 
 	src.update_status()
 

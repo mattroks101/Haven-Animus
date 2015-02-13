@@ -92,7 +92,7 @@
 		else
 			for(var/mob/O in viewers(user, 3))
 				O.show_message("<span class='warning'>The locker has been broken by [user] with an electromagnetic card!</span>", 1, "You hear a faint electrical spark.", 2)
-	else if(istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
+	else if(istype(W,/obj/item/stack/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
 		return ..(W,user)
 	else if(istype(W, /obj/item/device/multitool) && !src.broken)
 		var/obj/item/device/multitool/multi = W

@@ -74,10 +74,14 @@
 	slot_flags = SLOT_BACK
 	origin_tech = "combat=3;materials=1"
 	mag_type = /obj/item/ammo_magazine/internal/dualshot
+	var/sawn_desc = "Omar's coming!"
+	var/sawn = 0
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob)
 	..()
 	if(istype(A, /obj/item/weapon/circular_saw) || istype(A, /obj/item/weapon/melee/energy) || istype(A, /obj/item/weapon/gun/energy/plasmacutter))
+		if(sawn)
+			user << "<span class='notice'>\The [src] is already sawn!</span>"
 		user << "<span class='notice'>You begin to shorten the barrel of \the [src].</span>"
 		if(get_ammo())
 			afterattack(user, user)	//will this work?
@@ -86,14 +90,15 @@
 			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
 			return
 		if(do_after(user, 30))	//SHIT IS STEALTHY EYYYYY
-			icon_state = "sawnshotgun"
+			icon_state = "[icon_state]-sawn"
 			w_class = 3
 			item_state = "gun"
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 			slot_flags |= SLOT_BELT		//but you can wear it on your belt (poorly concealed under a trenchcoat, ideally)
 			user << "<span class='warning'>You shorten the barrel of \the [src]!</span>"
-			name = "sawn-off shotgun"
-			desc = "Omar's coming!"
+			name = "sawn-off [src.name]"
+			desc = sawn_desc
+			sawn = 1
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel/attack_self(mob/living/user as mob)
 	var/num_unloaded = 0
@@ -110,6 +115,33 @@
 		user << "<span class = 'notice'>You break open \the [src] and unload [num_unloaded] shell\s.</span>"
 	else
 		user << "<span class='notice'>[src] is empty.</span>"
+
+// IMPROVISED SHOTGUN //
+
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/improvised
+	name = "improvised shotgun"
+	desc = "Essentially a tube that aims shotgun shells."
+	icon_state = "ishotgun"
+	item_state = "shotgun"
+	w_class = 4.0
+	force = 10
+	origin_tech = "combat=2;materials=2"
+	mag_type = /obj/item/ammo_magazine/internal/improvised
+	sawn_desc = "I'm just here for the gasoline."
+
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/improvised/attackby(var/obj/item/A as obj, mob/user as mob)
+	..()
+	if(istype(A, /obj/item/stack/cable_coil) && !sawn)
+		var/obj/item/stack/cable_coil/C = A
+		if(C.use(10))
+			flags =  CONDUCT
+			slot_flags = SLOT_BACK
+			icon_state = "ishotgunsling"
+			user << "<span class='notice'>You tie the lengths of cable to the shotgun, making a sling.</span>"
+			update_icon()
+		else
+			user << "<span class='warning'>You need at least ten lengths of cable if you want to make a sling.</span>"
+			return
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel/spin()
 	set invisibility = 101

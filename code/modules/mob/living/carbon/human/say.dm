@@ -16,15 +16,18 @@
 		return say_dead(message)
 
 	if(iszombie(src))
-		if (copytext(message, 1, 2) == "*" && !stat)
-			return emote(copytext(message, 2))
-		if(message)
-			if(prob(15))
-			//	message = pick("...argh...", "...deaath...", "...haaaww...", "...diee...")
-				message = pick("...беги...", "...голод...", "...не жизнь...", "...убейте...", "...аагрх...", "...смерть...", "...жрать...", "...умрии...")
+		if (message && !(copytext(message, 1, 3) == ":z"))
+			if (copytext(message, 1, 2) == "*" && !stat)
+				return emote(copytext(message, 2))
 			else
 				emote(pick("z_roar","z_shout","z_mutter","z_rawr"))
 				return
+//		if(message)
+//			if(prob(15))
+//				message = pick("...беги...", "...голод...", "...не жизнь...", "...убейте...", "...аагрх...", "...смерть...", "...жрать...", "...умрии...")
+//			else
+//				emote(pick("z_roar","z_shout","z_mutter","z_rawr"))
+//				return
 
 	var/message_mode = parse_message_mode(message, "headset")
 

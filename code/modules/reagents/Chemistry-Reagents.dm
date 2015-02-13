@@ -1357,7 +1357,7 @@ datum/reagent/toxin/plasma
 				egg.Hatch()*/
 		if((!O) || (!volume))	return 0
 		var/turf/the_turf = get_turf(O)
-		the_turf.assume_gas("volatile_fuel", volume, T20C)
+		the_turf.assume_gas("plasma", volume, T20C)
 	reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
 		if(!istype(M, /mob/living))
 			return
@@ -1366,7 +1366,7 @@ datum/reagent/toxin/plasma
 			return
 	reaction_turf(var/turf/T, var/volume)
 		src = null
-		T.assume_gas("volatile_fuel", volume, T20C)
+		T.assume_gas("plasma", volume, T20C)
 		return
 
 datum/reagent/toxin/lexorin
@@ -1757,6 +1757,15 @@ datum/reagent/toxin/acid/polyacid
 	toxpwr = 2
 	meltprob = 30
 
+datum/reagent/toxin/acid/fluacid
+	name = "Fluorosulfuric acid"
+	id = "facid"
+	description = "Fluorosulfuric acid is a an extremely corrosive chemical substance."
+	color = "#8E18A9" // rgb: 142, 24, 169
+	toxpwr = 2
+	meltprob = 20
+
+
 /////////////////////////Food Reagents////////////////////////////
 // Part of the food code. Nutriment is used instead of the old "heal_amt" code. Also is where all the food
 // 	condiments, additives, and such go.
@@ -1772,6 +1781,20 @@ datum/reagent/nutriment
 		if(!M) M = holder.my_atom
 		if(prob(50)) M.heal_organ_damage(1,0)
 		M.nutrition += nutriment_factor	// For hunger and fatness
+		..()
+		return
+
+datum/reagent/vitamin
+	name = "Vitamin"
+	id = "vitamin"
+	description = "All the best vitamins, minerals, and carbohydrates the body needs in pure form."
+	reagent_state = SOLID
+	color = "#664330" // rgb: 102, 67, 48
+	nutriment_factor = 25 * REAGENTS_METABOLISM
+
+	on_mob_life(var/mob/living/M as mob)
+		if(prob(50))
+			M.heal_organ_damage(1,1)
 		..()
 		return
 

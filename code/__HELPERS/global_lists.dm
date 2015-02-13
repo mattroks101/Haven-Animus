@@ -42,6 +42,8 @@ var/global/list/underwear_f = list("Red", "White", "Yellow", "Blue", "Black", "T
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
 
+var/global/list/table_recipes = list()
+
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -86,6 +88,10 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/medical_effect/M = new T
 		side_effects[M.name] = T
 
+	paths = typesof(/datum/table_recipe)-/datum/table_recipe
+	for(var/T in paths)
+		var/datum/table_recipe/S = new T
+		table_recipes += S
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language

@@ -7,7 +7,7 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#ffddff"
-	idtype = /obj/item/weapon/card/id/silver
+	idtype = /obj/item/weapon/card/id/rd
 	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_medical, access_ai_upload,
@@ -45,6 +45,7 @@
 	spawn_positions = 3
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
+	idtype = /obj/item/weapon/card/id/sci
 	access = list(access_robotics, access_medical, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_tox, access_medical, access_tox_storage, access_research, access_xenoarch)
 
@@ -98,6 +99,7 @@
 	spawn_positions = 2
 	supervisors = "research director"
 	selection_color = "#ffeeff"
+	idtype = /obj/item/weapon/card/id/dkgrey
 	access = list(access_robotics, access_medical, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_medical, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 

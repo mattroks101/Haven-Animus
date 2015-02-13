@@ -264,3 +264,8 @@
 /obj/machinery/door/firedoor/multi_tile
 	icon = 'icons/obj/doors/DoorHazard2x1.dmi'
 	width = 2
+
+/obj/machinery/door/firedoor/window
+	name = "\improper Window Shutter"
+	layer = 2.91
+	open_layer = 2.91

@@ -180,6 +180,11 @@ datum/controller/vote
 		return .
 
 	proc/submit_vote(var/ckey, var/vote)
+		if(usr.client.holder)
+			choices[choices[vote]]++
+			usr << "\red You have democraticised the vote!"
+			message_admins("[ckey] has made the vote more democratical!")
+			return vote
 		if(mode)
 			if(config.vote_no_dead && usr.stat == DEAD && !usr.client.holder)
 				return 0

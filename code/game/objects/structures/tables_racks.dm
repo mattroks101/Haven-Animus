@@ -21,6 +21,7 @@
 	throwpass = 1	//You can throw objects over this, despite it's density.")
 	breakable = 1
 	parts = /obj/item/weapon/table_parts
+	var/busy = 0
 
 	var/flipped = 0
 	var/dented = 0

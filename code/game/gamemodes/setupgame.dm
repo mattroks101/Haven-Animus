@@ -21,44 +21,6 @@
 	if (prob(75))
 		DIFFMUT = rand(0,20)
 
-	/* Old, for reference (so I don't accidentally activate something) - N3X
-	var/list/avnums = new/list()
-	var/tempnum
-
-	avnums.Add(2)
-	avnums.Add(12)
-	avnums.Add(10)
-	avnums.Add(8)
-	avnums.Add(4)
-	avnums.Add(11)
-	avnums.Add(13)
-	avnums.Add(6)
-
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
-	HULKBLOCK = tempnum
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
-	TELEBLOCK = tempnum
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
-	FIREBLOCK = tempnum
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
-	XRAYBLOCK = tempnum
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
-	CLUMSYBLOCK = tempnum
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
-	FAKEBLOCK = tempnum
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
-	DEAFBLOCK = tempnum
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
-	BLINDBLOCK = tempnum
-	*/
 	var/list/numsToAssign=new()
 	for(var/i=1;i<STRUCDNASIZE;i++)
 		numsToAssign += i
@@ -76,25 +38,25 @@
 	FAKEBLOCK          = getAssignedBlock("FAKE",          numsToAssign)
 
 	// UNUSED!
-	//COUGHBLOCK         = getAssignedBlock("COUGH",         numsToAssign)
-	//GLASSESBLOCK       = getAssignedBlock("GLASSES",       numsToAssign)
-	//EPILEPSYBLOCK      = getAssignedBlock("EPILEPSY",      numsToAssign)
-	//TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
-	//NERVOUSBLOCK       = getAssignedBlock("NERVOUS",       numsToAssign)
+	COUGHBLOCK         = getAssignedBlock("COUGH",         numsToAssign)
+	GLASSESBLOCK       = getAssignedBlock("GLASSES",       numsToAssign)
+	EPILEPSYBLOCK      = getAssignedBlock("EPILEPSY",      numsToAssign)
+	TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
+	NERVOUSBLOCK       = getAssignedBlock("NERVOUS",       numsToAssign)
 
 	// Bay muts (UNUSED)
-	//HEADACHEBLOCK      = getAssignedBlock("HEADACHE",      numsToAssign)
-	//NOBREATHBLOCK      = getAssignedBlock("NOBREATH",      numsToAssign, DNA_HARD_BOUNDS)
-	//REMOTEVIEWBLOCK    = getAssignedBlock("REMOTEVIEW",    numsToAssign, DNA_HARDER_BOUNDS)
-	//REGENERATEBLOCK    = getAssignedBlock("REGENERATE",    numsToAssign, DNA_HARDER_BOUNDS)
-	//INCREASERUNBLOCK   = getAssignedBlock("INCREASERUN",   numsToAssign, DNA_HARDER_BOUNDS)
-	//REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
-	//MORPHBLOCK         = getAssignedBlock("MORPH",         numsToAssign, DNA_HARDER_BOUNDS)
-	//COLDBLOCK          = getAssignedBlock("COLD",          numsToAssign)
-	//HALLUCINATIONBLOCK = getAssignedBlock("HALLUCINATION", numsToAssign)
-	//NOPRINTSBLOCK      = getAssignedBlock("NOPRINTS",      numsToAssign, DNA_HARD_BOUNDS)
-	//SHOCKIMMUNITYBLOCK = getAssignedBlock("SHOCKIMMUNITY", numsToAssign)
-	//SMALLSIZEBLOCK     = getAssignedBlock("SMALLSIZE",     numsToAssign, DNA_HARD_BOUNDS)
+	HEADACHEBLOCK      = getAssignedBlock("HEADACHE",      numsToAssign)
+	NOBREATHBLOCK      = getAssignedBlock("NOBREATH",      numsToAssign, DNA_HARD_BOUNDS)
+	REMOTEVIEWBLOCK    = getAssignedBlock("REMOTEVIEW",    numsToAssign, DNA_HARDER_BOUNDS)
+	REGENERATEBLOCK    = getAssignedBlock("REGENERATE",    numsToAssign, DNA_HARDER_BOUNDS)
+	INCREASERUNBLOCK   = getAssignedBlock("INCREASERUN",   numsToAssign, DNA_HARDER_BOUNDS)
+	REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
+	MORPHBLOCK         = getAssignedBlock("MORPH",         numsToAssign, DNA_HARDER_BOUNDS)
+//	COLDBLOCK          = getAssignedBlock("COLD",          numsToAssign)
+	HALLUCINATIONBLOCK = getAssignedBlock("HALLUCINATION", numsToAssign)
+	NOPRINTSBLOCK      = getAssignedBlock("NOPRINTS",      numsToAssign, DNA_HARD_BOUNDS)
+	SHOCKIMMUNITYBLOCK = getAssignedBlock("SHOCKIMMUNITY", numsToAssign)
+	SMALLSIZEBLOCK     = getAssignedBlock("SMALLSIZE",     numsToAssign, DNA_HARD_BOUNDS)
 
 	// And the genes that actually do the work. (domutcheck improvements)
 	var/list/blocks_assigned[STRUCDNASIZE]

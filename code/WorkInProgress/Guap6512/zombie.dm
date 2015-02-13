@@ -6,9 +6,9 @@ var/list/datum/zombies = list()
 	stat &= 1
 	oxyloss = 0
 	becoming_zombie = 0
-	zombie = 1
 	bodytemperature = 310.055
 	see_in_dark = 4
+	set_species("Zombie")
 	sight |= SEE_MOBS
 	update_icons()
 	src.verbs += /mob/living/carbon/human/proc/supersuicide
@@ -23,8 +23,8 @@ var/list/datum/zombies = list()
 	zombies.Add(src)
 
 
-/mob/living/carbon/proc/unzombify()
-	zombie = 0
+/mob/living/carbon/human/proc/unzombify()
+	set_species("Human")
 	see_in_dark = 2
 	sight &= ~SEE_MOBS
 	src.verbs -= /mob/living/carbon/human/proc/supersuicide
@@ -104,26 +104,3 @@ var/list/datum/zombies = list()
 	if(zombieleader)
 		zombify()
 
-/mob/living/carbon/human/proc/AddZombieImages()
-	if (client && zombie)
-		for (var/mob/living/carbon/human/C in mob_list)
-			if(C.zombie)
-				var/I = image('icons/mob/hud.dmi', loc = C, icon_state = "hudzombie")
-				client.images += I
-	return
-
-
-/*
-/proc/UpdateZombieIcons()
-	spawn(0)
-		for(var/mob/living/carbon/human/H in world)
-			del(H.zombieimage)
-			if(H.zombie)
-				H.zombieimage = image('icons/mob/hud.dmi', loc = H, icon_state = "hudzombie")
-			else
-				H.zombieimage = null
-		for(var/mob/living/carbon/human/H in world)
-			if(H.zombie)
-				for(var/mob/living/carbon/human/N in world)
-					H << N.zombieimage
-*/

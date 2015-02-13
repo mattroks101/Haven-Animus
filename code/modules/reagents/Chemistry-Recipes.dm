@@ -119,13 +119,6 @@ datum
 		//	required_reagents = list("hydrogen" = 1, "carbon" = 1, "nitrogen" = 1)
 		//	result_amount = 1
 
-		water //I can't believe we never had this.
-			name = "Water"
-			id = "water"
-			result = null
-			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
-			result_amount = 1
-
 		thermite
 			name = "Thermite"
 			id = "thermite"
@@ -279,7 +272,7 @@ datum
 			name = "Napalm"
 			id = "napalm"
 			result = null
-			required_reagents = list("aluminum" = 1, "phoron" = 1, "sacid" = 1 )
+			required_reagents = list("aluminum" = 1, "plasma" = 1, "sacid" = 1 )
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/turf/location = get_turf(holder.my_atom.loc)

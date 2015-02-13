@@ -119,7 +119,8 @@ proc/isorgan(A)
 
 proc/iszombie(A)
 	if(istype(A, /mob/living/carbon/human))
-		if(A:zombie)
+		var/mob/living/carbon/human/H = A
+		if(H.species && istype(H.species, /datum/species/human/zombie))
 			return 1
 	return 0
 
