@@ -1,6 +1,6 @@
 /obj/machinery/computer/helm
 	name = "helm control console"
-	icon_state = "id"
+	icon_state = "steering"
 	var/state = "status"
 	var/obj/effect/map/ship/linked			//connected overmap object
 	var/autopilot = 0
@@ -10,7 +10,7 @@
 	var/dy		//coordinates
 
 /obj/machinery/computer/helm/initialize()
-	linked = map_sectors["[z]"]
+	linked = map_sectors["[vessel_name]"]
 	if (linked)
 		if(!linked.nav_control)
 			linked.nav_control = src
@@ -170,5 +170,5 @@
 	if (href_list["state"])
 		state = href_list["state"]
 	add_fingerprint(usr)
-	updateUsrDialog()
+	nanomanager.update_uis(src)
 

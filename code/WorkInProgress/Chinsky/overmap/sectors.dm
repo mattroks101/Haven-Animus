@@ -9,9 +9,16 @@ var/global/list/map_sectors = list()
 		return 1
 	testing("Building overmap...")
 	var/obj/effect/mapinfo/data
+	var/ship_found = 0
 	for(var/level in 1 to world.maxz)
 		data = locate("sector[level]")
-		if (data)
+		if(level in vessel_z)
+			if(!ship_found)
+				data = locate("ship_sector_[vessel_name]")
+				testing("Vessel \"[vessel_name]\" connected to overmap.")
+				map_sectors["[vessel_name]"] = new /obj/effect/map/ship/luna(data)
+				ship_found = 1
+		else if (data)
 			testing("Located sector \"[data.name]\" at [data.mapx],[data.mapy] corresponding to zlevel [level]")
 			map_sectors["[level]"] = new data.obj_type(data)
 	return 1
@@ -31,6 +38,7 @@ var/global/list/map_sectors = list()
 	var/mapx			//coordinates on the
 	var/mapy			//overmap zlevel
 	var/known = 1
+	var/list/levels = new/list()
 
 /obj/effect/mapinfo/New()
 	tag = "sector[z]"
@@ -44,6 +52,10 @@ var/global/list/map_sectors = list()
 /obj/effect/mapinfo/ship
 	name = "generic ship"
 	obj_type = /obj/effect/map/ship
+
+/obj/effect/mapinfo/ship/New()
+	..()
+	tag = "ship_sector_[vessel_name]"
 
 
 //===================================================================================

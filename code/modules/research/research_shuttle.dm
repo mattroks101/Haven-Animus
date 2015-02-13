@@ -83,7 +83,7 @@ proc/move_research_shuttle()
 	if(href_list["move"])
 		//if(ticker.mode.name == "blob")
 		//	if(ticker.mode:declared)
-		//		usr << "Under directive 7-10, [station_name()] is quarantined until further notice."
+		//		usr << "Under directive 7-10, [vessel_name()] is quarantined until further notice."
 		//		return
 
 		if (!research_shuttle_moving)

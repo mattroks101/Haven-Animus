@@ -2,13 +2,13 @@
 
 /obj/machinery/computer/engines
 	name = "engines control console"
-	icon_state = "id"
+	icon_state = "engineeringcameras"
 	var/state = "status"
 	var/list/engines = list()
 	var/obj/effect/map/ship/linked
 
 /obj/machinery/computer/engines/initialize()
-	linked = map_sectors["[z]"]
+	linked = map_sectors["[vessel_name]"]
 	if (linked)
 		if (!linked.eng_control)
 			linked.eng_control = src
@@ -16,9 +16,9 @@
 	else
 		testing("Engines console at level [z] was unable to find a corresponding overmap object.")
 
-	for(var/datum/ship_engine/E in engines)
-		if (E.zlevel == z && !(E in engines))
-			engines += E
+	for(var/datum/ship_engine/E in ship_engines)
+		if ((E.zlevel in vessel_z) && !(E in src.engines))
+			src.engines += E
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
 	if(..())
@@ -84,7 +84,7 @@
 				E.toggle()
 
 	add_fingerprint(usr)
-	updateUsrDialog()
+	nanomanager.update_uis(src)
 
 /obj/machinery/computer/engines/proc/burn()
 	if(engines.len == 0)
