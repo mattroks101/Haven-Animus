@@ -250,7 +250,7 @@
 
 				update_req_desc()
 				return
-			else if(istype(P, /obj/item/weapon) && get_req_components_amt())
+			else if(istype(P, /obj/item) && get_req_components_amt())
 				for(var/I in req_components)
 					if(!ispath(I))
 						I = text2path(I)
@@ -560,6 +560,7 @@ to destroy them and players will be able to make replacements.
 	req_components = list(
 							/obj/item/weapon/stock_parts/manipulator = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1)
+
 
 /obj/item/weapon/circuitboard/thermomachine
 	name = "circuit board (Freezer)"
