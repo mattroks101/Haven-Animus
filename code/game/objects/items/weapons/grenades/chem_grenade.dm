@@ -146,7 +146,7 @@
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 50, 1)
 			return
 
-		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
+		playsound(src.loc, 'sound/effects/bamfgas.ogg', 50, 1)
 
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 			G.reagents.trans_to(src, G.reagents.total_volume)
