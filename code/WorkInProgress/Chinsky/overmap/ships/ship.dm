@@ -16,7 +16,7 @@
 /obj/effect/map/ship/luna/New(var/obj/effect/mapinfo/data)
 //	map_z = data.zlevel
 	name = "[vessel_name]"
-	always_known = data.known
+	always_known = 1
 	if (data.icon != 'icons/mob/screen1.dmi')
 		icon = data.icon
 		icon_state = data.icon_state

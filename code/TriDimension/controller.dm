@@ -174,7 +174,7 @@ atom/movable/Move() //Hackish
 				T.z_overlays += m_img
 
 				T.overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
-				T.z_overlays += image('floors.dmi', icon_state = "black_open", layer = src.layer+1)
+				T.z_overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
 
 				T.overlays -= below.z_overlays
 				T.z_overlays -= below.z_overlays
