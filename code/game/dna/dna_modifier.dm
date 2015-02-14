@@ -178,11 +178,11 @@
 		if (!opened)
 			src.opened = 1
 			user << "You open the maintenance hatch of [src]."
-			//src.icon_state = "autolathe_t"
+			src.icon_state = "scanner_open_maintenance"
 		else
 			src.opened = 0
 			user << "You close the maintenance hatch of [src]."
-			//src.icon_state = "autolathe"
+			src.icon_state = "scanner_0"
 		return 1
 	else if(istype(item, /obj/item/weapon/crowbar))
 		if (occupant)
