@@ -106,6 +106,7 @@
 				del(A.fingerprints)
 		else
 			user << "\blue Isolated [A.fingerprints.len] fingerprints: Data Stored: Scan with Hi-Res Forensic Scanner to retrieve."
+			playsound(get_turf(src), 'sound/items/detscan.ogg', 50, 1)
 			var/list/complete_prints = list()
 			for(var/i in A.fingerprints)
 				var/print = A.fingerprints[i]

@@ -19,6 +19,8 @@
 		msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to card [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 		transfer_ai("AICORE", "AICARD", M, user)
+		playsound(get_turf(src), 'sound/machines/paistartup.ogg', 50, 1)
+
 		return
 
 	attack(mob/living/silicon/decoy/M as mob, mob/user as mob)
