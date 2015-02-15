@@ -22,7 +22,7 @@ proc/toggle_move_stars(direction)
 		if (moving_levels["zlevel"] != gen_dir)
 			moving_levels["zlevel"] = gen_dir
 			for(var/turf/space/S in world)
-				if(S.z in vessel_z)
+				if((S.z in vessel_z) && (S.z != OVERMAP_ZLEVEL))
 					spawn(0)
 						var/turf/T = S
 						if(!gen_dir)

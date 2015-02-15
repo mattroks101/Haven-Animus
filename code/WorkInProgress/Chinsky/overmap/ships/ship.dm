@@ -2,7 +2,7 @@
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "sheet-sandstone"
-	var/vessel_mass = 9000 //tonnes, random number
+	var/vessel_mass = 34000 //tonnes, random number
 	var/default_delay = 60
 	var/list/speed = list(0,0)
 	var/last_burn = 0
