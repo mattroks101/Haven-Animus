@@ -225,7 +225,7 @@ proc/virus2_greater_infection()
 proc/virology_letterhead(var/report_name)
 	return {"
 		<center><h1><b>[report_name]</b></h1></center>
-		<center><small><i>[station_name()] Virology Lab</i></small></center>
+		<center><small><i>[vessel_name()] Virology Lab</i></small></center>
 		<hr>
 "}
 

@@ -15,7 +15,7 @@
 
 /obj/machinery/account_database/New()
 	..()
-	machine_id = "[station_name()] Acc. DB #[num_financial_terminals++]"
+	machine_id = "[vessel_name()] Acc. DB #[num_financial_terminals++]"
 
 /obj/machinery/account_database/attack_hand(mob/user as mob)
 	if(get_dist(src,user) <= 1)

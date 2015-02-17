@@ -91,8 +91,8 @@
 
 /datum/turntable_soundtrack/portal
 	f_name = "S"
-	name = "till Alive"
-	path = 'sound/turntable/Still_alive.ogg'
+	name = "tayin Alive"
+	path = 'sound/turntable/Stayin_Alive.ogg'
 
 /datum/turntable_soundtrack/assistant
 	f_name = "W"

@@ -19,17 +19,16 @@
 
 /obj/machinery/party/musicwriter/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/weapon/coin))
-		if(!coin)
-			user.drop_item()
-			O.loc = src
-			coin = 1
+		user.drop_item()
+		del(O)
+		coin++
 
 /obj/machinery/party/musicwriter/attack_hand(mob/user)
 	var/dat = ""
 	if(writing)
 		dat += "Memory scan completed. <br>Writing from scan of [retard_name] mind... Please Stand By."
 	else if(!coin)
-		dat += "Please insert coin"
+		dat += "Please insert a coin."
 	else
 		dat += "<A href='?src=\ref[src];write=1'>Write</A>"
 
@@ -62,6 +61,6 @@
 					message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[S]'>sound</A> named as [N]. <A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A> data.")
 			icon_state = "writer_off"
 			writing = 0
-//			coin -= 1
+			coin -= 1
 			retard = null
 			retard_name = null

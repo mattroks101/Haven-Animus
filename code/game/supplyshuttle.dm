@@ -297,7 +297,7 @@ var/list/mechtoys = list(
 			var/obj/item/weapon/paper/manifest/slip = new /obj/item/weapon/paper/manifest(A)
 			slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
 			slip.info +="Order #[SO.ordernum]<br>"
-			slip.info +="Destination: [station_name]<br>"
+			slip.info +="Destination: [vessel_name]<br>"
 			slip.info +="[supply_shuttle.shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 			slip.info +="CONTENTS:<br><ul>"
 
@@ -420,7 +420,7 @@ var/list/mechtoys = list(
 		supply_shuttle.ordernum++
 		var/obj/item/weapon/paper/reqform = new /obj/item/weapon/paper(loc)
 		reqform.name = "Requisition Form - [P.name]"
-		reqform.info += "<h3>[station_name] Supply Requisition Form</h3><hr>"
+		reqform.info += "<h3>[vessel_name] Supply Requisition Form</h3><hr>"
 		reqform.info += "INDEX: #[supply_shuttle.ordernum]<br>"
 		reqform.info += "REQUESTED BY: [idname]<br>"
 		reqform.info += "RANK: [idrank]<br>"
@@ -613,7 +613,7 @@ var/list/mechtoys = list(
 		supply_shuttle.ordernum++
 		var/obj/item/weapon/paper/reqform = new /obj/item/weapon/paper(loc)
 		reqform.name = "Requisition Form - [P.name]"
-		reqform.info += "<h3>[station_name] Supply Requisition Form</h3><hr>"
+		reqform.info += "<h3>[vessel_name] Supply Requisition Form</h3><hr>"
 		reqform.info += "INDEX: #[supply_shuttle.ordernum]<br>"
 		reqform.info += "REQUESTED BY: [idname]<br>"
 		reqform.info += "RANK: [idrank]<br>"

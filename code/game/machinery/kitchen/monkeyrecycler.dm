@@ -11,6 +11,29 @@
 	active_power_usage = 50
 	var/grinded = 0
 
+	attackby(obj/item/weapon/W as obj, mob/user as mob)
+		if (istype(W, /obj/item/weapon/wrench))
+			if (src.anchored)
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				user << "\blue You begin to unfasten \the [src] from the floor..."
+				if (do_after(user, 20))
+					user.visible_message( \
+						"[user] unfastens \the [src].", \
+						"\blue You have unfastened \the [src].", \
+						"You hear ratchet.")
+					src.anchored = 0
+			else
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				user << "\blue You begin to fasten \the [src] to the floor..."
+				if (do_after(user, 20))
+					user.visible_message( \
+						"[user] fastens \the [src].", \
+						"\blue You have fastened \the [src].", \
+						"You hear ratchet.")
+					src.anchored = 1
+		else
+			..()
+			return
 
 /obj/machinery/monkey_recycler/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(default_unfasten_wrench(user, O))

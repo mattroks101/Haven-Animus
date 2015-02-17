@@ -100,7 +100,7 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 		candidates -= chosen
 		members += chosen
 
-	command_alert("Sensors indicate that [station_name()] has entered Code Red and is in need of assistance. We will prepare and dispatch an emergency response team to deal with the situation.", "NMV Icarus Command")
+	command_alert("Sensors indicate that [vessel_name()] has entered Code Red and is in need of assistance. We will prepare and dispatch an emergency response team to deal with the situation.", "NMV Icarus Command")
 
 	for(var/obj/effect/landmark/L in landmarks_list)
 		if(L.name == "Response Team")
@@ -189,12 +189,12 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 				ticker.mode.traitors |= new_member.mind // ERTs will show up at the end of the round on the "traitor" list
 
 				// Join message
-				new_member << "\blue You are the <b>Emergency Response Team[!leader_selected?"!</b>":" Leader!</b>"] \nAs a response team [!leader_selected?"member":"<b>leader</b>"] you answer directly to [!leader_selected?"your team leader.":"Central Command."] \nYou have been deployed by NanoTrasen Central Command in Tau Ceti to resolve a Code Red alert aboard [station_name()], and have been provided with the following instructions and information regarding your mission: \red [situation]"
+				new_member << "\blue You are the <b>Emergency Response Team[!leader_selected?"!</b>":" Leader!</b>"] \nAs a response team [!leader_selected?"member":"<b>leader</b>"] you answer directly to [!leader_selected?"your team leader.":"Central Command."] \nYou have been deployed by NanoTrasen Central Command in Tau Ceti to resolve a Code Red alert aboard [vessel_name()], and have been provided with the following instructions and information regarding your mission: \red [situation]"
 				new_member.mind.store_memory("<b>Mission Parameters:</b> \red [situation].")
 
 				// Leader join message
 				if(leader_selected)
-					new_member << "\red The Nuclear Authentication Code is: <b> [nuke_code]</b>. You are instructed not to detonate the nuclear device aboard [station_name()] unless <u>absolutely necessary</u>."
+					new_member << "\red The Nuclear Authentication Code is: <b> [nuke_code]</b>. You are instructed not to detonate the nuclear device aboard [vessel_name()] unless <u>absolutely necessary</u>."
 					new_member.mind.store_memory("<b>Nuclear Authentication Code:</b> \red [nuke_code]")
 
 				new_member.equip_response_team(leader_selected) // Start equipping them

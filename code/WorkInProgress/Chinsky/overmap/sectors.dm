@@ -9,9 +9,16 @@ var/global/list/map_sectors = list()
 		return 1
 	testing("Building overmap...")
 	var/obj/effect/mapinfo/data
+	var/ship_found = 0
 	for(var/level in 1 to world.maxz)
 		data = locate("sector[level]")
-		if (data)
+		if(level in vessel_z)
+			if(!ship_found)
+				data = locate("ship_sector_[vessel_name]")
+				testing("Vessel \"[vessel_name]\" connected to overmap.")
+				map_sectors["[vessel_name]"] = new /obj/effect/map/ship/luna(data)
+				ship_found = 1
+		else if (data)
 			testing("Located sector \"[data.name]\" at [data.mapx],[data.mapy] corresponding to zlevel [level]")
 			map_sectors["[level]"] = new data.obj_type(data)
 	return 1
@@ -31,6 +38,7 @@ var/global/list/map_sectors = list()
 	var/mapx			//coordinates on the
 	var/mapy			//overmap zlevel
 	var/known = 1
+	var/list/levels = new/list()
 
 /obj/effect/mapinfo/New()
 	tag = "sector[z]"
@@ -44,6 +52,10 @@ var/global/list/map_sectors = list()
 /obj/effect/mapinfo/ship
 	name = "generic ship"
 	obj_type = /obj/effect/map/ship
+
+/obj/effect/mapinfo/ship/New()
+	..()
+	tag = "ship_sector_[vessel_name]"
 
 
 //===================================================================================
@@ -75,17 +87,17 @@ var/global/list/map_sectors = list()
 		shuttle_landing = locate(data.landing_area)
 
 /obj/effect/map/CanPass(atom/movable/A)
-	testing("[A] attempts to enter sector\"[name]\"")
+//	testing("[A] attempts to enter sector\"[name]\"")
 	return 1
 
 /obj/effect/map/Crossed(atom/movable/A)
-	testing("[A] has entered sector\"[name]\"")
+//	testing("[A] has entered sector\"[name]\"")
 	if (istype(A,/obj/effect/map/ship))
 		var/obj/effect/map/ship/S = A
 		S.current_sector = src
 
 /obj/effect/map/Uncrossed(atom/movable/A)
-	testing("[A] has left sector\"[name]\"")
+//	testing("[A] has left sector\"[name]\"")
 	if (istype(A,/obj/effect/map/ship))
 		var/obj/effect/map/ship/S = A
 		S.current_sector = null
@@ -106,19 +118,19 @@ var/global/list/map_sectors = list()
 	loc = locate(nx, ny, OVERMAP_ZLEVEL)
 	map_z = nz
 	map_sectors["[map_z]"] = src
-	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z].")
+//	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z].")
 
 /obj/effect/map/sector/temporary/Del()
 	map_sectors["[map_z]"] = null
-	testing("Temporary sector at [x],[y] was deleted.")
+//	testing("Temporary sector at [x],[y] was deleted.")
 	if (can_die())
-		testing("Associated zlevel disappeared.")
+//		testing("Associated zlevel disappeared.")
 		world.maxz--
 
 /obj/effect/map/sector/temporary/proc/can_die(var/mob/observer)
-	testing("Checking if sector at [map_z] can die.")
+//	testing("Checking if sector at [map_z] can die.")
 	for(var/mob/M in player_list)
 		if(M != observer && M.z == map_z)
-			testing("There are people on it.")
+//			testing("There are people on it.")
 			return 0
 	return 1

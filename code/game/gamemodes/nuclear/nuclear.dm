@@ -24,8 +24,8 @@
 
 /datum/game_mode/nuclear/announce()
 	world << "<B>The current game mode is - Nuclear Emergency!</B>"
-	world << "<B>A [syndicate_name()] Strike Force is approaching [station_name()]!</B>"
-	world << "A nuclear explosive was being transported by Nanotrasen to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [station_name()]. It was identified by Nanotrasen as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!"
+	world << "<B>A [syndicate_name()] Strike Force is approaching [vessel_name()]!</B>"
+	world << "A nuclear explosive was being transported by Nanotrasen to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [vessel_name()]. It was identified by Nanotrasen as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!"
 
 /datum/game_mode/nuclear/can_start()//This could be better, will likely have to recode it later
 	if(!..())
@@ -284,19 +284,19 @@
 
 	if      (!disk_rescued && station_was_nuked && !syndies_didnt_escape)
 		world << "<FONT size = 3><B>Syndicate Major Victory!</B></FONT>"
-		world << "<B>[syndicate_name()] operatives have destroyed [station_name()]!</B>"
+		world << "<B>[syndicate_name()] operatives have destroyed [vessel_name()]!</B>"
 
 	else if (!disk_rescued && station_was_nuked && syndies_didnt_escape)
 		world << "<FONT size = 3><B>Total Annihilation</B></FONT>"
-		world << "<B>[syndicate_name()] operatives destroyed [station_name()] but did not leave the area in time and got caught in the explosion.</B> Next time, don't lose the disk!"
+		world << "<B>[syndicate_name()] operatives destroyed [vessel_name()] but did not leave the area in time and got caught in the explosion.</B> Next time, don't lose the disk!"
 
 	else if (!disk_rescued && !station_was_nuked && nuke_off_station && !syndies_didnt_escape)
 		world << "<FONT size = 3><B>Crew Minor Victory</B></FONT>"
-		world << "<B>[syndicate_name()] operatives secured the authentication disk but blew up something that wasn't [station_name()].</B> Next time, don't lose the disk!"
+		world << "<B>[syndicate_name()] operatives secured the authentication disk but blew up something that wasn't [vessel_name()].</B> Next time, don't lose the disk!"
 
 	else if (!disk_rescued && !station_was_nuked && nuke_off_station && syndies_didnt_escape)
 		world << "<FONT size = 3><B>[syndicate_name()] operatives have earned Darwin Award!</B></FONT>"
-		world << "<B>[syndicate_name()] operatives blew up something that wasn't [station_name()] and got caught in the explosion.</B> Next time, don't lose the disk!"
+		world << "<B>[syndicate_name()] operatives blew up something that wasn't [vessel_name()] and got caught in the explosion.</B> Next time, don't lose the disk!"
 
 	else if (disk_rescued && is_operatives_are_dead())
 		world << "<FONT size = 3><B>Crew Major Victory!</B></FONT>"
@@ -312,7 +312,7 @@
 
 	else if (!disk_rescued && crew_evacuated)
 		world << "<FONT size = 3><B>Syndicate Minor Victory!</B></FONT>"
-		world << "<B>[syndicate_name()] operatives recovered the abandoned authentication disk but detonation of [station_name()] was averted.</B> Next time, don't lose the disk!"
+		world << "<B>[syndicate_name()] operatives recovered the abandoned authentication disk but detonation of [vessel_name()] was averted.</B> Next time, don't lose the disk!"
 
 	else if (!disk_rescued && !crew_evacuated)
 		world << "<FONT size = 3><B>Neutral Victory</B></FONT>"

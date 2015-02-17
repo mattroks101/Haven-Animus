@@ -321,6 +321,25 @@ var/list/ghostteleportlocs = list()
 	icon_state = "yellow"
 	requires_power = 0
 
+/area/shuttle/elevator
+	name = "\improper Heavy Elevator"
+	music = "music/escape.ogg"
+
+
+/area/shuttle/elevator/cargo/first
+	icon_state = "shuttle2"
+
+/area/shuttle/elevator/cargo/second
+	icon_state = "shuttle"
+
+
+/area/shuttle/elevator/medbay/first
+	icon_state = "shuttle2"
+
+/area/shuttle/elevator/medbay/second
+	icon_state = "shuttle"
+
+
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
 /area/dummy/           // Referenced in engine.dm:261
@@ -1241,8 +1260,16 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Kitchen"
 	icon_state = "kitchen"
 
+/area/crew_quarters/freezer
+	name = "\improper Freezer"
+	icon_state = "kitchen"
+
 /area/crew_quarters/bar
 	name = "\improper Bar"
+	icon_state = "bar"
+
+/area/crew_quarters/diner_backroom
+	name = "\improper Diner Backroom"
 	icon_state = "bar"
 
 /area/crew_quarters/theatre

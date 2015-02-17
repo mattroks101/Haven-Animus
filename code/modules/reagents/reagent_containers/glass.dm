@@ -50,6 +50,13 @@
 		if (!(usr in view(2)) && usr!=src.loc) return
 		if(reagents && reagents.reagent_list.len)
 			usr << "\blue It contains [src.reagents.total_volume] units of liquid."
+			if(istype(usr, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = usr
+				if(H.glasses && istype(H.glasses, /obj/item/clothing/glasses/science))
+					var/reagents_length = reagents.reagent_list.len
+					usr << "\icon[H.glasses] \blue [reagents_length] chemical agent[reagents_length > 1 ? "s" : ""] found."
+					for (var/re in reagents.reagent_list)
+						usr << "\blue \t [re]"
 		else
 			usr << "\blue It is empty."
 		if (!is_open_container())

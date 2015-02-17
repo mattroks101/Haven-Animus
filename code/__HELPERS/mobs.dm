@@ -92,6 +92,6 @@ proc/generate_backstory(age)
 		hobby3 = pick(hobby)
 
 	if(src.client && src.mind)
-		src << "\blue <br><br><b>Good morning [src.name]!</b><br>You are a crew member on a  [station_name], born and raised in [birthplace1]. Your favorite hobbies were always [hobby1], [hobby2] and [hobby3], while your lifelong dream is [lifedream1].<br>"
+		src << "\blue <br><br><b>Good morning [src.name]!</b><br>You are a crew member on a  [vessel_name], born and raised in [birthplace1]. Your favorite hobbies were always [hobby1], [hobby2] and [hobby3], while your lifelong dream is [lifedream1].<br>"
 		src.mind.store_memory("You are a crew member on D2K5 Space Observatory Beta 242, born and raised in [birthplace1]. Your favorite hobbies are [hobby1], [hobby2] and [hobby3], while your lifelong dream is [lifedream1].")
 */

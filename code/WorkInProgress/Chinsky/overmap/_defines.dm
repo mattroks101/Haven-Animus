@@ -1,5 +1,5 @@
 //Zlevel where overmap objects should be
-#define OVERMAP_ZLEVEL 9
+#define OVERMAP_ZLEVEL 10
 //How far from the edge of overmap zlevel could randomly placed objects spawn
 #define OVERMAP_EDGE 7
 
@@ -18,19 +18,20 @@ proc/toggle_move_stars(direction)
 	if(!direction)
 		gen_dir = null
 
-	if (moving_levels["vessel_z"] != gen_dir)
-		moving_levels["vessel_z"] = gen_dir
-		for(var/turf/space/S in world)
-			if(S.z in vessel_z)
-				spawn(0)
-					var/turf/T = S
-					if(!gen_dir)
-						T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"
-					else
-						T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
-						for(var/atom/movable/AM in T)
-							if (!AM.anchored)
-								AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
+	for(var/zlevel in vessel_z)
+		if (moving_levels["zlevel"] != gen_dir)
+			moving_levels["zlevel"] = gen_dir
+			for(var/turf/space/S in world)
+				if((S.z in vessel_z) && (S.z != OVERMAP_ZLEVEL))
+					spawn(0)
+						var/turf/T = S
+						if(!gen_dir)
+							T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"
+						else
+							T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
+							for(var/atom/movable/AM in T)
+								if (!AM.anchored)
+									AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
 
 
 //list used to cache empty zlevels to avoid nedless map bloat
@@ -38,6 +39,8 @@ var/list/cached_space = list()
 
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/obj/effect/map/M = map_sectors["[T.z]"]
+	if(T.z in vessel_z)
+		M = map_sectors["[vessel_name]"]
 	if (!M)
 		return
 	var/mapx = M.x
@@ -66,13 +69,16 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 		nx = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 		mapy = min(world.maxy, mapy+1)
 
-	testing("[A] moving from [M] ([M.x], [M.y]) to ([mapx],[mapy]).")
+//	testing("[A] moving from [M] ([M.x], [M.y]) to ([mapx],[mapy]).")
 
 	var/turf/map = locate(mapx,mapy,OVERMAP_ZLEVEL)
 	var/obj/effect/map/TM = locate() in map
 	if(TM)
-		nz = TM.map_z
-		testing("Destination: [TM]")
+		if(istype(TM, /obj/effect/map/ship/luna))
+			nz = pick(vessel_z)
+		else
+			nz = TM.map_z
+//		testing("Destination: [TM]")
 	else
 		if(cached_space.len)
 			var/obj/effect/map/sector/temporary/cache = cached_space[cached_space.len]
@@ -80,12 +86,12 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 			nz = cache.map_z
 			cache.x = mapx
 			cache.y = mapy
-			testing("Destination: *cached* [TM]")
+//			testing("Destination: *cached* [TM]")
 		else
 			world.maxz++
 			nz = world.maxz
 			TM = new /obj/effect/map/sector/temporary(mapx, mapy, nz)
-			testing("Destination: *new* [TM]")
+//			testing("Destination: *new* [TM]")
 
 	var/turf/dest = locate(nx,ny,nz)
 	if(dest)
@@ -94,6 +100,6 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	if(istype(M, /obj/effect/map/sector/temporary))
 		var/obj/effect/map/sector/temporary/source = M
 		if (source.can_die())
-			testing("Catching [M] for future use")
+//			testing("Catching [M] for future use")
 			source.loc = null
 			cached_space += source

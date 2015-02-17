@@ -1,4 +1,4 @@
-var/station_name = "NSV Luna"
+var/vessel_name = "NSV Luna"
 var/vessel_type = "ship"
 var/list/vessel_z = list(1,2,3,4)
 var/asteroid_z = 8

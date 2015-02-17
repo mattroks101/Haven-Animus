@@ -1,4 +1,4 @@
-var/station_name = "NSS Exodus"
+var/vessel_name = "NSS Exodus"
 var/vessel_type = "station"
 var/list/vessel_z = list(1)
 var/asteroid_z = 8

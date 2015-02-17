@@ -444,7 +444,7 @@
 		return
 
 	if(ticker.mode.name == "blob")
-		user << "Under directive 7-10, [station_name()] is quarantined until further notice."
+		user << "Under directive 7-10, [vessel_name()] is quarantined until further notice."
 		return
 
 	emergency_shuttle.incall()
@@ -489,7 +489,7 @@
 			emergency_shuttle.fake_recall = rand(300,500)
 
 		if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
-			user << "Under directive 7-10, [station_name()] is quarantined until further notice."
+			user << "Under directive 7-10, [vessel_name()] is quarantined until further notice."
 			return
 
 	emergency_shuttle.shuttlealert(1)

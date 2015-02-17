@@ -16,6 +16,7 @@ LINEN BINS
 	throw_range = 2
 	w_class = 2.0
 	item_color = "white"
+	slot_flags = SLOT_BACK
 //	pressure_resistance = 1
 //	slot_flags = SLOT_OCLOTHING
 //	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | HEAD
@@ -49,6 +50,7 @@ LINEN BINS
 
 /obj/item/weapon/bedsheet/rainbow
 	icon_state = "sheetrainbow"
+	desc = "A multicolored blanket.  It's actually several different sheets cut up and sewn together."
 	item_color = "rainbow"
 
 /obj/item/weapon/bedsheet/red
@@ -61,33 +63,47 @@ LINEN BINS
 
 /obj/item/weapon/bedsheet/mime
 	icon_state = "sheetmime"
+	desc = "A very soothing striped blanket.  All the noise just seems to fade out when you're under the covers in this."
 	item_color = "mime"
 
 /obj/item/weapon/bedsheet/clown
 	icon_state = "sheetclown"
+	desc = "A rainbow blanket with a clown mask woven in.  It smells faintly of bananas."
 	item_color = "clown"
 
 /obj/item/weapon/bedsheet/captain
+	name = "captain's bedsheet"
 	icon_state = "sheetcaptain"
+	desc = "It has a Nanotrasen symbol on it, and was woven with a revolutionary new kind of thread guaranteed to have 0.01% permeability for most non-chemical substances, popular among most modern captains."
 	item_color = "captain"
 
 /obj/item/weapon/bedsheet/rd
+	name = "research director's bedsheet"
+	desc = "It appears to have a beaker emblem, and is made out of fire-resistant material, although it probably won't protect you in the event of fires you're familiar with every day."
 	icon_state = "sheetrd"
 	item_color = "director"
 
 /obj/item/weapon/bedsheet/medical
+	name = "medical blanket"
+	desc = "It's a sterilized* blanket commonly used in the Medbay.  *Sterilization is voided if a virologist is present onboard the station."
 	icon_state = "sheetmedical"
 	item_color = "medical"
 
 /obj/item/weapon/bedsheet/hos
+	name = "head of security's bedsheet"
+	desc = "It is decorated with a shield emblem.  While crime doesn't sleep, you do, but you are still THE LAW!"
 	icon_state = "sheethos"
 	item_color = "hosred"
 
 /obj/item/weapon/bedsheet/hop
+	name = "head of personnel's bedsheet"
+	desc = "It is decorated with a key emblem.  For those rare moments when you can rest and cuddle with Ian without someone screaming for you over the radio."
 	icon_state = "sheethop"
 	item_color = "hop"
 
 /obj/item/weapon/bedsheet/ce
+	name = "chief engineer's bedsheet"
+	desc = "It is decorated with a wrench emblem.  It's highly reflective and stain resistant, so you don't need to worry about ruining it with oil."
 	icon_state = "sheetce"
 	item_color = "chief"
 
@@ -103,7 +119,10 @@ LINEN BINS
 	desc = "A linen bin. It looks rather cosy."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "linenbin-full"
-	anchored = 1
+//	anchored = 1
+	throwforce = 1
+	throw_speed = 3
+	throw_range = 7
 	var/amount = 20
 	var/list/sheets = list()
 	var/obj/item/hidden = null
@@ -161,7 +180,7 @@ LINEN BINS
 		B.loc = user.loc
 		user.put_in_hands(B)
 		user << "<span class='notice'>You take [B] out of [src].</span>"
-
+		update_icon()
 		if(hidden)
 			hidden.loc = user.loc
 			user << "<span class='notice'>[hidden] falls out of [B]!</span>"
@@ -191,4 +210,4 @@ LINEN BINS
 			hidden = null
 
 
-	add_fingerprint(user)
+//	add_fingerprint(user)

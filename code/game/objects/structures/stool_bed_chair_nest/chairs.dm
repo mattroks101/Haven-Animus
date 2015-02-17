@@ -90,6 +90,9 @@
 	else
 		..()
 
+/obj/structure/stool/bed/chair/goon
+	icon_state = "g-chair"
+
 /obj/structure/stool/bed/chair/comfy
 	name = "comfy chair"
 	desc = "It looks comfy."

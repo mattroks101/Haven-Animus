@@ -2,7 +2,7 @@
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "sheet-sandstone"
-	var/vessel_mass = 9000 //tonnes, random number
+	var/vessel_mass = 34000 //tonnes, random number
 	var/default_delay = 60
 	var/list/speed = list(0,0)
 	var/last_burn = 0
@@ -12,6 +12,22 @@
 	var/obj/effect/map/current_sector
 	var/obj/machinery/computer/helm/nav_control
 	var/obj/machinery/computer/engines/eng_control
+
+/obj/effect/map/ship/luna/New(var/obj/effect/mapinfo/data)
+//	map_z = data.zlevel
+	name = "[vessel_name]"
+	always_known = 1
+	if (data.icon != 'icons/mob/screen1.dmi')
+		icon = data.icon
+		icon_state = data.icon_state
+	if(data.desc)
+		desc = data.desc
+	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, world.maxx - OVERMAP_EDGE)
+	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, world.maxy - OVERMAP_EDGE)
+	loc = locate(new_x, new_y, OVERMAP_ZLEVEL)
+
+	if(data.landing_area)
+		shuttle_landing = locate(data.landing_area)
 
 /obj/effect/map/ship/initialize()
 	for(var/obj/machinery/computer/engines/E in machines)

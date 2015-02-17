@@ -34,8 +34,7 @@
 		visible_message("\red [src] has grabbed [target]!")
 		target << "\red <b>You feel something suddenly grab you around the neck from behind!</b> Everything goes black..."
 
-		G.state = 3
-		G.killing = 1
+		G.state = GRAB_KILL
 
 		desc = "It's some kind of human sized, doll-like sculpture, with weird discolourations on some parts of it. It appears to be quite solid. [G ? "\red The sculpture is holding [G.affecting] in a vice-like grip." : ""]"
 		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been grabbed by SCP-173, and is being strangled!</font>")
@@ -73,12 +72,11 @@
 		desc = "It's some kind of human sized, doll-like sculpture, with weird discolourations on some parts of it. It appears to be quite solid."
 
 	//if we are sent into forced hibernation mode, allow our victim to escape
-	if(hibernate && G && G.killing == 1)
+	if(hibernate && G && G.state == GRAB_KILL)
 		if(G)
 			G.affecting << "\red You suddenly feel the grip around your neck being loosened!"
 			visible_message("\red [src] suddenly loosens it's grip!")
-			G.killing = 0
-			G.state = 1
+			G.state = GRAB_AGGRESSIVE
 		return
 
 	//
@@ -87,8 +85,7 @@
 		if(G)
 			G.affecting << "\red You suddenly feel the grip around your neck being loosened!"
 			visible_message("\red [src] suddenly loosens it's grip!")
-			G.killing = 0
-			G.state = 1
+			G.state = GRAB_AGGRESSIVE
 			if(!observed)
 				Escape()
 		observed = 1
@@ -242,8 +239,7 @@
 		//our grip is still rock solid, but the victim has a chance to escape
 		G.affecting << "\red You suddenly feel the grip around your neck being loosened!"
 		visible_message("\red [src] suddenly loosens it's grip!")
-		G.state = 1
-		G.killing = 0
+		G.state = GRAB_AGGRESSIVE
 
 /mob/living/simple_animal/sculpture/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	..()

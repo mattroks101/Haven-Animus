@@ -107,6 +107,7 @@
 /obj/item/device/paicard/proc/setPersonality(mob/living/silicon/pai/personality)
 	src.pai = personality
 	src.overlays += "pai-happy"
+	playsound(get_turf(src), 'sound/machines/paistartup.ogg', 50, 1)
 
 /obj/item/device/paicard/proc/removePersonality()
 	src.pai = null

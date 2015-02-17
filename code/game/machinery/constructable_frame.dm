@@ -250,7 +250,7 @@
 
 				update_req_desc()
 				return
-			else if(istype(P, /obj/item/weapon) && get_req_components_amt())
+			else if(istype(P, /obj/item) && get_req_components_amt())
 				for(var/I in req_components)
 					if(!ispath(I))
 						I = text2path(I)
@@ -559,4 +559,40 @@ to destroy them and players will be able to make replacements.
 	origin_tech = "materials=2;engineering=2"
 	req_components = list(
 							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1)
+
+
+/obj/item/weapon/circuitboard/thermomachine
+	name = "circuit board (Freezer)"
+	desc = "Use screwdriver to switch between heating and cooling modes."
+	build_path = /obj/machinery/atmospherics/unary/cold_sink/freezer
+	board_type = "machine"
+	origin_tech = "programming=3;plasmatech=3"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/micro_laser = 2,
+							/obj/item/stack/cable_coil = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1)
+
+/obj/item/weapon/circuitboard/thermomachine/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/screwdriver))
+		if(build_path == /obj/machinery/atmospherics/unary/cold_sink/freezer)
+			build_path = /obj/machinery/atmospherics/unary/heat_reservoir/heater
+			name = "circuit board (Heater)"
+			user << "<span class='notice'>You set the board to heating.</span>"
+		else
+			build_path = /obj/machinery/atmospherics/unary/cold_sink/freezer
+			name = "circuit board (Freezer)"
+			user << "<span class='notice'>You set the board to cooling.</span>"
+
+
+/obj/item/weapon/circuitboard/clonepod
+	name = "circuit board (Clone Pod)"
+	build_path = /obj/machinery/clonepod
+	board_type = "machine"
+	origin_tech = "programming=3;biotech=3"
+	req_components = list(
+							/obj/item/stack/cable_coil = 2,
+							/obj/item/weapon/stock_parts/scanning_module = 2,
+							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/stock_parts/console_screen = 1)
