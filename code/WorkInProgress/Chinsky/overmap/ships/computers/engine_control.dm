@@ -12,7 +12,7 @@
 	if (linked)
 		if (!linked.eng_control)
 			linked.eng_control = src
-		testing("Engines console at level [z] found a corresponding overmap object '[linked.name]'.")
+//		testing("Engines console at level [z] found a corresponding overmap object '[linked.name]'.")
 	else
 		testing("Engines console at level [z] was unable to find a corresponding overmap object.")
 

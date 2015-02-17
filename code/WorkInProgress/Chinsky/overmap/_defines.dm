@@ -69,7 +69,7 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 		nx = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 		mapy = min(world.maxy, mapy+1)
 
-	testing("[A] moving from [M] ([M.x], [M.y]) to ([mapx],[mapy]).")
+//	testing("[A] moving from [M] ([M.x], [M.y]) to ([mapx],[mapy]).")
 
 	var/turf/map = locate(mapx,mapy,OVERMAP_ZLEVEL)
 	var/obj/effect/map/TM = locate() in map
@@ -78,7 +78,7 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 			nz = pick(vessel_z)
 		else
 			nz = TM.map_z
-		testing("Destination: [TM]")
+//		testing("Destination: [TM]")
 	else
 		if(cached_space.len)
 			var/obj/effect/map/sector/temporary/cache = cached_space[cached_space.len]
@@ -86,12 +86,12 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 			nz = cache.map_z
 			cache.x = mapx
 			cache.y = mapy
-			testing("Destination: *cached* [TM]")
+//			testing("Destination: *cached* [TM]")
 		else
 			world.maxz++
 			nz = world.maxz
 			TM = new /obj/effect/map/sector/temporary(mapx, mapy, nz)
-			testing("Destination: *new* [TM]")
+//			testing("Destination: *new* [TM]")
 
 	var/turf/dest = locate(nx,ny,nz)
 	if(dest)
@@ -100,6 +100,6 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	if(istype(M, /obj/effect/map/sector/temporary))
 		var/obj/effect/map/sector/temporary/source = M
 		if (source.can_die())
-			testing("Catching [M] for future use")
+//			testing("Catching [M] for future use")
 			source.loc = null
 			cached_space += source
