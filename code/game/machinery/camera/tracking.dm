@@ -58,9 +58,7 @@
 		var/turf/T = get_turf(M)
 		if(!T)
 			continue
-		if(T.z <= 4)
-			continue
-		if(T.z > 8)
+		if(!(T.z in vessel_z) && (T.z != asteroid_z))
 			continue
 		if(M == usr)
 			continue
