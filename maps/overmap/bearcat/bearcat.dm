@@ -2,8 +2,8 @@
 	name = "CSV Bearcat"
 	landing_area = /area/ship/scrap/shuttle/ingoing
 	obj_type = /obj/effect/map/ship/bearcat
-	mapx = 4
-	mapy = 4
+	mapx = 10
+	mapy = 14
 
 /obj/effect/map/ship/bearcat
 	name = "generic ship"

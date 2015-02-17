@@ -78,6 +78,18 @@
 	icon = 'icons/obj/plants.dmi'
 	icon_state = "plant-26"
 
+/obj/structure/flora/pottedplant/goon
+	name = "potted plant"
+	icon_state = "gplant_1"
+	anchored = 1
+	layer = MOB_LAYER+0.1
+
+/obj/structure/flora/pottedplant/goon/plant1
+	icon_state = "gplant_1"
+
+/obj/structure/flora/pottedplant/goon/plant2
+	icon_state = "gplant_2"
+
 //newbushes
 
 /obj/structure/flora/ausbushes
