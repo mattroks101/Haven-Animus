@@ -64,6 +64,9 @@
 #define FILE_DIR "sound/voice/Serithi"
 #define FILE_DIR "sound/vox"
 #define FILE_DIR "sound/weapons"
+#define FILE_DIR "tools"
+#define FILE_DIR "tools/AddToChangelog"
+#define FILE_DIR "tools/AddToChangelog/AddToChangelog"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG
@@ -1456,6 +1459,7 @@
 #include "code\WorkInProgress\Chinsky\overmap\ships\engines\engine.dm"
 #include "code\WorkInProgress\Chinsky\overmap\ships\engines\thermal.dm"
 #include "code\WorkInProgress\Cib\MedicalSideEffects.dm"
+#include "code\WorkInProgress\Guap6512\elevator.dm"
 #include "code\WorkInProgress\Guap6512\medals.dm"
 #include "code\WorkInProgress\Guap6512\zombie.dm"
 #include "code\WorkInProgress\Guap6512\zombieAI.dm"
