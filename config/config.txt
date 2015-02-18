@@ -338,5 +338,8 @@ ANIMAL_DELAY 0
 ## Remove the # in front of this config option to have loyalty implants spawn by default on your server.
 #USE_LOYALTY_IMPLANTS
 
+## Remove # if you want your server have the Luna's job system
+JOIN_UNASSIGNED
+
 ## Uncomment to use overmap system for zlevel travel
-USE_OVERMAP
+#USE_OVERMAP

@@ -120,6 +120,8 @@
 	var/comms_password = ""
 	var/use_overmap = 0
 
+	var/join_unassigned = 0
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -170,6 +172,9 @@
 
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
+
+				if ("join_unassigned")
+					config.join_unassigned = 1
 
 				if("ban_legacy_system")
 					config.ban_legacy_system = 1

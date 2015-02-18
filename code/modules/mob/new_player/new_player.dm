@@ -122,6 +122,7 @@
 				usr << "\red The round is either not ready, or has already finished..."
 				return
 
+
 			if(client.prefs.species != "Human")
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
@@ -132,7 +133,14 @@
 					src << alert("Your current species,[client.prefs.species], is not available for play on the [vessel_type].")
 					return 0
 
-			LateChoices()
+			if(!enter_allowed)
+				usr << "\blue There is an administrative lock on entering the game!"
+				return
+
+			if(config.join_unassigned)
+				AttemptLateSpawn("Unassigned")
+			else
+				LateChoices()
 
 		if(href_list["manifest"])
 			ViewManifest()

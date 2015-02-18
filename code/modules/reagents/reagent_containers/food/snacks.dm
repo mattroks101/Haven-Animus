@@ -36,14 +36,15 @@
 	return
 
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
+
 	if(!reagents.total_volume)						//Shouldn't be needed but it checks to see if it has anything left in it.
 		user << "\red None of [src] left, oh no!"
 		M.drop_from_inventory(src)	//so icons update :[
 		del(src)
 		return 0
 
-		if(!canconsume(M, user))
-			return 0
+	if(!canconsume(M, user))
+		return 0
 
 	if(M == user)								//If you're eating it yourself.
 		var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
