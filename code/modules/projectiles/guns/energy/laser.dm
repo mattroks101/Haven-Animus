@@ -95,6 +95,7 @@ obj/item/weapon/gun/energy/laser/retro
 	origin_tech = "combat=5;materials=3;magnets=2;syndicate=2"
 	projectile_type = "/obj/item/projectile/beam/xray"
 	charge_cost = 50
+	force = 15
 
 
 ////////Laser Tag////////////////////

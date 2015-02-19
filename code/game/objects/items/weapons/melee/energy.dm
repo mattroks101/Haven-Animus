@@ -39,13 +39,52 @@
 	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;syndicate=4"
 	attack_verb = list("attacked", "slashed", "sliced", "torn", "ripped", "diced", "cut")
-	sharp = 1
-	edge = 1
+	//sharp = 1
+	//edge = 1
+	var/hacked = 0
 
 /obj/item/weapon/melee/energy/sword/pirate
 	name = "energy cutlass"
 	desc = "Arrrr matey."
 	icon_state = "cutlass0"
+
+
+
+/obj/item/weapon/melee/energy/sword/attackby(obj/item/weapon/W, mob/living/user)
+	..()
+/*	if(istype(W, /obj/item/weapon/melee/energy/sword))
+		if(W == src)
+			user << "<span class='notice'>You try to attach the end of the energy sword to... itself. You're not very smart, are you?</span>"
+			if(ishuman(user))
+				user.adjustBrainLoss(10)
+		else
+			user << "<span class='notice'>You attach the ends of the two energy swords, making a single double-bladed weapon! You're cool.</span>"
+			var/obj/item/weapon/twohanded/dualsaber/newSaber = new /obj/item/weapon/twohanded/dualsaber(user.loc)
+			if(src.hacked) // That's right, we'll only check the "original" esword.
+				newSaber.hacked = 1
+				newSaber.item_color = "rainbow"
+			user.u_equip(W)
+			user.u_equip(src)
+			qdel(W)
+			qdel(src)
+			user.put_in_hands(newSaber)*/
+	if(istype(W, /obj/item/device/multitool))
+		if(hacked == 0)
+			hacked = 1
+			item_color = "rainbow"
+			user << "<span class='warning'>RNBW_ENGAGE</span>"
+			if(active)
+				icon_state = "swordrainbow"
+				// Updating overlays, copied from welder code.
+				// I tried calling attack_self twice, which looked cool, except it somehow didn't update the overlays!!
+				if(user.r_hand == src)
+					user.update_inv_r_hand(0)
+				else if(user.l_hand == src)
+					user.update_inv_l_hand(0)
+
+	else			user << "<span class='warning'>It's already fabulous!</span>"
+
+
 
 /obj/item/weapon/melee/energy/blade
 	name = "energy blade"
@@ -55,9 +94,10 @@
 	throwforce = 1//Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
-	sharp = 1
+//	sharp = 1
 	edge = 1
 	w_class = 4.0//So you can't hide it in your pocket or some such.
 	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
 	attack_verb = list("attacked", "slashed", "sliced", "torn", "ripped", "diced", "cut")
 	var/datum/effect/effect/system/spark_spread/spark_system
+

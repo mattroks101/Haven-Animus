@@ -47,6 +47,14 @@
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/rdserver
 
+datum/design/telepad
+	name = "Machine Design (Telepad Board)"
+	desc = "The circuit board for a telescience telepad."
+	id = "telepad"
+	req_tech = list("programming" = 4, "bluespace" = 4, "materials" = 3, "engineering" = 3)
+	build_type = IMPRINTER
+	materials = list("$glass" = 1000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/telesci_pad
 
 ////////////////////////////////////////
 ///////////Fabricators Boards///////////

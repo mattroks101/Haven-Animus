@@ -37,3 +37,15 @@
 	materials = list("$gold" = 1500, "$diamond" = 3000, "$plasma" = 1500)
 	reliability_base = 100
 	build_path = /obj/item/weapon/stock_parts/bluespace_crystal/artificial
+
+
+/datum/design/telesci_gps
+	name = "GPS Device"
+	desc = "Little thingie that can track its position at all times."
+	id = "telesci_gps"
+	req_tech = list("materials" = 2, "magnets" = 3, "bluespace" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 500, "$glass" = 1000)
+	build_path = /obj/item/device/gps
+
+
