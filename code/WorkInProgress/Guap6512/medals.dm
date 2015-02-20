@@ -1,8 +1,11 @@
 /mob/proc/unlock_medal(title, announce, desc, diff)
-	return
 	spawn ()
 		if (ismob(src) && src.key)
 		//	var/list/keys = list()
+			if(!dbcon.IsConnected())
+				world.log << "Failed to connect to database in unlock_medal()."
+				diary << "Failed to connect to database in unlock_medal()."
+				return
 			var/DBQuery/cquery = dbcon.NewQuery("SELECT `medal` FROM `medals` WHERE ckey='[src.ckey]'")
 			if(!cquery.Execute())
 				message_admins(cquery.ErrorMsg())
