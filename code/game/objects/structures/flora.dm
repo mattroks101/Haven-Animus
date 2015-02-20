@@ -90,6 +90,15 @@
 /obj/structure/flora/pottedplant/goon/plant2
 	icon_state = "gplant_2"
 
+/obj/structure/flora/pottedplant/goon/plant3
+	icon_state = "gplant_3"
+
+/obj/structure/flora/pottedplant/goon/plant4
+	icon_state = "gplant_4"
+
+/obj/structure/flora/pottedplant/goon/plant5
+	icon_state = "gplant_5"
+
 //newbushes
 
 /obj/structure/flora/ausbushes

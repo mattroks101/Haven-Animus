@@ -195,7 +195,7 @@ datum/reagent/poo
 	id = "poo"
 	description = "It's poo."
 	reagent_state = LIQUID
-	color = "643200"
+	color = "#643200"
 //			melting_temp = 310
 //			boiling_temp = 430
 
@@ -301,6 +301,7 @@ datum/reagent/water
 			T.assume_air(lowertemp)
 			del(hotspot)
 		return
+
 	reaction_obj(var/obj/O, var/volume)
 		src = null
 		var/turf/T = get_turf(O)
@@ -316,6 +317,7 @@ datum/reagent/water
 			if(!cube.wrapped)
 				cube.Expand()
 		return
+
 	reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with water can help put them out!
 		if(!istype(M, /mob/living))
 			return

@@ -16,6 +16,9 @@
 /obj/effect/decal/cleanable/poo/New()
 	src.icon = 'pooeffect.dmi'
 	src.icon_state = pick(src.random_icon_states)
+	for(var/obj/effect/decal/cleanable/poo/shit in src.loc)
+		if(shit != src)
+			del(shit)
 //	spawn(5) src.reagents.add_reagent("poo",5)
 	spawn(400)
 		src.dried = 1
@@ -51,16 +54,17 @@
 /obj/effect/decal/cleanable/poo/HasEntered(AM as mob|obj)
 	if (istype(AM, /mob/living/carbon) && src.dried == 0)
 		var/mob/M =	AM
-		if ((istype(M, /mob/living/carbon/human) && istype(M:shoes, /obj/item/clothing/shoes/galoshes)) || M.m_intent == "walk")
+		if ((istype(M, /mob/living/carbon/human) && M:shoes.flags&NOSLIP) || M.m_intent == "walk")
 			return
 
 		if(prob(30))
-			M.pulling = null
+			M.stop_pulling()
+			step(M, M.dir)
 			M << "\blue You slipped on the wet poo stain!"
-	//		M.achievement_give("Oh Shit!", 68)
+			M.unlock_medal("Oh Shit!", 0, "Slip on the poo stain!", "easy")
 			playsound(src.loc, 'slip.ogg', 50, 1, -3)
-			M.stunned = 6
-			M.weakened = 5
+			M.stunned = 1
+			M.weakened = 4
 
 /obj/effect/decal/cleanable/poo/tracks/HasEntered(AM as mob|obj)
 	return

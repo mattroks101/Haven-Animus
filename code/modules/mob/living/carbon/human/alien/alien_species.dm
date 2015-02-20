@@ -1,4 +1,7 @@
 //Stand-in until this is made more lore-friendly.
+
+var/list/xeno_species = list(/datum/species/xenos, /datum/species/xenos/drone, /datum/species/xenos/hunter, /datum/species/xenos/sentinel, /datum/species/xenos/queen)
+
 /datum/species/xenos
 	name = "Xenomorph"
 	name_plural = "Xenomorphs"

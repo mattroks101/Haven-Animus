@@ -39,6 +39,9 @@ datum/reagent/styptic_powder
 	metabolization_rate = 2
 
 datum/reagent/styptic_powder/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
+	if(!istype(M))
+		..()
+		return
 	if(method == TOUCH)
 		M.heal_organ_damage(volume*REM,0)
 		M << "<span class='notice'>You feel your wounds knitting back together!</span>"

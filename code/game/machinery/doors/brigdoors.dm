@@ -320,7 +320,6 @@
 		I.overlays += ID
 	return I
 
-
 /obj/machinery/door_timer/cell_1
 	name = "Cell 1"
 	id = "Cell 1"
@@ -366,3 +365,45 @@
 #undef FONT_COLOR
 #undef FONT_STYLE
 #undef CHARS_PER_LINE
+
+/obj/machinery/door_timer/alt
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "doortimer0"
+
+/obj/machinery/door_timer/alt/update_icon()
+	if(stat & (NOPOWER))
+		icon_state = "doortimer-p"
+		return
+	else if(stat & (BROKEN))
+		icon_state = "doortimer-b"
+		return
+	else
+		if(src.timing)
+			icon_state = "doortimer1"
+		else if(src.timeleft() > 0)
+			icon_state = "doortimer0"
+		else
+			spawn( 50 )
+				icon_state = "doortimer0"
+			icon_state = "doortimer2"
+
+/obj/machinery/door_timer/alt/cell_1
+	name = "Cell 1"
+	id = "Cell 1"
+	dir = 2
+	pixel_y = -32
+
+
+/obj/machinery/door_timer/alt/cell_2
+	name = "Cell 2"
+	id = "Cell 2"
+	dir = 2
+	pixel_y = -32
+
+
+/obj/machinery/door_timer/alt/cell_3
+	name = "Cell 3"
+	id = "Cell 3"
+	dir = 2
+	pixel_y = -32
+

@@ -156,6 +156,8 @@ datum/preferences
 
 		dat += "<br>"
 		dat += "<b>UI Type:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_type]</b></a><br>"
+		if(UI_type == "Luna" && user.client.holder)
+			dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=uistyle'><b>[UI_style]</b></a><br>"
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</b></a><br>"
@@ -974,6 +976,13 @@ datum/preferences
 							else
 								UI_type = "Luna"//"Midnight"
 								UI_style = "Luna"
+					if("uistyle")
+						if(UI_type == "Luna")
+							switch(UI_style)
+								if("Luna") //"Orange"
+									UI_style = "Orange"
+								else
+									UI_style = "Luna"
   // I don't need this bay12 shit
 
 					if("be_special")

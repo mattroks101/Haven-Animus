@@ -11,6 +11,7 @@
 
 	using = new /obj/screen()
 	using.name = "help"
+	using.icon = ui_style
 	using.icon_state = "help_m"
 	using.screen_loc = ui_iarrowleft
 	using.layer = 21
@@ -18,6 +19,7 @@
 
 	using = new /obj/screen()
 	using.name = "grab"
+	using.icon = ui_style
 	using.icon_state = "grab_m"
 	using.screen_loc = ui_iarrowleft
 	using.layer = 21
@@ -26,6 +28,7 @@
 
 	using = new /obj/screen()
 	using.name = "disarm"
+	using.icon = ui_style
 	using.icon_state = "disarm_m"
 	using.screen_loc = ui_iarrowright
 	using.layer = 21
@@ -33,6 +36,7 @@
 
 	using = new /obj/screen()
 	using.name = "harm"
+	using.icon = ui_style
 	using.icon_state = "harm_m"
 	using.screen_loc = ui_iarrowright
 	using.layer = 21
