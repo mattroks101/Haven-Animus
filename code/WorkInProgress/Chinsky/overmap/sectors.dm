@@ -14,7 +14,7 @@ var/global/list/map_sectors = list()
 		data = locate("sector[level]")
 		if(level in vessel_z)
 			if(!ship_found)
-				data = locate("ship_sector_[vessel_name]")
+				data = locate("ship_sector_[vessel_name()]")
 				testing("Vessel \"[vessel_name]\" connected to overmap.")
 				map_sectors["[vessel_name]"] = new /obj/effect/map/ship/luna(data)
 				ship_found = 1
@@ -55,7 +55,7 @@ var/global/list/map_sectors = list()
 
 /obj/effect/mapinfo/ship/New()
 	..()
-	tag = "ship_sector_[vessel_name]"
+	tag = "ship_sector_[vessel_name()]"
 
 
 //===================================================================================

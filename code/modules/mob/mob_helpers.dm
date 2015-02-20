@@ -23,7 +23,7 @@
 /proc/isalienadult(A)
 	if(ishuman(A))
 		var/mob/living/carbon/human/H = A
-		if(istype(H.species, /datum/species/xenos))
+		if(H.species in xeno_species)
 			return 1
 	return 0
 

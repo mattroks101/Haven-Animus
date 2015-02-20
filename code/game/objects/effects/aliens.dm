@@ -153,8 +153,8 @@
 
 /obj/effect/alien/weeds
 	name = "weeds"
-	desc = "Weird purple weeds."
-	icon_state = "weeds"
+	desc = "Weird gray weeds."
+	icon_state = "creep_northsouthwesteast"		//lol
 
 	anchored = 1
 	density = 0
@@ -164,13 +164,16 @@
 
 /obj/effect/alien/weeds/node
 	icon_state = "weednode"
-	name = "purple sac"
-	desc = "Weird purple octopus-like thing."
+	name = "weeds node"
+	desc = "Weird gray octopus-like thing."
 	layer = 3
 	luminosity = NODERANGE
 	var/node_range = NODERANGE
 
 /obj/effect/alien/weeds/node/New()
+	var/image/I = image('icons/mob/alien.dmi', icon_state = "weednode")
+	I = new(src)
+	src.overlays += I
 	..(src.loc, src)
 
 
@@ -180,28 +183,44 @@
 		del(src)
 		return
 	linked_node = node
-	if(icon_state == "weeds")icon_state = pick("weeds", "weeds1", "weeds2")
+	update_icon()
 	spawn(rand(150, 200))
 		if(src)
 			Life()
 	return
 
+/obj/effect/alien/weeds/update_icon()
+
+	var/turf/T = get_turf(src)
+
+	var/obj/effect/alien/weeds/north = locate() in get_step(T, NORTH)
+	var/obj/effect/alien/weeds/west = locate() in get_step(T, WEST)
+	var/obj/effect/alien/weeds/east = locate() in get_step(T, EAST)
+	var/obj/effect/alien/weeds/south = locate() in get_step(T, SOUTH)
+	src.overlays = null
+	var/direct
+
+	if(!north)
+		direct += "north"
+
+	if(!south)
+		direct += "south"
+
+	if(!west)
+		direct += "west"
+
+	if(!east)
+		direct += "east"
+
+	if(!direct)
+		icon_state = "creep_center"
+	else
+		icon_state = "creep_[direct]"
+	return
+
 /obj/effect/alien/weeds/proc/Life()
 	set background = 1
 	var/turf/U = get_turf(src)
-/*
-	if (locate(/obj/movable, U))
-		U = locate(/obj/movable, U)
-		if(U.density == 1)
-			del(src)
-			return
-
-Alien plants should do something if theres a lot of poison
-	if(U.poison> 200000)
-		health -= round(U.poison/200000)
-		update()
-		return
-*/
 	if (istype(U, /turf/space))
 		del(src)
 		return
@@ -210,20 +229,39 @@ Alien plants should do something if theres a lot of poison
 		return
 
 	direction_loop:
+		//First we will try to break stuff
+		var/obj/machinery/light/L = locate() in src.loc
+		if(L)
+			L.broken()
+
+
+
 		for(var/dirn in cardinal)
 			var/turf/T = get_step(src, dirn)
 
 			if (!istype(T) || T.density || locate(/obj/effect/alien/weeds) in T || istype(T.loc, /area/arrival) || istype(T, /turf/space))
 				continue
 
-	//		if (locate(/obj/movable, T)) // don't propogate into movables
-	//			continue
+			if(locate(/obj/machinery/door/airlock) in T)
+				if(locate(/obj/machinery/door/airlock/external) in T)
+					continue
+				if(!locate(/obj/effect/alien/weeds) in T)
+					var/obj/machinery/door/airlock/D = locate() in T
+					if(D.density)
+						D.open(1)
+						D.locked = 1
 
 			for(var/obj/O in T)
 				if(O.density)
-					continue direction_loop
+					if(locate(/obj/structure/closet) in T || locate(/obj/structure/table) in T || locate(/obj/machinery/computer) in T || locate(/obj/machinery/disposal) in T)
+						new /obj/effect/alien/weeds(T, linked_node)
+					else
+						continue direction_loop
 
-			new /obj/effect/alien/weeds(T, linked_node)
+			var/obj/effect/alien/weeds/NewWeed = new(T, linked_node)
+			NewWeed.update_icon()
+
+			update_icon()
 
 
 /obj/effect/alien/weeds/ex_act(severity)
