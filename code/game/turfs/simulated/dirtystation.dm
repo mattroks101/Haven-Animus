@@ -6,8 +6,8 @@
 /obj/effect/decal/cleanable/blood/old
 	name = "dried blood"
 	desc = "Looks like it's been here a while.  Eew."
-	basecolor="#FFFFFF"
-	color="#FFFFFF"
+//	basecolor="#FFFFFF"
+//	color="#FFFFFF"
 	New()
 		..()
 		icon_state += "-old"
@@ -15,7 +15,7 @@
 /obj/effect/decal/cleanable/blood/gibs/old
 	name = "old rotting gibs"
 	desc = "Oh god, why didn't anyone clean this up?  It smells terrible."
-	basecolor="#FFFFFF"
+//	basecolor="#FFFFFF"
 	New()
 		..()
 		icon_state += "-old"

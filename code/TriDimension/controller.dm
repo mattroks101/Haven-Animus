@@ -173,11 +173,11 @@ atom/movable/Move() //Hackish
 				T.overlays += m_img
 				T.z_overlays += m_img
 
-				T.overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
-				T.z_overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
-
 				T.overlays -= below.z_overlays
 				T.z_overlays -= below.z_overlays
+
+				T.overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
+				T.z_overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
 
 		// this is sadly impossible to use right now
 		// the overlay is always opaque to mouseclicks and thus prevents interactions with everything except the turf

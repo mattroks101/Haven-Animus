@@ -228,7 +228,15 @@
 		on = (s && status == LIGHT_OK)
 		update()
 
-
+/obj/machinery/light/small/red
+	icon_state = "bulbred1"
+	base_state = "bulbred"
+	fitting = "bulb"
+	brightnessred = 5
+	brightnessgreen = 2
+	brightnessblue = 2
+	desc = "A small lighting fixture."
+	light_type = /obj/item/weapon/light/bulb/fire
 
 /obj/machinery/light/spot
 	name = "spotlight"
@@ -725,8 +733,8 @@
 	item_state = "egg4"
 	g_amt = 100
 	brightnessred = 5
-	brightnessgreen = 5
-	brightnessblue = 4
+	brightnessgreen = 2
+	brightnessblue = 2
 
 // update the icon state and description of the light
 

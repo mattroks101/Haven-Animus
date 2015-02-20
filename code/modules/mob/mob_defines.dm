@@ -75,6 +75,7 @@
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
 	var/antitoxs = null
+	var/eye_stat = null//Living, potentially Carbon
 	var/plasma = null
 	var/sleeping = 0		//Carbon
 	var/resting = 0			//Carbon

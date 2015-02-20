@@ -138,7 +138,7 @@ var/global/datum/controller/occupations/job_master
 				var/good_age_minimal = 25
 				var/good_age_maximal = 60
 				if(command_position == "Captain")
-					good_age_minimal = 30
+					good_age_minimal = 25
 					good_age_maximal = 70 // Old geezer captains ftw
 
 				for(var/mob/V in candidates)
@@ -166,6 +166,10 @@ var/global/datum/controller/occupations/job_master
 				var/mob/new_player/candidate = pickweight(weightedCandidates)
 				if(AssignRole(candidate, command_position))
 					return 1
+
+		if(config.join_unassigned)
+			Debug("FillHeadPosition, Forcing Captain")
+			ForceCaptain()
 		return 0
 
 
@@ -209,6 +213,27 @@ var/global/datum/controller/occupations/job_master
 						break
 			if(ai_selected)	return 1
 			return 0
+
+	proc/ForceCaptain()
+		var/mob/new_player/captain_choice = null
+
+		for(var/mob/new_player/player in player_list)
+			if(player.ready && player.mind && player.mind.assigned_role == "Captain")
+				captain_choice = player
+
+		if(!captain_choice && unassigned.len > 0)
+			unassigned = shuffle(unassigned)
+			for(var/mob/new_player/player in unassigned)
+				if(jobban_isbanned(player, "Captain"))
+					continue
+				else
+					captain_choice = player
+					break
+
+			unassigned -= captain_choice
+
+		if(captain_choice)
+			captain_choice.mind.assigned_role = "Captain"
 
 
 /** Proc DivideOccupations
@@ -303,23 +328,6 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == GET_RANDOM_JOB)
 				GiveRandomJob(player)
-		/*
-		Old job system
-		for(var/level = 1 to 3)
-			for(var/datum/job/job in occupations)
-				Debug("Checking job: [job]")
-				if(!job)
-					continue
-				if(!unassigned.len)
-					break
-				if((job.current_positions >= job.spawn_positions) && job.spawn_positions != -1)
-					continue
-				var/list/candidates = FindOccupationCandidates(job, level)
-				while(candidates.len && ((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
-					var/mob/new_player/candidate = pick(candidates)
-					Debug("Selcted: [candidate], for: [job.title]")
-					AssignRole(candidate, job.title)
-					candidates -= candidate*/
 
 		Debug("DO, Standard Check end")
 

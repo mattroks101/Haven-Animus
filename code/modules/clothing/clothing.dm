@@ -1,34 +1,41 @@
 /obj/item/clothing
 	name = "clothing"
 	var/list/species_restricted = null //Only these species can wear this kit.
+	var/fatness_restricted = 0
 	var/poop_covering = 0
 
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
 
-	if(species_restricted && istype(M,/mob/living/carbon/human))
-
-		var/wearable = null
-		var/exclusive = null
+	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-
-		if("exclude" in species_restricted)
-			exclusive = 1
-
-		if(H.species)
-			if(istype(H.species, /datum/species/xenos))		//A little dirty, but...
-				M << "\red How do you imagine wearing [src]?"
+		if(fatness_restricted)
+			if(FAT in H.mutations)
+				M << "\red Your fat ass won't fit into [src]!"
 				return 0
-			if(exclusive)
-				if(!(H.species.name in species_restricted))
-					wearable = 1
-			else
-				if(H.species.name in species_restricted)
-					wearable = 1
 
-			if(!wearable && (slot != 15 && slot != 16)) //Pockets.
-				M << "\red Your species cannot wear [src]."
-				return 0
+		if(species_restricted)
+
+			var/wearable = null
+			var/exclusive = null
+
+			if("exclude" in species_restricted)
+				exclusive = 1
+
+			if(H.species)
+				if(istype(H.species, /datum/species/xenos))		//A little dirty, but...
+					M << "\red How do you imagine wearing [src]?"
+					return 0
+				if(exclusive)
+					if(!(H.species.name in species_restricted))
+						wearable = 1
+				else
+					if(H.species.name in species_restricted)
+						wearable = 1
+
+				if(!wearable && (slot != 15 && slot != 16)) //Pockets.
+					M << "\red Your species cannot wear [src]."
+					return 0
 
 	return ..()
 
@@ -188,6 +195,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/suits.dmi'
 	name = "suit"
 	var/fire_resist = T0C+100
+	fatness_restricted = 1
 	flags = FPRINT | TABLEPASS
 	allowed = list(/obj/item/weapon/tank/emergency_oxygen)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)

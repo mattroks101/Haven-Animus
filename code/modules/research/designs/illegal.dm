@@ -28,3 +28,12 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 300, "$glass" = 300)
 	build_path = /obj/item/device/encryptionkey/binary
+
+/datum/design/energysword
+	name = "Energy Sword"
+	desc = "May the force be within you."
+	id = "energysword"
+	req_tech = list("syndicate" = 6, "magnets" = 5, "materials" = 6, "powerstorage" = 3)
+	build_type = PROTOLATHE
+	materials = list("$gold" = 5000, "$silver" = 2000, "$metal" = 4000, "$diamond" = 5000)
+	build_path = /obj/item/weapon/melee/energy/sword

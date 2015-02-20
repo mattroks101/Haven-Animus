@@ -109,6 +109,7 @@
 	S["real_name"]			>> real_name
 	S["name_is_always_random"] >> be_random_name
 	S["gender"]				>> gender
+	S["fat"]				>> fat
 	S["age"]				>> age
 
 	//colors to be consolidated into hex strings (requires some work with dna code)
@@ -172,6 +173,7 @@
 	if(!real_name) real_name = random_name(gender)
 	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
 	gender			= sanitize_gender(gender)
+	fat				= sanitize_integer(fat, 0, 1, initial(fat))
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	r_hair			= sanitize_integer(r_hair, 0, 255, initial(r_hair))
 	g_hair			= sanitize_integer(g_hair, 0, 255, initial(g_hair))
@@ -216,6 +218,7 @@
 	S["real_name"]			<< real_name
 	S["name_is_always_random"] << be_random_name
 	S["gender"]				<< gender
+	S["fat"]				<< fat
 	S["age"]				<< age
 	S["hair_red"]			<< r_hair
 	S["hair_green"]			<< g_hair

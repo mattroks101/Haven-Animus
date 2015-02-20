@@ -95,3 +95,12 @@ proc/generate_backstory(age)
 		src << "\blue <br><br><b>Good morning [src.name]!</b><br>You are a crew member on a  [vessel_name], born and raised in [birthplace1]. Your favorite hobbies were always [hobby1], [hobby2] and [hobby3], while your lifelong dream is [lifedream1].<br>"
 		src.mind.store_memory("You are a crew member on D2K5 Space Observatory Beta 242, born and raised in [birthplace1]. Your favorite hobbies are [hobby1], [hobby2] and [hobby3], while your lifelong dream is [lifedream1].")
 */
+
+
+proc/add_logs(mob/user, mob/target, what_done, var/admin=1, var/object=null, var/addition=null)
+	if(user && ismob(user))
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has [what_done] [target ? "[target.name][(ismob(target) && target.ckey) ? "([target.ckey])" : ""]" : "NON-EXISTANT SUBJECT"][object ? " with [object]" : " "][addition]</font>")
+	if(target && ismob(target))
+		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [what_done] by [user ? "[user.name][(ismob(user) && user.ckey) ? "([user.ckey])" : ""]" : "NON-EXISTANT SUBJECT"][object ? " with [object]" : " "][addition]</font>")
+	if(admin)
+		log_attack("<font color='red'>[user ? "[user.name][(ismob(user) && user.ckey) ? "([user.ckey])" : ""]" : "NON-EXISTANT SUBJECT"] [what_done] [target ? "[target.name][(ismob(target) && target.ckey)? "([target.ckey])" : ""]" : "NON-EXISTANT SUBJECT"][object ? " with [object]" : " "][addition]</font>")
