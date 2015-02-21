@@ -8,6 +8,7 @@
 	desc = "A prototype modular reciever and trigger assembly for a firearm."
 	icon = 'icons/obj/improvised.dmi'
 	icon_state = "reciever"
+	m_amt = 15000
 
 /obj/item/weaponcrafting/stock
 	name = "rifle stock"

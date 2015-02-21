@@ -39,11 +39,11 @@
 			else
 				M.take_organ_damage(rand(20,45))
 		else if(src.vars.Find("throwforce"))
-			M.take_organ_damage(src:throwforce)
+			M.hitby(src,speed)		//hitby will log the attack itself
 
-			log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
-			//log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
-			msg_admin_attack("[hit_atom] ([M.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[M]'>JMP</A>) was hit by [src] thrown by ([src.fingerprintslast])", 2)
+//			log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
+//			//log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
+//			msg_admin_attack("[hit_atom] ([M.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[M]'>JMP</A>) was hit by [src] thrown by ([src.fingerprintslast])", 2)
 
 
 

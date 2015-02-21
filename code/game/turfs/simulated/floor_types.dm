@@ -228,8 +228,14 @@
 
 //CATWALKS
 
-/turf/simulated/floor/plating/airless/catwalk
+/turf/simulated/floor/plating/catwalk
+	layer = TURF_LAYER + 0.5
 	icon = 'icons/turf/catwalks.dmi'
-	icon_state = "catwalk0"
+	icon_state = "catwalk"
 	name = "catwalk"
 	desc = "Cats really don't like these things."
+
+/turf/simulated/floor/plating/catwalk/airless
+	oxygen = 0.01
+	nitrogen = 0.01
+	temperature = TCMB

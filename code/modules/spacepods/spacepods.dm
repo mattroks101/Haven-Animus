@@ -211,8 +211,6 @@
 			user << "You were unable to attach [W] to [src]"
 		return
 
-
-
 /obj/spacepod/attack_hand(mob/user as mob)
 	if(!hatch_open)
 		return ..()
@@ -267,6 +265,24 @@
 	New()
 		..()
 		name = "Pod C-[rand(100,999)]"
+
+/obj/spacepod/civilian/attackby(obj/item/W as obj, mob/user as mob)
+
+	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
+		var/obj/item/weapon/grab/G = W
+		if(G.state >= 2)
+			if(src.occupant)
+				user << "\red Someone is occupying the passenger's seat."
+				return
+			user.visible_message("\red [user] starts stuffing [G.affecting] into [name]!")
+			if(do_after(user, 50))
+				if(!src.occupant)
+					moved_inside(G.affecting, 2)
+					return
+				else
+					user << "\red Someone is occupying the passenger's seat."
+					return
+	..(W, user)
 
 /obj/spacepod/industrial
 	icon_state = "pod_industrial"
@@ -399,6 +415,10 @@
 		return
 	if (usr.stat || !ishuman(usr))
 		return
+
+	if(usr == src.occupant || usr == src.passenger)
+		return
+
 	var/target_place = "Driver's"
 
 	if(istype(src, /obj/spacepod/civilian))

@@ -129,7 +129,7 @@ atom/movable/Move() //Hackish
 		T.overlays -= T.z_overlays
 		T.z_overlays -= T.z_overlays
 
-		if(down && (istype(T, /turf/space) || istype(T, /turf/simulated/floor/open)))
+		if(down && (istype(T, /turf/space) || istype(T, /turf/simulated/floor/open) || istype(T, /turf/simulated/floor/plating/catwalk)))
 			var/turf/below = locate(T.x, T.y, down_target)
 			if(below)
 				if(!(istype(below, /turf/space) || istype(below, /turf/simulated/floor/open)))
@@ -176,8 +176,8 @@ atom/movable/Move() //Hackish
 				T.overlays -= below.z_overlays
 				T.z_overlays -= below.z_overlays
 
-				T.overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
-				T.z_overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+1)
+				T.overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+0.4)
+				T.z_overlays += image('floors.dmi', icon_state = "black_open", layer = TURF_LAYER+0.4)
 
 		// this is sadly impossible to use right now
 		// the overlay is always opaque to mouseclicks and thus prevents interactions with everything except the turf

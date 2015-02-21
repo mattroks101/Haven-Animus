@@ -435,7 +435,7 @@
 		var/list/L = list()
 		for(var/obj/item/device/radio/beacon/B in world)
 			var/turf/T = get_turf(B)
-			if(T.z == ZLEVEL_STATION)
+			if(T.z in vessel_z)
 				L += B
 		if(!L.len)
 			user << "<span class='notice'>The [src.name] failed to create a wormhole.</span>"
