@@ -78,10 +78,13 @@
 				I = pda.id
 			if (I && istype(I))
 				if(access_captain in I.access || access_heads in I.access) //Let heads change the alert level.
+					if(tmp_alertlevel == SEC_LEVEL_RED && !(access_captain in I.access))
+						usr << "\red You are not authorized to do this. You need to have captain's access on your ID to declare red alert."
+						return
 					var/old_level = security_level
 					if(!tmp_alertlevel) tmp_alertlevel = SEC_LEVEL_GREEN
 					if(tmp_alertlevel < SEC_LEVEL_GREEN) tmp_alertlevel = SEC_LEVEL_GREEN
-					if(tmp_alertlevel > SEC_LEVEL_BLUE) tmp_alertlevel = SEC_LEVEL_BLUE //Cannot engage delta with this
+					if(tmp_alertlevel > SEC_LEVEL_RED) tmp_alertlevel = SEC_LEVEL_RED //Cannot engage delta with this
 					set_security_level(tmp_alertlevel)
 					if(security_level != old_level)
 						//Only notify the admins if an actual change happened
@@ -89,11 +92,11 @@
 						message_admins("[key_name_admin(usr)] has changed the security level to [get_security_level()].")
 					tmp_alertlevel = 0
 				else
-					usr << "You are not authorized to do this."
+					usr << "\red You are not authorized to do this."
 					tmp_alertlevel = 0
 				state = STATE_DEFAULT
 			else
-				usr << "You need to swipe your ID."
+				usr << "\red You need to swipe your ID."
 
 		if("announce")
 			if(src.authenticated==2)
@@ -359,7 +362,8 @@
 				dat += "<font color='red'><b>The self-destruct mechanism is active. Find a way to deactivate the mechanism to lower the alert level or evacuate.</b></font>"
 			else
 				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_BLUE]'>Blue</A><BR>"
-				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_GREEN]'>Green</A>"
+				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_GREEN]'>Green</A><BR>"
+				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_RED]'>Red</A>"
 		if(STATE_CONFIRM_LEVEL)
 			dat += "Current alert level: [get_security_level()]<BR>"
 			dat += "Confirm the change to: [num2seclevel(tmp_alertlevel)]<BR>"

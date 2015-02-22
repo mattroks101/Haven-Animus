@@ -24,6 +24,11 @@
 				world << "<font size=4 color='red'>Attention! Security level lowered to green</font>"
 				world << "<font color='red'>[config.alert_desc_green]</font>"
 				security_level = SEC_LEVEL_GREEN
+
+				for(var/obj/machinery/light/L in machines)
+					if(L.z in vessel_z || L.z == asteroid_z)
+						L.update()
+
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z in vessel_z || FA.z == asteroid_z)
 						FA.overlays = list()
@@ -36,6 +41,11 @@
 					world << "<font size=4 color='red'>Attention! Security level lowered to blue</font>"
 					world << "<font color='red'>[config.alert_desc_blue_downto]</font>"
 				security_level = SEC_LEVEL_BLUE
+
+				for(var/obj/machinery/light/L in machines)
+					if(L.z in vessel_z || L.z == asteroid_z)
+						L.update()
+
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z in vessel_z || FA.z == asteroid_z)
 						FA.overlays = list()
@@ -54,6 +64,10 @@
 				if(CC)
 					CC.post_status("alert", "redalert")*/
 
+				for(var/obj/machinery/light/L in machines)
+					if(L.z in vessel_z || L.z == asteroid_z)
+						L.update()
+
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z in vessel_z || FA.z == asteroid_z)
 						FA.overlays = list()
@@ -63,6 +77,11 @@
 				world << "<font size=4 color='red'>Attention! Delta security level reached!</font>"
 				world << "<font color='red'>[config.alert_desc_delta]</font>"
 				security_level = SEC_LEVEL_DELTA
+
+				for(var/obj/machinery/light/L in machines)
+					if(L.z in vessel_z || L.z == asteroid_z)
+						L.update()
+
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z in vessel_z || FA.z == asteroid_z)
 						FA.overlays = list()

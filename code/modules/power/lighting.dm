@@ -202,6 +202,7 @@
 	var/brightnessred = 8				// luminosity when on, also used in power calculation
 	var/brightnessgreen = 8
 	var/brightnessblue = 8
+	var/redalert = 1
 
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0
@@ -260,6 +261,8 @@
 /obj/machinery/light/New()
 	..()
 
+	processing_objects.Add(src)
+
 	spawn(2)
 		switch(fitting)
 			if("tube")
@@ -280,6 +283,7 @@
 			update(0)
 
 /obj/machinery/light/Destroy()
+	processing_objects.Remove(src)
 	var/area/A = get_area(src)
 	if(A)
 		on = 0
@@ -306,8 +310,12 @@
 /obj/machinery/light/proc/update(var/trigger = 1)
 
 	update_icon()
+
 	if(on)
-		if(luminosity != brightnessred)
+
+		SetLuminosity(on * brightnessred, on * brightnessgreen * !isalert(), on * brightnessblue * !isalert())		// *UL*
+
+		if(luminosity != ul_Luminosity(src))
 			switchcount++
 			if(rigged)
 				if(status == LIGHT_OK && trigger)
@@ -324,7 +332,6 @@
 					SetLuminosity(0, 0, 0)
 			else
 				use_power = 2
-				SetLuminosity(brightnessred, brightnessgreen, brightnessblue)
 	else
 		use_power = 1
 		SetLuminosity(0, 0, 0)
@@ -332,6 +339,15 @@
 	active_power_usage = (luminosity * 10)
 	if(on != on_gs)
 		on_gs = on
+
+/obj/machinery/light/proc/isalert()
+	if(security_level >= SEC_LEVEL_RED)
+		return 1
+	else
+		return 0
+
+/obj/machinery/light/small/isalert()		//I don't want them to change to red
+	return 0
 
 
 // attempt to set the light's on/off status

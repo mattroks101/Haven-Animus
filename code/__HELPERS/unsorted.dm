@@ -5,6 +5,12 @@
  */
 
 //Inverts the colour of an HTML string
+
+/*UL*/
+
+#define ul_Luminosity(A) max(A.LuminosityRed, A.LuminosityGreen, A.LuminosityBlue)
+
+
 /proc/invertHTML(HTMLstring)
 
 	if (!( istext(HTMLstring) ))
