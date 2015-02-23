@@ -85,6 +85,7 @@
 
 /obj/machinery/computer/telescience/interact(mob/user)
 	var/t
+	user.set_machine(src)
 	if(!telepad)
 		in_use = 0     //Yeah so if you deconstruct teleporter while its in the process of shooting it wont disable the console
 		t += "<div class='statusDisplay'>No telepad located. <BR>Please add telepad data.</div><BR>"
@@ -288,7 +289,6 @@
 		I.loc = src.loc
 		crystals -= I
 	power = 0
-	updateDialog()
 
 /obj/machinery/computer/telescience/Topic(href, href_list)
 	if(..())
@@ -296,9 +296,10 @@
 	if(!telepad)
 		updateDialog()
 		return
+
 	if(telepad.panel_open)
 		temp_msg = "Telepad undergoing physical maintenance operations."
-		updateDialog()
+
 
 	if(href_list["setrotation"])
 		var/new_rot = input("Please input desired bearing in degrees.", name, rotation) as num
@@ -306,14 +307,13 @@
 			return
 		rotation = Clamp(new_rot, -900, 900)
 		rotation = round(rotation, 0.01)
-		updateDialog()
 
 	if(href_list["setangle"])
 		var/new_angle = input("Please input desired elevation in degrees.", name, angle) as num
 		if(..())
 			return
 		angle = Clamp(round(new_angle, 0.1), 1, 9999)
-		updateDialog()
+
 
 	if(href_list["setpower"])
 		var/index = href_list["setpower"]
@@ -321,7 +321,6 @@
 		if(index != null && power_options[index])
 			if(crystals.len + telepad.efficiency >= index)
 				power = power_options[index]
-	 	updateDialog()
 
 	if(href_list["setz"])
 		var/new_z = input("Please input desired sector.", name, z_co) as num
@@ -332,24 +331,22 @@
 	if(href_list["send"])
 		sending = 1
 		teleport(usr)
-		updateDialog()
 
 	if(href_list["receive"])
 		sending = 0
 		teleport(usr)
-		updateDialog()
 
 	if(href_list["recal"])
 		recalibrate()
 		sparks()
 		temp_msg = "NOTICE:<BR>Calibration successful."
-		updateDialog()
+
 
 	if(href_list["eject"])
 		eject()
 		temp_msg = "NOTICE:<BR>Bluespace crystals ejected."
-		updateDialog()
 
+	src.updateDialog()
 
 /obj/machinery/computer/telescience/proc/recalibrate()
 	teles_left = rand(30, 40)

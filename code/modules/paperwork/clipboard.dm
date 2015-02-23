@@ -38,6 +38,8 @@
 	if(toppaper)
 		overlays += toppaper.icon_state
 		overlays += toppaper.overlays
+		item_state = "clipboardp"
+	else item_state = "clipboard"
 	if(haspen)
 		overlays += "clipboard_pen"
 	overlays += "clipboard_over"

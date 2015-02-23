@@ -74,7 +74,7 @@
 	src.density = 1
 	src.SetOpacity(initial(opacity))
 	update_nearby_tiles()
-
+	crush()
 	sleep(10)
 	src.operating = 0
 	return
