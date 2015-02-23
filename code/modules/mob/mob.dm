@@ -993,6 +993,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 					affected = organ
 
 		affected.implants -= selection
+		if(selection in src.pinned)
+			src.pinned -= selection
+			if(!pinned.len)
+				anchored = 0
 		U.put_in_hands(selection)
 		H.shock_stage+=10
 		H.bloody_hands(S)
@@ -1002,15 +1006,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 			affected.wounds += I
 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
 		return 1
-//	U.put_in_hands(selection)
-//	selection.loc = get_turf(src)
-
-	for(var/obj/item/weapon/O in pinned)
-		if(O == selection)
-			pinned -= O
-		if(!pinned.len)
-			anchored = 0
-	return 1
 
 /mob/living/verb/head()
 	set hidden = 1

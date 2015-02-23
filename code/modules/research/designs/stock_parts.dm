@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 /////////////Stock Parts////////////////
 ////////////////////////////////////////
-
+/*
 /datum/design/RPED
 	name = "Rapid Part Exchange Device"
 	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
@@ -11,7 +11,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 15000, "$glass" = 5000) //hardcore
 	build_path = /obj/item/weapon/storage/part_replacer
-
+*/
 
 /datum/design/basic_capacitor
 	name = "Basic Capacitor"

@@ -22,8 +22,6 @@
 
 #define ul_Clamp(Value) min(max(Value, 0), ul_Steps)
 #define ul_IsLuminous(A) (A.LuminosityRed || A.LuminosityGreen || A.LuminosityBlue)
-#define ul_Luminosity(A) max(A.LuminosityRed, A.LuminosityGreen, A.LuminosityBlue)
-
 
 #ifdef ul_LightingResolution
 var/ul_LightingResolutionSqrt = sqrt(ul_LightingResolution)

@@ -84,6 +84,12 @@
 	examine()
 	return
 
+/obj/item/weapon/paper/MouseDrop(atom/over_object)
+	if (istype(over_object, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = over_object
+		if (H==usr && !H.restrained() && !H.stat && in_range(src, over_object))
+			examine()
+			add_fingerprint(usr)
 /obj/item/weapon/paper/attack_ai(var/mob/living/silicon/ai/user as mob)
 	var/dist
 	if(istype(user) && user.current) //is AI

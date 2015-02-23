@@ -264,6 +264,8 @@
 	return
 
 /obj/mecha/relaymove(mob/user,direction)
+	if(direction == UP || direction == DOWN)		//Later to connect with jetpack code.
+		return 0
 	if(user != src.occupant) //While not "realistic", this piece is player friendly.
 		user.forceMove(get_turf(src))
 		user << "You climb out from [src]"

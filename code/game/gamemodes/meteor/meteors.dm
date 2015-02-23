@@ -123,7 +123,7 @@
 		if(!istype(T, /turf/simulated/floor/engine))
 			ram_turf(T)
 
-			if(prob(10) && !istype(T, /turf/space))//randomly takes a 'hit' from ramming
+			if(prob(10) && (!istype(T, /turf/space) && !istype(T, /turf/simulated/floor/engine/vacuum/hull)))//randomly takes a 'hit' from ramming
 				get_hit()
 
 	return .
