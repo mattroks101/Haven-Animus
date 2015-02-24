@@ -322,3 +322,21 @@
 
 /obj/machinery/door/morgue
 	icon = 'icons/obj/doors/doormorgue.dmi'
+
+/obj/machinery/door/proc/crush()
+	for(var/mob/living/L in get_turf(src))
+		if(isalien(L))  //For xenos
+			L.adjustBruteLoss(10* 1.5) //Xenos go into crit after aproximately the same amount of crushes as humans.
+			L.emote("roar")
+		else if(ishuman(L)) //For humans
+			L.adjustBruteLoss(10)
+			L.emote("scream")
+			L.Weaken(5)
+		else if(ismonkey(L)) //For monkeys
+			L.adjustBruteLoss(10)
+			L.Weaken(5)
+		else //for simple_animals & borgs
+			L.adjustBruteLoss(10)
+		var/turf/location = src.loc
+		if(istype(location, /turf/simulated)) //add_blood doesn't work for borgs/xenos, but add_blood_floor does.
+			location.add_blood(L)
