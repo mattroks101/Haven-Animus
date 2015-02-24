@@ -881,7 +881,7 @@ datum/mind
 							/client/proc/interhack,
 							/client/proc/reactivate_camera)
 
-						current:laws = new /datum/ai_laws/nanotrasen
+						current:laws = new /datum/ai_laws/asimov
 						del(current:malf_picker)
 						current:show_laws()
 						current.icon_state = "ai"

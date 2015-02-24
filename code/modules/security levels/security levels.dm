@@ -27,7 +27,7 @@
 
 				for(var/obj/machinery/light/L in machines)
 					if(L.z in vessel_z || L.z == asteroid_z)
-						L.update()
+						L.update_redalert()
 
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z in vessel_z || FA.z == asteroid_z)
@@ -44,7 +44,7 @@
 
 				for(var/obj/machinery/light/L in machines)
 					if(L.z in vessel_z || L.z == asteroid_z)
-						L.update()
+						L.update_redalert()
 
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z in vessel_z || FA.z == asteroid_z)
@@ -66,7 +66,7 @@
 
 				for(var/obj/machinery/light/L in machines)
 					if(L.z in vessel_z || L.z == asteroid_z)
-						L.update()
+						L.update_redalert()
 
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z in vessel_z || FA.z == asteroid_z)
@@ -80,7 +80,7 @@
 
 				for(var/obj/machinery/light/L in machines)
 					if(L.z in vessel_z || L.z == asteroid_z)
-						L.update()
+						L.update_redalert()
 
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z in vessel_z || FA.z == asteroid_z)

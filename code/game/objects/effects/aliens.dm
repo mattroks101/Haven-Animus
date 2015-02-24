@@ -397,7 +397,8 @@
 
 	var/mob/living/carbon/M = user
 	if(!istype(M) || !(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs))
-		return attack_hand(user)
+		user << "\red You touch the egg."
+		return
 
 	switch(status)
 		if(BURST)

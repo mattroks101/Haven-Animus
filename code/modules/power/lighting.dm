@@ -659,6 +659,15 @@
 	if(on)
 		use_power(luminosity * LIGHTING_POWER_FACTOR, LIGHT)
 
+/obj/machinery/light/proc/update_redalert()
+	if(on)
+		on = 0
+		update()
+		sleep(rand(0,8))
+		on = 1
+		update()
+
+
 // called when area power state changes
 /obj/machinery/light/power_change()
 	spawn(10)

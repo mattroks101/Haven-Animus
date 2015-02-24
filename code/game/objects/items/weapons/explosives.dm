@@ -73,7 +73,10 @@
 /obj/item/weapon/plastique/proc/explode(var/turf/location)
 	if(target)
 		target.overlays -= image_overlay
-		if(target != location)
+		if(isliving(target))
+			var/mob/living/Li = target
+			Li.gib()
+		else if(target != location)
 			target.ex_act(2)
 	location.ex_act(2)
 	explosion(location,0,0,3)
