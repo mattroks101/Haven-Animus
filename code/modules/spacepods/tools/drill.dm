@@ -35,7 +35,7 @@
 						var/obj/target_obj = A
 						if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	continue
 					log_message("Drilled through [A]")
-					A.ex_act(2)
+					A.ex_act(3)
 /*				if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 					var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
 					if(ore_box)

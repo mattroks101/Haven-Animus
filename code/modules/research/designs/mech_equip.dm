@@ -184,7 +184,7 @@
 	desc = "A spacepod core, the basic part of the whole construction."
 	id = "spacepod_core"
 	build_type = PODFAB
-	req_tech = list("materials" = 4, "plasma" = 3, "bluespace" = 2, "engineering" = 3)
+	req_tech = list("materials" = 4, "plasmatech" = 3, "bluespace" = 2, "engineering" = 3)
 	build_path = /obj/item/pod_parts/core
 	category = "Spacepod Parts"
 
