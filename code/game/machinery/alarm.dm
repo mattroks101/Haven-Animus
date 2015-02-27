@@ -1508,13 +1508,18 @@ FIRE ALARM
 	return src.attack_hand(user)
 
 /obj/machinery/firealarm/bullet_act(BLAH)
-	return src.alarm()
+	if(stat & (NOPOWER|BROKEN))
+		return
+	else return src.alarm()
 
 /obj/machinery/firealarm/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/firealarm/emp_act(severity)
-	if(prob(50/severity)) alarm()
+	if(prob(50/severity))
+		if(stat & (NOPOWER|BROKEN))
+			return
+		else alarm()
 	..()
 
 /obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
@@ -1571,8 +1576,9 @@ FIRE ALARM
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 					del(src)
 		return
-
-	src.alarm()
+	if(stat & (NOPOWER|BROKEN))
+		return
+	else src.alarm()
 	return
 
 /obj/machinery/firealarm/process()//Note: this processing was mostly phased out due to other code, and only runs when needed
@@ -1691,6 +1697,8 @@ FIRE ALARM
 	return
 
 /obj/machinery/firealarm/proc/alarm()
+	if (usr.stat || stat & (BROKEN|NOPOWER))
+		return
 	if (!( src.working ))
 		return
 	var/area/A = src.loc
