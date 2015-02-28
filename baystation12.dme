@@ -12,8 +12,6 @@
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/Rust"
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/ShieldGen"
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/Supermatter_new"
-#define FILE_DIR "code/WorkInProgress/Guap6512"
-#define FILE_DIR "code/WorkInProgress/Guap6512/VR"
 #define FILE_DIR "code/WorkInProgress/ShieldGenerator"
 #define FILE_DIR "code/WorkInProgress/Susan"
 #define FILE_DIR "code/WorkInProgress/travel"
@@ -66,9 +64,6 @@
 #define FILE_DIR "sound/voice/Serithi"
 #define FILE_DIR "sound/vox"
 #define FILE_DIR "sound/weapons"
-#define FILE_DIR "tools"
-#define FILE_DIR "tools/AddToChangelog"
-#define FILE_DIR "tools/AddToChangelog/AddToChangelog"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG

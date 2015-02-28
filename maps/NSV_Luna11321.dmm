@@ -6105,7 +6105,7 @@
 "cnu" = (/obj/structure/table/woodentable,/obj/item/weapon/pinpointer/nukeop,/obj/item/weapon/handcuffs,/turf/simulated/shuttle/floor{tag = "icon-floor4"; icon_state = "floor4"},/area/syndicate_station/start)
 "cnv" = (/obj/structure/table/woodentable,/obj/machinery/recharger,/turf/simulated/shuttle/floor{tag = "icon-floor4"; icon_state = "floor4"},/area/syndicate_station/start)
 "cnw" = (/obj/item/weapon/storage/secure/briefcase,/turf/simulated/shuttle/floor{tag = "icon-floor4"; icon_state = "floor4"},/area/syndicate_station/start)
-"cnx" = (/obj/machinery/vending/medical,/turf/simulated/shuttle/floor{tag = "icon-floor4"; icon_state = "floor4"},/area/syndicate_station/start)
+"cnx" = (/obj/machinery/vending/medical{emagged = 1},/turf/simulated/shuttle/floor{tag = "icon-floor4"; icon_state = "floor4"},/area/syndicate_station/start)
 "cny" = (/obj/effect/landmark{name = "Syndicate-Spawn"},/turf/simulated/shuttle/floor{tag = "icon-floor4"; icon_state = "floor4"},/area/syndicate_station/start)
 "cnz" = (/obj/machinery/sleeper,/turf/simulated/shuttle/floor{tag = "icon-floor4"; icon_state = "floor4"},/area/syndicate_station/start)
 "cnA" = (/obj/item/stack/sheet/glass{amount = 50; pixel_x = 3; pixel_y = 3},/turf/simulated/shuttle/floor{tag = "icon-floor4"; icon_state = "floor4"},/area/syndicate_station/start)
