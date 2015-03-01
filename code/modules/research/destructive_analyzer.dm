@@ -24,9 +24,8 @@ Note: Must be placed within 3 tiles of the R&D Console
 
 /obj/machinery/r_n_d/destructive_analyzer/RefreshParts()
 	var/T = 0
-	for(var/obj/item/weapon/stock_parts/S in src)
-		T += S.rating * 0.1
-	T = between (0, T, 1)
+	for(var/obj/item/weapon/stock_parts/S in component_parts)
+		T += S.rating
 	decon_mod = T
 
 /obj/machinery/r_n_d/destructive_analyzer/meteorhit()
