@@ -166,43 +166,47 @@ obj/item/weapon/gun/energy/staff
 	icon_state = "xray"
 	projectile_type = "/obj/item/projectile/beam/mindflayer"
 	fire_sound = 'sound/weapons/Laser.ogg'
-
+/*
 /obj/item/weapon/gun/energy/kinetic_accelerator
 	name = "proto-kinetic accelerator"
 	desc = "According to Nanotrasen accounting, this is mining equipment. It's been modified for extreme power output to crush rocks, but often serves as a miner's first defense against hostile alien life; it's not very powerful unless used in a low pressure environment."
 	icon_state = "kineticgun"
 	item_state = "kineticgun"
-	charge_cost = 500
-	projectile_type = "/obj/item/projectile/kinetic"
-	cell_type = "/obj/item/weapon/cell/crap"
-	fire_sound = 'sound/weapons/Gunshot4.ogg'
+	var/ammo_type = list(/obj/item/ammo_casing/energy/kinetic)
+	cell_type = "/obj/item/weapon/stock_parts/cell/crap"
 	var/overheat = 0
 	var/recent_reload = 1
+	var/range_add = 0
+	var/overheat_time = 20
+
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/emp_act()
 	return // so it stops breaking from EMPs
 
-/obj/item/weapon/gun/energy/kinetic_accelerator/process_chambered()
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/newshot()
+	..()
+	if(chambered && chambered.BB)
+		var/obj/item/projectile/kinetic/charge = chambered.BB
+		charge.range += range_add
+
+
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/shoot_live_shot()
 	overheat = 1
-	spawn(20)
+	spawn(overheat_time)
 		overheat = 0
 		recent_reload = 0
 	..()
 
-/obj/item/weapon/gun/energy/kinetic_accelerator/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
-	..()
-	if(flag)	return
-	if(istype(target, /obj/machinery/recharger))	return
-
-/obj/item/weapon/gun/energy/kinetic_accelerator/attack_self(mob/living/user)
+/obj/item/weapon/gun/energy/kinetic_accelerator/attack_self(var/mob/living/user/L)
 	if(overheat || recent_reload)
 		return
-	else
-		power_supply.give(500)
-		playsound(user, 'sound/weapons/kenetic_reload.ogg', 60, 1)
-		recent_reload = 1
-		update_icon()
-		return
+	power_supply.give(500)
+	playsound(src.loc, 'sound/weapons/shotgunpump.ogg', 60, 1)
+	recent_reload = 1
+	update_icon()
+	return*/
 
 /obj/item/weapon/gun/energy/plasmacutter
 	name = "plasma cutter"

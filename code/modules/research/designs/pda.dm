@@ -67,7 +67,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/cartridge/security
-	locked = 1
+	locked = 0
 
 /datum/design/cart_janitor
 	name = "CustodiPRO Cartridge"
@@ -114,7 +114,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/cartridge/quartermaster
-	locked = 1
+	locked = 0
 
 /datum/design/cart_hop
 	name = "Human Resources 9001 Cartridge"
@@ -124,7 +124,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/cartridge/hop
-	locked = 1
+	locked = 0
 
 /datum/design/cart_hos
 	name = "R.O.B.U.S.T. DELUXE Cartridge"
@@ -134,7 +134,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/cartridge/hos
-	locked = 1
+	locked = 0
 
 /datum/design/cart_ce
 	name = "Power-On DELUXE Cartridge"
@@ -144,7 +144,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/cartridge/ce
-	locked = 1
+	locked = 0
 
 /datum/design/cart_cmo
 	name = "Med-U DELUXE Cartridge"
@@ -154,7 +154,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/cartridge/cmo
-	locked = 1
+	locked = 0
 
 /datum/design/cart_rd
 	name = "Signal Ace DELUXE Cartridge"
@@ -164,7 +164,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/cartridge/rd
-	locked = 1
+	locked = 0
 
 /datum/design/cart_captain
 	name = "Value-PAK Cartridge"
@@ -174,4 +174,4 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/cartridge/captain
-	locked = 1
+	locked = 0
