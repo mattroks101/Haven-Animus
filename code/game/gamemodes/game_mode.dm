@@ -72,6 +72,7 @@ Implants;
 
 // Items removed from above:
 /*
+/obj/item/device/radio/beacon/syndicate:7:Singularity Beacon (DANGER!);
 /obj/item/weapon/cloaking_device:4:Cloaking Device;	//Replacing cloakers with thermals.	-Pete
 */
 
