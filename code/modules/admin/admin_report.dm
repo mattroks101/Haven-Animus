@@ -36,7 +36,7 @@ datum/report_topic_handler
 		src << "To enough."
 	else
 		var/body = input(src.mob, "Describe in detail what you're reporting.", "Bug report") as null|text
-		if(body)
+		if(trim(sanitize(body)))
 			if(length(body)<10)
 				src << "Very short to report."
 			else
