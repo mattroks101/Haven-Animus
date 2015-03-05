@@ -61,6 +61,7 @@
 					user.show_message(text("\blue You [] the service panel.", (src.open ? "open" : "close")))
 				return
 			if ((istype(W, /obj/item/device/multitool)) && (src.open == 1)&& (!src.l_hacking))
+				src.visible_message("\red <B>[user] picks in wires of the [src] with a multitool!</B>")
 				user.show_message(text("\red Now attempting to reset internal memory, please hold."), 1)
 				src.l_hacking = 1
 				if (do_after(usr, 100))
@@ -177,48 +178,13 @@
 		src.add_fingerprint(user)
 		return
 
-	//I consider this worthless but it isn't my code so whatever.  Remove or uncomment.
-	/*attack(mob/M as mob, mob/living/user as mob)
-		if ((CLUMSY in user.mutations) && prob(50))
-			user << "\red The [src] slips out of your hand and hits your head."
-			user.take_organ_damage(10)
-			user.Paralyse(2)
-			return
-
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-
-		log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
-
-		var/t = user:zone_sel.selecting
-		if (t == "head")
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if (H.stat < 2 && H.health < 50 && prob(90))
-				// ******* Check
-					if (istype(H, /obj/item/clothing/head) && H.flags & 8 && prob(80))
-						H << "\red The helmet protects you from being hit hard in the head!"
-						return
-					var/time = rand(2, 6)
-					if (prob(75))
-						H.Paralyse(time)
-					else
-						H.Stun(time)
-					if(H.stat != 2)	H.stat = 1
-					for(var/mob/O in viewers(H, null))
-						O.show_message(text("\red <B>[] has been knocked unconscious!</B>", H), 1, "\red You hear someone fall.", 2)
-				else
-					H << text("\red [] tried to knock you unconcious!",user)
-					H.eye_blurry += 3
-
-		return*/
-
 // -----------------------------
 //        Secure Safe
 // -----------------------------
 
 /obj/item/weapon/storage/secure/safe
 	name = "secure safe"
+	desc = "A large wall-mounted safe with a digital locking system."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "safe"
 	icon_opened = "safe0"
@@ -239,6 +205,45 @@
 
 	attack_hand(mob/user as mob)
 		return attack_self(user)
+
+/obj/item/weapon/storage/secure/safe/security/
+	desc = "A large wall-mounted safe with a digital locking system. This one has an automatic radio-alert system."
+
+/obj/item/weapon/storage/secure/safe/security/New()
+	new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
+	new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
+	new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
+	new /obj/item/weapon/gun/projectile/automatic/pistol(src)
+	new /obj/item/weapon/gun/projectile/automatic/pistol(src)
+	new /obj/item/ammo_magazine/external/mc9mm(src)
+	new /obj/item/ammo_magazine/external/mc9mm(src)
+	..()
+
+/obj/item/weapon/storage/secure/safe/security/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (locked && (istype(W, /obj/item/device/multitool)) && (!src.open) && (!src.l_hacking))
+		user.show_message(text("\red Now attempting to reset internal memory, please hold."), 1)
+		src.visible_message("\red <B>[user] picks in wires of the [src] with a multitool!</B>")
+		if(prob(70))
+			var/obj/item/device/radio/headset/headset_sec/HS = new(src)
+			HS.autosay("An attempt to reset the internal memory. [prob(50) ? "[user] is involved!" : ""]", "Security Safe Alarm", "Security", "beeps")
+		src.l_hacking = 1
+		if (do_after(usr, 100))
+			if (prob(20))
+				src.l_setshort = 1
+				src.l_set = 0
+				user.show_message(text("\red Internal memory reset.  Please give it a few seconds to reinitialize."), 1)
+				sleep(80)
+				src.l_setshort = 0
+				src.l_hacking = 0
+			else
+				user.show_message(text("\red Unable to reset internal memory."), 1)
+				src.l_hacking = 0
+
+		else	src.l_hacking = 0
+		return
+	else
+		return ..()
+
 
 /obj/item/weapon/storage/secure/safe/HoS/New()
 	..()

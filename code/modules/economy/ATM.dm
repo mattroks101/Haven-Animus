@@ -88,6 +88,7 @@ log transactions
 			held_card = idcard
 			if(authenticated_account && held_card.associated_account_number != authenticated_account.account_number)
 				authenticated_account = null
+
 	else if(authenticated_account)
 		if(istype(I,/obj/item/weapon/spacecash))
 			//consume the money
@@ -299,29 +300,34 @@ log transactions
 						usr << "\blue \icon[src] Access granted. Welcome user '[authenticated_account.owner_name].'"
 
 					previous_account_number = tried_account_num
+
 			if("withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
 					if(amount <= authenticated_account.money)
-						playsound(src, 'sound/machines/chime.ogg', 50, 1)
+						if(amount > 15000)
+							usr << "\icon[src]<span class='warning'>You cannot withdraw more than 15000 credits at a time!</span>"
+						else
+							playsound(src, 'sound/machines/chime.ogg', 50, 1)
 
-						//remove the money
-						authenticated_account.money -= amount
-						spawn_money(amount,src.loc)
+							//remove the money
+							authenticated_account.money -= amount
+							spawn_money(amount,src.loc)
 
-						//create an entry in the account transaction log
-						var/datum/transaction/T = new()
-						T.target_name = authenticated_account.owner_name
-						T.purpose = "Credit withdrawal"
-						T.amount = "([amount])"
-						T.source_terminal = machine_id
-						T.date = current_date_string
-						T.time = worldtime2text()
-						authenticated_account.transaction_log.Add(T)
+							//create an entry in the account transaction log
+							var/datum/transaction/T = new()
+							T.target_name = authenticated_account.owner_name
+							T.purpose = "Credit withdrawal"
+							T.amount = "([amount])"
+							T.source_terminal = machine_id
+							T.date = current_date_string
+							T.time = worldtime2text()
+							authenticated_account.transaction_log.Add(T)
 					else
 						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
+
 			if("balance_statement")
 				if(authenticated_account)
 					var/obj/item/weapon/paper/R = new(src.loc)

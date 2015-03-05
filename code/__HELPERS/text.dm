@@ -69,7 +69,7 @@ proc/sanitize_PDA(var/msg)
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-			if(127 to 255)	return			//rejects weird letters like ï¿½
+//			if(127 to 255)	return			//rejects weird letters like ï¿½
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
@@ -141,7 +141,7 @@ proc/sanitize_PDA(var/msg)
 //if tag is not in whitelist (var/list/paper_tag_whitelist in global.dm)
 //relpaces < with &lt;
 proc/checkhtml(var/t)
-	t = html_encode(sanitize_uni(t, list("&#"=".")))
+	t = html_encode(t)
 	var/p = findtext(t,"<",1)
 	while (p)	//going through all the tags
 		var/start = p++
@@ -327,34 +327,65 @@ proc/checkhtml(var/t)
 	return t
 
 /proc/rhtml_encode(var/msg)
-        var/list/c = text2list(msg, "ÿ")
-        if(c.len == 1)
-                c = text2list(msg, "&#255;")
-                if(c.len == 1)
-                        return html_encode(msg)
-        var/out = ""
-        var/first = 1
-        for(var/text in c)
-                if(!first)
-                        out += "&#255;"
-                first = 0
-                out += html_encode(text)
-        return out
+	var/list/c = text2list(msg, "ÿ")
+	if(c.len == 1)
+		c = text2list(msg, "&#255;")
+		if(c.len == 1)
+			return html_encode(msg)
+	var/out = ""
+	var/first = 1
+	for(var/text in c)
+		if(!first)
+			out += "&#255;"
+		first = 0
+		out += html_encode(text)
+	return out
+
+/proc/rhtml_encode_paper(var/msg)
+	var/list/c = text2list(msg, "ÿ")
+	if(c.len == 1)
+		c = text2list(msg, "&#1103;")
+		if(c.len == 1)
+			return html_encode(msg)
+	var/out = ""
+	var/first = 1
+	for(var/text in c)
+		if(!first)
+			out += "&#1103;"
+		first = 0
+		out += html_encode(text)
+	return out
 
 /proc/rhtml_decode(var/msg)
-        var/list/c = text2list(msg, "ÿ")
-        if(c.len == 1)
-                c = text2list(msg, "&#255;")
-                if(c.len == 1)
-                        return html_decode(msg)
-        var/out = ""
-        var/first = 1
-        for(var/text in c)
-                if(!first)
-                        out += "&#255;"
-                first = 0
-                out += html_decode(text)
-        return out
+	var/list/c = text2list(msg, "ÿ")
+	if(c.len == 1)
+		c = text2list(msg, "&#255;")
+		if(c.len == 1)
+			return html_decode(msg)
+	var/out = ""
+	var/first = 1
+	for(var/text in c)
+		if(!first)
+			out += "&#255;"
+		first = 0
+		out += html_decode(text)
+	return out
+
+/proc/rhtml_decode_paper(var/msg)
+	var/list/c = text2list(msg, "ÿ")
+	if(c.len == 1)
+		c = text2list(msg, "&#1103;")
+		if(c.len == 1)
+			return html_decode(msg)
+	var/out = ""
+	var/first = 1
+	for(var/text in c)
+		if(!first)
+			out += "&#1103;"
+		first = 0
+		out += html_decode(text)
+	return out
+
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
