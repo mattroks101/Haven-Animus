@@ -253,8 +253,8 @@
 		new /datum/data/mining_equipment("Mining Drone",        /mob/living/simple_animal/hostile/mining_drone/,                   500),
 		new /datum/data/mining_equipment("Resonator",           /obj/item/weapon/resonator,                                        750),
 		new /datum/data/mining_equipment("Plasma Cutter", 		/obj/item/weapon/gun/energy/plasmacutter,						   950),
-		new /datum/data/mining_equipment("Kinetic Accelerator", /obj/item/weapon/gun/energy/kinetic_accelerator,                  1000),
-//		new /datum/data/mining_equipment("Brass Knuckles", 		/obj/item/weapon/brassknuckles,        					          2000),
+	//	new /datum/data/mining_equipment("Kinetic Accelerator", /obj/item/weapon/gun/energy/kinetic_accelerator,                  1000),
+//	/	new /datum/data/mining_equipment("Brass Knuckles", 		/obj/item/weapon/brassknuckles,        					          2000),
 		new /datum/data/mining_equipment("Jetpack",             /obj/item/weapon/tank/jetpack/carbondioxide/mining,               2000),
 //		new /datum/data/mining_equipment("Jaunter",             /obj/item/device/wormhole_jaunter,                                 200),
 		new /datum/data/mining_equipment("Lazarus Injector",    /obj/item/weapon/lazarus_injector,                                1000),
@@ -361,8 +361,8 @@
 	switch(selection)
 		if("Resonator")
 			new /obj/item/weapon/resonator(src.loc)
-		if("Kinetic Accelerator")
-			new /obj/item/weapon/gun/energy/kinetic_accelerator(src.loc)
+	//	if("Kinetic Accelerator")
+		//	new /obj/item/weapon/gun/energy/kinetic_accelerator(src.loc)
 		if("Plasma Cutter")
 			new /obj/item/weapon/gun/energy/plasmacutter(src.loc)
 		if("Mining Drone")

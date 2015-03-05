@@ -373,3 +373,87 @@
 	item_state = "sundress"
 	item_color = "sundress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/schoolgirl/red
+	name = "red schoolgirl uniform"
+	icon_state = "schoolgirlred"
+	item_state = "schoolgirlred"
+	item_color = "schoolgirlred"
+
+/obj/item/clothing/under/schoolgirl/green
+	name = "green schoolgirl uniform"
+	icon_state = "schoolgirlgreen"
+	item_state = "schoolgirlgreen"
+	item_color = "schoolgirlgreen"
+
+/obj/item/clothing/under/schoolgirl/orange
+	name = "orange schoolgirl uniform"
+	icon_state = "schoolgirlorange"
+	item_state = "schoolgirlorange"
+	item_color = "schoolgirlorange"
+
+/obj/item/clothing/under/janimaid
+	name = "maid uniform"
+	desc = "A simple maid uniform for housekeeping."
+	icon_state = "janimaid"
+	item_state = "janimaid"
+	item_color = "janimaid"
+
+
+
+/obj/item/clothing/under/jeans
+	name = "jeans"
+	desc = "A pair of tough blue jeans."
+	icon_state = "jeans"
+	item_state = "jeans"
+	item_color = "jeans"
+	gender = PLURAL
+
+
+
+/obj/item/clothing/under/trackpants
+	name = "track pants"
+	desc = "A pair of track pants, for the athletic."
+	icon_state = "trackpants"
+	item_state = "trackpants"
+	item_color = "trackpants"
+	gender = PLURAL
+
+
+
+/obj/item/clothing/under/khaki
+	name = "khaki pants"
+	desc = "A pair of dust beige khaki pants."
+	icon_state = "khaki"
+	item_state = "khaki"
+	item_color = "khaki"
+	gender = PLURAL
+
+/obj/item/clothing/under/camo
+	name = "camouflage pants"
+	desc = "A pair of woodland camouflage pants, not good for camouflage in this enviornment."
+	icon_state = "camopants"
+	item_state = "camopants"
+	item_color = "camopants"
+	gender = PLURAL
+
+
+
+/obj/item/clothing/under/kamina
+	name = "awesome pants"
+	desc = "Just who the hell do you think I am?!"
+	icon_state = "kaminapants"
+	item_state = "kaminapants"
+	item_color = "kaminapants"
+	gender = PLURAL
+
+
+
+
+/obj/item/clothing/under/snake
+	desc = "It's an old jumpsuit, that was worn by 'the man who makes the impossible possible'."
+	name = "sneak suit"
+	icon_state = "snake"
+	item_state = "snake"
+	item_color = "snake"
+	armor = list(melee = 10, bullet = 15, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)

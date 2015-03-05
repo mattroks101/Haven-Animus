@@ -13,6 +13,7 @@ datum/admin_report/var
 	offender_key // store the key of the offender
 	offender_cid // store the cid of the offender
 
+
 datum/report_topic_handler
 	Topic(href,href_list)
 		..()
@@ -24,14 +25,38 @@ datum/report_topic_handler
 		else if(href_list["action"] == "edit")
 			C.edit_report(text2num(href_list["ID"]))
 
+
+
+
+
+/client/verb/bugreport(mob/M as mob,var/mob/user)
+	set category = "OOC"
+	set name = "Bug report"
+	if(user.reports_amount >= 2)
+		src << "To enough."
+	else
+		var/body = input(src.mob, "Describe in detail what you're reporting.", "Bug report") as null|text
+		if(trim(sanitize(body)))
+			if(length(body)<10)
+				src << "Very short to report."
+			else
+				make_report(body,M.ckey)
+				src << "Thanks for report."
+				user.reports_amount++
+
+
+
+
+
 var/datum/report_topic_handler/report_topic_handler
+
 
 world/New()
 	..()
 	report_topic_handler = new
 
 // add a new news datums
-proc/make_report(body, author, okey, cid)
+proc/make_report(body, author)
 	var/savefile/Reports = new("data/reports.sav")
 	var/list/reports
 	var/lastID
@@ -48,9 +73,6 @@ proc/make_report(body, author, okey, cid)
 	created.author 	= author
 	created.date    = world.realtime
 	created.done    = 0
-	created.offender_key = okey
-	created.offender_cid = cid
-
 	reports.Insert(1, created)
 
 	Reports["reports"]   << reports
@@ -90,9 +112,9 @@ client/proc/is_reported()
 	return 0
 
 // display only the reports that haven't been handled
-client/proc/display_admin_reports()
+client/verb/display_admin_reports()
 	set category = "Admin"
-	set name = "Display Admin Reports"
+	set name = "Display Bug Reports"
 	if(!src.holder) return
 
 	var/list/reports = load_reports()
@@ -103,13 +125,9 @@ client/proc/display_admin_reports()
 		for(var/datum/admin_report/N in reports)
 			if(N.done)
 				continue
-			output += "<b>Reported player:</b> [N.offender_key](CID: [N.offender_cid])<br>"
-			output += "<b>Offense:</b>[N.body]<br>"
+			output += "<b>authored by <i>[N.author]</i><br>"
+			output += "<b>description:</b>[N.body]<br>"
 			output += "<small>Occured at [time2text(N.date,"MM/DD hh:mm:ss")]</small><br>"
-			output += "<small>authored by <i>[N.author]</i></small><br>"
-			output += " <a href='?src=\ref[report_topic_handler];client=\ref[src];action=remove;ID=[N.ID]'>Flag as Handled</a>"
-			if(src.key == N.author)
-				output += " <a href='?src=\ref[report_topic_handler];client=\ref[src];action=edit;ID=[N.ID]'>Edit</a>"
 			output += "<br>"
 			output += "<br>"
 	else
@@ -137,8 +155,8 @@ client/proc/Report(mob/M as mob in world)
 		display_admin_reports()
 
 client/proc/mark_report_done(ID as num)
-	if(!src.holder || src.holder.level < 0)
-		return
+//	if(!src.holder || src.holder.level < 0)
+	//	return
 
 	var/savefile/Reports = new("data/reports.sav")
 	var/list/reports
@@ -157,9 +175,9 @@ client/proc/mark_report_done(ID as num)
 
 
 client/proc/edit_report(ID as num)
-	if(!src.holder || src.holder.level < 0)
-		src << "<b>You tried to modify the news, but you're not an admin!"
-		return
+//	if(!src.holder || src.holder.level < 0)
+	//	src << "<b>You tried to modify the news, but you're not an admin!"
+	//	return
 
 	var/savefile/Reports = new("data/reports.sav")
 	var/list/reports

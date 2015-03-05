@@ -40,7 +40,7 @@ datum/design/rust_fuel_control
 	name = "Internal circuitry (RUST fuel port)"
 	icon_state = "card_mod"
 	origin_tech = "engineering=4;materials=5"
-
+/*
 datum/design/rust_fuel_port
 	name = "Internal circuitry (RUST fuel port)"
 	desc = "Allows for the construction of circuit boards used to build a fuel injection port for the RUST fusion engine."
@@ -48,7 +48,7 @@ datum/design/rust_fuel_port
 	req_tech = list("engineering" = 4, "materials" = 5)
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20, "$uranium" = 3000)
-	build_path = "/obj/item/weapon/module/rust_fuel_port"
+	build_path = "/obj/item/weapon/module/rust_fuel_port"*/
 
 //////////////////////////////////////
 // RUST Fuel Compressor board
