@@ -35,11 +35,13 @@
 	var/d1 = 0
 	var/d2 = 1
 	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
+	color = COLOR_RED
 	var/cable_color = COLOR_RED
 	var/obj/structure/powerswitch/power_switch
 
 /obj/structure/cable/yellow
 	cable_color = COLOR_YELLOW
+	color = COLOR_YELLOW
 
 /obj/structure/cable/green
 	cable_color = COLOR_GREEN

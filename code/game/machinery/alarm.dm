@@ -1697,7 +1697,7 @@ FIRE ALARM
 	return
 
 /obj/machinery/firealarm/proc/alarm()
-	if (usr.stat || stat & (BROKEN|NOPOWER))
+	if (stat & (BROKEN|NOPOWER))
 		return
 	if (!( src.working ))
 		return

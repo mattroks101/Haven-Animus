@@ -31,16 +31,16 @@ datum/report_topic_handler
 
 /client/verb/bugreport(mob/M as mob,var/mob/user)
 	set category = "OOC"
-	set name = "Bug report"
+	set name = "BUGREPORT"
 	if(user.reports_amount >= 2)
 		src << "To enough."
 	else
-		var/body = input(src.mob, "Describe in detail what you're reporting.", "Bug report") as null|text
+		var/body = input(src.mob, "Describe the situation.", "Bug report") as null|text
 		if(trim(sanitize(body)))
 			if(length(body)<10)
-				src << "Very short to report."
+				src << "\red Your report is too short!"
 			else
-				make_report(body,M.ckey)
+				make_report(body,src.ckey)
 				src << "Thanks for report."
 				user.reports_amount++
 

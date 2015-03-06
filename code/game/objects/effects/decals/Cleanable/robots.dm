@@ -41,6 +41,7 @@
 	name = "motor oil"
 	desc = "It's black and greasy. Looks like Beepsky made another mess."
 	basecolor="#030303"
+	color = "#030303"
 
 /obj/effect/decal/cleanable/blood/oil/dry()
 	return

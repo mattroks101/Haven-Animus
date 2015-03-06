@@ -12,6 +12,9 @@
 	icon_action_button = "action_flashlight"
 	var/on = 0
 	var/brightness_on = 3 //luminosity when on
+	var/brightness_red = 3
+	var/brightness_green = 3
+	var/brightness_blue = 2
 
 /obj/item/device/flashlight/attackby(var/obj/B, var/mob/user)
 	if (istype(B, /obj/item/weapon/storage/toolbox))
@@ -22,7 +25,7 @@
 	..()
 	if (on)
 		icon_state = "[initial(icon_state)]-on"
-		src.SetLuminosity(brightness_on, brightness_on, 0)
+		src.SetLuminosity(brightness_red, brightness_green, brightness_blue)
 	else
 		icon_state = initial(icon_state)
 		src.SetLuminosity(0)
@@ -31,21 +34,21 @@
 	if (on)
 		icon_state = "[initial(icon_state)]-on"
 		if(src.loc == user)
-			user.AddLuminosity(brightness_on, brightness_on, 0)
+			user.AddLuminosity(brightness_red, brightness_green, brightness_blue)
 		else if (isturf(src.loc))
-			SetLuminosity(brightness_on, brightness_on, 0)
+			SetLuminosity(brightness_red, brightness_green, brightness_blue)
 
 	else
 		icon_state = initial(icon_state)
 		if(src.loc == user)
-			user.AddLuminosity(-brightness_on, -brightness_on, 0)
+			user.AddLuminosity(-brightness_red, -brightness_green, -brightness_blue)
 		else if (isturf(src.loc))
 			SetLuminosity(0)
 
 /obj/item/device/flashlight/on_enter_storage()
 	if(on)
 		icon_state = initial(icon_state)
-		usr.AddLuminosity(-brightness_on, -brightness_on, 0)
+		usr.AddLuminosity(-brightness_red, -brightness_green, -brightness_blue)
 		on = 0
 	..()
 	return
@@ -105,14 +108,14 @@
 
 /obj/item/device/flashlight/pickup(mob/user)
 	if(on)
-		user.AddLuminosity(brightness_on, brightness_on, 0)
+		user.AddLuminosity(brightness_red, brightness_green, brightness_blue)
 		src.SetLuminosity(0)
 
 
 /obj/item/device/flashlight/dropped(mob/user)
 	if(on)
-		user.AddLuminosity(-brightness_on, -brightness_on, 0)
-		src.SetLuminosity(brightness_on, brightness_on, 0)
+		user.AddLuminosity(-brightness_red, -brightness_green, -brightness_blue)
+		src.SetLuminosity(brightness_red, brightness_green, brightness_blue)
 
 
 /obj/item/device/flashlight/pen
@@ -121,7 +124,9 @@
 	icon_state = "penlight"
 	item_state = ""
 	flags = FPRINT | TABLEPASS | CONDUCT
-	brightness_on = 2
+	brightness_red = 2
+	brightness_green = 2
+	brightness_blue = 2
 
 
 // the desk lamps are a bit special
@@ -130,7 +135,6 @@
 	desc = "A desk lamp with an adjustable mount."
 	icon_state = "lamp"
 	item_state = "lamp"
-	brightness_on = 5
 	w_class = 4
 	flags = FPRINT | TABLEPASS | CONDUCT
 	m_amt = 0
@@ -143,7 +147,11 @@
 	desc = "A classic green-shaded desk lamp."
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
-	brightness_on = 5
+
+	brightness_red = 2
+	brightness_green = 5
+	brightness_blue = 2
+
 
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
@@ -160,13 +168,18 @@
 	name = "flare"
 	desc = "A red Nanotrasen issued flare. There are instructions on the side, it reads 'pull cord, make light'."
 	w_class = 2.0
-	brightness_on = 7 // Pretty bright.
+//	brightness_on = 7 // Pretty bright.
 	icon_state = "flare"
 	item_state = "flare"
 	icon_action_button = null	//just pull it manually, neckbeard.
 	var/fuel = 0
 	var/on_damage = 7
 	var/produce_heat = 1500
+
+	brightness_red = 5
+	brightness_green = 1
+	brightness_blue = 1
+
 
 /obj/item/device/flashlight/flare/New()
 	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.

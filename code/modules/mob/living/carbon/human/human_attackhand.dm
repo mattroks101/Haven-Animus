@@ -113,7 +113,7 @@
 		if("hurt")
 			// See if they can attack, and which attacks to use.
 			var/datum/unarmed_attack/attack = M.species.unarmed
-			if(!attack.is_usable(M))
+			if(!attack.is_usable(M) || prob(10))
 				attack = M.species.secondary_unarmed
 			if(!attack.is_usable(M))
 				return 0
