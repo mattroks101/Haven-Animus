@@ -1,14 +1,14 @@
 /obj/item/weapon/gun/energy/gun
 	name = "energy gun"
 	desc = "A basic hybrid energy gun with two settings: Stun and kill."
-	icon_state = "energystun100"
+	icon_state = "oldenergystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.(if null)
 	fire_sound = 'sound/weapons/Taser3.ogg'
 
 	charge_cost = 100 //How much energy is needed to fire.
 	projectile_type = "/obj/item/projectile/energy/electrode"
 	origin_tech = "combat=3;magnets=2"
-	modifystate = "energystun"
+	modifystate = "oldenergystun"
 
 	var/mode = 0 //0 = stun, 1 = kill
 
