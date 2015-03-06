@@ -1602,7 +1602,7 @@
 "aEP" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor{icon_state = "dark"},/area/server)
 "aEQ" = (/obj/machinery/light_switch{pixel_x = 28},/turf/simulated/floor/bluegrid,/area/server)
 "aER" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/wall,/area/luna/maintenance/apmaint3)
-"aES" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/machinery/door/airlock/maintenance{req_access_txt = "0"; req_one_access_txt = "1,19,56"},/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor/plating,/area/luna/maintenance/apmaint3)
+"aES" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/machinery/door/airlock/maintenance{req_access_txt = "0"; req_one_access = list(1,19,56); req_one_access_txt = "0"},/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor/plating,/area/luna/maintenance/apmaint3)
 "aET" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/wall,/area/luna/maintenance/apmaint3)
 "aEU" = (/turf/simulated/wall,/area/luna/maintenance/apmaint3)
 "aEV" = (/turf/simulated/wall,/area/security/lobby)
