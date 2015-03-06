@@ -25,28 +25,24 @@ datum/report_topic_handler
 		else if(href_list["action"] == "edit")
 			C.edit_report(text2num(href_list["ID"]))
 
-
-
-
-
-/client/verb/bugreport(mob/M as mob,var/mob/user)
+/client/verb/bugreport()
+	var/mob/user = usr
 	set category = "OOC"
 	set name = "BUGREPORT"
-	if(user.reports_amount >= 2)
-		src << "To enough."
+	if (usr.client.prefs.muted & MUTE_REPORTS)
+		src << "You are muted."
 	else
-		var/body = input(src.mob, "Describe the situation.", "Bug report") as null|text
-		if(trim(sanitize(body)))
-			if(length(body)<10)
-				src << "\red Your report is too short!"
-			else
-				make_report(body,src.ckey)
-				src << "Thanks for report."
-				user.reports_amount++
-
-
-
-
+		if(user.reports_amount >= 2)
+			src << "\red Enough reports for you, at least for this round."
+		else
+			var/body = input(user, "Describe the situation.", "Bug report") as null|text
+			if(trim(sanitize(body)))
+				if(length(body)<10)
+					src << "\red Your report is too short!"
+				else
+					make_report(body,user.ckey)
+					src << "Thanks for the report."
+					user.reports_amount++
 
 var/datum/report_topic_handler/report_topic_handler
 
@@ -68,11 +64,11 @@ proc/make_report(body, author)
 	if(!lastID) 	lastID = 0
 
 	var/datum/admin_report/created = new()
-	created.ID 		= ++lastID
+	created.ID 	= ++lastID
 	created.body 	= body
-	created.author 	= author
-	created.date    = world.realtime
-	created.done    = 0
+	created.author	= author
+	created.date   = world.realtime
+	created.done   = 0
 	reports.Insert(1, created)
 
 	Reports["reports"]   << reports
@@ -112,7 +108,7 @@ client/proc/is_reported()
 	return 0
 
 // display only the reports that haven't been handled
-client/verb/display_admin_reports()
+client/proc/display_admin_reports()
 	set category = "Admin"
 	set name = "Display Bug Reports"
 	if(!src.holder) return
@@ -135,7 +131,7 @@ client/verb/display_admin_reports()
 
 	usr << browse(output, "window=news;size=600x400")
 
-
+/*
 client/proc/Report(mob/M as mob in world)
 	set category = "Admin"
 	if(!src.holder)
@@ -152,7 +148,7 @@ client/proc/Report(mob/M as mob in world)
 	make_report(body, key, M.key, CID)
 
 	spawn(1)
-		display_admin_reports()
+		display_admin_reports()*/
 
 client/proc/mark_report_done(ID as num)
 //	if(!src.holder || src.holder.level < 0)
