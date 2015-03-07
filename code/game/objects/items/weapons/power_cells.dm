@@ -27,9 +27,26 @@
 /obj/item/weapon/cell/crap
 	name = "\improper Nanotrasen brand rechargable AA battery"
 	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT
+	icon_state = "cartridge100"
 	origin_tech = "powerstorage=0"
 	maxcharge = 500
 	g_amt = 40
+
+	updateicon()
+		if(charge < 0.01)
+			icon_state = "cartridge0"
+		if(charge/maxcharge >=0.95)
+			icon_state = "cartridge100"
+		else if(charge/maxcharge >=0.75)
+			icon_state = "cartridge80"
+		else if(charge/maxcharge >=0.55)
+			icon_state = "cartridge60"
+		else if(charge/maxcharge >=0.25)
+			icon_state = "cartridge40"
+		else if(charge/maxcharge >=0.15)
+			icon_state = "cartridge20"
+		else
+			icon_state = "cartridge0"
 
 /obj/item/weapon/cell/crap/leet
 	name = "\improper Nanotrasen brand rechargable AA battery"

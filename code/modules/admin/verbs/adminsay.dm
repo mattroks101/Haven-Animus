@@ -3,17 +3,17 @@
 	set name = "Asay" //Gave this shit a shorter name so you only have to time out "asay" rather than "admin say" to use it --NeoFite
 	set hidden = 1
 
-	if(!check_rights(R_ADMIN))	return
+	if(!check_rights(R_ADMIN|R_MOD))	return
 
 	msg = sanitize_uni(msg)
 	if(!msg)	return
 
 	log_admin("[key_name(src)] : [msg]")
 
-	if(check_rights(R_ADMIN,0))
+	if(check_rights(R_ADMIN|R_MOD,0))
 		msg = "<span class='adminmod'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> (<a href='?_src_=holder;adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 		for(var/client/C in admins)
-			if(R_ADMIN & C.holder.rights)
+			if(R_ADMIN|R_MOD & C.holder.rights)
 				C << msg
 
 /client/proc/cmd_mod_say(msg as text)

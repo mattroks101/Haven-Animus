@@ -13,7 +13,7 @@ obj/machinery/recharger
 obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 	if(istype(user,/mob/living/silicon))
 		return
-	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton))
+	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton) || istype(G, /obj/item/weapon/cell/crap))
 		if(charging)
 			return
 
@@ -29,6 +29,13 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		if (istype(G, /obj/item/weapon/gun/energy/gun/nuclear) || istype(G, /obj/item/weapon/gun/energy/crossbow))
 			user << "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>"
 			return
+
+		if (istype(G, /obj/item/weapon/gun/energy/taser/leet))
+			var/obj/item/weapon/gun/energy/taser/leet/T = G
+			if(!T.power_supply)
+				user << "<span class='notice'>How are you going to charge a gun without a battery?</span>"
+				return
+
 		if (istype(G, /obj/item/weapon/gun/energy/staff))
 			return
 		user.drop_item()
@@ -77,6 +84,14 @@ obj/machinery/recharger/process()
 				B.charges++
 				icon_state = "recharger1"
 				use_power(150)
+			else
+				icon_state = "recharger2"
+
+		if(istype(charging, /obj/item/weapon/cell/crap))
+			var/obj/item/weapon/cell/crap/C = charging
+			if(C.charge < C.maxcharge)
+				icon_state = "recharger1"
+				use_power(C.give(100))
 			else
 				icon_state = "recharger2"
 

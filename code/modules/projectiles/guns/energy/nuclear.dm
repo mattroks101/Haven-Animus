@@ -2,6 +2,7 @@
 	name = "energy gun"
 	desc = "A basic hybrid energy gun with two settings: Stun and kill."
 	icon_state = "oldenergystun100"
+	item_state = "gun"
 	item_state = null	//so the human update icon uses the icon_state instead.(if null)
 	fire_sound = 'sound/weapons/Taser3.ogg'
 
@@ -21,14 +22,14 @@
 				fire_sound = 'sound/weapons/Laser4.ogg'
 				user << "\red [src.name] is now set to kill."
 				projectile_type = "/obj/item/projectile/energy/laser"
-				modifystate = "energykill"
+				modifystate = "oldenergykill"
 			if(1)
 				mode = 0
 				charge_cost = 100
 				fire_sound = 'sound/weapons/Taser3.ogg'
 				user << "\red [src.name] is now set to stun."
 				projectile_type = "/obj/item/projectile/energy/electrode"
-				modifystate = "energystun"
+				modifystate = "oldenergystun"
 		update_icon()
 
 /obj/item/weapon/gun/energy/gun/old
