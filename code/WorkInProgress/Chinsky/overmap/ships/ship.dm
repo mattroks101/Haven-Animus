@@ -2,21 +2,25 @@
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "sheet-sandstone"
+	var/shipname = "generic_ship"
 	var/vessel_mass = 34000 //tonnes, random number
 	var/default_delay = 60
 	var/list/speed = list(0,0)
 	var/last_burn = 0
 	var/list/last_movement = list(0,0)
 	var/fore_dir = NORTH
+	var/list/ship_turfs = list()
+	var/list/ship_levels = list()
 
 	var/obj/effect/map/current_sector
 	var/obj/machinery/computer/helm/nav_control
 	var/obj/machinery/computer/engines/eng_control
 
-/obj/effect/map/ship/luna/New(var/obj/effect/mapinfo/data)
-//	map_z = data.zlevel
-	name = "[vessel_name]"
-	always_known = 1
+/obj/effect/map/ship/New(var/obj/effect/mapinfo/data)
+	tag = "ship_[shipname]"
+	map_z = data.zlevel
+	name = data.name
+	always_known = data.known
 	if (data.icon != 'icons/mob/screen1.dmi')
 		icon = data.icon
 		icon_state = data.icon_state
@@ -29,13 +33,24 @@
 	if(data.landing_area)
 		shuttle_landing = locate(data.landing_area)
 
+	update_spaceturfs()
+
+/obj/effect/map/ship/proc/update_spaceturfs()
+	for(var/turf/space/S in world)
+		if(S.z in src.ship_levels)
+			ship_turfs += S
+
+/obj/effect/map/ship/luna/New(var/obj/effect/mapinfo/data)
+	..()
+	name = "[vessel_name()]"
+
 /obj/effect/map/ship/initialize()
 	for(var/obj/machinery/computer/engines/E in machines)
-		if (E.z in vessel_z)
+		if (E.z in ship_levels)
 			eng_control = E
 			break
 	for(var/obj/machinery/computer/helm/H in machines)
-		if (H.z in vessel_z)
+		if (H.z in ship_levels)
 			nav_control = H
 			break
 	processing_objects.Add(src)
@@ -70,9 +85,9 @@
 	speed[1] = Clamp(speed[1] + n_x, -default_delay, default_delay)
 	speed[2] = Clamp(speed[2] + n_y, -default_delay, default_delay)
 	if(is_still())
-		toggle_move_stars()
+		toggle_move_stars(src)
 	else
-		toggle_move_stars(fore_dir)
+		toggle_move_stars(src, fore_dir)
 
 /obj/effect/map/ship/proc/can_burn()
 	if (!eng_control)

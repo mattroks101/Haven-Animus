@@ -9,10 +9,14 @@ var/list/ship_engines = list()
 /datum/ship_engine/New(var/obj/machinery/holder)
 	engine = holder
 	zlevel = holder.z
-	for(var/obj/machinery/computer/engines/E in machines)
-		if ((E.z in vessel_z) && !(src in E.engines))
-			E.engines += src
-			break
+	spawn(5)
+		var/obj/effect/map/ship/linked = map_sectors["[zlevel]"]
+		if(!linked)
+			return
+		for(var/obj/machinery/computer/engines/E in machines)
+			if ((E.z in linked.ship_levels) && !(src in E.engines))
+				E.engines += src
+				break
 
 //Tries to fire the engine. If successfull, returns 1
 /datum/ship_engine/proc/burn()
@@ -53,8 +57,9 @@ var/list/ship_engines = list()
 	return 1
 
 /datum/ship_engine/proc/die()
+	var/obj/effect/map/ship/linked = map_sectors["[zlevel]"]
 	for(var/obj/machinery/computer/engines/E in machines)
-		if (E.z in vessel_z)
+		if (E.z in linked.ship_levels)
 			E.engines -= src
 			break
 	del(src)

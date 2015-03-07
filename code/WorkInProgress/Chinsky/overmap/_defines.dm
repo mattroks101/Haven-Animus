@@ -8,7 +8,9 @@ var/list/moving_levels = list()
 //Proc to 'move' stars in spess
 //yes it looks ugly, but it should only fire when state actually change.
 //null direction stops movement
-proc/toggle_move_stars(direction)
+proc/toggle_move_stars(var/obj/effect/map/ship/ship, direction)
+	if(!ship)
+		return
 
 	var/gen_dir = null
 	if(direction & (NORTH|SOUTH))
@@ -18,11 +20,11 @@ proc/toggle_move_stars(direction)
 	if(!direction)
 		gen_dir = null
 
-	for(var/zlevel in vessel_z)
-		if (moving_levels["zlevel"] != gen_dir)
-			moving_levels["zlevel"] = gen_dir
+	for(var/zlevel in ship.ship_levels)
+		if (moving_levels[zlevel] != gen_dir)
+			moving_levels[zlevel] = gen_dir
 			for(var/turf/space/S in world)
-				if((S.z in vessel_z) && (S.z != OVERMAP_ZLEVEL))
+				if((S.z == zlevel) && (S.z != OVERMAP_ZLEVEL))
 					spawn(0)
 						var/turf/T = S
 						if(!gen_dir)
@@ -39,8 +41,6 @@ var/list/cached_space = list()
 
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/obj/effect/map/M = map_sectors["[T.z]"]
-	if(T.z in vessel_z)
-		M = map_sectors["[vessel_name]"]
 	if (!M)
 		return
 	var/mapx = M.x
@@ -74,8 +74,8 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/turf/map = locate(mapx,mapy,OVERMAP_ZLEVEL)
 	var/obj/effect/map/TM = locate() in map
 	if(TM)
-		if(istype(TM, /obj/effect/map/ship/luna))
-			nz = pick(vessel_z)
+		if(istype(TM, /obj/effect/map/ship))
+			nz = pick(TM:ship_levels)
 		else
 			nz = TM.map_z
 //		testing("Destination: [TM]")
