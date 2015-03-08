@@ -120,7 +120,6 @@
 		"/obj/item/weapon/reagent_containers/food/snacks/donut/normal",
 		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
 		"/obj/item/weapon/melee/baton",
-		"/obj/item/weapon/gun/energy/taser",
 		"/obj/item/weapon/flame/lighter/zippo",
 		"/obj/item/weapon/cigpacket",
 		"/obj/item/clothing/glasses/hud/security",
@@ -130,7 +129,9 @@
 		"/obj/item/weapon/melee",
 		"/obj/item/taperoll/police",
 		"/obj/item/weapon/gun/energy/taser",
+		"/obj/item/weapon/cell/crap",
 		"/obj/item/weapon/gun/energy/gun",
+		"/obj/item/weapon/gun/energy/taser",
 		"/obj/item/weapon/gun/energy/laser",
 		"/obj/item/weapon/gun/energy/stunrevolver",
 		"/obj/item/weapon/gun/energy/ionrifle"

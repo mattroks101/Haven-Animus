@@ -6,7 +6,12 @@
 
 /obj/effect/landmark/corpse
 	name = "Unknown"
+
 	var/mobname = "Unknown"  //Unused now but it'd fuck up maps to remove it now
+	var/random_name = 0
+
+	gender = MALE
+
 	var/corpseuniform = null //Set this to an object path to have the slot filled with said object on the corpse.
 	var/corpsesuit = null
 	var/corpseshoes = null
@@ -23,7 +28,13 @@
 	var/corpseidjob = null // Needs to be in quotes, such as "Clown" or "Chef." This just determines what the ID reads as, not their access
 	var/corpseidaccess = null //This is for access. See access.dm for which jobs give what access. Again, put in quotes. Use "Captain" if you want it to be all access.
 	var/corpseidicon = null //For setting it to be a gold, silver, centcomm etc ID
+
 	var/mutantrace = "human"
+
+	var/brutedamaged = 0
+	var/burndamaged = 0
+	var/oxydamaged = 0
+	var/toxydamaged = 0
 
 	var/corpsehaircolor = null
 	var/corpsehairstyle = null
@@ -35,6 +46,7 @@
 /obj/effect/landmark/corpse/proc/createCorpse() //Creates a mob and checks for gear in each slot before attempting to equip it.
 	var/mob/living/carbon/human/M = new /mob/living/carbon/human (src.loc)
 	M.dna.mutantrace = mutantrace
+
 	if(src.corpsehaircolor)
 		M.r_facial = hex2num(copytext(corpsehaircolor, 2, 4))
 		M.g_facial = hex2num(copytext(corpsehaircolor, 4, 6))
@@ -46,7 +58,22 @@
 		M.h_style = corpsehairstyle
 	if(src.corpsefhairstyle)
 		M.f_style = corpsefhairstyle
+
+	if(gender)
+		M.gender = gender
 	M.real_name = src.name
+	if(random_name)
+		M.real_name = random_name(M.gender)
+
+	if(brutedamaged)
+		M.apply_damage(brutedamaged, BRUTE)
+	if(burndamaged)
+		M.apply_damage(brutedamaged, BURN)
+	if(oxydamaged)
+		M.apply_damage(brutedamaged, OXY)
+	if(toxydamaged)
+		M.apply_damage(brutedamaged, TOX)
+
 	M.death(1) //Kills the new mob
 	if(src.corpseuniform)
 		M.equip_to_slot_or_del(new src.corpseuniform(M), slot_w_uniform)
@@ -139,6 +166,7 @@
 
 /obj/effect/landmark/corpse/chef
 	name = "Chef"
+	random_name = 1
 	corpseuniform = /obj/item/clothing/under/rank/chef
 	corpsesuit = /obj/item/clothing/suit/chef/classic
 	corpseshoes = /obj/item/clothing/shoes/black
@@ -152,6 +180,7 @@
 
 /obj/effect/landmark/corpse/doctor
 	name = "Doctor"
+	random_name = 1
 	corpseradio = /obj/item/device/radio/headset/headset_med
 	corpseuniform = /obj/item/clothing/under/rank/medical
 	corpsesuit = /obj/item/clothing/suit/storage/labcoat
@@ -164,6 +193,7 @@
 
 /obj/effect/landmark/corpse/engineer
 	name = "Engineer"
+	random_name = 1
 	corpseradio = /obj/item/device/radio/headset/headset_eng
 	corpseuniform = /obj/item/clothing/under/rank/engineer
 	corpseback = /obj/item/weapon/storage/backpack/industrial
@@ -194,6 +224,7 @@
 
 /obj/effect/landmark/corpse/scientist
 	name = "Scientist"
+	random_name = 1
 	corpseradio = /obj/item/device/radio/headset/headset_sci
 	corpseuniform = /obj/item/clothing/under/rank/scientist
 	corpsesuit = /obj/item/clothing/suit/storage/labcoat/science
@@ -204,6 +235,7 @@
 	corpseidaccess = "Scientist"
 
 /obj/effect/landmark/corpse/miner
+	random_name = 1
 	corpseradio = /obj/item/device/radio/headset/headset_cargo
 	corpseuniform = /obj/item/clothing/under/rank/miner
 	corpsegloves = /obj/item/clothing/gloves/black
@@ -223,6 +255,7 @@
 
 /obj/effect/landmark/corpse/bridgeofficer
 	name = "Bridge Officer"
+	random_name = 1
 	corpseradio = /obj/item/device/radio/headset/heads/hop
 	corpseuniform = /obj/item/clothing/under/rank/centcom_officer
 	corpsesuit = /obj/item/clothing/suit/armor/bulletproof
@@ -234,6 +267,7 @@
 
 /obj/effect/landmark/corpse/commander
 	name = "Commander"
+	random_name = 1
 	corpseuniform = /obj/item/clothing/under/rank/centcom_commander
 	corpsesuit = /obj/item/clothing/suit/armor/bulletproof
 	corpseradio = /obj/item/device/radio/headset/heads/captain
