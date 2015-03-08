@@ -57,6 +57,9 @@ obj/machinery/recharger/attack_hand(mob/user as mob)
 	if(charging)
 		charging.update_icon()
 		charging.loc = loc
+		if(istype(charging, /obj/item/weapon/cell/crap))
+			var/obj/item/weapon/cell/crap/C = charging
+			C.updateicon()
 		charging = null
 		use_power = 1
 		update_icon()
