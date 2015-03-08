@@ -52,6 +52,7 @@ datum/preferences
 	var/real_name						//our character's name
 	var/generate_backstory = 0
 	var/be_random_name = 0				//whether we are a random name every round
+	var/dwarven = 0
 	var/gender = MALE					//gender of character (well duh)
 	var/fat = 0
 	var/age = 30						//age of character
@@ -120,7 +121,7 @@ datum/preferences
 				if(load_character())
 					return
 	gender = pick(MALE, FEMALE)
-	real_name = random_name(gender)
+	real_name = random_name(gender, dwarven_name = dwarven)
 
 /datum/preferences
 
@@ -149,6 +150,7 @@ datum/preferences
 		dat += "(<a href='?_src_=prefs;preference=name;task=random'>Random Name</A>) "
 		dat += "(<a href='?_src_=prefs;preference=name'>Always Random Name: [be_random_name ? "Yes" : "No"]</a>)"
 		dat += "<br>"
+		dat += "<b>Use Dwarven Name Generator:</b> <a href='?_src_=prefs;preference=dwarven'>[dwarven ? "Yes" : "No"]</a><br>"
 
 		dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
@@ -728,7 +730,7 @@ datum/preferences
 			if("random")
 				switch(href_list["preference"])
 					if("name")
-						real_name = random_name(gender)
+						real_name = random_name(gender, dwarven_name = dwarven)
 					if("age")
 						age = rand(AGE_MIN, AGE_MAX)
 					if("hair")
@@ -956,6 +958,9 @@ datum/preferences
 						else
 							gender = MALE
 
+					if("dwarven")
+						dwarven = !dwarven
+
 					if("fatness")
 						fat = !fat
 
@@ -1035,7 +1040,7 @@ datum/preferences
 
 	proc/copy_to(mob/living/carbon/human/character, safety = 0)
 		if(be_random_name)
-			real_name = random_name(gender)
+			real_name = random_name(gender, dwarven_name = dwarven)
 
 		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
@@ -1043,6 +1048,11 @@ datum/preferences
 			real_name += " [pick(last_names)]"
 		else if(firstspace == name_length)
 			real_name += "[pick(last_names)]"
+
+		for(var/mob/living/carbon/namecheck in world)
+			if(namecheck.real_name == real_name)
+				real_name = random_name(gender, dwarven_name = dwarven)
+				break
 
 		character.real_name = real_name
 		character.name = character.real_name
