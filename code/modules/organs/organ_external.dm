@@ -587,13 +587,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//Replace all wounds on that arm with one wound on parent organ.
 		wounds.Cut()
 		if (parent)
-			var/datum/wound/W
-			if(max_damage < 50)
-				W = new/datum/wound/lost_limb/small(max_damage)
-			else
-				W = new/datum/wound/lost_limb(max_damage)
-			parent.wounds += W
-			parent.update_damages()
+			if(!(parent.status & ORGAN_DESTROYED))
+				var/datum/wound/W
+				if(max_damage < 50)
+					W = new/datum/wound/lost_limb/small(max_damage)
+				else
+					W = new/datum/wound/lost_limb(max_damage)
+				parent.wounds += W
+				parent.update_damages()
 		update_damages()
 
 		// If any organs are attached to this, destroy them

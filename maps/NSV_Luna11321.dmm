@@ -1140,7 +1140,7 @@
 "avV" = (/turf/simulated/floor{tag = "icon-freezerfloor"; icon_state = "freezerfloor"},/area/engine/engine_monitoring)
 "avW" = (/obj/machinery/engine/laser{dir = 4; icon_state = "laser"; id = "west"; tag = "icon-laser (EAST)"},/turf/simulated/floor/engine/vacuum{name = "Power Core"},/area/engine/engine_monitoring)
 "avX" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{tag = "icon-intact (NORTH)"; icon_state = "intact"; dir = 1},/turf/simulated/floor/engine/vacuum{name = "Power Core"},/area/engine/reactor_core)
-"avY" = (/obj/machinery/engine/supermatter,/turf/simulated/floor/engine/vacuum{name = "Power Core"},/area/engine/reactor_core)
+"avY" = (/obj/machinery/engine/supermatter{anchored = 0},/turf/simulated/floor/engine/vacuum{name = "Power Core"},/area/engine/reactor_core)
 "avZ" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{tag = "icon-intact (NORTH)"; icon_state = "intact"; dir = 1},/obj/machinery/engine/laser{dir = 8; icon_state = "laser"; id = "east"; tag = "icon-laser (WEST)"},/turf/simulated/floor/engine/vacuum{name = "Power Core"},/area/engine/engine_monitoring)
 "awa" = (/obj/machinery/atmospherics/pipe/simple/insulated,/obj/machinery/meter{name = "Pressure Meter"},/turf/simulated/floor{tag = "icon-freezerfloor"; icon_state = "freezerfloor"},/area/engine/engine_monitoring)
 "awb" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/atmospherics/unary/cold_sink/freezer{current_temperature = 5; dir = 4; icon_state = "freezer_0"; tag = ""},/obj/machinery/camera/autoname{dir = 8},/turf/simulated/floor/plating,/area/engine/engine_monitoring)

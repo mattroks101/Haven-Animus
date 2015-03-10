@@ -255,6 +255,11 @@ obj/machinery/atmospherics/pipe
 		pipe_color="red"
 		icon_state = ""
 
+	simple/cyan
+		name="Pipe"
+		pipe_color="cyan"
+		icon_state = ""
+
 	simple/supply
 		name="Air supply pipe"
 		pipe_color="blue"
@@ -277,6 +282,14 @@ obj/machinery/atmospherics/pipe
 	simple/scrubbers/hidden
 		level = 1
 		icon_state = "intact-r-f"
+
+	simple/cyan/visible
+		level = 2
+		icon_state = "intact-c"
+
+	simple/cyan/hidden
+		level = 1
+		icon_state = "intact-c-f"
 
 	simple/supply/visible
 		level = 2
@@ -688,6 +701,7 @@ obj/machinery/atmospherics/pipe
 				var/C = ""
 				switch(pipe_color)
 					if ("red") C = "-r"
+					if ("ins") C = "-ins"
 					if ("blue") C = "-b"
 					if ("cyan") C = "-c"
 					if ("green") C = "-g"
@@ -783,7 +797,7 @@ obj/machinery/atmospherics/pipe
 
 	manifold/insulated
 		name="Insulated pipe"
-		pipe_color="red"
+		pipe_color="ins"
 		icon_state = "manifold-ins"
 
 

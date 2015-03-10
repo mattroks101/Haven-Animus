@@ -11,6 +11,7 @@
 	var/fore_dir = NORTH
 	var/list/ship_turfs = list()
 	var/list/ship_levels = list()
+	var/move_dir
 
 	var/obj/effect/map/current_sector
 	var/obj/machinery/computer/helm/nav_control
