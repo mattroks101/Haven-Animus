@@ -177,6 +177,10 @@
 	corpseidjob = "Chef"
 	corpseidaccess = "Chef"
 
+	brutedamaged = 19
+	burndamaged = 84
+	oxydamaged = 97
+
 
 /obj/effect/landmark/corpse/doctor
 	name = "Doctor"
@@ -190,6 +194,11 @@
 	corpseid = 1
 	corpseidjob = "Medical Doctor"
 	corpseidaccess = "Medical Doctor"
+
+/obj/effect/landmark/corpse/doctor/damaged
+	brutedamaged = 124
+	oxydamaged = 86
+
 
 /obj/effect/landmark/corpse/engineer
 	name = "Engineer"
