@@ -73,7 +73,6 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
-#include "voice.dm"
 #include "code\global.dm"
 #include "code\hub.dm"
 #include "code\names.dm"
@@ -783,6 +782,7 @@
 #include "code\modules\assembly\signaler.dm"
 #include "code\modules\assembly\soda_bomb.dm"
 #include "code\modules\assembly\timer.dm"
+#include "code\modules\assembly\voice.dm"
 #include "code\modules\awaymissions\bluespaceartillery.dm"
 #include "code\modules\awaymissions\corpse.dm"
 #include "code\modules\awaymissions\exile.dm"
