@@ -801,6 +801,8 @@
 	if(flag)
 		var/turf/T = get_turf(target)
 		var/obj/effect/overlay/holograph/H = locate() in T
+		if(istype(target, /obj/structure/janitorialcart))	return
+		if(istype(target, /obj/item/weapon/storage)) return
 		if(H)
 			user << "<span class='notice'>You use [src] to destroy [H].</span>"
 			qdel(H)

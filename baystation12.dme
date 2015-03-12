@@ -73,6 +73,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "voice.dm"
 #include "code\global.dm"
 #include "code\hub.dm"
 #include "code\names.dm"

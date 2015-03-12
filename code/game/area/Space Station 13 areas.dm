@@ -407,6 +407,9 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Syndicate Mothership"
 	icon_state = "syndie-ship"
 	requires_power = 0
+	luminosity = 1
+	ul_Lighting = 0
+
 
 /area/syndicate_mothership/control
 	name = "\improper Syndicate Control Room"
