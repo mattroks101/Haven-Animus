@@ -699,38 +699,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				for(var/obj/machinery/door/poddoor/M in world)
 					if(M.id == cartridge.remote_door_id)
 						if(M.density)
-							M.open()
+							spawn( 0 )
+								M.open()
 						else
-							M.close()
+							spawn( 0 )
+								M.close()
 
 		if("Detonate")//Detonate PDA... maybe
-			// check if telecomms I/O route 1459 is stable
-			//var/telecomms_intact = telecomms_process(P.owner, owner, t)
-			var/obj/machinery/message_server/useMS = null
-			if(message_servers)
-				for (var/obj/machinery/message_server/MS in message_servers)
-				//PDAs are now dependant on the Message Server.
-					if(MS.active)
-						useMS = MS
-						break
-
-			var/datum/signal/signal = src.telecomms_process()
-
-			var/useTC = 0
-			if(signal)
-				if(signal.data["done"])
-					useTC = 1
-					var/turf/pos = get_turf(src)
-					if(pos.z in signal.data["level"])
-						useTC = 2
-
-			if(istype(cartridge, /obj/item/weapon/cartridge/syndicate))
-				if(!(useMS && useTC))
-					U.show_message("\red An error flashes on your [src]: Connection unavailable", 1)
-					return
-				if(useTC != 2) // Does our recepient have a broadcaster on their level?
-					U.show_message("\red An error flashes on your [src]: Recipient unavailable", 1)
-					return
+			if(cartridge)
 				var/obj/item/device/pda/P = locate(href_list["target"])
 				if(!isnull(P))
 					if (!P.toff && cartridge.charges > 0)
