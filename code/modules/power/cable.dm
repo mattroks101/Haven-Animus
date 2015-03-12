@@ -626,6 +626,13 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
+
+		if(ishuman(M))
+			if(M:species.flags & IS_SYNTHETIC)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
+					return
+
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)
 			if(user != M)

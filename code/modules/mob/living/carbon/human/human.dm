@@ -27,13 +27,18 @@
 	set_species("Unathi")
 	..()
 
+/mob/living/carbon/human/unathi/New()
+	h_style = "blue IPC screen"
+	set_species("Machine")
+	..()
+
 /mob/living/carbon/human/vox/New()
 	h_style = "Short Vox Quills"
 	set_species("Vox")
 	..()
 
 /mob/living/carbon/human/diona/New()
-	species = new /datum/species/diona(src)
+	set_species("Diona")
 	..()
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
@@ -850,7 +855,10 @@
 	return species.has_fine_manipulation
 
 /mob/living/carbon/human/SpeciesCanConsume()
-	return 1 // Humans can eat, drink, and be forced to do so
+	if(src.species.flags & IS_SYNTHETIC)
+		return 0
+	else
+		return 1 // Humans can eat, drink, and be forced to do so
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
 	if(full_body && ((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )) || (src.back || src.wear_mask || src.head || src.shoes || src.w_uniform || src.wear_suit || src.glasses || src.l_ear || src.r_ear || src.gloves)))
@@ -887,6 +895,10 @@
 	return
 
 /mob/living/carbon/human/proc/vomit()
+
+	if(species.flags & IS_SYNTHETIC)
+		return //Machines don't throw up.
+
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<spawn class='warning'>You feel nauseous..."

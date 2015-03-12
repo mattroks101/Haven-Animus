@@ -280,6 +280,11 @@
 	build_path = /obj/item/weapon/circuitboard/mining_equipment_vendor
 	origin_tech = "programming=1;engineering=2"
 
+/obj/item/weapon/circuitboard/helm
+	name = "Circuit board (Helm Control)"
+	build_path = "/obj/machinery/computer/helm"
+	origin_tech = "programming=4;magnets=4"
+
 /obj/item/weapon/circuitboard/supplycomp/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I,/obj/item/device/multitool))
 		var/catastasis = src.contraband_enabled

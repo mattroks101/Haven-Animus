@@ -24,15 +24,14 @@ proc/toggle_move_stars(var/obj/effect/map/ship/ship, direction)
 		if (ship.move_dir != gen_dir)
 			ship.move_dir = gen_dir
 			for(var/turf/space/S in ship.ship_turfs)
-				spawn(0)
-					var/turf/T = S
-					if(!gen_dir)
-						T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"
-					else
-						T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
-						for(var/atom/movable/AM in T)
-							if (!AM.anchored)
-								AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
+				var/turf/T = S
+				if(!gen_dir)
+					T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"
+				else
+					T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
+					for(var/atom/movable/AM in T)
+						if (!AM.anchored)
+							AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
 
 
 //list used to cache empty zlevels to avoid nedless map bloat

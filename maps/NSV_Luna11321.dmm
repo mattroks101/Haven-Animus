@@ -1087,7 +1087,7 @@
 "auU" = (/obj/structure/lattice,/obj/machinery/atmospherics/pipe/manifold{dir = 4; icon_state = "manifold"; initialize_directions = 11; level = 2},/turf/simulated/floor/engine/vacuum/hull,/area)
 "auV" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/disposalpipe/segment,/turf/simulated/floor/plating,/area/luna/maintenance/starboard3)
 "auW" = (/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/light/small{dir = 1},/obj/machinery/shielding/emitter/plate,/turf/simulated/floor/plating,/area/luna/maintenance/starboard3)
-"auX" = (/obj/structure/table/reinforced,/turf/simulated/floor{icon_state = "white"},/area/toxins/telesci)
+"auX" = (/obj/structure/table/reinforced,/obj/item/device/multitool,/turf/simulated/floor{icon_state = "white"},/area/toxins/telesci)
 "auY" = (/obj/structure/table/reinforced,/obj/item/weapon/crowbar/red,/obj/item/weapon/wrench,/turf/simulated/floor{icon_state = "white"},/area/toxins/telesci)
 "auZ" = (/obj/structure/table/reinforced,/obj/item/device/gps/science,/obj/item/device/gps/science,/obj/item/device/gps/science,/obj/item/clothing/glasses/science{pixel_x = 2; pixel_y = 6},/obj/item/clothing/glasses/science{pixel_x = 0; pixel_y = 3},/turf/simulated/floor{icon_state = "white"},/area/toxins/telesci)
 "ava" = (/obj/structure/table/reinforced,/obj/item/clothing/mask/gas,/obj/item/clothing/mask/gas,/obj/item/clothing/mask/gas,/turf/simulated/floor{icon_state = "white"},/area/toxins/telesci)
