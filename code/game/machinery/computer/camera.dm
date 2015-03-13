@@ -26,9 +26,15 @@
 		return 1
 
 
+	proc/level_check()
+		if (src.z in vessel_z)
+			return 1
+		else
+			return 0
+
 	attack_hand(var/mob/user as mob)
-		if (src.z > 6)
-			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+		if (!level_check())
+			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
 			return
 		if(stat & (NOPOWER|BROKEN))	return
 
@@ -207,3 +213,6 @@
 	desc = "Used to access the built-in cameras in helmets."
 	icon_state = "syndicam"
 	network = list("NUKE")
+
+	level_check()
+		return 1

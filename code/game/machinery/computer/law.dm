@@ -25,8 +25,8 @@
 
 
 	attackby(obj/item/weapon/O as obj, mob/user as mob)
-		if (user.z > 6)
-			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+		if (!(src.z in vessel_z))
+			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
 			return
 		if(istype(O, /obj/item/weapon/aiModule))
 			var/obj/item/weapon/aiModule/M = O

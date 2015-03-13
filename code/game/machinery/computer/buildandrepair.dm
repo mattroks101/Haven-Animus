@@ -285,6 +285,11 @@
 	build_path = "/obj/machinery/computer/helm"
 	origin_tech = "programming=4;magnets=4"
 
+/obj/item/weapon/circuitboard/propulsion_control
+	name = "Circuit board (Propulsion Control)"
+	build_path = "/obj/machinery/computer/engines"
+	origin_tech = "programming=2;magnets=4"
+
 /obj/item/weapon/circuitboard/supplycomp/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I,/obj/item/device/multitool))
 		var/catastasis = src.contraband_enabled

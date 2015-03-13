@@ -41,6 +41,10 @@
 	set_species("Diona")
 	..()
 
+/mob/living/carbon/human/machine/New()
+	set_species("Machine")
+	..()
+
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
 	if(!dna)

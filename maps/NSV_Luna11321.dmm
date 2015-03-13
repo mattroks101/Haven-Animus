@@ -5950,7 +5950,7 @@
 "ckv" = (/obj/item/stack/sheet/glass{amount = 50; pixel_x = 3; pixel_y = 3},/obj/structure/closet/crate,/obj/item/stack/sheet/metal{amount = 50},/obj/item/stack/sheet/metal{amount = 50},/turf/simulated/floor,/area/storage/eva)
 "ckw" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 4},/turf/simulated/floor{tag = "icon-warningcorner (WEST)"; icon_state = "warningcorner"; dir = 8},/area/storage/eva)
 "ckx" = (/obj/structure/sign/vacuum,/obj/machinery/atmospherics/pipe/simple{dir = 4},/turf/simulated/wall/r_wall,/area/storage/eva)
-"cky" = (/obj/machinery/atmospherics/pipe/simple{dir = 1},/turf/simulated/wall/r_wall,/area/storage/eva)
+"cky" = (/obj/machinery/atmospherics/pipe/simple{dir = 9; icon_state = "intact-f"},/turf/simulated/wall/r_wall,/area/storage/eva)
 "ckz" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/luna/hallway/primary/services)
 "ckA" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/luna/hallway/primary/services)
 "ckB" = (/obj/machinery/door/airlock/maintenance,/turf/simulated/floor,/area/luna/hallway/primary/services)

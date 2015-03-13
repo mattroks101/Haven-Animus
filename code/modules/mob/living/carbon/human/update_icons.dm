@@ -196,6 +196,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/icon/standing = new /icon('icons/mob/dam_human.dmi', "00")
 
+	if(src.species)
+		standing = new /icon(src.species.damage_icon, "00")
+
 	var/image/standing_image = new /image("icon" = standing)
 
 
