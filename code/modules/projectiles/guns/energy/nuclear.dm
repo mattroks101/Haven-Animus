@@ -3,7 +3,6 @@
 	desc = "A basic hybrid energy gun with two settings: Stun and kill."
 	icon_state = "oldenergystun100"
 	item_state = "gun"
-	item_state = null	//so the human update icon uses the icon_state instead.(if null)
 	fire_sound = 'sound/weapons/Taser3.ogg'
 
 	charge_cost = 100 //How much energy is needed to fire.
