@@ -28,9 +28,10 @@
 /obj/machinery/computer/robotics/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-	if (!(src.z in vessel_z))
-		user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
-		return
+	if(z_check)
+		if (!(src.z in vessel_z))
+			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
+			return
 	user.set_machine(src)
 	var/dat
 	if (src.temp)
