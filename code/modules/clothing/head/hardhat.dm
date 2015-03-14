@@ -21,23 +21,23 @@
 		item_state = "hardhat[on]_[item_color]"
 
 		if(on)
-			user.SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
+			user.AddLuminosity(brightness_on,brightness_on,(brightness_on - 1))
 		else
-			user.SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
+			user.AddLuminosity(-brightness_on,-brightness_on,-(brightness_on - 1))
 
 	pickup(mob/user)
 		if(on)
-			user.SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
+			user.AddLuminosity(brightness_on,brightness_on,(brightness_on - 1))
 			SetLuminosity(0)
 
 	dropped(mob/user)
 		if(on)
-			user.SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
-			SetLuminosity(brightness_on, brightness_on - 1, 0)
+			user.AddLuminosity(-brightness_on,-brightness_on,-(brightness_on - 1))
+			SetLuminosity(brightness_on,brightness_on,(brightness_on - 1))
 
 	on_enter_storage()
 		if(on)
-			usr.SetLuminosity(usr.LuminosityRed - brightness_on, usr.LuminosityGreen - (brightness_on - 1), usr.LuminosityBlue)
+			usr.AddLuminosity(-brightness_on,-brightness_on,-(brightness_on - 1))
 			on = 0
 			icon_state = "hardhat[on]_[item_color]"
 			item_state = "hardhat[on]_[item_color]"

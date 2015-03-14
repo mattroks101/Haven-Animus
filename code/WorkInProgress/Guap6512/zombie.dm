@@ -33,11 +33,17 @@ var/list/datum/zombies = list()
 
 /mob/living/carbon/human/proc/zombie_bit(var/mob/living/carbon/human/biter)
 	var/mob/living/carbon/human/biten = src
+
 	visible_message("\red <b>[biter.name] bites [name]!</b>")
+
+	if(biten.species && biten.species.flags & IS_SYNTHETIC)
+		return
+
 	if(stat > 1)//dead: it takes time to reverse death, but there is no chance of failure
 		sleep(50)
 		zombify()
 		return
+
 	if((istype(biten.wear_suit, /obj/item/clothing/suit/bio_suit) || istype(biten.wear_suit, /obj/item/clothing/suit/space)) || (istype(biten.head, /obj/item/clothing/head/bio_hood) || istype(biten.head, /obj/item/clothing/head/space)))
 		if((istype(biten.head, /obj/item/clothing/head/bio_hood) || istype(biten.head, /obj/item/clothing/head/space)) && (istype(biten.wear_suit, /obj/item/clothing/suit/bio_suit) || istype(biten.wear_suit, /obj/item/clothing/suit/space)))
 			if(prob(70))

@@ -493,6 +493,10 @@
 		"brain" =    /datum/organ/internal/brain,
 		)
 
+/datum/species/machine/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.name = "Automaton-[pick("N", "T", "X", "Z", "I", "S", "P", "Q", "D", "L", "M", "Alpha", "Beta", "Gamma")]-[rand(101, 998)]"
+	return ..()
+
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H)
 
