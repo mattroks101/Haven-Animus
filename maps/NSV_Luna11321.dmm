@@ -5951,7 +5951,7 @@
 "ckw" = (/obj/structure/disposalpipe/segment,/turf/simulated/wall/r_wall,/area/storage/eva)
 "ckx" = (/obj/machinery/door/airlock/command{name = "E.V.A."; req_access = null; req_access_txt = "18"},/turf/simulated/floor,/area/storage/eva)
 "cky" = (/obj/structure/dispenser/oxygen,/turf/simulated/floor,/area/storage/eva)
-"ckz" = (/obj/item/stack/sheet/glass{amount = 50; pixel_x = 3; pixel_y = 3},/obj/structure/closet/crate,/obj/item/stack/sheet/metal{amount = 50},/obj/item/stack/sheet/metal{amount = 50},/turf/simulated/floor,/area/storage/eva)
+"ckz" = (/obj/item/stack/sheet/glass{amount = 50; pixel_x = 3; pixel_y = 3},/obj/structure/closet/crate,/obj/item/stack/sheet/metal{amount = 50},/obj/item/stack/sheet/metal{amount = 50},/obj/item/stack/sheet/mineral/plastic{amount = 45},/turf/simulated/floor,/area/storage/eva)
 "ckA" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 4},/turf/simulated/floor{tag = "icon-warningcorner (WEST)"; icon_state = "warningcorner"; dir = 8},/area/storage/eva)
 "ckB" = (/obj/structure/sign/vacuum,/obj/machinery/atmospherics/pipe/simple{dir = 4},/turf/simulated/wall/r_wall,/area/storage/eva)
 "ckC" = (/obj/machinery/atmospherics/pipe/simple{dir = 9; icon_state = "intact-f"},/turf/simulated/wall/r_wall,/area/storage/eva)
