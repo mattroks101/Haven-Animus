@@ -13,6 +13,10 @@
 			if(FAT in H.mutations)
 				M << "\red Your fat ass won't fit into [src]!"
 				return 0
+		else
+			if(!(FAT in H.mutations))
+				M << "\red It is too big for you!"
+				return 0
 
 		if(species_restricted)
 

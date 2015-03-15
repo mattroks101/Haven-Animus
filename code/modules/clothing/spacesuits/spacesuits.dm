@@ -2,7 +2,7 @@
 //Note: Everything in modules/clothing/spacesuits should have the entire suit grouped together.
 //      Meaning the the suit is defined directly after the corrisponding helmet. Just like below!
 /obj/item/clothing/head/helmet/space
-	name = "Space helmet"
+	name = "space helmet"
 	icon_state = "space"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL
@@ -17,7 +17,7 @@
 	species_restricted = list("exclude","Diona","Vox")
 
 /obj/item/clothing/suit/space
-	name = "Space suit"
+	name = "space suit"
 	desc = "A suit that protects against low pressure environments. \"NSV LUNA\" is written in large block letters on the back."
 	icon_state = "space"
 	item_state = "s_suit"
@@ -65,3 +65,10 @@
 	for(var/datum/organ/external/E in supporting_limbs)
 		E.status &= ~ ORGAN_SPLINTED
 	supporting_limbs = list()
+
+
+/obj/item/clothing/suit/space/king_size
+	name = "enormous space suit"
+	desc = "A suit that protects against low pressure environments. \"NSV LUNA\" is written in large block letters on the back. This one is for REALLY LARGE spacemen."
+	fatness_restricted = 0
+	breach_threshold = 2

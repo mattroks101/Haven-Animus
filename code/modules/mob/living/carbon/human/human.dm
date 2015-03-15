@@ -1449,3 +1449,18 @@
 				flavor_text += "\n\n"
 	return ..()
 
+
+/mob/living/carbon/human/proc/expose_brain()
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H)
+		H.brained=1
+		h_style = "Bald"
+		update_hair()
+		update_body()
+
+/mob/living/carbon/human/proc/unexpose_brain()
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H)
+		H.brained=0
+		update_hair()
+		update_body()

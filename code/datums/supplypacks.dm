@@ -173,6 +173,17 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Emergency Crate"
 	group = "Engineering"
 
+/datum/supply_packs/big_spacesuit
+	name = "Enormous space suit"
+	contains = list(/obj/item/clothing/suit/space/king_size,
+					/obj/item/clothing/head/helmet/space,
+					/obj/item/weapon/tank/emergency_oxygen,
+					/obj/item/clothing/mask/gas)
+	cost = 15
+	containertype = /obj/structure/closet/crate/internals
+	containername = "Space Suit Crate"
+	group = "Engineering"
+
 /datum/supply_packs/janitor
 	name = "Janitorial supplies"
 	contains = list(/obj/item/weapon/reagent_containers/glass/bucket,

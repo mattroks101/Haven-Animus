@@ -11,11 +11,16 @@
 	var/min_bruised_damage = 10
 	var/min_broken_damage = 30
 	var/parent_organ = "chest"
+	var/list/emplevel = list(0,0,0)  // [1] is the highest amount of emp damage, [3] is the least
+	var/desc = ""
 	var/robotic = 0 //For being a robot
 	var/removed_type //When removed, forms this object.
 	var/rejecting            // Is this organ already being rejected?
 	var/obj/item/organ/organ_holder // If not in a body, held in this item.
 	var/list/transplant_data
+	var/damagelevel = 1
+
+
 /datum/organ/internal/proc/rejuvenate()
 	damage=0
 
@@ -25,19 +30,16 @@
 /datum/organ/internal/proc/is_broken()
 	return damage >= min_broken_damage || status & ORGAN_CUT_AWAY
 
-/datum/organ/internal/New(mob/living/carbon/M)
+/datum/organ/internal/New(mob/living/carbon/human/H)
 	..()
-	if(M && istype(M))
-
-		M.internal_organs |= src
-		src.owner = M
-
-		var/mob/living/carbon/human/H = M
-		if(istype(H))
-			var/datum/organ/external/E = H.organs_by_name[src.parent_organ]
-			if(E.internal_organs == null)
-				E.internal_organs = list()
-			E.internal_organs |= src
+	if(H && istype(H))
+		var/datum/organ/external/E = H.organs_by_name[src.parent_organ]
+		if(E.internal_organs == null)
+			E.internal_organs = list()
+		var/datum/organ/internal/check = E.internal_organs[name]
+		if(check)
+			del(check)
+		E.internal_organs |= src
 
 /datum/organ/internal/process()
 
@@ -92,49 +94,19 @@
 							owner.reagents.add_reagent("toxin", rand(3,5))
 
 /datum/organ/internal/proc/take_damage(amount, var/silent=0)
-	if(src.robotic == 2)
-		src.damage += (amount * 0.8)
-	else
-		src.damage += amount
+	damage += amount * damagelevel
 
 	var/datum/organ/external/parent = owner.get_organ(parent_organ)
 	if (!silent)
 		owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
 
 /datum/organ/internal/proc/emp_act(severity)
-	switch(robotic)
-		if(0)
-			return
-		if(1)
-			switch (severity)
-				if (1.0)
-					take_damage(20,0)
-					return
-				if (2.0)
-					take_damage(7,0)
-					return
-				if(3.0)
-					take_damage(3,0)
-					return
-		if(2)
-			switch (severity)
-				if (1.0)
-					take_damage(40,0)
-					return
-				if (2.0)
-					take_damage(15,0)
-					return
-				if(3.0)
-					take_damage(10,0)
-					return
+	if(emplevel[1])
+		take_damage(emplevel[severity])
 
 /datum/organ/internal/proc/mechanize() //Being used to make robutt hearts, etc
-	robotic = 2
 
 /datum/organ/internal/proc/mechassist() //Used to add things like pacemakers, etc
-	robotic = 1
-	min_bruised_damage = 15
-	min_broken_damage = 35
 
 /****************************************************
 				INTERNAL ORGANS DEFINES
@@ -145,24 +117,80 @@
 	parent_organ = "chest"
 	removed_type = /obj/item/organ/heart
 
+/datum/organ/internal/heart/robotic
+	robotic = 2
+	damagelevel = 0.8
+	emplevel = list(40,15,10)
+	desc = "Mechanical"
+	removed_type = /obj/item/organ/heart/prosthetic
+
+/datum/organ/internal/heart/robotic/process()
+	germ_level = 0
+	return
+
+/datum/organ/internal/heart/mechanize()
+	new /datum/organ/internal/heart/robotic(owner)
+	return
+
+/datum/organ/internal/heart/assisted
+	robotic = 1
+	min_bruised_damage = 15
+	min_broken_damage = 35
+	emplevel = list(20,7,3)
+	desc = "Assisted"
+
+/datum/organ/internal/heart/mechassist()
+	new /datum/organ/internal/heart/assisted(owner)
+	return
+
+
+
 /datum/organ/internal/lungs
 	name = "lungs"
 	parent_organ = "chest"
 	removed_type = /obj/item/organ/lungs
 
-	process()
-		..()
-		if (germ_level > INFECTION_LEVEL_ONE)
-			if(prob(5))
-				owner.emote("cough")		//respitory tract infection
+/datum/organ/internal/lungs/process()
+	..()
+	if (germ_level > INFECTION_LEVEL_ONE)
+		if(prob(5))
+			owner.emote("cough")		//respitory tract infection
 
-		if(is_bruised())
-			if(prob(2))
-				spawn owner.emote("me", 1, "coughs up blood!")
-				owner.drip(10)
-			if(prob(4))
-				spawn owner.emote("me", 1, "gasps for air!")
-				owner.losebreath += 15
+	if(is_bruised())
+		if(prob(2))
+			spawn owner.emote("me", 1, "coughs up blood!")
+			owner.drip(10)
+		if(prob(4))
+			spawn owner.emote("me", 1, "gasps for air!")
+			owner.losebreath += 15
+
+/datum/organ/internal/lungs/robotic
+	robotic = 2
+	damagelevel = 0.8
+	emplevel = list(40,15,10)
+	desc = "Mechanical"
+	removed_type = /obj/item/organ/lungs/prosthetic
+
+/datum/organ/internal/lungs/robotic/process()
+	germ_level = 0
+	return
+
+/datum/organ/internal/lungs/mechanize()
+	new /datum/organ/internal/lungs/robotic(owner)
+	return
+
+/datum/organ/internal/lungs/assisted
+	robotic = 1
+	min_bruised_damage = 15
+	min_broken_damage = 35
+	emplevel = list(20,7,3)
+	desc = "Assisted"
+
+/datum/organ/internal/lungs/mechassist()
+	new /datum/organ/internal/lungs/assisted(owner)
+	return
+
+
 
 /datum/organ/internal/liver
 	name = "liver"
@@ -222,6 +250,33 @@
 						owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
 					owner.reagents.remove_reagent(R.id, REAGENTS_METABOLISM*filter_effect)
 
+/datum/organ/internal/liver/robotic
+	robotic = 2
+	damagelevel = 0.8
+	emplevel = list(40,15,10)
+	removed_type = /obj/item/organ/liver/prosthetic
+
+/datum/organ/internal/liver/robotic/process()
+	germ_level = 0
+	return
+
+/datum/organ/internal/liver/mechanize()
+	new /datum/organ/internal/liver/robotic(owner)
+	return
+
+/datum/organ/internal/liver/assisted
+	robotic = 1
+	min_bruised_damage = 15
+	min_broken_damage = 35
+	emplevel = list(20,7,3)
+	desc = "Assisted"
+
+/datum/organ/internal/liver/mechassist()
+	new /datum/organ/internal/liver/assisted(owner)
+	return
+
+
+
 /datum/organ/internal/kidney
 	name = "kidneys"
 	parent_organ = "groin"
@@ -241,6 +296,34 @@
 			else if(is_broken())
 				owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
 
+/datum/organ/internal/kidney/robotic
+	robotic = 2
+	damagelevel = 0.8
+	emplevel = list(40,15,10)
+	desc = "Mechanical"
+	removed_type = /obj/item/organ/kidneys/prosthetic
+
+/datum/organ/internal/kidney/robotic/process()
+	germ_level = 0
+	return
+
+/datum/organ/internal/kidney/mechanize()
+	new /datum/organ/internal/kidney/robotic(owner)
+	return
+
+/datum/organ/internal/kidney/assisted
+	robotic = 1
+	min_bruised_damage = 15
+	min_broken_damage = 35
+	emplevel = list(20,7,3)
+	desc = "Assisted"
+
+/datum/organ/internal/kidney/mechassist()
+	new /datum/organ/internal/kidney/assisted(owner)
+	return
+
+
+
 /datum/organ/internal/brain
 	name = "brain"
 	parent_organ = "head"
@@ -249,6 +332,35 @@
 
 /datum/organ/internal/brain/xeno
 	removed_type = /obj/item/organ/brain/xeno
+
+/datum/organ/internal/brain/robotic
+	robotic = 2
+	damagelevel = 0.8
+	emplevel = list(40,15,10)
+	desc = "Mechanical"
+	removed_type = /obj/item/organ/brain/prosthetic
+
+/datum/organ/internal/brain/robotic/process()
+	germ_level = 0
+	return
+
+/datum/organ/internal/brain/mechanize()
+	new /datum/organ/internal/brain/robotic(owner)
+	return
+
+/datum/organ/internal/brain/assisted
+	robotic = 1
+	min_bruised_damage = 15
+	min_broken_damage = 35
+	emplevel = list(20,7,3)
+	desc = "Assisted"
+
+/datum/organ/internal/brain/mechassist()
+	new /datum/organ/internal/brain/assisted(owner)
+	return
+
+
+
 
 /datum/organ/internal/eyes
 	name = "eyes"
@@ -261,6 +373,34 @@
 			owner.eye_blurry = 20
 		if(is_broken())
 			owner.eye_blind = 20
+
+/datum/organ/internal/eyes/robotic
+	damagelevel = 0.8
+	emplevel = list(40,15,10)
+	desc = "Mechanical"
+	removed_type = /obj/item/organ/eyes/prosthetic
+
+/datum/organ/internal/eyes/robotic/process()
+	germ_level = 0
+	if(is_bruised())
+		owner.eye_blurry = 20
+	if(is_broken())
+		owner.eye_blind = 20
+
+/datum/organ/internal/eyes/mechanize()
+	new /datum/organ/internal/eyes/robotic(owner)
+	return
+
+/datum/organ/internal/eyes/assisted
+	min_bruised_damage = 15
+	min_broken_damage = 35
+	emplevel = list(20,7,3)
+	desc = "Assisted"
+
+/datum/organ/internal/eyes/mechassist()
+	new /datum/organ/internal/eyes/assisted(owner)
+	return
+
 
 /datum/organ/internal/appendix
 	name = "appendix"
