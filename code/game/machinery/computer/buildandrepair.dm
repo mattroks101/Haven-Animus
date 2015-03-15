@@ -287,7 +287,7 @@
 
 /obj/item/weapon/circuitboard/propulsion_control
 	name = "Circuit board (Propulsion Control)"
-	build_path = "/obj/machinery/computer/engines"
+	build_path = "/obj/machinery/computer/engines/constructed"
 	origin_tech = "programming=2;magnets=4"
 
 /obj/item/weapon/circuitboard/supplycomp/attackby(obj/item/I as obj, mob/user as mob)

@@ -40,6 +40,7 @@
 		if(check)
 			del(check)
 		E.internal_organs |= src
+		owner = H
 
 /datum/organ/internal/process()
 
@@ -107,6 +108,8 @@
 /datum/organ/internal/proc/mechanize() //Being used to make robutt hearts, etc
 
 /datum/organ/internal/proc/mechassist() //Used to add things like pacemakers, etc
+
+
 
 /****************************************************
 				INTERNAL ORGANS DEFINES

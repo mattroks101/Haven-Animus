@@ -166,16 +166,14 @@ Please contact me on #coderbus IRC. ~Carn x
 
 var/global/list/damage_icon_parts = list()
 
-proc/get_damage_icon_part(damage_state, body_part, damage_icon)
-	if(!damage_icon)
-		damage_icon = 'icons/mob/dam_human.dmi'
-	if(damage_icon_parts["[damage_state]/[body_part]/[damage_icon]"] == null)
-		var/icon/DI = new /icon(damage_icon, damage_state)			// the damage icon for whole human
-		DI.Blend(new /icon(damage_icon, body_part), ICON_MULTIPLY)		// mask with this organ's pixels
-		damage_icon_parts["[damage_state]/[body_part]/[damage_icon]"] = DI
+proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mob/dam_human.dmi')
+	if(damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"] == null)
+		var/icon/DI = new /icon(dam_icon, damage_state)			// the damage icon for whole human
+		DI.Blend(new /icon('icons/mob/dam_mask.dmi', body_part), ICON_MULTIPLY)		// mask with this organ's pixels
+		damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"] = DI
 		return DI
 	else
-		return damage_icon_parts["[damage_state]/[body_part]/[damage_icon]"]
+		return damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"]
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
@@ -195,7 +193,8 @@ proc/get_damage_icon_part(damage_state, body_part, damage_icon)
 		// nothing to do here
 		return
 
-	var/damage_icon = 'icons/mob/dam_human.dmi'
+	var/icon/damage_icon = 'icons/mob/dam_human.dmi'
+
 	if(src.species)
 		damage_icon = src.species.damage_icon
 
@@ -203,8 +202,6 @@ proc/get_damage_icon_part(damage_state, body_part, damage_icon)
 
 	var/icon/standing = new /icon(damage_icon, "00")
 
-	if(src.species)
-		standing = new /icon(src.species.damage_icon, "00")
 
 	var/image/standing_image = new /image("icon" = standing)
 
@@ -215,7 +212,7 @@ proc/get_damage_icon_part(damage_state, body_part, damage_icon)
 			O.update_icon()
 			if(O.damage_state == "00") continue
 
-			var/icon/DI = get_damage_icon_part(O.damage_state, O.icon_name, damage_icon)
+			var/icon/DI = get_damage_icon_part(O.damage_state, O.icon_name, damage_icon)//, damage_icon)
 
 			standing_image.overlays += DI
 

@@ -98,3 +98,9 @@
 /obj/machinery/computer/engines/proc/get_total_thrust()
 	for(var/datum/ship_engine/E in engines)
 		. += E.get_thrust()
+
+
+/obj/machinery/computer/engines/constructed
+	New()
+		..()
+		initialize()

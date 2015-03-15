@@ -49,22 +49,22 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 
 	if(T.x <= TRANSITIONEDGE)
 		nx = world.maxx - TRANSITIONEDGE - 2
-		ny = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+		ny = T.y
 		mapx = max(1, mapx-1)
 
 	else if (A.x >= (world.maxx - TRANSITIONEDGE - 1))
 		nx = TRANSITIONEDGE + 2
-		ny = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+		ny = T.y
 		mapx = min(world.maxx, mapx+1)
 
 	else if (T.y <= TRANSITIONEDGE)
 		ny = world.maxy - TRANSITIONEDGE -2
-		nx = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+		nx = T.x
 		mapy = max(1, mapy-1)
 
 	else if (A.y >= (world.maxy - TRANSITIONEDGE - 1))
 		ny = TRANSITIONEDGE + 2
-		nx = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+		nx = T.x
 		mapy = min(world.maxy, mapy+1)
 
 //	testing("[A] moving from [M] ([M.x], [M.y]) to ([mapx],[mapy]).")

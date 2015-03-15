@@ -9,7 +9,7 @@
 
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
-	var/damage_icon = 'icons/mob/dam_human.dmi'
+	var/icon/damage_icon = 'icons/mob/dam_human.dmi'
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
 
