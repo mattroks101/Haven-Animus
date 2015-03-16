@@ -6,7 +6,6 @@
 	name="Space Pod Core"
 	icon_state = "core"
 	flags = FPRINT | CONDUCT
-	origin_tech = "materials=4;plasma=3;bluespace=2;engineering=3"
 	construction_cost = list("metal"=20000,"glass"=10000, "plasma"=5000)
 
 /obj/item/pod_parts/pod_frame

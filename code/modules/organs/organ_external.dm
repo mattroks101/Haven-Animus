@@ -1002,6 +1002,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(brute_dam > 40)
 			if(prob(10))
 				breakskull()
+	else
+		var/datum/organ/internal/I = internal_organs["brain"]
+		if(I)
+			I.take_damage(brute)
 	owner.UpdateDamageIcon(1)
 
 /datum/organ/external/head/rejuvenate()

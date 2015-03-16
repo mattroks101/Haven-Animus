@@ -236,3 +236,9 @@
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
 	del(src)
+
+/obj/effect/landmark/alterations
+	name = "alterations"
+
+/obj/effect/landmark/alterations/nopath
+	name = "Bot No-Path"

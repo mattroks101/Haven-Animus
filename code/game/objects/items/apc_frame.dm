@@ -37,7 +37,7 @@
 		else
 			var/obj/item/stack/cable_coil/C = new /obj/item/stack/cable_coil(loc)
 			C.amount = 10
-			usr << "You cut the cables and disassemble the unused power terminal."
+			usr << "\blue You cut the cables and disassemble the unused power terminal."
 			del(T)
 	new /obj/machinery/power/apc(loc, ndir, 1)
 	del(src)

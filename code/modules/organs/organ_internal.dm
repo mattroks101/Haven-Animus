@@ -38,8 +38,8 @@
 			E.internal_organs = list()
 		var/datum/organ/internal/check = E.internal_organs[name]
 		if(check)
-			del(check)
-		E.internal_organs |= src
+			delete(H)
+		add(H)
 		owner = H
 
 /datum/organ/internal/process()
@@ -108,6 +108,28 @@
 /datum/organ/internal/proc/mechanize() //Being used to make robutt hearts, etc
 
 /datum/organ/internal/proc/mechassist() //Used to add things like pacemakers, etc
+
+
+/datum/organ/internal/proc/delete(var/mob/living/carbon/human/H)
+	if(H)
+		var/datum/organ/internal/toremove = H.internal_organs_by_name[name]
+		if(toremove)
+			var/datum/organ/external/E = H.organs_by_name[toremove.parent_organ]
+			for (var/datum/organ/internal/I in E.internal_organs)
+				if (I == toremove)
+					I = null
+
+	return
+
+/datum/organ/internal/proc/add(var/mob/living/carbon/human/H)
+	var/datum/organ/external/P = H.organs_by_name[parent_organ]
+	if(P)
+		if(P.internal_organs == null)
+			P.internal_organs = list()
+		P.internal_organs += src
+	H.internal_organs_by_name[name] = src
+	owner = H
+	return
 
 
 
