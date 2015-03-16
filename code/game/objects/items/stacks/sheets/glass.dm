@@ -285,8 +285,9 @@
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if( istype(H.species, /datum/species/xenos) )
+			if(istype(H.species, /datum/species/xenos) || (H.species.flags & IS_SYNTHETIC))
 				return
+
 			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
 				var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
 				if(affecting.status & ORGAN_ROBOT)

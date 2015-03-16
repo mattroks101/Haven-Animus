@@ -160,11 +160,11 @@
 
 			if("control")
 				active = locate(href_list["bot"])
-				post_signal(control_freq, cmd, "bot_status", s_filter = RADIO_MULEBOT)
+				post_signal(control_freq, cmd, "bot_status", s_filter = RADIO_SECBOT)
 
 			if("scanbots")		// find all bots
 				botlist = null
-				post_signal(control_freq, "command", "bot_status", s_filter = RADIO_MULEBOT)
+				post_signal(control_freq, "command", "bot_status", s_filter = RADIO_SECBOT)
 
 			if("botlist")
 				active = null

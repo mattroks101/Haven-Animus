@@ -68,6 +68,11 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb1"
 
+	Bumped(atom/user)
+		if(ismob(user))
+			if(prob(20))
+				user << "[pick("The cobweb softly touches your face", "You feel something touching your face", "You fell the disguisting touch of the cobweb", "Some of the cobweb remains on your face")]..."
+
 /obj/effect/decal/cleanable/molten_item
 	name = "gooey grey mass"
 	desc = "It looks like a melted... something."
@@ -85,6 +90,12 @@
 	layer = 3
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb2"
+
+	Bumped(atom/user)
+		if(ismob(user))
+			if(prob(20))
+				user << "[pick("The cobweb softly touches your face", "You feel something touching your face", "You fell the disguisting touch of the cobweb", "Some of the cobweb remains on your face")]..."
+
 
 //Vomit (sorry)
 /obj/effect/decal/cleanable/vomit

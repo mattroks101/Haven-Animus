@@ -772,6 +772,9 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!T)	return 0
 	T << "<span class='danger'>you feel a small prick as stomach churns violently and you become to feel skinnier.</span>"
 	T.nutrition -= 100
+	if(FAT in T.mutations)
+		T.mutations.Remove(FAT)
+		T.update_icons()
 	return 1
 
 /mob/proc/changeling_DEATHsting()

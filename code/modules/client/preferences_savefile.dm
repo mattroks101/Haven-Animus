@@ -107,6 +107,7 @@
 
 	//Character
 	S["real_name"]			>> real_name
+	S["dwarven"]			>> dwarven
 	S["name_is_always_random"] >> be_random_name
 	S["gender"]				>> gender
 	S["fat"]				>> fat
@@ -172,6 +173,7 @@
 	if(isnull(nanotrasen_relation)) nanotrasen_relation = initial(nanotrasen_relation)
 	if(!real_name) real_name = random_name(gender)
 	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
+	dwarven 		= sanitize_integer(dwarven, 0, 1, initial(dwarven))
 	gender			= sanitize_gender(gender)
 	fat				= sanitize_integer(fat, 0, 1, initial(fat))
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
@@ -217,6 +219,7 @@
 	//Character
 	S["real_name"]			<< real_name
 	S["name_is_always_random"] << be_random_name
+	S["dwarven"]			<< dwarven
 	S["gender"]				<< gender
 	S["fat"]				<< fat
 	S["age"]				<< age

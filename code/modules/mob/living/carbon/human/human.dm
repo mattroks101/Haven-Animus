@@ -27,13 +27,22 @@
 	set_species("Unathi")
 	..()
 
+/mob/living/carbon/human/unathi/New()
+	h_style = "blue IPC screen"
+	set_species("Machine")
+	..()
+
 /mob/living/carbon/human/vox/New()
 	h_style = "Short Vox Quills"
 	set_species("Vox")
 	..()
 
 /mob/living/carbon/human/diona/New()
-	species = new /datum/species/diona(src)
+	set_species("Diona")
+	..()
+
+/mob/living/carbon/human/machine/New()
+	set_species("Machine")
 	..()
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
@@ -797,17 +806,17 @@
 				src << browse(null, "window=flavor_changes")
 				return
 			if("general")
-				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message)
+				var/msg = rhtml_encode_paper(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",rhtml_decode_paper(flavor_texts[href_list["flavor_change"]])) as message)
 				if(msg != null)
-					msg = sanitize_uni(copytext(msg, 1, MAX_MESSAGE_LEN))
-					msg = html_encode(msg)
+					msg = sanitize(copytext(msg, 1, MAX_MESSAGE_LEN))
+					msg = rhtml_encode_paper(msg)
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
 			else
-				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",sanitize_uni(html_decode(flavor_texts[href_list["flavor_change"]]))) as message)
+				var/msg = rhtml_encode_paper(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",sanitize_uni(rhtml_decode_paper(flavor_texts[href_list["flavor_change"]]))) as message)
 				if(msg != null)
-					msg = sanitize_uni(copytext(msg, 1, MAX_MESSAGE_LEN))
-					msg = html_encode(msg)
+					msg = sanitize(copytext(msg, 1, MAX_MESSAGE_LEN))
+					msg = rhtml_encode_paper(msg)
 				flavor_texts[href_list["flavor_change"]] = msg
 				set_flavor()
 				return
@@ -850,7 +859,10 @@
 	return species.has_fine_manipulation
 
 /mob/living/carbon/human/SpeciesCanConsume()
-	return 1 // Humans can eat, drink, and be forced to do so
+	if(src.species.flags & IS_SYNTHETIC)
+		return 0
+	else
+		return 1 // Humans can eat, drink, and be forced to do so
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
 	if(full_body && ((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )) || (src.back || src.wear_mask || src.head || src.shoes || src.w_uniform || src.wear_suit || src.glasses || src.l_ear || src.r_ear || src.gloves)))
@@ -887,6 +899,10 @@
 	return
 
 /mob/living/carbon/human/proc/vomit()
+
+	if(species.flags & IS_SYNTHETIC)
+		return //Machines don't throw up.
+
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<spawn class='warning'>You feel nauseous..."
@@ -1433,3 +1449,18 @@
 				flavor_text += "\n\n"
 	return ..()
 
+
+/mob/living/carbon/human/proc/expose_brain()
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H)
+		H.brained=1
+		h_style = "Bald"
+		update_hair()
+		update_body()
+
+/mob/living/carbon/human/proc/unexpose_brain()
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H)
+		H.brained=0
+		update_hair()
+		update_body()

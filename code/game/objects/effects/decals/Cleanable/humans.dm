@@ -10,6 +10,7 @@ var/global/list/image/splatter_cache=list()
 	anchored = 1
 	layer = 2
 	icon = 'icons/effects/blood.dmi'
+	color = "#A10808"
 	icon_state = "mfloor1"
 	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
 	var/base_icon = 'icons/effects/blood.dmi'

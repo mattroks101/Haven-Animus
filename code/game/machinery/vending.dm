@@ -235,6 +235,7 @@
 			currently_vending = null
 	else
 		usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+	src.updateUsrDialog()
 
 /obj/machinery/vending/attack_paw(mob/user as mob)
 	return attack_hand(user)

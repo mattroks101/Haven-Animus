@@ -69,3 +69,5 @@
 
 	var/lastFart = 0 // Toxic fart cooldown.
 	var/lastElaugh = 0
+
+	var/decaylevel = 0 // For rotting bodies

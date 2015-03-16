@@ -106,7 +106,45 @@
 
 /obj/item/weapon/gun/energy/taser/leet
 	name = "leet taser gun"
-	desc = "Specially designed taser gun with extended charge."
+	desc = "Specially designed taser gun with detacheble battery."
 	icon_state = "taser_h"
 	item_state = "gun"
-	cell_type = "/obj/item/weapon/cell/crap/leet"
+	cell_type = "/obj/item/weapon/cell/crap"
+
+	attack_self(mob/user as mob)
+		if(power_supply)
+			power_supply.loc = get_turf(src.loc)
+			user.put_in_hands(power_supply)
+			user << "<span class='notice'>You remove the [power_supply] from [src].</span>"
+			power_supply.updateicon()
+			power_supply = null
+			src.update_icon()
+		else
+			user << "<span class='warning'>It has no cell!</span>"
+
+	update_icon()
+		if(power_supply)
+			var/ratio = power_supply.charge / power_supply.maxcharge
+			ratio = round(ratio, 0.25) * 100
+			icon_state = "[initial(icon_state)][ratio]"
+		else
+			icon_state = "[initial(icon_state)]0"
+
+	examine()
+		..()
+		if(!power_supply)
+			usr << "\red It has no battery!"
+		return
+
+	attackby(var/obj/item/A, var/mob/user)
+		if(istype(A, /obj/item/weapon/cell/crap) && !power_supply)
+			user.drop_item()
+			power_supply = A
+			power_supply.loc = src
+			user << "<span class='notice'>You load a battery into \the [src]!</span>"
+			var/obj/item/weapon/cell/crap/C = A			//I didn't know how to do it without hardcoded type
+			C.updateicon()
+			update_icon()
+		else
+			..()
+			return

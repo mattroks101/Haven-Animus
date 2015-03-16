@@ -209,6 +209,12 @@
 
 			if(variable=="luminosity")
 				O.SetLuminosity(new_value)
+			if(variable=="LuminosityRed")
+				O.SetLuminosity(O.LuminosityRed, O.LuminosityGreen, O.LuminosityBlue)
+			if(variable=="LuminosityGreen")
+				O.SetLuminosity(O.LuminosityRed, O.LuminosityGreen, O.LuminosityBlue)
+			if(variable=="LuminosityBlue")
+				O.SetLuminosity(O.LuminosityRed, O.LuminosityGreen, O.LuminosityBlue)
 			else
 				O.vars[variable] = new_value
 

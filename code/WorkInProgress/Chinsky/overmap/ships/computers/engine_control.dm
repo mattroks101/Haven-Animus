@@ -3,12 +3,13 @@
 /obj/machinery/computer/engines
 	name = "engines control console"
 	icon_state = "engineeringcameras"
+	circuit = "/obj/item/weapon/circuitboard/propulsion_control"
 	var/state = "status"
 	var/list/engines = list()
 	var/obj/effect/map/ship/linked
 
 /obj/machinery/computer/engines/initialize()
-	linked = map_sectors["[vessel_name]"]
+	linked = map_sectors["[z]"]
 	if (linked)
 		if (!linked.eng_control)
 			linked.eng_control = src
@@ -17,7 +18,7 @@
 		testing("Engines console at level [z] was unable to find a corresponding overmap object.")
 
 	for(var/datum/ship_engine/E in ship_engines)
-		if ((E.zlevel in vessel_z) && !(E in src.engines))
+		if ((E.zlevel in linked.ship_levels) && !(E in src.engines))
 			src.engines += E
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
@@ -97,3 +98,9 @@
 /obj/machinery/computer/engines/proc/get_total_thrust()
 	for(var/datum/ship_engine/E in engines)
 		. += E.get_thrust()
+
+
+/obj/machinery/computer/engines/constructed
+	New()
+		..()
+		initialize()

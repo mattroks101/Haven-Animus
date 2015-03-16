@@ -128,15 +128,15 @@ var/const/SUP_FREQ = 1347
 #define TRANSMISSION_RADIO	1
 
 /* filters */
-var/const/RADIO_TO_AIRALARM = "1"
-var/const/RADIO_FROM_AIRALARM = "2"
-var/const/RADIO_CHAT = "3"
-var/const/RADIO_ATMOSIA = "4"
-var/const/RADIO_NAVBEACONS = "5"
-var/const/RADIO_AIRLOCK = "6"
-var/const/RADIO_SECBOT = "7"
-var/const/RADIO_MULEBOT = "8"
-var/const/RADIO_MAGNETS = "9"
+var/const/RADIO_TO_AIRALARM = "radio_airalarm" //air alarms
+var/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in recieving signals from air alarms
+var/const/RADIO_CHAT = "radio_telecoms"
+var/const/RADIO_ATMOSIA = "radio_atmos"
+var/const/RADIO_NAVBEACONS = "radio_navbeacon"
+var/const/RADIO_AIRLOCK = "radio_airlock"
+var/const/RADIO_SECBOT = "radio_secbot"
+var/const/RADIO_MULEBOT = "radio_mulebot"
+var/const/RADIO_MAGNETS = "radio_magnet"
 
 var/global/datum/controller/radio/radio_controller
 
@@ -156,6 +156,8 @@ datum/controller/radio
 			frequency.frequency = new_frequency
 			frequencies[f_text] = frequency
 
+
+//		world << "Adding listener to frequency [f_text]"
 		frequency.add_listener(device, filter)
 		return frequency
 
@@ -253,7 +255,10 @@ datum/radio_frequency
 			if (!devices_line)
 				devices_line = new
 				devices[filter] = devices_line
-			devices_line+=device
+//				world << "Added device to frequency [frequency]: [device.name]"
+			if(!(device in devices_line))
+				devices_line+=device
+//			world << "Added device to frequency [frequency]: [device.name]"
 //			var/list/obj/devices_line___ = devices[filter_str]
 //			var/l = devices_line___.len
 			//log_admin("DEBUG: devices_line.len=[devices_line.len]")
@@ -270,9 +275,8 @@ datum/radio_frequency
 					del(devices_line)
 
 
-obj/proc
-	receive_signal(datum/signal/signal, receive_method, receive_param)
-		return null
+obj/proc/receive_signal(datum/signal/signal, receive_method, receive_param)
+	return null
 
 datum/signal
 	var/obj/source

@@ -210,6 +210,15 @@
 	if (!N)
 		return
 
+	var/obj/effect/map/ship/connected_ship = null
+
+	if(istype(src, /turf/space) || istype(N, /turf/space))
+		for(var/obj/effect/map/ship/found_ship in world)
+			if(src.z in found_ship.ship_levels)
+				connected_ship = found_ship
+				break
+
+
 ///// Z-Level Stuff ///// This makes sure that turfs are not changed to space when one side is part of a zone
 	if(N == /turf/space)
 		var/turf/controller = locate(1, 1, src.z)
@@ -240,6 +249,9 @@
 		var/turf/simulated/S = src
 		if(S.zone) S.zone.rebuild()
 
+	if(connected_ship && (src in connected_ship.ship_turfs))
+		connected_ship.ship_turfs -= src
+
 	if(ispath(N, /turf/simulated/floor))
 		//if the old turf had a zone, connect the new turf to it as well - Cael
 		//Adjusted by SkyMarshal 5/10/13 - The air master will handle the addition of the new turf.
@@ -266,6 +278,10 @@
 			air_master.mark_for_update(src)
 
 		W.levelupdate()
+
+		if(istype(W, /turf/space) && connected_ship)
+			connected_ship.ship_turfs += W
+
 		return W
 
 	else
@@ -287,6 +303,10 @@
 			air_master.mark_for_update(src)
 
 		W.levelupdate()
+
+		if(istype(W, /turf/space) && connected_ship)
+			connected_ship.ship_turfs += W
+
 		return W
 
 /turf/proc/AddDecal(const/image/decal)
@@ -383,13 +403,18 @@
 			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 				L.Add(t)
 	return L
+
 /turf/proc/Distance(turf/t)
-	if(get_dist(src,t) == 1)
-		var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y)
+	if(!src || !t)
+		return 1e31
+	t = get_turf(t)
+	if(get_dist(src, t) == 1 || src.z != t.z)
+		var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y) + (src.z - t.z) * (src.z - t.z) * 3
 		cost *= (pathweight+t.pathweight)/2
 		return cost
 	else
 		return get_dist(src,t)
+
 /turf/proc/AdjacentTurfsSpace()
 	var/L[] = new()
 	for(var/turf/t in oview(src,1))

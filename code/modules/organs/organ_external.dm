@@ -587,13 +587,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//Replace all wounds on that arm with one wound on parent organ.
 		wounds.Cut()
 		if (parent)
-			var/datum/wound/W
-			if(max_damage < 50)
-				W = new/datum/wound/lost_limb/small(max_damage)
-			else
-				W = new/datum/wound/lost_limb(max_damage)
-			parent.wounds += W
-			parent.update_damages()
+			if(!(parent.status & ORGAN_DESTROYED))
+				var/datum/wound/W
+				if(max_damage < 50)
+					W = new/datum/wound/lost_limb/small(max_damage)
+				else
+					W = new/datum/wound/lost_limb(max_damage)
+				parent.wounds += W
+				parent.update_damages()
 		update_damages()
 
 		// If any organs are attached to this, destroy them
@@ -975,6 +976,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	min_broken_damage = 40
 	body_part = HEAD
 	var/disfigured = 0
+	var/brained = 0
 	vital = 1
 	encased = "skull"
 
@@ -996,6 +998,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 				disfigure("brute")
 		if (burn_dam > 40)
 			disfigure("burn")
+	if(!brained)
+		if(brute_dam > 40)
+			if(prob(10))
+				breakskull()
+	else
+		var/datum/organ/internal/I = internal_organs["brain"]
+		if(I)
+			I.take_damage(brute)
+	owner.UpdateDamageIcon(1)
+
+/datum/organ/external/head/rejuvenate()
+	..()
+	owner.unexpose_brain()
 
 /datum/organ/external/head/proc/disfigure(var/type = "brute")
 	if (disfigured)
@@ -1009,6 +1024,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 		"\red <b>Your face melts off!</b>",	\
 		"\red You hear a sickening sizzle.")
 	disfigured = 1
+
+/datum/organ/external/head/proc/breakskull()
+	if(brained)
+		return
+	owner.visible_message("\red <b>The top of \the [owner]'s skull breaks, exposing the brain within!</b>",	\
+	"\red <b>Unbearable pain hits you as the top of your skull breaks and exposes your brain!</b>",	\
+	"\red You hear a sickening crack.")
+	owner.expose_brain()
 
 /****************************************************
 			   EXTERNAL ORGAN ITEMS

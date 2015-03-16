@@ -272,6 +272,10 @@
 		telefail()
 		temp_msg = "ERROR!<BR>Elevation is less than 1 or greater than 90."
 		return
+	if(z_co == 8)
+		telefail()
+		temp_msg = "BZZZZ!#&*(@"
+		return
 	if(z_co == 6 || z_co == 7 || z_co < 1 || z_co > 9)
 		telefail()
 		temp_msg = "ERROR! Sector is less than 1, <BR>greater than 9, or equal to 6 or 7."

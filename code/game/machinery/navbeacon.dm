@@ -27,10 +27,17 @@
 
 		var/turf/T = loc
 		hide(T.intact)
-
-		spawn(5)	// must wait for map loading to finish
+		spawn(10)	// must wait for map loading to finish, copied it here because of player-created beacons
 			if(radio_controller)
-				radio_controller.add_object(src, freq, RADIO_NAVBEACONS)
+				radio_controller.add_object(src, freq, filter = RADIO_NAVBEACONS)
+
+
+
+	initialize()
+		spawn(10)	// must wait for map loading to finish
+			if(radio_controller)
+				radio_controller.add_object(src, freq, filter = RADIO_NAVBEACONS)
+
 
 	// set the transponder codes assoc list from codes_txt
 	proc/set_codes()
@@ -74,6 +81,7 @@
 	// or one of the set transponder keys
 	// if found, return a signal
 	receive_signal(datum/signal/signal)
+//		world << "\red signal received"
 
 		var/request = signal.data["findbeacon"]
 		if(request && ((request in codes) || request == "any" || request == location))
@@ -126,10 +134,11 @@
 	attack_ai(var/mob/user)
 		interact(user, 1)
 
-	attack_paw()
-		return
-
 	attack_hand(var/mob/user)
+
+		if(!user.IsAdvancedToolUser())
+			return 0
+
 		interact(user, 0)
 
 	interact(var/mob/user, var/ai = 0)
@@ -193,7 +202,7 @@ Transponder Codes:<UL>"}
 					updateDialog()
 
 				else if(href_list["locedit"])
-					var/newloc = sanitize(input("Enter New Location", "Navigation Beacon", location) as text|null)
+					var/newloc = sanitize(copytext(input("Enter New Location", "Navigation Beacon", location) as text|null,1,MAX_MESSAGE_LEN))
 					if(newloc)
 						location = newloc
 						updateDialog()

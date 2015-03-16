@@ -53,7 +53,7 @@
 	power_change()
 		..()
 		if(!(stat & (BROKEN|NOPOWER)) && src.occupant)
-			SetLuminosity(2)
+			SetLuminosity(1,1,2)
 		else
 			SetLuminosity(0)
 

@@ -165,7 +165,7 @@
 
 // Returns the surrounding cardinal turfs with open links
 // Including through doors openable with the ID
-/turf/proc/CardinalTurfsWithAccess(var/obj/item/weapon/card/id/ID)
+turf/proc/CardinalTurfsWithAccess(var/obj/item/weapon/card/id/ID)
 	var/L[] = new()
 
 	//	for(var/turf/simulated/t in oview(src,1))
@@ -175,8 +175,17 @@
 		if(istype(T) && !T.density)
 			if(!LinkBlockedWithAccess(src, T, ID))
 				L.Add(T)
-	return L
 
+	for(var/obj/multiz/stairs/enter/S in src)
+		var/dir = S.dir
+		if(!S.istop)
+			dir = turn(dir, 180)
+		var/turf/T = get_step(src, dir)
+		T = locate(T.x, T.y, S.targetZ())
+		if (T)
+			L.Add(T)
+
+	return L
 
 // Returns true if a link between A and B is blocked
 // Movement through doors allowed if ID has access

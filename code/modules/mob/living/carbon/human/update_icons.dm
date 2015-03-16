@@ -165,14 +165,15 @@ Please contact me on #coderbus IRC. ~Carn x
 
 
 var/global/list/damage_icon_parts = list()
-proc/get_damage_icon_part(damage_state, body_part)
-	if(damage_icon_parts["[damage_state]/[body_part]"] == null)
-		var/icon/DI = new /icon('icons/mob/dam_human.dmi', damage_state)			// the damage icon for whole human
+
+proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mob/dam_human.dmi')
+	if(damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"] == null)
+		var/icon/DI = new /icon(dam_icon, damage_state)			// the damage icon for whole human
 		DI.Blend(new /icon('icons/mob/dam_mask.dmi', body_part), ICON_MULTIPLY)		// mask with this organ's pixels
-		damage_icon_parts["[damage_state]/[body_part]"] = DI
+		damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"] = DI
 		return DI
 	else
-		return damage_icon_parts["[damage_state]/[body_part]"]
+		return damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"]
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
@@ -192,9 +193,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 		// nothing to do here
 		return
 
+	var/icon/damage_icon = 'icons/mob/dam_human.dmi'
+
+	if(src.species)
+		damage_icon = src.species.damage_icon
+
 	previous_damage_appearance = damage_appearance
 
-	var/icon/standing = new /icon('icons/mob/dam_human.dmi', "00")
+	var/icon/standing = new /icon(damage_icon, "00")
+
 
 	var/image/standing_image = new /image("icon" = standing)
 
@@ -205,7 +212,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 			O.update_icon()
 			if(O.damage_state == "00") continue
 
-			var/icon/DI = get_damage_icon_part(O.damage_state, O.icon_name)
+			var/icon/DI = get_damage_icon_part(O.damage_state, O.icon_name, damage_icon)//, damage_icon)
 
 			standing_image.overlays += DI
 
@@ -236,6 +243,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/g = (gender == FEMALE ? "f" : "m")
 	var/has_head = 0
+	var/brain_showing = 0
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
@@ -251,6 +259,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 		if(istype(part,/datum/organ/external/head) && !(part.status & ORGAN_DESTROYED))
 			has_head = 1
+			var/datum/organ/external/head/head = part
+			if(head.brained==1)
+				brain_showing = 1
+			else brain_showing = 0
 
 		if(part.status & ORGAN_DESTROYED)
 			icon_key = "[icon_key]0"
@@ -375,6 +387,13 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//Mouth	(lipstick!)
 //		if(lip_style && (species && species.flags & HAS_LIPS))	//skeletons are allowed to wear lipstick no matter what you think, agouri.
 //			stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_s"), ICON_OVERLAY)
+
+		//Brain showing
+		if(brain_showing)
+			var/braindam_icon = 'icons/mob/dam_human.dmi'
+			if(src.species)
+				braindam_icon = src.species.damage_icon
+			stand_icon.Blend(new/icon(braindam_icon, "brain"), ICON_OVERLAY)
 
 	//Underwear
 	if(underwear >0 && underwear < 12 && species.flags & HAS_UNDERWEAR)
@@ -709,8 +728,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 		if(gender == FEMALE  && (!FAT in mutations))
 			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit_f.dmi'), "icon_state" = "[wear_suit.icon_state]")
+		else if (FAT in mutations)
+			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit_fat.dmi'), "icon_state" = "[wear_suit.icon_state]")
 		else
 			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit.dmi'), "icon_state" = "[wear_suit.icon_state]")
+
+
 
 		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
 			drop_from_inventory(handcuffed)

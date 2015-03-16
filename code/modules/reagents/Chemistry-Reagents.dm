@@ -1859,6 +1859,8 @@ datum/reagent/condensedcapsaicin
 		if(method == TOUCH)
 			if(istype(M, /mob/living/carbon/human))
 				var/mob/living/carbon/human/victim = M
+				if(victim.species && (victim.species.flags & IS_SYNTHETIC))
+					return
 				var/mouth_covered = 0
 				var/eyes_covered = 0
 				var/obj/item/safe_thing = null

@@ -1,5 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-
 /*
 A Star pathfinding algorithm
 Returns a list of tiles forming a path from A to B, taking dense objects as well as walls, and the orientation of
@@ -38,8 +36,9 @@ length to avoid portals or something i guess?? Not that they're counted right no
 
 
 PriorityQueue
-	var/L[]
-	var/cmp
+	var
+		L[]
+		cmp
 	New(compare)
 		L = new()
 		cmp = compare
@@ -58,12 +57,12 @@ PriorityQueue
 				j >>= 1
 
 		Dequeue()
-			if(!L.len) return 0
+			ASSERT(L.len)
 			. = L[1]
 			Remove(1)
 
 		Remove(i)
-			if(i > L.len) return 0
+			ASSERT(i <= L.len)
 			L.Swap(i,L.len)
 			L.Cut(L.len)
 			if(i < L.len)
@@ -93,12 +92,13 @@ PriorityQueue
 			if(ind)
 				Remove(ind)
 PathNode
-	var/datum/source
-	var/PathNode/prevNode
-	var/f
-	var/g
-	var/h
-	var/nt		// Nodes traversed
+	var
+		datum/source
+		PathNode/prevNode
+		f
+		g
+		h
+		nt		// Nodes traversed
 	New(s,p,pg,ph,pnt)
 		source = s
 		prevNode = p
@@ -109,19 +109,17 @@ PathNode
 		nt = pnt
 
 datum
-	var/bestF
+	var
+		bestF
 proc
 	PathWeightCompare(PathNode/a, PathNode/b)
 		return a.f - b.f
 
-	AStar(start,end,adjacent,dist,maxnodes,maxnodedepth = 30,mintargetdist,minnodedist,id=null, var/turf/exclude=null)
-
-//		world << "A*: [start] [end] [adjacent] [dist] [maxnodes] [maxnodedepth] [mintargetdist], [minnodedist] [id]"
+	AStar(start, end, adjacent, dist, maxnodes, maxnodedepth = 30, mintargetdist, minnodedist, id=null, var/list/exclude = null)
+		set background = 1
 		var/PriorityQueue/open = new /PriorityQueue(/proc/PathWeightCompare)
 		var/closed[] = new()
 		var/path[]
-		start = get_turf(start)
-		if(!start) return 0
 
 		open.Enqueue(new /PathNode(start,null,0,call(start,dist)(end)))
 
@@ -131,8 +129,9 @@ proc
 			closed.Add(cur.source)
 
 			var/closeenough
+
 			if(mintargetdist)
-				closeenough = call(cur.source,dist)(end) <= mintargetdist
+				closeenough = call(cur.source, dist)(end) <= mintargetdist
 
 			if(cur.source == end || closeenough)
 				path = new()
@@ -143,6 +142,7 @@ proc
 				break
 
 			var/L[] = call(cur.source,adjacent)(id)
+
 			if(minnodedist && maxnodedepth)
 				if(call(cur.source,minnodedist)(end) + cur.nt >= maxnodedepth)
 					continue
@@ -150,29 +150,39 @@ proc
 				if(cur.nt >= maxnodedepth)
 					continue
 
-			for(var/datum/d in L)
-				if(d == exclude)
-					continue
-				var/ng = cur.g + call(cur.source,dist)(d)
-				if(d.bestF)
-					if(ng + call(d,dist)(end) < d.bestF)
-						for(var/i = 1; i <= open.L.len; i++)
-							var/PathNode/n = open.L[i]
-							if(n.source == d)
-								open.Remove(i)
-								break
-					else
-						continue
+			find_path:
+				for(var/datum/d in L)
+					if(exclude)
+						if(exclude.Find(d.type) || exclude.Find(d))
+							continue
+					for(var/datum/e in d)
+						if(exclude)
+							if(exclude.Find(e.type) || exclude.Find(e))
+								continue find_path
 
-				open.Enqueue(new /PathNode(d,cur,ng,call(d,dist)(end),cur.nt+1))
-				if(maxnodes && open.L.len > maxnodes)
-					open.L.Cut(open.L.len)
+					var/ng = cur.g + call(cur.source,dist)(d)
+
+					if(d.bestF)
+						if(ng + call(d,dist)(end) < d.bestF)
+							for(var/i = 1; i <= open.L.len; i++)
+								var/PathNode/n = open.L[i]
+								if(n.source == d)
+									open.Remove(i)
+									break
+						else
+							continue
+
+					open.Enqueue(new /PathNode(d,cur,ng,call(d,dist)(end),cur.nt+1))
+
+					if(maxnodes && open.L.len > maxnodes)
+						open.L.Cut(open.L.len)
 		}
 
 		var/PathNode/temp
 		while(!open.IsEmpty())
 			temp = open.Dequeue()
 			temp.source.bestF = 0
+
 		while(closed.len)
 			temp = closed[closed.len]
 			temp.bestF = 0

@@ -141,19 +141,32 @@
 
 //These are here so they can be printed out via the fabricator.
 /obj/item/organ/heart/prosthetic
-	robotic = 2
+	name = "circulatory pump"
+	icon_state = "heart-prosthetic"
+	organ_data = /datum/organ/internal/heart/robotic
 
 /obj/item/organ/lungs/prosthetic
-	robotic = 2
+	name = "gas exchange system"
+	icon_state = "lungs-prosthetic"
+	organ_data = /datum/organ/internal/lungs/robotic
 
 /obj/item/organ/kidneys/prosthetic
-	robotic = 2
+	name = "prosthetic kidneys"
+	icon_state = "kidneys-prosthetic"
+	organ_data = /datum/organ/internal/lungs/robotic
 
 /obj/item/organ/eyes/prosthetic
-	robotic = 2
+	name = "visual prosthesis"
+	icon_state = "eyes-prosthetic"
+	organ_data = /datum/organ/internal/lungs/robotic
 
 /obj/item/organ/liver/prosthetic
-	robotic = 2
+	name = "toxin filter"
+	icon_state = "liver-prosthetic"
+	organ_data = /datum/organ/internal/lungs/robotic
+
+/obj/item/organ/brain/prosthetic
+	organ_data = /datum/organ/internal/brain
 
 /obj/item/organ/appendix
 	name = "appendix"

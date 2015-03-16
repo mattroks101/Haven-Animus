@@ -9,6 +9,7 @@
 
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
+	var/icon/damage_icon = 'icons/mob/dam_human.dmi'
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
 
@@ -460,6 +461,7 @@
 
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
+	damage_icon = 'icons/mob/dam_ipc.dmi'
 	language = "Tradeband"
 	unarmed_type = /datum/unarmed_attack/punch
 	rarity_value = 2
@@ -490,6 +492,10 @@
 		"heart" =    /datum/organ/internal/heart,
 		"brain" =    /datum/organ/internal/brain,
 		)
+
+/datum/species/machine/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.name = "Automaton-[pick("N", "T", "X", "Z", "I", "S", "P", "Q", "D", "L", "M", "Alpha", "Beta", "Gamma")]-[rand(101, 998)]"
+	return ..()
 
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H)

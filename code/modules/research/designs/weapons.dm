@@ -13,7 +13,7 @@
 	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 500)
 	reliability_base = 76
 	build_path = /obj/item/weapon/gun/energy/gun/nuclear
-	locked = 1
+	locked = 0
 
 /datum/design/stunrevolver
 	name = "Stun Revolver"
@@ -23,7 +23,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 4000)
 	build_path = /obj/item/weapon/gun/energy/stunrevolver
-	locked = 1
+	locked = 0
 
 /datum/design/lasercannon
 	name = "Laser Cannon"
@@ -33,7 +33,7 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 10000, "$glass" = 1000, "$diamond" = 2000)
 	build_path = /obj/item/weapon/gun/energy/lasercannon
-	locked = 1
+	locked = 0
 
 /datum/design/decloner
 	name = "Decloner"
@@ -43,7 +43,7 @@
 	build_type = PROTOLATHE
 	materials = list("$gold" = 5000,"$uranium" = 10000, "mutagen" = 40)
 	build_path = /obj/item/weapon/gun/energy/decloner
-	locked = 1
+	locked = 0
 /*
 /datum/design/plasmapistol
 	name = "plasma pistol"
@@ -81,7 +81,7 @@ datum/design/xray
 	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 500, "$silver" = 3000)
 	build_path = /obj/item/weapon/gun/energy/temperature
-	locked = 1
+	locked = 0
 
 // Projectile Weapons
 
@@ -93,7 +93,7 @@ datum/design/xray
 	build_type = PROTOLATHE
 	materials = list("$metal" = 8000, "$silver" = 2000, "$diamond" = 1000)
 	build_path = /obj/item/weapon/gun/projectile/automatic
-	locked = 1
+	locked = 0
 
 
 // Other Weapons

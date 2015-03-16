@@ -64,6 +64,12 @@
 		cure(mob)
 		return
 
+	if(istype(mob,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = mob
+		if(H.species && H.species.flags & IS_SYNTHETIC)
+			cure(mob)
+			return
+
 	if(mob.stat == 2)
 		return
 	if(stage <= 1 && clicks == 0) 	// with a certain chance, the mob may become immune to the disease before it starts properly

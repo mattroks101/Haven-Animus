@@ -823,13 +823,13 @@
 */
 		if(("vomit") || ("puke") || ("throwup"))
 			if(!src.reagents || src.nutrition <= 80)
-				message = "<B>[src]</B> inserts a hand into their mouth and attempts to vomit but nothing comes out."
+				message = "<B>[src]</B> gags as if trying to throw up but nothing comes out."
 				src << "You gag as you want to throw up, but there's nothing in your stomach!"
 			else
 				var/obj/effect/decal/cleanable/vomit/V = new/obj/effect/decal/cleanable/vomit(src.loc)
 				if(src.reagents)
 					src.reagents.trans_to(V, 10)
-				message = "<B>[src]</B> inserts a hand into their mouth and vomits on the floor."
+				message = "<B>[src]</B> [pick("vomits", "throws up")]!"
 				src.nutrition -= rand(40,80)
 				if(src.dizziness)
 					src.dizziness -= rand(2,8)

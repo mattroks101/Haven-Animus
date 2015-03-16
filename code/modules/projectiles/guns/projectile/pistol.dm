@@ -1,3 +1,6 @@
+/obj/item/weapon/gun/projectile/automatic/pistol/toggle_fire()
+	set hidden = 1
+	return
 
 /obj/item/weapon/gun/projectile/automatic/pistol/silenced/usp
 	name = "usp silenced"
@@ -112,7 +115,7 @@
 	icon_state = "pistol"
 	w_class = 2
 	silenced = 0
-	origin_tech = "combat=2;materials=2;syndicate=2"
+	origin_tech = "combat=3;materials=2"
 	mag_type = /obj/item/ammo_magazine/external/mc9mm
 
 /obj/item/weapon/gun/projectile/automatic/pistol/stechtkin

@@ -407,6 +407,38 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Syndicate Mothership"
 	icon_state = "syndie-ship"
 	requires_power = 0
+	luminosity = 1
+	ul_Lighting = 0
+
+
+/area/syndicate_interception_station
+	name = "\improper Syndicate Work Station"
+	icon_state = "syndie-control"
+	requires_power = 0
+
+/area/syndicate_interception_station/observation
+	name = "\improper Syndicate Observation room"
+
+/area/syndicate_interception_station/engineering
+	name = "\improper Syndicate Engineering bay"
+
+/area/syndicate_interception_station/kitchen
+	name = "\improper Syndicate Kitchen room"
+
+/area/syndicate_interception_station/lounge
+	name = "\improper Syndicate lounge room"
+
+/area/syndicate_interception_station/arrivals
+	name = "\improper Syndicate Arrival"
+
+/area/syndicate_interception_station/vault
+	name = "\improper Syndicate vault"
+
+
+
+
+
+
 
 /area/syndicate_mothership/control
 	name = "\improper Syndicate Control Room"

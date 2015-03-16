@@ -242,7 +242,7 @@
 											O.show_message(text("\red <B>[] unlocks [] with a multitool.</B>", user, crat), 1)
 		multi.is_used = 0
 
-	if(!opened)
+	if(!src.opened)
 		src.togglelock(user)
 		return
 	return ..()

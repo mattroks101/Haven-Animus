@@ -105,8 +105,9 @@
 #define MINIMUM_TEMPERATURE_START_SUPERCONDUCTION	T20C+200
 
 #define FLOOR_HEAT_TRANSFER_COEFFICIENT 0.4
-#define WALL_HEAT_TRANSFER_COEFFICIENT 0.0
-#define DOOR_HEAT_TRANSFER_COEFFICIENT 0.0
+#define WALL_HEAT_TRANSFER_COEFFICIENT 0.3
+#define RWALL_HEAT_TRANSFER_COEFFICIENT 0.2
+#define DOOR_HEAT_TRANSFER_COEFFICIENT 0.2
 #define SPACE_HEAT_TRANSFER_COEFFICIENT 0.2 //a hack to partly simulate radiative heat
 #define OPEN_HEAT_TRANSFER_COEFFICIENT 0.4
 #define WINDOW_HEAT_TRANSFER_COEFFICIENT 0.1 //a hack for now
@@ -520,7 +521,9 @@ var/list/liftable_structures = list(\
 #define MUTE_PRAY		4
 #define MUTE_ADMINHELP	8
 #define MUTE_DEADCHAT	16
+#define MUTE_REPORTS 	0
 #define MUTE_ALL		31
+
 
 //Number of identical messages required to get the spam-prevention automute thing to trigger warnings and automutes
 #define SPAM_TRIGGER_WARNING 5

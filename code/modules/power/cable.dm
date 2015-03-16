@@ -35,11 +35,13 @@
 	var/d1 = 0
 	var/d2 = 1
 	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
+	color = COLOR_RED
 	var/cable_color = COLOR_RED
 	var/obj/structure/powerswitch/power_switch
 
 /obj/structure/cable/yellow
 	cable_color = COLOR_YELLOW
+	color = COLOR_YELLOW
 
 /obj/structure/cable/green
 	cable_color = COLOR_GREEN
@@ -624,6 +626,13 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
+
+		if(ishuman(M))
+			if(M:species.flags & IS_SYNTHETIC)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
+					return
+
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)
 			if(user != M)

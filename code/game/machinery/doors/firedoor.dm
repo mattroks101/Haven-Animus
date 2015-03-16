@@ -8,6 +8,7 @@
 	req_one_access = null
 	opacity = 0
 	density = 0
+	open_layer = 2.69
 
 	var/blocked = 0
 	var/nextstate = null

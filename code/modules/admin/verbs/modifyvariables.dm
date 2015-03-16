@@ -438,6 +438,22 @@ var/list/forbidden_varedit_object_types = list(/datum/admins)
 				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
 				if(var_new == null) return
 				O.SetLuminosity(var_new)
+
+			else if(variable=="LuminosityRed")
+				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
+				if(var_new == null) return
+				O.SetLuminosity(O.LuminosityRed, O.LuminosityGreen, O.LuminosityBlue)
+
+			else if(variable=="LuminosityGreen")
+				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
+				if(var_new == null) return
+				O.SetLuminosity(O.LuminosityRed, O.LuminosityGreen, O.LuminosityBlue)
+
+			else if(variable=="LuminosityBlue")
+				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
+				if(var_new == null) return
+				O.SetLuminosity(O.LuminosityRed, O.LuminosityGreen, O.LuminosityBlue)
+
 			else if(variable=="stat")
 				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
 				if(var_new == null) return

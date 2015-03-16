@@ -623,7 +623,7 @@
 
 
 
-					var/moved = step_towards(src, next)	// attempt to move
+					var/moved = step_towards_3d(src, next)	// attempt to move
 					if(cell) cell.use(1)
 					if(moved)	// successful move
 						//world << "Successful move."
@@ -831,11 +831,11 @@
 	if(!on)
 		return
 
-	/*
-	world << "rec signal: [signal.source]"
-	for(var/x in signal.data)
-		world << "* [x] = [signal.data[x]]"
-	*/
+
+//	world << "rec signal: [signal.source]"
+//	for(var/x in signal.data)
+//		world << "* [x] = [signal.data[x]]"
+
 	var/recv = signal.data["command"]
 	// process all-bot input
 	if(recv=="bot_status" && (wires & wire_remote_rx))

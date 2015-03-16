@@ -36,6 +36,13 @@
 //Making the station dirty, one tile at a time. Called by master controller's setup_objects
 
 /turf/simulated/floor/proc/MakeDirty()
+	var/trash = pick(/obj/item/trash/raisins,
+				/obj/item/trash/candy,
+				/obj/item/trash/cheesie,
+				/obj/item/trash/chips,
+				/obj/item/trash/syndi_cakes,
+				/obj/item/trash/sosjerky,
+				/obj/item/weapon/cigbutt)
 	if(prob(66))	//fastest possible exit 2/3 of the time
 		return
 
@@ -61,8 +68,13 @@
 	if(prob(80))	//mid dirt  - 1/15
 		return
 
+	if(!istype(A, /turf/simulated/floor/open)) // add trash
+		if(istype(A,/area/luna/maintenance))
+			if(prob(13))
+				new trash(src)
+	return
 
-	if(istype(A, /area/engine) || istype(A,/area/assembly) || istype(A,/area/maintenance) || istype(A,/area/construction))
+	if(istype(A, /area/engine) || istype(A,/area/assembly) || istype(A,/area/luna/maintenance) || istype(A,/area/construction))
 	 	//Blood, sweat, and oil.  Oh, and dirt.
 //		if(prob(3))
 //			new /obj/effect/decal/cleanable/blood/old(src)
@@ -72,7 +84,6 @@
 				new /obj/effect/decal/remains/robot/old(src)
 			else
 				new /obj/effect/decal/cleanable/blood/oil(src)
-		else
 			new /obj/effect/decal/cleanable/dirt(src)
 		return
 

@@ -73,14 +73,19 @@
 	New()
 		..()
 		src.icon_state = "secbot[src.on]"
-		spawn(3)
+		spawn(15)
 			src.botcard = new /obj/item/weapon/card/id(src)
-			var/datum/job/detective/J = new/datum/job/detective
+			var/datum/job/captain/J = new/datum/job/captain
 			src.botcard.access = J.get_access()
 			if(radio_controller)
 				radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
 				radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
 
+
+	initialize()
+		if(radio_controller)
+			radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
+			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
 
 /obj/machinery/bot/secbot/turn_on()
 	..()
@@ -264,7 +269,7 @@ Auto Patrol: []"},
 
 				else								// not next to perp
 					var/turf/olddist = get_dist(src, src.target)
-					walk_to(src, src.target,1,4)
+					walk_to_3d(src, src.target,1,4)
 					if((get_dist(src, src.target)) >= (olddist))
 						src.frustration++
 					else
@@ -385,7 +390,7 @@ Auto Patrol: []"},
 
 		if(istype( next, /turf/simulated))
 
-			var/moved = step_towards(src, next)	// attempt to move
+			var/moved = step_towards_3d(src, next)	// attempt to move
 			if(moved)	// successful move
 				blockcount = 0
 				path -= loc
@@ -469,15 +474,15 @@ Auto Patrol: []"},
 // used for beacon reception
 
 /obj/machinery/bot/secbot/receive_signal(datum/signal/signal)
-	//log_admin("DEBUG \[[world.timeofday]\]: /obj/machinery/bot/secbot/receive_signal([signal.debug_print()])")
+//	world << "DEBUG \[[world.timeofday]\]: /obj/machinery/bot/secbot/receive_signal([signal.debug_print()])"
 	if(!on)
 		return
 
-	/*
-	world << "rec signal: [signal.source]"
-	for(var/x in signal.data)
-		world << "* [x] = [signal.data[x]]"
-	*/
+
+//	world << "rec signal: [signal.source]"
+//	for(var/x in signal.data)
+//		world << "* [x] = [signal.data[x]]"
+
 
 	var/recv = signal.data["command"]
 	// process all-bot input
@@ -549,6 +554,8 @@ Auto Patrol: []"},
 // send a radio signal with multiple data key/values
 /obj/machinery/bot/secbot/proc/post_signal_multiple(var/freq, var/list/keyval)
 
+//	world << "Posted signal"
+
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(freq)
 
 	if(!frequency) return
@@ -556,10 +563,8 @@ Auto Patrol: []"},
 	var/datum/signal/signal = new()
 	signal.source = src
 	signal.transmission_method = 1
-	//for(var/key in keyval)
-	//	signal.data[key] = keyval[key]
 	signal.data = keyval
-		//world << "sent [key],[keyval[key]] on [freq]"
+
 	if(signal.data["findbeacon"])
 		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
 	else if(signal.data["type"] == "secbot")
@@ -582,7 +587,7 @@ Auto Patrol: []"},
 // calculates a path to the current destination
 // given an optional turf to avoid
 /obj/machinery/bot/secbot/proc/calc_path(var/turf/avoid = null)
-	src.path = AStar(src.loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id=botcard, exclude=avoid)
+	src.path = AStar(src.loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id=botcard, exclude=list(/obj/effect/landmark/alterations/nopath, avoid))
 	if (!path) path = list()
 
 // look for a criminal in view of the bot

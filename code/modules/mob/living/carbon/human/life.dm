@@ -105,6 +105,9 @@
 
 		handle_medical_side_effects()
 
+	if(stat == DEAD)
+		handle_decay()
+
 	handle_stasis_bag()
 
 	//Check if we're on fire
@@ -1425,7 +1428,7 @@
 						if(2)	healths.icon_state = "health7"
 						else
 							//switch(health - halloss)
-							switch(100 - ((species && species.flags & NO_PAIN) ? 0 : traumatic_shock))
+							switch(100 - ((species && species.flags & NO_PAIN & !IS_SYNTHETIC) ? 0 : traumatic_shock))
 								if(100 to INFINITY)		healths.icon_state = "health0"
 								if(80 to 100)			healths.icon_state = "health1"
 								if(60 to 80)			healths.icon_state = "health2"
@@ -1691,6 +1694,42 @@
 					break
 
 		return temp
+
+
+	proc/handle_decay()
+		var/decaytime = world.time - timeofdeath
+
+		if(species.flags & IS_SYNTHETIC)
+			return
+
+		if(decaytime <= 6000) //10 minutes for decaylevel1 -- stinky
+			return
+
+		if(decaytime > 6000 && decaytime <= 12000)//20 minutes for decaylevel2 -- bloated and very stinky
+			decaylevel = 1
+
+		if(decaytime > 12000 && decaytime <= 18000)//30 minutes for decaylevel3 -- rotting and gross
+			decaylevel = 2
+
+		if(decaytime > 18000 && decaytime <= 27000)//45 minutes for decaylevel4 -- skeleton
+			decaylevel = 3
+
+		if(decaytime > 27000)
+			decaylevel = 4
+			makeSkeleton()
+			return //No puking over skeletons, they don't smell at all!
+
+
+		for(var/mob/living/carbon/human/H in range(decaylevel, src))
+			if(prob(5))
+				if(airborne_can_reach(get_turf(src), get_turf(H)))
+					if(istype(loc,/obj/item/bodybag))
+						return
+					var/obj/item/clothing/mask/M = H.wear_mask
+					if(M && (M.flags & MASKCOVERSMOUTH))
+						return
+					H << "<spawn class='warning'>You smell something foul..."
+					H.vomit()
 
 /mob/living/carbon/human/handle_silent()
 	if(..())

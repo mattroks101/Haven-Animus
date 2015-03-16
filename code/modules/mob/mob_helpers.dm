@@ -265,6 +265,9 @@ proc/slur(phrase)
 			if(lowerrustext(newletter)=="ã")	newletter="õ"
 			if(lowerrustext(newletter)=="ä")	newletter="ò"
 			if(lowerrustext(newletter)=="ë")	newletter="ëü"
+		if(rand(1,20)==20)
+			if(newletter==" ")	newletter="...[pick("ıııààà", "õûûûûõõ", "ãõûûûûû", "ãûûûû")]..."
+			if(newletter==".")	newletter=" *BURP*."
 		switch(rand(1,15))
 			if(1,3,5,8)	newletter="[lowerrustext(newletter)]"
 			if(2,4,6,15)	newletter="[upperrustext(newletter)]"

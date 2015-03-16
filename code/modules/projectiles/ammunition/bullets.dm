@@ -145,3 +145,8 @@
 	m_amt = 250
 //	pellets = 5
 //	variance = 0.8
+
+/obj/item/ammo_casing/energy/kinetic
+	projectile_type = /obj/item/projectile/kinetic
+//	select_name = "kinetic"
+

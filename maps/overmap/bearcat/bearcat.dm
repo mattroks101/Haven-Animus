@@ -1,5 +1,6 @@
 /obj/effect/mapinfo/ship/bearcat
 	name = "CSV Bearcat"
+	shipname = "CSV Bearcat"
 	landing_area = /area/ship/scrap/shuttle/ingoing
 	obj_type = /obj/effect/map/ship/bearcat
 	mapx = 10
@@ -7,14 +8,14 @@
 
 /obj/effect/map/ship/bearcat
 	name = "generic ship"
+	shipname = "CSV Bearcat"
 	desc = "Space faring vessel."
 	icon = 'maps/overmap/bearcat/bearcat.dmi'
 	icon_state = "ship"
+	vessel_mass = 9000
 
-/obj/machinery/computer/shuttle_control/explore/bearcat
-	name = "exploration shuttle console"
-
-
+///obj/machinery/computer/shuttle_control/explore/bearcat
+//	name = "exploration shuttle console"
 
 /area/ship/scrap
 	name = "\improper Generic Ship"

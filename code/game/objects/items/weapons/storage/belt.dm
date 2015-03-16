@@ -120,7 +120,6 @@
 		"/obj/item/weapon/reagent_containers/food/snacks/donut/normal",
 		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
 		"/obj/item/weapon/melee/baton",
-		"/obj/item/weapon/gun/energy/taser",
 		"/obj/item/weapon/flame/lighter/zippo",
 		"/obj/item/weapon/cigpacket",
 		"/obj/item/clothing/glasses/hud/security",
@@ -130,7 +129,9 @@
 		"/obj/item/weapon/melee",
 		"/obj/item/taperoll/police",
 		"/obj/item/weapon/gun/energy/taser",
+		"/obj/item/weapon/cell/crap",
 		"/obj/item/weapon/gun/energy/gun",
+		"/obj/item/weapon/gun/energy/taser",
 		"/obj/item/weapon/gun/energy/laser",
 		"/obj/item/weapon/gun/energy/stunrevolver",
 		"/obj/item/weapon/gun/energy/ionrifle"
@@ -205,37 +206,37 @@
 		)
 
 
-	/obj/item/weapon/storage/belt/security/tactical/verb/holster()
-		set name = "Holster"
-		set category = "Object"
-		set src in usr
-		if(!istype(usr, /mob/living)) return
-		if(usr.stat) return
+/obj/item/weapon/storage/belt/security/tactical/verb/holster()
+	set name = "Holster"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
 
-		if(!holstered)
-			if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
-				usr << "\blue You need your gun equiped to holster it."
-				return
-			var/obj/item/weapon/gun/W = usr.get_active_hand()
-			if (!W.isHandgun())
-				usr << "\red This gun won't fit in \the belt!"
-				return
-			holstered = usr.get_active_hand()
-			usr.drop_item()
-			holstered.loc = src
-			usr.visible_message("\blue \The [usr] holsters \the [holstered].", "You holster \the [holstered].")
+	if(!holstered)
+		if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
+			usr << "\blue You need your gun equiped to holster it."
+			return
+		var/obj/item/weapon/gun/W = usr.get_active_hand()
+		if (!W.isHandgun())
+			usr << "\red This gun won't fit in \the belt!"
+			return
+		holstered = usr.get_active_hand()
+		usr.drop_item()
+		holstered.loc = src
+		usr.visible_message("\blue \The [usr] holsters \the [holstered].", "You holster \the [holstered].")
+	else
+		if(istype(usr.get_active_hand(),/obj) && istype(usr.get_inactive_hand(),/obj))
+			usr << "\red You need an empty hand to draw the gun!"
 		else
-			if(istype(usr.get_active_hand(),/obj) && istype(usr.get_inactive_hand(),/obj))
-				usr << "\red You need an empty hand to draw the gun!"
+			if(usr.a_intent == "hurt")
+				usr.visible_message("\red \The [usr] draws \the [holstered], ready to shoot!", \
+				"\red You draw \the [holstered], ready to shoot!")
 			else
-				if(usr.a_intent == "hurt")
-					usr.visible_message("\red \The [usr] draws \the [holstered], ready to shoot!", \
-					"\red You draw \the [holstered], ready to shoot!")
-				else
-					usr.visible_message("\blue \The [usr] draws \the [holstered], pointing it at the ground.", \
-					"\blue You draw \the [holstered], pointing it at the ground.")
-				usr.put_in_hands(holstered)
-			holstered = null
+				usr.visible_message("\blue \The [usr] draws \the [holstered], pointing it at the ground.", \
+				"\blue You draw \the [holstered], pointing it at the ground.")
+			usr.put_in_hands(holstered)
+		holstered = null
 
 /obj/item/weapon/storage/belt/military
 	name = "military belt"

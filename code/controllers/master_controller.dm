@@ -90,6 +90,9 @@ datum/controller/game_controller/proc/setup()
 	SetupXenoarch()
 
 	transfer_controller = new
+	new /datum/elevator()
+	new /datum/elevator/rnd()
+
 
 	for(var/i=0, i<max_secret_rooms, i++)
 		make_mining_asteroid_secret()

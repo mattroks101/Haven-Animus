@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/energy
-	icon_state = "oldenergy"
+	icon_state = "energy"
 	item_state = "energy"
 	name = "energy gun"
 	desc = "A basic energy-based gun."
