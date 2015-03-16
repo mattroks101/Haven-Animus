@@ -41,9 +41,7 @@
 /obj/machinery/computer/secure_data/attack_hand(mob/user as mob)
 	if(..())
 		return
-	if (!(src.z in vessel_z))
-		user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
-		return
+	if(level_check()==0)	return
 	var/dat
 
 	if (temp)

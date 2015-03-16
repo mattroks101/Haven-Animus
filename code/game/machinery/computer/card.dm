@@ -45,7 +45,7 @@
 /obj/machinery/computer/card/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-
+	if(level_check()==0)	return
 	user.set_machine(src)
 	var/dat
 	if (!( ticker ))

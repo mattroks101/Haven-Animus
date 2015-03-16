@@ -23,6 +23,13 @@
 	if(ticker)
 		initialize()
 
+/obj/machinery/computer/proc/level_check()
+	if(z_check)
+		if(!(src.z in vessel_z))
+			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
+			return 0
+	else return 1
+
 
 /obj/machinery/computer/initialize()
 	power_change()
@@ -133,3 +140,4 @@
 				A.icon_state = "4"
 			qdel(src)
 	return
+

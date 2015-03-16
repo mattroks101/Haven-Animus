@@ -192,6 +192,7 @@
 		return
 
 	else if(locked && istype(W, /obj/item/device/multitool) && !src.broken)
+		if(src.opened)	return
 		var/obj/item/device/multitool/multi = W
 		if(multi.is_used)
 			user << "\red This multitool is already in use!"

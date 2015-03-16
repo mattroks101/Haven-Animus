@@ -14,23 +14,40 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(mob/living/target as mob, mob/living/user as mob)
 
 	//Creates a shattering noise and replaces the bottle with a broken_bottle
-	user.drop_item()
-	var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(user.loc)
-	user.put_in_active_hand(B)
-	if(prob(33))
-		new/obj/item/weapon/shard(target.loc) // Create a glass shard at the target's location!
-	B.icon_state = src.icon_state
+	if(!target || !user)
 
-	var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
-	I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
-	I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
-	B.icon = I
+		var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(loc)
+		if(prob(33))
+			new/obj/item/weapon/shard(loc) // Create a glass shard at the target's location!
+		B.icon_state = src.icon_state
+		var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
+		I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
+		I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
+		playsound(src, "shatter", 70, 1)
+		B.icon = I
+		spawn(0)
+		del(src)
+	else
+		user.drop_item()
+		var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(user.loc)
+		user.put_in_active_hand(B)
+		if(prob(33))
+			new/obj/item/weapon/shard(target.loc) // Create a glass shard at the target's location!
+		B.icon_state = src.icon_state
 
-	playsound(src, "shatter", 70, 1)
-	user.put_in_active_hand(B)
-	src.transfer_fingerprints_to(B)
+		var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
+		I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
+		I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
+		B.icon = I
 
-	del(src)
+		playsound(src, "shatter", 70, 1)
+		user.put_in_active_hand(B)
+		src.transfer_fingerprints_to(B)
+
+		del(src)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/bullet_act()
+	smash()
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target as mob, mob/living/user as mob)
 

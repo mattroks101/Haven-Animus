@@ -31,6 +31,7 @@
 	interact(user)
 
 /obj/machinery/power/monitor/attack_hand(mob/user)
+	//if(level_check()==0)	return
 	add_fingerprint(user)
 
 	if(stat & (BROKEN|NOPOWER))

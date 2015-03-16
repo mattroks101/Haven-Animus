@@ -6590,76 +6590,75 @@
 "cwL" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/suit/wizrobe/marisa,/obj/item/clothing/shoes/sandal/marisa,/obj/item/clothing/head/wizard/marisa,/obj/item/weapon/staff/broom,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
 "cwM" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/suit/wizrobe/magusblue,/obj/item/clothing/head/wizard/magus,/obj/item/weapon/staff,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
 "cwN" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cwO" = (/obj/effect/step_trigger/thrower{affect_ghosts = 1; dir = 4; name = "thrower_rightnostop"; nostop = 1},/turf/space,/area)
-"cwP" = (/obj/structure/bookcase,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cwQ" = (/obj/machinery/vending/magivend,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cwR" = (/obj/effect/landmark/start{name = "wizard"},/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cwS" = (/obj/structure/mineral_door/wood{tag = "icon-wood"; icon_state = "wood"},/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cwT" = (/obj/item/device/radio/intercom{desc = "Talk through this. Evilly"; freerange = 1; frequency = 1213; name = "Syndicate Intercom"; pixel_x = 32; subspace_transmission = 1; syndie = 1},/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cwU" = (/turf/space/transit/west/shuttlespace_we10,/area/shuttle/escape_pod2/transit)
-"cwV" = (/turf/space/transit/west/shuttlespace_we11,/area/shuttle/escape_pod2/transit)
-"cwW" = (/turf/space/transit/west/shuttlespace_we12,/area/shuttle/escape_pod2/transit)
-"cwX" = (/turf/space/transit/west/shuttlespace_we13,/area/shuttle/escape_pod2/transit)
-"cwY" = (/turf/space/transit/west/shuttlespace_we14,/area/shuttle/escape_pod2/transit)
-"cwZ" = (/turf/space/transit/west/shuttlespace_we15,/area/shuttle/escape_pod2/transit)
-"cxa" = (/turf/space/transit/west/shuttlespace_we1,/area/shuttle/escape_pod2/transit)
-"cxb" = (/obj/structure/table/woodentable,/obj/machinery/chem_dispenser/soda,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxc" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/backpack/cultpack,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cxd" = (/obj/structure/table/woodentable,/obj/item/weapon/coin/adamantine,/obj/item/clothing/glasses/monocle,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cxe" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/backpack,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cxf" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/under/psysuit,/obj/item/clothing/suit/wizrobe/psypurple,/obj/item/clothing/head/wizard/amp,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cxg" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/shoes/sandal/marisa{desc = "A set of fancy shoes that are as functional as they are comfortable."; name = "Gentlemans Shoes"},/obj/item/clothing/under/gentlesuit,/obj/item/clothing/suit/wizrobe/gentlecoat,/obj/item/clothing/head/wizard/cap,/obj/item/weapon/staff/gentcane,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cxh" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/suit/wizrobe/magusred,/obj/item/clothing/head/wizard/magus,/obj/item/weapon/staff,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
-"cxi" = (/turf/space/transit/west/shuttlespace_we2,/area/shuttle/escape_pod2/transit)
-"cxj" = (/obj/effect/landmark/start{name = "wizard"},/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxk" = (/turf/space/transit/west/shuttlespace_we3,/area/shuttle/escape_pod2/transit)
-"cxl" = (/turf/space/transit/west/shuttlespace_we4,/area/shuttle/escape_pod2/transit)
-"cxm" = (/obj/structure/stool/bed/chair/wood/wings{icon_state = "wooden_chair_wings"; dir = 4},/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxn" = (/obj/structure/table/woodentable,/obj/item/weapon/dice/d20,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxo" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/box/cups,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxp" = (/obj/structure/stool/bed/chair/wood/wings{icon_state = "wooden_chair_wings"; dir = 8},/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxq" = (/obj/item/target,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
-"cxr" = (/obj/item/target/syndicate,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
-"cxs" = (/obj/item/target/alien,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
-"cxt" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows2"; dir = 1},/area/wizard_station)
-"cxu" = (/obj/structure/rack,/obj/item/weapon/kitchenknife/ritual,/turf/unsimulated/floor{dir = 1; icon_state = "chapel"},/area/wizard_station)
-"cxv" = (/obj/structure/kitchenspike,/obj/structure/table/reinforced,/turf/unsimulated/floor{dir = 4; icon_state = "chapel"},/area/wizard_station)
-"cxw" = (/obj/structure/kitchenspike,/obj/structure/table/reinforced,/turf/unsimulated/floor{dir = 1; icon_state = "chapel"},/area/wizard_station)
-"cxx" = (/obj/structure/rack,/obj/item/weapon/kitchenknife/ritual,/turf/unsimulated/floor{dir = 4; icon_state = "chapel"},/area/wizard_station)
-"cxy" = (/obj/structure/table/woodentable,/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/snacks/milosoup,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxz" = (/obj/structure/table/woodentable,/obj/item/weapon/dice,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxA" = (/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
-"cxB" = (/turf/unsimulated/wall/fakeglass,/area/wizard_station)
-"cxC" = (/turf/unsimulated/floor{dir = 8; icon_state = "chapel"},/area/wizard_station)
-"cxD" = (/turf/unsimulated/floor{icon_state = "chapel"},/area/wizard_station)
-"cxE" = (/obj/structure/table/woodentable,/obj/item/device/megaphone,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxF" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/fancy/donut_box,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxG" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/snacks/chawanmushi,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxH" = (/obj/structure/table/woodentable,/obj/item/weapon/spacecash/c1,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"cxI" = (/obj/structure/table/reinforced,/obj/item/weapon/book/manual/robotics_cyborgs,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
-"cxJ" = (/obj/structure/table/reinforced,/obj/item/robot_parts/head,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
-"cxK" = (/obj/item/device/radio/intercom{desc = "Talk through this. Evilly"; freerange = 1; frequency = 1213; name = "Syndicate Intercom"; pixel_x = 32; subspace_transmission = 1; syndie = 1},/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
-"cxL" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows"; dir = 8},/area/wizard_station)
-"cxM" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows2"; dir = 8},/area/wizard_station)
-"cxN" = (/turf/unsimulated/wall/fakeglass{dir = 1; icon_state = "fakewindows"},/area/wizard_station)
-"cxO" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows"; dir = 4},/area/wizard_station)
-"cxP" = (/obj/effect/decal/remains/human,/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
-"cxQ" = (/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
-"cxR" = (/turf/unsimulated/floor{tag = "icon-asteroid8"; name = "plating"; icon_state = "asteroid8"},/area/wizard_station)
-"cxS" = (/turf/unsimulated/floor{tag = "icon-asteroid7"; name = "plating"; icon_state = "asteroid7"},/area/wizard_station)
-"cxT" = (/turf/unsimulated/floor{tag = "icon-asteroid5"; name = "plating"; icon_state = "asteroid5"},/area/wizard_station)
-"cxU" = (/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
-"cxV" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
-"cxW" = (/obj/effect/decal/cleanable/blood,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
-"cxX" = (/mob/living/carbon/monkey{name = "Murphey"},/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
-"cxY" = (/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
-"cxZ" = (/mob/living/simple_animal/hostile/creature{name = "Experiment 35b"},/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
-"cya" = (/turf/unsimulated/floor{tag = "icon-asteroid10"; name = "plating"; icon_state = "asteroid10"},/area/wizard_station)
-"cyb" = (/mob/living/simple_animal/hostile/tribesman{name = "Experiment 69T"},/turf/unsimulated/floor{tag = "icon-asteroid2"; name = "plating"; icon_state = "asteroid2"},/area/wizard_station)
-"cyc" = (/obj/structure/flora/ausbushes/grassybush,/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
-"cyd" = (/mob/living/simple_animal/hostile/retaliate/goat{name = "Experiment 97d"},/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
-"cye" = (/obj/item/weapon/caution,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
-"cyf" = (/obj/item/weapon/kitchenknife/ritual,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
+"cwO" = (/obj/structure/bookcase,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cwP" = (/obj/machinery/vending/magivend,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cwQ" = (/obj/effect/landmark/start{name = "wizard"},/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cwR" = (/obj/structure/mineral_door/wood{tag = "icon-wood"; icon_state = "wood"},/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cwS" = (/obj/item/device/radio/intercom{desc = "Talk through this. Evilly"; freerange = 1; frequency = 1213; name = "Syndicate Intercom"; pixel_x = 32; subspace_transmission = 1; syndie = 1},/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cwT" = (/turf/space/transit/west/shuttlespace_we10,/area/shuttle/escape_pod2/transit)
+"cwU" = (/turf/space/transit/west/shuttlespace_we11,/area/shuttle/escape_pod2/transit)
+"cwV" = (/turf/space/transit/west/shuttlespace_we12,/area/shuttle/escape_pod2/transit)
+"cwW" = (/turf/space/transit/west/shuttlespace_we13,/area/shuttle/escape_pod2/transit)
+"cwX" = (/turf/space/transit/west/shuttlespace_we14,/area/shuttle/escape_pod2/transit)
+"cwY" = (/turf/space/transit/west/shuttlespace_we15,/area/shuttle/escape_pod2/transit)
+"cwZ" = (/turf/space/transit/west/shuttlespace_we1,/area/shuttle/escape_pod2/transit)
+"cxa" = (/obj/structure/table/woodentable,/obj/machinery/chem_dispenser/soda,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxb" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/backpack/cultpack,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cxc" = (/obj/structure/table/woodentable,/obj/item/weapon/coin/adamantine,/obj/item/clothing/glasses/monocle,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cxd" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/backpack,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cxe" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/under/psysuit,/obj/item/clothing/suit/wizrobe/psypurple,/obj/item/clothing/head/wizard/amp,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cxf" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/shoes/sandal/marisa{desc = "A set of fancy shoes that are as functional as they are comfortable."; name = "Gentlemans Shoes"},/obj/item/clothing/under/gentlesuit,/obj/item/clothing/suit/wizrobe/gentlecoat,/obj/item/clothing/head/wizard/cap,/obj/item/weapon/staff/gentcane,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cxg" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/suit/wizrobe/magusred,/obj/item/clothing/head/wizard/magus,/obj/item/weapon/staff,/turf/unsimulated/floor{icon_state = "grimy"},/area/wizard_station)
+"cxh" = (/turf/space/transit/west/shuttlespace_we2,/area/shuttle/escape_pod2/transit)
+"cxi" = (/obj/effect/landmark/start{name = "wizard"},/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxj" = (/turf/space/transit/west/shuttlespace_we3,/area/shuttle/escape_pod2/transit)
+"cxk" = (/turf/space/transit/west/shuttlespace_we4,/area/shuttle/escape_pod2/transit)
+"cxl" = (/obj/structure/stool/bed/chair/wood/wings{icon_state = "wooden_chair_wings"; dir = 4},/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxm" = (/obj/structure/table/woodentable,/obj/item/weapon/dice/d20,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxn" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/box/cups,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxo" = (/obj/structure/stool/bed/chair/wood/wings{icon_state = "wooden_chair_wings"; dir = 8},/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxp" = (/obj/item/target,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
+"cxq" = (/obj/item/target/syndicate,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
+"cxr" = (/obj/item/target/alien,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
+"cxs" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows2"; dir = 1},/area/wizard_station)
+"cxt" = (/obj/structure/rack,/obj/item/weapon/kitchenknife/ritual,/turf/unsimulated/floor{dir = 1; icon_state = "chapel"},/area/wizard_station)
+"cxu" = (/obj/structure/kitchenspike,/obj/structure/table/reinforced,/turf/unsimulated/floor{dir = 4; icon_state = "chapel"},/area/wizard_station)
+"cxv" = (/obj/structure/kitchenspike,/obj/structure/table/reinforced,/turf/unsimulated/floor{dir = 1; icon_state = "chapel"},/area/wizard_station)
+"cxw" = (/obj/structure/rack,/obj/item/weapon/kitchenknife/ritual,/turf/unsimulated/floor{dir = 4; icon_state = "chapel"},/area/wizard_station)
+"cxx" = (/obj/structure/table/woodentable,/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/snacks/milosoup,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxy" = (/obj/structure/table/woodentable,/obj/item/weapon/dice,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxz" = (/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
+"cxA" = (/turf/unsimulated/wall/fakeglass,/area/wizard_station)
+"cxB" = (/turf/unsimulated/floor{dir = 8; icon_state = "chapel"},/area/wizard_station)
+"cxC" = (/turf/unsimulated/floor{icon_state = "chapel"},/area/wizard_station)
+"cxD" = (/obj/structure/table/woodentable,/obj/item/device/megaphone,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxE" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/fancy/donut_box,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxF" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/snacks/chawanmushi,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxG" = (/obj/structure/table/woodentable,/obj/item/weapon/spacecash/c1,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"cxH" = (/obj/structure/table/reinforced,/obj/item/weapon/book/manual/robotics_cyborgs,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
+"cxI" = (/obj/structure/table/reinforced,/obj/item/robot_parts/head,/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
+"cxJ" = (/obj/item/device/radio/intercom{desc = "Talk through this. Evilly"; freerange = 1; frequency = 1213; name = "Syndicate Intercom"; pixel_x = 32; subspace_transmission = 1; syndie = 1},/turf/unsimulated/floor{tag = "icon-cult"; name = "plating"; icon_state = "cult"},/area/wizard_station)
+"cxK" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows"; dir = 8},/area/wizard_station)
+"cxL" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows2"; dir = 8},/area/wizard_station)
+"cxM" = (/turf/unsimulated/wall/fakeglass{dir = 1; icon_state = "fakewindows"},/area/wizard_station)
+"cxN" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows"; dir = 4},/area/wizard_station)
+"cxO" = (/obj/effect/decal/remains/human,/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
+"cxP" = (/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
+"cxQ" = (/turf/unsimulated/floor{tag = "icon-asteroid8"; name = "plating"; icon_state = "asteroid8"},/area/wizard_station)
+"cxR" = (/turf/unsimulated/floor{tag = "icon-asteroid7"; name = "plating"; icon_state = "asteroid7"},/area/wizard_station)
+"cxS" = (/turf/unsimulated/floor{tag = "icon-asteroid5"; name = "plating"; icon_state = "asteroid5"},/area/wizard_station)
+"cxT" = (/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
+"cxU" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
+"cxV" = (/obj/effect/decal/cleanable/blood,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
+"cxW" = (/mob/living/carbon/monkey{name = "Murphey"},/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
+"cxX" = (/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
+"cxY" = (/mob/living/simple_animal/hostile/creature{name = "Experiment 35b"},/turf/unsimulated/floor{tag = "icon-lava"; name = "plating"; icon_state = "lava"},/area/wizard_station)
+"cxZ" = (/turf/unsimulated/floor{tag = "icon-asteroid10"; name = "plating"; icon_state = "asteroid10"},/area/wizard_station)
+"cya" = (/mob/living/simple_animal/hostile/tribesman{name = "Experiment 69T"},/turf/unsimulated/floor{tag = "icon-asteroid2"; name = "plating"; icon_state = "asteroid2"},/area/wizard_station)
+"cyb" = (/obj/structure/flora/ausbushes/grassybush,/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
+"cyc" = (/mob/living/simple_animal/hostile/retaliate/goat{name = "Experiment 97d"},/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/wizard_station)
+"cyd" = (/obj/item/weapon/caution,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
+"cye" = (/obj/item/weapon/kitchenknife/ritual,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
 
 (1,1,1) = {"
 aaaaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
@@ -7621,18 +7620,18 @@ aabaabaabcwicwicwicwicwicwicwicwicwicwicwicwicwicwjcwicwicwiaabaabaabaabaabaabaa
 aabaabaabcwicwkcwlcwmcwncwocwpcwicwqcwrcwscwicwtcwucwvcwicwiaabaabaabaabaabaabaabaabaabaabaabcnccndcnecnfcmOcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmNcmYcmZcnacnbaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabcwicwmcwmcwmcwmcwmcwmcwwcwxcwycwzcwAcwucwucwBcwicwiaabaabaabaabaabaabaabaabaabaabaabcnjcnkcnlcnmcmScnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcmLcndcnecnfcngaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabcwicwCcwCcwmcwmcwmcwDcwicwEcwFcwGcwicwicwicwicwicwiaabaabaabaabaabaabaabaabaabaabaabcnfcngcnhcnjcmJcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcmIcnbcnicnccndaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwmcwmcwmcwmcwmcwHcwicwIcwIcwJcwicwKcwLcwMcwNcwiaabaabaabaabaabaabaabaabaabaabaabcnccndcnecnfcmRcnccndcnecnfcngcnhcnjcnkcnlcnmcwgcwhcvWcwdcvEcwOcvGcvHcvIcngcnhcnjcnkcnlcnmcmYcmZcnacmQcmYcmZcnacnbaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwPcwPcwmcwmcwmcwQcwicwIcwIcwRcwScwIcwIcwIcwTcwiaabaabaabaabaabaabaabaabaabaabaabcnmcmYcmZcnacmJcnjcnkcnlcnmcmYcmZcnacnbcnicnccvGcwUcwVcwWcwXcwYcwZcxacvOcmYcmZcnacnbcnicnccndcnecnfcmIcngcnhcnjcnkaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwmcwmcwmcwmcwmcxbcwicxccxdcxecwicxfcxgcxhcwNcwiaabaabaabaabaabaabaabaabaabaabaabcnccndcnecnfcmKcnkcnlcnmcmYcmZcnacnbcnicnccndcvHcwVcwWcwXcwYcwZcxacxicwgcmZcnacnbcnicnccndcnecnfcngcmJcmYcmZcnacnbaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwmcwmcxjcwmcwmcwDcwicwicwicwicwicwicwicwicwicwiaabaabaabaabaabaabaabaabaabaabaabcndcnecnfcngcmScnmcmYcmZcnacnbcnicnccndcnecnfcvJcwXcwYcwZcxacxicxkcxlcvWcnbcnicnccndcnecnfcngcnhcnjcmLcmZcnacnbcniaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwmcxmcxncxocxpcwmcxqcxrcxscxqcxtcxucxvcxwcxxcwiaabaabaabaabaabaabaabaabaabaabaabcnfcngcnhcnjcmJcnjcnkcnlcnmcmYcmZcnacnbcnicnccvGcwUcwVcwWcwXcwYcwZcxacvOcmYcmZcnacnbcnicnccndcnecnfcmIcnbcnicnccndaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwmcxmcxycxzcxpcwmcxAcxAcxAcxAcxBcxCcxDcxCcxDcwiaabaabaabaabaabaabaabaabaabaabaabcnccndcnecnfcmScnmcmYcmZcnacnbcnicnccndcnecnfcvJcwXcxacxicxacxicxkcxlcvWcnbcnicnccndcnecnfcngcnhcnlcmMcmYcmZcnacnbaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwmcxmcxEcxFcxpcwmcxAcxAcxAcxAcxAcxAcxAcxAcxAcwiaabaabaabaabaabaabaabaabaabaabaabcnfcngcnhcnlcmHcngcnhcnjcnkcnlcnmcmYcmZcnacnbcvEcvFcvGcvHcvIcvJcvKcvLcvMcnlcnmcmYcmZcnacnbcnicnccndcmVcnbcnicnccndaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwmcxmcxGcxHcxpcwmcxAcxAcxAcxAcxAcxAcxIcxJcxKcwiaabaabaabaabaabaabaabaabaabaabaabcnbcnicnccndcmIcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecmHcnlcnmcmYcmZaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicwmcwmcwmcwmcwmcwmcxAcxAcxAcxAcxAcxAcxAcxAcxAcwiaabaabaabaabaabaabaabaabaabaabaabcnicnccndcnecmRcnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacmQcnmcmYcmZcnaaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicxLcxMcxMcxNcxMcxMcxMcxNcxMcxMcxMcxNcxMcxMcxOcwiaabaabaabaabaabaabaabaabaabaabaabcnmcmYcmZcnacmKcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcmJcngcnhcnjcnkaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicxPcxQcxQcxtcxRcxScxTcxtcxUcxUcxVcxtcxWcxXcxYcwiaabaabaabaabaabaabaabaabaabaabaabcndcnecnfcngcmUcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicmTcmZcnacnbcniaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
-aabaabaabcwicxQcxZcxPcxBcyacybcxScxBcyccydcxUcxBcyecxYcyfcwiaabaabaabaabaabaabaabaabaabaabaabcmZcnacnbcnicmIcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecmHcnjcnkcnlcnmaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwmcwmcwmcwmcwmcwHcwicwIcwIcwJcwicwKcwLcwMcwNcwiaabaabaabaabaabaabaabaabaabaabaabcnccndcnecnfcmRcnccndcnecnfcngcnhcnjcnkcnlcnmcwgcwhcvWcwdcvEcvFcvGcvHcvIcngcnhcnjcnkcnlcnmcmYcmZcnacmQcmYcmZcnacnbaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwOcwOcwmcwmcwmcwPcwicwIcwIcwQcwRcwIcwIcwIcwScwiaabaabaabaabaabaabaabaabaabaabaabcnmcmYcmZcnacmJcnjcnkcnlcnmcmYcmZcnacnbcnicnccvGcwTcwUcwVcwWcwXcwYcwZcvOcmYcmZcnacnbcnicnccndcnecnfcmIcngcnhcnjcnkaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwmcwmcwmcwmcwmcxacwicxbcxccxdcwicxecxfcxgcwNcwiaabaabaabaabaabaabaabaabaabaabaabcnccndcnecnfcmKcnkcnlcnmcmYcmZcnacnbcnicnccndcvHcwUcwVcwWcwXcwYcwZcxhcwgcmZcnacnbcnicnccndcnecnfcngcmJcmYcmZcnacnbaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwmcwmcxicwmcwmcwDcwicwicwicwicwicwicwicwicwicwiaabaabaabaabaabaabaabaabaabaabaabcndcnecnfcngcmScnmcmYcmZcnacnbcnicnccndcnecnfcvJcwWcwXcwYcwZcxhcxjcxkcvWcnbcnicnccndcnecnfcngcnhcnjcmLcmZcnacnbcniaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwmcxlcxmcxncxocwmcxpcxqcxrcxpcxscxtcxucxvcxwcwiaabaabaabaabaabaabaabaabaabaabaabcnfcngcnhcnjcmJcnjcnkcnlcnmcmYcmZcnacnbcnicnccvGcwTcwUcwVcwWcwXcwYcwZcvOcmYcmZcnacnbcnicnccndcnecnfcmIcnbcnicnccndaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwmcxlcxxcxycxocwmcxzcxzcxzcxzcxAcxBcxCcxBcxCcwiaabaabaabaabaabaabaabaabaabaabaabcnccndcnecnfcmScnmcmYcmZcnacnbcnicnccndcnecnfcvJcwWcwZcxhcwZcxhcxjcxkcvWcnbcnicnccndcnecnfcngcnhcnlcmMcmYcmZcnacnbaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwmcxlcxDcxEcxocwmcxzcxzcxzcxzcxzcxzcxzcxzcxzcwiaabaabaabaabaabaabaabaabaabaabaabcnfcngcnhcnlcmHcngcnhcnjcnkcnlcnmcmYcmZcnacnbcvEcvFcvGcvHcvIcvJcvKcvLcvMcnlcnmcmYcmZcnacnbcnicnccndcmVcnbcnicnccndaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwmcxlcxFcxGcxocwmcxzcxzcxzcxzcxzcxzcxHcxIcxJcwiaabaabaabaabaabaabaabaabaabaabaabcnbcnicnccndcmIcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecmHcnlcnmcmYcmZaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicwmcwmcwmcwmcwmcwmcxzcxzcxzcxzcxzcxzcxzcxzcxzcwiaabaabaabaabaabaabaabaabaabaabaabcnicnccndcnecmRcnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacmQcnmcmYcmZcnaaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicxKcxLcxLcxMcxLcxLcxLcxMcxLcxLcxLcxMcxLcxLcxNcwiaabaabaabaabaabaabaabaabaabaabaabcnmcmYcmZcnacmKcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcmJcngcnhcnjcnkaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicxOcxPcxPcxscxQcxRcxScxscxTcxTcxUcxscxVcxWcxXcwiaabaabaabaabaabaabaabaabaabaabaabcndcnecnfcngcmUcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicmTcmZcnacnbcniaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
+aabaabaabcwicxPcxYcxOcxAcxZcyacxRcxAcybcyccxTcxAcydcxXcyecwiaabaabaabaabaabaabaabaabaabaabaabcmZcnacnbcnicmIcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecmHcnjcnkcnlcnmaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabcwicwicwicwicwicwicwicwicwicwicwicwicwicwicwicwicwiaabaabaabaabaabaabaabaabaabaabaabcnicnccndcnecmRcnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacmQcnmcmYcmZcnaaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabcnmcmYcmZcnacmPcnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmOcngcnhcnjcnkaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabcnkcnlcnmcmYcmJcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcngcnhcnjcnkcnlcnmcmYcmZcnacnbcnicnccndcnecnfcmIcnecnfcngcnhaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab

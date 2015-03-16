@@ -26,17 +26,18 @@
 		return 1
 
 
-	proc/level_check()
+/*	proc/level_check()
 		if (src.z in vessel_z)
 			return 1
 		else
-			return 0
+			return 0*/
 
 	attack_hand(var/mob/user as mob)
-		if(z_check)
+	/*	if(z_check)
 			if (!level_check())
 				user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
-				return
+				return*/
+		if(level_check()==0)	return
 		if(stat & (NOPOWER|BROKEN))	return
 
 		if(!isAI(user))

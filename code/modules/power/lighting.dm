@@ -630,17 +630,16 @@
 // explosion effect
 // destroy the whole light fixture or just shatter it
 
-/obj/machinery/light/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(75))
-				broken()
-		if(3.0)
-			if (prob(50))
-				broken()
+/obj/machinery/light/emp_act()
+	if(1.0)
+		qdel(src)
+		return
+	if(2.0)
+		if (prob(75))
+			broken()
+	if(3.0)
+		if (prob(50))
+			broken()
 	return
 
 //blob effect
@@ -648,6 +647,12 @@
 /obj/machinery/light/blob_act()
 	if(prob(75))
 		broken()
+
+
+/obj/machinery/light/bullet_act()
+	broken()
+
+
 
 
 // timed process

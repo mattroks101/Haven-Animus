@@ -58,7 +58,7 @@
 /obj/machinery/computer/aifixer/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-
+	if(level_check()==0)	return
 	user.set_machine(src)
 	var/dat = "<h3>AI System Integrity Restorer</h3><br><br>"
 
