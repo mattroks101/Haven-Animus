@@ -630,7 +630,7 @@
 // explosion effect
 // destroy the whole light fixture or just shatter it
 
-/obj/machinery/light/emp_act()
+/obj/machinery/light/emp_act(severity)
 	if(1.0)
 		qdel(src)
 		return

@@ -414,7 +414,7 @@ var/list/ghostteleportlocs = list()
 /area/syndicate_interception_station
 	name = "\improper Syndicate Work Station"
 	icon_state = "syndie-control"
-	requires_power = 0
+	requires_power = 1
 
 /area/syndicate_interception_station/observation
 	name = "\improper Syndicate Observation room"
