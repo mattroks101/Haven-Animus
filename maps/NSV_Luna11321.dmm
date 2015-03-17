@@ -4294,7 +4294,7 @@
 "bED" = (/obj/machinery/door/firedoor/window,/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/storage/fire)
 "bEE" = (/turf/simulated/floor,/area/storage/fire)
 "bEF" = (/obj/machinery/shielding/emitter/plate,/turf/simulated/floor,/area/storage/fire)
-"bEG" = (/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/machinery/door/airlock/engineering{name = "Fire Station"; req_one_access_txt = "10,24"},/turf/simulated/floor,/area/storage/fire)
+"bEG" = (/obj/machinery/door/firedoor{layer = 2.69; req_one_access = null},/obj/machinery/door/airlock/engineering{name = "Fire Station"; req_one_access = list(24,10); req_one_access_txt = "0"},/turf/simulated/floor,/area/storage/fire)
 "bEH" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor,/area/hallway/primary/central)
 "bEI" = (/obj/structure/extinguisher_cabinet{pixel_x = 27},/turf/simulated/floor{tag = "icon-red (EAST)"; icon_state = "red"; dir = 4},/area/hallway/primary/central)
 "bEJ" = (/obj/multiz/stairs/active/bottom{dir = 1},/turf/simulated/floor{dir = 10; icon_state = "blue"},/area/security/lobby)
