@@ -349,6 +349,7 @@ var/list/mechtoys = list(
 /obj/machinery/computer/ordercomp/attack_hand(var/mob/user as mob)
 	if(..())
 		return
+	if(level_check()==0)	return
 	user.set_machine(src)
 	var/dat
 	if(temp)
@@ -467,6 +468,7 @@ var/list/mechtoys = list(
 	return
 
 /obj/machinery/computer/supplycomp/attack_hand(var/mob/user as mob)
+	if(level_check()==0)	return
 	if(!allowed(user))
 		user << "\red Access Denied."
 		return

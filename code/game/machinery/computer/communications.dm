@@ -277,10 +277,7 @@
 /obj/machinery/computer/communications/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-	if(z_check)
-		if (!(src.z in vessel_z))
-			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
-			return
+	if(level_check()==0)	return
 
 	user.set_machine(src)
 	var/dat = "<head><title>Communications Console</title></head><body>"

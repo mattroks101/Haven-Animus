@@ -21,6 +21,7 @@
 
 /obj/machinery/computer/crew/attack_hand(mob/user)
 	add_fingerprint(user)
+	if(level_check()==0)	return
 	if(stat & (BROKEN|NOPOWER))
 		return
 	interact(user)
@@ -41,10 +42,6 @@
 
 /obj/machinery/computer/crew/Topic(href, href_list)
 	if(..()) return
-	if(z_check)
-		if (!(src.z in vessel_z))
-			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
-			return
 	if( href_list["close"] )
 		usr << browse(null, "window=crewcomp")
 		usr.unset_machine()
