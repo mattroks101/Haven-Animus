@@ -739,18 +739,14 @@
 			else
 				message = "<b>[src]</b> strains, and nothing happens."
 				m_type = 1
-/*
-
-/**********************************************************************************
-***********************************************************************************
-*************************SHEPARD**PIDORAS******************************************
-***********************************************************************************
-**********************************************************************************/
-
 
 
 		if(("poo") || ("poop") || ("shit") || ("crap"))
-			if (src.nutrition <= 300)
+			if(!config.allow_shit)
+				message = "<b>[src]</b> strains, and nothing happens."
+				m_type = 1
+
+			else if (src.nutrition <= 300)
 				src.emote("fart")
 				m_type = 2
 			else
@@ -788,10 +784,9 @@
 						m_type = 2
 
 		if(("pee") || ("urinate") || ("piss"))
-			if(!src.reagents)
-				message = "<B>[src]</B> attempts to urinate but nothing comes out."
-			if(src.nutrition < 250)
-				message = "<B>[src]</B> attempts to urinate but nothing comes out."
+			if((!config.allow_shit) || (!src.reagents) || (src.nutrition < 250))
+				message = "<b>[src]</b> strains, and nothing happens."
+				m_type = 1
 			else
 				if (src.w_uniform)
 					message = "<B>[src]</B> urinates in their uniform."
@@ -820,7 +815,7 @@
 						message = "<B>[src]</B> urinates on the floor."
 						src.nutrition -= 80
 						m_type = 1
-*/
+
 		if(("vomit") || ("puke") || ("throwup"))
 			if(!src.reagents || src.nutrition <= 80)
 				message = "<B>[src]</B> gags as if trying to throw up but nothing comes out."
@@ -844,24 +839,20 @@
 //SHITTY EMOTES END
 
 		if("z_roar")
-			if(iszombie(src))
-				message = "<font color='red'><B>[src]</B> roars!</font>"
-				m_type = 1
-				call_sound_emote("z_roar")
+			message = "<font color='red'><B>[src]</B> roars!</font>"
+			m_type = 1
+			call_sound_emote("z_roar")
 		if("z_shout")
-			if(iszombie(src))
-				message = "<font color='red'><B>[src]</B> shouts!</font>"
-				m_type = 1
-				call_sound_emote("z_shout")
+			message = "<font color='red'><B>[src]</B> shouts!</font>"
+			m_type = 1
+			call_sound_emote("z_shout")
 		if("z_mutter")
-			if(iszombie(src))
-				message = "<font color='red'><B>[src]</B> mutters!</font>"
-				m_type = 1
-				call_sound_emote("z_mutter")
+			message = "<font color='red'><B>[src]</B> mutters!</font>"
+			m_type = 1
+			call_sound_emote("z_mutter")
 		if("z_rawr")
-			if(iszombie(src))
-				message = "<font color='red'><B>[src]</B> rawrs!</font>"
-				m_type = 1
+			message = "<font color='red'><B>[src]</B> rawrs!</font>"
+			m_type = 1
 
 		if ("help")
 			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, elaugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, vomit, twitch_s, whimper,\nwink, yawn. For custom emotes use '*emote.'"

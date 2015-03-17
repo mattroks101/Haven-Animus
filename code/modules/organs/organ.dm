@@ -108,6 +108,9 @@
 				if (!E.is_usable() || E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)))
 					leg_tally--			// let it fail even if just foot&leg
 
+	for(var/datum/organ/internal/organ in internal_organs)
+		organ.vital_check()
+
 	// standing is poor
 	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))
 		if(!(species && (species.flags & NO_PAIN)))

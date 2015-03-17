@@ -121,6 +121,7 @@
 	var/use_overmap = 0
 
 	var/join_unassigned = 0
+	var/allow_shit = 0
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -467,7 +468,8 @@
 				if("use_overmap")
 					config.use_overmap = 1
 
-
+				if("allow_shit")
+					config.allow_shit = 1
 
 				else
 					diary << "Unknown setting in configuration: '[name]'"

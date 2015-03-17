@@ -42,6 +42,10 @@
 		add(H)
 		owner = H
 
+/datum/organ/internal/proc/vital_check()
+	if(src.vital && is_broken())
+		owner.death()
+
 /datum/organ/internal/process()
 
 	//Process infections
@@ -127,6 +131,7 @@
 		if(P.internal_organs == null)
 			P.internal_organs = list()
 		P.internal_organs += src
+	H.internal_organs.Add(src)
 	H.internal_organs_by_name[name] = src
 	owner = H
 	return
@@ -353,6 +358,8 @@
 	name = "brain"
 	parent_organ = "head"
 	removed_type = /obj/item/organ/brain
+	min_bruised_damage = 15
+	min_broken_damage = 40			//30 was too little
 	vital = 1
 
 /datum/organ/internal/brain/xeno

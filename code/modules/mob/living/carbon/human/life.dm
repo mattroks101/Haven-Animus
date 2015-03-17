@@ -1725,9 +1725,11 @@
 				if(airborne_can_reach(get_turf(src), get_turf(H)))
 					if(istype(loc,/obj/item/bodybag))
 						return
+					if(H.stat >= 2)
+						continue
 					var/obj/item/clothing/mask/M = H.wear_mask
 					if(M && (M.flags & MASKCOVERSMOUTH))
-						return
+						continue
 					H << "<spawn class='warning'>You smell something foul..."
 					H.vomit()
 

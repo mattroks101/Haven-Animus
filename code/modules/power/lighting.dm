@@ -230,8 +230,8 @@
 		update()
 
 /obj/machinery/light/small/red
-	icon_state = "bulbred1"
-	base_state = "bulbred"
+	icon_state = "firelight1"
+	base_state = "firelight"
 	fitting = "bulb"
 	brightnessred = 5
 	brightnessgreen = 2
@@ -341,6 +341,8 @@
 		on_gs = on
 
 /obj/machinery/light/proc/isalert()
+	if(!(src.z in vessel_z))
+		return 0
 	if(security_level >= SEC_LEVEL_RED)
 		return 1
 	else
@@ -758,8 +760,8 @@
 /obj/item/weapon/light/bulb/fire
 	name = "fire bulb"
 	desc = "A replacement fire bulb."
-	icon_state = "fbulb"
-	base_state = "fbulb"
+	icon_state = "flight"
+	base_state = "flight"
 	item_state = "egg4"
 	g_amt = 100
 	brightnessred = 5
