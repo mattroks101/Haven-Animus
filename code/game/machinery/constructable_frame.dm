@@ -596,3 +596,32 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/scanning_module = 2,
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/stock_parts/console_screen = 1)
+
+
+
+////  Vendors
+/obj/item/weapon/circuitboard/vendor
+	name = "circuit board (Booze-O-Mat Vendor)"
+	build_path = /obj/machinery/vending/boozeomat
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/vending_refill/boozeomat = 3)
+
+	var/list/names_paths = list(/obj/machinery/vending/boozeomat = "Booze-O-Mat",
+							/obj/machinery/vending/coffee = "Solar's Best Hot Drinks",
+							/obj/machinery/vending/snack = "Getmore Chocolate Corp",
+							/obj/machinery/vending/cola = "Robust Softdrinks",
+							/obj/machinery/vending/cigarette = "ShadyCigs Deluxe",
+							/obj/machinery/vending/autodrobe = "AutoDrobe")
+
+/obj/item/weapon/circuitboard/vendor/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/weapon/screwdriver))
+		set_type(pick(names_paths), user)
+
+
+/obj/item/weapon/circuitboard/vendor/proc/set_type(typepath, mob/user)
+		build_path = typepath
+		name = "circuit board ([names_paths[build_path]] Vendor)"
+		user << "<span class='notice'>You set the board to [names_paths[build_path]].</span>"
+		req_components = list(text2path("/obj/item/weapon/vending_refill/[copytext("[build_path]", 24)]") = 3)       //Never before has i used a method as horrible as this one, im so sorry
