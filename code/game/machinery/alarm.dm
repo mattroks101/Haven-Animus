@@ -134,6 +134,11 @@
 /obj/machinery/alarm/New(var/loc, var/dir, var/building = 0)
 	..()
 
+	alarm_area = get_area(src)
+	if (alarm_area.master)
+		alarm_area = alarm_area.master
+	area_uid = alarm_area.uid
+
 	if(building)
 		if(loc)
 			src.loc = loc
@@ -154,10 +159,6 @@
 
 
 /obj/machinery/alarm/proc/first_run()
-	alarm_area = get_area(src)
-	if (alarm_area.master)
-		alarm_area = alarm_area.master
-	area_uid = alarm_area.uid
 	if (name == "alarm")
 		name = "[alarm_area.name] Air Alarm"
 

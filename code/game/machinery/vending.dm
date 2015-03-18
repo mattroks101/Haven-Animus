@@ -3,6 +3,7 @@
 	var/product_path = null
 	var/amount = 0
 	var/price = 0
+	var/max_amount = 0
 	var/display_color = "blue"
 
 
@@ -53,6 +54,9 @@
 
 	var/check_accounts = 0		// 1 = requires PIN and checks accounts.  0 = You slide an ID, it vends, SPACE COMMUNISM!
 
+	var/obj/item/weapon/vending_refill/refill_canister = null		//The type of refill canisters used by this machine.
+
+
 /obj/machinery/vending/New()
 	..()
 	spawn(4)
@@ -63,15 +67,66 @@
 		// so if slogantime is 10 minutes, it will say it at somewhere between 10 and 20 minutes after the machine is crated.
 		src.last_slogan = world.time + rand(0, slogan_delay)
 
-		src.build_inventory(products)
-		 //Add hidden inventory
-		src.build_inventory(contraband, 1)
-		src.build_inventory(premium, 0, 1)
+	if(refill_canister) //constructable vending machine
+		component_parts = list()
+		var/obj/item/weapon/circuitboard/vendor/V = new(null)
+		V.set_type(type)
+		component_parts += V
+		component_parts += new refill_canister
+		component_parts += new refill_canister
+		component_parts += new refill_canister
+		RefreshParts()
+	else
+		build_inventory(products)
+		build_inventory(contraband, 1)
+		build_inventory(premium, 0, 1)
 		power_change()
 
 		return
 
 	return
+
+
+
+/obj/machinery/vending/RefreshParts()         //Better would be to make constructable child
+	if(component_parts)
+		product_records = list()
+		hidden_records = list()
+		coin_records = list()
+		build_inventory(products, start_empty = 1)
+		build_inventory(contraband, 1, start_empty = 1)
+		build_inventory(premium, 0, 1, start_empty = 1)
+		for(var/obj/item/weapon/vending_refill/VR in component_parts)
+			refill_inventory(VR, product_records)
+
+
+/obj/machinery/vending/proc/refill_inventory(obj/item/weapon/vending_refill/refill, datum/data/vending_product/machine)
+	var/total = 0
+
+	var/to_restock = 0
+	for(var/datum/data/vending_product/machine_content in machine)
+		if(machine_content.amount == 0 && refill.charges > 0)
+			machine_content.amount++
+			refill.charges--
+			total++
+		to_restock += machine_content.max_amount - machine_content.amount
+	if(to_restock <= refill.charges)
+		for(var/datum/data/vending_product/machine_content in machine)
+			machine_content.amount = machine_content.max_amount
+		refill.charges -= to_restock
+		total += to_restock
+	else
+		var/tmp_charges = refill.charges
+		for(var/datum/data/vending_product/machine_content in machine)
+			if(refill.charges == 0)
+				break
+			var/restock = Ceiling(((machine_content.max_amount - machine_content.amount)/to_restock)*tmp_charges)
+			if(restock > refill.charges)
+				restock = refill.charges
+			machine_content.amount += restock
+			refill.charges -= restock
+			total += restock
+	return total
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
@@ -100,18 +155,19 @@
 
 	return
 
-/obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
+/obj/machinery/vending/proc/build_inventory(list/productlist, hidden=0, req_coin=0, start_empty = null)
 	for(var/typepath in productlist)
 		var/amount = productlist[typepath]
-		var/price = prices[typepath]
-		if(isnull(amount)) amount = 1
+		if(isnull(amount))
+			amount = 0
 
 		var/atom/temp = new typepath(null)
 		var/datum/data/vending_product/R = new /datum/data/vending_product()
-		R.product_name = temp.name
+		R.product_name = initial(temp.name)
 		R.product_path = typepath
-		R.amount = amount
-		R.price = price
+		if(!start_empty)
+			R.amount = amount
+		R.max_amount = amount
 		R.display_color = pick("red","blue","green")
 
 		if(hidden)
@@ -120,15 +176,29 @@
 			coin_records += R
 		else
 			product_records += R
-//		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
-	return
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(src.panel_open)
+		if(default_unfasten_wrench(user, W, time = 60))
+			return
+
+		if(component_parts && istype(W, /obj/item/weapon/crowbar))
+			var/datum/data/vending_product/machine = product_records
+			for(var/datum/data/vending_product/machine_content in machine)
+				while(machine_content.amount !=0)
+					for(var/obj/item/weapon/vending_refill/VR in component_parts)
+						VR.charges++
+						machine_content.amount--
+						if(!machine_content.amount)
+							break
+			default_deconstruction_crowbar(W)
+
 	if (istype(W, /obj/item/weapon/card/emag))
 		src.emagged = 1
 		user << "You short out the product lock on [src]"
 		return
 	else if(istype(W, /obj/item/weapon/screwdriver))
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		src.panel_open = !src.panel_open
 		user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
 		src.overlays.Cut()
@@ -179,6 +249,23 @@
 			if(istype(W, R.product_path))
 				stock(R, user)
 				del(W)
+	else if(istype(W, refill_canister) && refill_canister != null)
+		if(stat & (BROKEN|NOPOWER))
+			user << "<span class='notice'>It does nothing.</span>"
+		else if(src.panel_open)
+			//if the panel is open we attempt to refill the machine
+			var/obj/item/weapon/vending_refill/canister = W
+			if(canister.charges == 0)
+				user << "<span class='notice'>This [canister.name] is empty!</span>"
+			else
+				var/transfered = refill_inventory(canister,product_records,user)
+				if(transfered)
+					user << "<span class='notice'>You loaded [transfered] items in \the [name].</span>"
+				else
+					user << "<span class='notice'>The [name] is fully stocked.</span>"
+			return;
+		else
+			user << "<span class='notice'>You should probably unscrew the service panel first.</span>"
 
 	else
 		..()
@@ -648,6 +735,7 @@
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
 	product_ads = "Drink up!;Booze is good for you!;Alcohol is humanity's best friend.;Quite delighted to serve you!;Care for a nice, cold beer?;Nothing cures you like booze!;Have a sip!;Have a drink!;Have a beer!;Beer is good for you!;Only the finest alcohol!;Best quality booze since 2053!;Award-winning wine!;Maximum alcohol!;Man loves beer.;A toast for progress!"
 	req_access_txt = "25"
+	refill_canister = /obj/item/weapon/vending_refill/boozeomat
 
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
@@ -665,7 +753,7 @@
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25, /obj/item/weapon/reagent_containers/food/drinks/tea = 25, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
-
+	refill_canister = /obj/item/weapon/vending_refill/coffee
 
 
 
@@ -700,6 +788,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
+	refill_canister = /obj/item/weapon/vending_refill/cola
 
 /obj/machinery/vending/cola/soda
 	icon_state = "soda"
@@ -728,6 +817,7 @@
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
 	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2)
 	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/flame/lighter/random = 2)
+	refill_canister = /obj/item/weapon/vending_refill/cigarette
 
 
 /obj/machinery/vending/medical
@@ -971,6 +1061,7 @@
 					/obj/item/clothing/suit/poncho/green = 1, /obj/item/clothing/suit/poncho/red = 1) //Pretty much everything that had a chance to spawn.
 	contraband = list(/obj/item/clothing/suit/cardborg = 1,/obj/item/clothing/head/cardborg = 1, /obj/item/clothing/suit/judgerobe = 1,/obj/item/clothing/head/powdered_wig = 1,/obj/item/weapon/gun/magic/wand = 1, /obj/item/clothing/glasses/sunglasses/garb = 1, /obj/item/clothing/glasses/hypno = 1)
 	premium = list(/obj/item/clothing/suit/hgpirate = 1, /obj/item/clothing/head/hgpiratecap = 1, /obj/item/clothing/head/helmet/roman = 1, /obj/item/clothing/head/helmet/roman/legionaire = 1, /obj/item/clothing/under/roman = 1, /obj/item/clothing/shoes/roman = 1, /obj/item/weapon/shield/riot/roman = 1, /obj/item/clothing/glasses/sunglasses/gar = 1, /obj/item/clothing/glasses/threed = 1)*/
+	refill_canister = /obj/item/weapon/vending_refill/autodrobe
 
 /obj/machinery/vending/clothing
 	name = "Clothe-O-Mat"
@@ -988,4 +1079,5 @@
 					/obj/item/clothing/shoes/laceup = 3,/obj/item/clothing/shoes/sneakers/black = 6, /obj/item/clothing/shoes/sandal = 2)
 	contraband = list(/obj/item/clothing/under/syndicate/tacticool = 1,/obj/item/clothing/mask/fawkes = 1,/obj/item/clothing/mask/balaclava = 1,/obj/item/clothing/head/ushanka = 1,/obj/item/clothing/under/soviet = 1,/obj/item/clothing/suit/cardborg = 1, /obj/item/clothing/head/cardborg = 1,/obj/item/clothing/glasses/hypno = 1)
 	premium = list(/obj/item/clothing/under/suit_jacket/checkered = 1,/obj/item/clothing/head/mailman = 1,/obj/item/clothing/under/rank/mailman = 1,/obj/item/clothing/suit/labcoat/coat/jacket/leather = 1,/obj/item/clothing/suit/ianshirt = 1,/obj/item/clothing/glasses/sunglasses = 3, /obj/item/clothing/glasses/threed = 2, /obj/item/clothing/head/collectable/paper = 1, /obj/item/clothing/head/fedora = 2)*/
+	refill_canister = /obj/item/weapon/vending_refill/clothing
 
