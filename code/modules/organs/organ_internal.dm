@@ -44,6 +44,7 @@
 
 /datum/organ/internal/proc/vital_check()
 	if(src.vital && is_broken())
+		owner.oxyloss = 201
 		owner.death()
 
 /datum/organ/internal/process()
