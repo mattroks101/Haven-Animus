@@ -17,7 +17,7 @@
 	else
 		testing("Engines console at level [z] was unable to find a corresponding overmap object.")
 
-	for(var/datum/ship_engine/E in ship_engines)
+	for(var/datum/ship_engine/E in linked.ship_engines)
 		if ((E.zlevel in linked.ship_levels) && !(E in src.engines))
 			src.engines += E
 

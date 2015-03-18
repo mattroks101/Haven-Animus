@@ -13,6 +13,7 @@ var/list/ship_engines = list()
 		var/obj/effect/map/ship/linked = map_sectors["[zlevel]"]
 		if(!linked)
 			return
+		linked.ship_engines.Add(src)
 		for(var/obj/machinery/computer/engines/E in machines)
 			if ((E.z in linked.ship_levels) && !(src in E.engines))
 				E.engines += src

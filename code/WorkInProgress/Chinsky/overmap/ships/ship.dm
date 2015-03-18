@@ -16,6 +16,7 @@
 	var/obj/effect/map/current_sector
 	var/obj/machinery/computer/helm/nav_control
 	var/obj/machinery/computer/engines/eng_control
+	var/list/ship_engines = list()
 
 /obj/effect/map/ship/New(var/obj/effect/mapinfo/data)
 	tag = "ship_[shipname]"
