@@ -1569,6 +1569,11 @@
 		if(wrapped)
 			Unwrap(user)
 
+	HasEntered(A as obj)
+		if(istype(A, /obj/effect/effect/water))
+			Expand()
+
+
 	proc/Expand()
 		for(var/mob/M in viewers(src,7))
 			M << "\red \The [src] expands!"
@@ -1580,6 +1585,8 @@
 					new /mob/living/carbon/monkey/unathi(get_turf(src))
 				if("skrell")
 					new /mob/living/carbon/monkey/skrell(get_turf(src))
+				if("vine")
+					new /obj/effect/spacevine_controller(get_turf(src))
 		else
 			new /mob/living/carbon/monkey(get_turf(src))
 		del(src)

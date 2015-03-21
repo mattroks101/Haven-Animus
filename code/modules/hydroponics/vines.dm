@@ -34,6 +34,9 @@
 
 /obj/effect/plantsegment/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (!W || !user || !W.type) return
+
+
+
 	switch(W.type)
 		if(/obj/item/weapon/circular_saw) del src
 		if(/obj/item/weapon/kitchen/utensil/knife) del src
@@ -42,6 +45,8 @@
 		if(/obj/item/weapon/hatchet) del src
 		if(/obj/item/weapon/melee/energy) del src
 		if(/obj/item/weapon/gun/energy/plasmacutter) del src
+		if(/obj/item/weapon/kitchen/utensil/bayonet) del src
+
 
 		// Less effective weapons
 		if(/obj/item/weapon/wirecutters)
@@ -49,12 +54,16 @@
 		if(/obj/item/weapon/shard)
 			if(prob(25)) del src
 
+
 		// Weapons with subtypes
 		else
 			if(istype(W, /obj/item/weapon/melee/energy/sword)) del src
 			else if(istype(W, /obj/item/weapon/weldingtool))
 				var/obj/item/weapon/weldingtool/WT = W
 				if(WT.remove_fuel(0, user)) del src
+			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/m14))
+				var/obj/item/weapon/gun/projectile/automatic/m14/C = W
+				if(C.knife) del src
 			else
 				manual_unbuckle(user)
 				return
