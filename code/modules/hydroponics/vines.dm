@@ -61,8 +61,8 @@
 			else if(istype(W, /obj/item/weapon/weldingtool))
 				var/obj/item/weapon/weldingtool/WT = W
 				if(WT.remove_fuel(0, user)) del src
-			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/m14))
-				var/obj/item/weapon/gun/projectile/automatic/m14/C = W
+			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/m300))
+				var/obj/item/weapon/gun/projectile/automatic/m300/C = W
 				if(C.knife) del src
 			else
 				manual_unbuckle(user)

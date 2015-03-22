@@ -85,8 +85,8 @@
 
 
 /obj/item/weapon/mine/attackby(obj/item/weapon/W as obj)
-	if(istype(W, /obj/item/weapon/gun/projectile/automatic/m14))
-		var/obj/item/weapon/gun/projectile/automatic/m14/C = W
+	if(istype(W, /obj/item/weapon/gun/projectile/automatic/m300))
+		var/obj/item/weapon/gun/projectile/automatic/m300/C = W
 		if(C.knife)
 			deactivate()
 		else
@@ -178,13 +178,13 @@
 	icon_state = "mre"
 	New()
 		..()
-		for(var/i = 1; i <= 3; i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/human/burger/dry_rations(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/human/burger/dry_rations(src)
 		new /obj/item/weapon/reagent_containers/food/drinks/bottle/waterbottle(src)
-		new /obj/item/weapon/storage/box/matches(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/chocolatebar(src)
+		new /obj/item/weapon/reagent_containers/pill/charcoal(src)
 		new /obj/item/weapon/kitchen/utensil/fork(src)
-		new /obj/item/ammo_magazine/external/m12mm/nanotrasen(src)
-
+		new /obj/item/weapon/storage/fancy/cigarettes(src)
+		new /obj/item/weapon/storage/box/matches(src)
 ///food
 /obj/item/weapon/reagent_containers/food/snacks/human/burger/dry_rations
 	name = "dry rations"
@@ -232,31 +232,31 @@
 
 
 /obj/item/clothing/head/helmet/tactical/nanotrasen
-	name = "tactical helmet"
-	desc = "Tactical Helmet of terrestrial infantry nanotrasen."
+	name = "combat helmet"
+	desc = "Standard-issue combat of terrestrial NT infantry."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "helmet_j"
 	item_state = "helmet_j"
 
-	armor = list(melee = 40, bullet = 40, laser = 20,energy = 5, bomb = 10, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 30, laser = 20,energy =70, bomb = 10, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/helmet/tactical/nanotrasen/med
-	name = "medical tactical helmet"
-	desc = "Tactical Helmet of support terrestrial infantry nanotrasen."
+	name = "medical combat helmet"
+	desc = "Combat helmet of support terrestrial infantry nanotrasen."
 	icon_state = "helmet_j_m"
 	item_state = "helmet_j_m"
 
-	armor = list(melee = 30, bullet = 40, laser = 20,energy = 5, bomb = 10, bio = 30, rad = 0)
+	armor = list(melee = 30, bullet = 30, laser = 20,energy = 70, bomb = 10, bio = 30, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/helmet/tactical/nanotrasen/tactical
-	name = "tactical hat"
+	name = "Drill sergeants hat"
 	desc = "For those who do not die first on the battlefield."
 	icon_state = "sergeanthead_j"
 	item_state = "sergeanthead_j"
 
-	armor = list(melee = 50, bullet = 50, laser = 30,energy = 5, bomb = 10, bio = 30, rad = 0)
+	armor = list(melee = 30, bullet = 10, laser = 10,energy = 5, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/glasses/sunglasses/aviator
@@ -282,7 +282,7 @@
 
 /// ochen avtomat
 
-/obj/item/weapon/gun/projectile/automatic/m14
+/obj/item/weapon/gun/projectile/automatic/m300
 	name = "\improper M14"
 	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses 12mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
 	icon = 'icons/obj/items.dmi'
@@ -299,7 +299,7 @@
 
 
 
-/obj/item/weapon/gun/projectile/automatic/m14/update_icon()
+/obj/item/weapon/gun/projectile/automatic/m300/update_icon()
 	if(magazine)
 		icon_state = "har_laser_w"
 		if(knife)
@@ -316,17 +316,18 @@
 
 
 
-/obj/item/weapon/gun/projectile/automatic/m14/attack_self(mob/user as mob)
-	if(!chambered)
-		if(knife)
-			knife.loc = get_turf(src.loc)
-			user.put_in_hands(knife)
+/obj/item/weapon/gun/projectile/automatic/m300/attack_self(mob/user as mob)
+	if(!magazine)
+		if(knife && open)
+			knife.loc = usr
+			usr.put_in_hands(knife)
 			knife = 0
+			src.force = initial(force)
 			user << "<span class='notice'>You remove bayonet from \the [src]!</span>"
 	..()
 
 
-/obj/item/weapon/gun/projectile/automatic/m14/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/gun/projectile/automatic/m300/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(open)
 			usr << "You Tighten the screws on [src]."
@@ -335,29 +336,26 @@
 			usr << "You unscrewed the bolts on [src]."
 			open = 1
 
-	if(istype(W, knife) && open)
-		user.drop_item()
+	if(istype(W, /obj/item/weapon/kitchen/utensil) && open)
 		knife = W
-		knife.loc = src
-		user << "<span class='notice'>You add [W] to \the [src]!</span>"
-		W.update_icon()
+		user.drop_item()
+		W.loc = src
+		src.force = W.force
+		user << "<span class='notice'>You add [knife.name] to \the [src]!</span>"
 		update_icon()
-		return 1
-
-
 	..()
 
 
 
-/obj/item/weapon/gun/projectile/automatic/m14/afterattack(mob/user as mob)
+/obj/item/weapon/gun/projectile/automatic/m300/afterattack(mob/user as mob)
 	..()
 	if(knife && open)
 		knife.loc = get_turf(src.loc)
-		user.put_in_hands(knife)
-		knife = 0
-		user << "\red Bayonet fell off from [src]"
+		src.knife = null
+		usr << "\red Bayonet fell off from [src]"
 	if(!chambered && !get_ammo() && !alarmed)
 		playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
+	update_icon()
 	return
 
 /obj/item/ammo_magazine/external/m12mm/nanotrasen
@@ -369,5 +367,5 @@
 	max_ammo = 20
 
 /obj/item/ammo_magazine/external/m12mm/nanotrasen/update_icon()
-	icon_state = "har_laser_cartridge"
+	return
 
