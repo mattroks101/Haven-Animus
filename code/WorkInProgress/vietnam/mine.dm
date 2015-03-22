@@ -31,7 +31,7 @@
 				for(var/mob/O in oviewers(src))
 					if ((O.client && !( O.blinded )))
 						O << "\red [A] stepped on [src]."
-						O.unlock_medal("I served in Vietnam.", 0, "Stepped on a mine.", "easy")
+				usr.unlock_medal("I served in Vietnam.", 0, "Stepped on a mine.", "easy")
 				expl()
 		else if(istype(I, /obj/item/))
 			if(I.w_class >= 4)
@@ -178,13 +178,13 @@
 	icon_state = "mre"
 	New()
 		..()
-		new /obj/item/weapon/reagent_containers/food/snacks/human/burger/dry_rations(src)
-		new /obj/item/weapon/reagent_containers/food/drinks/bottle/waterbottle(src)
+		for(var/i = 1; i <= 3; i++)
+			new /obj/item/weapon/reagent_containers/food/snacks/human/burger/dry_rations(src)
+		new /obj/item/weapon/storage/box/matches(src)
 		new /obj/item/weapon/reagent_containers/food/snacks/chocolatebar(src)
 		new /obj/item/weapon/reagent_containers/pill/charcoal(src)
-		new /obj/item/weapon/kitchen/utensil/fork(src)
 		new /obj/item/weapon/storage/fancy/cigarettes(src)
-		new /obj/item/weapon/storage/box/matches(src)
+
 ///food
 /obj/item/weapon/reagent_containers/food/snacks/human/burger/dry_rations
 	name = "dry rations"
@@ -202,8 +202,8 @@
 ///// clout...odejda
 
 /obj/item/clothing/under/syndicate/tacticool/nanotrasen
-	name = "tactical turtleneck"
-	desc = "Specially designed lightweight suit for infantry nanotrasen"
+	name = "combat jumpsuit"
+	desc = "Specially designed lightweight suit for NT infantry"
 	icon_state = "troopsuit"
 //	item_state = "jungle_s"
 //	item_color = "troopsuit"
