@@ -154,6 +154,7 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
 
+
 /obj/machinery/sleeper/New()
 	..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large()
@@ -226,7 +227,7 @@
 				I.on_enter_storage()
 			M.loc = src
 			src.occupant = M
-			src.icon_state = "sleeper"
+			update_icon()
 
 			M << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
 
@@ -306,7 +307,7 @@
 		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.loc = src.loc
 	src.occupant = null
-	icon_state = "sleeper-open"
+	update_icon()
 	return
 
 
@@ -355,7 +356,7 @@
 	set src in oview(1)
 	if(usr.stat != 0)
 		return
-	src.icon_state = "sleeper-open"
+	update_icon()
 	src.go_out()
 	add_fingerprint(usr)
 	return
@@ -401,7 +402,7 @@
 			I.on_enter_storage()
 		usr.loc = src
 		src.occupant = usr
-		src.icon_state = "sleeper"
+		src.update_icon()
 
 		usr << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
 
@@ -410,3 +411,48 @@
 		src.add_fingerprint(usr)
 		return
 	return
+/obj/machinery/body_scanconsole/power_change()
+	..()
+	update_icon()
+
+/obj/machinery/body_scanconsole/power_change()
+	..()
+	update_icon()
+
+/obj/machinery/sleeper/update_icon()
+	if(occupant)
+		icon_state = "sleeper"
+	else
+		icon_state = "sleeper-open"
+
+
+
+/obj/machinery/sleep_console/blue
+	icon_state = "console-blue"
+
+/obj/machinery/sleep_console/blue/update_icon()
+	if(stat & (NOPOWER|BROKEN))
+		icon_state = "console-blue-p"
+	else
+		icon_state = "console-blue"
+
+
+/obj/machinery/sleeper/blue
+	name = "sleeper"
+	icon = 'icons/obj/Cryogenic2.dmi'
+	icon_state = "sleeper-blue-open"
+
+/obj/machinery/sleeper/blue/update_icon()
+	if(occupant)
+		switch(src.occupant.stat)
+			if(0.0)
+				icon_state =  "sleeper_heal100-blue"
+			if(1.0)
+				icon_state = "sleeper_healing-blue"
+			if(2.0)
+				icon_state = "sleeper_healing-blue"
+	else
+		if(stat & (NOPOWER|BROKEN))
+			icon_state = "sleeper-blue-p-open"
+		else
+			icon_state = "sleeper-blue-open"

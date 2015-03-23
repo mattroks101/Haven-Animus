@@ -66,27 +66,28 @@
 	if(iscarbon(M))
 		var/safety = M:eyecheck()
 		if(safety <= 0)
-			if(!iszombie(M))
-				M.Weaken(10)
+			M.Weaken(10)
 			flick("e_flash", M.flash)
 
-			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)
-				if(user.mind && user.mind in ticker.mode.head_revolutionaries && ticker.mode.name == "revolution")
-					var/revsafe = 0
-					for(var/obj/item/weapon/implant/loyalty/L in M)
-						if(L && L.implanted)
-							revsafe = 1
-							break
-					M.mind_initialize()		//give them a mind datum if they don't have one.
-					if(M.mind.has_been_rev)
-						revsafe = 2
-					if(!revsafe)
-						M.mind.has_been_rev = 1
-						ticker.mode.add_revolutionary(M.mind)
-					else if(revsafe == 1)
-						user << "<span class='warning'>Something seems to be blocking the flash!</span>"
+			if(ishuman(M) && ishuman(user) && M.stat != DEAD)
+				if(user.mind && user.mind in ticker.mode.head_revolutionaries)
+					if(M.client)
+						if(M.stat == CONSCIOUS)
+							var/revsafe = 0
+							M.mind_initialize()		//give them a mind datum if they don't have one.
+//							if(M.mind.has_been_rev)
+//								revsafe = 2
+							if(!revsafe)
+								M.mind.has_been_rev = 1
+								ticker.mode.add_revolutionary(M.mind)
+							else if(revsafe == 1)
+								user << "<span class='warning'>Something seems to be blocking the flash!</span>"
+							else
+								user << "<span class='warning'>This mind seems resistant to the flash!</span>"
+						else
+							user << "<span class='warning'>They must be conscious before you can convert them!</span>"
 					else
-						user << "<span class='warning'>This mind seems resistant to the flash!</span>"
+						user << "<span class='warning'>This mind is so vacant that it is not susceptible to influence!</span>"
 		else
 			flashfail = 1
 
@@ -119,8 +120,6 @@
 		user.visible_message("<span class='notice'>[user] fails to blind [M] with the flash!</span>")
 
 	return
-
-
 
 
 /obj/item/device/flash/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)

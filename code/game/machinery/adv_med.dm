@@ -3,9 +3,11 @@
 
 /obj/machinery/bodyscanner
 	var/locked
+	var/obj/machinery/body_scanconsole/connected
 	name = "Body Scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
+
 	density = 1
 	anchored = 1
 
@@ -15,6 +17,16 @@
 
 /*/obj/machinery/bodyscanner/allow_drop()
 	return 0*/
+
+
+/obj/machinery/body_scanconsole/New()
+	..()
+	spawn( 5 )
+		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, EAST))
+		return
+	return
+
+
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	if (user.stat)
@@ -52,7 +64,6 @@
 	usr.loc = src
 	src.occupant = usr
 	update_use_power(2)
-	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
 		//O = null
 		del(O)
@@ -72,10 +83,11 @@
 	src.occupant.loc = src.loc
 	src.occupant = null
 	update_use_power(1)
-	src.icon_state = "body_scanner_0"
+	update_icon()
 	return
 
 /obj/machinery/bodyscanner/attackby(obj/item/weapon/grab/G as obj, user as mob)
+	src.connected = locate(/obj/machinery/bodyscanner, get_step(src, EAST))
 	if ((!( istype(G, /obj/item/weapon/grab) ) || !( ismob(G.affecting) )))
 		return
 	if (src.occupant)
@@ -91,7 +103,8 @@
 	M.loc = src
 	src.occupant = M
 	update_use_power(2)
-	src.icon_state = "body_scanner_1"
+	update_icon()
+
 	for(var/obj/O in src)
 		O.loc = src.loc
 		//Foreach goto(154)
@@ -159,14 +172,7 @@
 
 /obj/machinery/body_scanconsole/power_change()
 	..()
-	if(stat & BROKEN)
-		icon_state = "body_scannerconsole-p"
-	else
-		if (stat & NOPOWER)
-			spawn(rand(0, 15))
-				src.icon_state = "body_scannerconsole-p"
-		else
-			icon_state = initial(icon_state)
+	update_icon()
 
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/connected
@@ -184,6 +190,7 @@
 	..()
 	spawn( 5 )
 		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, WEST))
+		update_icon()
 		return
 	return
 
@@ -243,6 +250,7 @@
 
 	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", user)
 	user << browse(dat, "window=scanconsole;size=430x600")
+	update_icon()
 	return
 
 
@@ -455,3 +463,65 @@
 	if(occ["sdisabilities"] & NEARSIGHTED)
 		dat += text("<font color='red'>Retinal misalignment detected.</font><BR>")
 	return dat
+
+
+
+
+/obj/machinery/bodyscanner/update_icon()
+	if(occupant)
+		icon_state = "body_scanner_1"
+	else
+		icon_state = "body_scanner_0"
+
+
+/obj/machinery/body_scanconsole/update_icon()
+	if(stat & (NOPOWER|BROKEN))
+		icon_state = "body_scannerconsole-p"
+	else
+		icon_state = "body_scannerconsole"
+
+
+
+/obj/machinery/bodyscanner/blue
+	icon_state = "scanner_open"
+
+/obj/machinery/bodyscanner/blue/update_icon()
+	if(stat & (NOPOWER|BROKEN))
+		icon_state = "scanner_open"
+	else
+		if(occupant)
+			if(occupant.health>=100)
+				icon_state = "scanner_green"
+			else if(occupant.health>=0)
+				icon_state = "scanner_yellow"
+			else if(occupant.health>=-190)
+				icon_state = "scanner_red"
+			else if(occupant.health<=190)
+				icon_state = "scanner_death"
+			else icon_state = "scanner_off"
+		else icon_state = "scanner_open"
+
+/obj/machinery/body_scanconsole/blue
+	icon_state = "scanner_terminal_off"
+
+
+
+
+/obj/machinery/body_scanconsole/blue/update_icon()
+	if(stat & (NOPOWER|BROKEN))
+		icon_state = "scanner_terminal_off"
+	else
+		if(connected)
+			if(connected.occupant)
+				if(connected.occupant.health>=0)
+					icon_state = "scanner_terminal_green"
+				if(connected.occupant.health>=100)
+					icon_state = "scanner_terminal_blue"
+				if(connected.occupant.health<0)
+					icon_state = "scanner_terminal_red"
+				if(connected.occupant.health<=-190)
+					icon_state = "scanner_terminal_dead"
+			else
+				icon_state = "scanner_terminal_blue"
+		else
+			icon_state = "scanner_terminal_off"
