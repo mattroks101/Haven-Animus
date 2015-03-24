@@ -76,7 +76,7 @@
 	desc = "It looks rather strong and opaque. Might take a few good hits to shatter it."
 	icon_state = "twindow"
 	basestate = "twindow"
-	opacity = 1
+//	opacity = 1
 
 /obj/structure/window/full/reinforced/tinted/frosted
 	name = "frosted window"

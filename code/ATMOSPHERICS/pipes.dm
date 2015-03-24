@@ -251,27 +251,27 @@ obj/machinery/atmospherics/pipe
 			return null
 
 	simple/scrubbers
-		name="Scrubbers pipe"
+		name="scrubbers pipe"
 		pipe_color="red"
 		icon_state = ""
 
 	simple/cyan
-		name="Pipe"
+		name="pipe"
 		pipe_color="cyan"
 		icon_state = ""
 
 	simple/supply
-		name="Air supply pipe"
+		name="air supply pipe"
 		pipe_color="blue"
 		icon_state = ""
 
 	simple/supplymain
-		name="Main air supply pipe"
+		name="main air supply pipe"
 		pipe_color="purple"
 		icon_state = ""
 
 	simple/general
-		name="Pipe"
+		name="pipe"
 		pipe_color=""
 		icon_state = ""
 
@@ -316,7 +316,7 @@ obj/machinery/atmospherics/pipe
 		icon_state = "intact-f"
 
 	simple/yellow
-		name="Pipe"
+		name="pipe"
 		pipe_color="yellow"
 		icon_state = ""
 

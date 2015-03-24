@@ -44,22 +44,23 @@
 		var/direction = pick(directions)
 		for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
 			sleep(3)
-			//if (i > 0)
-			//	var/obj/decal/cleanable/poo/b = new /obj/decal/cleanable/poo(src.loc)
-			//	if (src.virus)
-			//		b.virus = src.virus
+			if (i > 0)
+				new /obj/effect/decal/cleanable/poo(src.loc)
 			if (step_to(src, get_step(src, direction), 0))
 				break
 
-/obj/effect/decal/cleanable/poo/HasEntered(AM as mob|obj)
+/obj/effect/decal/cleanable/poo/HasEntered(AM as mob|obj, var/forceslip = 0)
 	if (istype(AM, /mob/living/carbon) && src.dried == 0)
-		var/mob/M =	AM
+		var/mob/living/carbon/M =	AM
 		if ((istype(M, /mob/living/carbon/human) && M:shoes.flags&NOSLIP) || M.m_intent == "walk")
 			return
 
-		if(prob(30))
+		if(prob(30) || forceslip)
 			M.stop_pulling()
 			step(M, M.dir)
+			if(locate(/obj/effect/decal/cleanable/poo) in get_turf(M))
+				var/obj/effect/decal/cleanable/poo/way = locate() in get_turf(M)
+				way.HasEntered(M, 1)
 			M << "\blue You slipped on the wet poo stain!"
 			M.unlock_medal("Oh Shit!", 0, "Slip on the poo stain!", "easy")
 			playsound(src.loc, 'slip.ogg', 50, 1, -3)
