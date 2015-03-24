@@ -20,7 +20,7 @@
 		if(shit != src)
 			del(shit)
 //	spawn(5) src.reagents.add_reagent("poo",5)
-	spawn(400)
+	spawn(6000)
 		src.dried = 1
 
 /obj/effect/decal/cleanable/poo/tracks
@@ -65,7 +65,7 @@
 			M.unlock_medal("Oh Shit!", 0, "Slip on the poo stain!", "easy")
 			playsound(src.loc, 'slip.ogg', 50, 1, -3)
 			M.stunned = 1
-			M.weakened = 4
+			M.weakened = 3
 
 /obj/effect/decal/cleanable/poo/tracks/HasEntered(AM as mob|obj)
 	return
