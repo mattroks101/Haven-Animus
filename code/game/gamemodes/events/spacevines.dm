@@ -47,7 +47,7 @@
 			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/m300))
 				var/obj/item/weapon/gun/projectile/automatic/m300/C = W
 				if(C.knife) del src
-			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/pistol/m14))
+			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14))
 				var/obj/item/weapon/gun/projectile/automatic/m300/C = W
 				if(C.knife) del src
 			else

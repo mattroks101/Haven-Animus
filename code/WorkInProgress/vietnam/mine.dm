@@ -285,7 +285,7 @@
 /obj/item/weapon/gun/projectile/automatic/m300
 	name = "\improper M14"
 	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses 12mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "har_laser"
 	item_state = "c20r"
 	w_class = 3.0
@@ -296,25 +296,8 @@
 	var/obj/item/weapon/kitchen/utensil/knife = 0
 	var/open = 0
 
-
-
-
 /obj/item/weapon/gun/projectile/automatic/m300/update_icon()
-	if(magazine)
-		icon_state = "har_laser_w"
-		if(knife)
-			icon_state = "har_laser_w-k"
-	else
-		icon_state = "har_laser-e"
-		if(knife)
-			icon_state = "har_laser-e-k"
-
-
-/*	icon_state = "har_laser" + "[chambered ? "" : "-e"][knife ? "" : "-k"]"
-	return*/
-
-
-
+	icon_state = "[initial(icon_state)][magazine ? "" : "-e"][knife ? "-k" : ""]"
 
 /obj/item/weapon/gun/projectile/automatic/m300/attack_self(mob/user as mob)
 	if(!magazine)
