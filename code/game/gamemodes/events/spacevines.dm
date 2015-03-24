@@ -31,6 +31,7 @@
 		if(/obj/item/weapon/twohanded/fireaxe) del src
 		if(/obj/item/weapon/hatchet) del src
 		if(/obj/item/weapon/melee/energy) del src
+		if(/obj/item/weapon/kitchen/utensil/bayonet) del src
 
 		//less effective weapons
 		if(/obj/item/weapon/wirecutters)
@@ -43,12 +44,23 @@
 			else if(istype(W, /obj/item/weapon/weldingtool))
 				var/obj/item/weapon/weldingtool/WT = W
 				if(WT.remove_fuel(0, user)) del src
+			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/m300))
+				var/obj/item/weapon/gun/projectile/automatic/m300/C = W
+				if(C.knife) del src
+			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/pistol/m14))
+				var/obj/item/weapon/gun/projectile/automatic/m300/C = W
+				if(C.knife) del src
 			else
 				manual_unbuckle(user)
 				return
 		//Plant-b-gone damage is handled in its entry in chemistry-reagents.dm
 	..()
 
+
+/obj/effect/spacevine/HasEntered(A as mob|obj)
+	..()
+	if(istype(A, /obj/fire))
+		del src
 
 /obj/effect/spacevine/attack_hand(mob/user as mob)
 	manual_unbuckle(user)

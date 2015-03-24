@@ -155,7 +155,7 @@
 
 	return
 
-/obj/machinery/vending/proc/build_inventory(list/productlist, hidden=0, req_coin=0, start_empty = null)
+/obj/machinery/vending/proc/build_inventory(var/list/productlist, hidden=0, req_coin=0, start_empty = null)
 	for(var/typepath in productlist)
 		var/amount = productlist[typepath]
 		if(isnull(amount))
@@ -163,7 +163,7 @@
 
 		var/atom/temp = new typepath(null)
 		var/datum/data/vending_product/R = new /datum/data/vending_product()
-		R.product_name = initial(temp.name)
+		R.product_name = temp.name
 		R.product_path = typepath
 		if(!start_empty)
 			R.amount = amount
@@ -176,6 +176,47 @@
 			coin_records += R
 		else
 			product_records += R
+	return
+		/*
+/obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
+	for(var/typepath in productlist)
+		var/amount = productlist[typepath]
+		var/price = prices[typepath]
+		if(isnull(amount)) amount = 1
+
+		var/atom/temp = new typepath(null)
+		var/datum/data/vending_product/R = new /datum/data/vending_product()
+		R.product_name = temp.name
+		R.product_path = typepath
+		R.amount = amount
+		R.price = price
+		R.display_color = pick("red","blue","green")
+
+		if(hidden)
+			hidden_records += R
+		else if(req_coin)
+			coin_records += R
+		else
+			product_records += R
+//		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
+	return
+			*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.panel_open)

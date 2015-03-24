@@ -329,3 +329,17 @@
 
 /datum/data/function/proc/display()
 	return
+
+
+/obj/machinery/atmospherics/unary/cryo_cell/blue
+	icon = 'icons/obj/cryogenics.dmi'
+	icon_state = "cell-off-blue"
+
+/obj/machinery/atmospherics/unary/cryo_cell/blue/update_icon()
+	if(on)
+		if(occupant)
+			icon_state = "cell-occupied-blue"
+			return
+		icon_state = "cell-on-blue"
+		return
+	icon_state = "cell-off-blue"

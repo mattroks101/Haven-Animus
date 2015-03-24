@@ -426,13 +426,16 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Syndicate Kitchen room"
 
 /area/syndicate_interception_station/lounge
-	name = "\improper Syndicate lounge room"
+	name = "\improper Syndicate Lounge room"
 
 /area/syndicate_interception_station/arrivals
 	name = "\improper Syndicate Arrival"
 
 /area/syndicate_interception_station/vault
-	name = "\improper Syndicate vault"
+	name = "\improper Syndicate Vault"
+
+/area/syndicate_interception_station/server
+	name = "\improper Syndicate Server room"
 
 
 
@@ -523,7 +526,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "yellow"
 
 /area/syndicate_station/deck1
-	name = "\improper NSV Luna's first deck"
+	name = "\improper Interception Station"
 	icon_state = "southeast"
 
 /area/syndicate_station/deck2
