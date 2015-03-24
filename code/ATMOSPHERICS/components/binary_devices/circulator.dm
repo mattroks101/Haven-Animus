@@ -19,6 +19,7 @@
 /obj/machinery/atmospherics/binary/circulator/New()
 	..()
 	desc = initial(desc) + "  Its outlet port is to the [dir2text(dir)]."
+	update_connections()
 
 /obj/machinery/atmospherics/binary/circulator/proc/return_transfer_air()
 	var/datum/gas_mixture/removed
@@ -75,33 +76,37 @@
 		anchored = !anchored
 		user << "\blue You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor."
 
-		if(anchored)
-			if(dir & (NORTH|SOUTH))
-				initialize_directions = NORTH|SOUTH
-			else if(dir & (EAST|WEST))
-				initialize_directions = EAST|WEST
-
-			initialize()
-			build_network()
-			if (node1)
-				node1.initialize()
-				node1.build_network()
-			if (node2)
-				node2.initialize()
-				node2.build_network()
-		else
-			if(node1)
-				node1.disconnect(src)
-				del(network1)
-			if(node2)
-				node2.disconnect(src)
-				del(network2)
-
-			node1 = null
-			node2 = null
+		update_connections()
 
 	else
 		..()
+
+/obj/machinery/atmospherics/binary/circulator/proc/update_connections()
+	if(anchored)
+		if(dir & (NORTH|SOUTH))
+			initialize_directions = NORTH|SOUTH
+		else if(dir & (EAST|WEST))
+			initialize_directions = EAST|WEST
+
+		initialize()
+		build_network()
+		if (node1)
+			node1.initialize()
+			node1.build_network()
+		if (node2)
+			node2.initialize()
+			node2.build_network()
+	else
+		if(node1)
+			node1.disconnect(src)
+			del(network1)
+		if(node2)
+			node2.disconnect(src)
+			del(network2)
+
+		node1 = null
+		node2 = null
+
 
 /obj/machinery/atmospherics/binary/circulator/verb/rotate_clockwise()
 	set category = "Object"
