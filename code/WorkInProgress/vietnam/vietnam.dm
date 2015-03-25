@@ -9,20 +9,6 @@
 	mag_type = /obj/item/ammo_magazine/external/mag545
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
 
-/obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14
-	name = "M14"
-	desc = "Nanotrasen ground infantry standard weapon"
-	icon = 'code/WorkInProgress/vietnam/gun.dmi'
-	icon_state = "m14"
-	item_state = "c20r"
-	w_class = 3.0
-	origin_tech = "combat=5;materials=3"
-	mag_type = /obj/item/ammo_magazine/external/mag762
-	fire_sound = 'sound/weapons/Gunshot.ogg'
-	var
-		open = 0
-		obj/item/weapon/kitchen/utensil/knife = 0
-
 /obj/item/ammo_magazine/external/mag762
 	name = "7.62 magazine (M14)"
 	icon = 'code/WorkInProgress/vietnam/ammo.dmi'
@@ -105,6 +91,20 @@
 	mag_type = /obj/item/ammo_magazine/external/sm45
 	fire_sound = 'sound/weapons/Gunshot_m9.ogg'
 
+/obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14
+	name = "M14"
+	desc = "Nanotrasen ground infantry standard weapon"
+	icon = 'code/WorkInProgress/vietnam/gun.dmi'
+	icon_state = "m14"
+	item_state = "c20r"
+	w_class = 3.0
+	origin_tech = "combat=5;materials=3"
+	mag_type = /obj/item/ammo_magazine/external/mag762
+	fire_sound = 'sound/weapons/Gunshot.ogg'
+	var
+		open = 0
+		obj/item/weapon/kitchen/utensil/knife = 0
+
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14/update_icon()
 	icon_state = "[initial(icon_state)][magazine ? "" : "-e"][knife ? "-k" : ""]"
 
@@ -123,7 +123,7 @@
 		W.loc = src
 		src.force = W.force
 		user << "<span class='notice'>You add [knife] to \the [src]!</span>"
-		update_icon()
+	update_icon()
 	..()
 
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14/afterattack(mob/user as mob)
@@ -170,14 +170,16 @@
 
 /obj/item/weapon/gun/projectile/shotgun/mosin/pump(mob/M as mob)
 	playsound(M, 'sound/weapons/bolt_action.ogg', 60, 1)
-	AM++
-	if(AM>5)
-		AM = 0
-		if(magazine)
-			magazine.loc = get_turf(src)
-			magazine = null
-			if(in_chamber)
-				in_chamber = null
+	if(magazine)
+		AM++
+		if(AM>5)
+			AM = 0
+			if(magazine)
+				magazine.loc = get_turf(src)
+				magazine = null
+				if(in_chamber)
+					in_chamber = null
+
 	if(chambered)
 		chambered.loc = get_turf(src)
 		chambered = null
