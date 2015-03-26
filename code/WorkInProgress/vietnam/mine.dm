@@ -8,11 +8,15 @@
 	var/power1 = 2
 	var/power2 = 2
 
-/obj/item/weapon/mine/update_icon()
-	if(active)
-		icon_state = "mine_active"
-	else
-		icon_state = "mine"
+/obj/item/weapon/mine/New()
+	..()
+	pixel_y = rand(-8, 8)
+	pixel_x = rand(-8, 8)
+
+/obj/item/weapon/mine/active/New()
+	..()
+	active = 1
+	update_icon()
 
 /obj/item/weapon/mine/medium/
 	desc = "LM-M.	Designed for explosion astronautics."
@@ -23,6 +27,12 @@
 	desc = "LM-E.	Designed for explosion astronautics."
 	power1 = 6
 	power2 = 5
+
+/obj/item/weapon/mine/update_icon()
+	if(active)
+		icon_state = "mine_active"
+	else
+		icon_state = "mine"
 
 /obj/item/weapon/mine/HasEntered(A as mob|obj, var/obj/item/I)
 	if(active)
@@ -295,6 +305,9 @@
 
 	var/obj/item/weapon/kitchen/utensil/knife = 0
 	var/open = 0
+
+/obj/item/weapon/gun/projectile/automatic/m300/bayonet
+	knife = /obj/item/weapon/kitchen/utensil/bayonet
 
 /obj/item/weapon/gun/projectile/automatic/m300/update_icon()
 	icon_state = "[initial(icon_state)][magazine ? "" : "-e"][knife ? "-k" : ""]"

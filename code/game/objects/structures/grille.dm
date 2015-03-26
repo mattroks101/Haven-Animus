@@ -35,6 +35,8 @@
 	attack_hand(user)
 
 /obj/structure/grille/attack_hand(mob/user as mob)
+	if(!user)
+		return playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user

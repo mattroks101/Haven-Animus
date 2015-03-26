@@ -287,10 +287,13 @@
 			else
 				var/dkey = trim(input(usr, "Please enter the decryption key.") as text|null)
 				if(dkey && dkey != "")
-					if(src.linkedServer.decryptkey == dkey)
-						auth = 1
+					if(linkedServer)
+						if(src.linkedServer.decryptkey == dkey)
+							auth = 1
+						else
+							message = incorrectkey
 					else
-						message = incorrectkey
+						message = noserver
 
 		//Turn the server on/off.
 		if (href_list["active"])
