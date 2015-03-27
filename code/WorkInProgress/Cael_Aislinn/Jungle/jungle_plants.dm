@@ -25,32 +25,66 @@
 		var/mob/living/carbon/monkey/A = M
 		A.loc = get_turf(src)
 
-/obj/structure/bush/attackby(var/obj/I as obj, var/mob/user as mob)
+/obj/structure/bush/attackby(obj/item/weapon/W as obj, var/mob/user as mob)
 	//hatchets can clear away undergrowth
-	if(istype(I, /obj/item/weapon/hatchet) && !stump)
-		if(indestructable)
-			//this bush marks the edge of the map, you can't destroy it
-			user << "\red You flail away at the undergrowth, but it's too thick here."
-		else
-			user.visible_message("\red <b>[user] begins clearing away [src].</b>","\red <b>You begin clearing away [src].</b>")
-			spawn(rand(15,30))
-				if(get_dist(user,src) < 2)
-					user << "\blue You clear away [src]."
-					var/obj/item/stack/sheet/wood/W = new(src.loc)
-					W.amount = rand(3,15)
-					if(prob(50))
-						icon_state = "stump[rand(1,2)]"
-						name = "cleared foliage"
-						desc = "There used to be dense undergrowth here."
-						density = 0
-						stump = 1
-						pixel_x = rand(-6,6)
-						pixel_y = rand(-6,6)
-					else
-						del(src)
-	else
-		return ..()
+	if (!W || !user || !W.type) return
 
+	switch(W.type)
+		if(/obj/item/weapon/circular_saw) clearing(user)
+		if(/obj/item/weapon/kitchen/utensil/knife) clearing(user)
+		if(/obj/item/weapon/scalpel) clearing(user)
+		if(/obj/item/weapon/twohanded/fireaxe) clearing(user)
+		if(/obj/item/weapon/hatchet) clearing(user)
+		if(/obj/item/weapon/melee/energy) clearing(user)
+		if(/obj/item/weapon/gun/energy/plasmacutter) clearing(user)
+		if(/obj/item/weapon/kitchen/utensil/bayonet) clearing(user)
+
+
+		// Less effective weapons
+		if(/obj/item/weapon/wirecutters)
+			if(prob(25)) clearing(user)
+		if(/obj/item/weapon/shard)
+			if(prob(25)) clearing(user)
+
+
+		// Weapons with subtypes
+		else
+			if(istype(W, /obj/item/weapon/melee/energy/sword)) clearing()
+			else if(istype(W, /obj/item/weapon/weldingtool))
+				var/obj/item/weapon/weldingtool/WT = W
+				if(WT.remove_fuel(0, user)) clearing(user)
+			else if(istype(W, /obj/item/weapon/gun/projectile/automatic/m300))
+				var/obj/item/weapon/gun/projectile/automatic/m300/C = W
+				if(C.knife) clearing(user)
+			else
+				return ..()
+
+
+/obj/structure/bush/proc/clearing(var/mob/user as mob)
+	if(indestructable)
+			//this bush marks the edge of the map, you can't destroy it
+		user << "\red You flail away at the undergrowth, but it's too thick here."
+	else
+		for(var/mob/O in oviewers(src))
+			if ((O.client && !( O.blinded )))
+				O << "\red [user] begins clearing away [src]."
+		if(do_after(user,rand(15,30)))
+			if(get_dist(user,src) < 2)
+				for(var/mob/O in oviewers(src))
+					if ((O.client && !( O.blinded )))
+						O << "\blue [user] clear away [src]."
+				var/obj/item/stack/sheet/wood/W = new(src.loc)
+				W.amount = rand(3,15)
+				if(prob(50))
+					icon_state = "stump[rand(1,2)]"
+					name = "cleared foliage"
+					desc = "There used to be dense undergrowth here."
+					density = 0
+					stump = 1
+					pixel_x = rand(-6,6)
+					pixel_y = rand(-6,6)
+				else
+					del(src)
 //*******************************//
 // Strange, fruit-bearing plants //
 //*******************************//
