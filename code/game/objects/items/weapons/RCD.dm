@@ -136,7 +136,7 @@ RCD
 							return 1
 					return 0
 
-			/*	if(istype(A, /turf/simulated/floor) && !istype(A, /turf/simulated/floor/open))
+				if(istype(A, /turf/simulated/floor) && !istype(A, /turf/simulated/floor/open))
 					if(checkResource(5, user))
 						user << "Deconstructing Floor..."
 						playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
@@ -145,7 +145,7 @@ RCD
 							activate()
 							A:ChangeTurf(/turf/space)
 							return 1
-					return 0*/
+					return 0
 
 				if(istype(A, /obj/machinery/door/airlock))
 					if(checkResource(10, user))
