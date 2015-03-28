@@ -170,6 +170,7 @@
 
 	verb/deadman_it()
 		set src in usr
+		set category = "Object"
 		set name = "Threaten to push the button!"
 		set desc = "BOOOOM!"
 		deadman = 1

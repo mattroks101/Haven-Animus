@@ -215,8 +215,7 @@
 			in_chamber.damage *= 1.75
 			Fire(M,user)
 			return
-		else if(target && M in target)
-			Fire(M,user) ///Otherwise, shoot!
-			return
+		else
+			return ..()
 	else
 		return ..() //Pistolwhippin'

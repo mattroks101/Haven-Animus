@@ -8,11 +8,15 @@
 	var/power1 = 2
 	var/power2 = 2
 
-/obj/item/weapon/mine/update_icon()
-	if(active)
-		icon_state = "mine_active"
-	else
-		icon_state = "mine"
+/obj/item/weapon/mine/New()
+	..()
+	pixel_y = rand(-8, 8)
+	pixel_x = rand(-8, 8)
+
+/obj/item/weapon/mine/active/New()
+	..()
+	active = 1
+	update_icon()
 
 /obj/item/weapon/mine/medium/
 	desc = "LM-M.	Designed for explosion astronautics."
@@ -23,6 +27,12 @@
 	desc = "LM-E.	Designed for explosion astronautics."
 	power1 = 6
 	power2 = 5
+
+/obj/item/weapon/mine/update_icon()
+	if(active)
+		icon_state = "mine_active"
+	else
+		icon_state = "mine"
 
 /obj/item/weapon/mine/HasEntered(A as mob|obj, var/obj/item/I)
 	if(active)
@@ -285,7 +295,7 @@
 /obj/item/weapon/gun/projectile/automatic/m300
 	name = "\improper M14"
 	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses 12mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "har_laser"
 	item_state = "c20r"
 	w_class = 3.0
@@ -296,25 +306,11 @@
 	var/obj/item/weapon/kitchen/utensil/knife = 0
 	var/open = 0
 
-
-
+/obj/item/weapon/gun/projectile/automatic/m300/bayonet
+	knife = /obj/item/weapon/kitchen/utensil/bayonet
 
 /obj/item/weapon/gun/projectile/automatic/m300/update_icon()
-	if(magazine)
-		icon_state = "har_laser_w"
-		if(knife)
-			icon_state = "har_laser_w-k"
-	else
-		icon_state = "har_laser-e"
-		if(knife)
-			icon_state = "har_laser-e-k"
-
-
-/*	icon_state = "har_laser" + "[chambered ? "" : "-e"][knife ? "" : "-k"]"
-	return*/
-
-
-
+	icon_state = "[initial(icon_state)][magazine ? "" : "-e"][knife ? "-k" : ""]"
 
 /obj/item/weapon/gun/projectile/automatic/m300/attack_self(mob/user as mob)
 	if(!magazine)
