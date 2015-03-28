@@ -28,7 +28,7 @@ datum/report_topic_handler
 /client/verb/bugreport()
 	var/mob/user = usr
 	set category = "OOC"
-	set name = "BUGREPORT"
+	set name = "Report a Bug"
 	if (usr.client.prefs.muted & MUTE_REPORTS)
 		src << "You are muted."
 	else

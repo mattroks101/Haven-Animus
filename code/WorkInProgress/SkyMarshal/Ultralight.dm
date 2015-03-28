@@ -14,7 +14,7 @@
 #define ul_Steps 7
 #define ul_FalloffStyle UL_I_FALLOFF_ROUND // Sets the lighting falloff to be either squared or circular.
 #define ul_Layer 10
-#define ul_TopLuminosity 9 //Maximum brightness an object can have.
+#define ul_TopLuminosity 13 //Maximum brightness an object can have.
 
 //#define ul_LightLevelChangedUpdates
 //Uncomment if you have code that you want triggered when the light level on an atom changes.

@@ -18,7 +18,7 @@
 
 /obj/item/device/flashlight/attackby(var/obj/B, var/mob/user)
 	if (istype(B, /obj/item/weapon/storage/toolbox))
-		user << "Are you silly? You can't insert this massive toolbox into flashlight."
+		user << "<b>[src]</b> says, \"Are you silly? You can't insert this massive toolbox into flashlight.\""
 		return
 
 /obj/item/device/flashlight/initialize()
@@ -229,3 +229,18 @@
 		src.force = on_damage
 		src.damtype = "fire"
 		processing_objects += src
+
+
+/obj/item/device/flashlight/seclite
+	name = "seclite"
+	desc = "A robust flashlight used by security."
+	icon_state = "seclite"
+	item_state = "seclite"
+	force = 8 // Not as good as a stun baton.
+	attack_verb = list("beaten")
+	hitsound = 'sound/weapons/genhit1.ogg'
+	// A little better than the standard flashlight.
+
+	brightness_red = 4
+	brightness_green = 4
+	brightness_blue = 4

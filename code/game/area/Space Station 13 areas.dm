@@ -713,6 +713,10 @@ var/list/ghostteleportlocs = list()
 	name = "Atmospherics Maintenance"
 	icon_state = "fpmaint"
 
+/area/maintenance/electrical
+	name = "Electrical Maintenance"
+	icon_state = "yellow"
+
 /area/maintenance/fpmaint
 	name = "EVA Maintenance"
 	icon_state = "fpmaint"

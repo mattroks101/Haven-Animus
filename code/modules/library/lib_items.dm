@@ -19,11 +19,34 @@
 	density = 1
 	opacity = 1
 
+	var/category = "Fiction"
+
 /obj/structure/bookcase/initialize()
+	name = "[category] Bookcase"
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/weapon/book))
 			I.loc = src
+
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		world.log << "ERROR: Unable to connect to database."
+	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM erro_library WHERE category='[category]'")
+	query.Execute()
+
+	while(query.NextRow())
+		var/author = query.item[2]
+		var/title = query.item[3]
+		var/content = query.item[4]
+		var/obj/item/weapon/book/B = new(src)
+		B.name = "Book: [title]"
+		B.title = title
+		B.author = author
+		B.dat = content
+		B.icon_state = "book[rand(1,7)]"
+
 	update_icon()
+
+
 
 /obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/weapon/book))
@@ -35,7 +58,7 @@
 		if(!newname)
 			return
 		else
-			name = ("bookcase ([sanitize(newname)])")
+			name = ("\"[sanitize(newname)]\" Bookcase")
 	else
 		..()
 
