@@ -80,7 +80,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			title = null
 		title = sanitizeSQL(title)
 	if(href_list["setcategory"])
-		var/newcategory = input("Choose a category to search for:") in list("Any", "Fiction", "Non-Fiction", "Adult", "Reference", "Religion")
+		var/newcategory = input("Choose a category to search for:") in list("Fiction", "Non-Fiction", "Adult", "Religion", "History", "SelfHelp", "Science", "Cooking", "Medical", "Engineering")
 		if(newcategory)
 			category = sanitize(newcategory)
 		else

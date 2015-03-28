@@ -21,6 +21,34 @@
 
 	var/category = "Fiction"
 
+obj/structure/bookcase/engi
+	name = "Engineering Bookcase"
+	category = "Engineering"
+obj/structure/bookcase/med
+	name = "Medical Bookcase"
+	category = "Medical"
+obj/structure/bookcase/his
+	name = "History Bookcase"
+	category = "History"
+obj/structure/bookcase/bus
+	name = "Non-Fiction Bookcase"
+	category = "Non-Fiction"
+obj/structure/bookcase/sh
+	name = "Self-Help Bookcase"
+	category = "SelfHelp"
+obj/structure/bookcase/sci
+	name = "Science Bookcase"
+	category = "Science"
+obj/structure/bookcase/reli
+	name = "Religion Bookcase"
+	category = "Religion"
+obj/structure/bookcase/cook
+	name = "Cooking Bookcase"
+	category = "Cooking"
+obj/structure/bookcase/cook
+	name = "Adult Bookcase"
+	category = "Adult"
+
 /obj/structure/bookcase/initialize()
 	name = "[category] Bookcase"
 	for(var/obj/item/I in loc)
