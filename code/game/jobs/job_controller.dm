@@ -370,6 +370,7 @@ var/global/datum/controller/occupations/job_master
 				H.loc = S.loc
 
 		//give them an account in the station database
+		/*
 		var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)
 		if(H.mind)
 			var/remembered_info = ""
@@ -398,8 +399,8 @@ var/global/datum/controller/occupations/job_master
 
 		spawn(0)
 			H << "\blue<b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b>"
-
-		var/alt_title = null
+		*/
+		//var/alt_title = null
 		if(H.mind)
 			H.mind.assigned_role = rank
 
@@ -424,12 +425,12 @@ var/global/datum/controller/occupations/job_master
 							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel(H)
 							new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
-
+		/*
 		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
 		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
-
-		spawnId(H, rank, alt_title)
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
+		*/
+		//spawnId(H, rank, alt_title)
+		//H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
 
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
