@@ -546,3 +546,24 @@
 		if(prob(25))
 			speaking_to_players = 1
 			processing_objects.Add(src)
+
+
+
+/obj/item/weapon/crystal
+	name = "Crystal"
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "crystal"
+	listening_to_players = 1
+	speaking_to_players = 1
+
+/obj/item/weapon/crystal/New()
+	if(prob(50))
+		icon_state = "crystal2"
+	processing_objects.Add(src)
+
+
+
+/obj/item/weapon/crystal/Destroy()
+	..()
+	processing_objects.Remove(src)
+

@@ -40,7 +40,7 @@
 				heard_words["[lowertext(seperate[Xa])]"] = list()
 			var/list/w = heard_words["[lowertext(seperate[Xa])]"]
 			if(w)
-				w.Add("[lowertext(seperate[next])]")
+				w.Add("[lowertext(seperate[sanitize(next)])]")
 			//world << "Adding [lowertext(seperate[next])] to [lowertext(seperate[Xa])]"
 
 		if(!rand(0, 5))
@@ -87,7 +87,7 @@
 		else
 			text = "[pick(heard_words)]"
 		msg+=" [text]"
-	if(q)
+	if(q || prob(10))
 		msg+="?"
 	else
 		if(rand(0,10))
@@ -105,5 +105,5 @@
 			listening|=M
 
 	for(var/mob/M in listening)
-		M << "<b>[src]</b> reverberates, \blue\"[msg]\""
+		M << "<b>[src]</b> reverberates, \blue\"[sanitize(msg)]\""
 	lastsaid = world.timeofday + rand(300,800)
