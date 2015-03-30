@@ -71,7 +71,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_antagHUD_restrictions,
 	/client/proc/allow_character_respawn,    /* Allows a ghost to respawn */
 	/client/proc/admin_infect_zombie,
-	/client/proc/checkAccount
+	/client/proc/checkAccount,
+	/client/proc/spawn_by_ckey
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
