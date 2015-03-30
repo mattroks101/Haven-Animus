@@ -177,46 +177,6 @@
 		else
 			product_records += R
 	return
-		/*
-/obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
-	for(var/typepath in productlist)
-		var/amount = productlist[typepath]
-		var/price = prices[typepath]
-		if(isnull(amount)) amount = 1
-
-		var/atom/temp = new typepath(null)
-		var/datum/data/vending_product/R = new /datum/data/vending_product()
-		R.product_name = temp.name
-		R.product_path = typepath
-		R.amount = amount
-		R.price = price
-		R.display_color = pick("red","blue","green")
-
-		if(hidden)
-			hidden_records += R
-		else if(req_coin)
-			coin_records += R
-		else
-			product_records += R
-//		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
-	return
-			*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.panel_open)
@@ -381,14 +341,14 @@
 			return
 
 	var/vendorname = (src.name)  //import the machine's name
-
+/*
 	if(src.currently_vending)
 		var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
 		dat += "<b>You have selected [currently_vending.product_name].<br>Please swipe your ID to pay for the article.</b><br>"
 		dat += "<a href='byond://?src=\ref[src];cancel_buying=1'>Cancel</a>"
 		user << browse(dat, "window=vending")
 		onclose(user, "")
-		return
+		return*/
 
 	var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
 	dat += "<b>Select an item: </b><br><br>" //the rest is just general spacing and bolding
@@ -471,33 +431,73 @@
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
 		usr.set_machine(src)
-		if ((href_list["vend"]) && (src.vend_ready) && (!currently_vending))
-
-			if(istype(usr,/mob/living/silicon))
-				if(istype(usr,/mob/living/silicon/robot))
-					var/mob/living/silicon/robot/R = usr
-					if(!(R.module && istype(R.module,/obj/item/weapon/robot_module/butler) ))
-						usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
-						return
-				else
-					usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
-					return
-
-			if ((!src.allowed(usr)) && (!src.emagged) && (src.wires & WIRE_SCANID)) //For SECURE VENDING MACHINES YEAH
-				usr << "\red Access denied." //Unless emagged of course
-				flick(src.icon_deny,src)
+		if((href_list["vend"]) && (vend_ready))
+			if(panel_open)
+				usr << "<span class='notice'>The vending machine cannot dispense products while its service panel is open!</span>"
 				return
+
+			if((!allowed(usr)) && !emagged && WIRE_SCANID)	//For SECURE VENDING MACHINES YEAH
+				usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
+				flick(icon_deny,src)
+				return
+
+			vend_ready = 0 //One thing at a time!!
 
 			var/datum/data/vending_product/R = locate(href_list["vend"])
-			if (!R || !istype(R) || !R.product_path || R.amount <= 0)
+			if(!R || !istype(R) || !R.product_path)
+				vend_ready = 1
 				return
 
-			if(R.price == null)
-				src.vend(R, usr)
-			else
-				src.currently_vending = R
-				src.updateUsrDialog()
+			if(R in hidden_records)
+				if(!extended_inventory)
+					vend_ready = 1
+					return
+			else if(R in coin_records)
+				if(!coin)
+					usr << "<span class='notice'>You need to insert a coin to get this item.</span>"
+					vend_ready = 1
+					return
+				if(coin.string_attached)
+					if(prob(50))
+						if(usr.put_in_hands(coin))
+							usr << "<span class='notice'>You successfully pull [coin] out before [src] could swallow it.</span>"
+							coin = null
+						else
+							usr << "<span class='notice'>You couldn't pull [coin] out because your hands are full.</span>"
+							qdel(coin)
+							coin = null
+					else
+						usr << "<span class='notice'>You weren't able to pull [coin] out fast enough, the machine ate it, string and all.</span>"
+						qdel(coin)
+						coin = null
+				else
+					qdel(coin)
+					coin = null
+			else if (!(R in product_records))
+				vend_ready = 1
+				message_admins("Vending machine exploit attempted by [key_name(usr, usr.client)]!")
+				return
 
+			if (R.amount <= 0)
+				usr << "<span class='warning'>Sold out.</span>"
+				vend_ready = 1
+				return
+			else
+				R.amount--
+
+			if(((last_reply + (vend_delay + 200)) <= world.time) && vend_reply)
+				speak(vend_reply)
+				last_reply = world.time
+
+			use_power(5)
+			if(icon_vend) //Show the vending animation if needed
+				flick(icon_vend,src)
+			spawn(vend_delay)
+				new R.product_path(get_turf(src))
+				vend_ready = 1
+				return
+
+			updateUsrDialog()
 			return
 
 		else if (href_list["cancel_buying"])
