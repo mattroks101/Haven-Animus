@@ -17,7 +17,6 @@
 	icon_state = "book_alt-0"
 	anchored = 1
 	density = 1
-	opacity = 1
 
 	var/category = "Fiction"
 
@@ -45,7 +44,7 @@ obj/structure/bookcase/reli
 obj/structure/bookcase/cook
 	name = "Cooking Bookcase"
 	category = "Cooking"
-obj/structure/bookcase/cook
+obj/structure/bookcase/adult
 	name = "Adult Bookcase"
 	category = "Adult"
 
@@ -58,19 +57,20 @@ obj/structure/bookcase/cook
 	establish_db_connection()
 	if(!dbcon.IsConnected())
 		world.log << "ERROR: Unable to connect to database."
-	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM erro_library WHERE category='[category]'")
-	query.Execute()
+	else
+		var/DBQuery/query = dbcon.NewQuery("SELECT * FROM erro_library WHERE category='[category]'")
+		query.Execute()
 
-	while(query.NextRow())
-		var/author = query.item[2]
-		var/title = query.item[3]
-		var/content = query.item[4]
-		var/obj/item/weapon/book/B = new(src)
-		B.name = "Book: [title]"
-		B.title = title
-		B.author = author
-		B.dat = content
-		B.icon_state = "book[rand(1,7)]"
+		while(query.NextRow())
+			var/author = query.item[2]
+			var/title = query.item[3]
+			var/content = query.item[4]
+			var/obj/item/weapon/book/B = new(src)
+			B.name = "Book: [title]"
+			B.title = title
+			B.author = author
+			B.dat = content
+			B.icon_state = "book[rand(1,7)]"
 
 	update_icon()
 

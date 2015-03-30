@@ -50,12 +50,13 @@ datum/shuttle_controller/proc/shuttlealert(var/X)
 
 
 datum/shuttle_controller/proc/recall()
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 	if(direction == 1)
 		var/timeleft = timeleft()
 		if(alert == 0)
 			if(timeleft >= 600)
 				return
-			captain_announce("The emergency shuttle has been recalled.")
+			a.autosay("The emergency shuttle has been recalled.", "Escape Computer")
 			world << sound('sound/AI/shuttlerecalled.ogg')
 			setdirection(-1)
 			online = 1
@@ -64,7 +65,7 @@ datum/shuttle_controller/proc/recall()
 					A.readyreset()
 			return
 		else //makes it possible to send shuttle back.
-			captain_announce("The shuttle has been recalled.")
+			a.autosay("The emergency shuttle has been recalled.", "Escape Computer")
 			setdirection(-1)
 			online = 1
 			alert = 0 // set alert back to 0 after an admin recall
@@ -101,6 +102,7 @@ datum/shuttle_controller/proc/setdirection(var/dirn)
 datum/shuttle_controller/proc/process()
 
 datum/shuttle_controller/emergency_shuttle/process()
+	var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)
 	if(!online)
 		return
 	var/timeleft = timeleft()
@@ -284,7 +286,8 @@ datum/shuttle_controller/emergency_shuttle/process()
 				start_location.move_contents_to(end_location)
 				settimeleft(SHUTTLELEAVETIME)
 				//send2irc("Server", "The Emergency Shuttle has docked with the station.")
-				captain_announce("The Emergency Shuttle has docked with the station. You have [round(timeleft()/60,1)] minutes to board the Emergency Shuttle.")
+
+				a.autosay("The Emergency Shuttle has docked with the station. You have [round(timeleft()/60,1)] minutes to board the Emergency Shuttle.", "Escape Computer")
 				world << sound('sound/AI/shuttledock.ogg')
 
 				return 1
@@ -415,7 +418,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 						if(!M.buckled)
 							M.Weaken(5)
 
-				captain_announce("The Emergency Shuttle has left the station. Estimate [round(timeleft()/60,1)] minutes until the shuttle docks at Central Command.")
+				a.autosay("The Emergency Shuttle has left the station. Estimate [round(timeleft()/60,1)] minutes until the shuttle docks at Central Command.", "Escape Computer")
 
 				return 1
 

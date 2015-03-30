@@ -63,6 +63,16 @@
 	poison_per_bite = 5
 	move_to_delay = 4
 
+/mob/living/simple_animal/hostile/giant_spider/New()
+	..()
+
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+	name = "[name] ([rand(1, 1000)])"
+
+/mob/living/simple_animal/hostile/giant_spider/can_use_vents()
+	return
+
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
 	..()
 	if(isliving(target))
@@ -72,6 +82,66 @@
 			if(prob(poison_per_bite))
 				L << "\red You feel a tiny prick."
 				L.reagents.add_reagent(poison_type, 5)
+
+/mob/living/simple_animal/hostile/giant_spider/verb/webweb()
+	set category = "Abilities"
+	set name = "Create web"
+	web()
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/CtrlClickOn(var/atom/A)
+	makecocon(A)
+
+/mob/living/simple_animal/hostile/giant_spider/proc/web(mob/living/M as mob)
+	busy = SPINNING_WEB
+	src.visible_message("\blue \the [src] begins to secrete a sticky substance.")
+	stop_automated_movement = 1
+	spawn(40)
+		if(busy == SPINNING_WEB)
+			new /obj/effect/spider/stickyweb(src.loc)
+			busy = 0
+			stop_automated_movement = 0
+
+
+/mob/living/simple_animal/hostile/giant_spider/proc/makecocon(var/target)
+
+	var/atom/cocoon_target = target
+	if(get_dist(src, cocoon_target) <= 1)
+		busy = SPINNING_COCOON
+		src.visible_message("\blue \the [src] begins to secrete a sticky substance around \the [cocoon_target].")
+		stop_automated_movement = 1
+		walk(src,0)
+		spawn(50)
+			if(busy == SPINNING_COCOON)
+				if(cocoon_target && istype(cocoon_target.loc, /turf) && get_dist(src,cocoon_target) <= 1)
+					var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
+					var/large_cocoon = 0
+					C.pixel_x = cocoon_target.pixel_x
+					C.pixel_y = cocoon_target.pixel_y
+					for(var/mob/living/M in C.loc)
+						if(istype(M, /mob/living/simple_animal/hostile/giant_spider))
+							continue
+						large_cocoon = 1
+
+						src.visible_message("\red \the [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.")
+						M.loc = C
+						C.pixel_x = M.pixel_x
+						C.pixel_y = M.pixel_y
+						break
+					for(var/obj/item/I in C.loc)
+						I.loc = C
+					for(var/obj/structure/S in C.loc)
+						if(!S.anchored)
+							S.loc = C
+							large_cocoon = 1
+					for(var/obj/machinery/M in C.loc)
+						if(!M.anchored)
+							M.loc = C
+							large_cocoon = 1
+					if(large_cocoon)
+						C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
+				busy = 0
+				stop_automated_movement = 0
+
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
 	..()
@@ -116,14 +186,7 @@
 				//second, spin a sticky spiderweb on this tile
 				var/obj/effect/spider/stickyweb/W = locate() in get_turf(src)
 				if(!W)
-					busy = SPINNING_WEB
-					src.visible_message("\blue \the [src] begins to secrete a sticky substance.")
-					stop_automated_movement = 1
-					spawn(40)
-						if(busy == SPINNING_WEB)
-							new /obj/effect/spider/stickyweb(src.loc)
-							busy = 0
-							stop_automated_movement = 0
+					web()
 				else
 					//third, lay an egg cluster there
 					var/obj/effect/spider/eggcluster/E = locate() in get_turf(src)

@@ -242,11 +242,10 @@
 										if(O != user)
 											O.show_message(text("\red <B>[] unlocks [] with a multitool.</B>", user, crat), 1)
 		multi.is_used = 0
-
-	if(src && !src.opened)
+	else if(src && !src.opened)
 		src.togglelock(user)
 		return
-	return ..()
+	else return ..()
 
 /obj/structure/closet/crate/secure/emp_act(severity)
 	for(var/obj/O in src)

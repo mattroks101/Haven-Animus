@@ -455,7 +455,7 @@
 	if(evac_type == "pods")
 		a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	else
-		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
+		a.autosay("Alert: The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	return
@@ -560,7 +560,7 @@
 	if(evac_type == "pods")
 		a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	else
-		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
+		a.autosay("Alert: The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	..()
@@ -589,7 +589,7 @@
 	if(evac_type == "pods")
 		a.autosay("Alert: The escape pods are being launched. They will launch in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	else
-		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
+		a.autosay("Alert: The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.", "Escape Computer")
 	world << sound('sound/AI/shuttlecalled.ogg')
 
 	..()

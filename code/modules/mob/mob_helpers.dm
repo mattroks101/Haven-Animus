@@ -62,6 +62,11 @@
 		return 1
 	return 0
 
+/proc/isspider(A)
+	if(istype(A, /mob/living/simple_animal/hostile/giant_spider))
+		return 1
+	return 0
+
 /proc/ismouse(A)
 	if(istype(A, /mob/living/simple_animal/mouse))
 		return 1
