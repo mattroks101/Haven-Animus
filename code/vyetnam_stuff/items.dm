@@ -36,3 +36,62 @@
 	new /obj/item/weapon/plastique(src)
 	new /obj/item/weapon/plastique(src)
 	new /obj/item/weapon/plastique(src)
+
+/obj/item/taperoll/barbwire
+	name = "Coil of barbwire"
+	desc = "Nope."
+	tape_type = /obj/item/tape/barbwire
+
+/obj/item/tape/barbwire
+	name = "Barbwire"
+	icon = 'icons/policetape.dmi'
+	anchored = 1
+	density = 0
+	icon_base = "police"
+
+/obj/item/tape/barbwire/Entered(atom/movable/obj,atom/oldLoc)
+	. = ..()
+	if(!ishuman(obj))
+		return
+	var/mob/living/carbon/human/H = obj
+
+	H << "You cut yourself by [src]."
+	H.adjustBruteLossByPart(15, pick("r_leg", "l_leg", "r_foot", "l_foot"))
+
+	if(prob(75))
+		H << "You stuck in [src] a bit."
+		H.Stun(10)
+	else if(prob(75))
+		H << "You really stuck in [src]."
+		H.Stun(25)
+
+/obj/item/tape/barbwire/attack_hand(mob/user)
+	if(!ishuman(user))
+		return ..()
+	var/mob/living/carbon/human/H = user
+	if((H.gloves && prob(10)) || (!H.gloves && prob(60)))
+		H << "You cut yourself by [src]"
+		H.adjustBruteLossByPart(10, (H.hand) ? "l_arm" : "r_arm")
+
+/obj/item/tape/barbwire/attackby(obj/item/W, mob/user)
+	if(!istype(W, /obj/item/weapon/wirecutters))
+		return ..()
+	user << "You start cutting [src]"
+	user.show_viewers("\red [user] starts cutting the [src]!")
+
+	if(!do_after(30))
+		return
+
+	user << "You cut [src] by [W]."
+	user.show_viewers("\red [user] cuts the [src]!")
+	del(src)
+
+/obj/structure/bushes
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "ano70"
+	density = 0
+	opacity = 0
+	layer = 5
+
+	New()
+		icon_state = pick("ano70", "ano80")
