@@ -7,14 +7,15 @@
 	if(!player_ckey)
 		return
 
-	var/client/player = 0
-	for(var/client/C in world)
-		if(player_ckey == player.ckey)
+	var/client/player = null
+	for(var/client/C)
+		if(player_ckey == C.key)
 			player = C
 			break
 
 	if(!player)
 		usr << "\red User not found."
+		return
 
 	var/list/possible_equipment = list("Marine", "Sergeant", "Corporal", "Lieutenant")
 
