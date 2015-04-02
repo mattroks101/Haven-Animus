@@ -163,6 +163,22 @@
 						M << pick("\red Something sharp bites you!","\red Sharp teeth grab hold of you!","\red You feel something take a chunk out of your leg!")
 						M.apply_damage(rand(0,1), BRUTE)
 
+/turf/unsimulated/jungle/water/attackby(obj/item/W, mob/user)
+	if(!istype(W, /obj/item/weapon/reagent_containers/food/drinks))
+		return ..()
+	var/obj/item/weapon/reagent_containers/food/drinks/D = W
+
+	var/free_volume = D.reagents.maximum_volume - D.reagents.total_volume
+	if(free_volume <= 10)
+		user << "\blue Your [W] is almost full already!"
+		return
+
+	D.reagents.add_reagent("water", free_volume * 0.8)
+	D.reagents.add_reagent("toxin", free_volume * 0.2)
+
+	user << "You filled up [W]."
+
+
 /turf/unsimulated/jungle/water/deep
 	plants_spawn = 0
 	density = 1

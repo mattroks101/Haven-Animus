@@ -45,10 +45,9 @@
 			M.equip_to_slot_or_del(new /obj/item/weapon/melee/classic_baton(M), slot_belt)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(M), slot_shoes)
 
-		//if("Lieutenant")
-			//M.equip_to_slot_or_del(,)
-			//M.equip_to_slot_or_del(,)
-			//M.equip_to_slot_or_del(,)
+		if("Lieutenant")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(M), slot_shoes)
 
 	var/obj/item/weapon/card/id/W = new(M)
 	W.name = "[M.real_name]'s ID Card"

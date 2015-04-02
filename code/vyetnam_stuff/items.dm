@@ -42,18 +42,18 @@
 
 /obj/item/taperoll/barbwire
 	name = "coil of barbwire"
-	icon = 'icons/policetape.dmi'
-	icon_state = "police_start"
+	icon = 'icons/vyetnam.dmi'
+	icon_state = "barbwire_start"
 	tape_type = /obj/item/tape/barbwire
-	icon_base = "police"
+	icon_base = "barbwire"
 
 /obj/item/tape/barbwire
 	name = "barbwire"
-	icon = 'icons/policetape.dmi'
+	icon = 'icons/vyetnam.dmi'
 	anchored = 1
 	density = 0
-	icon_state = "police_h"
-	icon_base = "police"
+	icon_state = "barbwire_h"
+	icon_base = "barbwire"
 
 /obj/item/tape/barbwire/Crossed(atom/movable/obj,atom/oldLoc)
 	. = ..()
@@ -95,11 +95,20 @@
 	del(src)
 
 /obj/structure/bushes
-	icon = 'icons/obj/xenoarchaeology.dmi'
-	icon_state = "ano70"
+	icon = 'icons/obj/plants.dmi'
+	icon_state = "gplant_1"
 	density = 0
 	opacity = 0
 	layer = 5
 
 	New()
-		icon_state = pick("ano70", "ano80")
+		icon_state = "gplant_[rand(1, 10)]"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/marine
+	icon_state = "ramen"
+	volume = 40
+
+	New()
+		..()
+		reagents.add_reagent("water", 40)
+

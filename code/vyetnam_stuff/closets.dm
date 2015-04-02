@@ -4,6 +4,26 @@
 /obj/structure/closet/gear/lieutenant/New()
 	name = "Lieutenant gear closet"
 
+	/*Weapon*/
+	new /obj/item/weapon/gun/projectile/automatic/pistol/usp(src)
+	new /obj/item/ammo_magazine/external/sm45(src)
+	new /obj/item/ammo_magazine/external/sm45(src)
+	new /obj/item/ammo_magazine/external/sm45(src)
+
+	/*Clothes*/
+	new /obj/item/clothing/head/helmet/HoS/dermal(src)
+	new /obj/item/clothing/suit/armor/bulletproof/nanotrasen(src)
+	new /obj/item/weapon/storage/belt/security/tactical(src)
+
+	var/obj/item/weapon/storage/backpack/satchel_norm/satchel = new(src)
+
+	/*Other stuff*/
+	new /obj/item/weapon/storage/box/first_aid_kit(satchel)
+	new /obj/item/weapon/storage/box/lunches(satchel)
+	new /obj/item/weapon/flame/lighter/zippo(src)
+
+	new /obj/item/device/radio/headset/ert(src)
+
 
 /obj/structure/closet/gear/sergeant
 	name = "Sergeant gear closet"
@@ -22,6 +42,7 @@
 
 	/*Clothes*/
 	new /obj/item/clothing/head/helmet/tactical/nanotrasen(src)
+	new /obj/item/clothing/head/helmet/HoS/dermal(src)
 	new /obj/item/clothing/suit/armor/bulletproof/nanotrasen(src)
 	//new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/weapon/storage/belt/security/tactical(src)
@@ -36,7 +57,6 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 
-	new /obj/item/device/radio/off(src)
 	new /obj/item/device/radio/headset/ert(src)
 
 
@@ -97,6 +117,8 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 
+	new /obj/item/device/radio/off(src)
+
 /obj/structure/closet/gear/fire_support
 	name = "Fire support gear closet"
 	icon_state = "red"
@@ -124,6 +146,7 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/storage/box/explosive_kit(satchel)
+
 	new /obj/item/device/radio/off(src)
 
 
@@ -170,6 +193,8 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 
+	new /obj/item/device/radio/off(src)
+
 
 /obj/structure/closet/gear/engineer
 	name = "Engineer gear closet"
@@ -202,3 +227,5 @@
 
 	new /obj/item/stack/sheet/metal(satchel)
 	new /obj/item/stack/sheet/glass(satchel)
+
+	new /obj/item/device/radio/off(src)

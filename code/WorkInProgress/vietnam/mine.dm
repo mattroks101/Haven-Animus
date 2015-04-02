@@ -262,11 +262,11 @@
 
 /obj/item/clothing/head/helmet/tactical/nanotrasen/tactical
 	name = "Drill sergeants hat"
-	desc = "For those who do not die first on the battlefield."
+	desc = "For those who do not die first on the battlefield. Now without any protection."
 	icon_state = "sergeanthead_j"
 	item_state = "sergeanthead_j"
 
-	armor = list(melee = 30, bullet = 10, laser = 10,energy = 5, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/glasses/sunglasses/aviator
