@@ -372,4 +372,5 @@ BLIND     // can't see anything
 	W.hold.loc = usr
 	W.hold.attack_hand(usr)
 
-
+/obj/item/proc/negates_gravity()
+	return 0

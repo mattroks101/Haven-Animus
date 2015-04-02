@@ -1,6 +1,7 @@
 /mob/living/carbon/human/movement_delay()
 	var/tally = 0
-
+	//if(!has_gravity(src))
+	//	return -1	//It's hard to be slowed down in space by... anything
 	if(status_flags & GOTTAGOFAST) return -1
 
 	if(species.slowdown)
@@ -50,7 +51,7 @@
 
 /mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
 	//Can we act
-	if(restrained())	return 0
+	if(!canmove)	return 0
 
 	//Do we have a working jetpack
 	if(istype(back, /obj/item/weapon/tank/jetpack))
@@ -58,10 +59,12 @@
 		if(((!check_drift) || (check_drift && J.stabilization_on)) && (!lying) && (J.allow_thrust(0.01, src)))
 			inertia_dir = 0
 			return 1
-//		if(!check_drift && J.allow_thrust(0.01, src))
-//			return 1
-
-	//If no working jetpack then use the other checks
+	//Do we have working magboots
+	if(istype(shoes, /obj/item/clothing/shoes/magboots))
+		var/obj/item/clothing/shoes/magboots/B = shoes
+		if((B.flags & NOSLIP) && istype(src.loc,/turf/simulated/floor)/* && (!has_gravity(src.loc))*/)
+			return 1
+	//If no working jetpack or magboots then use the other checks
 	if(..())	return 1
 	return 0
 
@@ -70,7 +73,8 @@
 	//If knocked out we might just hit it and stop.  This makes it possible to get dead bodies and such.
 	if(stat)
 		prob_slip = 0 // Changing this to zero to make it line up with the comment, and also, make more sense.
-
+	if(istype(shoes) && shoes.negates_gravity())
+		prob_slip = 0
 	//Do we have magboots or such on if so no slip
 	if(istype(shoes, /obj/item/clothing/shoes/magboots) && (shoes.flags & NOSLIP))
 		prob_slip = 0
@@ -83,3 +87,13 @@
 
 	prob_slip = round(prob_slip)
 	return(prob_slip)
+/*
+/mob/living/carbon/human/mob_has_gravity()
+	. = ..()
+	if(!.)
+		if(mob_negates_gravity())
+			. = 1
+
+/mob/living/carbon/human/mob_negates_gravity()
+	return shoes && shoes.negates_gravity()
+*/

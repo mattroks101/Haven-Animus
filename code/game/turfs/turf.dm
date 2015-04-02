@@ -88,6 +88,65 @@
 				return 0
 	return 1 //Nothing found to block so return success!
 
+/*
+/turf/Entered(atom/atom as mob|obj)
+	..()
+//vvvvv Infared beam stuff vvvvv
+
+	if ((atom && atom.density && !( istype(atom, /obj/effect/beam) )))
+		for(var/obj/effect/beam/i_beam/I in src)
+			spawn( 0 )
+				if (I)
+					I.hit()
+				break
+
+//^^^^^ Infared beam stuff ^^^^^
+
+	if(!istype(atom, /atom/movable))
+		return
+
+	var/atom/movable/M = atom
+
+	var/loopsanity = 100
+	if(ismob(M))
+		var/mob/O = M
+		if(!O.lastarea)
+			O.lastarea = get_area(O.loc)
+		var/has_gravity = O.mob_has_gravity(src)
+		O.update_gravity(has_gravity)
+		if(!has_gravity)
+			inertial_drift(O)
+		else if(!istype(src, /turf/space))
+			O.inertia_dir = 0
+
+	/*
+		if(M.flags & NOGRAV)
+			inertial_drift(M)
+	*/
+
+
+
+		else if(!istype(src, /turf/space))
+			M:inertia_dir = 0
+	..()
+	var/objects = 0
+	for(var/atom/A as mob|obj|turf|area in src)
+		if(objects > loopsanity)	break
+		objects++
+		spawn( 0 )
+			if ((A && M))
+				A.HasEntered(M, 1)
+			return
+	objects = 0
+	for(var/atom/A as mob|obj|turf|area in range(1))
+		if(objects > loopsanity)	break
+		objects++
+		spawn( 0 )
+			if ((A && M))
+				A.HasProximity(M, 1)
+			return
+	return
+*/
 
 /turf/Entered(atom/atom as mob|obj)
 	..()
@@ -141,7 +200,6 @@
 				A.HasProximity(M, 1)
 			return
 	return
-
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
 	return
 
@@ -424,5 +482,9 @@
 	return L
 
 /turf/handle_fall(mob/faller, forced)
-	faller.lying = 90
+	faller.lying = pick(90, 270)
+	if(!forced)
+		return
+//	if(has_gravity(src))
+	//	playsound(src, "bodyfall", 50, 1)
 

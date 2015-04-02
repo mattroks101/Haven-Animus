@@ -326,13 +326,30 @@
 /area/proc/gravitychange(var/gravitystate = 0, var/area/A)
 
 	A.has_gravity = gravitystate
-
 	for(var/area/SubA in A.related)
 		SubA.has_gravity = gravitystate
-
 		if(gravitystate)
 			for(var/mob/living/carbon/human/M in SubA)
 				thunk(M)
+
+
+/*
+/proc/has_gravity(atom/AT, turf/T)
+	if(!T)
+		T = get_turf(AT)
+	var/area/A = get_area(T)
+	if(istype(T, /turf/space)) // Turf never has gravity
+		return 0
+	else if(A && A.has_gravity) // Areas which always has gravity
+		return 1
+	else
+		// There's a gravity generator on our z level
+
+
+		if(T && gravity_generators["[T.z]"] && length(gravity_generators["[T.z]"]))
+			return 1
+
+	return 0*/
 
 /area/proc/thunk(mob)
 	if(istype(mob,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
@@ -573,3 +590,4 @@ proc/get_doors(area/A) //Luckily for the CPU, this generally is only run once pe
 					O.density = doors_list[O]*/
 			//for(var/obj/machinery/door/D in T)
 			//	D.density = z_doors_list[D]
+
