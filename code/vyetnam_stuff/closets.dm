@@ -23,7 +23,7 @@
 	/*Clothes*/
 	new /obj/item/clothing/head/helmet/tactical/nanotrasen(src)
 	new /obj/item/clothing/suit/armor/bulletproof/nanotrasen(src)
-	new /obj/item/clothing/shoes/jackboots(src)
+	//new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/weapon/storage/belt/security/tactical(src)
 
 	var/obj/item/weapon/storage/backpack/satchel_norm/satchel = new(src)
@@ -34,6 +34,7 @@
 	new /obj/item/weapon/storage/firstaid/regular(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
+	new /obj/item/weapon/storage/box/lunches(satchel)
 
 	new /obj/item/device/radio/off(src)
 	new /obj/item/device/radio/headset/ert(src)
@@ -57,7 +58,7 @@
 	/*Clothes*/
 	new /obj/item/clothing/head/helmet/tactical/nanotrasen(src)
 	new /obj/item/clothing/suit/armor/bulletproof/nanotrasen(src)
-	new /obj/item/clothing/shoes/jackboots(src)
+	//new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/weapon/storage/belt/security/tactical(src)
 
 	var/obj/item/weapon/storage/backpack/satchel_norm/satchel = new(src)
@@ -66,9 +67,9 @@
 	new /obj/item/weapon/storage/box/medipens/utility(satchel)
 	new /obj/item/weapon/storage/box/first_aid_kit(satchel)
 	new /obj/item/weapon/storage/firstaid/regular(satchel)
-
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
+	new /obj/item/weapon/storage/box/lunches(satchel)
 
 	new /obj/item/device/radio/off(src)
 
@@ -92,9 +93,9 @@
 
 	/*Other stuff*/
 	new /obj/item/weapon/storage/box/first_aid_kit(satchel)
-
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
+	new /obj/item/weapon/storage/box/lunches(satchel)
 
 /obj/structure/closet/gear/fire_support
 	name = "Fire support gear closet"
@@ -121,6 +122,7 @@
 
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
+	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/storage/box/explosive_kit(satchel)
 	new /obj/item/device/radio/off(src)
 
@@ -164,9 +166,9 @@
 	new /obj/item/weapon/storage/surgery_tools_case(src)
 	new /obj/item/roller(src)
 	new /obj/item/weapon/storage/box/syringes (satchel)
-
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
+	new /obj/item/weapon/storage/box/lunches(satchel)
 
 
 /obj/structure/closet/gear/engineer
@@ -196,6 +198,7 @@
 
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
+	new /obj/item/weapon/storage/box/lunches(satchel)
 
 	new /obj/item/stack/sheet/metal(satchel)
 	new /obj/item/stack/sheet/glass(satchel)

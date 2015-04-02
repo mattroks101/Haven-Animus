@@ -27,22 +27,23 @@
 	var/mob/new_player/newPlayer = new(usr.loc)
 	newPlayer.client = player
 	var/mob/living/carbon/human/M = newPlayer.create_character()
+	M.loc = usr.loc
 
 	switch(equipment)
 		if("Marine")
-			M.equip_to_slot_or_del(/obj/item/clothing/under/tactical, slot_w_uniform)
-			M.equip_to_slot_or_del(/obj/item/clothing/shoes/slippers, slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/tactical(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/slippers(M), slot_shoes)
 
 		if("Sergeant")
-			M.equip_to_slot_or_del(/obj/item/clothing/under/tactical, slot_w_uniform)
-			M.equip_to_slot_or_del(/obj/item/clothing/head/helmet/tactical/nanotrasen/tactical, slot_head)
-			M.equip_to_slot_or_del(/obj/item/weapon/melee/classic_baton, slot_belt)
-			M.equip_to_slot_or_del(/obj/item/clothing/shoes/jackboots, slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/tactical(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/tactical/nanotrasen/tactical(M), slot_head)
+			M.equip_to_slot_or_del(new /obj/item/weapon/melee/classic_baton(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(M), slot_shoes)
 
 		if("Corporal")
-			M.equip_to_slot_or_del(/obj/item/clothing/under/tactical, slot_w_uniform)
-			M.equip_to_slot_or_del(/obj/item/weapon/melee/classic_baton, slot_belt)
-			M.equip_to_slot_or_del(/obj/item/clothing/shoes/jackboots, slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/tactical(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/weapon/melee/classic_baton(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(M), slot_shoes)
 
 		//if("Lieutenant")
 			//M.equip_to_slot_or_del(,)

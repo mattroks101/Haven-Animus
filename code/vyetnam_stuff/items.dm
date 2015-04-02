@@ -4,6 +4,7 @@
 	icon_state = "implant"
 
 /obj/item/weapon/storage/box/first_aid_kit/New()
+	..()
 	new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
 	new /obj/item/stack/medical/bruise_pack(src)
 	new /obj/item/stack/medical/ointment(src)
@@ -16,6 +17,7 @@
 	max_combined_w_class = 18 //All surgery tools fits perfectly but left no more space
 
 /obj/item/weapon/storage/surgery_tools_case/New()
+	..()
 	new /obj/item/weapon/circular_saw(src)
 	new /obj/item/weapon/FixOVein(src)
 	new /obj/item/weapon/bonegel(src)
@@ -32,45 +34,51 @@
 	icon_state = "mousetraps"
 
 /obj/item/weapon/storage/box/explosive_kit/New()
+	..()
 	new /obj/item/weapon/plastique(src)
 	new /obj/item/weapon/plastique(src)
 	new /obj/item/weapon/plastique(src)
 	new /obj/item/weapon/plastique(src)
 
 /obj/item/taperoll/barbwire
-	name = "Coil of barbwire"
-	desc = "Nope."
+	name = "coil of barbwire"
+	icon = 'icons/policetape.dmi'
+	icon_state = "police_start"
 	tape_type = /obj/item/tape/barbwire
+	icon_base = "police"
 
 /obj/item/tape/barbwire
-	name = "Barbwire"
+	name = "barbwire"
 	icon = 'icons/policetape.dmi'
 	anchored = 1
 	density = 0
+	icon_state = "police_h"
 	icon_base = "police"
 
-/obj/item/tape/barbwire/Entered(atom/movable/obj,atom/oldLoc)
+/obj/item/tape/barbwire/Crossed(atom/movable/obj,atom/oldLoc)
 	. = ..()
 	if(!ishuman(obj))
 		return
 	var/mob/living/carbon/human/H = obj
 
-	H << "You cut yourself by [src]."
-	H.adjustBruteLossByPart(15, pick("r_leg", "l_leg", "r_foot", "l_foot"))
+	H << "<span class='danger'>You cut yourself by [src].</span>"
+	H.adjustBruteLossByPart(10, pick("r_leg", "l_leg", "r_foot", "l_foot"))
 
 	if(prob(75))
 		H << "You stuck in [src] a bit."
-		H.Stun(10)
+		H.Stun(2)
+		H.canmove = 0
 	else if(prob(75))
 		H << "You really stuck in [src]."
-		H.Stun(25)
+		H.Stun(6)
+		H.canmove = 0
 
 /obj/item/tape/barbwire/attack_hand(mob/user)
 	if(!ishuman(user))
 		return ..()
 	var/mob/living/carbon/human/H = user
 	if((H.gloves && prob(10)) || (!H.gloves && prob(60)))
-		H << "You cut yourself by [src]"
+		H << "<span class='danger'>You cut yourself by [src]</span>"
 		H.adjustBruteLossByPart(10, (H.hand) ? "l_arm" : "r_arm")
 
 /obj/item/tape/barbwire/attackby(obj/item/W, mob/user)
@@ -79,7 +87,7 @@
 	user << "You start cutting [src]"
 	user.show_viewers("\red [user] starts cutting the [src]!")
 
-	if(!do_after(30))
+	if(!do_after(user, 7))
 		return
 
 	user << "You cut [src] by [W]."
