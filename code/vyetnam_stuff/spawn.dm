@@ -17,7 +17,7 @@
 		usr << "\red User not found."
 		return
 
-	var/list/possible_equipment = list("Marine/Fire Support/Medic/Engineer", "Sergeant", "Corporal", "Lieutenant")
+	var/list/possible_equipment = list("Marine/Fire Support/Medic/Engineer", "Sergeant", "Corporal", "Lieutenant", "Spetsnaz", "SpecOps")
 
 	var/equipment = input(usr, "Select equipment", "Equipment") in possible_equipment
 
@@ -48,6 +48,12 @@
 		if("Lieutenant")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(M), slot_shoes)
+
+		if("Spetsnaz")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/soviet(src), slot_w_uniform)
+
+		if("SpecOps")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/tactical(M), slot_w_uniform)
 
 	var/obj/item/weapon/card/id/W = new(M)
 	W.name = "[M.real_name]'s ID Card"

@@ -1513,7 +1513,7 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\NSV_Luna11321.dmm"
+#include "maps\tgstation2.dmm"
 #include "maps\encounters\bearcat.dmm"
 #include "maps\encounters\interception_station.dmm"
 #include "maps\encounters\mining_station.dmm"
