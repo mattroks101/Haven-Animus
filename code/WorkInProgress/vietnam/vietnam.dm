@@ -71,7 +71,6 @@
 	mag_type = /obj/item/ammo_magazine/external/m60e1
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 
-
 /obj/item/ammo_magazine/external/m60e1
 	name = "magazine (7.62)"
 	icon = 'code/WorkInProgress/vietnam/ammo.dmi'
@@ -79,6 +78,25 @@
 	ammo_type = /obj/item/ammo_casing/ammo762
 	caliber = "7.62"
 	max_ammo = 75
+
+/obj/item/weapon/gun/projectile/automatic/vietnam/rpk
+	name = "RPK"
+	desc = "Last ten years was used as axe so it's deformed a bit but still can shoot."
+	icon = 'code/WorkInProgress/vietnam/gun.dmi'
+	icon_state = "rpk"
+	item_state = "c20r"
+	w_class = 3.0
+	origin_tech = "combat=5;materials=3"
+	mag_type = /obj/item/ammo_magazine/external/rpk
+	fire_sound = 'sound/weapons/Gunshot.ogg'
+
+/obj/item/ammo_magazine/external/rpk
+	name = "magazine (7.62)"
+	icon = 'code/WorkInProgress/vietnam/ammo.dmi'
+	icon_state = "rpk-ammo"
+	ammo_type = /obj/item/ammo_casing/ammo762
+	caliber = "7.62"
+	max_ammo = 45
 
 /obj/item/weapon/gun/projectile/automatic/pistol/m1911
 	name = "M1911"
@@ -101,13 +119,18 @@
 	origin_tech = "combat=5;materials=3"
 	mag_type = /obj/item/ammo_magazine/external/mag762
 	fire_sound = 'sound/weapons/Gunshot.ogg'
-	var
-		open = 0
-		obj/item/weapon/kitchen/utensil/knife = 0
+//	var
+//		open = 0
+//		obj/item/weapon/kitchen/utensil/knife = 0
+
+/obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14/scoped
+	name = "M14 with scope"
+	desc = "More powerful than m14. First shot broke optic aim."
+	icon_state = "m14scoped"
 
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14/update_icon()
-	icon_state = "[initial(icon_state)][magazine ? "" : "-e"][knife ? "-k" : ""]"
-
+	icon_state = "[initial(icon_state)][magazine ? "" : "-e"]"//[knife ? "-k" : ""]"
+/* Nope. We haven't required sprites
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(open)
@@ -134,7 +157,7 @@
 		usr << "\red Bayonet fell off from [src]"
 	update_icon()
 	return
-
+*/
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/afterattack(mob/user as mob)
 	..()
 	update_icon()

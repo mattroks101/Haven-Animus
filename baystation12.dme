@@ -1412,6 +1412,7 @@
 #include "code\vyetnam_stuff\clothes.dm"
 #include "code\vyetnam_stuff\items.dm"
 #include "code\vyetnam_stuff\spawn.dm"
+#include "code\vyetnam_stuff\weapon.dm"
 #include "code\WorkInProgress\alarm.dm"
 #include "code\WorkInProgress\autopsy.dm"
 #include "code\WorkInProgress\buildmode.dm"

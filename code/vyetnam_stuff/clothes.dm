@@ -53,4 +53,9 @@
 /obj/item/clothing/head/soft/gook
 	name = "gook castoff cap"
 	desc = "Do you like frisby?"
-	icon_state = ""
+	icon_state = "vietnamesehat"
+
+/obj/item/clothing/tie/holster/greenberets
+	name = "Green holster"
+	desc = "Useful to keep you green beret dry."
+	icon_state = "vest_green"
