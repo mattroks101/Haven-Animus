@@ -15,10 +15,10 @@
 	icon_state = "maskcloak"
 	armor = list(melee = 45, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 
-/obj/item/clothing/head/soft/gook
+/obj/item/clothing/head/soft/greenberets
 	name = "maskcloak hood"
 	desc = "Mm... Still fresh."
-	icon_state = "maskcloackhood"
+	icon_state = "maskhood"
 	armor = list(melee = 45, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/greenberets
