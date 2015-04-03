@@ -17,7 +17,7 @@
 		usr << "\red User not found."
 		return
 
-	var/list/possible_equipment = list("Marine", "Sergeant", "Corporal", "Lieutenant")
+	var/list/possible_equipment = list("Marine/Fire Support/Medic/Engineer", "Sergeant", "Corporal", "Lieutenant")
 
 	var/equipment = input(usr, "Select equipment", "Equipment") in possible_equipment
 

@@ -21,8 +21,11 @@
 	new /obj/item/weapon/storage/box/first_aid_kit(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/flame/lighter/zippo(src)
+	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
+
 
 	new /obj/item/device/radio/headset/ert(src)
+
 
 
 /obj/structure/closet/gear/sergeant
@@ -56,6 +59,7 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
+	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
 
 	new /obj/item/device/radio/headset/ert(src)
 
@@ -90,6 +94,7 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
+	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
 
 	new /obj/item/device/radio/off(src)
 
@@ -116,6 +121,7 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
+	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
 
 	new /obj/item/device/radio/off(src)
 
@@ -146,6 +152,7 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/storage/box/explosive_kit(satchel)
+	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
 
 	new /obj/item/device/radio/off(src)
 
@@ -192,6 +199,7 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
+	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
 
 	new /obj/item/device/radio/off(src)
 
@@ -224,6 +232,7 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
+	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
 
 	new /obj/item/stack/sheet/metal(satchel)
 	new /obj/item/stack/sheet/glass(satchel)

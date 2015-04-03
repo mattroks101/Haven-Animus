@@ -411,19 +411,19 @@ var/global/datum/controller/occupations/job_master
 				if("AI","Clown")	//don't need bag preference stuff!
 				else
 					switch(H.backbag) //BS12 EDIT
-						if(1)
-							H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+						//if(1)
+							//H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 						if(2)
 							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
+							//new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 						if(3)
 							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel_norm(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
+							//new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 						if(4)
 							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
+							//new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 		/*
 		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
