@@ -401,6 +401,7 @@ var/global/datum/controller/occupations/job_master
 			H << "\blue<b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b>"
 		*/
 		//var/alt_title = null
+		var/obj/item/weapon/storage/backpack/BPK = null
 		if(H.mind)
 			H.mind.assigned_role = rank
 
@@ -411,20 +412,66 @@ var/global/datum/controller/occupations/job_master
 				if("AI","Clown")	//don't need bag preference stuff!
 				else
 					switch(H.backbag) //BS12 EDIT
-						//if(1)
+						if(1)
 							//H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 						if(2)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack(H)
+							BPK = new/obj/item/weapon/storage/backpack(H)
 							//new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 						if(3)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel_norm(H)
+							BPK = new/obj/item/weapon/storage/backpack/satchel_norm(H)
 							//new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 						if(4)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel(H)
+							BPK = new/obj/item/weapon/storage/backpack/satchel(H)
 							//new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
+
+		if(BPK)
+			switch(prob(100))
+				if(1 to 30)
+					var/obj/item/weapon/gun/projectile/shotgun/mosin/rifle = new (BPK)
+					if(prob(85))
+						if(rifle.magazine)
+							del(rifle.magazine)
+						if(rifle.chambered)
+							del(rifle.chambered)
+						rifle.update_icon()
+
+					if(prob(40))
+						new /obj/item/ammo_magazine/external/mag545mosin(BPK)
+						new /obj/item/ammo_magazine/external/mag545mosin(BPK)
+				if(31 to 50)
+					var/obj/item/weapon/gun/projectile/automatic/vietnam/AKM = new (BPK)
+					if(prob(90))
+						if(AKM.magazine)
+							del(AKM.magazine)
+						if(AKM.chambered)
+							del(AKM.chambered)
+						AKM.update_icon()
+					if(prob(50))
+						new /obj/item/ammo_magazine/external/mag762(BPK)
+				if(51 to 52)
+					var/obj/item/weapon/gun/projectile/automatic/vietnam/rpk/RPK = new (BPK)
+					if(RPK.magazine)
+						del(RPK.magazine)
+					if(RPK.chambered)
+						del(RPK.chambered)
+					RPK.update_icon()
+			if(prob(50))
+				if(prob(5))
+					new /obj/item/weapon/reagent_containers/food/snacks/ricepudding(BPK)
+				else
+					new /obj/item/weapon/reagent_containers/food/snacks/boiledrice(BPK)
+			if(prob(5))
+				new /obj/item/weapon/reagent_containers/food/snacks/grown/ricestalk(BPK)
+			if(prob(10))
+				new /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka(BPK)
+
+
+
+
+
 		/*
 		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
 		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
