@@ -2,8 +2,7 @@
 	name = "Lieutenant gear closet"
 
 /obj/structure/closet/gear/lieutenant/New()
-	name = "Lieutenant gear closet"
-
+	..()
 	/*Weapon*/
 	new /obj/item/weapon/gun/projectile/automatic/pistol/usp(src)
 	new /obj/item/ammo_magazine/external/sm45(src)
@@ -35,6 +34,7 @@
 	icon_closed = "secoff"
 
 /obj/structure/closet/gear/sergeant/New()
+	..()
 	/*Weapon*/
 	new /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14(src)
 	for(var/i = 0; i < 4; i++)
@@ -71,6 +71,7 @@
 	icon_closed = "capsecureoff"
 
 /obj/structure/closet/gear/corporal/New()
+	..()
 	/*Weapon*/
 	new /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14(src)
 	for(var/i = 0; i < 4; i++)
@@ -103,6 +104,7 @@
 	name = "Marine gear closet"
 
 /obj/structure/closet/gear/marine/New()
+	..()
 	/*Weapon*/
 	new /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14(src)
 	for(var/i = 0; i < 4; i++)
@@ -132,6 +134,7 @@
 	icon_closed = "red"
 
 /obj/structure/closet/gear/fire_support/New()
+	..()
 	/*Weapon*/
 	new /obj/item/weapon/gun/projectile/automatic/vietnam/m60(src)
 	for(var/i = 0; i < 3; i++)
@@ -164,6 +167,7 @@
 	icon_closed = "medicaloff"
 
 /obj/structure/closet/gear/medic/New()
+	..()
 	/*Weapon*/
 	new /obj/item/weapon/gun/projectile/automatic/vietnam/m3a1(src)
 	for(var/i = 0; i < 3; i++)
@@ -211,6 +215,7 @@
 	icon_closed = "toolcloset"
 
 /obj/structure/closet/gear/engineer/New()
+	..()
 	/*Weapon*/
 	new /obj/item/weapon/gun/projectile/shotgun(src)
 	new /obj/item/ammo_magazine/box/shotgun (src)
@@ -238,3 +243,114 @@
 	new /obj/item/stack/sheet/glass(satchel)
 
 	new /obj/item/device/radio/off(src)
+
+/obj/structure/closet/gear/spetsnaz_leader
+	name = "Spetsnaz Leader gear"
+	icon_state = "syndicate"
+	icon_opened = "syndicateopen"
+	icon_closed = "syndicate"
+
+/obj/structure/closet/gear/spetsnaz_leader/New()
+	..()
+
+	new /obj/item/clothing/shoes/jackboots(src)
+	new /obj/item/clothing/under/syndicate/combat(src)
+	new /obj/item/device/radio/headset/syndicate(src)
+	new /obj/item/weapon/storage/backpack/satchel_norm(src)
+	new /obj/item/weapon/gun/projectile/automatic/pistol/stechtkin(src)
+	new /obj/item/ammo_magazine/external/mc9mm(src)
+	new /obj/item/ammo_magazine/external/mc9mm(src)
+	new /obj/item/weapon/storage/belt/military(src)
+	new /obj/item/weapon/reagent_containers/hypospray/combat(src)
+	new /obj/item/clothing/suit/armor/vest(src)
+	new /obj/item/clothing/head/helmet/HoS/dermal(src)
+
+/obj/structure/closet/gear/spetsnaz_interrogator
+	name = "Spetsnaz Interrogator gear"
+	icon_state = "acloset"
+	icon_opened = "aclosetopen"
+	icon_closed = "acloset"
+
+/obj/structure/closet/gear/interrogator/New()
+	..()
+	new /obj/item/clothing/shoes/laceup(src)
+	new /obj/item/clothing/under/det/slob(src)
+	new /obj/item/clothing/glasses/sunglasses/aviator(src)
+	new /obj/item/clothing/gloves/black(src)
+	new /obj/item/clothing/head/helmet/HoS/nkvd(src)
+	new /obj/item/clothing/suit/armor/hos/nkvd(src)
+	new /obj/item/weapon/storage/backpack/satchel(src)
+	new /obj/item/device/radio/headset/syndicate(src)
+	new /obj/item/weapon/gun/projectile/revolver(src)
+	new /obj/item/clothing/tie/holster(src)
+	new /obj/item/ammo_magazine/box/a357(src)
+	new /obj/item/ammo_magazine/box/a357(src)
+
+/obj/structure/closet/gear/spetsnaz_engineer
+	name = "Spetsnaz Engineer gear"
+	icon_state = "secureengweldoff"
+	icon_opened = "toolclosetopen"
+	icon_closed = "secureengweldoff"
+
+/obj/structure/closet/gear/spetsnaz_engineer/New()
+	..()
+	new /obj/item/clothing/shoes/jackboots(src)
+	new /obj/item/device/radio/headset/syndicate(src)
+	new /obj/item/clothing/under/tactical(src)
+	new /obj/item/weapon/storage/backpack/industrial(src)
+	new /obj/item/weapon/plastique(src)
+	new /obj/item/weapon/plastique(src)
+	new /obj/item/weapon/mine/extra/(src)
+	new /obj/item/weapon/mine/extra/(src)
+	new /obj/item/weapon/gun/projectile/automatic/vietnam/rpk(src)
+	new /obj/item/ammo_magazine/external/rpk(src)
+	new /obj/item/ammo_magazine/external/rpk(src)
+	new /obj/item/clothing/head/bomb_hood(src)
+	new /obj/item/clothing/suit/bomb_suit(src)
+	new /obj/item/weapon/storage/toolbox/mechanical(src)
+	new /obj/item/weapon/storage/backpack/satchel_norm(src)
+
+/obj/structure/closet/gear/spetsnaz_recon
+	name = "Spetsnaz Recon gear"
+	icon_state = "rdsecureoff"
+	icon_opened = "rdsecureopen"
+	icon_closed = "rdsecureoff"
+
+/obj/structure/closet/gear/spetsnaz_recon/New()
+	..()
+	new /obj/item/device/radio/headset/syndicate(src)
+	new /obj/item/clothing/under/tactical(src)
+	new /obj/item/clothing/shoes/jackboots(src)
+	new /obj/item/clothing/suit/armor/maskcloak(src)
+	new /obj/item/clothing/head/soft/gook(src)
+	new /obj/item/clothing/glasses/thermal/monocle(src)
+	new /obj/item/weapon/legcuffs/beartrap(src)
+	new /obj/item/weapon/legcuffs/beartrap(src)
+	new /obj/item/weapon/storage/backpack/satchel_norm(src)
+	new /obj/item/weapon/grenade/smokebomb(src)
+	new /obj/item/weapon/grenade/smokebomb(src)
+	new /obj/item/weapon/grenade/smokebomb(src)
+	new /obj/item/weapon/grenade/smokebomb(src)
+	new /obj/item/weapon/grenade/chem_grenade/metalfoam(src)
+	new /obj/item/weapon/gun/projectile/automatic/pistol/silenced/usp(src)
+	new /obj/item/ammo_magazine/external/sm45(src)
+	new /obj/item/ammo_magazine/external/sm45(src)
+
+/obj/structure/closet/gear/spetsnaz_instructor
+	name = "Spetsnaz Instructor gear"
+	icon_state = "fridgebroken"
+	icon_opened = "fridgeopen"
+	icon_closed = "fridgebroken"
+
+/obj/structure/closet/gear/spetsnaz_instructor/New()
+	..()
+	new /obj/item/device/radio/headset/syndicate(src)
+	new /obj/item/clothing/head/ushanka(src)
+	new /obj/item/clothing/suit/armor/bulletproof(src)
+	new /obj/item/weapon/gun/projectile/automatic/ak74u(src)
+	new /obj/item/ammo_magazine/external/mag545(src)
+	new /obj/item/ammo_magazine/external/mag545(src)
+	new /obj/item/clothing/glasses/sunglasses/aviator(src)
+	new /obj/item/weapon/storage/backpack/satchel(src)
+	new /obj/item/clothing/under/soviet(src)
+	new /obj/item/clothing/shoes/jackboots(src)
