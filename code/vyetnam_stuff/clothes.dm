@@ -15,6 +15,12 @@
 	icon_state = "maskcloak"
 	armor = list(melee = 45, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 
+/obj/item/clothing/head/soft/gook
+	name = "maskcloak hood"
+	desc = "Mm... Still fresh."
+	icon_state = "maskcloackhood"
+	armor = list(melee = 45, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
+
 /obj/item/clothing/suit/armor/greenberets
 	name = "greenberets armor"
 	desc = "Not for green rookies."
@@ -25,11 +31,13 @@
 	name = "greenberets uniform"
 	desc = "Just recolored syndicate uniform."
 	icon_state = "greenberets"
+	item_color = "greenberets"
 
 /obj/item/clothing/under/syndicate/gook
 	name = "gook castoff suit"
 	desc = "Burns well in napalm."
 	icon_state = "gookjumpsuit"
+	item_color = "gookjumpsuit"
 	var/trouser = 0
 
 /obj/item/clothing/under/syndicate/gook/verb/toggle_sleeve()

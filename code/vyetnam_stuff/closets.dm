@@ -167,9 +167,9 @@
 	new /obj/item/ammo_magazine/external/sm45(src)
 
 	/*Clothes*/
-	new /obj/item/clothing/head/helmet/tactical/nanotrasen
-	new /obj/item/clothing/suit/armor/bulletproof/nanotrasen
-	new /obj/item/clothing/shoes/jackboots
+	new /obj/item/clothing/head/helmet/tactical/nanotrasen (src)
+	new /obj/item/clothing/suit/armor/bulletproof/nanotrasen (src)
+	new /obj/item/clothing/shoes/jackboots (src)
 
 	var/obj/item/weapon/storage/belt/medical/belt = new(src)
 	var/obj/item/weapon/storage/backpack/satchel_med/satchel = new(src)
