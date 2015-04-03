@@ -105,7 +105,7 @@
 		icon_state = "gplant_[rand(1, 10)]"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/marine
-	icon_state = "ramen"
+	icon_state = "flask"
 	volume = 40
 
 	New()

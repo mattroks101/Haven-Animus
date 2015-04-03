@@ -1409,6 +1409,7 @@
 #include "code\TriDimension\Structures.dm"
 #include "code\TriDimension\Turfs.dm"
 #include "code\vyetnam_stuff\closets.dm"
+#include "code\vyetnam_stuff\clothes.dm"
 #include "code\vyetnam_stuff\items.dm"
 #include "code\vyetnam_stuff\spawn.dm"
 #include "code\WorkInProgress\alarm.dm"
