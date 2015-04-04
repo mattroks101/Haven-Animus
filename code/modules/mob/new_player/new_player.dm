@@ -28,12 +28,7 @@
 		output +="<hr>"
 		output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
-		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-			if(!ready)	output += "<p><a href='byond://?src=\ref[src];ready=1'>Declare Ready</A></p>"
-			else	output += "<p><b>You are ready</b> (<a href='byond://?src=\ref[src];ready=2'>Cancel</A>)</p>"
-
-		else
-			output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
+		if(ticker && ticker.current_state > GAME_STATE_PREGAME)
 			output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
 
 		output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
@@ -212,7 +207,7 @@
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-			AnnounceArrival(character, rank)
+			//AnnounceArrival(character, rank)
 
 		else
 			character.Robotize()

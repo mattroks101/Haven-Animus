@@ -323,7 +323,7 @@ BLIND     // can't see anything
 	if(usr.stat) return
 
 	if(hastie)
-		if (istype(hastie,/obj/item/clothing/tie/holster))
+		if (istype(hastie, /obj/item/clothing/tie/holster))
 			verbs -= /obj/item/clothing/under/proc/holster
 
 		if (istype(hastie,/obj/item/clothing/tie/storage))

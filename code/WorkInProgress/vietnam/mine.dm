@@ -5,8 +5,8 @@
 	icon_state = "mine"
 	w_class = 3.0
 	var/active = 0
-	var/power1 = 2
-	var/power2 = 2
+	var/power1 = 1
+	var/power2 = 1
 
 /obj/item/weapon/mine/New()
 	..()
@@ -42,21 +42,25 @@
 					if ((O.client && !( O.blinded )))
 						O << "\red [A] stepped on [src]."
 				usr.unlock_medal("I served in Vietnam.", 0, "Stepped on a mine.", "easy")
-				expl()
+				expl(A)
 		else if(istype(I, /obj/item/))
 			if(I.w_class >= 4)
-				expl()
+				expl(A)
 
 
 
-/obj/item/weapon/mine/proc/expl()
+/obj/item/weapon/mine/proc/expl(var/atom/A)
 	for(var/mob/O in oviewers(src))
 		O << "\red *beep*"
 		playsound(get_turf(src), 'sound/weapons/c4armed.ogg', 60, 1)
 
 	var/turf/T = get_turf(src.loc)
 	spawn(0)
+		if(istype(A, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = A
+			H.adjustBruteLossByPart(50, pick("r_foot", "l_foot"))
 		explosion(T, 0, 0, power1, power2)
+
 		sleep(1)
 		qdel(src)
 
@@ -262,11 +266,11 @@
 
 /obj/item/clothing/head/helmet/tactical/nanotrasen/tactical
 	name = "Drill sergeants hat"
-	desc = "For those who do not die first on the battlefield."
+	desc = "For those who do not die first on the battlefield. Now without any protection."
 	icon_state = "sergeanthead_j"
 	item_state = "sergeanthead_j"
 
-	armor = list(melee = 30, bullet = 10, laser = 10,energy = 5, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/glasses/sunglasses/aviator
