@@ -183,6 +183,8 @@
 		icon_state = "gplant_[rand(1, 10)]"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/marine
+	name = "military flask"
+	desc = "for water only"
 	icon_state = "flask"
 	volume = 40
 
