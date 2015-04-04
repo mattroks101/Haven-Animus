@@ -34,7 +34,7 @@
 				J.pixel_x = rand(-6,6)
 				J.pixel_y = rand(-6,6)
 		if(bushes_spawn && prob(90))
-			new /obj/structure/bush(src)
+			new /obj/structure/bush_hide(src)
 
 /turf/unsimulated/jungle/clear
 	bushes_spawn = 0
