@@ -253,6 +253,7 @@
 
 	new /obj/item/stack/sheet/metal(satchel)
 	new /obj/item/stack/sheet/glass(satchel)
+	new /obj/item/taperoll/barbwire(satchel)
 
 	new /obj/item/device/radio/off(src)
 

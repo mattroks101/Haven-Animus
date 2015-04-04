@@ -172,7 +172,7 @@
 	user.show_viewers("\red [user] cuts the [src]!")
 	del(src)
 
-/obj/structure/bushes
+/obj/structure/bush_hide
 	icon = 'icons/obj/plants.dmi'
 	icon_state = "gplant_1"
 	density = 0

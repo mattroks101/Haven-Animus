@@ -54,6 +54,8 @@
 		..()
 		for(var/obj/structure/bush/B in src)
 			del B
+		if(prob(20)) //Too lazy
+			new /obj/structure/bush_hide(src)
 
 /turf/unsimulated/jungle/proc/Spread(var/probability, var/prob_loss = 50)
 	if(probability <= 0)

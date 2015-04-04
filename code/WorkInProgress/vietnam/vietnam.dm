@@ -165,6 +165,7 @@
 	if(knife && open)
 		knife.loc = get_turf(src.loc)
 		src.knife = null
+		src.force = initial(src.force)
 		usr << "\red Bayonet fell off from [src]"
 	update_icon()
 	return

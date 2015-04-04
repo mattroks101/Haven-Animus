@@ -19,6 +19,7 @@
 	name = "maskcloak hood"
 	desc = "Mm... Still fresh."
 	icon_state = "maskhood"
+	item_color = null
 	armor = list(melee = 45, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/greenberets
@@ -62,6 +63,7 @@
 	name = "gook castoff cap"
 	desc = "Do you like frisby?"
 	icon_state = "vietnamesehat"
+	item_color = null
 
 /obj/item/clothing/tie/holster/greenberets
 	name = "Green holster"
