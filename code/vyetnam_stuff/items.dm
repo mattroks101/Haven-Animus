@@ -8,6 +8,10 @@
 	new /obj/item/weapon/reagent_containers/hypospray/medipen/combat(src)
 	new /obj/item/stack/medical/bruise_pack(src)
 	new /obj/item/stack/medical/ointment(src)
+	new /obj/item/device/flashlight/flare(src)
+	new /obj/item/device/flashlight/flare(src)
+	new /obj/item/device/flashlight/flare(src)
+	new /obj/item/device/flashlight/flare(src)
 
 /obj/item/weapon/storage/surgery_tools_case
 	name = "Surgery Tools Case"
@@ -44,7 +48,7 @@
 	name = "coil of barbwire"
 	desc = "Strong iron coil"
 	icon = 'icons/vyetnam.dmi'
-	icon_state = "barbwire_start"
+	icon_state = "barbwire_stop"
 	tape_type = /obj/item/tape/barbwire
 	icon_base = "barbwire"
 	var/charge = 15

@@ -20,7 +20,18 @@
 /obj/item/ammo_casing/ammo762
 	desc = "A 7.62 bullet casing."
 	caliber = "7.62"
-	projectile_type = /obj/item/projectile/bullet
+	projectile_type = /obj/item/projectile/bullet/midbullet2
+
+/obj/item/ammo_magazine/external/mag762/exp
+	name = "7.62 exp magazine (M14)"
+	icon = 'code/WorkInProgress/vietnam/ammo.dmi'
+	icon_state = "m14mag"
+	ammo_type = /obj/item/ammo_casing/ammo762/exp
+	caliber = "7.62"
+	max_ammo = 20
+
+/obj/item/ammo_casing/ammo762/exp
+	projectile_type = /obj/item/projectile/bullet/midbullet
 
 /obj/item/weapon/gun/projectile/automatic/vietnam/m3a1
 	name = "M3A1"
@@ -119,18 +130,18 @@
 	origin_tech = "combat=5;materials=3"
 	mag_type = /obj/item/ammo_magazine/external/mag762
 	fire_sound = 'sound/weapons/Gunshot.ogg'
-//	var
-//		open = 0
-//		obj/item/weapon/kitchen/utensil/knife = 0
+	var
+		open = 0
+		obj/item/weapon/kitchen/utensil/knife = 0
 
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14/scoped
 	name = "M14 with scope"
-	desc = "More powerful than m14. First shot broke optic aim."
+	desc = "Much more powerful than m14. First shot broke optic aim."
 	icon_state = "m14scoped"
 
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14/update_icon()
-	icon_state = "[initial(icon_state)][magazine ? "" : "-e"]"//[knife ? "-k" : ""]"
-/* Nope. We haven't required sprites
+	icon_state = "[initial(icon_state)][magazine ? "" : "-e"][knife ? "-k" : ""]"
+
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/m14/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(open)
@@ -157,7 +168,7 @@
 		usr << "\red Bayonet fell off from [src]"
 	update_icon()
 	return
-*/
+
 /obj/item/weapon/gun/projectile/automatic/pistol/vietnam/afterattack(mob/user as mob)
 	..()
 	update_icon()

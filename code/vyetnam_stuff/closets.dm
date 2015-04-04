@@ -60,6 +60,8 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
+	new /obj/item/weapon/kitchen/utensil/bayonet(src)
+	new /obj/item/weapon/screwdriver(src)
 
 	new /obj/item/device/radio/headset/ert(src)
 
@@ -96,6 +98,8 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
+	new /obj/item/weapon/kitchen/utensil/bayonet(src)
+	new /obj/item/weapon/screwdriver(src)
 
 	new /obj/item/device/radio/off(src)
 
@@ -124,6 +128,8 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
+	new /obj/item/weapon/kitchen/utensil/bayonet(src)
+	new /obj/item/weapon/screwdriver(src)
 
 	new /obj/item/device/radio/off(src)
 
@@ -156,6 +162,8 @@
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/storage/box/explosive_kit(satchel)
 	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
+	new /obj/item/weapon/kitchen/utensil/bayonet(src)
+	new /obj/item/weapon/screwdriver(src)
 
 	new /obj/item/device/radio/off(src)
 
@@ -204,6 +212,8 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
+	new /obj/item/weapon/kitchen/utensil/bayonet(src)
+	new /obj/item/weapon/screwdriver(src)
 
 	new /obj/item/device/radio/off(src)
 
@@ -238,6 +248,8 @@
 	new /obj/item/weapon/grenade/syndieminibomb/nanotrasen(satchel)
 	new /obj/item/weapon/storage/box/lunches(satchel)
 	new /obj/item/weapon/reagent_containers/food/drinks/flask/marine(src)
+	new /obj/item/weapon/kitchen/utensil/bayonet(src)
+	new /obj/item/weapon/screwdriver(src)
 
 	new /obj/item/stack/sheet/metal(satchel)
 	new /obj/item/stack/sheet/glass(satchel)
@@ -253,6 +265,7 @@
 /obj/structure/closet/gear/spetsnaz_leader/New()
 	..()
 
+	new /obj/item/clothing/glasses/night(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/clothing/under/syndicate/combat(src)
 	new /obj/item/device/radio/headset/syndicate(src)
@@ -273,6 +286,8 @@
 
 /obj/structure/closet/gear/interrogator/New()
 	..()
+
+	new /obj/item/clothing/glasses/night(src)
 	new /obj/item/clothing/shoes/laceup(src)
 	new /obj/item/clothing/under/det/slob(src)
 	new /obj/item/clothing/glasses/sunglasses/aviator(src)
@@ -294,6 +309,7 @@
 
 /obj/structure/closet/gear/spetsnaz_engineer/New()
 	..()
+	new /obj/item/clothing/glasses/night(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/device/radio/headset/syndicate(src)
 	new /obj/item/clothing/under/tactical(src)
@@ -318,6 +334,7 @@
 
 /obj/structure/closet/gear/spetsnaz_recon/New()
 	..()
+	new /obj/item/clothing/glasses/night(src)
 	new /obj/item/device/radio/headset/syndicate(src)
 	new /obj/item/clothing/under/tactical(src)
 	new /obj/item/clothing/shoes/jackboots(src)
@@ -344,6 +361,7 @@
 
 /obj/structure/closet/gear/spetsnaz_instructor/New()
 	..()
+	new /obj/item/clothing/glasses/night(src)
 	new /obj/item/device/radio/headset/syndicate(src)
 	new /obj/item/clothing/head/ushanka(src)
 	new /obj/item/clothing/suit/armor/bulletproof(src)
