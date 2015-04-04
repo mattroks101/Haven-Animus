@@ -247,6 +247,32 @@ BLIND     // can't see anything
 
 	..()
 
+/obj/item/clothing/under/proc/attachTie(obj/item/I, mob/user)
+	if(istype(I, /obj/item/clothing/tie))
+		if(hastie)
+			if(user)
+				user << "<span class='warning'>[src] already has an accessory.</span>"
+			return
+		else
+			if(user)
+				user.drop_item()
+			hastie = I
+			I.loc = src
+			if(user)
+				user << "<span class='notice'>You attach [I] to [src].</span>"
+			I.transform *= 0.5	//halve the size so it doesn't overpower the under
+			I.pixel_x += 8
+			I.pixel_y -= 8
+			I.layer = FLOAT_LAYER
+			overlays += I
+
+
+			if(istype(loc, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = loc
+				H.update_inv_w_uniform(0)
+
+			return
+
 /obj/item/clothing/under/examine()
 	set src in view()
 	..()

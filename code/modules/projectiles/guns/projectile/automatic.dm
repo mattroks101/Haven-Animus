@@ -57,6 +57,14 @@
 	mag_type = /obj/item/ammo_magazine/external/uzim45
 
 
+/obj/item/weapon/gun/projectile/automatic/carbine
+	name = "\improper MK-138 carbine"
+	desc = "A MK-138, lightweight, fully-automatical carbine, which used by NT security forces."
+	icon_state = "carbine"
+	w_class = 3.0
+	origin_tech = "combat=5;materials=2"
+	mag_type = /obj/item/ammo_magazine/external/mag556
+
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"

@@ -1,5 +1,5 @@
 //Zlevel where overmap objects should be
-#define OVERMAP_ZLEVEL 13
+#define OVERMAP_ZLEVEL 12
 //How far from the edge of overmap zlevel could randomly placed objects spawn
 #define OVERMAP_EDGE 7
 

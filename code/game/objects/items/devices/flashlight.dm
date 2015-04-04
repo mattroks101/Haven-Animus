@@ -128,6 +128,15 @@
 	brightness_green = 2
 	brightness_blue = 2
 
+/obj/item/device/flashlight/seclite
+	name = "seclite"
+	desc = "A robust flashlight used by security."
+	icon_state = "seclite"
+	item_state = "seclite"
+	force = 10 // Not as good as a stun baton.
+	attack_verb = list("beaten")
+	hitsound = 'sound/weapons/genhit1.ogg'
+	brightness_on = 5 // A little better than the standard flashlight.
 
 // the desk lamps are a bit special
 /obj/item/device/flashlight/lamp
