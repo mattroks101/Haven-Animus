@@ -97,8 +97,7 @@
 		"/obj/item/device/flashlight/pen",
 		"/obj/item/clothing/mask/surgical",
 		"/obj/item/clothing/gloves/latex",
-		"/obj/item/weapon/reagent_containers/hypospray",
-		"/obj/item/weapon/reagent_containers/food/drinks/flask/marine"
+	        "/obj/item/weapon/reagent_containers/hypospray"
 	)
 
 
@@ -136,7 +135,7 @@
 		"/obj/item/weapon/gun/energy/laser",
 		"/obj/item/weapon/gun/energy/stunrevolver",
 		"/obj/item/weapon/gun/energy/ionrifle"
-	)
+		)
 
 /obj/item/weapon/storage/belt/soulstone
 	name = "soul stone belt"
@@ -203,8 +202,7 @@
 		"/obj/item/device/radio/headset",
 		"/obj/item/weapon/melee",
 		"/obj/item/taperoll/police",
-		"/obj/item/weapon/gun/energy/taser",
-		"/obj/item/weapon/reagent_containers/food/drinks/flask/marine"
+		"/obj/item/weapon/gun/energy/taser"
 		)
 
 

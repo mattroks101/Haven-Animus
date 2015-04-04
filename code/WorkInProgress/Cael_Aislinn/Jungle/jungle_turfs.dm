@@ -34,7 +34,7 @@
 				J.pixel_x = rand(-6,6)
 				J.pixel_y = rand(-6,6)
 		if(bushes_spawn && prob(90))
-			new /obj/structure/bush_hide(src)
+			new /obj/structure/bush(src)
 
 /turf/unsimulated/jungle/clear
 	bushes_spawn = 0
@@ -54,8 +54,6 @@
 		..()
 		for(var/obj/structure/bush/B in src)
 			del B
-		if(prob(20)) //Too lazy
-			new /obj/structure/bush_hide(src)
 
 /turf/unsimulated/jungle/proc/Spread(var/probability, var/prob_loss = 50)
 	if(probability <= 0)
@@ -132,7 +130,7 @@
 	if(istype(O, /mob/living/))
 		var/mob/living/M = O
 		//slip in the murky water if we try to run through it
-		if(prob(M.m_intent == "run" ? 40 : 0))
+		if(prob(10 + (M.m_intent == "run" ? 40 : 0)))
 			M << pick("\blue You slip on something slimy.","\blue You fall over into the murk.")
 			M.Stun(2)
 			M.Weaken(1)
@@ -164,22 +162,6 @@
 					if(istype(T, /turf/unsimulated/jungle/water))
 						M << pick("\red Something sharp bites you!","\red Sharp teeth grab hold of you!","\red You feel something take a chunk out of your leg!")
 						M.apply_damage(rand(0,1), BRUTE)
-
-/turf/unsimulated/jungle/water/attackby(obj/item/W, mob/user)
-	if(!istype(W, /obj/item/weapon/reagent_containers/food/drinks))
-		return ..()
-	var/obj/item/weapon/reagent_containers/food/drinks/D = W
-
-	var/free_volume = D.reagents.maximum_volume - D.reagents.total_volume
-	if(free_volume <= 10)
-		user << "\blue Your [W] is almost full already!"
-		return
-
-	D.reagents.add_reagent("water", free_volume * 0.8)
-	D.reagents.add_reagent("toxin", free_volume * 0.2)
-
-	user << "You filled up [W]."
-
 
 /turf/unsimulated/jungle/water/deep
 	plants_spawn = 0
