@@ -336,7 +336,7 @@
 	mymob.zone_sel.icon = ui_style
 	mymob.zone_sel.overlays.Cut()
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
-
+/*
 	//Handle the gun settings buttons
 	mymob.gun_setting_icon = new /obj/screen/gun/mode(null)
 	if (mymob.client)
@@ -356,7 +356,7 @@
 					mymob.gun_run_icon.dir = 1
 				src.adding += mymob.gun_run_icon
 			src.adding += mymob.gun_move_icon
-
+*/
 	mymob.client.screen = null
 
 	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.pressure, mymob.toxin, mymob.bodytemp, mymob.internals, mymob.fire, mymob.healths, mymob.pullin, mymob.blind, mymob.flash) //mymob.gun_setting_icon, mymob.rest, mymob.sleep, mymob.mach )
