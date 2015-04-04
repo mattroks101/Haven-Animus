@@ -54,6 +54,12 @@
 	stutter = 10
 	embed = 0
 
+/obj/item/projectile/bullet/rubber
+	damage = 15
+	stun = 10
+	weaken = 10
+	embed = 0
+
 /obj/item/projectile/bullet/SW
 	damage = 35
 	stun = 15

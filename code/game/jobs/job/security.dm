@@ -38,6 +38,7 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
+			H.equip_to_slot_or_del(new /obj/item/device/flashlight/seclite(H), slot_in_backpack)
 		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
 		L.imp_in = H
 		L.implanted = 1
@@ -82,6 +83,7 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
+			H.equip_to_slot_or_del(new /obj/item/device/flashlight/seclite(H), slot_in_backpack)
 		return 1
 
 
@@ -123,7 +125,7 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/evidence(H), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/device/detective_scanner(H), slot_in_backpack)
-
+			H.equip_to_slot_or_del(new /obj/item/device/flashlight/seclite(H), slot_in_backpack)
 		return 1
 
 
@@ -143,12 +145,12 @@
 	minimal_player_age = 3
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
+		assign_sec_to_department(H)
 		switch(H.backbag)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_sec(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security(H), slot_w_uniform)
+	//	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/security(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_s_store)
@@ -159,4 +161,65 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
+			H.equip_to_slot_or_del(new /obj/item/device/flashlight/seclite(H), slot_in_backpack)
 		return 1
+
+var/list/sec_departments = list("engineering", "supply", "medical", "science")
+
+/datum/job/officer/proc/assign_sec_to_department(var/mob/living/carbon/human/H as mob)
+	if(sec_departments.len)
+		var/department = pick(sec_departments)
+		sec_departments -= department
+		switch(department)
+			if("supply")
+				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security/alternative/cargo(H), slot_w_uniform)
+				H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec/department/supply(H), slot_l_ear)
+				minimal_access += list(access_mailsorting, access_mining)
+			if("engineering")
+				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security/alternative/engine(H), slot_w_uniform)
+				H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec/department/engi(H), slot_l_ear)
+				minimal_access += list(access_construction, access_engine)
+			if("medical")
+				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security/alternative/med(H), slot_w_uniform)
+				H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec/department/med(H), slot_l_ear)
+				minimal_access += list(access_medical)
+			if("science")
+				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security/alternative/science(H), slot_w_uniform)
+				H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec/department/sci(H), slot_l_ear)
+				minimal_access += list(access_research)
+			else
+				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security/alternative(H), slot_w_uniform)
+				H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
+
+/obj/item/device/radio/headset/headset_sec/department/New()
+	if(radio_controller)
+		initialize()
+	recalculateChannels()
+
+/obj/item/device/radio/headset/headset_sec/department/engi
+	keyslot1 = new /obj/item/device/encryptionkey/headset_sec
+	keyslot2 = new /obj/item/device/encryptionkey/headset_eng
+
+/obj/item/device/radio/headset/headset_sec/department/supply
+	keyslot1 = new /obj/item/device/encryptionkey/headset_sec
+	keyslot2 = new /obj/item/device/encryptionkey/headset_cargo
+
+/obj/item/device/radio/headset/headset_sec/department/med
+	keyslot1 = new /obj/item/device/encryptionkey/headset_sec
+	keyslot2 = new /obj/item/device/encryptionkey/headset_med
+
+/obj/item/device/radio/headset/headset_sec/department/sci
+	keyslot1 = new /obj/item/device/encryptionkey/headset_sec
+	keyslot2 = new /obj/item/device/encryptionkey/headset_sci
+
+/obj/item/clothing/under/rank/security/alternative/cargo/New()
+	attachTie(new /obj/item/clothing/tie/armband/cargo)
+
+/obj/item/clothing/under/rank/security/alternative/engine/New()
+	attachTie(new /obj/item/clothing/tie/armband/engine)
+
+/obj/item/clothing/under/rank/security/alternative/science/New()
+	attachTie(new /obj/item/clothing/tie/armband/science)
+
+/obj/item/clothing/under/rank/security/alternative/med/New()
+	attachTie(new /obj/item/clothing/tie/armband/med)

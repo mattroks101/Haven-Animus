@@ -44,7 +44,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/used_light = 0
 	var/used_environ = 0
 
-	var/has_gravity = 1
+	var/has_gravity = 1//0
+
 	var/list/apc = list()
 
 	var/no_air = null
@@ -367,6 +368,7 @@ var/list/ghostteleportlocs = list()
 	requires_power = 0
 	luminosity = 1
 	ul_Lighting = 0
+	has_gravity = 1
 
 /area/centcom/control
 	name = "\improper Centcom Control"
@@ -409,12 +411,13 @@ var/list/ghostteleportlocs = list()
 	requires_power = 0
 	luminosity = 1
 	ul_Lighting = 0
-
+	has_gravity = 1
 
 /area/syndicate_interception_station
 	name = "\improper Syndicate Work Station"
 	icon_state = "syndie-control"
 	requires_power = 1
+	has_gravity = 1
 
 /area/syndicate_interception_station/observation
 	name = "\improper Syndicate Observation room"
@@ -457,6 +460,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Asteroid"
 	icon_state = "asteroid"
 	requires_power = 0
+	has_gravity = 1
 
 /area/asteroid/cave				// -- TLE
 	name = "\improper Asteroid - Underground"
@@ -468,23 +472,31 @@ var/list/ghostteleportlocs = list()
 	icon_state = "cave"
 
 
+//SATELLITE
+/area/ship/scrap/satellite/command
+	name = "\improper satellite - command"
+	icon_state = "satellite"
+	requires_power = 1
+	poweralm = 0
+	power_environ = 0
+	power_equip = 0
+	power_light = 0
 
-
-
-
-
-
-
-
-
-
-
+/area/ship/scrap/satellite/engine
+	name = "\improper satellite - engine"
+	icon_state = "satellitee"
+	requires_power = 1
+	poweralm = 0
+	power_environ = 0
+	power_equip = 0
+	power_light = 0
 
 
 /area/planet/clown
 	name = "\improper Clown Planet"
 	icon_state = "honk"
 	requires_power = 0
+	has_gravity = 1
 
 /area/tdome
 	name = "\improper Thunderdome"
@@ -524,6 +536,7 @@ var/list/ghostteleportlocs = list()
 /area/syndicate_station/start
 	name = "\improper Syndicate Forward Operating Base"
 	icon_state = "yellow"
+	has_gravity = 1
 
 /area/syndicate_station/deck1
 	name = "\improper Interception Station"
@@ -583,6 +596,7 @@ var/list/ghostteleportlocs = list()
 	requires_power = 0
 	ul_Lighting = 0
 	luminosity = 1
+	has_gravity = 1
 
 /area/vox_station/transit
 	name = "\improper hyperspace"
@@ -1433,6 +1447,10 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Chief Engineer's office"
 		icon_state = "engine_control"
 
+/area/engine/gravity_generator
+	name = "Gravity Generator Room"
+	icon_state = "blue"
+
 /area/propulsion
 	name = "Propulsion Hangar"
 	icon_state = "propulsion"
@@ -1911,6 +1929,7 @@ area/assembly/podbay
 /area/djstation
 	name = "\improper Ruskie DJ Station"
 	icon_state = "DJ"
+	has_gravity = 1
 
 /area/djstation/solars
 	name = "\improper DJ Station Solars"
@@ -2180,6 +2199,7 @@ area/assembly/podbay
 /area/awaymission
 	name = "\improper Strange Location"
 	icon_state = "away"
+	has_gravity = 1
 
 /area/awaymission/example
 	name = "\improper Strange Station"

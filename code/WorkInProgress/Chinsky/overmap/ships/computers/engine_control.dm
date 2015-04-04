@@ -104,3 +104,6 @@
 	New()
 		..()
 		initialize()
+
+/obj/machinery/computer/engines/soviet
+	icon_state = "engineeringcamerassoviet"
