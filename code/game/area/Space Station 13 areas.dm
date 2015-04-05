@@ -1567,6 +1567,9 @@ area/assembly/podbay
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
+/area/medical/medbay/security
+	name = "\improper Medbay Security Checkpoint"
+	icon_state = "red"
 
 /area/medical/biostorage
 	name = "\improper Secondary Storage"

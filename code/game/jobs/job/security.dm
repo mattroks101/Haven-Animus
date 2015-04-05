@@ -186,7 +186,7 @@ var/list/sec_departments = list("engineering", "supply", "medical", "science")
 			if("science")
 				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security/alternative/science(H), slot_w_uniform)
 				H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec/department/sci(H), slot_l_ear)
-				minimal_access += list(access_research)
+				minimal_access += list(access_research, access_tox)
 			else
 				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security/alternative(H), slot_w_uniform)
 				H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
