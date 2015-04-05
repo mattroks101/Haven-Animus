@@ -502,6 +502,10 @@
 			for(var/mob/O in viewers(usr, null))
 				O.show_message(text("\red <B>[] resists!</B>", L), 1)
 
+	//unbuckling yourself
+	if(L.buckled && (L.last_special <= world.time) )
+		L.buckled.manual_unbuckle(L)
+
 	//Breaking out of a locker?
 	if( src.loc && (istype(src.loc, /obj/structure/closet)) )
 		var/breakout_time = 2 //2 minutes by default
