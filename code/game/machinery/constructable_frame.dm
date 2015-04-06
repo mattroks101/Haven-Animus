@@ -598,6 +598,16 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
 
+/obj/item/weapon/circuitboard/engine
+	name = "circuit board (Engine Nozzle)"
+	build_path = /obj/machinery/atmospherics/unary/engine
+	board_type = "machine"
+	origin_tech = "programming=4;plasmatech=3"
+	req_components = list(
+							/obj/item/stack/cable_coil = 2,
+							/obj/item/weapon/stock_parts/manipulator = 2,
+							/obj/item/weapon/stock_parts/micro_laser = 2,
+							/obj/item/weapon/stock_parts/matter_bin = 4)
 
 ////  Vendors
 /obj/item/weapon/circuitboard/vendor

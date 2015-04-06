@@ -38,7 +38,7 @@
 		return
 
 	if(exchange_parts(user, I))
-		return
+		return user << "<span class='warning'>It would be very stupid to do it, because the engine is running</span>"
 
 	default_deconstruction_crowbar(I)
 
