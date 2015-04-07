@@ -37,6 +37,7 @@
 	var/list/equipment = new
 	var/obj/item/device/spacepod_equipment/selected
 
+	var/obj/structure/closet/crate/baggage = null
 
 /obj/spacepod/New()
 	. = ..()
@@ -401,10 +402,34 @@
 	else
 		return 0
 
-/obj/spacepod/MouseDrop_T(mob/M as mob, mob/user as mob)
+/obj/spacepod/MouseDrop_T(var/atom/movable/M, mob/user as mob, )
+	if(istype(M, /obj/structure/closet/crate))
+		user << "<span class='notice'>You start to putting [M.name].</spane>"
+		if(do_after(user, 50))
+			baggage = M
+			M.loc = src
+			user << "<span class='notice'>You put [M.name] to [src.name].</spane>"
+
+
 	if(M != user)
 		return
+
 	move_inside(M, user)
+
+/obj/spacepod/verb/eject_baggage(mob/user as mob)
+	if(baggage!=null)
+		set category = "Object"
+		set name = "Eject baggage"
+		set src in oview(1)
+		var/obj/structure/closet/crate/O = null
+
+		user << "<span class='notice'>You start to ejecting [baggage.name].</spane>"
+		if(do_after(user, 50))
+			O = baggage
+			baggage = null
+			O.loc = user.loc
+			user << "<span class='notice'>You eject [baggage.name].</spane>"
+
 
 /obj/spacepod/verb/move_inside()
 	set category = "Object"

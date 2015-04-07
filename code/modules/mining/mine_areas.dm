@@ -3,6 +3,7 @@
 /area/mine
 	icon_state = "mining"
 	music = 'sound/ambience/song_game.ogg'
+	has_gravity = 1
 
 /area/mine/explored
 	name = "Mine"

@@ -245,7 +245,10 @@
 		mob.lastarea = get_area(mob.loc)
 
 	if((istype(mob.loc, /turf/space)) || (mob.lastarea.has_gravity == 0))
-		if(!mob.Process_Spacemove(0))	return 0
+		if(!mob.Process_Spacemove(0))    return 0
+	/*if(!has_gravity(mob))
+		if(!mob.Process_Spacemove(0))
+			return 0*/
 
 
 	if(isobj(mob.loc) || ismob(mob.loc))//Inside an object, tell it we moved
@@ -435,6 +438,9 @@
 		if(istype(turf,/turf/space))
 			continue
 
+	/*	if(!turf.density && !mob_negates_gravity())
+			continue*/
+
 		if(istype(src,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
 			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0) && !(istype(src:shoes, /obj/item/clothing/shoes/magboots) && (src:shoes:flags & NOSLIP)))
 				continue
@@ -492,3 +498,12 @@
 
 	prob_slip = round(prob_slip)
 	return(prob_slip)
+/*
+/mob/proc/mob_has_gravity(turf/T)
+	return has_gravity(src, T)
+
+/mob/proc/mob_negates_gravity()
+	return 0
+
+/mob/proc/update_gravity()
+	return*/

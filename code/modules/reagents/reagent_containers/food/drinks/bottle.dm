@@ -25,7 +25,6 @@
 		I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
 		playsound(src, "shatter", 70, 1)
 		B.icon = I
-		spawn(0)
 		del(src)
 	else
 		user.drop_item()

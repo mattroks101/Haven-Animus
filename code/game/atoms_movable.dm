@@ -81,6 +81,7 @@
 					src.throw_impact(A,speed)
 					src.throwing = 0
 
+
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
 	if(!target || !src)	return 0
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
@@ -178,6 +179,7 @@
 	src.throwing = 0
 	src.thrower = null
 	src.throw_source = null
+
 
 
 //Overlays

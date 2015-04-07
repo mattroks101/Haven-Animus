@@ -2,6 +2,16 @@
 	set hidden = 1
 	return
 
+
+/obj/item/weapon/gun/projectile/automatic/pistol/mk58
+	name = "\improper MK 58"
+	desc = "A small handgun used by NT security forces"
+	icon_state = "secguncomp"
+	w_class = 2.0
+	origin_tech = "combat=2;materials=2"
+	mag_type = /obj/item/ammo_magazine/external/sm45
+	fire_sound = 'sound/weapons/Gunshot2.ogg'
+
 /obj/item/weapon/gun/projectile/automatic/pistol/silenced/usp
 	name = "usp silenced"
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
