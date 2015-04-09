@@ -141,8 +141,6 @@
 
 	var/coughedtime = null
 
-	var/inertia_dir = 0
-
 	var/music_lastplayed = "null"
 
 	var/job = null//Living

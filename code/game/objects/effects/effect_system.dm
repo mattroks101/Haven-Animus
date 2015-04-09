@@ -30,8 +30,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/water/New()
 	..()
-	create_reagents(5)
-
 	//var/turf/T = src.loc
 	//if (istype(T, /turf))
 	//	T.firelevel = 0 //TODO: FIX
@@ -57,15 +55,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	if(newloc.density)
 		return 0
 	.=..()
-
-	if(!gcDestroyed && reagents)
-		reagents.reaction(newloc)
-		for(var/atom/atm in newloc)
-			if(reagents) return
-			reagents.reaction(atm)
-			if(isliving(atm)) //For extinguishing mobs on fire
-				var/mob/living/M = atm
-				M.ExtinguishMob()
 
 /obj/effect/effect/water/Bump(atom/A)
 	if(reagents)

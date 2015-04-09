@@ -12,6 +12,7 @@
 	var/throw_range = 7
 	var/moved_recently = 0
 	var/mob/pulledby = null
+	var/inertia_dir = 0
 //	glide_size = 8
 
 	// Garbage collection (controller).
@@ -19,7 +20,7 @@
 	var/timeDestroyed
 
 
-/atom/movable/Move()
+/atom/movable/Move(atom/newloc, direct = 0)
 	var/atom/A = src.loc
 	. = ..()
 	src.move_speed = world.timeofday - src.l_move_time
@@ -27,6 +28,12 @@
 	src.m_flag = 1
 	if ((A != src.loc && A && A.z == src.z))
 		src.last_move = get_dir(A, src.loc)
+
+	spawn(5)	// Causes space drifting. We have no concept of speed, we just use 5
+		if(loc && direct && last_move == direct)
+			if(loc == newloc) //Remove this check and people can accelerate. Not opening that can of worms just yet.
+				newtonian_move(last_move)
+
 	return
 
 /atom/movable/Bump(var/atom/A as mob|obj|turf|area, yes)
@@ -66,6 +73,38 @@
 		loc.Entered(src)
 		return 1
 	return 0
+
+//Called whenever an object moves and by mobs when they attempt to move themselves through space
+//And when an object or action applies a force on src, see newtonian_move() below
+//Return 0 to have src start/keep drifting in a no-grav area and 1 to stop/not start drifting
+//Mobs should return 1 if they should be able to move of their own volition, see client/Move() in mob_movement.dm
+//movement_dir == 0 when stopping or any dir when trying to move
+/atom/movable/proc/Process_Spacemove(var/movement_dir = 0)
+	if(has_gravity(src))
+		return 1
+
+	if(pulledby)
+		return 1
+
+	if(locate(/obj/structure/lattice) in orange(1, get_turf(src))) //Not realistic but makes pushing things in space easier
+		return 1
+
+	return 0
+
+/atom/movable/proc/newtonian_move(direction) //Only moves the object if it's under no gravity
+
+	if(!loc || Process_Spacemove(0))
+		inertia_dir = 0
+		return 0
+
+	inertia_dir = direction
+	if(!direction)
+		return 1
+
+
+	var/old_dir = dir
+	. = step(src, direction)
+	dir = old_dir
 
 /atom/movable/proc/hit_check(var/speed)
 	if(src.throwing)
@@ -116,7 +155,7 @@
 
 
 
-		while(src && target &&((((src.x < target.x && dx == EAST) || (src.x > target.x && dx == WEST)) && dist_travelled < range) || (a && a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
+		while(src && target &&((((src.x < target.x && dx == EAST) || (src.x > target.x && dx == WEST)) && dist_travelled < range) || (!has_gravity(src))  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
 			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 			if(error < 0)
 				var/atom/step = get_step(src, dy)

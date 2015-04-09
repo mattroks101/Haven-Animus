@@ -831,7 +831,8 @@
 
 /mob/living/proc/has_eyes()
 	return 1
-/*
+
+
 /mob/living/update_gravity(has_gravity)
 	if(!ticker)
 		return
@@ -843,4 +844,4 @@
 		floating = 1
 	else if(!on && floating)
 		animate(src, pixel_y = initial(pixel_y), time = 10)
-		floating = 0*/
+		floating = 0

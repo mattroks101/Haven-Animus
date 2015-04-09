@@ -25,7 +25,6 @@
 	var/use_internal_tank = 0
 	var/datum/global_iterator/pr_int_temp_processor //normalizes internal air mixture temperature
 	var/datum/global_iterator/pr_give_air //moves air from tank to cabin
-	var/inertia_dir = 0
 	var/hatch_open = 0
 	var/next_firetime = 0
 	var/list/pod_overlays
@@ -565,7 +564,7 @@
 	if(dir == 1 || dir == 4)
 		src.loc.Entered(src)
 
-/obj/spacepod/proc/Process_Spacemove(var/check_drift = 0, mob/user)
+/obj/spacepod/Process_Spacemove(var/check_drift = 0, mob/user)
 	var/dense_object = 0
 	if(!user)
 		for(var/direction in list(NORTH, NORTHEAST, EAST))

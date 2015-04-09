@@ -167,21 +167,13 @@
 	var/atom/movable/M = atom
 
 	var/loopsanity = 100
+
 	if(ismob(M))
-		if(!M:lastarea)
-			M:lastarea = get_area(M.loc)
-		if(M:lastarea.has_gravity == 0)
-			inertial_drift(M)
+		var/mob/O = M
+		if(!O.lastarea)
+			O.lastarea = get_area(O.loc)
+		O.update_gravity(O.mob_has_gravity())
 
-	/*
-		if(M.flags & NOGRAV)
-			inertial_drift(M)
-	*/
-
-
-
-		else if(!istype(src, /turf/space))
-			M:inertia_dir = 0
 	..()
 	var/objects = 0
 	for(var/atom/A as mob|obj|turf|area in src)
@@ -482,9 +474,8 @@
 	return L
 
 /turf/handle_fall(mob/faller, forced)
-	faller.lying = pick(90, 270)
+	faller.lying = 90
 	if(!forced)
 		return
-//	if(has_gravity(src))
-	//	playsound(src, "bodyfall", 50, 1)
-
+	if(has_gravity(src))
+		playsound(src, "bodyfall", 50, 1)

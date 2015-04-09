@@ -98,6 +98,8 @@
 				sleep(3)
 				B.Move(get_step(usr,movementdirection), movementdirection)
 
+		else user.newtonian_move(turn(direction, 180))
+
 		var/turf/T = get_turf(target)
 		var/turf/T1 = get_step(T,turn(direction, 90))
 		var/turf/T2 = get_step(T,turn(direction, -90))
@@ -111,13 +113,18 @@
 				if(!W || !src) return
 				src.reagents.trans_to(W, 1)
 				for(var/b=0, b<5, b++)
-					step_towards(W, my_target)
+					step_towards(W,my_target)
+					if(!W || !W.reagents) return
+					W.reagents.reaction(get_turf(W))
+					for(var/atom/atm in get_turf(W))
+						if(!W) return
+						W.reagents.reaction(atm)
+						if(isliving(atm)) //For extinguishing mobs on fire
+							var/mob/living/M = atm
+							M.ExtinguishMob()
 					if(W.loc == my_target) break
 					sleep(2)
 
-	/*	if(!has_gravity(user))
-			user.inertia_dir = get_dir(target, user)
-			step(user, user.inertia_dir)*/
 	else
 		return ..()
 	return

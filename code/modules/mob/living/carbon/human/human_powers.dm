@@ -61,6 +61,11 @@
 		src << "You cannot leap in your current state."
 		return
 
+	if(!has_gravity(src))
+		src << "<span class='alertalien'>It is unsafe to leap without gravity!</span>"
+		//It's also extremely buggy visually, so it's balance+bugfix
+		return
+
 	var/list/choices = list()
 	for(var/mob/living/M in view(6,src))
 		if(!istype(M,/mob/living/silicon))

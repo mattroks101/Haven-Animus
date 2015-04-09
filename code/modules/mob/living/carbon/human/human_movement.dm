@@ -87,7 +87,7 @@
 
 	prob_slip = round(prob_slip)
 	return(prob_slip)
-/*
+
 /mob/living/carbon/human/mob_has_gravity()
 	. = ..()
 	if(!.)
@@ -96,4 +96,11 @@
 
 /mob/living/carbon/human/mob_negates_gravity()
 	return shoes && shoes.negates_gravity()
-*/
+
+/mob/living/carbon/human/Move(NewLoc, direct)
+	..()
+	if(shoes)
+		if(!lying)
+			if(loc == NewLoc)
+				if(!has_gravity(loc))
+					return

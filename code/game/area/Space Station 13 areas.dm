@@ -44,7 +44,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/used_light = 0
 	var/used_environ = 0
 
-	var/has_gravity = 1//0
+	var/has_gravity = 0
 
 	var/list/apc = list()
 
@@ -118,6 +118,7 @@ var/list/ghostteleportlocs = list()
 	requires_power = 0
 	luminosity = 1
 	ul_Lighting = 0
+	has_gravity = 1
 
 /area/shuttle/spaceship
 	name = "\improper Space Ship"

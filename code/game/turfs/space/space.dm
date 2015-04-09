@@ -152,6 +152,8 @@
 			spawn (0)
 				if ((A && A.loc))
 					A.loc.Entered(A)
+					//now we're on the new z_level, proceed the space drifting
+					A.newtonian_move(A.inertia_dir)
 
 /turf/space/proc/Sandbox_Spacemove(atom/movable/A as mob|obj)
 	var/cur_x

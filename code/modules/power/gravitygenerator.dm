@@ -105,7 +105,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	power_channel = ENVIRON
 	sprite_number = 8
 	use_power = 1
-	interact_offline = 1
+//	interact_offline = 1
 	var/on = 1
 	var/breaker = 1
 	var/list/parts = list()
@@ -371,12 +371,21 @@ var/const/GRAV_NEEDS_WRENCH = 3
 /obj/machinery/gravity_generator/main/proc/update_list()
 	var/turf/T = get_turf(src.loc)
 	if(T)
-		if(!gravity_generators["[T.z]"])
-			gravity_generators["[T.z]"] = list()
-		if(on)
-			gravity_generators["[T.z]"] |= src
+		if(T.z in vessel_z)
+			for(var/level in vessel_z)
+				if(!gravity_generators["[level]"])
+					gravity_generators["[level]"] = list()
+				if(on)
+					gravity_generators["[level]"] |= src
+				else
+					gravity_generators["[level]"] -= src
 		else
-			gravity_generators["[T.z]"] -= src
+			if(!gravity_generators["[T.z]"])
+				gravity_generators["[T.z]"] = list()
+			if(on)
+				gravity_generators["[T.z]"] |= src
+			else
+				gravity_generators["[T.z]"] -= src
 
 // Misc
 

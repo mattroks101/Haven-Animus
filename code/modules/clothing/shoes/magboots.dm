@@ -26,7 +26,7 @@
 			icon_state = "magboots1"
 			usr << "You enable the mag-pulse traction system."
 		usr.update_inv_shoes()	//so our mob-overlays update
-	//	usr.update_gravity(usr.mob_has_gravity())
+		usr.update_gravity(usr.mob_has_gravity())
 
 	examine()
 		set src in view()
