@@ -699,6 +699,8 @@
 	icon_state = "bookSpaceLaw"
 	author = "Nanotrasen"
 	title = "Space Law"
+	var/mob/affecting = null
+
 
 	dat = {"
 
@@ -712,6 +714,19 @@
 
 		"}
 
+
+/obj/item/weapon/book/manual/security_space_law/attack(mob/living/M as mob, mob/living/user as mob)
+	if(user.mind && user.mind.assigned_role == "Head of Security")
+		if(M.mind && M.mind.assigned_role == "Security Officer" || M.mind && M.mind.assigned_role == "Detective" || M.mind && M.mind.assigned_role == "Warden")
+			if(istype(M, /mob/living/carbon/human) && prob(60))
+				if(M.stat !=2 && M.health<100)
+					add_logs(user, M, "lawed", object="[src.name]")
+					M.health += 3
+					M <<  "<span class='notice'>[user] teaches you on the right path!</B></span>"
+					for(var/mob/O in viewers(M, null))
+						O.show_message(text("<span class='warning'><B>[] heals [] with the power of [src.name]!</B></span>", user, M), 1)
+					playsound(src.loc, "punch", 25, 1, -1)
+	else ..()
 
 /obj/item/weapon/book/manual/engineering_guide
 	name = "Engineering Textbook"

@@ -30,8 +30,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/water/New()
 	..()
-	create_reagents(5)
-
 	//var/turf/T = src.loc
 	//if (istype(T, /turf))
 	//	T.firelevel = 0 //TODO: FIX
@@ -57,15 +55,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	if(newloc.density)
 		return 0
 	.=..()
-
-	if(!gcDestroyed)
-		reagents.reaction(newloc)
-		for(var/atom/atm in newloc)
-			if(reagents) return
-			reagents.reaction(atm)
-			if(isliving(atm)) //For extinguishing mobs on fire
-				var/mob/living/M = atm
-				M.ExtinguishMob()
 
 /obj/effect/effect/water/Bump(atom/A)
 	if(reagents)
@@ -621,8 +610,6 @@ steam.start() -- spawns the effect
 						src.start()
 			currloc = T
 
-
-
 /////////////////////////////////////////////
 //////// Attach a steam trail to an object (eg. a reacting beaker) that will follow it
 // even if it's carried of thrown.
@@ -757,16 +744,9 @@ steam.start() -- spawns the effect
 	if(metal)
 		return
 
-	if (istype(AM, /mob/living/carbon))
-		var/mob/M =	AM
-		if (istype(M, /mob/living/carbon/human) && (istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP))
-			return
-
-		M.stop_pulling()
-		M << "\blue You slipped on the foam!"
-		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-		M.Stun(5)
-		M.Weaken(2)
+	if(istype(AM, /mob/living/carbon))
+		var/mob/living/carbon/M = AM
+		M.slip(5, 2, src)
 
 
 /datum/effect/effect/system/foam_spread

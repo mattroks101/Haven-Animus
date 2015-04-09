@@ -299,22 +299,24 @@
 			item:dropped(src) // let it know it's been dropped
 
 	//actually throw it!
-	if (item)
-		src.visible_message("\red [src] has thrown [item].")
+	//actually throw it!
+	if(item)
+		item.layer = initial(item.layer)
+		src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
+
+		var/turf/start_T = get_turf(loc) //Get the start and target tile for the descriptors
+		var/turf/end_T = get_turf(target)
+		if(start_T && end_T)
+			var/start_T_descriptor = "<font color='#6b5d00'>tile at [start_T.x], [start_T.y], [start_T.z] in area [get_area(start_T)]</font>"
+			var/end_T_descriptor = "<font color='#6b4400'>tile at [end_T.x], [end_T.y], [end_T.z] in area [get_area(end_T)]</font>"
+
+			usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Has thrown [item] from [start_T_descriptor] with the target [end_T_descriptor]</font>")
+			log_attack("<font color='red'>[usr]([usr.key]) has thrown [item] from [start_T_descriptor] with the target [end_T_descriptor]</font>")
 
 		if(!src.lastarea)
 			src.lastarea = get_area(src.loc)
-		if((istype(src.loc, /turf/space)) || (src.lastarea.has_gravity == 0))
-			src.inertia_dir = get_dir(target, src)
-			step(src, inertia_dir)
 
-
-/*
-		if(istype(src.loc, /turf/space) || (src.flags & NOGRAV)) //they're in space, move em one space in the opposite direction
-			src.inertia_dir = get_dir(target, src)
-			step(src, inertia_dir)
-*/
-
+		newtonian_move(get_dir(target, src))
 
 		item.throw_at(target, item.throw_range, item.throw_speed, src)
 
@@ -398,6 +400,13 @@
 	else if(prob(50))
 		return "trails_1"
 	return "trails_2"
+
+var/const/NO_SLIP_WHEN_WALKING = 1
+var/const/STEP = 2
+var/const/SLIDE = 4
+var/const/GALOSHES_DONT_HELP = 8
+/mob/living/carbon/slip(var/s_amount, var/w_amount, var/obj/O, var/lube)
+	loc.handle_slip(src, s_amount, w_amount, O, lube)
 
 
 /mob/living/carbon/verb/mob_sleep()

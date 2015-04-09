@@ -188,6 +188,9 @@
 	for(var/obj/item/weapon/implant/loyalty/L in H)//Checking that there is a loyalty implant in the contents
 		if(L.imp_in == H)//Checking that it's actually implanted
 			return 0
+	for(var/obj/item/weapon/implant/mentor/L in H)//Checking that there is a mentor implant in the contents
+		if(L.imp_in == H)//Checking that it's actually implanted
+			return 0
 	if((rev_mind in revolutionaries) || (rev_mind in head_revolutionaries))
 		return 0
 	revolutionaries += rev_mind

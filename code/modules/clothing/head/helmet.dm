@@ -11,6 +11,33 @@
 	heat_protection = HEAD
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
+	var/obj/machinery/camera/camera
+	var/network_used = "SS13"
+
+
+/obj/item/clothing/head/helmet/emp_act(severity)
+	if(network_used)
+		if(1.0)
+			if(src.camera)
+				src.camera.network = list()
+				cameranet.removeCamera(src.camera)
+				usr << "<span class='warning'>[src.name] bzzz.</span>"
+	else ..()
+
+
+
+/obj/item/clothing/head/helmet/attack_self(mob/user)
+	if(network_used)
+		if(camera)
+			..(user)
+		else
+			camera = new /obj/machinery/camera(src)
+			camera.network = list(network_used)
+			cameranet.removeCamera(camera)
+			camera.c_tag = user.name
+			user << "\blue User scanned as [camera.c_tag]. Camera activated."
+	else ..()
+
 
 /obj/item/clothing/head/helmet/warden
 	name = "warden's hat"
@@ -39,6 +66,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5
+	network_used = "swat"
 
 /obj/item/clothing/head/helmet/thunderdome
 	name = "\improper Thunderdome helmet"
@@ -50,6 +78,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
+	network_used = "thunder"
 
 /obj/item/clothing/head/helmet/gladiator
 	name = "gladiator helmet"
@@ -59,6 +88,7 @@
 	item_state = "gladiator"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES
 	siemens_coefficient = 1
+	network_used = "thunder"
 
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"
@@ -69,3 +99,5 @@
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
+	network_used = "swat"
+

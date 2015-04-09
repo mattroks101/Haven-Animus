@@ -158,6 +158,8 @@
 	else
 		user.update_inv_r_hand()
 
+	user.newtonian_move(get_dir(target, user))
+
 /obj/item/weapon/gun/proc/can_fire()
 	return process_chambered()
 

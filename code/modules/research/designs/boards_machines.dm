@@ -146,6 +146,14 @@ datum/design/telepad
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/pacman/mrs
 
+/datum/design/engine
+	name = "Machine Design (Engine Nozzle)"
+	desc = "The circuit board that for a Engine Nozzle."
+	id = "engine"
+	req_tech = list("programming" = 3, "plasmatech" = 2, "engineering" = 5)
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/engine
+
 
 ///////////////////////////////////
 ///////Subspace Telecomms//////////

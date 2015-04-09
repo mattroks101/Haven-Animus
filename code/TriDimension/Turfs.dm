@@ -21,7 +21,6 @@
 					if(!getbelow())
 						return
 				if(AM)
-					var/area/areacheck = get_area(src)
 					var/blocked = 0
 					for(var/atom/A in floorbelow.contents)
 						if(A.density)
@@ -36,7 +35,7 @@
 
 							//dont break here, since we still need to be sure that it isnt blocked
 
-					if (!blocked && !(areacheck.name == "Space"))
+					if (!blocked && !(has_gravity(src)))
 						AM.Move(floorbelow)
 						if ( istype(AM, /mob/living/carbon/human))
 							if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
@@ -45,10 +44,10 @@
 								var/mob/living/carbon/human/H = AM
 								var/damage = 10
 //								H.apply_damage(rand(0,damage), BRUTE, "groin")
-								H.apply_damage(rand(0,damage), BRUTE, "l_leg")
-								H.apply_damage(rand(0,damage), BRUTE, "r_leg")
-								H.apply_damage(rand(2,damage), BRUTE, "l_foot")
-								H.apply_damage(rand(2,damage), BRUTE, "r_foot")
+								H.apply_damage(damage/2 + rand(-5,5), BRUTE, "l_leg")
+								H.apply_damage(damage/2 + rand(-5,5), BRUTE, "r_leg")
+								H.apply_damage(damage + rand(-5,5), BRUTE, "l_foot")
+								H.apply_damage(damage + rand(-5,5), BRUTE, "r_foot")
 								H:weakened = max(H:weakened,2)
 								H:updatehealth()
 		return ..()

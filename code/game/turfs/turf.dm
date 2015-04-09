@@ -88,7 +88,7 @@
 				return 0
 	return 1 //Nothing found to block so return success!
 
-
+/*
 /turf/Entered(atom/atom as mob|obj)
 	..()
 //vvvvv Infared beam stuff vvvvv
@@ -109,10 +109,15 @@
 
 	var/loopsanity = 100
 	if(ismob(M))
-		if(!M:lastarea)
-			M:lastarea = get_area(M.loc)
-		if(M:lastarea.has_gravity == 0)
-			inertial_drift(M)
+		var/mob/O = M
+		if(!O.lastarea)
+			O.lastarea = get_area(O.loc)
+		var/has_gravity = O.mob_has_gravity(src)
+		O.update_gravity(has_gravity)
+		if(!has_gravity)
+			inertial_drift(O)
+		else if(!istype(src, /turf/space))
+			O.inertia_dir = 0
 
 	/*
 		if(M.flags & NOGRAV)
@@ -141,7 +146,52 @@
 				A.HasProximity(M, 1)
 			return
 	return
+*/
 
+/turf/Entered(atom/atom as mob|obj)
+	..()
+//vvvvv Infared beam stuff vvvvv
+
+	if ((atom && atom.density && !( istype(atom, /obj/effect/beam) )))
+		for(var/obj/effect/beam/i_beam/I in src)
+			spawn( 0 )
+				if (I)
+					I.hit()
+				break
+
+//^^^^^ Infared beam stuff ^^^^^
+
+	if(!istype(atom, /atom/movable))
+		return
+
+	var/atom/movable/M = atom
+
+	var/loopsanity = 100
+
+	if(ismob(M))
+		var/mob/O = M
+		if(!O.lastarea)
+			O.lastarea = get_area(O.loc)
+		O.update_gravity(O.mob_has_gravity())
+
+	..()
+	var/objects = 0
+	for(var/atom/A as mob|obj|turf|area in src)
+		if(objects > loopsanity)	break
+		objects++
+		spawn( 0 )
+			if ((A && M))
+				A.HasEntered(M, 1)
+			return
+	objects = 0
+	for(var/atom/A as mob|obj|turf|area in range(1))
+		if(objects > loopsanity)	break
+		objects++
+		spawn( 0 )
+			if ((A && M))
+				A.HasProximity(M, 1)
+			return
+	return
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
 	return
 
@@ -425,4 +475,32 @@
 
 /turf/handle_fall(mob/faller, forced)
 	faller.lying = 90
+	if(!forced)
+		return
+	if(has_gravity(src))
+		playsound(src, "bodyfall", 50, 1)
 
+/turf/handle_slip(mob/slipper, s_amount, w_amount, obj/O, lube)
+	if(has_gravity(src))
+		var/mob/living/carbon/M = slipper
+		if (M.m_intent=="walk" && (lube&NO_SLIP_WHEN_WALKING))
+			return 0
+		if(!M.lying && (M.status_flags & CANWEAKEN)) // we slip those who are standing and can fall.
+			var/olddir = M.dir
+			M.Stun(s_amount)
+			M.Weaken(w_amount)
+			M.stop_pulling()
+			if(lube&SLIDE)
+				for(var/i=1, i<5, i++)
+					spawn (i)
+						step(M, olddir)
+						M.spin(1,1)
+				if(M.lying) //did I fall over?
+					M.adjustBruteLoss(2)
+			if(O)
+				M << "<span class='notice'>You slipped on the [O.name]!</span>"
+			else
+				M << "<span class='notice'>You slipped!</span>"
+			playsound(M.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+			return 1
+	return 0 // no success. Used in clown pda and wet floors

@@ -2,6 +2,16 @@
 	set hidden = 1
 	return
 
+
+/obj/item/weapon/gun/projectile/automatic/pistol/mk58
+	name = "\improper MK 58"
+	desc = "A small handgun used by NT security forces"
+	icon_state = "secguncomp"
+	w_class = 2.0
+	origin_tech = "combat=2;materials=2"
+	mag_type = /obj/item/ammo_magazine/external/sm45
+	fire_sound = 'sound/weapons/Gunshot2.ogg'
+
 /obj/item/weapon/gun/projectile/automatic/pistol/silenced/usp
 	name = "usp silenced"
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
@@ -183,6 +193,67 @@
 	..()
 	del(magazine)
 	magazine = new /obj/item/ammo_magazine/external/mc9mm/extra(src)
+
+/obj/item/weapon/gun/projectile/automatic/deagle/glock
+	name = "glock"
+	desc = "A glock pistol. Uses 9mm ammo."
+	icon_state = "glock"
+	force = 10.0
+	origin_tech = "combat=4;materials=3"
+	mag_type = /obj/item/ammo_magazine/external/mc9mm
+
+///obj/item/weapon/gun/projectile/automatic/deagle/glock/attackby(obj/item/W as obj, mob/user as mob)
+//	if(istype(W,/obj/item/weapon/screwdriver))
+
+
+/obj/item/weapon/assembly/glock
+	icon = 'icons/obj/buildingobject.dmi'
+
+/obj/item/weapon/assembly/glock/barrel
+	name = "handgun barrel"
+	desc = "One third of a low-caliber handgun."
+	icon_state = "glock1"
+	m_amt = 400000 // expensive, will need an autolathe upgrade to hold enough metal to produce the barrel. this way you need cooperation between 3 departments to finish even 1.
+
+/obj/item/weapon/assembly/glock/construction
+	name = "handgun barrel and grip"
+	desc = "Two thirds of a low-caliber handgun."
+	icon_state = "glockstep1"
+	var/construction = 0
+
+/obj/item/weapon/assembly/glock/construction/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/assembly/glock/slide))
+		user << "You attach the slide to the gun."
+		construction = 1
+		del(W)
+		icon_state = "glockstep2"
+		name = "unfinished handgun"
+		desc = "An almost finished handgun."
+		return
+	if(istype(W,/obj/item/weapon/screwdriver))
+		if(construction)
+			user << "You finish the handgun."
+			new /obj/item/weapon/gun/projectile/automatic/deagle/glock(user.loc)
+			del(src)
+			return
+
+/obj/item/weapon/assembly/glock/barrel/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/assembly/glock/grip))
+		user << "You attach the grip to the barrel."
+		new /obj/item/weapon/assembly/glock/construction(user.loc)
+		del(W)
+		del(src)
+		return
+
+/obj/item/weapon/assembly/glock/grip
+	name = "handgun grip"
+	desc = "One third of a low-caliber handgun."
+	icon_state = "glock2"
+
+/obj/item/weapon/assembly/glock/slide
+	name = "handgun slide"
+	desc = "One third of a low-caliber handgun."
+	icon_state = "glock3"
 
 
 /obj/item/weapon/silencer

@@ -11,6 +11,7 @@
 	qdel(src)
 
 /obj/effect/decal/warning_stripes/oldstyle
+	name = "Warning stripes"
 	icon = 'icons/effects/warning_stripes_old.dmi'
 
 /obj/effect/decal/warning_stripes/pathmarkers

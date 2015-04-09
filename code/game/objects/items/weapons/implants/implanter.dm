@@ -63,6 +63,18 @@
 	return
 
 
+/obj/item/weapon/implanter/mentor
+	name = "implanter-mentor protection"
+
+/obj/item/weapon/implanter/mentor/New()
+	src.imp = new /obj/item/weapon/implant/mentor( src )
+	..()
+	update()
+	return
+
+
+
+
 
 /obj/item/weapon/implanter/explosive
 	name = "implanter (E)"

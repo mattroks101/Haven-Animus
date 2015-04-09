@@ -104,3 +104,27 @@
 	New()
 		..()
 		initialize()
+
+/obj/machinery/computer/engines/soviet
+	icon_state = "engineeringcamerassoviet-er"
+	var/error = 1
+
+/obj/machinery/computer/engines/soviet/attack_hand(var/mob/user as mob)
+	if(error)
+		user << "<span class='warning'>Error! Requires a system reboot..</span>"
+		return
+	..()
+
+/obj/machinery/computer/engines/soviet/attackby(obj/item/P as obj, mob/user as mob)
+	if(stat & (NOPOWER|BROKEN))
+		return
+	if(istype(P, /obj/item/device/multitool))
+		user << "<span class='notice'>You start rebooting system..</span>"
+		if(do_after(user, 50))
+			error = 0
+			icon_state = "engineeringcamerassoviet"
+			user << "<span class='notice'>You successfully reboot system.</span>"
+
+		else	user << "<span class='warning'>You cancel rebooting system!</span>"
+
+	..()

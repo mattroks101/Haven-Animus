@@ -25,7 +25,6 @@
 	var/use_internal_tank = 0
 	var/datum/global_iterator/pr_int_temp_processor //normalizes internal air mixture temperature
 	var/datum/global_iterator/pr_give_air //moves air from tank to cabin
-	var/inertia_dir = 0
 	var/hatch_open = 0
 	var/next_firetime = 0
 	var/list/pod_overlays
@@ -37,6 +36,7 @@
 	var/list/equipment = new
 	var/obj/item/device/spacepod_equipment/selected
 
+	var/obj/structure/closet/crate/baggage = null
 
 /obj/spacepod/New()
 	. = ..()
@@ -401,10 +401,34 @@
 	else
 		return 0
 
-/obj/spacepod/MouseDrop_T(mob/M as mob, mob/user as mob)
+/obj/spacepod/MouseDrop_T(var/atom/movable/M, mob/user as mob, )
+	if(istype(M, /obj/structure/closet/crate))
+		user << "<span class='notice'>You start to putting [M.name].</spane>"
+		if(do_after(user, 50))
+			baggage = M
+			M.loc = src
+			user << "<span class='notice'>You put [M.name] to [src.name].</spane>"
+
+
 	if(M != user)
 		return
+
 	move_inside(M, user)
+
+/obj/spacepod/verb/eject_baggage(mob/user as mob)
+	if(baggage!=null)
+		set category = "Object"
+		set name = "Eject baggage"
+		set src in oview(1)
+		var/obj/structure/closet/crate/O = null
+
+		user << "<span class='notice'>You start to ejecting [baggage.name].</spane>"
+		if(do_after(user, 50))
+			O = baggage
+			baggage = null
+			O.loc = user.loc
+			user << "<span class='notice'>You eject [baggage.name].</spane>"
+
 
 /obj/spacepod/verb/move_inside()
 	set category = "Object"
@@ -540,7 +564,7 @@
 	if(dir == 1 || dir == 4)
 		src.loc.Entered(src)
 
-/obj/spacepod/proc/Process_Spacemove(var/check_drift = 0, mob/user)
+/obj/spacepod/Process_Spacemove(var/check_drift = 0, mob/user)
 	var/dense_object = 0
 	if(!user)
 		for(var/direction in list(NORTH, NORTHEAST, EAST))

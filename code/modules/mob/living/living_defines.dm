@@ -51,3 +51,5 @@
 	var/attack_sound = null
 	var/friendly = "nuzzles" //If the mob does no damage with it's attack
 	var/wall_smash = 0 //if they can smash walls
+
+	var/floating = 0
