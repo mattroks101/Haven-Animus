@@ -106,7 +106,6 @@
 	item_color = "syndi"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.6
-	var/obj/machinery/camera/camera
 	species_restricted = list("exclude","Vox")
 /obj/item/clothing/head/helmet/space/rig/syndi/attack_self(mob/user)
 	if(camera)

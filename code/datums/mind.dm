@@ -128,9 +128,13 @@ datum/mind
 			/** Impanted**/
 			if(istype(current, /mob/living/carbon/human))
 				if(H.is_loyalty_implanted(H))
-					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
+					text += "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
 				else
-					text = "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
+					text += "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
+				if(H.is_mentor_implanted(H))
+					text += "Mentor Implant:<a href='?src=\ref[src];implant_mentor=remove'>Remove</a>|<b>Implanted</b></br>"
+				else
+					text += "Mentor Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant_mentor=add'>Implant him!</a></br>"
 			else
 				text = "Loyalty Implant: Don't implant that monkey!</br>"
 			sections["implant"] = text
@@ -139,7 +143,7 @@ datum/mind
 			if (ticker.mode.config_tag=="revolution")
 				text += uppertext(text)
 			text = "<i><b>[text]</b></i>: "
-			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H))
+			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H) || H.is_mentor_implanted(H))
 				text += "<b>LOYAL EMPLOYEE</b>|headrev|rev"
 			else if (src in ticker.mode.head_revolutionaries)
 				text = "<a href='?src=\ref[src];revolution=clear'>employee</a>|<b>HEADREV</b>|<a href='?src=\ref[src];revolution=rev'>rev</a>"
@@ -169,7 +173,7 @@ datum/mind
 			if (ticker.mode.config_tag=="cult")
 				text = uppertext(text)
 			text = "<i><b>[text]</b></i>: "
-			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H))
+			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H)|| H.is_mentor_implanted(H))
 				text += "<B>LOYAL EMPLOYEE</B>|cultist"
 			else if (src in ticker.mode.cult)
 				text += "<a href='?src=\ref[src];cult=clear'>employee</a>|<b>CULTIST</b>"
@@ -505,6 +509,47 @@ datum/mind
 								I.Destroy()
 								break
 					H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
+				if("add")
+					var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
+					L.imp_in = H
+					L.implanted = 1
+					var/datum/organ/external/affected = H.organs_by_name["head"]
+					affected.implants += L
+					L.part = affected
+
+					H << "\red <Font size =3><B>You somehow have become the recepient of a loyalty transplant, and it just activated!</B></FONT>"
+					if(src in ticker.mode.revolutionaries)
+						special_role = null
+						ticker.mode.revolutionaries -= src
+						src << "\red <Font size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a revolutionary.  Get back to work!</B></Font>"
+					if(src in ticker.mode.head_revolutionaries)
+						special_role = null
+						ticker.mode.head_revolutionaries -=src
+						src << "\red <Font size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a revolutionary.  Get back to work!</B></Font>"
+					if(src in ticker.mode.cult)
+						ticker.mode.cult -= src
+						ticker.mode.update_cult_icons_removed(src)
+						special_role = null
+						var/datum/game_mode/cult/cult = ticker.mode
+						if (istype(cult))
+							cult.memoize_cult_objectives(src)
+						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being in a cult.  Have a productive day!</B></FONT>"
+						memory = ""
+					if(src in ticker.mode.traitors)
+						ticker.mode.traitors -= src
+						special_role = null
+						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a traitor to Nanotrasen.  Have a nice day!</B></FONT>"
+						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
+		else if(href_list["implant_mentor"])
+			var/mob/living/carbon/human/H = current
+			switch(href_list["implant_mentor"])
+				if("remove")
+					for(var/obj/item/weapon/implant/mentor/I in H.contents)
+						for(var/datum/organ/external/organs in H.organs)
+							if(I in organs.implants)
+								I.Destroy()
+								break
+					H << "\blue <Font size =3><B>Your mentor protection has been deactivated.</B></FONT>"
 				if("add")
 					var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
 					L.imp_in = H

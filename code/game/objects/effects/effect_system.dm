@@ -518,31 +518,30 @@ steam.start() -- spawns the effect
 			src.processing = 1
 		if(src.processing)
 			src.processing = 0
-			var/turf/T = get_turf(src.holder)
-			if(T != src.oldposition)
-			/*	if(!has_gravity(T))
-					var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
-					src.oldposition = T
-					I.dir = src.holder.dir
-					flick("ion_fade", I)
-					I.icon_state = "blank"
-					spawn( 20 )
-						if(I)
-							I.delete()*/
-				spawn(2)
-					if(src.on)
-						src.processing = 1
-						src.start()
-			else
-				spawn(2)
-					if(src.on)
-						src.processing = 1
-						src.start()
+			spawn(0)
+				var/turf/T = get_turf(src.holder)
+				if(T != src.oldposition)
+					if(istype(T, /turf/space))
+						var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
+						src.oldposition = T
+						I.dir = src.holder.dir
+						flick("ion_fade", I)
+						I.icon_state = "blank"
+						spawn( 20 )
+							I.delete()
+					spawn(2)
+						if(src.on)
+							src.processing = 1
+							src.start()
+				else
+					spawn(2)
+						if(src.on)
+							src.processing = 1
+							src.start()
 
 	proc/stop()
 		src.processing = 0
 		src.on = 0
-
 
 /datum/effect/effect/system/ion_trail_follow/space_trail
 //	var/turf/oldloc // secondary ion trail loc
@@ -610,8 +609,6 @@ steam.start() -- spawns the effect
 						src.processing = 1
 						src.start()
 			currloc = T
-
-
 
 /////////////////////////////////////////////
 //////// Attach a steam trail to an object (eg. a reacting beaker) that will follow it
@@ -747,16 +744,9 @@ steam.start() -- spawns the effect
 	if(metal)
 		return
 
-	if (istype(AM, /mob/living/carbon))
-		var/mob/M =	AM
-		if (istype(M, /mob/living/carbon/human) && (istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP))
-			return
-
-		M.stop_pulling()
-		M << "\blue You slipped on the foam!"
-		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-		M.Stun(5)
-		M.Weaken(2)
+	if(istype(AM, /mob/living/carbon))
+		var/mob/living/carbon/M = AM
+		M.slip(5, 2, src)
 
 
 /datum/effect/effect/system/foam_spread

@@ -117,6 +117,18 @@
 		..()
 		return
 
+/obj/item/weapon/implantcase/mentor
+	name = "Glass Case- 'Mentor protection'"
+	desc = "A case containing a mentor protection implant."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "implantcase-r"
+
+
+	New()
+		src.imp = new /obj/item/weapon/implant/mentor( src )
+		..()
+		return
+
 
 /obj/item/weapon/implantcase/death_alarm
 	name = "Glass Case- 'Death Alarm'"

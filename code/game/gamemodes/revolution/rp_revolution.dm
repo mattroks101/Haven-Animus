@@ -151,6 +151,9 @@
 	for(var/obj/item/weapon/implant/loyalty/L in M)//Checking that there is a loyalty implant in the contents
 		if(L.imp_in == M)//Checking that it's actually implanted
 			return 0
+	for(var/obj/item/weapon/implant/mentor/L in M)//Checking that there is a loyalty implant in the contents
+		if(L.imp_in == M)//Checking that it's actually implanted
+			return 0
 
 	return 1
 

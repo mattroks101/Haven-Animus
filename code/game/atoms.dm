@@ -435,3 +435,6 @@ its easier to just keep the beam vertical.
 
 /atom/proc/CheckParts()
 	return
+
+/atom/proc/handle_slip()
+	return

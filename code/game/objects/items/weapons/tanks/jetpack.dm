@@ -40,6 +40,7 @@
 	set name = "Toggle Jetpack"
 	set category = "Object"
 	on = !on
+	usr << "You toggle the jetpack [on? "on":"off"]."
 	if(on)
 		icon_state = "[icon_state]-on"
 //			item_state = "[item_state]-on"

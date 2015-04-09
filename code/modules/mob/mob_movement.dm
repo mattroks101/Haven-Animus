@@ -469,6 +469,8 @@
 	prob_slip = round(prob_slip)
 	return(prob_slip)
 
+/mob/proc/slip(var/s_amount, var/w_amount, var/obj/O, var/lube)
+	return
 
 /mob/proc/mob_has_gravity(turf/T)
 	return has_gravity(src, T)
