@@ -108,12 +108,12 @@ var/list/instruments_A5files = list('sound/synthesizer/PianoA5.ogg', 'sound/synt
 	updateUsrDialog()
 
 /obj/structure/device/piano/synthesizer/attack_hand(var/mob/user as mob)
-
+/*
 	if(user.ckey == "editorrus")  // ok ok
 		playsound(src.loc, "sparks", 75, 1, -1)
 		user.Weaken(30)
 		user << "\red You're feel like people are beginning to suffer."
-		return
+		return*/
 
 	usr.machine = src
 

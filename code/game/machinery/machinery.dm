@@ -404,3 +404,17 @@ Class Procs:
 		target.stop_pulling()
 	updateUsrDialog()
 	update_icon()
+
+/obj/machinery/proc/ai_notice(var/message, var/obj/machinery/machine, var/style)
+	if(!machine || !message || !machine && !message)
+		return world << "START NO OK"
+	var/mob/living/silicon/ai/AI = usr
+	if(!near_camera(machine))
+		return
+	var/list/style_list = list("warning", "info", "notice")
+	if(style == null || !style in style_list)
+		style = "info"
+	for(AI in living_mob_list)
+
+		AI << "<span class='[style]'><b>The <a href='byond://?src=\ref[AI];track2=\ref[AI];jumptomachine=\ref[machine]'>[machine]</a> [pick("reports", "inform", "communicate", "data", "pings")] </b> - \"[message].\"</span>"
+	return
