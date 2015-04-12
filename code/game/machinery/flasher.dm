@@ -65,6 +65,7 @@
 	flick("[base_state]_flash", src)
 	src.last_flash = world.time
 	use_power(1000)
+	ai_notice("[src.name] activated", src, "warning")
 
 	for (var/mob/O in viewers(src, null))
 		if (get_dist(src, O) > src.range)

@@ -17,8 +17,11 @@
 
 /obj/structure/closet/New()
 	..()
-	if(!opened)		// if closed, any item at the crate's loc is put in the contents
-		take_contents()
+	spawn(1)
+		if(!opened)		// if closed, any item at the crate's loc is put in the contents
+			for(var/obj/item/I in src.loc)
+				if(I.density || I.anchored || I == src) continue
+				I.loc = src
 
 /obj/structure/closet/alter_health()
 	return get_turf(src)
@@ -61,13 +64,13 @@
 
 	src.dump_contents()
 
+	src.icon_state = src.icon_opened
 	src.opened = 1
 	if(istype(src, /obj/structure/closet/body_bag))
 		playsound(src.loc, 'sound/items/zip.ogg', 15, 1, -3)
 	else
 		playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
 	density = 0
-	update_icon()
 	return 1
 
 /obj/structure/closet/proc/close()
@@ -76,15 +79,44 @@
 	if(!src.can_close())
 		return 0
 
-	take_contents()
+	var/itemcount = 0
 
+	//Cham Projector Exception
+	for(var/obj/effect/dummy/chameleon/AD in src.loc)
+		if(itemcount >= storage_capacity)
+			break
+		AD.loc = src
+		itemcount++
+
+	for(var/obj/item/I in src.loc)
+		if(itemcount >= storage_capacity)
+			break
+		if(!I.anchored)
+			I.loc = src
+			itemcount++
+
+	for(var/mob/M in src.loc)
+		if(itemcount >= storage_capacity)
+			break
+		if(istype (M, /mob/dead/observer))
+			continue
+		if(M.buckled)
+			continue
+
+		if(M.client)
+			M.client.perspective = EYE_PERSPECTIVE
+			M.client.eye = src
+
+		M.loc = src
+		itemcount++
+
+	src.icon_state = src.icon_closed
 	src.opened = 0
 	if(istype(src, /obj/structure/closet/body_bag))
 		playsound(src.loc, 'sound/items/zip.ogg', 15, 1, -3)
 	else
 		playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
 	density = 1
-	update_icon()
 	return 1
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
@@ -92,31 +124,6 @@
 	if(!.)
 		user << "<span class='notice'>It won't budge!</span>"
 	return
-
-/obj/structure/closet/proc/take_contents()
-
-	for(var/atom/movable/AM in src.loc)
-		if(insert(AM) == -1) // limit reached
-			break
-
-/obj/structure/closet/proc/insert(var/atom/movable/AM)
-
-	if(contents.len >= storage_capacity)
-		return -1
-
-	if(istype(AM, /mob/living))
-		var/mob/living/L = AM
-		if(L.buckled)
-			return
-		if(L.client)
-			L.client.perspective = EYE_PERSPECTIVE
-			L.client.eye = src
-	else if(!istype(AM, /obj/item) && !istype(AM, /obj/effect/dummy/chameleon))
-		return 0
-	else if(AM.density || AM.anchored)
-		return 0
-	AM.loc = src
-	return 1
 
 // this should probably use dump_contents()
 /obj/structure/closet/ex_act(severity)

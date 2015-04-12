@@ -106,6 +106,7 @@
 
 	var/desc = input("Please select a location to lock in.", "Locking Computer") in L
 	src.locked = L[desc]
+	ai_notice("[src.name] now locked to [L[desc]]", src, "warning")
 	for(var/mob/O in hearers(src, null))
 		O.show_message("\blue Locked In", 2)
 	src.add_fingerprint(usr)

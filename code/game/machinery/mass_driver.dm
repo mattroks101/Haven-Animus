@@ -33,6 +33,7 @@
 				spawn( 0 )
 					O.throw_at(target, drive_range * power, power)
 		flick("mass_driver1", src)
+		ai_notice("[src.name] started", src, "info")
 		return
 
 	emp_act(severity)

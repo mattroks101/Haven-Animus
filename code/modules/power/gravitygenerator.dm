@@ -272,6 +272,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	else if(breaker)
 		new_state = 1
 
+	ai_notice("[src.name] now [charging_state == POWER_UP ? "charging" : "discharging"]", src, "warning")
 	charging_state = new_state ? POWER_UP : POWER_DOWN // Startup sequence animation.
 	investigate_log("is now [charging_state == POWER_UP ? "charging" : "discharging"].", "gravity")
 	update_icon()

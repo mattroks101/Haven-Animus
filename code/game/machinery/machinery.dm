@@ -113,6 +113,7 @@ Class Procs:
 	var/state_open = 0
 	var/mob/living/occupant = null
 	var/unsecuring_tool = /obj/item/weapon/wrench
+	var/last_notice = 0
 
 /obj/machinery/New()
 	..()
@@ -407,14 +408,16 @@ Class Procs:
 
 /obj/machinery/proc/ai_notice(var/message, var/obj/machinery/machine, var/style)
 	if(!machine || !message || !machine && !message)
-		return world << "START NO OK"
+		return
+	if (last_notice && world.time < last_notice + 300) // stop spam
+		return
 	var/mob/living/silicon/ai/AI = usr
-	if(!near_camera(machine))
+	if(!near_camera(machine))   // check machine on camera
 		return
 	var/list/style_list = list("warning", "info", "notice")
-	if(style == null || !style in style_list)
+	if(style == null || !style in style_list)  // check styles
 		style = "info"
 	for(AI in living_mob_list)
-
-		AI << "<span class='[style]'><b>The <a href='byond://?src=\ref[AI];track2=\ref[AI];jumptomachine=\ref[machine]'>[machine]</a> [pick("reports", "inform", "communicate", "data", "pings")] </b> - \"[message].\"</span>"
+		AI << "<span class='[style]'><b><a href='byond://?src=\ref[AI];track2=\ref[AI];jumptomachine=\ref[machine]'>[machine]</a> [pick("reports", "inform", "communicate", "data", "pings")] </b> - \"[message].\"</span>"
+	last_notice = world.time
 	return
