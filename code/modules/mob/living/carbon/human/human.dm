@@ -64,7 +64,7 @@
 	if(!dna)
 		dna = new /datum/dna(null)
 
-	for(var/i=0;i<7;i++) // 2 for medHUDs and 5 for secHUDs
+	for(var/i=0;i<8;i++) // 2 for medHUDs and 5 for secHUDs
 		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
 
 	..()
@@ -314,6 +314,14 @@
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/weapon/implant/loyalty))
+			for(var/datum/organ/external/O in M.organs)
+				if(L in O.implants)
+					return 1
+	return 0
+
+/mob/living/carbon/human/proc/is_mentor_implanted(mob/living/carbon/human/M)
+	for(var/L in M.contents)
+		if(istype(L, /obj/item/weapon/implant/mentor))
 			for(var/datum/organ/external/O in M.organs)
 				if(L in O.implants)
 					return 1

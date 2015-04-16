@@ -19,7 +19,7 @@ var/list/ai_list = list()
 	anchored = 1 // -- TLE
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE
-	var/list/network = list("SS13")
+	var/list/network = list("SS13", "security")
 	var/obj/machinery/camera/current = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -361,6 +361,17 @@ var/list/ai_list = list()
 
 	if (href_list["laws"]) // With how my law selection code works, I changed statelaws from a verb to a proc, and call it through my law selection panel. --NeoFite
 		statelaws()
+
+	if (href_list["jumptomachine"])
+		var/obj/machinery/M = locate(href_list["jumptomachine"])
+		var/mob/living/silicon/ai/U = usr
+
+		if (!near_camera(M))
+			world << "NO NEAR CAMERA OK"
+			U << "[M.name] is not near any active cameras."
+			return
+		U.eyeobj.setLoc(get_turf(M))
+		sleep(10)
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in mob_list

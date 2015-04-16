@@ -15,6 +15,7 @@
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
 	species_restricted = list("exclude","Diona","Vox")
+	network_used = 0
 
 /obj/item/clothing/suit/space
 	name = "space suit"

@@ -128,9 +128,13 @@ datum/mind
 			/** Impanted**/
 			if(istype(current, /mob/living/carbon/human))
 				if(H.is_loyalty_implanted(H))
-					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
+					text += "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
 				else
-					text = "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
+					text += "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
+				if(H.is_mentor_implanted(H))
+					text += "Mentor Implant:<a href='?src=\ref[src];implant_mentor=remove'>Remove</a>|<b>Implanted</b></br>"
+				else
+					text += "Mentor Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant_mentor=add'>Implant him!</a></br>"
 			else
 				text = "Loyalty Implant: Don't implant that monkey!</br>"
 			sections["implant"] = text
@@ -139,7 +143,7 @@ datum/mind
 			if (ticker.mode.config_tag=="revolution")
 				text += uppertext(text)
 			text = "<i><b>[text]</b></i>: "
-			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H))
+			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H) || H.is_mentor_implanted(H))
 				text += "<b>LOYAL EMPLOYEE</b>|headrev|rev"
 			else if (src in ticker.mode.head_revolutionaries)
 				text = "<a href='?src=\ref[src];revolution=clear'>employee</a>|<b>HEADREV</b>|<a href='?src=\ref[src];revolution=rev'>rev</a>"
@@ -169,7 +173,7 @@ datum/mind
 			if (ticker.mode.config_tag=="cult")
 				text = uppertext(text)
 			text = "<i><b>[text]</b></i>: "
-			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H))
+			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H)|| H.is_mentor_implanted(H))
 				text += "<B>LOYAL EMPLOYEE</B>|cultist"
 			else if (src in ticker.mode.cult)
 				text += "<a href='?src=\ref[src];cult=clear'>employee</a>|<b>CULTIST</b>"

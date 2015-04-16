@@ -334,12 +334,54 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	implanted(mob/M)
 		if(!istype(M, /mob/living/carbon/human))	return 0
 		var/mob/living/carbon/human/H = M
+		for(var/obj/item/weapon/implant/mentor/I in H.contents)
+			for(var/datum/organ/external/organs in H.organs)
+				if(I in organs.implants)
+					I.Destroy()
+					break
+			H << "\blue <Font size =3><B>Your mentor protection implant has been deactivated.</B></FONT>"
 		if(H.mind in ticker.mode.head_revolutionaries)
 			H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of Nanotrasen try to invade your mind!")
 			return 0
 		else if(H.mind in ticker.mode:revolutionaries)
 			ticker.mode:remove_revolutionary(H.mind)
 		H << "\blue You feel a surge of loyalty towards Nanotrasen."
+		return 1
+
+
+/obj/item/weapon/implant/mentor
+	name = "mentor protection implant"
+	desc = "Protects you from bad thoughts."
+
+	get_data()
+		var/dat = {"
+<b>Implant Specifications:</b><BR>
+<b>Name:</b> Nanotrasen Employee Management Implant<BR>
+<b>Life:</b> One year.<BR>
+<b>Important Notes:</b> Personnel injected with this device tend to protects the human psyche from the psychological impact.<BR>
+<HR>
+<b>Implant Details:</b><BR>
+<b>Function:</b> Contains a small pod of nanobots that manipulate the host's mental functions.<BR>
+<b>Special Features:</b> Will prevent and cure most forms of brainwashing.<BR>
+<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
+		return dat
+
+
+	implanted(mob/M)
+		if(!istype(M, /mob/living/carbon/human))	return 0
+		var/mob/living/carbon/human/H = M
+		for(var/obj/item/weapon/implant/loyalty/I in H.contents)
+			for(var/datum/organ/external/organs in H.organs)
+				if(I in organs.implants)
+					I.Destroy()
+					break
+			H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
+		if(H.mind in ticker.mode.head_revolutionaries)
+			H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of Nanotrasen try to invade your mind!")
+			return 0
+		else if(H.mind in ticker.mode:revolutionaries)
+			ticker.mode:remove_revolutionary(H.mind)
+		H << "\blue You fell how nanotransen do not seem so bad."
 		return 1
 
 

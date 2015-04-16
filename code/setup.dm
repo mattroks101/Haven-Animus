@@ -724,6 +724,7 @@ var/list/be_special_flags = list(
 #define IMPLOYAL_HUD	5 // loyality implant
 #define IMPCHEM_HUD		6 // chemical implant
 #define IMPTRACK_HUD	7 // tracking implant
+#define IMPMENTOR_HUD	8 // mentor   implant
 
 //Pulse levels, very simplified
 #define PULSE_NONE		0	//so !M.pulse checks would be possible

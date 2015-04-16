@@ -7,7 +7,7 @@
 	icon_state = "seccam"
 	var/obj/machinery/camera/current = null
 	var/last_pic = 1.0
-	var/list/network = list("SS13")
+	var/list/network = list("SS13", "security")
 	var/mapping = 0//For the overview file, interesting bit of code.
 
 

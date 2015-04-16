@@ -226,3 +226,7 @@ obj/item/clothing/glasses/hud/security/supergars
 					holder = perp.hud_list[IMPCHEM_HUD]
 					holder.icon_state = "hud_imp_chem"
 					C.images += holder
+				if(istype(I,/obj/item/weapon/implant/mentor))
+					holder = perp.hud_list[IMPMENTOR_HUD]
+					holder.icon_state = "hud_imp_mentor"
+					C.images += holder
