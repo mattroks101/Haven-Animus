@@ -259,7 +259,8 @@
 						continue direction_loop
 
 			var/obj/effect/alien/weeds/NewWeed = new(T, linked_node)
-			NewWeed.update_icon()
+			if(NewWeed)
+				NewWeed.update_icon()
 
 			update_icon()
 
