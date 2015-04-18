@@ -11,6 +11,7 @@
 		dead_mob_list += src
 	else
 		living_mob_list += src
+	update_gravity()
 	..()
 
 /mob/proc/Cell()

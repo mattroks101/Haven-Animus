@@ -281,9 +281,6 @@
 	if(!L.lastarea)
 		L.lastarea = get_area(L.loc)
 	var/area/newarea = get_area(L.loc)
-	var/area/oldarea = L.lastarea
-	if((oldarea.has_gravity == 0) && (newarea.has_gravity == 1) && (L.m_intent == "run")) // Being ready when you change areas gives you a chance to avoid falling all together.
-		thunk(L)
 
 	L.lastarea = newarea
 
@@ -322,33 +319,6 @@
 			spawn(600)			//ewww - this is very very bad
 				if(L.&& L.client)
 					L.client.played = 0
-
-/area/proc/gravitychange(var/gravitystate = 0, var/area/A)
-
-	A.has_gravity = gravitystate
-	for(var/area/SubA in A.related)
-		SubA.has_gravity = gravitystate
-		if(gravitystate)
-			for(var/mob/living/carbon/human/M in SubA)
-				thunk(M)
-
-/area/proc/thunk(mob)
-	if(istype(mob,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
-		if((istype(mob:shoes, /obj/item/clothing/shoes/magboots) && (mob:shoes.flags & NOSLIP)))
-			return
-
-	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
-		return
-
-	if((istype(mob,/mob/living/carbon/human/)) && (mob:m_intent == "run")) // Only clumbsy humans can fall on their asses.
-		mob:AdjustStunned(5)
-		mob:AdjustWeakened(5)
-
-	else if (istype(mob,/mob/living/carbon/human/))
-		mob:AdjustStunned(2)
-		mob:AdjustWeakened(2)
-
-	mob << "Gravity!"
 
 /area/proc/activate_air_doors(stayclosed)
 	if(src.name == "Space") //no atmo alarms in space
