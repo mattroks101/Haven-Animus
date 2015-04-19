@@ -492,7 +492,7 @@
 				if(status != LIGHT_OK) break
 				on = !on
 				update(0)
-				sleep(rand(5, 15))
+				sleep(rand(3, 15))
 			on = (status == LIGHT_OK)
 			update(0)
 		flickering = 0
