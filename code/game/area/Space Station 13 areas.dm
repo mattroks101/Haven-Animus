@@ -478,20 +478,40 @@ var/list/ghostteleportlocs = list()
 	name = "\improper satellite - command"
 	icon_state = "satellite"
 	requires_power = 1
-	poweralm = 0
-	power_environ = 0
-	power_equip = 0
-	power_light = 0
 
 /area/ship/scrap/satellite/engine
-	name = "\improper satellite - engine"
+	name = "\improper satellite - Engine"
 	icon_state = "satellitee"
 	requires_power = 1
-	poweralm = 0
-	power_environ = 0
-	power_equip = 0
-	power_light = 0
 
+// CARGO SHIP
+
+/area/ship/scrap/cargo_wreck
+	name = "\improper Cargo Ship"
+	icon_state = "yellow"
+	luminosity = 1
+
+/area/ship/scrap/cargo_wreck/hangar
+	name = "\improper Cargo Ship - Hangar"
+	icon_state = "blueold"
+
+/area/ship/scrap/cargo_wreck/engine
+	name = "\improper Cargo Ship - Engine"
+	icon_state = "red"
+
+/area/ship/scrap/cargo_wreck/command
+	name = "\improper Cargo Ship - Command"
+	icon_state = "green"
+
+/area/ship/scrap/cargo_wreck/dorm
+	name = "\improper Cargo Ship - Dormitory"
+	icon_state = "blue"
+
+/area/ship/scrap/cargo_wreck/dorm_bay
+	name = "\improper Cargo Ship - Dormitory"
+
+
+//
 
 /area/planet/clown
 	name = "\improper Clown Planet"
