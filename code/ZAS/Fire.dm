@@ -39,13 +39,12 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	return igniting
 
 /zone/proc/process_fire()
-	for(var/turf/simulated/T in fire_tiles)
-		var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in T
-		if(!air.check_combustability(liquid))
+	if(!air.check_combustability())
+		for(var/turf/simulated/T in fire_tiles)
 			if(istype(T.fire))
 				T.fire.RemoveFire()
 			T.fire = null
-			fire_tiles -= T//Cut()
+		fire_tiles.Cut()
 
 	if(!fire_tiles.len)
 		air_master.active_fire_zones.Remove(src)
@@ -80,7 +79,6 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 		return 1
 
 	fire = new(src, fl)
-//	world << "newfire firelevel = [fl]"
 	zone.fire_tiles |= src
 	air_master.active_fire_zones |= zone
 	return 0
@@ -95,7 +93,6 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "1"
-//	l_color = "#ED9200"
 	layer = TURF_LAYER
 
 	var/firelevel = 10000 //Calculated by gas_mixture.calculate_firelevel()
@@ -112,24 +109,15 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
 
-	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in my_tile
-
-	if(!air_contents.check_combustability(liquid))
-		RemoveFire()
-		return 0
-
 	if(firelevel > 6)
 		icon_state = "3"
-		if(LuminosityRed != 11)
-			SetLuminosity(11,9,0)
+		SetLuminosity(11,9,0)
 	else if(firelevel > 2.5)
 		icon_state = "2"
-		if(LuminosityRed != 8)
-			SetLuminosity(8,7,0)
+		SetLuminosity(8,7,0)
 	else
 		icon_state = "1"
-		if(LuminosityRed != 5)
-			SetLuminosity(5,4,0)
+		SetLuminosity(5,4,0)
 
 	//im not sure how to implement a version that works for every creature so for now monkeys are firesafe
 	for(var/mob/living/carbon/human/M in loc)
@@ -150,10 +138,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 				if(!enemy_tile.zone.fire_tiles.len)
 					var/datum/gas_mixture/acs = enemy_tile.return_air()
-					var/obj/effect/decal/cleanable/liquid_fuel/liq = locate() in enemy_tile
-					if(!acs)
-						continue
-					if(!acs.check_combustability(liq))
+					if(!acs || !acs.check_combustability())
 						continue
 
 				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
@@ -168,14 +153,6 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 			else
 				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
-
-	var/datum/gas_mixture/flow = air_contents.remove_ratio(vsc.fire_consuption_rate)
-
-	if(flow)
-		if(flow.check_recombustability(liquid))
-			flow.zburn(liquid,1)
-		my_tile.assume_air(flow)
-
 
 /obj/fire/New(newLoc,fl)
 	..()

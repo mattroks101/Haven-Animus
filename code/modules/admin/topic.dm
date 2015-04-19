@@ -1758,21 +1758,6 @@
 				usr.client.strike_team()
 			if("tripleAI")
 				usr.client.triple_ai()
-			if("gravity")
-				if(!(ticker && ticker.mode))
-					usr << "Please wait until the game starts!  Not sure how it will work otherwise."
-					return
-				gravity_is_on = !gravity_is_on
-				for(var/area/A in world)
-					A.gravitychange(gravity_is_on,A)
-				if(gravity_is_on)
-					log_admin("[key_name(usr)] toggled gravity on.", 1)
-					message_admins("\blue [key_name_admin(usr)] toggled gravity on.", 1)
-					command_alert("Gravity generators are again functioning within normal parameters. Sorry for any inconvenience.")
-				else
-					log_admin("[key_name(usr)] toggled gravity off.", 1)
-					message_admins("\blue [key_name_admin(usr)] toggled gravity off.", 1)
-					command_alert("Feedback surge detected in mass-distributions systems. Artifical gravity has been disabled whilst the system reinitializes. Further failures may result in a gravitational collapse and formation of blackholes. Have a nice day.")
 			if("wave")
 				log_admin("[key_name(usr)] spawned a meteor wave", 1)
 				message_admins("\blue [key_name_admin(usr)] spawned a meteor wave.", 1)

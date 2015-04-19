@@ -372,6 +372,7 @@
 	if(being_built)
 		src.being_built.Move(get_step(src,eject_dir))
 		src.visible_message("\icon[src] <b>[src]</b> beeps, \"The following has been completed: [src.being_built] is built\".")
+		ai_notice("The following has been completed: [src.being_built] is built", src, "notice")
 		src.being_built = null
 	src.updateUsrDialog()
 	return 1

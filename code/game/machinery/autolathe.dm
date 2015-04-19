@@ -263,7 +263,7 @@ var/global/list/autolathe_recipes_hidden = list( \
 			spawn(16/prod_coeff)
 				var/obj/item/new_item = new template.type(get_turf(src))
 				var/list/cost = get_cost(template, multiplier)
-
+				ai_notice("[src.name] began designing [new_item.name]", src, "notice")
 				if(istype(new_item, /obj/item/stack))
 					if (multiplier>1)
 						var/obj/item/stack/S = new_item
@@ -271,10 +271,8 @@ var/global/list/autolathe_recipes_hidden = list( \
 				else
 					new_item.m_amt = cost["metal"]
 					new_item.g_amt = cost["glass"]
-
 				m_amount -= cost["metal"]
 				g_amount -= cost["glass"]
-
 				busy = 0
 				src.updateUsrDialog()
 

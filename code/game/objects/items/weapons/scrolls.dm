@@ -83,6 +83,10 @@
 		else
 			break
 
+	if(!tempL.len)
+		user <<"The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry."
+		return
+
 	if(!success)
 		user.loc = pick(L)
 

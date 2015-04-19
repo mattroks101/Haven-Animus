@@ -178,6 +178,7 @@
 		gibs_ready = 1
 	else
 		state = 4
+	ai_notice("[src.name] start washing", src, "notice")
 	update_icon()
 
 /obj/machinery/washing_machine/verb/climb_out()

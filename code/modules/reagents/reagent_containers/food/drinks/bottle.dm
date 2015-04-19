@@ -45,6 +45,17 @@
 
 		del(src)
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, speed)
+	..(hit_atom, speed)
+	if(prob(33))
+		if(isliving(hit_atom))
+			var/mob/living/target = hit_atom
+			if(src.reagents)
+				for(var/mob/O in viewers(target, null))
+					O.show_message(text("\blue <B>The contents of the [src] splashes all over [target]!</B>"), 1)
+				src.reagents.reaction(target, TOUCH)
+		smash()
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bullet_act()
 	smash()
 

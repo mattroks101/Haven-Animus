@@ -238,9 +238,6 @@
 
 	if(!mob.canmove)	return
 
-	//if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
-	//	if(!mob.Process_Spacemove(0))	return 0
-
 	if(!mob.lastarea)
 		mob.lastarea = get_area(mob.loc)
 

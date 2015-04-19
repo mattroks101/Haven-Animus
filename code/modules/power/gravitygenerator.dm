@@ -272,6 +272,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	else if(breaker)
 		new_state = 1
 
+	ai_notice("[src.name] now [charging_state == POWER_UP ? "charging" : "discharging"]", src, "warning")
 	charging_state = new_state ? POWER_UP : POWER_DOWN // Startup sequence animation.
 	investigate_log("is now [charging_state == POWER_UP ? "charging" : "discharging"].", "gravity")
 	update_icon()
@@ -354,7 +355,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	var/turf/our_turf = get_turf(src)
 	for(var/mob/M in mob_list)
 		var/turf/their_turf = get_turf(M)
-		if(their_turf.z == our_turf.z)
+		if((their_turf.z == our_turf.z) || ((our_turf.z in vessel_z) && (their_turf.z in vessel_z)))
 			M.update_gravity(M.mob_has_gravity())
 			if(M.client)
 				shake_camera(M, 15, 1)

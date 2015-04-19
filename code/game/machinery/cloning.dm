@@ -236,6 +236,7 @@
 	H.flavor_texts = R.flavor.Copy()
 	H.suiciding = 0
 	src.attempting = 0
+	ai_notice("[src.name] completed a cloning cycle", src, "info")
 	return 1
 
 //Grow clones to maturity then kick them out.  FREELOADERS
