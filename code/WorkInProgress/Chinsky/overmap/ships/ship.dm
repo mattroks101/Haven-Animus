@@ -64,7 +64,7 @@
 	return !(speed[1] || speed[2])
 
 /obj/effect/map/ship/proc/get_acceleration()
-	return eng_control.get_total_thrust()/vessel_mass
+	return min(eng_control.get_total_thrust()/vessel_mass,default_delay) //max acceleration = max speed
 
 /obj/effect/map/ship/proc/get_speed()
 	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]))
