@@ -158,7 +158,7 @@ datum/preferences
 
 		dat += "<br>"
 		dat += "<b>UI Type:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_type]</b></a><br>"
-		if(UI_type == "Luna" && user.client.holder)
+		if(UI_type == "Luna")
 			dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=uistyle'><b>[UI_style]</b></a><br>"
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
