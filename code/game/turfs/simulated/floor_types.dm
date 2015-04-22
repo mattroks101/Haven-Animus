@@ -27,6 +27,26 @@
 				update_icon()
 				name = n
 
+/turf/simulated/floor/light/tech_neon
+	icon_state = "techfloor_neon"
+	floor_tile = new/obj/item/stack/tile/neon
+	luminosity = 0
+	New()
+		..()
+		update_icon()
+
+/turf/simulated/floor/light/tech_neon/tech_white
+	icon_state = "techfloor_neonwhte"
+	floor_tile = new/obj/item/stack/tile/neon/neonwhte
+
+/turf/simulated/floor/light/tech_neon/side
+	icon_state = "techfloor_lightedcorner"
+	floor_tile = new/obj/item/stack/tile/neon/neonwhte/side
+
+/turf/simulated/floor/light/tech_neon/side_grid
+	icon_state = "techfloor_lightedcorner_grid"
+	floor_tile = new/obj/item/stack/tile/neon/neonwhte/side_grid
+
 
 
 /turf/simulated/floor/wood

@@ -67,7 +67,10 @@
 				totalPlayers = 0
 				totalPlayersReady = 0
 				for(var/mob/new_player/player in player_list)
-					stat("[player.key]", (player.ready)?("(Playing)"):(null))
+					if(client.holder)
+						stat("[player.key]", (player.ready)?("(Playing as [player.client.work_chosen])"):(null))
+					else
+						stat("[player.key]", (player.ready)?("(Playing)"):(null))
 					totalPlayers++
 					if(player.ready)totalPlayersReady++
 
@@ -80,6 +83,7 @@
 
 		if(href_list["ready"])
 			ready = !ready
+			client.GetHighJob()
 
 		if(href_list["refresh"])
 			src << browse(null, "window=playersetup") //closes the player setup window

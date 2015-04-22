@@ -23,15 +23,15 @@
 	else
 		..()
 
-/obj/item/weapon/gun/projectile/automatic/verb/toggle_fire(mob/user as mob)
+/obj/item/weapon/gun/projectile/automatic/verb/toggle_fire()
 	set name = "Toggle Firing Mode"
 	set category = "Object"
 	if(mode)
 		mode = 0
-		user << "<span class='notice'>The [src] will now fire single shots.</span>"
+		usr << "<span class='notice'>The [src] will now fire single shots.</span>"
 	else
 		mode = 1
-		user << "<span class='notice'>The [src] will now fire bursts.</span>"
+		usr << "<span class='notice'>The [src] will now fire bursts.</span>"
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 
 /obj/item/weapon/gun/projectile/automatic/attackby(var/obj/item/A as obj, mob/user as mob)
