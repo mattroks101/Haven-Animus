@@ -64,7 +64,7 @@
 	return !(speed[1] || speed[2])
 
 /obj/effect/map/ship/proc/get_acceleration()
-	return eng_control.get_total_thrust()/vessel_mass
+	return min(eng_control.get_total_thrust()/vessel_mass,default_delay) //max acceleration = max speed
 
 /obj/effect/map/ship/proc/get_speed()
 	return round(sqrt(speed[1]*speed[1] + speed[2]*speed[2]))
@@ -103,7 +103,7 @@
 /obj/effect/map/ship/proc/get_brake_path()
 	if(!get_acceleration())
 		return INFINITY
-	return max(abs(speed[1]),abs(speed[2]))/get_acceleration()
+	return get_speed()/get_acceleration()
 
 /obj/effect/map/ship/proc/decelerate()
 	if(!is_still() && can_burn())

@@ -122,6 +122,35 @@ turf/simulated/floor/proc/update_icon()
 		else
 			SetLuminosity(0)
 			icon_state = "light_off"
+	else if(is_neon_floor())
+		var/obj/item/stack/tile/neon/T = floor_tile
+		if(T.c == "techfloor_lightedcorner" || T.c == "techfloor_lightedcorner_grid")
+			if(T.on)
+				icon_state = initial(icon_state)
+				SetLuminosity(2)
+				luminosity = 2
+			else
+				icon_state = "[initial(icon_state)]_off"
+				src.SetLuminosity(0)
+		else if(T.on)
+			var/LuminLevel = 0
+			for(var/obj/structure/grille/grille in get_turf(src))
+				LuminLevel = 1
+			if(LuminLevel)
+				if(T.c=="techfloor_neon")
+					SetLuminosity(0, 2, 2)
+				else  // for white color
+					SetLuminosity(2)
+			if(T.c=="techfloor_neon")
+				src.SetLuminosity(0, 3, 5)
+			else  // for white color
+				SetLuminosity(5)
+			luminosity = 5
+			icon_state = T.c
+		else
+			icon_state = "techfloor_neon_off"
+			src.SetLuminosity(0)
+
 	else if(is_grass_floor())
 		if(!broken && !burnt)
 			if(!(icon_state in list("grass1","grass2","grass3","grass4")))
@@ -201,6 +230,10 @@ turf/simulated/floor/proc/update_icon()
 		var/obj/item/stack/tile/light/T = floor_tile
 		T.on = !T.on
 		update_icon()
+	if(is_neon_floor())
+		var/obj/item/stack/tile/neon/T = floor_tile
+		T.on = !T.on
+		update_icon()
 	if ((!( user.canmove ) || user.restrained() || !( user.pulling )))
 		return
 	if (user.pulling.anchored || !isturf(user.pulling.loc))
@@ -241,6 +274,12 @@ turf/simulated/floor/proc/update_icon()
 		return 1
 	else
 		return 0
+
+/turf/simulated/floor/proc/is_neon_floor()
+	if(istype(floor_tile, /obj/item/stack/tile/neon))
+		return 1
+	else return 0
+
 
 /turf/simulated/floor/is_grass_floor()
 	if(istype(floor_tile,/obj/item/stack/tile/grass))
