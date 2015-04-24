@@ -513,6 +513,18 @@ var/list/ghostteleportlocs = list()
 
 //
 
+// Asteroid base
+
+/area/ship/scrap/asteroid_base
+	name = "\improper Asteroid base - East"
+	icon_state = "yellow"
+
+/area/ship/scrap/asteroid_base/west
+	name = "\improper Asteroid base - West"
+	icon_state = "red"
+
+//
+
 /area/planet/clown
 	name = "\improper Clown Planet"
 	icon_state = "honk"

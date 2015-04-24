@@ -1,4 +1,4 @@
-/datum/job/cmo
+/*/datum/job/cmo
 	title = "Chief Medical Officer"
 	flag = CMO
 	department_flag = MEDSCI
@@ -35,7 +35,7 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		return 1
 
-
+*/
 /datum/job/doctor
 	title = "Medical Doctor"
 	flag = DOCTOR
