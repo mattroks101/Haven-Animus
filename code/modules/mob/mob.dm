@@ -11,7 +11,7 @@
 		dead_mob_list += src
 	else
 		living_mob_list += src
-	update_gravity()
+	update_gravity(src)
 	..()
 
 /mob/proc/Cell()
@@ -754,53 +754,31 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return 1
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
+//Robots and brains have their own version so don't worry about them
 /mob/proc/update_canmove()
-	if(buckled)
-		anchored = 1
-		canmove = 0
-		if( istype(buckled,/obj/structure/stool/bed/chair) )
-			lying = 0
-		else
-			lying = 90
-	else if( stat || weakened || paralysis || sleeping || (status_flags & FAKEDEATH))
-		fall(1)
-		canmove = 0
-	else if( stunned )
-//		lying = 0
-		canmove = 0
-	else if(captured)
-		anchored = 1
-		canmove = 0
-		lying = 0
-	else if(resting)
-		fall(0)
-		canmove = 0
-	else if(!can_stand)
-		lying = 90
-		canmove = 0
-	else
-		lying = 0
-		canmove = 1
+        var/ko = weakened || paralysis || stat || (status_flags & FAKEDEATH)
+        var/bed = !(buckled && istype(buckled, /obj/structure/stool/bed/chair))
+        if(ko || resting || stunned)
+                drop_r_hand()
+                drop_l_hand()
+        else
+                lying = 0
+                canmove = 1
+        if(buckled)
+                lying = 90 * bed
+                anchored = buckled
+        else
+                if((ko || resting) && !lying)
+                        fall(ko)
+        canmove = !(ko || resting || stunned || buckled)
+        density = !lying
+        update_transform()
+        lying_prev = lying
+        if(update_icon) //forces a full overlay update
+                update_icon = 0
+                regenerate_icons()
+        return canmove
 
-	if(lying)
-		density = 0
-		drop_l_hand()
-		drop_r_hand()
-	else
-		density = 1
-
-	//Temporarily moved here from the various life() procs
-	//I'm fixing stuff incrementally so this will likely find a better home.
-	//It just makes sense for now. ~Carn
-	update_transform()
-	lying_prev = lying
-	if( update_icon )	//forces a full overlay update
-		update_icon = 0
-		regenerate_icons()
-//	else if( lying != lying_prev )
-//		update_icons()
-
-	return canmove
 
 /mob/proc/fall(var/forced)
 	drop_l_hand()
