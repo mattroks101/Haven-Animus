@@ -391,7 +391,7 @@
 "ahA" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating{tag = "icon-warnplate (NORTH)"; icon_state = "warnplate"; dir = 1},/area/luna/hallway/primary/aftadmin)
 "ahB" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/engine/vacuum/hull,/area)
 "ahC" = (/obj/multiz/ladder,/turf/simulated/floor/plating,/area/luna/hallway/primary/aftadmin)
-"ahD" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 2},/turf/space,/area)
+"ahD" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 3},/turf/space,/area)
 "ahE" = (/obj/effect/landmark{name = "carpspawn"},/turf/simulated/floor/engine/vacuum/hull,/area)
 "ahF" = (/turf/simulated/wall/r_wall,/area/luna/maintenance/fore3)
 "ahG" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/firedoor/window,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/luna/maintenance/fore3)
@@ -2247,7 +2247,7 @@
 "aRk" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/firedoor/window,/turf/simulated/floor/plating,/area/security/warden)
 "aRl" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/firedoor/window,/turf/simulated/floor/plating,/area/security/warden)
 "aRm" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/firedoor/window,/turf/simulated/floor/plating,/area/security/warden)
-"aRn" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 3; up = 1; up_target = 1},/turf/space,/area)
+"aRn" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 2; up = 1; up_target = 4},/turf/space,/area)
 "aRo" = (/turf/simulated/wall/r_wall,/area/crew_quarters/bar)
 "aRp" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/firedoor/window,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/crew_quarters/bar)
 "aRq" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/firedoor/window,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/crew_quarters/bar)
@@ -5001,7 +5001,7 @@
 "bSi" = (/obj/structure/window/reinforced,/obj/effect/decal/warning_stripes{tag = "icon-warning"; icon_state = "warning"},/obj/machinery/atmospherics/pipe/simple/general/visible,/turf/simulated/floor/plating,/area/propulsion/right)
 "bSj" = (/obj/machinery/atmospherics/unary/engine{dir = 1},/turf/simulated/floor/plating/airless{name = "plating"},/area/propulsion/left)
 "bSk" = (/obj/machinery/atmospherics/unary/engine{dir = 1},/turf/simulated/floor/plating/airless{name = "plating"},/area/propulsion/right)
-"bSl" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 4; up = 1; up_target = 2},/turf/space,/area)
+"bSl" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 1; up = 1; up_target = 3},/turf/space,/area)
 "bSm" = (/turf/simulated/wall/r_wall,/area)
 "bSn" = (/turf/simulated/wall/r_wall,/area/luna/maintenance/fore1)
 "bSo" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/luna/maintenance/fore1)
@@ -6135,7 +6135,7 @@
 "cnY" = (/obj/structure/lattice,/obj/structure/disposalpipe/segment{dir = 4},/turf/space,/area)
 "cnZ" = (/obj/structure/lattice,/obj/structure/disposalpipe/junction,/turf/space,/area)
 "coa" = (/obj/structure/disposaloutlet,/obj/structure/lattice,/obj/structure/disposalpipe/trunk{dir = 1},/turf/space,/area)
-"cob" = (/obj/effect/landmark/zcontroller{up = 1; up_target = 3},/turf/space,/area)
+"cob" = (/obj/effect/landmark/zcontroller{up = 1; up_target = 2},/turf/space,/area)
 "coc" = (/turf/unsimulated/wall,/area)
 "cod" = (/obj/effect/landmark/start,/turf/space,/area)
 "coe" = (/turf/unsimulated/wall{icon = 'icons/misc/fullscreen.dmi'; icon_state = "title"; name = "Space Station 13"},/area)
@@ -6737,7 +6737,7 @@
 "czC" = (/obj/item/weapon/caution,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
 "czD" = (/obj/item/weapon/kitchenknife/ritual,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/wizard_station)
 
-(1,1,1) = {"
+(1,1,4) = {"
 aaaaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
@@ -6900,7 +6900,7 @@ aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaa
 ahDaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 "}
 
-(1,1,2) = {"
+(1,1,3) = {"
 aaaaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
@@ -7063,7 +7063,7 @@ aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaa
 aRnaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 "}
 
-(1,1,3) = {"
+(1,1,2) = {"
 aaaaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
@@ -7226,7 +7226,7 @@ aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaa
 bSlaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 "}
 
-(1,1,4) = {"
+(1,1,1) = {"
 aaaaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
 aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaab
