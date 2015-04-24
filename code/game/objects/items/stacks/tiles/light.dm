@@ -34,3 +34,29 @@
 		if(amount <= 0)
 			user.drop_from_inventory(src)
 			del(src)
+
+/obj/item/stack/tile/neon
+	name = "light tile"
+	singular_name = "light floor tile"
+	desc = "A floor tile, made out off glass. It produces light."
+	icon_state = "tile_e"
+	w_class = 3.0
+	force = 4.0
+	throwforce = 6.0
+	throw_speed = 5
+	throw_range = 6
+	flags = FPRINT | TABLEPASS | CONDUCT
+	max_amount = 60
+	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "smashed")
+	var/on = 1
+	var/c = "techfloor_neon"
+
+/obj/item/stack/tile/neon/neonwhte
+	c = "techfloor_neonwhte"
+
+/obj/item/stack/tile/neon/neonwhte/side
+	c = "techfloor_lightedcorner"
+
+/obj/item/stack/tile/neon/neonwhte/side_grid
+	c = "techfloor_lightedcorner_grid"
+

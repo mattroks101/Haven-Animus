@@ -101,3 +101,8 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 //			testing("Catching [M] for future use")
 			source.loc = null
 			cached_space += source
+
+	if ((A && A.loc))
+		A.loc.Entered(A)
+		//now we're on the new z_level, proceed the space drifting
+		A.newtonian_move(A.inertia_dir)

@@ -2,7 +2,7 @@
 
 var/vessel_name = ""//"NSV Luna"
 var/vessel_type = "ship"
-var/list/vessel_z = list(0,1,2,3,4)
+var/list/vessel_z = list(1,2,3,4)
 var/asteroid_z = 8
 var/centcomm_z = 6
 var/evac_type = "pods"

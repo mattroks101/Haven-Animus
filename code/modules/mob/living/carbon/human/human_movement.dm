@@ -49,15 +49,14 @@
 
 	return (tally+config.human_delay)
 
-/mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
+/mob/living/carbon/human/Process_Spacemove(var/movement_dir = 0)
 	//Can we act
 	if(!canmove && !has_gravity(src))	return 0
 
 	//Do we have a working jetpack
-	if(istype(back, /obj/item/weapon/tank/jetpack))
+	if(istype(back, /obj/item/weapon/tank/jetpack) && isturf(loc)) //Second check is so you can't use a jetpack in a mech
 		var/obj/item/weapon/tank/jetpack/J = back
-		if(((!check_drift) || (check_drift && J.stabilization_on)) && (!lying) && (J.allow_thrust(0.01, src)))
-			inertia_dir = 0
+		if((movement_dir || J.stabilization_on) && J.allow_thrust(0.01, src))
 			return 1
 	//Do we have working magboots
 	if(istype(shoes, /obj/item/clothing/shoes/magboots))
