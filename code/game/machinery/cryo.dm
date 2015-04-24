@@ -342,6 +342,8 @@
 		if(occupant)
 			icon_state = "cell-occupied-blue"
 			return
-		icon_state = "cell-on-blue"
-		return
+		else
+			icon_state = "cell-on-blue"
+			return
+
 	icon_state = "cell-off-blue"

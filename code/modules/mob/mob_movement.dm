@@ -197,56 +197,46 @@
 
 
 /client/Move(n, direct)
-
-	if(mob.control_object)	Move_object(direct)
-
-	if(isobserver(mob))	return mob.Move(n,direct)
-
-	if(moving)	return 0
-
-	if(world.time < move_delay)	return
-
-	if(!mob)	return
-
-	if(locate(/obj/effect/stop/, mob.loc))
-		for(var/obj/effect/stop/S in mob.loc)
-			if(S.victim == mob)
-				return
-
-	if(mob.stat==2)	return
-
-	if(isAI(mob))	return AIMove(n,direct,mob)
-
-	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var
-
+	if(!mob)
+		return 0
+	if(mob.control_object)
+		return Move_object(direct)
+	if(world.time < move_delay)
+		return 0
+	if(isAI(mob))
+		return AIMove(n,direct,mob)
+	if(!isliving(mob))
+		return mob.Move(n,direct)
+	if(moving)
+		return 0
+	if(mob.stat == DEAD)
+		return 0
 	if(isliving(mob))
 		var/mob/living/L = mob
-		if(L.incorporeal_move)//Move though walls
+		if(L.incorporeal_move)	//Move though walls
 			Process_Incorpmove(direct)
-			return
-//		if(mob.client)
-//			if(mob.client.view != world.view)
-//				if(locate(/obj/item/weapon/gun/energy/sniperrifle, mob.contents))		// If mob moves while zoomed in with sniper rifle, unzoom them.
-//					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in mob
-//					if(s.zoom)
-//						s.zoom()
+			return 0
 
 	if(Process_Grab())	return
 
 	if(mob.buckled)							//if we're buckled to something, tell it we moved.
 		return mob.buckled.relaymove(mob, direct)
 
-	if(!mob.canmove)	return
+	if(!mob.canmove)
+		return 0
 
 	if(!mob.lastarea)
 		mob.lastarea = get_area(mob.loc)
 
-	if(!mob.Process_Spacemove(direct))
-		return 0
+	if(!has_gravity(mob))
+		if(!mob.Process_Spacemove(0))
+			return 0
 
-	if(isobj(mob.loc) || ismob(mob.loc))//Inside an object, tell it we moved
+
+	if(isobj(mob.loc) || ismob(mob.loc))	//Inside an object, tell it we moved
 		var/atom/O = mob.loc
 		return O.relaymove(mob, direct)
+
 
 	if(isturf(mob.loc))
 
@@ -284,6 +274,7 @@
 
 		//We are now going to move
 		moving = 1
+		mob.update_gravity(mob)
 		//Something with pulling things
 		if(locate(/obj/item/weapon/grab, mob))
 			move_delay = max(move_delay, world.time + 7)
@@ -410,7 +401,6 @@
 			L.dir = direct
 	return 1
 
-
 ///Process_Spacemove
 ///Called by /client/Move()
 ///For moving in space
@@ -455,7 +445,6 @@
 
 		return 1
 	return 0
-
 
 /mob/proc/Process_Spaceslipping(var/prob_slip = 5)
 	//Setup slipage
