@@ -1,4 +1,4 @@
-"aaa" = (/obj/machinery/telecomms/relay/preset/luna,/turf/space,/area)
+"aaa" = (/obj/effect/mapinfo/ship/luna,/turf/space,/area)
 "aab" = (/turf/space,/area)
 "aac" = (/turf/space,/area/syndicate_station/deck4)
 "aad" = (/turf/simulated/floor/engine/vacuum/hull,/area)
