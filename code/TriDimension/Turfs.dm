@@ -39,45 +39,45 @@
 						if ( istype(AM, /mob/living/carbon/human))
 							if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
 								return
-							var/blocked = 0		
+							blocked = 0
 							for(var/atom/A in src)
 								if(A.density&&A!=AM)
 									blocked = 1
 									break
 								if(istype(A, /obj/machinery/atmospherics/pipe))
 									blocked = 1
-									if(prob(20)
+									if(prob(20))
 										blocked = 0
 										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 										A.Destroy()
-									else if((FAT in mob.mutations) && prob(80))
-										blocked = 0
-										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
-										A.Destroy()
+								//	else if((FAT in mob.mutations) && prob(80))
+								//		blocked = 0
+								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//		A.Destroy()
 									break
 									
 								if(istype(A, /obj/structure/disposalpipe))
 									blocked = 1
-									if(prob(10)
+									if(prob(10))
 										blocked = 0
 										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 										A.Destroy()
-									else if((FAT in mob.mutations) && prob(40))
-										blocked = 0
-										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
-										A.Destroy()
+								//	else if((FAT in mob.mutations) && prob(40))
+								//		blocked = 0
+								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//		A.Destroy()
 									break
 									
 								if(istype(A, /obj/structure/lattice))
 									blocked = 1
-									if(prob(3)
+									if(prob(3))
 										blocked = 0
 										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 										A.Destroy()
-									else if((FAT in mob.mutations) && prob(10))
-										blocked = 0
-										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
-										A.Destroy()
+								//	else if((FAT in mob.mutations) && prob(10))
+								//		blocked = 0
+								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//		A.Destroy()
 									break
 					
 							if (!blocked)
