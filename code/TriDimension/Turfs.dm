@@ -35,7 +35,7 @@
 
 							//dont break here, since we still need to be sure that it isnt blocked
 
-				if (!blocked && !(has_gravity(src)))
+					if (!blocked && !(has_gravity(src)))
 						if ( istype(AM, /mob/living/carbon/human))
 							if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
 								return
