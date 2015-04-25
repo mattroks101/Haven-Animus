@@ -622,7 +622,7 @@
 
 // *** Cutting sandwich-system containers into pieces ***
 
-/*/	 Loaf code
+//	 Loaf code
 /obj/item/weapon/reagent_containers/food/snacks/breadsys/loaf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/kitchen/utensil/knife))
 		var/turf/spawnloc = foodloc(user, src)
@@ -670,7 +670,7 @@
 			del(src)
 
 // *** Sandwich assembling code. Watch the overloading on bread/attackby ***
-/*
+
 /obj/item/weapon/reagent_containers/food/snacks/breadsys/bread/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/breadsys/ontop))
 		var/state = W:stateontop
@@ -700,7 +700,7 @@
 	for(var/obj/item/weapon/reagent_containers/food/snacks/breadsys/ontop/X in src)
 		var/iconx = "[X.stateontop][num]"
 		overlays += image(X.icon,iconx)
-*/*/
+
 ///////////////////////////////////////////////////////
 //        End of sandwich-related stuff              //
 ///////////////////////////////////////////////////////
