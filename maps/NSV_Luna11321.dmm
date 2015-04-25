@@ -3504,7 +3504,7 @@
 "bpt" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor{dir = 8; icon_state = "whitegreen"},/area/medical/medbay)
 "bpu" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
 "bpv" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk,/turf/simulated/floor{dir = 4; icon_state = "whitegreen"},/area/medical/medbay)
-"bpw" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
+"bpw" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/medical/medbay)
 "bpx" = (/obj/structure/closet/secure_closet/medical2,/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor{icon_state = "whitegreen"; dir = 9},/area/medical/medbay)
 "bpy" = (/obj/structure/closet/secure_closet/medical4,/turf/simulated/floor{tag = "icon-whitegreen (NORTH)"; icon_state = "whitegreen"; dir = 1},/area/medical/medbay)
 "bpz" = (/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)

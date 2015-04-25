@@ -12,7 +12,6 @@
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/Rust"
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/ShieldGen"
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn/Supermatter_new"
-#define FILE_DIR "code/WorkInProgress/Guap6512"
 #define FILE_DIR "code/WorkInProgress/ShieldGenerator"
 #define FILE_DIR "code/WorkInProgress/Susan"
 #define FILE_DIR "code/WorkInProgress/travel"
@@ -66,9 +65,6 @@
 #define FILE_DIR "sound/voice/Serithi"
 #define FILE_DIR "sound/vox"
 #define FILE_DIR "sound/weapons"
-#define FILE_DIR "tools"
-#define FILE_DIR "tools/AddToChangelog"
-#define FILE_DIR "tools/AddToChangelog/AddToChangelog"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG
@@ -102,7 +98,7 @@
 #include "code\__HELPERS\sorts\InsertSort.dm"
 #include "code\__HELPERS\sorts\MergeSort.dm"
 #include "code\__HELPERS\sorts\TimSort.dm"
-#include "code\_maps\exodus.dm"
+#include "code\_maps\Luna.dm"
 #include "code\_onclick\adjacent.dm"
 #include "code\_onclick\ai.dm"
 #include "code\_onclick\click.dm"
@@ -1512,6 +1508,14 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstationnow.dmm"
+#include "maps\NSV_Luna11321.dmm"
+#include "maps\encounters\satellite.dm"
+#include "maps\encounters\bearcat.dmm"
+#include "maps\encounters\cargo_wreck.dmm"
+#include "maps\encounters\interception_station.dmm"
+#include "maps\encounters\mining_station.dmm"
+#include "maps\encounters\old_base.dmm"
+#include "maps\encounters\satellite.dmm"
+#include "maps\encounters\telesat.dmm"
 #include "maps\overmap\bearcat\bearcat.dm"
 // END_INCLUDE
