@@ -35,8 +35,9 @@
 
 							//dont break here, since we still need to be sure that it isnt blocked
 
-					if (!blocked && !(has_gravity(src)))
+					if (!blocked && has_gravity(src))
 						if ( istype(AM, /mob/living/carbon/human))
+							var/mob/living/carbon/human/H = AM
 							if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
 								return
 							blocked = 0
@@ -50,7 +51,7 @@
 										blocked = 0
 										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 										A.Destroy()
-								//	else if((FAT in mob.mutations) && prob(80))
+								//	else if((FAT in AM.mutations) && prob(80))
 								//		blocked = 0
 								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 								//		A.Destroy()
@@ -62,7 +63,7 @@
 										blocked = 0
 										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 										A.Destroy()
-								//	else if((FAT in mob.mutations) && prob(40))
+								//	else if((FAT in AM.mutations) && prob(40))
 								//		blocked = 0
 								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 								//		A.Destroy()
@@ -74,15 +75,14 @@
 										blocked = 0
 										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 										A.Destroy()
-								//	else if((FAT in mob.mutations) && prob(10))
+								//	else if((FAT in AM.mutations) && prob(10))
 								//		blocked = 0
 								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 								//		A.Destroy()
-									break
+								//	break
 
 							if (!blocked)
 								AM.Move(floorbelow)
-								var/mob/living/carbon/human/H = AM
 								var/damage = 10
 	//							H.apply_damage(rand(0,damage), BRUTE, "groin")
 								H.apply_damage(damage/2 + rand(-5,5), BRUTE, "l_leg")
