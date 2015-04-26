@@ -5,10 +5,10 @@
 /datum/game_mode/borer
 	name = "borer"
 	config_tag = "borer"
-	required_players = 1
-	required_players_secret = 1
+	required_players = 7
+	required_players_secret = 7
 	restricted_jobs = list("AI", "Cyborg")
-	recommended_enemies = 1 // need at least a borer and a host
+	recommended_enemies = 5// need at least a borer and a host
 	votable = 0 // temporarily disable this mode for voting
 	var/attuned = 0
 

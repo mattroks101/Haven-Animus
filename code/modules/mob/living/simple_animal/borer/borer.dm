@@ -242,3 +242,6 @@
 
 /mob/living/simple_animal/mouse/can_use_vents()
 	return 1
+
+mob/proc/clearHUD()
+	if(client) client.screen.Cut()
