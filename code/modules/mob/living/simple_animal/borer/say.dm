@@ -33,7 +33,7 @@
 		return //No host, no audible speech.
 
 	src << "You drop words into [host]'s mind: \"[message]\""
-	host << "Your own thoughts speak: \"[message]\""
+	host << "\bold Your own thoughts speak: \italic \"[sanitize_uni(message)]\""
 
 	for (var/mob/M in player_list)
 		if (istype(M, /mob/new_player))

@@ -133,7 +133,7 @@
 						else
 							log_attack("[key_name(user)] injected [key_name(M)] with the Isolated [name]")
 					else
-						testing("DNA injector with contents: [english_list(buf.dna.SE)]")
+					//	testing("DNA injector with contents: [english_list(buf.dna.SE)]")
 						if (GetState(MONKEYBLOCK) && istype(M, /mob/living/carbon/human) )
 							message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name] \red(MONKEY)")
 							log_attack("[key_name(user)] injected [key_name(M)] with the [name] (MONKEY)")

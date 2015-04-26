@@ -1150,7 +1150,11 @@ datum/mind
 	//	fail |= !ticker.mode.equip_traitor(current, 1)
 		fail |= !ticker.mode.equip_revolutionary(current)
 
-
+	proc/make_Borer()
+		if(!(src in ticker.mode.borers))
+			ticker.mode.borers += src
+			special_role = "borer"
+			ticker.mode.forge_borer_objectives(src)
 	// check whether this mind's mob has been brigged for the given duration
 	// have to call this periodically for the duration to work properly
 	proc/is_brigged(duration)
