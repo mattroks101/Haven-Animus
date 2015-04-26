@@ -8,7 +8,7 @@
 	required_players = 7
 	required_players_secret = 7
 	restricted_jobs = list("AI", "Cyborg")
-	recommended_enemies = 5// need at least a borer and a host
+	recommended_enemies = 1// need at least a borer and a host
 	votable = 0 // temporarily disable this mode for voting
 	var/attuned = 0
 
@@ -56,7 +56,7 @@
 		return 0 // not enough candidates for borer
 
 	// for each 2 possible borers, add one borer and one host
-	while(possible_borers.len >= 2)
+	if(possible_borers.len >= 2)
 		var/datum/mind/borer = pick(possible_borers)
 		possible_borers.Remove(borer)
 
@@ -67,6 +67,8 @@
 		modePlayer += first_host
 		borers += borer
 		first_hosts += first_host
+
+
 
 		// so that we can later know which host belongs to which borer
 		assigned_hosts[borer.key] = first_host
@@ -183,9 +185,9 @@
 		var/borerwin = 1
 
 		if((borer.current) && (istype(borer.current,/mob/living/simple_animal/borer) || istype(borer.current,/mob/living/captive_brain)))
-			world << "<B>The borer was [borer.current.key].</B>"
-			if(borer.current:host)
-				world << "<B>The last host was [borer.current:host].</B>"
+			world << "<B>The borer was [borer.key].</B>"
+			if(borer.current:last_host)
+				world << "<B>The last host was [borer.current:last_host].</B>"
 
 			var/count = 1
 			for(var/datum/objective/objective in borer.objectives)

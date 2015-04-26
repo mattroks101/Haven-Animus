@@ -31,6 +31,7 @@
 	var/docile = 0                          // Sugar can stop borers from acting.
 	var/has_reproduced
 	var/roundstart
+	var/last_host = null
 
 /mob/living/simple_animal/borer/roundstart
 	roundstart = 1
@@ -229,6 +230,7 @@
 	if(host.has_brain_worms())
 		return 0
 
+	src.last_host = host.name
 	src.host = host
 	src.host.status_flags |= PASSEMOTES
 	src.loc = host
@@ -244,4 +246,6 @@
 	return 1
 
 mob/proc/clearHUD()
-	if(client) client.screen.Cut()
+	if(client)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.g_dither, global_hud.r_dither, global_hud.gray_dither, global_hud.lp_dither)
+		update_action_buttons()
