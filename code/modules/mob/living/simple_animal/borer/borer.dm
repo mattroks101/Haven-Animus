@@ -1,4 +1,3 @@
-/datum/game_mode/var/list/borers = list()
 
 /mob/living/simple_animal/borer
 	name = "cortical borer"
@@ -15,7 +14,7 @@
 	speed = 5
 	a_intent = "harm"
 	stop_automated_movement = 1
-	status_flags = CANPUSH
+//	status_flags = CANPUSH
 	attacktext = "nips"
 	friendly = "prods"
 	wander = 0
@@ -40,8 +39,8 @@
 	..()
 
 	add_language("Cortical Link")
-	verbs += /mob/living/proc/ventcrawl
-	verbs += /mob/living/proc/hide
+	src.verbs += /mob/living/proc/ventcrawl
+	src.verbs += /mob/living/proc/hide
 
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 	if(!roundstart) request_player()
@@ -69,9 +68,26 @@
 						src << "\blue You shake off your lethargy as the sugar leaves your host's blood."
 					docile = 0
 
-			if(chemicals < 250)
+			if(chemicals < 250 && !controlling)
 				chemicals++
 			if(controlling)
+				if(chemicals < 10)
+					var/mob/living/simple_animal/borer/B = src.host.has_brain_worms()
+
+					src << "\red <B>You no longer have the strength to control the host</B>"
+					B.host_brain << "\red <B>Your vision swims as the alien parasite releases control of your body.</B>"
+					src.ckey = src.host.ckey
+					B.controlling = 0
+					if(B.host_brain.ckey)
+						src.host.ckey = B.host_brain.ckey
+						B.host_brain.ckey = null
+						B.host_brain.name = "host brain"
+						B.host_brain.real_name = "host brain"
+
+						src.host.verbs -= /mob/living/carbon/proc/release_control
+						src.host.verbs -= /mob/living/carbon/proc/punish_host
+						src.host.verbs -= /mob/living/carbon/proc/spawn_larvae
+				chemicals--
 
 				if(docile)
 					host << "\blue You are feeling far too docile to continue controlling your host..."
@@ -197,12 +213,35 @@
 	if(!candidate)
 		return
 
-	src.mind = candidate.mob.mind
 	src.ckey = candidate.ckey
 	if(src.mind)
-		src.mind.assigned_role = "Cortical Borer"
+		src.mind.make_Borer()
+		log_admin("New borer: ", src.ckey)
+	/*	src.mind.assigned_role = "Cortical Borer"
 		src.mind.special_role = "Cortical Borer"
 		ticker.mode.borers |= src.mind
+		*/
 
 /mob/living/simple_animal/borer/can_use_vents()
 	return
+
+/mob/living/simple_animal/borer/proc/enter_host(mob/living/carbon/host)
+	if(host.has_brain_worms())
+		return 0
+
+	src.host = host
+	src.host.status_flags |= PASSEMOTES
+	src.loc = host
+
+	if(client) client.eye = host
+
+	return 1
+
+/mob/living/simple_animal/borer/emote(var/message)
+	return
+
+/mob/living/simple_animal/mouse/can_use_vents()
+	return 1
+
+mob/proc/clearHUD()
+	if(client) client.screen.Cut()

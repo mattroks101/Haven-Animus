@@ -247,6 +247,9 @@ Implants;
 		if(BE_CULTIST)		roletext="cultist"
 		if(BE_NINJA)		roletext="ninja"
 		if(BE_RAIDER)		roletext="raider"
+		if(BE_ALIEN)		roletext="borer"
+
+//		if(BE_MEME)			roletext="meme"
 
 	// Assemble a list of active players without jobbans.
 	for(var/mob/new_player/player in player_list)

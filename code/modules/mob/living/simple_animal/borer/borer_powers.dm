@@ -99,6 +99,7 @@
 		src.host.status_flags |= PASSEMOTES
 		src.loc = M
 
+
 		//Update their traitor status.
 		if(host.mind)
 			if(!host.mind.special_role)
@@ -122,7 +123,7 @@
 	else
 		src << "They are no longer in range!"
 		return
-
+/*
 /mob/living/simple_animal/borer/verb/devour_brain()
 	set category = "Abilities"
 	set name = "Devour Brain"
@@ -146,7 +147,7 @@
 
 	src << "<span class = 'danger'>It only takes a few moments to render the dead host brain down into a nutrient-rich slurry...</span>"
 	replace_brain()
-
+*/
 // BRAIN WORM ZOMBIES AAAAH.
 /mob/living/simple_animal/borer/proc/replace_brain()
 
