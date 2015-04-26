@@ -118,7 +118,7 @@
 	var/ghost_interaction = 1
 
 	var/comms_password = ""
-	var/use_overmap = 0
+	var/use_overmap = 1
 
 	var/join_unassigned = 0
 	var/allow_shit = 0
