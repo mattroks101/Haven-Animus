@@ -39,6 +39,10 @@ client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 	"South" = SOUTH,\
 	"East" = EAST,\
 	"West" = WEST,\
+	#ifdef ZLEVELS
+	"UP" = 16,\
+	"DOWN" = 32,\
+	#endif
 	"N/A" = null)
 	var/direction = input("What direction do you wish to test?","Set direction") as null|anything in direction_list
 	if(!direction)
@@ -53,7 +57,10 @@ client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 
 	var/turf/simulated/other_turf = get_step(T, direction_list[direction])
 	if(!istype(other_turf))
+		mob << "NO turf in dir [direction]. :("
 		return
+
+	mob << "other_turf in dir [direction]: X: [other_turf.x]  Y: [other_turf.y]  Z: [other_turf.z]."
 
 	var/t_block = T.c_airblock(other_turf)
 	var/o_block = other_turf.c_airblock(T)

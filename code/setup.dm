@@ -89,7 +89,7 @@
 #define REAGENTS_EFFECT_MULTIPLIER REAGENTS_METABOLISM / 0.4
 
 
-#define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05
+#define MINIMUM_AIR_RATIO_TO_SUSPEND 0.0000000000 //Previus: 0.05. If there is a lag significantly increased by several orders of magnitude.
 	//Minimum ratio of air that must move to/from a tile to suspend group processing
 #define MINIMUM_AIR_TO_SUSPEND MOLES_CELLSTANDARD*MINIMUM_AIR_RATIO_TO_SUSPEND
 	//Minimum amount of air that has to move before a group processing can be suspended
