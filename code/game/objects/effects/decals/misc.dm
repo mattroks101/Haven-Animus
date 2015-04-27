@@ -22,3 +22,7 @@
 	name = "chemicals"
 	icon = 'icons/obj/chempuff.dmi'
 	pass_flags = PASSTABLE | PASSGRILLE
+
+/obj/effect/decal/grass_edge
+	icon = 'icons/effects/grass_edge.dmi'
+	layer = 2.1
