@@ -35,21 +35,64 @@
 
 							//dont break here, since we still need to be sure that it isnt blocked
 
-					if (!blocked && !(has_gravity(src)))
-						AM.Move(floorbelow)
+					if (!blocked && has_gravity(src))
 						if ( istype(AM, /mob/living/carbon/human))
+							var/mob/living/carbon/human/H = AM
 							if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
 								return
-							else
-								var/mob/living/carbon/human/H = AM
+							blocked = 0
+							for(var/atom/A in src)
+								if(A.density&&A!=AM)
+									blocked = 1
+									break
+								if(istype(A, /obj/machinery/atmospherics/pipe))
+									blocked = 1
+									if(prob(20))
+										blocked = 0
+										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+										A.Destroy()
+								//	else if((FAT in AM.mutations) && prob(80))
+								//		blocked = 0
+								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//		A.Destroy()
+									break
+
+								if(istype(A, /obj/structure/disposalpipe))
+									blocked = 1
+									if(prob(10))
+										blocked = 0
+										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+										A.Destroy()
+								//	else if((FAT in AM.mutations) && prob(40))
+								//		blocked = 0
+								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//		A.Destroy()
+									break
+
+								if(istype(A, /obj/structure/lattice))
+									blocked = 1
+									if(prob(3))
+										blocked = 0
+										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+										A.Destroy()
+								//	else if((FAT in AM.mutations) && prob(10))
+								//		blocked = 0
+								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//		A.Destroy()
+								//	break
+
+							if (!blocked)
+								AM.Move(floorbelow)
 								var/damage = 10
-//								H.apply_damage(rand(0,damage), BRUTE, "groin")
+	//							H.apply_damage(rand(0,damage), BRUTE, "groin")
 								H.apply_damage(damage/2 + rand(-5,5), BRUTE, "l_leg")
 								H.apply_damage(damage/2 + rand(-5,5), BRUTE, "r_leg")
 								H.apply_damage(damage + rand(-5,5), BRUTE, "l_foot")
 								H.apply_damage(damage + rand(-5,5), BRUTE, "r_foot")
 								H:weakened = max(H:weakened,2)
 								H:updatehealth()
+						else
+							AM.Move(floorbelow)
 		return ..()
 
 /turf/simulated/floor/open/proc/getbelow()

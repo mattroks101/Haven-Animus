@@ -257,7 +257,7 @@ datum/reagents/proc/conditional_update(var/atom/A)
 	update_total()
 
 datum/reagents/proc/handle_reactions()
-	if(my_atom.flags & NOREACT) return //Yup, no reactions here. No siree.
+	if(my_atom && (my_atom.flags & NOREACT)) return //Yup, no reactions here. No siree.
 
 	var/reaction_occured = 0
 	do

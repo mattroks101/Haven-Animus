@@ -156,9 +156,58 @@
 	min_n2 = 0
 	max_n2 = 0
 	minbodytemp = 0
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+
+	attackby(obj/item/weapon/W as obj, mob/user as mob)
+		..()
+		if(istype(W,/obj/item/weapon/crowbar/red))
+			health -= 8
+		s.set_up(3, 1, src)
+		s.start()
+
+/mob/living/simple_animal/hostile/viscerator/New()
+	src.SetLuminosity(3, 0, 0)
+
+/mob/living/simple_animal/hostile/viscerator/Life()
+	..()
+	if(health<0)
+		Die()
+		return
+	if(FindTarget())
+		var/Tg = PickTarget()
+		if(Tg & CanAttack(Tg))
+			MoveToTarget()
 
 /mob/living/simple_animal/hostile/viscerator/Die()
 	..()
 	visible_message("\red <b>[src]</b> is smashed into pieces!")
-	del src
+	s.set_up(3, 1, src)
+	s.start()
+	src.SetLuminosity(0)
+	new/obj/effect/decal/remains/robot(src.loc)
+	del(src)
 	return
+
+/mob/living/simple_animal/hostile/viscerator/Bump(atom/A as mob|obj)
+
+	var/damage = rand(15,25)
+	custom_emote(1, "slashes at [A]")
+	if(ishuman(A))
+		var/mob/living/carbon/human/H = A
+		var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
+		var/datum/organ/external/affecting = H.get_organ(ran_zone(dam_zone))
+		H.apply_damage(damage, BRUTE, affecting, H.run_armor_check(affecting, "melee"), sharp=1, edge=1)
+	else if(isliving(A))
+		var/mob/living/L = target
+		L.adjustBruteLoss(damage)
+		return L
+	else if(istype(A,/obj/mecha))
+		var/obj/mecha/M = target
+		M.attack_animal(src)
+		return M
+	else if(istype(A,/obj/structure/window))
+		var/obj/structure/window/W = A
+		W.hit(5)
+		return
+
+

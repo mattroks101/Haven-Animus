@@ -422,7 +422,7 @@ var/const/GALOSHES_DONT_HELP = 8
 //Brain slug proc for voluntary removal of control.
 /mob/living/carbon/proc/release_control()
 
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Release Control"
 	set desc = "Release control of your host's body."
 
@@ -448,7 +448,7 @@ var/const/GALOSHES_DONT_HELP = 8
 
 //Brain slug proc for tormenting the host.
 /mob/living/carbon/proc/punish_host()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Torment host"
 	set desc = "Punish your host with agony."
 
@@ -471,7 +471,7 @@ var/const/GALOSHES_DONT_HELP = 8
 	return 0
 
 /mob/living/carbon/proc/spawn_larvae()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Reproduce"
 	set desc = "Spawn several young."
 
@@ -480,13 +480,14 @@ var/const/GALOSHES_DONT_HELP = 8
 	if(!B)
 		return
 
-	if(B.chemicals >= 100)
+	if(B.chemicals >= 150)
 		src << "\red <B>Your host twitches and quivers as you rapdly excrete several larvae from your sluglike body.</B>"
 		visible_message("\red <B>[src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!</B>")
-		B.chemicals -= 100
+		B.chemicals -= 150
 
 		new /obj/effect/decal/cleanable/vomit(get_turf(src))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+		Stun(5)
 		new /mob/living/simple_animal/borer(get_turf(src))
 
 	else

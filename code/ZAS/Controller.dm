@@ -307,7 +307,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 /datum/controller/air_system/proc/mark_edge_sleeping(connection_edge/E)
 	#ifdef ZASDBG
-	ASSERT(istype(E)
+	ASSERT(istype(E))
 	#endif
 	if(E.sleeping) return
 	active_edges.Remove(E)
@@ -315,7 +315,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 /datum/controller/air_system/proc/mark_edge_active(connection_edge/E)
 	#ifdef ZASDBG
-	ASSERT(istype(E)
+	ASSERT(istype(E))
 	#endif
 	if(!E.sleeping) return
 	active_edges.Add(E)
