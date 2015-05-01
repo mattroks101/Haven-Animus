@@ -70,11 +70,13 @@
 		else if(get_dist(M, T) <= 5)
 			if(!ear_safety)
 				M.Stun(8)
+				M.Weaken(3)
 				M.ear_damage += rand(0, 3)
 				M.ear_deaf = max(M.ear_deaf,10)
 
 		else if(!ear_safety)
 			M.Stun(4)
+			M.Weaken(2)
 			M.ear_damage += rand(0, 1)
 			M.ear_deaf = max(M.ear_deaf,5)
 

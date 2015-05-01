@@ -409,7 +409,7 @@ Class Procs:
 /obj/machinery/proc/ai_notice(var/message, var/obj/machinery/machine, var/style)
 	if(!machine || !message || !machine && !message)
 		return
-	if (last_notice && world.time < last_notice + 300) // stop spam
+	if (last_notice && world.time < last_notice + 16) // stop spam or no
 		return
 	var/mob/living/silicon/ai/AI = usr
 	if(!near_camera(machine))   // check machine on camera
