@@ -214,7 +214,9 @@
 	if(chemicals < 50)
 		src << "You don't have enough chemicals!"
 
-	var/chem = input("Select a chemical to secrete.", "Chemicals") in list("salglu_solution","tramadol","morphine","mannitol")
+	var/chem = input("Select a chemical to secrete.", "Chemicals") in list(\
+	 "salglu_solution","tramadol","morphine",\
+	"mannitol","mindbreaker","stoxin")
 
 	if(chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
 		return

@@ -127,6 +127,20 @@
 	floor_tile = null
 	intact = 0
 
+/turf/simulated/floor/plating/under
+	name = "plating"
+	icon_state = "23"
+	floor_tile = null
+
+	Entered(mob/living/M as mob)
+		var/turf/simulated/floor/plating/catwalk/C
+		if(!C in get_turf(src))
+			if(prob(75))
+				M.adjustBruteLoss(5)
+				M << "<span class='warning'>You tripped over.</span>"
+				return
+
+
 /turf/simulated/floor/plating/airless
 	icon_state = "plating"
 	name = "airless plating"
@@ -217,6 +231,7 @@
 	icon = 'icons/turf/carpet.dmi'
 	icon_state = "carpet"
 	floor_tile = new/obj/item/stack/tile/carpet
+	style = "carpet"
 
 	New()
 		floor_tile.New() //I guess New() isn't ran on objects spawned without the definition of a turf to house them, ah well.
@@ -231,7 +246,8 @@
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
 
-
+/turf/simulated/floor/carpet/blue
+	style = "blue"
 
 /turf/simulated/floor/plating/ironsand/New()
 	..()

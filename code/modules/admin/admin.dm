@@ -910,6 +910,10 @@ var/global/log_adminsay = 1
 		if (ticker.mode.config_tag == "changeling")
 			return 2
 		return 1
+	if(M.mind in ticker.mode.borers)
+		if (ticker.mode.config_tag == "borer")
+			return 2
+		return 1
 
 	for(var/datum/disease/D in M.viruses)
 		if(istype(D, /datum/disease/jungle_fever))

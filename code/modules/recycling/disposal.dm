@@ -1064,14 +1064,14 @@
 /obj/structure/disposalpipe/sortjunction
 
 	icon_state = "pipe-j1s"
-	var/sortType = 0	//Look at the list called TAGGERLOCATIONS in setup.dm
+	var/list/sortType = list()   //Look at the list called TAGGERLOCATIONS in setup.dm
 	var/posdir = 0
 	var/negdir = 0
 	var/sortdir = 0
 
 	proc/updatedesc()
 		desc = "An underfloor disposal pipe with a package sorting mechanism."
-		if(sortType>0)
+		if(sortType.len>0)
 			var/tag = uppertext(TAGGERLOCATIONS[sortType])
 			desc += "\nIt's tagged with [tag]"
 
@@ -1108,7 +1108,6 @@
 				user << "\blue Changed filter to [tag]"
 				updatedesc()
 
-
 	// next direction to move
 	// if coming in from negdir, then next is primary dir or sortdir
 	// if coming in from posdir, then flip around and go back to posdir
@@ -1118,7 +1117,7 @@
 		//var/flipdir = turn(fromdir, 180)
 		if(fromdir != sortdir)	// probably came from the negdir
 
-			if(src.sortType == sortTag) //if destination matches filtered type...
+			if(sortTag in sortType) //if destination matches filtered type...
 				return sortdir		// exit through sortdirection
 			else
 				return posdir
