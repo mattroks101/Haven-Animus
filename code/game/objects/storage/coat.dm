@@ -7,6 +7,12 @@
 	var/obj/screen/storage/boxes = null
 	var/obj/screen/close/closer = null
 
+/obj/item/clothing/suit/storage/vest/heavy/New()
+	..()
+	storage_slots = 4
+	max_w_class = 2
+	max_combined_w_class = 8
+
 /obj/item/clothing/suit/storage/proc/return_inv()
 
 	var/list/L = list(  )
