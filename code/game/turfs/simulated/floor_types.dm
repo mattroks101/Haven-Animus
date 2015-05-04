@@ -129,16 +129,17 @@
 
 /turf/simulated/floor/plating/under
 	name = "plating"
-	icon_state = "23"
+	icon = 'icons/turf/un.dmi'
+	icon_state = "4,6"
 	floor_tile = null
 
-	Entered(mob/living/M as mob)
-		var/turf/simulated/floor/plating/catwalk/C
-		if(!C in get_turf(src))
-			if(prob(75))
-				M.adjustBruteLoss(5)
-				M << "<span class='warning'>You tripped over.</span>"
-				return
+/turf/simulated/floor/plating/under/Entered(mob/living/M as mob)
+	var/turf/simulated/floor/plating/catwalk/C
+	if(!C in get_turf(src))
+		if(prob(75))
+			M.adjustBruteLoss(5)
+			M << "<span class='warning'>You tripped over.</span>"
+			return
 
 
 /turf/simulated/floor/plating/airless
