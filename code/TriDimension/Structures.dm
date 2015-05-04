@@ -11,6 +11,7 @@
 	CanPass(obj/mover, turf/source, height, airflow)
 		return airflow || !density
 
+
 /obj/multiz/ladder
 	icon_state = "ladderdown"
 	name = "ladder"
@@ -347,3 +348,6 @@
 /obj/multiz/stairs/active/bottom
 	istop = 0
 	opacity = 1
+
+/obj/multiz/attack_tk(mob/user as mob)
+	return
