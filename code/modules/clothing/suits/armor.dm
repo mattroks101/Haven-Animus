@@ -3,7 +3,7 @@
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	flags = FPRINT | TABLEPASS
-
+	armor = list(melee = 35, bullet = 20, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	cold_protection = UPPER_TORSO|LOWER_TORSO
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = UPPER_TORSO|LOWER_TORSO
@@ -194,3 +194,124 @@
 	slowdown = 1
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
+
+//New Vests
+/obj/item/clothing/suit/storage/vest
+	name = "armor vest"
+	desc = "A simple kevlar plate carrier."
+	icon_state = "kvest"
+	item_state = "kvest"
+	armor = list(melee = 50, bullet = 20, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	allowed = list(/obj/item/weapon/gun,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
+	var/icon_badge
+	var/icon_nobadge
+	verb/toggle()
+		set name ="Adjust Badge"
+		set category = "Object"
+		set src in usr
+		if(!usr.canmove || usr.stat || usr.restrained())
+			return 0
+
+		if(icon_state == icon_badge)
+			icon_state = icon_nobadge
+			usr << "You unclip the badge from the vest."
+		else if(icon_state == icon_nobadge)
+			icon_state = icon_badge
+			usr << "You clip the badge to the vest."
+		else
+			usr << "You can't find a badge for [src]."
+			return
+		update_icon()
+
+/obj/item/clothing/suit/storage/vest/officer
+	name = "officer armor vest"
+	desc = "A simple kevlar plate carrier belonging to Nanotrasen. This one has a security holobadge clipped to the chest."
+	icon_state = "officervest_nobadge"
+	item_state = "officervest_nobadge"
+	icon_badge = "officervest_badge"
+	icon_nobadge = "officervest_nobadge"
+
+/obj/item/clothing/suit/storage/vest/warden
+	name = "warden armor vest"
+	desc = "A simple kevlar plate carrier belonging to Nanotrasen. This one has a silver badge clipped to the chest."
+	icon_state = "wardenvest_nobadge"
+	item_state = "wardenvest_nobadge"
+	icon_badge = "wardenvest_badge"
+	icon_nobadge = "wardenvest_nobadge"
+	armor = list(melee = 50, bullet = 30, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/vest/hos
+	name = "commander armor vest"
+	desc = "A simple kevlar plate carrier belonging to Nanotrasen. This one has a gold badge clipped to the chest."
+	icon_state = "hosvest_nobadge"
+	item_state = "hosvest_nobadge"
+	icon_badge = "hosvest_badge"
+	icon_nobadge = "hosvest_nobadge"
+	armor = list(melee = 60, bullet = 45, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/vest/pcrc
+	name = "PCRC armor vest"
+	desc = "A simple kevlar plate carrier belonging to Proxima Centauri Risk Control. This one has a PCRC crest clipped to the chest."
+	icon_state = "pcrcvest_nobadge"
+	item_state = "pcrcvest_nobadge"
+	icon_badge = "pcrcvest_badge"
+	icon_nobadge = "pcrcvest_nobadge"
+
+/obj/item/clothing/suit/storage/vest/detective
+	name = "detective armor vest"
+	desc = "A simple kevlar plate carrier in a vintage brown, it has a badge clipped to the chest that reads, 'Private investigator'."
+	icon_state = "detectivevest_nobadge"
+	item_state = "detectivevest_nobadge"
+	icon_badge = "detectivevest_badge"
+	icon_nobadge = "detectivevest_nobadge"
+	armor = list(melee = 50, bullet = 20, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/vest/heavy
+	name = "heavy armor vest"
+	desc = "A heavy kevlar plate carrier with webbing attached."
+	icon_state = "webvest"
+	item_state = "webvest"
+	armor = list(melee = 50, bullet = 40, laser = 50, energy = 25, bomb = 30, bio = 0, rad = 0)
+	slowdown = 1
+	storage_slots = 4
+
+/obj/item/clothing/suit/storage/vest/heavy/officer
+	name = "officer heavy armor vest"
+	desc = "A heavy kevlar plate carrier belonging to Nanotrasen with webbing attached. This one has a security holobadge clipped to the chest."
+	icon_state = "officerwebvest_nobadge"
+	item_state = "officerwebvest_nobadge"
+	icon_badge = "officerwebvest_badge"
+	icon_nobadge = "officerwebvest_nobadge"
+
+/obj/item/clothing/suit/storage/vest/heavy/warden
+	name = "warden heavy armor vest"
+	desc = "A heavy kevlar plate carrier belonging to Nanotrasen with webbing attached. This one has a silver badge clipped to the chest."
+	icon_state = "wardenwebvest_nobadge"
+	item_state = "wardenwebvest_nobadge"
+	icon_badge = "wardenwebvest_badge"
+	icon_nobadge = "wardenwebvest_nobadge"
+
+/obj/item/clothing/suit/storage/vest/heavy/hos
+	name = "commander heavy armor vest"
+	desc = "A heavy kevlar plate carrier belonging to Nanotrasen with webbing attached. This one has a gold badge clipped to the chest."
+	icon_state = "hoswebvest_nobadge"
+	item_state = "hoswebvest_nobadge"
+	icon_badge = "hoswebvest_badge"
+	icon_nobadge = "hoswebvest_nobadge"
+
+/obj/item/clothing/suit/storage/vest/heavy/pcrc
+	name = "PCRC heavy armor vest"
+	desc = "A heavy kevlar plate carrier belonging to Proxima Centauri Risk Control with webbing attached. This one has a PCRC crest clipped to the chest."
+	icon_state = "pcrcwebvest_nobadge"
+	item_state = "pcrcwebvest_nobadge"
+	icon_badge = "pcrcwebvest_badge"
+	icon_nobadge = "pcrcwebvest_nobadge"
+
+/obj/item/clothing/suit/storage/vest/heavy/merc
+	name = "heavy armor vest"
+	desc = "A high-quality heavy kevlar plate carrier in a fetching tan. The vest is surprisingly flexible, and possibly made of an advanced material."
+	icon_state = "mercwebvest"
+	item_state = "mercwebvest"
+	armor = list(melee = 65, bullet = 60, laser = 65, energy = 45, bomb = 50, bio = 0, rad = 0)
+	slowdown = 0
