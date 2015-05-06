@@ -262,6 +262,27 @@
 
 /turf/simulated/floor/carpet/blue
 	style = "blue"
+	icon_state = "blue15-15"
+
+/turf/simulated/floor/carpet/black
+	style = "black"
+	icon_state = "black15-15"
+
+/turf/simulated/floor/carpet/green
+	style = "green"
+	icon_state = "green15-15"
+
+/turf/simulated/floor/carpet/silverblue
+	style = "silverblue"
+	icon_state = "silverblue15-15"
+
+/turf/simulated/floor/carpet/gay
+	style = "gay"
+	icon_state = "gay15-15"
+
+/turf/simulated/floor/carpet/purple
+	style = "purple"
+	icon_state = "purple15-15"
 
 /turf/simulated/floor/plating/ironsand/New()
 	..()
