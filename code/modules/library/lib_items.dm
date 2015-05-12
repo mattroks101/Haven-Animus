@@ -14,7 +14,7 @@
 /obj/structure/bookcase
 	name = "bookcase"
 	icon = 'icons/obj/library.dmi'
-	icon_state = "book_alt-0"
+	icon_state = "book-0"
 	anchored = 1
 	density = 1
 
@@ -127,9 +127,9 @@ obj/structure/bookcase/adult
 
 /obj/structure/bookcase/update_icon()
 	if(contents.len < 5)
-		icon_state = "book_alt-[contents.len]"
+		icon_state = "book-[contents.len]"
 	else
-		icon_state = "book_alt-5"
+		icon_state = "book-5"
 
 
 /obj/structure/bookcase/manuals/medical
