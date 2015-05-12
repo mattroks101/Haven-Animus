@@ -147,10 +147,12 @@
 					FF.update_icon() //so siding get updated properly
 
 /turf/simulated/floor/plating/under/Entered(mob/living/M as mob)
-	var/turf/simulated/floor/plating/catwalk/C
-	if(!C in get_turf(src))
+	..()
+//	var/turf/simulated/floor/plating/catwalk/C = new/turf/simulated/floor/plating/catwalk/
+	if(M.m_intent == "run")
 		if(prob(75))
 			M.adjustBruteLoss(5)
+			M.weakened += 3
 			M << "<span class='warning'>You tripped over.</span>"
 			return
 
