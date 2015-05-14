@@ -134,7 +134,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	name = "\improper cryogenic freezer"
 	desc = "A man-sized pod for entering suspended animation."
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "body_scanner_0"
+	icon_state = "cryopod_0"
 	density = 1
 	anchored = 1
 
@@ -160,16 +160,16 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 /obj/machinery/cryopod/right
 	orient_right = 1
-	icon_state = "body_scanner_0-r"
+	icon_state = "cryopod_0-r"
 
 /obj/machinery/cryopod/New()
 
 	announce = new /obj/item/device/radio/intercom(src)
 
 	if(orient_right)
-		icon_state = "body_scanner_0-r"
+		icon_state = "cryopod_0-r"
 	else
-		icon_state = "body_scanner_0"
+		icon_state = "cryopod_0"
 	..()
 
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
@@ -250,9 +250,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					del(G)
 
 			if(orient_right)
-				icon_state = "body_scanner_0-r"
+				icon_state = "cryopod_0-r"
 			else
-				icon_state = "body_scanner_0"
+				icon_state = "cryopod_0"
 
 			//TODO: Check objectives/mode, update new targets if this mob is the target, spawn new antags?
 
@@ -308,9 +308,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					M.client.eye = src
 
 			if(orient_right)
-				icon_state = "body_scanner_1-r"
+				icon_state = "cryopod_1-r"
 			else
-				icon_state = "body_scanner_1"
+				icon_state = "cryopod_1"
 
 			M << "\blue You feel cool air surround you. You go numb as your senses turn inward."
 			M << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
@@ -332,9 +332,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		return
 
 	if(orient_right)
-		icon_state = "body_scanner_0-r"
+		icon_state = "cryopod_0-r"
 	else
-		icon_state = "body_scanner_0"
+		icon_state = "cryopod_0"
 
 	src.go_out()
 	add_fingerprint(usr)
@@ -375,9 +375,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		src.occupant = usr
 
 		if(orient_right)
-			icon_state = "body_scanner_1-r"
+			icon_state = "cryopod_1-r"
 		else
-			icon_state = "body_scanner_1"
+			icon_state = "cryopod_1"
 
 		usr << "\blue You feel cool air surround you. You go numb as your senses turn inward."
 		usr << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
@@ -401,9 +401,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	occupant = null
 
 	if(orient_right)
-		icon_state = "body_scanner_0-r"
+		icon_state = "cryopod_0-r"
 	else
-		icon_state = "body_scanner_0"
+		icon_state = "cryopod_0"
 
 	return
 
