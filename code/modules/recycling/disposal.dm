@@ -134,7 +134,7 @@
 		update()
 
 	// mouse drop another mob or self
-	//
+
 	MouseDrop_T(mob/target, mob/user)
 		if (!istype(target) || target.buckled || get_dist(user, src) > 1 || get_dist(user, target) > 1 || user.stat || istype(user, /mob/living/silicon/ai))
 			return
@@ -439,7 +439,6 @@
 	// called when holder is expelled from a disposal
 	// should usually only occur if the pipe network is modified
 	proc/expel(var/obj/structure/disposalholder/H)
-
 		var/turf/target
 		playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 		if(H) // Somehow, someone managed to flush a window which broke mid-transit and caused the disposal to go in an infinite loop trying to expel null, hopefully this fixes it
@@ -454,6 +453,7 @@
 
 			H.vent_gas(loc)
 			del(H)
+		return
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 		if (istype(mover,/obj/item) && mover.throwing)
@@ -475,6 +475,9 @@
 // travels through pipes in lieu of actual items
 // contents will be items flushed by the disposal
 // this allows the gas flushed to be tracked
+#define PROCESS_P 0
+#define NOT_FILTERED 1
+#define FILTERED 2
 
 /obj/structure/disposalholder
 	invisibility = 101
@@ -486,7 +489,7 @@
 	var/destinationTag = 0 // changes if contains a delivery container
 	var/tomail = 0 //changes if contains wrapped package
 	var/hasmob = 0 //If it contains a mob
-
+	var/sort_status = null
 
 	// initialize a holder from the contents of a disposal unit
 	proc/init(var/obj/machinery/disposal/D)
@@ -497,6 +500,8 @@
 		for(var/mob/living/M in D)
 			if(M && M.stat != 2)
 				hasmob = 1
+				if(M.client)
+					M.client.eye = src
 
 		//Checks 1 contents level deep. This means that players can be sent through disposals...
 		//...but it should require a second person to open the package. (i.e. person inside a wrapped locker)
@@ -506,6 +511,7 @@
 					if(M && M.stat != 2)
 						hasmob = 1
 
+
 		// now everything inside the disposal gets put into the holder
 		// note AM since can contain mobs or objs
 		for(var/atom/movable/AM in D)
@@ -514,12 +520,16 @@
 				var/mob/living/carbon/human/H = AM
 				if(FAT in H.mutations)		// is a human and fat?
 					has_fat_guy = 1			// set flag on holder
+
+/*
 			if(istype(AM, /obj/structure/bigDelivery) && !hasmob)
 				var/obj/structure/bigDelivery/T = AM
 				src.destinationTag = T.sortTag
 			if(istype(AM, /obj/item/smallDelivery) && !hasmob)
 				var/obj/item/smallDelivery/T = AM
 				src.destinationTag = T.sortTag
+*/
+		sort_status = PROCESS_P
 
 
 	// start the movement process
@@ -541,6 +551,9 @@
 	proc/move()
 		var/obj/structure/disposalpipe/last
 		while(active)
+			if(contents.len==0)
+				del(src)
+				break
 			if(hasmob && prob(3))
 				for(var/mob/living/H in src)
 					H.take_overall_damage(10, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
@@ -1071,9 +1084,12 @@
 
 	proc/updatedesc()
 		desc = "An underfloor disposal pipe with a package sorting mechanism."
-		if(sortType.len>0)
-			var/tag = uppertext(TAGGERLOCATIONS[sortType])
-			desc += "\nIt's tagged with [tag]"
+		if(sortType.len)
+			desc += "\n \blue It's tagged with "
+			for(var/i in sortType)
+				desc += "\n \blue - [uppertext(TAGGERLOCATIONS[i])]"
+		else
+			desc="No Filtration"
 
 	proc/updatedir()
 		posdir = dir
@@ -1099,25 +1115,54 @@
 			return
 
 		if(istype(I, /obj/item/device/destTagger))
-			var/obj/item/device/destTagger/O = I
+			openwindow(usr)
 
-			if(O.currTag > 0)// Tag set
-				sortType = O.currTag
+	proc/openwindow(mob/user as mob)
+		var/dat = "<tt><center><h1><b>TagMaster 2.2</b></h1></center>"
+		dat += "<table style='width:100%; padding:4px;'><tr>"
+		for (var/i = 1, i <= TAGGERLOCATIONS.len, i++)
+			if(i in src.sortType)
+				dat += "<td><b>[TAGGERLOCATIONS[i]]</b><a href='?src=\ref[src];del=[i]'> (X) </a></td>"
+			else
+				dat += "<td><a href='?src=\ref[src];nextTag=[i]'>[TAGGERLOCATIONS[i]]</a></td>"
+
+			if (i%4==0)
+				dat += "</tr><tr>"
+		user << browse(dat, "window=destTagScreenPipe;size=450x350")
+		onclose(user, "destTagScreenPipe")
+
+
+	Topic(href, href_list)
+		if(!(usr in view(1,src)))
+			return
+		src.add_fingerprint(usr)
+
+		if(href_list["nextTag"])
+			var/n = text2num(href_list["nextTag"])
+			if(n>TAGGERLOCATIONS.len)
+				return
+			if(!(n in sortType))
+				src.sortType+=n
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-				var/tag = uppertext(TAGGERLOCATIONS[O.currTag])
-				user << "\blue Changed filter to [tag]"
 				updatedesc()
 
+		if(href_list["del"])
+			var/n = text2num(href_list["del"])
+			if(n in sortType)
+				sortType-=n
+				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
+				updatedesc()
+
+		openwindow(usr)
 	// next direction to move
 	// if coming in from negdir, then next is primary dir or sortdir
 	// if coming in from posdir, then flip around and go back to posdir
 	// if coming in from sortdir, go to posdir
 
-	nextdir(var/fromdir, var/sortTag)
+	nextdir(var/fromdir, var/obj/structure/disposalholder/H)
 		//var/flipdir = turn(fromdir, 180)
 		if(fromdir != sortdir)	// probably came from the negdir
-
-			if(sortTag in sortType) //if destination matches filtered type...
+			if(H.sort_status==FILTERED) //if destination matches filtered type...
 				return sortdir		// exit through sortdirection
 			else
 				return posdir
@@ -1125,9 +1170,53 @@
 							// so go with the flow to positive direction
 			return posdir
 
+	proc/checksort(var/obj/structure/disposalholder/H)
+
+		if(H.sort_status!=PROCESS_P)
+			return
+		var/list/sort_list = list()
+		for(var/atom/movable/AM in H)
+			if(istype(AM,/obj/structure/bigDelivery))
+				var/obj/structure/bigDelivery/A = AM
+				if(A.sortTag in sortType)
+					sort_list+=A
+					if(H.sort_status==PROCESS_P)
+						H.sort_status = FILTERED
+					continue
+
+			if(istype(AM,/obj/item/smallDelivery))
+				var/obj/item/smallDelivery/A = AM
+				if(A.sortTag in sortType)
+					sort_list+=A
+					if(H.sort_status==PROCESS_P)
+						H.sort_status = FILTERED
+					continue
+
+			H.sort_status = NOT_FILTERED
+
+		if(H.sort_status==NOT_FILTERED&&sort_list.len)
+			var/obj/structure/disposalholder/Hd = new()
+			Hd.sort_status = FILTERED
+			Hd.loc = src
+			Hd.dir = H.dir
+			Hd.active = 1
+			for(var/atom/movable/A in sort_list)
+				A.loc = Hd
+				if(ismob(A))
+					var/mob/M = A
+					if(M.client)
+						M.client.eye = src
+			spawn(1)
+				Hd.move()
+
+
+
+
 	transfer(var/obj/structure/disposalholder/H)
-		var/nextdir = nextdir(H.dir, H.destinationTag)
+		checksort(H)
+		var/nextdir = nextdir(H.dir, H)
 		H.dir = nextdir
+		H.sort_status = PROCESS_P
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
 
@@ -1148,7 +1237,7 @@
 //a three-way junction that sorts objects destined for the mail office mail table (tomail = 1)
 /obj/structure/disposalpipe/wrapsortjunction
 
-	desc = "An underfloor disposal pipe which sorts wrapped and unwrapped objects."
+	desc = "An underfloor disposal pipe which sorts wrapped from unwrapped objects."
 	icon_state = "pipe-j1s"
 	var/posdir = 0
 	var/negdir = 0
@@ -1174,12 +1263,46 @@
 	// if coming in from negdir, then next is primary dir or sortdir
 	// if coming in from posdir, then flip around and go back to posdir
 	// if coming in from sortdir, go to posdir
+	proc/checksort(var/obj/structure/disposalholder/H)
 
-	nextdir(var/fromdir, var/istomail)
+		if(H.sort_status!=PROCESS_P)
+			return
+		var/list/sort_list = list()
+		for(var/atom/movable/AM in H)
+			if(istype(AM,/obj/structure/bigDelivery))
+				sort_list+=AM
+				if(H.sort_status==PROCESS_P)
+					H.sort_status = FILTERED
+				continue
+
+			if(istype(AM,/obj/item/smallDelivery))
+				sort_list+=AM
+				if(H.sort_status==PROCESS_P)
+					H.sort_status = FILTERED
+				continue
+
+			H.sort_status = NOT_FILTERED
+
+		if(H.sort_status==NOT_FILTERED&&sort_list.len)
+			var/obj/structure/disposalholder/Hd = new()
+			Hd.sort_status = FILTERED
+			Hd.loc = src
+			Hd.dir = H.dir
+			Hd.active = 1
+			for(var/atom/movable/A in sort_list)
+				A.loc = Hd
+				if(ismob(A))
+					var/mob/M = A
+					if(M.client)
+						M.client.eye = src
+			spawn(1)
+				Hd.move()
+
+	nextdir(var/obj/structure/disposalholder/H)
 		//var/flipdir = turn(fromdir, 180)
-		if(fromdir != sortdir)	// probably came from the negdir
+		if(H.dir != sortdir)	// probably came from the negdir
 
-			if(istomail) //if destination matches filtered type...
+			if(H.sort_status == FILTERED) //if destination matches filtered type...
 				return sortdir		// exit through sortdirection
 			else
 				return posdir
@@ -1188,7 +1311,8 @@
 			return posdir
 
 	transfer(var/obj/structure/disposalholder/H)
-		var/nextdir = nextdir(H.dir, H.tomail)
+		checksort(H)
+		var/nextdir = nextdir(H)
 		H.dir = nextdir
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
@@ -1288,7 +1412,6 @@
 	// transfer to linked object (outlet or bin)
 
 /obj/structure/disposalpipe/trunk/transfer(var/obj/structure/disposalholder/H)
-
 	if(H.dir == DOWN)		// we just entered from a disposer
 		return ..()		// so do base transfer proc
 	// otherwise, go to the linked object
@@ -1297,9 +1420,17 @@
 		if(istype(O) && (H))
 			O.expel(H)	// expel at outlet
 		else
-			var/obj/machinery/disposal/D = linked
-			if(H)
-				D.expel(H)	// expel at disposal
+			if(istype(linked,/obj/machinery/disposal/deliveryChute))
+				var/obj/machinery/disposal/deliveryChute/D = linked
+				if(H)
+					D.expel(H)	// expel at disposal
+
+			if(istype(linked,/obj/machinery/disposal/))
+				var/obj/machinery/disposal/D = linked
+				if(H)
+					D.expel(H)	// expel at disposal
+
+
 	else
 		if(H)
 			src.expel(H, src.loc, 0)	// expel at turf

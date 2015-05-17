@@ -202,7 +202,6 @@
 	desc = "A chute for big and small packages alike!"
 	density = 1
 	icon_state = "intake"
-
 	var/c_mode = 0
 
 	New()
@@ -241,19 +240,10 @@
 	flush()
 		flushing = 1
 		flick("intake-closing", src)
-		var/deliveryCheck = 0
 		var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 													// travels through the pipes.
-		for(var/obj/structure/bigDelivery/O in src)
-			deliveryCheck = 1
-			if(O.sortTag == 0)
-				O.sortTag = 1
-		for(var/obj/item/smallDelivery/O in src)
-			deliveryCheck = 1
-			if (O.sortTag == 0)
-				O.sortTag = 1
-		if(deliveryCheck == 0)
-			H.destinationTag = 1
+
+
 
 		air_contents = new()		// new empty gas resv.
 
@@ -305,3 +295,20 @@
 			else
 				user << "You need more welding fuel to complete this task."
 				return
+
+	expel(var/obj/structure/disposalholder/H)
+		var/turf/target = get_ranged_target_turf(src.loc, dir, 5)
+		playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
+		if(H) // Somehow, someone managed to flush a window which broke mid-transit and caused the disposal to go in an infinite loop trying to expel null, hopefully this fixes it
+			for(var/atom/movable/AM in H)
+
+
+				AM.loc = src.loc
+				AM.pipe_eject(dir)
+				spawn(1)
+					if(AM)
+						AM.throw_at(target, 3, 1)
+
+			H.vent_gas(loc)
+			del(H)
+		return

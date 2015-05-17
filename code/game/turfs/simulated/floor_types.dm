@@ -148,7 +148,10 @@
 
 /turf/simulated/floor/plating/under/Entered(mob/living/M as mob)
 	..()
-//	var/turf/simulated/floor/plating/catwalk/C = new/turf/simulated/floor/plating/catwalk/
+	for(var/turf/simulated/floor/plating/catwalk/C in get_turf(src))
+		return 0
+
+	if(!ismob(M))	return 0
 	if(M.m_intent == "run")
 		if(prob(75))
 			M.adjustBruteLoss(5)
