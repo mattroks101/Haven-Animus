@@ -33,7 +33,7 @@
 	icon_state = "corner"
 	layer = 4.1
 
-/obj/structure/railing/corner/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+/obj/structure/railing/corner/CanPass(atom/movable/mover as mob|obj, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
 	if(dir == EAST)

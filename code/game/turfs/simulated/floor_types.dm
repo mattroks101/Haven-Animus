@@ -148,7 +148,7 @@
 
 /turf/simulated/floor/plating/under/Entered(mob/living/M as mob)
 	..()
-	for(var/turf/simulated/floor/plating/catwalk/C in get_turf(src))
+	for(var/obj/structure/catwalk/C in get_turf(src))
 		return 0
 
 	if(!ismob(M))	return 0
