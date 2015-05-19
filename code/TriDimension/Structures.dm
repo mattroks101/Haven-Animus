@@ -317,10 +317,7 @@
 	name = "Stairs"
 	desc = "Stairs.  You walk up and down them."
 	icon_state = "ramptop"
-	layer = 2.1
-
-/obj/multiz/stairs/New()
-	icon_state = istop ^ istype(src, /obj/multiz/stairs/active) ? "ramptop" : "rampbottom"
+	layer = 2.4
 
 /obj/multiz/stairs/enter/bottom
 	istop = 0
