@@ -68,7 +68,8 @@
 								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 								//		A.Destroy()
 									break
-
+								if(istype(A, /obj/structure/catwalk))
+									blocked = 1
 								if(istype(A, /obj/structure/lattice))
 									blocked = 1
 									if(prob(3))
@@ -79,7 +80,7 @@
 								//		blocked = 0
 								//		AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 								//		A.Destroy()
-								//	break
+									break
 
 							if (!blocked)
 								AM.Move(floorbelow)

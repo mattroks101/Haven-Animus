@@ -121,6 +121,21 @@
 	nitrogen = 0.001
 	temperature = TCMB
 
+/turf/simulated/floor/engine/vacuum/hull/supernew
+	icon = 'icons/turf/hull.dmi'
+	icon_state = "hull"
+	style = "hull_new"
+
+
+	New()
+		..()
+		spawn(4)
+			update_icon()
+			for(var/direction in cardinal)
+				if(istype(get_step(src,direction),/turf/simulated/floor))
+					var/turf/simulated/floor/FF = get_step(src,direction)
+					FF.update_icon() //so siding get updated properly
+
 /turf/simulated/floor/plating
 	name = "plating"
 	icon_state = "plating"

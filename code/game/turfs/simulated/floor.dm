@@ -106,6 +106,35 @@ turf/simulated/floor/proc/update_icon()
 	else if(is_plating())
 		if(!broken && !burnt)
 			icon_state = icon_plating //Because asteroids are 'platings' too.
+	if(style == "hull_new")
+		var/connectdir = 0
+		var/random_icon = "center[rand(1,34)]"
+		for(var/direction in cardinal)
+			if(istype(get_step(src,direction),/turf/simulated/floor) || istype(get_step(src,direction),/turf/simulated/wall))
+				connectdir |= direction
+			//Check the diagonal connections for corners, where you have, for example, connections both north and east. In this case it checks for a north-east connection to determine whether to add a corner marker or not.
+		var/diagonalconnect = 0 //1 = NE; 2 = SE; 4 = NW; 8 = SW
+		//Northeast
+		if(connectdir & NORTH && connectdir & EAST)
+			if(istype(get_step(src,NORTHEAST),/turf/simulated/floor) || istype(get_step(src,NORTHEAST),/turf/simulated/wall))
+				diagonalconnect |= 1
+		//Southeast
+		if(connectdir & SOUTH && connectdir & EAST)
+			if(istype(get_step(src,SOUTHEAST),/turf/simulated/floor) || istype(get_step(src,SOUTHEAST),/turf/simulated/wall))
+				diagonalconnect |= 2
+			//Northwest
+		if(connectdir & NORTH && connectdir & WEST)
+			if(istype(get_step(src,NORTHWEST),/turf/simulated/floor) || istype(get_step(src,NORTHWEST),/turf/simulated/wall))
+				diagonalconnect |= 4
+			//Southwest
+		if(connectdir & SOUTH && connectdir & WEST)
+			if(istype(get_step(src,SOUTHWEST),/turf/simulated/floor) || istype(get_step(src,SOUTHWEST),/turf/simulated/wall))
+				diagonalconnect |= 8
+		if(!(connectdir == 15 && diagonalconnect == 15))
+			random_icon = "[connectdir]-[diagonalconnect]"
+
+		icon_state = "hull[random_icon]"
+
 	else if(is_light_floor())
 		var/obj/item/stack/tile/light/T = floor_tile
 		if(T.on)
@@ -349,6 +378,11 @@ turf/simulated/floor/proc/update_icon()
 	else
 		return 0
 
+/turf/simulated/floor/proc/is_hull()
+	if(src.style == "hull_new")
+		return 1
+	else
+		return 0
 
 /turf/simulated/floor/is_plating()
 	if(!floor_tile)

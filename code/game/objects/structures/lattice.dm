@@ -63,7 +63,16 @@
 			user << "\blue Slicing lattice joints ..."
 		new /obj/item/stack/rods(src.loc)
 		del(src)
-
+	if (istype(C, /obj/item/stack/rods))
+		var/obj/item/stack/rods/R = C
+		if(R.amount < 2)	return
+		R.use(2)
+		user << "<span class='notice'>You start connecting [R.name] to [src.name] ...</span>"
+		if(do_after(user,50))
+			src.alpha = 0
+			new /obj/structure/catwalk(src.loc)
+			qdel(src)
+		return
 	return
 
 /obj/structure/lattice/proc/updateOverlays()

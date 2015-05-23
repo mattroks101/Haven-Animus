@@ -86,6 +86,9 @@
 	if(pulledby)
 		return 1
 
+
+	if(locate(/obj/structure/catwalk) in orange(1, get_turf(src))) //Not realistic but makes pushing things in space easier
+		return 1
 	if(locate(/obj/structure/lattice) in orange(1, get_turf(src))) //Not realistic but makes pushing things in space easier
 		return 1
 
