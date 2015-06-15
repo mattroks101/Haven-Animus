@@ -65,6 +65,8 @@
 /var/const/access_sec_doors = 63 // Security front doors
 /var/const/access_psychiatrist = 64 // Psychiatrist's office
 /var/const/access_xenoarch = 65
+/var/const/access_mineral_storeroom = 66
+/var/const/access_weapons = 67 //Weapon authorization for secbots
 
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.
@@ -81,6 +83,7 @@
 
 	//The Syndicate
 /var/const/access_syndicate = 150//General Syndicate Access
+/var/const/access_syndicate_leader = 151//Nuke Op Leader Access
 
 	//MONEY
 /var/const/access_crate_cash = 200
