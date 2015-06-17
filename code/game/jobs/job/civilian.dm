@@ -2,6 +2,7 @@
 /datum/job/bartender
 	title = "Bartender"
 	flag = BARTENDER
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -43,6 +44,7 @@
 /datum/job/chef
 	title = "Chef"
 	flag = CHEF
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -72,6 +74,7 @@
 /datum/job/hydro
 	title = "Botanist"
 	flag = BOTANIST
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
@@ -103,6 +106,7 @@
 /datum/job/qm
 	title = "Quartermaster"
 	flag = QUARTERMASTER
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -134,6 +138,7 @@
 /datum/job/cargo_tech
 	title = "Cargo Technician"
 	flag = CARGOTECH
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -163,6 +168,7 @@
 /datum/job/mining
 	title = "Shaft Miner"
 	flag = MINER
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
@@ -200,6 +206,7 @@
 /datum/job/clown
 	title = "Clown"
 	flag = CLOWN
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -232,6 +239,7 @@
 /datum/job/mime
 	title = "Mime"
 	flag = MIME
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -273,6 +281,7 @@
 /datum/job/janitor
 	title = "Janitor"
 	flag = JANITOR
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -300,6 +309,7 @@
 /datum/job/librarian
 	title = "Librarian"
 	flag = LIBRARIAN
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -328,6 +338,7 @@
 /datum/job/lawyer
 	title = "Lawyer"
 	flag = LAWYER
+	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
