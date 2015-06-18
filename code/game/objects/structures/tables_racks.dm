@@ -15,7 +15,7 @@
 	desc = "A square piece of metal standing on four metal legs. It can not move."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "table"
-	density = 1
+//	density = 1
 	anchored = 1.0
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.")
@@ -26,6 +26,9 @@
 	var/flipped = 0
 	var/dented = 0
 	var/health = 100
+
+	var/frame = /obj/structure/table_frame
+	var/mob/tableclimber
 
 /obj/structure/table/proc/update_adjacent()
 	for(var/direction in list(1,2,4,8,5,6,9,10))
@@ -218,6 +221,22 @@
 					icon_state = "wood_tabledir2"
 				if(6)
 					icon_state = "wood_tabledir3"
+		else if(istype(src,/obj/structure/table/glass))
+			switch(table_type)
+				if(0)
+					icon_state = "glasstable"
+				if(1)
+					icon_state = "glasstable_1tileendtable"
+				if(2)
+					icon_state = "glasstable_1tilethick"
+				if(3)
+					icon_state = "glasstable_dir"
+				if(4)
+					icon_state = "glasstable_middle"
+				if(5)
+					icon_state = "glasstable_dir2"
+				if(6)
+					icon_state = "glasstable_dir3"
 		else
 			switch(table_type)
 				if(0)
@@ -277,20 +296,6 @@
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 		destroy()
 
-/obj/structure/table/attack_hand(mob/user)
-	if(HULK in user.mutations)
-		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		destroy()
-	if(usr.a_intent == "disarm" && get_dist(usr, src) <= 1 && !usr.buckled && !flipped)
-		if(prob(70))
-			visible_message("<span class='notice'>[user] climbs on the [src].</span>")
-			usr.loc = src.loc
-		else
-			sleep(5)
-			visible_message("<span class='warning'>[user] slipped off the edge of the [src].</span>")
-			usr.weakened += 3
-
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return
 
@@ -302,7 +307,7 @@
 		return 1
 	if (flipped)
 		if (get_dir(loc, target) == dir)
-			return !density
+			return density
 		else
 			return 1
 	return 0
@@ -339,17 +344,22 @@
 		return 1
 	if (flipped)
 		if (get_dir(loc, target) == dir)
-			return !density
+			return density
 		else
 			return 1
 	return 1
 
 /obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
+	if(ismob(O) && user == O && ishuman(user))
+		if(user.canmove)
+			climb_table(user)
+			return
 	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
 		return
 	if(isrobot(user))
 		return
-	user.drop_item()
+	if(!user.drop_item())
+		return
 	if (O.loc != src.loc)
 		step(O, get_dir(O, src))
 	return
@@ -548,6 +558,83 @@
 	return 1
 
 /*
+ * TABLE INTERACTION
+ */
+
+/obj/structure/table/proc/climb_table(mob/user)
+	src.add_fingerprint(user)
+	user.visible_message("<span class='warning'>[user] starts climbing onto [src].</span>", \
+								"<span class='notice'>You start climbing onto [src]...</span>")
+	var/climb_time = 20
+	if(user.restrained()) //Table climbing takes twice as long when restrained.
+		climb_time *= 2
+	tableclimber = user
+	if(do_mob(user, user, climb_time))
+		if(src.loc) //Checking if table has been destroyed
+			user.pass_flags += PASSTABLE
+			step(user,get_dir(user,src.loc))
+			user.pass_flags -= PASSTABLE
+			user.visible_message("<span class='warning'>[user] climbs onto [src].</span>", \
+									"<span class='notice'>You climb onto [src].</span>")
+			add_logs(user, src, "climbed onto")
+			user.Stun(2)
+			tableclimber = null
+			return 1
+	tableclimber = null
+	return 0
+
+/obj/structure/table/proc/tablepush(obj/item/I, mob/user)
+	if(get_dist(src, user) < 2)
+		var/obj/item/weapon/grab/G = I
+		if(G.affecting.buckled)
+			user << "<span class='warning'>[G.affecting] is buckled to [G.affecting.buckled]!</span>"
+			return 0
+		if(G.state < GRAB_AGGRESSIVE)
+			user << "<span class='warning'>You need a better grip to do that!</span>"
+			return 0
+		if(!G.confirm())
+			return 0
+		G.affecting.loc = src.loc
+		G.affecting.Weaken(5)
+		G.affecting.visible_message("<span class='danger'>[G.assailant] pushes [G.affecting] onto [src].</span>", \
+									"<span class='userdanger'>[G.assailant] pushes [G.affecting] onto [src].</span>")
+		add_logs(G.assailant, G.affecting, "pushed")
+		qdel(I)
+		return 1
+	qdel(I)
+
+
+/*
+ * Glass tables
+ */
+
+/obj/structure/table/glass
+	name = "glass table"
+	desc = "What did I say about leaning on the glass tables? Now you need surgery."
+	icon_state = "glasstable"
+//	parts = // TODO: construction
+	health = 30
+
+/obj/structure/table/glass/tablepush(obj/item/I, mob/user)
+	if(..())
+		visible_message("<span class='warning'>[src] breaks!</span>")
+		playsound(src.loc, "shatter", 50, 1)
+		new frame(src.loc)
+		new /obj/item/weapon/shard(src.loc)
+		qdel(src)
+
+
+/obj/structure/table/glass/climb_table(mob/user)
+	if(..())
+		visible_message("<span class='warning'>[src] breaks!</span>")
+		playsound(src.loc, "shatter", 50, 1)
+		new frame(src.loc)
+		new /obj/item/weapon/shard(src.loc)
+		qdel(src)
+		user.Weaken(5)
+
+
+/*
  * Wooden tables
  */
 /obj/structure/table/woodentable
@@ -600,25 +687,6 @@
 
 	..()
 
-/obj/structure/table/reinforced/attack_hand(mob/user)
-	if(HULK in user.mutations)
-		health -= rand(30,80)
-		if(health <=0)
-			destroy()
-			visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		else
-			visible_message("<span class='danger'>[user] smashes [src]!</span>")
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		destroy()
-	if(usr.a_intent == "disarm" && get_dist(usr, src) <= 1 && !usr.buckled && !flipped)
-		if(prob(70))
-			visible_message("<span class='notice'>[user] climbs on the [src].</span>")
-			usr.loc = src.loc
-		else
-			sleep(5)
-			visible_message("<span class='warning'>[user] slipped off the edge of the [src].</span>")
-			usr.weakened += 3
-
 
 /*
  * Racks
@@ -628,7 +696,7 @@
 	desc = "Different from the Middle Ages version."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "rack"
-	density = 1
+//	density = 1
 	flags = FPRINT
 	anchored = 1.0
 	throwpass = 1	//You can throw objects over this, despite it's density.
