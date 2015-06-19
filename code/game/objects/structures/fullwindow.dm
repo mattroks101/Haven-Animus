@@ -1,8 +1,9 @@
 /obj/structure/window/full
 //	sheets = 2
+	health = 0
 	dir=SOUTHWEST
 	mouse_opacity=2 // Complete opacity.
-	layer = 3.21 // Windows are at 3.2.
+	layer = 2.91 // Abowe grilles, beneath firelocks.
 
 /obj/structure/window/full/CheckExit(atom/movable/O as mob|obj, target as turf)
 	return 1
@@ -30,13 +31,41 @@
 				if(W.anchored && W.density) //Only counts anchored, not-destroyed full-tile windows.
 					if(abs(x-W.x)-abs(y-W.y) ) 		//doesn't count windows, placed diagonally to src
 						junction |= get_dir(src,W)
-		icon_state = "[basestate][junction]"
+		icon_state = "[initial(icon_state)][junction]"
+
+		overlays.Cut()
+		var/ratio = health / maxhealth
+		ratio = Ceiling(ratio*4) * 25
+		overlays += "damage[ratio]"
 		return
+
+/obj/structure/window/full/hitby(AM as mob|obj)
+	..()
+	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
+	var/tforce = 0
+	if(ismob(AM))
+		tforce = 40
+	else if(isobj(AM))
+		var/obj/item/I = AM
+		tforce = I.throwforce
+	if(reinf) tforce *= 0.25
+	playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
+	health = max(0, health - tforce)
+	update_nearby_icons()
+	if(health <= 7 && !reinf)
+		anchored = 0
+		step(src, get_dir(AM, src))
+	if(health <= 0)
+		new /obj/item/weapon/shard(loc)
+		if(reinf) new /obj/item/stack/rods(loc)
+		del(src)
+
 
 /obj/structure/window/full/basic
 	desc = "It looks thin and flimsy. A few knocks with... anything, really should shatter it."
 	icon_state = "window"
 	basestate = "window"
+	maxhealth = 50
 
 /obj/structure/window/full/plasmabasic
 	name = "plasma window"
@@ -44,7 +73,7 @@
 	basestate = "plasmawindow"
 	icon_state = "plasmawindow"
 	shardtype = /obj/item/weapon/shard/plasma
-	health = 120
+	maxhealth = 100
 
 /obj/structure/window/full/plasmabasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 32000)
@@ -58,7 +87,7 @@
 	icon_state = "plasmarwindow"
 	shardtype = /obj/item/weapon/shard/plasma
 	reinf = 1
-	health = 160
+	maxhealth = 160
 
 /obj/structure/window/full/plasmareinforced/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
@@ -68,7 +97,7 @@
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
 	icon_state = "rwindow"
 	basestate = "rwindow"
-	health = 40
+	maxhealth = 100
 	reinf = 1
 
 /obj/structure/window/full/reinforced/tinted
@@ -83,4 +112,4 @@
 	desc = "It looks rather strong and frosted over. Looks like it might take a few less hits then a normal reinforced window."
 	icon_state = "fwindow"
 	basestate = "fwindow"
-	health = 30
+	maxhealth = 50

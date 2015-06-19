@@ -7,7 +7,8 @@
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = 1.0
 	flags = ON_BORDER
-	var/health = 14.0
+	var/health = 0
+	var/maxhealth = 25
 	var/ini_dir = null
 	var/state = 2
 	var/reinf = 0
@@ -306,7 +307,7 @@
 	..()
 
 //	if(re)	reinf = re
-
+	health = maxhealth
 	ini_dir = dir
 
 	update_nearby_tiles(need_rebuild=1)
@@ -387,7 +388,7 @@
 	basestate = "plasmawindow"
 	icon_state = "plasmawindow"
 	shardtype = /obj/item/weapon/shard/plasma
-	health = 120
+	maxhealth = 120
 
 /obj/structure/window/plasmabasic/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 32000)
@@ -401,7 +402,7 @@
 	icon_state = "plasmarwindow"
 	shardtype = /obj/item/weapon/shard/plasma
 	reinf = 1
-	health = 160
+	maxhealth = 160
 
 /obj/structure/window/plasmareinforced/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
@@ -411,7 +412,7 @@
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
 	icon_state = "rwindow"
 	basestate = "rwindow"
-	health = 40
+	maxhealth = 40
 	reinf = 1
 
 /obj/structure/window/reinforced/tinted
@@ -426,4 +427,4 @@
 	desc = "It looks rather strong and frosted over. Looks like it might take a few less hits then a normal reinforced window."
 	icon_state = "fwindow"
 	basestate = "fwindow"
-	health = 30
+	maxhealth = 30
