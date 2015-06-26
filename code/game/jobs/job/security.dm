@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "капитану и космозакону"
 	selection_color = "#ffdddd"
 	idtype = /obj/item/weapon/card/id/hos
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
@@ -58,7 +58,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of security"
+	supervisors = "главе охраны"
 	selection_color = "#ffeeee"
 	idtype = /obj/item/weapon/card/id/sec
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue)
@@ -101,7 +101,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of security"
+	supervisors = "главе охраны"
 	selection_color = "#ffeeee"
 	idtype = /obj/item/weapon/card/id/det
 
@@ -147,7 +147,7 @@
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = "the head of security"
+	supervisors = "главе охраны и смотрителю"
 	selection_color = "#ffeeee"
 	idtype = /obj/item/weapon/card/id/sec
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue)
