@@ -41,7 +41,7 @@ datum/objective/assassinate
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
+			explanation_text = "Убейте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -50,7 +50,7 @@ datum/objective/assassinate
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "Assassinate [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
+			explanation_text = "Убейте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -69,7 +69,7 @@ datum/objective/mutiny
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
+			explanation_text = "Убейте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -78,7 +78,7 @@ datum/objective/mutiny
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "Assassinate [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
+			explanation_text = "Убейте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -97,7 +97,7 @@ datum/objective/mutiny/rp
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Assassinate, capture or convert [target.current.real_name], the [target.assigned_role]."
+			explanation_text = "Убейте, захватите или завербуйте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -106,7 +106,7 @@ datum/objective/mutiny/rp
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "Assassinate, capture or convert [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
+			explanation_text = "Убейте, захватите или завербуйте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -132,7 +132,7 @@ datum/objective/anti_revolution/execute
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [target.assigned_role] has extracted confidential information above their clearance. Execute \him[target.current]."
+			explanation_text = "[target.current.real_name] обладает информацией, способной навредить нам. Убейте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -141,7 +141,7 @@ datum/objective/anti_revolution/execute
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has extracted confidential information above their clearance. Execute \him[target.current]."
+			explanation_text = "[target.current.real_name] обладает информацией, способной навредить нам. Убейте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -159,7 +159,7 @@ datum/objective/anti_revolution/brig
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Brig [target.current.real_name], the [target.assigned_role] for 20 minutes to set an example."
+			explanation_text = "Поместите в бриг [target.current.real_name] на 20 минут."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -168,7 +168,7 @@ datum/objective/anti_revolution/brig
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "Brig [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] for 20 minutes to set an example."
+			explanation_text = "Поместите в бриг [target.current.real_name] на 20 минут."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -190,7 +190,7 @@ datum/objective/anti_revolution/demote
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to NanoTrasen's goals. Demote \him[target.current] to unassigned."
+			explanation_text = "[target.current.real_name] вредит НаноТрейзен. Сделайте так, чтобы [target.current] уволили."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -198,7 +198,7 @@ datum/objective/anti_revolution/demote
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to NanoTrasen's goals. Demote \him[target.current]."
+			explanation_text = "[target.current.real_name] вредит НаноТрейзен. Сделайте так, чтобы [target.current] уволили."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -222,7 +222,7 @@ datum/objective/debrain//I want braaaainssss
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Steal the brain of [target.current.real_name]."
+			explanation_text = "Украдите мозг [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -231,7 +231,7 @@ datum/objective/debrain//I want braaaainssss
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "Steal the brain of [target.current.real_name] the [!role_type ? target.assigned_role : target.special_role]."
+			explanation_text = "Украдите мозг [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -255,7 +255,7 @@ datum/objective/protect//The opposite of killing a dude.
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Protect [target.current.real_name], the [target.assigned_role]."
+			explanation_text = "Защищайте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -264,7 +264,7 @@ datum/objective/protect//The opposite of killing a dude.
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "Protect [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
+			explanation_text = "Защищайте [target.current.real_name]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -280,7 +280,7 @@ datum/objective/protect//The opposite of killing a dude.
 
 
 datum/objective/hijack
-	explanation_text = "Hijack the Escape Pod A by escaping alone."
+	explanation_text = "Взломайте спасательную шлюпку и эвакуируйтесь в одиночестве."
 
 	check_completion()
 		if(!owner.current || owner.current.stat)
@@ -301,7 +301,7 @@ datum/objective/hijack
 
 
 datum/objective/block
-	explanation_text = "Do not allow any organic lifeforms to escape on the shuttle alive."
+	explanation_text = "Не позвольте существам покинуть станцию на шаттле. В крайнем случае, позаботьтесь, чтобы они были мертвы."
 
 
 	check_completion()
@@ -325,7 +325,7 @@ datum/objective/block
 		return 1
 
 datum/objective/silence
-	explanation_text = "Do not allow anyone to escape the ship.  Only allow the pods to be sent when everyone is dead and your story is the only one left."
+	explanation_text = "Не позволяйте кому-либо покинуть станцию до тех пор, пока не останетесь последним."
 
 	check_completion()
 		if(emergency_shuttle.location<2)
@@ -345,7 +345,7 @@ datum/objective/silence
 
 
 datum/objective/escape
-	explanation_text = "Escape on an escape pod alive and free."
+	explanation_text = "Покиньте станцию живым и свободным."
 
 
 	check_completion()
@@ -385,7 +385,7 @@ datum/objective/escape
 
 
 datum/objective/survive
-	explanation_text = "Stay alive until the end."
+	explanation_text = "Останьтесь живым."
 
 	check_completion()
 		if(!owner.current || owner.current.stat == DEAD || isbrain(owner.current))
@@ -401,7 +401,7 @@ datum/objective/brig
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Have [target.current.real_name], the [target.assigned_role] brigged for 10 minutes."
+			explanation_text = "Поместите в бриг [target.current.real_name] на 10 минут."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -410,7 +410,7 @@ datum/objective/brig
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "Have [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] brigged for 10 minutes."
+			explanation_text = "Поместите в бриг [target.current.real_name] на 10 минут."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -436,7 +436,7 @@ datum/objective/harm
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Make an example of [target.current.real_name], the [target.assigned_role]. Break one of their bones, detach one of their limbs or disfigure their face. Make sure they're alive when you do it."
+			explanation_text = "Накажите [target.current.real_name].Переломайте ему кости, отрежьте конечность или разбейте лицо, пусть запомнит этот урок. Однако жертва должна быть жива."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -445,7 +445,7 @@ datum/objective/harm
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "Make an example of [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]. Break one of their bones, detach one of their limbs or disfigure their face. Make sure they're alive when you do it."
+			explanation_text = "Накажите [target.current.real_name].Переломайте ему кости, отрежьте конечность или разбейте лицо, пусть запомнит этот урок. Однако жертва должна быть жива.."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -474,7 +474,7 @@ datum/objective/harm
 
 
 datum/objective/nuclear
-	explanation_text = "Destroy the ship with a nuclear device."
+	explanation_text = "Уничтожьте корабль с помощью ядерной боеголовки"
 
 
 
@@ -483,38 +483,38 @@ datum/objective/steal
 	var/target_name
 
 	var/global/possible_items[] = list(
-		"the captain's antique laser gun" = /obj/item/weapon/gun/energy/laser/captain,
-		"a hand teleporter" = /obj/item/weapon/hand_tele,
-		"an RCD" = /obj/item/weapon/rcd,
-		"a jetpack" = /obj/item/weapon/tank/jetpack,
-		"a green captain's jumpsuit" = /obj/item/clothing/under/rank/captain/green,
-		"a blue captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
-		"a functional AI" = /obj/item/device/aicard,
-		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
-		"the [vessel_type] blueprints" = /obj/item/blueprints,
-		"a nasa voidsuit" = /obj/item/clothing/suit/space/nasavoid,
-		"28 moles of plasma (full tank)" = /obj/item/weapon/tank,
+		"антикварный лазер капитана" = /obj/item/weapon/gun/energy/laser/captain,
+		"ручной телепортер" = /obj/item/weapon/hand_tele,
+		"УБС (Устройство быстрого строительства)" = /obj/item/weapon/rcd,
+		"реактивный ранец" = /obj/item/weapon/tank/jetpack,
+		"зеленый костюм капитана" = /obj/item/clothing/under/rank/captain/green,
+		"синий костюм капитана" = /obj/item/clothing/under/rank/captain,
+		"функционирующий ИИ" = /obj/item/device/aicard,
+		"пару магнитных ботинок" = /obj/item/clothing/shoes/magboots,
+		"чертежи [vessel_type] " = /obj/item/blueprints,
+		"скафандр NASA" = /obj/item/clothing/suit/space/nasavoid,
+		"28 моль плазмы(полный бак)" = /obj/item/weapon/tank,
 //		"a sample of slime extract" = /obj/item/slime_extract,
 //		"a piece of corgi meat" = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
-		"a research director's jumpsuit" = /obj/item/clothing/under/rank/research_director,
-		"a chief engineer's jumpsuit" = /obj/item/clothing/under/rank/chief_engineer,
+		"костюм РД" = /obj/item/clothing/under/rank/research_director,
+		"костюм главного инженера" = /obj/item/clothing/under/rank/chief_engineer,
 //		"a chief medical officer's jumpsuit" = /obj/item/clothing/under/rank/chief_medical_officer,
-		"a head of security's jumpsuit" = /obj/item/clothing/under/rank/head_of_security,
-		"a head of personnel's jumpsuit" = /obj/item/clothing/under/rank/head_of_personnel,
-		"the hypospray" = /obj/item/weapon/reagent_containers/hypospray,
-		"the captain's pinpointer" = /obj/item/weapon/pinpointer,
-		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
+		"костюм главы охраны" = /obj/item/clothing/under/rank/head_of_security,
+		"костюм главы персонала" = /obj/item/clothing/under/rank/head_of_personnel,
+		"гипоспрей СМО" = /obj/item/weapon/reagent_containers/hypospray,
+		"капитанский маячок " = /obj/item/weapon/pinpointer,
+		"отражающую броню" = /obj/item/clothing/suit/armor/laserproof,
 	)
 
 	var/global/possible_items_special[] = list(
 		/*"nuclear authentication disk" = /obj/item/weapon/disk/nuclear,*///Broken with the change to nuke disk making it respawn on z level change.
-		"nuclear gun" = /obj/item/weapon/gun/energy/gun/nuclear,
-		"diamond drill" = /obj/item/weapon/pickaxe/diamonddrill,
+		"атомное оружие" = /obj/item/weapon/gun/energy/gun/nuclear,
+		"алмазную дрель" = /obj/item/weapon/pickaxe/diamonddrill,
 		"bag of holding" = /obj/item/weapon/storage/backpack/holding,
-		"hyper-capacity cell" = /obj/item/weapon/cell/hyper,
-		"10 diamonds" = /obj/item/stack/sheet/mineral/diamond,
-		"50 gold bars" = /obj/item/stack/sheet/mineral/gold,
-		"25 refined uranium bars" = /obj/item/stack/sheet/mineral/uranium,
+		"гипер-вместительную батарею" = /obj/item/weapon/cell/hyper,
+		"10 алмазов" = /obj/item/stack/sheet/mineral/diamond,
+		"50 слитков золота" = /obj/item/stack/sheet/mineral/gold,
+		"25 очищенных стержней урана" = /obj/item/stack/sheet/mineral/uranium,
 	)
 
 
@@ -523,7 +523,7 @@ datum/objective/steal
 		steal_target = possible_items[target_name]
 		if (!steal_target )
 			steal_target = possible_items_special[target_name]
-		explanation_text = "Steal [target_name]."
+		explanation_text = "Украдите [target_name]."
 		return steal_target
 
 
@@ -545,7 +545,7 @@ datum/objective/steal
 			if (!custom_name) return
 			target_name = custom_name
 			steal_target = custom_target
-			explanation_text = "Steal [target_name]."
+			explanation_text = "Украдите [target_name]."
 		else
 			set_target(new_target)
 		return steal_target
@@ -555,16 +555,16 @@ datum/objective/steal
 		if(!isliving(owner.current))	return 0
 		var/list/all_items = owner.current.get_contents()
 		switch (target_name)
-			if("28 moles of plasma (full tank)","10 diamonds","50 gold bars","25 refined uranium bars")
+			if("28 моль плазмы(полный бак)","10 алмазов","50 слитков золота","25 очищенных стержней урана")
 				var/target_amount = text2num(target_name)//Non-numbers are ignored.
 				var/found_amount = 0.0//Always starts as zero.
 
 				for(var/obj/item/I in all_items) //Check for plasma tanks
 					if(istype(I, steal_target))
-						found_amount += (target_name=="28 moles of plasma (full tank)" ? (I:air_contents:gas["plasma"]) : (I:amount))
+						found_amount += (target_name=="28 моль плазмы(полный бак)" ? (I:air_contents:gas["plasma"]) : (I:amount))
 				return found_amount>=target_amount
 
-			if("50 coins (in bag)")
+			if("50 монет (в мешке)")
 				var/obj/item/weapon/moneybag/B = locate() in all_items
 
 				if(B)
@@ -574,7 +574,7 @@ datum/objective/steal
 						found_amount++
 					return found_amount>=target
 
-			if("a functional AI")
+			if("функционирующий ИИ")
 				for(var/obj/item/device/aicard/C in all_items) //Check for ai card
 					for(var/mob/living/silicon/ai/M in C)
 						if(istype(M, /mob/living/silicon/ai) && M.stat != 2) //See if any AI's are alive inside that card.
@@ -608,7 +608,7 @@ datum/objective/steal
 datum/objective/download
 	proc/gen_amount_goal()
 		target_amount = rand(10,20)
-		explanation_text = "Download [target_amount] research levels."
+		explanation_text = "Загрузите на диск и украдите [target_amount] уровень исследований."
 		return target_amount
 
 
@@ -634,7 +634,7 @@ datum/objective/download
 datum/objective/capture
 	proc/gen_amount_goal()
 		target_amount = rand(5,10)
-		explanation_text = "Accumulate [target_amount] capture points."
+		explanation_text = "Накопите [target_amount] очков захвата."
 		return target_amount
 
 
@@ -675,7 +675,7 @@ datum/objective/absorb
 						n_p ++
 			target_amount = min(target_amount, n_p)
 
-		explanation_text = "Absorb [target_amount] compatible genomes."
+		explanation_text = "Поглотите [target_amount] геномов."
 		return target_amount
 
 	check_completion()

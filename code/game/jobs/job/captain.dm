@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Nanotrasen officials and Space law"
+	supervisors = "представителям NanoTrasen и космозакону"
 	selection_color = "#ccccff"
 	idtype = /obj/item/weapon/card/id/gold
 	access = list() 			//See get_access()
@@ -35,7 +35,7 @@
 		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
 		L.imp_in = H
 		L.implanted = 1
-		world << "<b>[H.real_name] is the captain!</b>"
+		world << "<b>[H.real_name] назначен капитаном!</b>"
 		var/datum/organ/external/affected = H.organs_by_name["head"]
 		affected.implants += L
 		L.part = affected
@@ -54,7 +54,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "капитану"
 	selection_color = "#ddddff"
 	idtype = /obj/item/weapon/card/id/hop
 	minimal_player_age = 10

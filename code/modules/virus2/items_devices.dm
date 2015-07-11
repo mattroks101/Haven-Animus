@@ -7,7 +7,7 @@
 /obj/item/device/antibody_scanner
 	name = "Antibody Scanner"
 	desc = "Used to scan living beings for antibodies in their blood."
-	icon_state = "health"
+	icon_state = "antibody_scaner"
 	w_class = 2.0
 	item_state = "electronic"
 	flags = FPRINT | TABLEPASS | CONDUCT
@@ -15,14 +15,14 @@
 
 /obj/item/device/antibody_scanner/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(!istype(M))
-		user << "<span class='notice'>Incompatible object, scan aborted.</span>"
+		user << "<span class='notice'>Сканирование не может быть проведено.</span>"
 		return
 	var/mob/living/carbon/C = M
 	if(!C.antibodies)
-		user << "<span class='notice'>Unable to detect antibodies.</span>"
+		user << "<span class='notice'>Сканирование остановлено: осуствтуют антитела..</span>"
 		return
 	var/code = antigens2string(M.antibodies)
-	user << "<span class='notice'>[src] The antibody scanner displays a cryptic set of data: [code]</span>"
+	user << "<span class='notice'>[src] Сканирование на антитела показало: [code]</span>"
 
 ///////////////VIRUS DISH///////////////
 
@@ -70,7 +70,7 @@
 /obj/item/weapon/diseasedisk
 	name = "Blank GNA disk"
 	icon = 'icons/obj/cloning.dmi'
-	icon_state = "datadisk0"
+	icon_state = "datadiskV"
 	var/datum/disease2/effectholder/effect = null
 	var/stage = 1
 

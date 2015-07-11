@@ -7,7 +7,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "главе персонала"
 	selection_color = "#dddddd"
 	idtype = /obj/item/weapon/card/id/chaplain
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)

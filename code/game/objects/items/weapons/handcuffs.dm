@@ -25,7 +25,7 @@
 			var/turf/p_loc_m = C.loc
 			playsound(src.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -2)
 			for(var/mob/O in viewers(user, null))
-				O.show_message("\red <B>[user] is trying to put handcuffs on [C]!</B>", 1)
+				O.show_message("\red <B>[user] пытается заковать [C]!</B>", 1)
 			spawn(30)
 				if(!C)	return
 				if(p_loc == user.loc && p_loc_m == C.loc)
@@ -34,7 +34,7 @@
 
 	else
 		if ((CLUMSY in usr.mutations) && prob(50))
-			usr << "\red Uh ... how do those things work?!"
+			usr << "\red Эм ... как эта штука работает?!"
 			if (istype(C, /mob/living/carbon/human))
 				if(!C.handcuffed)
 					var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
@@ -50,7 +50,7 @@
 				return
 			return
 		if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-			usr << "\red You don't have the dexterity to do this!"
+			usr << "\red У вас не получается!"
 			return
 		if (istype(C, /mob/living/carbon/human))
 			if(!C.handcuffed)

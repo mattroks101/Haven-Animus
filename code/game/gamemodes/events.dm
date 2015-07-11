@@ -178,7 +178,7 @@
 			H.viruses += D
 			break
 	spawn(rand(1500, 3000)) //Delayed announcements to keep the crew on their toes.
-		command_alert("Confirmed outbreak of level 7 viral biohazard aboard [vessel_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+		command_alert("Подтверждена биологическая угроза 7 уровня на борту [vessel_name()]. Объявлен карантин.", "Biohazard Alert")
 		for(var/mob/M in player_list)
 			M << sound('sound/AI/outbreak7.ogg')
 
@@ -207,7 +207,7 @@
 		spawncount--
 
 	spawn(rand(5000, 6000)) //Delayed announcements to keep the crew on their toes.
-		command_alert("Unidentified lifesigns detected coming aboard [vessel_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert")
+		command_alert("Неопознанные существа замечены на борту [vessel_name()].Рекомендуется заварить вентиляцию и воздуховоды.", "Lifesign Alert")
 		for(var/mob/M in player_list)
 			M << sound('sound/AI/aliens.ogg')
 
@@ -245,7 +245,7 @@
 			continue
 		M.apply_effect((rand(15,75)),IRRADIATE,0)
 	sleep(100)
-	command_alert("High levels of radiation detected near the [vessel_type]. Please report to the Med-bay if you feel strange.", "Anomaly Alert")
+	command_alert("Детекторы зафиксировали высокий уровень радиации возле [vessel_type]. Персоналу следует направится в ближайший техтоннель.", "Anomaly Alert")
 	for(var/mob/M in player_list)
 		M << sound('sound/AI/radiation.ogg')
 
@@ -286,7 +286,7 @@
 				temp_timer.releasetime = 1
 
 		sleep(150)
-		command_alert("Gr3y.T1d3 virus detected in [vessel_name()] imprisonment subroutines. Recommend [vessel_type]'s AI involvement.", "Security Alert")
+		command_alert("Обнаружен информационный вирус Gr3y.T1d3 на борту [vessel_name()]. Рекомендуется проверить электронное оборудование [vessel_type].", "Security Alert")
 	else
 		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
 
@@ -296,13 +296,13 @@
 			new /mob/living/simple_animal/hostile/carp(C.loc)
 	//sleep(100)
 	spawn(rand(300, 600)) //Delayed announcements to keep the crew on their toes.
-		command_alert("Unknown biological entities have been detected near [vessel_name()], please stand-by.", "Lifesign Alert")
+		command_alert("Неизвестные организмы обнаружены возле [vessel_name()],ожидайте указаний .", "Lifesign Alert")
 		for(var/mob/M in player_list)
 			M << sound('sound/AI/commandreport.ogg')
 
 /proc/lightsout(isEvent = 0, lightsoutAmount = 1,lightsoutRange = 25) //leave lightsoutAmount as 0 to break ALL lights
 	if(isEvent)
-		command_alert("An Electrical storm has been detected in your area, please repair potential electronic overloads.","Electrical Storm Alert")
+		command_alert("[vessel_name()] входит в ионный шторм. Возможны неисправности электронного оборудования.","Electrical Storm Alert")
 
 	if(lightsoutAmount)
 		var/list/epicentreList = list()

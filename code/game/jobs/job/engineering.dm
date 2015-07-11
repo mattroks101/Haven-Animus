@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "капитану"
 	selection_color = "#ffeeaa"
 	idtype = /obj/item/weapon/card/id/ce
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
@@ -49,7 +49,7 @@
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = "the chief engineer"
+	supervisors = "главному инженеру"
 	selection_color = "#fff5cc"
 	idtype = /obj/item/weapon/card/id/engie
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
@@ -85,7 +85,7 @@
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "the chief engineer"
+	supervisors = "главному инженеру"
 	selection_color = "#fff5cc"
 	idtype = /obj/item/weapon/card/id/atmos
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
