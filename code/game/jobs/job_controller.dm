@@ -425,8 +425,8 @@ var/global/datum/controller/occupations/job_master
 							new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 
-		H << "<B>Вы приняты на должность : [alt_title ? alt_title : rank].</B>"
-		H << "<b>Как [alt_title ? alt_title : rank] вы подчин&#255етесь [job.supervisors]. Это может измениться при особых обсто&#255тельствах.</b>"
+		H << "<B>Вы прин&#255;ты на должность : [alt_title ? alt_title : rank].</B>"
+		H << "<b>Как [alt_title ? alt_title : rank] вы подчин&#255;етесь [job.supervisors]. Это может изменитьс&#255; при особых обсто&#255;тельствах.</b>"
 
 		spawnId(H, rank, alt_title)
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)

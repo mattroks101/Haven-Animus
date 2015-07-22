@@ -129,6 +129,8 @@
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
 
 	src.throwing = 1
+	if(target.allow_spin) // turns out 1000+ spinning objects being thrown at the singularity creates lag - Iamgoofball
+		SpinAnimation(5, 1)
 	src.thrower = thrower
 	src.throw_source = get_turf(src)	//store the origin turf
 

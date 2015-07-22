@@ -568,6 +568,10 @@
 					m_type = 2
 
 //SHITTY EMOTES BEGIN
+		if ("flip")
+			if (!src.restrained() || !src.resting || !src.sleeping)
+				src.SpinAnimation(7,1)
+				m_type = 2
 
 		if("fart")
 			if(world.time-lastFart >= 600)

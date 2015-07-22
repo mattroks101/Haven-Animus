@@ -19,7 +19,7 @@
 		return
 	var/mob/living/carbon/C = M
 	if(!C.antibodies)
-		user << "<span class='notice'>—канирование остановлено: осуствтуют антитела..</span>"
+		user << "<span class='notice'>—канирование остановлено: отсутствуют антитела..</span>"
 		return
 	var/code = antigens2string(M.antibodies)
 	user << "<span class='notice'>[src] —канирование на антитела показало: [code]</span>"

@@ -35,7 +35,9 @@
 	var/obj/item/ammo_casing/AC = chambered //Find chambered round
 	if(isnull(AC) || !istype(AC))
 		return 0
+
 	AC.loc = get_turf(src) //Eject casing onto ground.
+	AC.SpinAnimation(10, 1) //next gen special effects
 	chambered = null
 	chamber_round()
 
@@ -110,6 +112,7 @@
 			chambered = null
 			if(CB && !istype(CB, /obj/item/ammo_casing/none))
 				CB.loc = get_turf(src.loc)
+				CB.SpinAnimation(10, 1)
 				CB.update_icon()
 				num_unloaded++
 
