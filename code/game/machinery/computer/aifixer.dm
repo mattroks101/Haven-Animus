@@ -6,7 +6,7 @@
 	var/active = 0
 
 /obj/machinery/computer/aifixer/New()
-	src.overlays += image('icons/obj/computer.dmi', "ai-fixer-empty")
+	src.overlays += image('icons/obj/computer.dmi', "ai-fixer-empty[dir==NORTH ? "N" : ][dir==SOUTH ? "S" : ][dir==EAST ? "E" : ][dir==WEST ? "W" : ]")
 
 
 /obj/machinery/computer/aifixer/attackby(I as obj, user as mob)
@@ -114,7 +114,7 @@
 		return
 	if (href_list["fix"])
 		src.active = 1
-		src.overlays += image('icons/obj/computer.dmi', "ai-fixer-on")
+		src.overlays += image('icons/obj/computer.dmi', "ai-fixer-on[dir==NORTH ? "N" : ][dir==SOUTH ? "S" : ][dir==EAST ? "E" : ][dir==WEST ? "W" : ]")
 		while (src.occupant.health < 100)
 			src.occupant.adjustOxyLoss(-1)
 			src.occupant.adjustFireLoss(-1)
@@ -126,12 +126,12 @@
 				src.occupant.lying = 0
 				dead_mob_list -= src.occupant
 				living_mob_list += src.occupant
-				src.overlays -= image('icons/obj/computer.dmi', "ai-fixer-404")
-				src.overlays += image('icons/obj/computer.dmi', "ai-fixer-full")
+				src.overlays -= image('icons/obj/computer.dmi', "ai-fixer-404[dir==NORTH ? "N" : ][dir==SOUTH ? "S" : ][dir==EAST ? "E" : ][dir==WEST ? "W" : ]")
+				src.overlays += image('icons/obj/computer.dmi', "ai-fixer-full[dir==NORTH ? "N" : ][dir==SOUTH ? "S" : ][dir==EAST ? "E" : ][dir==WEST ? "W" : ]")
 			src.updateUsrDialog()
 			sleep(10)
 		src.active = 0
-		src.overlays -= image('icons/obj/computer.dmi', "ai-fixer-on")
+		src.overlays -= image('icons/obj/computer.dmi', "ai-fixer-on[dir==NORTH ? "N" : ][dir==SOUTH ? "S" : ][dir==EAST ? "E" : ][dir==WEST ? "W" : ]")
 
 
 		src.add_fingerprint(usr)
@@ -144,14 +144,13 @@
 	// Broken / Unpowered
 	if((stat & BROKEN) || (stat & NOPOWER))
 		overlays.Cut()
-
 	// Working / Powered
 	else
 		if (occupant)
 			switch (occupant.stat)
 				if (0)
-					overlays += image('icons/obj/computer.dmi', "ai-fixer-full")
+					overlays += image('icons/obj/computer.dmi', "ai-fixer-full[dir==NORTH ? "N" : ][dir==SOUTH ? "S" : ][dir==EAST ? "E" : ][dir==WEST ? "W" : ]")
 				if (2)
-					overlays += image('icons/obj/computer.dmi', "ai-fixer-404")
+					overlays += image('icons/obj/computer.dmi', "ai-fixer-404[dir==NORTH ? "N" : ][dir==SOUTH ? "S" : ][dir==EAST ? "E" : ][dir==WEST ? "W" : ]")
 		else
-			overlays += image('icons/obj/computer.dmi', "ai-fixer-empty")
+			overlays += image('icons/obj/computer.dmi', "ai-fixer-empty[dir==NORTH ? "N" : ][dir==SOUTH ? "S" : ][dir==EAST ? "E" : ][dir==WEST ? "W" : ]")

@@ -6,7 +6,7 @@
 	var/obj/machinery/body_scanconsole/connected
 	name = "Body Scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "body_scanner_0"
+	icon_state = "scanner_open"
 
 	density = 1
 	anchored = 1
@@ -181,7 +181,7 @@
 	var/temphtml
 	name = "Body Scanner Console"
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "body_scannerconsole"
+	icon_state = "scanner_terminal_off"
 	density = 1
 	anchored = 1
 
@@ -194,28 +194,15 @@
 		return
 	return
 
-/*
+
 
 /obj/machinery/body_scanconsole/process() //not really used right now
-	if(stat & (NOPOWER|BROKEN))
-		return
-	//use_power(250) // power stuff
+	update_icon()
+	if(connected)
+		connected.update_icon()
 
-//	var/mob/M //occupant
-//	if (!( src.status )) //remove this
-//		return
-//	if ((src.connected && src.connected.occupant)) //connected & occupant ok
-//		M = src.connected.occupant
-//	else
-//		if (istype(M, /mob))
-//		//do stuff
-//		else
-///			src.temphtml = "Process terminated due to lack of occupant in scanning chamber."
-//			src.status = null
-//	src.updateDialog()
-//	return
 
-*/
+
 
 
 /obj/machinery/body_scanconsole/attack_paw(user as mob)
@@ -468,24 +455,6 @@
 
 
 /obj/machinery/bodyscanner/update_icon()
-	if(occupant)
-		icon_state = "body_scanner_1"
-	else
-		icon_state = "body_scanner_0"
-
-
-/obj/machinery/body_scanconsole/update_icon()
-	if(stat & (NOPOWER|BROKEN))
-		icon_state = "body_scannerconsole-p"
-	else
-		icon_state = "body_scannerconsole"
-
-
-
-/obj/machinery/bodyscanner/blue
-	icon_state = "scanner_open"
-
-/obj/machinery/bodyscanner/blue/update_icon()
 	if(stat & (NOPOWER|BROKEN))
 		icon_state = "scanner_open"
 	else
@@ -501,13 +470,7 @@
 			else icon_state = "scanner_off"
 		else icon_state = "scanner_open"
 
-/obj/machinery/body_scanconsole/blue
-	icon_state = "scanner_terminal_off"
-
-
-
-
-/obj/machinery/body_scanconsole/blue/update_icon()
+/obj/machinery/body_scanconsole/update_icon()
 	if(stat & (NOPOWER|BROKEN))
 		icon_state = "scanner_terminal_off"
 	else
@@ -525,3 +488,4 @@
 				icon_state = "scanner_terminal_blue"
 		else
 			icon_state = "scanner_terminal_off"
+

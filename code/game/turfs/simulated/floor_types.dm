@@ -120,8 +120,6 @@
 	oxygen = 0
 	nitrogen = 0.001
 	temperature = TCMB
-
-/turf/simulated/floor/engine/vacuum/hull/supernew
 	icon = 'icons/turf/hull.dmi'
 	icon_state = "hull"
 	style = "hull_new"
