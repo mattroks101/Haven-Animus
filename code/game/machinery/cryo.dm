@@ -1,7 +1,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi'
-	icon_state = "cell-off"
+	icon_state = "cell-off-blue"
 	density = 1
 	anchored = 1.0
 	layer = MOB_LAYER+0.1
@@ -45,6 +45,7 @@
 	if(abs(temperature_archived-air_contents.temperature) > 1)
 		network.update = 1
 
+	update_icon()
 	updateUsrDialog()
 	return 1
 
@@ -185,13 +186,17 @@
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
-	if(on)
-		if(occupant)
-			icon_state = "cell-occupied"
+	if(occupant)
+		if(on)
+			icon_state = "cell-occupied-blue"
 			return
-		icon_state = "cell-on"
-		return
-	icon_state = "cell-off"
+		else
+			icon_state = "cell-on-blue"
+			return
+	else
+		icon_state = "cell-off-blue"
+
+
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
 	if(air_contents.total_moles < 10)
@@ -331,19 +336,3 @@
 
 /datum/data/function/proc/display()
 	return
-
-
-/obj/machinery/atmospherics/unary/cryo_cell/blue
-	icon = 'icons/obj/cryogenics.dmi'
-	icon_state = "cell-off-blue"
-
-/obj/machinery/atmospherics/unary/cryo_cell/blue/update_icon()
-	if(on)
-		if(occupant)
-			icon_state = "cell-occupied-blue"
-			return
-		else
-			icon_state = "cell-on-blue"
-			return
-
-	icon_state = "cell-off-blue"

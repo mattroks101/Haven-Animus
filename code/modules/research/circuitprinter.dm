@@ -14,6 +14,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 	var/g_amount = 0
 	var/gold_amount = 0
 	var/diamond_amount = 0
+	var/uranium_amount = 0
 	var/max_material_amount = 75000.0
 	var/efficiency_coeff
 	reagents = new()

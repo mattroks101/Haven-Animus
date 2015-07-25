@@ -141,3 +141,28 @@
 			qdel(src)
 	return
 
+
+/obj/machinery/computer/attack_hand(mob/user as mob)
+	if(..())
+		return
+	if((src.dir == 1) && (user.y - src.y == 1)) //NORTH
+		if(src.x == user.x || src.x - user.x == 1 || user.x - src.x == 1)
+			return 0
+	else if(src.dir == 2 && src.y - user.y == 1) //SOUTH
+		if(src.x == user.x || src.x - user.x == 1 || user.x - src.x == 1)
+			return 0
+	else if(src.dir == 4 && user.x - src.x == 1) //EAST
+		if(src.y == user.y || src.y - user.y == 1 || user.y - src.y == 1)
+			return 0
+	else if(src.dir == 8 && src.x - user.x == 1) //WEST
+		if(src.y == user.y || src.y - user.y == 1 || user.y - src.y == 1)
+			return 0
+	else
+		return 1
+
+/obj/machinery/computer/verb/rotate()
+	set name = "Rotate computer"
+	set category = "Object"
+	set src in oview(1)
+	src.dir = turn(src.dir, -90)
+	return 1

@@ -10,11 +10,7 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 				"oldburning","light-on-r","light-on-y","light-on-g","light-on-b", "wood", "wood-broken", "carpet",
 				"carpetcorner", "carpetside", "carpet", "ironsand1", "ironsand2", "ironsand3", "ironsand4", "ironsand5",
 				"ironsand6", "ironsand7", "ironsand8", "ironsand9", "ironsand10", "ironsand11",
-				"ironsand12", "ironsand13", "ironsand14", "ironsand15",
-				"carpetblue", "carpetblue2", "carpetblue3",
-				 "carpetblue4", "carpetblue5" ,"carpetblue6" ,"carpetfblue1" ,
-				  "carpetfblue2" ,"carpetfblue3" ,"carpetfblue4" ,"carpetfblue5" ,
-				  "carpetfblue6" /*,"" ,"","",""*/)
+				"ironsand12", "ironsand13", "ironsand14", "ironsand15")
 
 var/list/plating_icons = list("plating","platingdmg1","platingdmg2","platingdmg3","asteroid","asteroid_dug",
 				"ironsand1", "ironsand2", "ironsand3", "ironsand4", "ironsand5", "ironsand6", "ironsand7",
@@ -39,7 +35,10 @@ var/list/wood_icons = list("wood","wood-broken")
 	var/burnt = 0
 	var/mineral = "metal"
 	var/obj/item/stack/tile/floor_tile = new/obj/item/stack/tile/plasteel
-	var/style = null
+	var/overlays_dmi = 'icons/turf/damage_overlays.dmi'
+	var/damage_overlay
+	var/style
+
 
 /turf/simulated/floor/New()
 	..()
@@ -361,7 +360,7 @@ turf/simulated/floor/proc/update_icon()
 		return 0
 
 /turf/simulated/floor/is_wood_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/carpet))
+	if(istype(floor_tile,/obj/item/stack/tile/wood))
 		return 1
 	else
 		return 0
@@ -395,46 +394,48 @@ turf/simulated/floor/proc/update_icon()
 		src.ChangeTurf(/turf/simulated/floor/plating)
 	if(broken) return
 	if(is_plasteel_floor())
-		src.icon_state = "damaged[pick(1,2,3,4,5)]"
+		src.damage_overlay = image(overlays_dmi,"damaged[pick(1,2,3,4,5)]")
 		broken = 1
 	else if(is_light_floor())
-		src.icon_state = "light_broken"
+		src.damage_overlay = image(overlays_dmi,"light_broken")
 		broken = 1
 	else if(is_plating())
-		src.icon_state = "platingdmg[pick(1,2,3)]"
+		src.damage_overlay = image(overlays_dmi,"platingdmg[pick(1,2,3)]")
 		broken = 1
 	else if(is_wood_floor())
-		src.icon_state = "wood-broken"
+		src.damage_overlay = image(overlays_dmi,"wood-broken")
 		broken = 1
 	else if(is_carpet_floor())
-		src.icon_state = "carpet-broken"
+		src.damage_overlay = image(overlays_dmi,"carpet-broken")
 		broken = 1
 	else if(is_grass_floor())
-		src.icon_state = "sand[pick("1","2","3")]"
+		src.damage_overlay = image(overlays_dmi,"sand[pick("1","2","3")]")
 		broken = 1
+	overlays += src.damage_overlay
 
 /turf/simulated/floor/proc/burn_tile()
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(istype(src,/turf/simulated/floor/plating/airless/asteroid)) return//Asteroid tiles don't burn
 	if(broken || burnt) return
 	if(is_plasteel_floor())
-		src.icon_state = "damaged[pick(1,2,3,4,5)]"
+		src.damage_overlay = image(overlays_dmi,"damaged[pick(1,2,3,4,5)]")
 		burnt = 1
 	else if(is_plasteel_floor())
-		src.icon_state = "floorscorched[pick(1,2)]"
+		src.damage_overlay = "floorscorched[pick(1,2)]"
 		burnt = 1
 	else if(is_plating())
-		src.icon_state = "panelscorched"
+		src.damage_overlay = image(overlays_dmi,"platingdmg[pick(1,2,3)]")
 		burnt = 1
 	else if(is_wood_floor())
-		src.icon_state = "wood-broken"
+		src.damage_overlay = image(overlays_dmi,"wood-broken")
 		burnt = 1
 	else if(is_carpet_floor())
-		src.icon_state = "carpet-broken"
+		src.damage_overlay = image(overlays_dmi,"carpet-broken")
 		burnt = 1
 	else if(is_grass_floor())
-		src.icon_state = "sand[pick("1","2","3")]"
+		src.damage_overlay = image(overlays_dmi,"sand[pick("1","2","3")]")
 		burnt = 1
+	overlays += src.damage_overlay
 
 //This proc will delete the floor_tile and the update_iocn() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.
@@ -585,6 +586,7 @@ turf/simulated/floor/proc/update_icon()
 
 	if(istype(C, /obj/item/weapon/crowbar) && (!(is_plating())))
 		if(broken || burnt)
+			overlays -= src.damage_overlay
 			user << "\red You remove the broken plating."
 		else
 			if(is_wood_floor())
@@ -679,7 +681,7 @@ turf/simulated/floor/proc/update_icon()
 				if(welder.remove_fuel(0,user))
 					user << "\red You fix some dents on the broken plating."
 					playsound(src.loc, 'sound/items/Welder.ogg', 80, 1)
-					icon_state = "plating"
+					overlays -= src.damage_overlay
 					burnt = 0
 					broken = 0
 				else

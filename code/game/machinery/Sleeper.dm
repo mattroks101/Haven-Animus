@@ -5,7 +5,7 @@
 /obj/machinery/sleep_console
 	name = "sleeper console"
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "console"
+	icon_state = "console-blue"
 	var/obj/machinery/sleeper/connected = null
 	anchored = 1 //About time someone fixed this.
 	density = 1
@@ -145,7 +145,7 @@
 /obj/machinery/sleeper
 	name = "sleeper"
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "sleeper-open"
+	icon_state = "sleeper-blue-open"
 	dir = 8
 	density = 1
 	anchored = 1
@@ -174,6 +174,7 @@
 			for(var/datum/reagent/x in H.reagents.reagent_list)
 				H.reagents.trans_to(beaker, 3)
 				H.vessel.trans_to(beaker, 1)
+	update_icon()
 	src.updateUsrDialog()
 	return
 
@@ -419,30 +420,18 @@
 	..()
 	update_icon()
 
-/obj/machinery/sleeper/update_icon()
-	if(occupant)
-		icon_state = "sleeper"
-	else
-		icon_state = "sleeper-open"
 
 
 
-/obj/machinery/sleep_console/blue
-	icon_state = "console-blue"
-
-/obj/machinery/sleep_console/blue/update_icon()
+/obj/machinery/sleep_console/update_icon()
 	if(stat & (NOPOWER|BROKEN))
 		icon_state = "console-blue-p"
 	else
 		icon_state = "console-blue"
 
 
-/obj/machinery/sleeper/blue
-	name = "sleeper"
-	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "sleeper-blue-open"
 
-/obj/machinery/sleeper/blue/update_icon()
+/obj/machinery/sleeper/update_icon()
 	if(occupant)
 		switch(src.occupant.stat)
 			if(0.0)
