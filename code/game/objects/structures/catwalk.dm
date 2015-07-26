@@ -27,58 +27,32 @@
 
 
 /obj/structure/catwalk/update_icon()
-	world << "/blue Okey, i'am started."
-
 	var/connectdir = 0
 	for(var/direction in cardinal)
-		world << "I'am in list [direction]."
-		if(locate(/obj/structure/catwalk, get_step(src, dir)))
-			var/obj/structure/catwalk/FF = locate(/obj/structure/catwalk, get_step(src, dir))
-			world << "Yeeh, my type is [src]."
-			world << "[FF] is ready?"
-			if(FF.is_catwalk())
-				world << "*happy* [FF] is [src]"
-				connectdir |= direction
-				world << "/red [direction] is finished ok!"
+		if(locate(/obj/structure/catwalk, get_step(src, direction)))
+			connectdir |= direction
+	//if(locate(/obj/structure/catwalk) in get_step(src, dir))
+    //istype(get_step(src,direction),/turf/simulated/floor)
+	//istype((locate(/obj/structure/catwalk) in get_step(src, dir)), /obj/structure/catwalk)
+
 	//Check the diagonal connections for corners, where you have, for example, connections both north and east. In this case it checks for a north-east connection to determine whether to add a corner marker or not.
 	var/diagonalconnect = 0 //1 = NE; 2 = SE; 4 = NW; 8 = SW
-	world << "Now to digonalcoonnect!"
-	//Northeast
+	//NORTHEAST
 	if(connectdir & NORTH && connectdir & EAST)
-		world << "Ok. In [connectdir] and [NORTH] and [connectdir] and [EAST]"
-		if(istype(get_step(src,NORTHEAST),/obj/structure/catwalk))
-			world << "Ok. Type is [src]"
-			var/obj/structure/catwalk/FF = get_step(src,NORTHEAST)
-			if(FF.is_catwalk())
-				world << "Ok. [FF] is [src]"
-				diagonalconnect |= 1
-			//Southeast
+		if(locate(/obj/structure/catwalk, get_step(src, NORTHEAST)))
+			diagonalconnect |= 1
+	//SOUTHEAST
 	if(connectdir & SOUTH && connectdir & EAST)
-		world << "Ok. In [connectdir] and [NORTH] and [connectdir] and [EAST]"
-		if(istype(get_step(src,SOUTHEAST),/obj/structure/catwalk))
-			world << "Ok. Type is [src]"
-			var/obj/structure/catwalk/FF = get_step(src,SOUTHEAST)
-			if(FF.is_catwalk())
-				world << "Ok. [FF] is [src]"
-				diagonalconnect |= 2
-	//Northwest
+		if(locate(/obj/structure/catwalk, get_step(src, SOUTHEAST)))
+			diagonalconnect |= 2
+	//NORTHWEST
 	if(connectdir & NORTH && connectdir & WEST)
-		world << "Ok. In [connectdir] and [NORTH] and [connectdir] and [EAST]"
-		if(istype(get_step(src,NORTHWEST),/obj/structure/catwalk))
-			world << "Ok. Type is [src]"
-			var/obj/structure/catwalk/FF = get_step(src,NORTHWEST)
-			if(FF.is_catwalk())
-				world << "Ok. [FF] is [src]"
-				diagonalconnect |= 4
-	//Southwest
+		if(locate(/obj/structure/catwalk, get_step(src, NORTHWEST)))
+			diagonalconnect |= 4
+	//SOUTHWEST
 	if(connectdir & SOUTH && connectdir & WEST)
-		world << "Ok. In [connectdir] and [NORTH] and [connectdir] and [EAST]"
-		if(istype(get_step(src,SOUTHWEST),/obj/structure/catwalk))
-			world << "Ok. Type is [src]"
-			var/obj/structure/catwalk/FF = get_step(src,SOUTHWEST)
-			if(FF.is_catwalk())
-				world << "Ok. [FF] is [src]"
-				diagonalconnect |= 8
+		if(locate(/obj/structure/catwalk, get_step(src, SOUTHWEST)))
+			diagonalconnect |= 8
 
 	icon_state = "catwalk[connectdir]-[diagonalconnect]"
 
