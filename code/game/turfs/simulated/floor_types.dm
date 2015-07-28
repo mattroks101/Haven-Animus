@@ -164,7 +164,8 @@
 	for(var/obj/structure/catwalk/C in get_turf(src))
 		return 0
 
-	if(!ismob(M))	return 0
+	if(!iscarbon(M))
+		return 0
 	if(M.m_intent == "run")
 		if(prob(75))
 			M.adjustBruteLoss(5)
