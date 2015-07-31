@@ -20,6 +20,9 @@
 				if(!floorbelow) //make sure that there is actually something below
 					if(!getbelow())
 						return
+				for(var/obj/structure/catwalk/C in get_turf(src))
+					return
+
 				if(AM)
 					var/blocked = 0
 					for(var/atom/A in floorbelow.contents)

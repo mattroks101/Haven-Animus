@@ -11,8 +11,11 @@
 		..()
 		spawn(4)
 			if(src)
+				for(var/obj/structure/catwalk/C in get_turf(src))
+					if(C != src)
+						qdel(C)
 				update_icon()
-				for (var/dir in cardinal)
+				for (var/dir in list(1,2,4,8,5,6,9,10))
 					if(locate(/obj/structure/catwalk, get_step(src, dir)))
 						var/obj/structure/catwalk/L = locate(/obj/structure/catwalk, get_step(src, dir))
 						L.update_icon() //so siding get updated properly
