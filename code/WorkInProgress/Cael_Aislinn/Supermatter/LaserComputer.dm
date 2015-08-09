@@ -3,7 +3,7 @@
 /obj/machinery/computer/lasercon
 	name = "Laser control computer"
 	var/obj/machinery/engine/laser/laser = null
-	icon_state = "atmos"
+	icon_state = "newlazer"
 	var/id
 	var/advanced = 0
 
