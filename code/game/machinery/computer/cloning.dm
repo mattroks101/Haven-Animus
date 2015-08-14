@@ -397,10 +397,10 @@
 /obj/machinery/computer/cloning/update_icon()
 
 	if(stat & BROKEN)
-		icon_state = "commb"
+		icon_state = "dnab"
 	else
 		if(stat & NOPOWER)
-			src.icon_state = "c_unpowered"
+			src.icon_state = "dna0"
 			stat |= NOPOWER
 		else
 			icon_state = initial(icon_state)

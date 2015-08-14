@@ -309,7 +309,7 @@ var/list/solars_list = list()
 		overlays.Cut()
 		return
 	if(stat & NOPOWER)
-		icon_state = "c_unpowered"
+		icon_state = "solar0"
 		overlays.Cut()
 		return
 	icon_state = "solar"

@@ -367,7 +367,7 @@
 		stat &= ~NOPOWER
 	else
 		spawn(rand(0, 15))
-			src.icon_state = "c_unpowered"
+			src.icon_state = "dna0"
 			stat |= NOPOWER
 
 /obj/machinery/scan_console/New()

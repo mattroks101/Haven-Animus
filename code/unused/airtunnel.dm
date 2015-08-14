@@ -209,7 +209,7 @@ obj/machinery/computer/airtunnel/attack_ai(user as mob)
 		return
 
 	if(stat & NOPOWER)
-		icon_state = "c_unpowered"
+		icon_state = "airtunnel0"
 		return
 
 	var/status = 0

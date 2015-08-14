@@ -33,7 +33,7 @@
 		icon_state = "crewb"
 	else
 		if(stat & NOPOWER)
-			src.icon_state = "c_unpowered"
+			src.icon_state = "crew0"
 			stat |= NOPOWER
 		else
 			icon_state = initial(icon_state)
