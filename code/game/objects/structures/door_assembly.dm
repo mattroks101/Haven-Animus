@@ -132,6 +132,10 @@ obj/structure/door_assembly
 				bound_width = world.icon_size
 				bound_height = width * world.icon_size
 
+		metal
+			base_icon_state = "m"
+			airlock_type = "/multi_tile/metal"
+
 
 
 /obj/structure/door_assembly/attackby(obj/item/W as obj, mob/user as mob)
