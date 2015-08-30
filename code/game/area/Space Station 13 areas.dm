@@ -48,6 +48,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/list/apc = list()
 
+	var/list/lights = list()
+
 	var/no_air = null
 	var/area/master				// master area used for power calcluations
 								// (original area before splitting due to sd_DAL)
