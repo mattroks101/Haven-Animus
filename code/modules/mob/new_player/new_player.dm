@@ -24,9 +24,7 @@
 
 
 	proc/new_player_panel_proc()
-		var/output = "<div align='center'><B>New Player Options</B>"
-		output +="<hr>"
-		output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
+		var/output = "<center><p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
 			if(!ready)	output += "<p><a href='byond://?src=\ref[src];ready=1'>Declare Ready</A></p>"
@@ -37,9 +35,14 @@
 			output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
 
 		output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
-		output += "</div>"
+		output += "</div></center>"
 
-		src << browse(output,"window=playersetup;size=210x240;can_close=0")
+		//src << browse(output,"window=playersetup;size=210x240;can_close=0")
+		var/datum/browser/popup = new(src, "playersetup", "<div align='center'>New Player Options</div>", 220, 265)
+		popup.set_window_options("can_close=0")
+		popup.set_content(output)
+		popup.open(0)
+		return
 		return
 
 	Stat()

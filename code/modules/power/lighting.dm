@@ -81,6 +81,7 @@
 
 /obj/machinery/light_construct/New()
 	..()
+
 	if (fixture_type == "bulb")
 		icon_state = "bulb-construct-stage1"
 
@@ -262,6 +263,10 @@
 	..()
 
 	processing_objects.Add(src)
+
+	var/area/A = get_area(src)
+	A.lights += src
+
 
 	spawn(2)
 		switch(fitting)
@@ -666,6 +671,7 @@
 	if(on)
 		use_power(luminosity * LIGHTING_POWER_FACTOR, LIGHT)
 
+
 /obj/machinery/light/proc/update_redalert()
 	if(on)
 		on = 0
@@ -673,6 +679,30 @@
 		sleep(rand(0,8))
 		on = 1
 		update()
+
+
+/obj/machinery/light/proc/set_blue()
+	if(on)
+		SetLuminosity(3, 3, 9)
+		brightnessred   = 3
+		brightnessgreen = 4
+		brightnessblue  = 6
+		update()
+
+/obj/machinery/light/proc/set_red()
+	if(on)
+		brightnessred   = 9
+		brightnessgreen = 4
+		brightnessblue  = 4
+		update()
+
+/obj/machinery/light/proc/reset_color()
+	if(on)
+		brightnessred   = initial(brightnessred)
+		brightnessgreen = initial(brightnessgreen)
+		brightnessblue  = initial(brightnessblue)
+		update()
+
 
 
 // called when area power state changes

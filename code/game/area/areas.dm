@@ -190,13 +190,20 @@
 	return
 
 /area/proc/updateicon()
-	if ((fire || eject || party) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
+	if ((fire || eject || party || atmosalm) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
 		if(fire && !eject && !party)
-			icon_state = "blue"
+			for(var/obj/machinery/light/L in lights)
+				L.set_red()
+
 		else if(atmosalm && !fire && !eject && !party)
-			icon_state = "bluenew"
+		//	icon_state = "bluenew"
+			for(var/obj/machinery/light/L in lights)
+				L.set_blue()
+
 		else if(!fire && eject && !party)
-			icon_state = "red"
+			for(var/obj/machinery/light/L in lights)
+				L.set_blue()
+
 		else if(party && !fire && !eject)
 			icon_state = "party"
 		else
@@ -204,6 +211,8 @@
 	else
 	//	new lighting behaviour with obj lights
 		icon_state = null
+		for(var/obj/machinery/light/L in lights)
+			L.reset_color()
 
 
 /*
@@ -211,6 +220,9 @@
 #define LIGHT 2
 #define ENVIRON 3
 */
+/area/proc/set_light_color(R,G,B)
+	for(var/obj/machinery/light/L in lights)
+		L.SetLuminosity(R,G,B)
 
 /area/proc/powered(var/chan)		// return true if the area has power to given channel
 

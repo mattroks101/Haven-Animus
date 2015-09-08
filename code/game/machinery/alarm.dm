@@ -777,6 +777,7 @@
 
 	if(!shorted)
 		user << browse(return_text(user),"window=air_alarm")
+
 		onclose(user, "air_alarm")
 
 	return
@@ -1207,11 +1208,6 @@ table tr:first-child th:first-child { border: none;}
 	air_doors_close(manual)
 		var/area/A = get_area(loc)
 		for(var/obj/machinery/door/airlock/E in A.master.all_doors)
-			var/obj/LightTest = locate(/obj/effect/alertlighting/atmoslight) in E.loc
-			if(isnull(LightTest))
-				var/obj/effect/alertlighting/atmoslight/F = new/obj/effect/alertlighting/atmoslight(E.loc)
-				var/image/imagelight = image('alert.dmi',F,icon_state = "blueold")
-				world << imagelight
 			if((!E.arePowerSystemsOn()) || (E.stat & NOPOWER)) continue
 			if(!E.density)
 				spawn(0)
@@ -1233,44 +1229,10 @@ table tr:first-child th:first-child { border: none;}
 				E.locked = 1
 				E.air_locked = 1
 				E.update_icon()
-/*			if(!A.fire)
-				for(var/obj/machinery/door/firedoor/D in E.loc)
-					if(!D.blocked)
-						if(D.operating)
-							D.nextstate = CLOSED
-						else if(!D.density)
-							spawn(0)
-							D.close()
-			if((!D.arePowerSystemsOn()) || (D.stat & NOPOWER)) continue
-			if(!D.density)
-				spawn(0)
-				D.close()
-				sleep(10)
-				if(D.density)
-					D.locked = 1
-					D.locked = 1
-					D.update_icon()
-			else if(!D.locked) //Don't lock already bolted doors.
-				D.locked = 1
-				D.locked = 1
-				D.update_icon()*/
-		/*if(!fire)
-			for(var/obj/machinery/door/firedoor/D in alldoors)
-				if(!D.blocked)
-					if(D.operating)
-						D.nextstate = CLOSED
-					else if(!D.density)
-						spawn(0)
-						D.close()
-		*/
+
+		A.atmosalm = 1
+		A.updateicon()
 		for(var/area/RA in A.related)
-			for(var/turf/T in RA)
-				if(T.density != 1)
-					var/obj/LightTest = locate(/obj/effect/alertlighting/atmoslight) in T
-					if(isnull(LightTest))
-						var/obj/effect/alertlighting/atmoslight/F = new/obj/effect/alertlighting/atmoslight(T)
-						var/image/imagelight = image('alert.dmi',F,icon_state = "blueold")
-						world << imagelight
 			RA.activate_air_doors(manual*5)
 
 	air_doors_open(manual)
@@ -1278,9 +1240,6 @@ table tr:first-child th:first-child { border: none;}
 		for(var/obj/machinery/door/airlock/E in A.master.all_doors)
 			var/area/B = get_area(E.loc)
 			if(B.air_doors_activated != 1)
-				var/turf/C = E.loc
-				for (var/obj/effect/alertlighting/atmoslight/G in C)
-					del(G)
 				if((!E.arePowerSystemsOn()) || (E.stat & NOPOWER)) continue
 					//E.locked = 0
 				if(E.locked) //Don't mess with doors locked for other reasons.
@@ -1296,10 +1255,9 @@ table tr:first-child th:first-child { border: none;}
 						else if(D.density)
 							spawn(0)
 							D.open()
+		A.atmosalm = 0
+		A.updateicon()
 		for(var/area/RA in A.related)
-			for(var/turf/T in RA)
-				for (var/obj/effect/alertlighting/atmoslight/F in T)
-					del(F)
 			RA.deactivate_air_doors(manual*5)
 
 
