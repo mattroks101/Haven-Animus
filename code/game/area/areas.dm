@@ -190,21 +190,21 @@
 	return
 
 /area/proc/updateicon()
-	if ((fire || eject || party || atmosalm) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
-		if(fire && !eject && !party)
+	if ((master.fire || master.eject || master.party || master.atmosalm) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
+		if(master.fire && !master.eject && !master.party)
 			for(var/obj/machinery/light/L in lights)
 				L.set_red()
 
-		else if(atmosalm && !fire && !eject && !party)
+		else if(master.atmosalm && !master.fire && !master.eject && !master.party)
 		//	icon_state = "bluenew"
 			for(var/obj/machinery/light/L in lights)
 				L.set_blue()
 
-		else if(!fire && eject && !party)
+		else if(!master.fire && master.eject && !master.party)
 			for(var/obj/machinery/light/L in lights)
 				L.set_blue()
 
-		else if(party && !fire && !eject)
+		else if(master.party && !master.fire && !master.eject)
 			icon_state = "party"
 		else
 			icon_state = "blue-red"
@@ -213,7 +213,6 @@
 		icon_state = null
 		for(var/obj/machinery/light/L in lights)
 			L.reset_color()
-
 
 /*
 #define EQUIP 1

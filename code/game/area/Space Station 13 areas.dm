@@ -15,7 +15,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 
 /area
-	var/fire = null
+	var/fire = 0
 	var/atmos = 1
 	var/atmosalm = 0
 	var/poweralm = 1

@@ -338,7 +338,7 @@
 	if(!istype(location))
 		return 0
 
-	if(breach_detection	== 0)
+	if(breach_detection == 0)
 		return 0
 
 	var/datum/gas_mixture/environment = location.return_air()

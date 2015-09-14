@@ -213,6 +213,8 @@
 								// this is used to calc the probability the light burns out
 
 	var/rigged = 0				// true if rigged to explode
+	var/firealarmed = 0
+	var/atmosalarmed = 0
 
 // the smaller bulb light fixture
 
@@ -299,7 +301,12 @@
 
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
-			icon_state = "[base_state][on]"
+			if(firealarmed == 1 && on && cmptext(base_state,"tube"))
+				icon_state = "[base_state]_alert"
+			else if(atmosalarmed == 1 && on && cmptext(base_state,"tube"))
+				icon_state = "[base_state]_alert_atmos"
+			else
+				icon_state = "[base_state][on]"
 		if(LIGHT_EMPTY)
 			icon_state = "[base_state]-empty"
 			on = 0
@@ -680,13 +687,15 @@
 		on = 1
 		update()
 
-
 /obj/machinery/light/proc/set_blue()
 	if(on)
 		SetLuminosity(3, 3, 9)
 		brightnessred   = 3
 		brightnessgreen = 4
 		brightnessblue  = 6
+		if(cmptext(base_state,"tube"))
+			atmosalarmed = 1
+			firealarmed = 0
 		update()
 
 /obj/machinery/light/proc/set_red()
@@ -694,6 +703,9 @@
 		brightnessred   = 9
 		brightnessgreen = 4
 		brightnessblue  = 4
+		if(cmptext(base_state,"tube"))
+			firealarmed = 1
+			atmosalarmed = 0
 		update()
 
 /obj/machinery/light/proc/reset_color()
@@ -701,6 +713,9 @@
 		brightnessred   = initial(brightnessred)
 		brightnessgreen = initial(brightnessgreen)
 		brightnessblue  = initial(brightnessblue)
+		if(cmptext(base_state,"tube"))
+			firealarmed = 0
+			atmosalarmed = 0
 		update()
 
 
