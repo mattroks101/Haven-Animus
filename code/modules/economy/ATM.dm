@@ -86,6 +86,7 @@ log transactions
 			usr.drop_item()
 			idcard.loc = src
 			held_card = idcard
+			src.icon_state = "atm_cardin"
 			if(authenticated_account && held_card.associated_account_number != authenticated_account.account_number)
 				authenticated_account = null
 
@@ -408,3 +409,4 @@ log transactions
 	if(ishuman(human_user) && !human_user.get_active_hand())
 		human_user.put_in_hands(held_card)
 	held_card = null
+	src.icon_state = "atm"
