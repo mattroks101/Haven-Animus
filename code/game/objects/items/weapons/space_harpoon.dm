@@ -2,7 +2,7 @@
 /obj/item/weapon/bluespace_harpoon
 	name = "bluespace harpoon"
 	desc = "For climbing on bluespace mountains!"
-	icon_state = "harpoon-1"
+	icon_state = "harpoon-2"
 	icon = 'icons/obj/items.dmi'
 	w_class = 3.0
 	throw_speed = 4
@@ -16,7 +16,7 @@
 
 /obj/item/weapon/bluespace_harpoon/afterattack(atom/A as turf, mob/user as mob)
 	var/current_fire = world.time
-	if(!user || !A)
+	if(!user || !A || user.machine)
 		return
 	if(transforming)
 		user << "<span class = 'warning'>You can't fire while [src] transforming!</span>"
@@ -83,12 +83,10 @@
 
 /obj/item/weapon/bluespace_harpoon/update_icon()
 	if(transforming && mode)
-		icon_state = "harpoon-1-change"
-		sleep(16)
-		icon_state = "harpoon-2"
+		flick("harpoon-2-change",src)
+		icon_state = "harpoon-1"
 		transforming = 0
 	else if (transforming && !mode)
-		icon_state = "harpoon-2-change"
-		sleep(13)
-		icon_state = "harpoon-1"
+		flick("harpoon-1-change", src)
+		icon_state = "harpoon-2"
 		transforming = 0

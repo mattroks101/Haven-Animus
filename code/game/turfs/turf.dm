@@ -211,6 +211,10 @@
 	return 0
 /turf/proc/is_underplating()
 	return 0
+/turf/proc/is_open_space()
+	return 0
+
+
 /turf/proc/return_siding_icon_state()		//used for grass floors, which have siding.
 	return 0
 

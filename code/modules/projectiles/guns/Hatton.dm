@@ -9,13 +9,10 @@
 	update_icon()
 
 /obj/item/weapon/hatton_magazine/update_icon()
-	overlays.Cut()
 	if(charge)
 		icon_state="Hatton_box1"
-		overlays += icon(icon, "3/3")
 	else
 		icon_state="Hatton_box0"
-		overlays += icon(icon, "1/3")
 
 
 

@@ -59,3 +59,7 @@
 /obj/item/stack/tile/underplating
 	name = "underplating"
 	singular_name = "underplating"
+
+/obj/item/stack/tile/open_space
+	name = "underplating"
+	singular_name = "underplating"
