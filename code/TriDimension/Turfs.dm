@@ -8,10 +8,15 @@
         var/turf/floorbelow
         var/list/overlay_references
 
+        floor_tile = new/obj/item/stack/tile/open_space // lol
+
         New()
                 ..()
                 getbelow()
                 return
+
+        is_open_space()
+                return 1
 
         Enter(var/atom/movable/AM)
                 if (..()) //TODO make this check if gravity is active (future use) - Sukasa

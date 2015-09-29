@@ -372,10 +372,11 @@ turf/simulated/floor/proc/update_icon()
 		return 0
 
 /turf/simulated/floor/is_underplating()
-	if(istype(floor_tile,/obj/item/stack/tile/underplating))
+	if(istype(floor_tile,/obj/item/stack/tile/underplating) || istype(floor_tile,/obj/item/stack/tile/open_space))
 		return 1
 	else
 		return 0
+
 
 /turf/simulated/floor/proc/is_hull()
 	if(src.style == "hull_new")

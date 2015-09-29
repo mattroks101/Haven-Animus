@@ -129,7 +129,7 @@
 		..()
 		spawn(4)
 			update_icon()
-			for(var/direction in cardinal)
+			for(var/direction in alldirs)
 				if(istype(get_step(src,direction),/turf/simulated/floor))
 					var/turf/simulated/floor/FF = get_step(src,direction)
 					FF.update_icon() //so siding get updated properly
@@ -154,7 +154,7 @@
 	spawn(4)
 		if(src)
 			update_icon()
-			for(var/direction in cardinal)
+			for(var/direction in alldirs)
 				if(istype(get_step(src,direction),/turf/simulated/floor))
 					var/turf/simulated/floor/FF = get_step(src,direction)
 					FF.update_icon() //so siding get updated properly
@@ -170,7 +170,7 @@
 		if(prob(75))
 			M.adjustBruteLoss(5)
 			M.weakened += 3
-			M << "<span class='warning'>You tripped over.</span>"
+			M << "<span class='warning'>You tripped over!</span>"
 			return
 
 
@@ -254,7 +254,7 @@
 		spawn(4)
 			if(src)
 				update_icon()
-				for(var/direction in cardinal)
+				for(var/direction in alldirs)
 					if(istype(get_step(src,direction),/turf/simulated/floor))
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
@@ -274,7 +274,7 @@
 		spawn(4)
 			if(src)
 				update_icon()
-				for(var/direction in list(1,2,4,8,5,6,9,10))
+				for(var/direction in alldirs)
 					if(istype(get_step(src,direction),/turf/simulated/floor))
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
