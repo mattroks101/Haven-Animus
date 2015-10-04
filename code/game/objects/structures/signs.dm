@@ -200,6 +200,11 @@
 	desc = "A direction sign, pointing out which way escape pods are."
 	icon_state = "direction_evac"
 
+/obj/structure/sign/ironhammer
+	name = "Ironhammer Security"
+	desc = "Sign depicts the symbolic of Ironhammer Security, the largest security provider within Trade Union of Hansa."
+	icon_state = "ironhammer"
+
 
 //New Signs
 
