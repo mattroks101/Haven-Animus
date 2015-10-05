@@ -24,7 +24,11 @@
 
 
 /obj/machinery/power/monitor/attack_ai(mob/user)
-	return attack_hand(user)
+	if(..())
+		return
+	add_fingerprint(user)
+
+	interact(user)
 
 /obj/machinery/power/monitor/attack_hand(mob/user)
 	if(..())
