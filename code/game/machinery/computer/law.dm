@@ -34,13 +34,9 @@
 
 
 	attack_hand(var/mob/user as mob)
+		if(..())
+			return
 		if(level_check()==0)	return
-		if(src.stat & NOPOWER)
-			usr << "The upload computer has no power!"
-			return
-		if(src.stat & BROKEN)
-			usr << "The upload computer is broken!"
-			return
 
 		src.current = select_active_ai(user)
 

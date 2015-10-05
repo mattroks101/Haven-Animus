@@ -24,18 +24,28 @@
 
 
 /obj/machinery/power/monitor/attack_ai(mob/user)
-	add_fingerprint(user)
-
-	if(stat & (BROKEN|NOPOWER))
-		return
-	interact(user)
+	return attack_hand(user)
 
 /obj/machinery/power/monitor/attack_hand(mob/user)
+	if(..())
+		return
+	if((src.dir == 1) && (user.y - src.y == 1)) //NORTH
+		if(!(src.x == user.x || src.x - user.x == 1 || user.x - src.x == 1))
+			return
+	else if(src.dir == 2 && src.y - user.y == 1) //SOUTH
+		if(!(src.x == user.x || src.x - user.x == 1 || user.x - src.x == 1))
+			return
+	else if(src.dir == 4 && user.x - src.x == 1) //EAST
+		if(!(src.y == user.y || src.y - user.y == 1 || user.y - src.y == 1))
+			return
+	else if(src.dir == 8 && src.x - user.x == 1) //WEST
+		if(!(src.y == user.y || src.y - user.y == 1 || user.y - src.y == 1))
+			return
+	else
+		return
 	//if(level_check()==0)	return
 	add_fingerprint(user)
 
-	if(stat & (BROKEN|NOPOWER))
-		return
 	interact(user)
 
 /obj/machinery/power/monitor/attackby(I as obj, user as mob)

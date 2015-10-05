@@ -835,7 +835,7 @@
 	return src.attack_hand(user)
 
 /obj/machinery/computer/pandemic/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
+	if(..())
 		return
 	user.set_machine(src)
 	var/dat = ""

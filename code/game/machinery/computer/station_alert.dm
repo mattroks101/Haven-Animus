@@ -16,10 +16,10 @@
 
 
 	attack_hand(mob/user)
+		if(..())
+			return
 		if(level_check()==0)	return
 		add_fingerprint(user)
-		if(stat & (BROKEN|NOPOWER))
-			return
 		interact(user)
 		return
 

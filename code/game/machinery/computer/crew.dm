@@ -20,10 +20,10 @@
 
 
 /obj/machinery/computer/crew/attack_hand(mob/user)
+	if(..())
+		return
 	add_fingerprint(user)
 	if(level_check()==0)	return
-	if(stat & (BROKEN|NOPOWER))
-		return
 	interact(user)
 
 
