@@ -298,6 +298,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(default_cartridge)
 		cartridge = new default_cartridge(src)
 	new /obj/item/weapon/pen(src)
+	update_icon()
+
+/obj/item/device/pda/update_icon()
+	overlays.Cut()
+	if(newmessage)
+		overlays += image('icons/obj/pda.dmi', "pda-r")
+	if(locate(/obj/item/weapon/pen) in src)
+		overlays += image('icons/obj/pda.dmi', "pda_pen")
 
 /obj/item/device/pda/proc/can_use()
 
@@ -763,8 +771,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 //EXTRA FUNCTIONS===================================
 
 	if (mode == 2||mode == 21)//To clear message overlays.
-		overlays.Cut()
 		newmessage = 0
+		update_icon()
 
 	if ((honkamt > 0) && (prob(60)))//For clown virus.
 		honkamt--
@@ -937,9 +945,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		nanomanager.update_user_uis(U, P) // Update the sending user's PDA UI so that they can see the new message
 
 		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
-		P.overlays.Cut()
-		P.overlays += image('icons/obj/pda.dmi', "pda-r")
 		P.newmessage = 1
+		P.update_icon()
 	else
 		U << "<span class='notice'>ERROR: Messaging server is not responding.</span>"
 
@@ -977,6 +984,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if(M.get_active_hand() == null)
 					M.put_in_hands(O)
 					usr << "<span class='notice'>You remove \the [O] from \the [src].</span>"
+					update_icon()
 					return
 			O.loc = get_turf(src)
 		else
@@ -1049,6 +1057,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			user.drop_item()
 			C.loc = src
 			user << "<span class='notice'>You slide \the [C] into \the [src].</span>"
+			update_icon()
 	return
 
 /obj/item/device/pda/attack(mob/living/C as mob, mob/living/user as mob)
