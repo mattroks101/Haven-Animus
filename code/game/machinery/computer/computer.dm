@@ -144,7 +144,7 @@
 
 /obj/machinery/computer/attack_hand(mob/user as mob)
 	if(..())
-		return
+		return 1
 	if((src.dir == 1) && (user.y - src.y == 1)) //NORTH
 		if(src.x == user.x || src.x - user.x == 1 || user.x - src.x == 1)
 			return 0

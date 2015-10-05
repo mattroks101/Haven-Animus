@@ -1506,7 +1506,7 @@
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
 
-			if((istype(wear_mask, /obj/item/clothing/mask/gas) && !istype(wear_mask, /obj/item/clothing/mask/gas/swat) && !istype(wear_mask, /obj/item/clothing/mask/gas/syndicate)) || istype(glasses, /obj/item/clothing/glasses/night))
+			if(istype(glasses, /obj/item/clothing/glasses/night))
 				client.screen += global_hud.g_dither
 
 			if ((istype(glasses, /obj/item/clothing/glasses/thermal) && !istype(glasses, /obj/item/clothing/glasses/thermal/syndi)) || istype(glasses, /obj/item/clothing/glasses/hud/security) || istype(wear_mask, /obj/item/clothing/mask/gas/swat) || istype(wear_mask, /obj/item/clothing/mask/gas/syndicate))

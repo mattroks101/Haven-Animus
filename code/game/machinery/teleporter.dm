@@ -67,7 +67,7 @@
 	src.attack_hand()
 
 /obj/machinery/computer/teleporter/attack_hand()
-	if(stat & (NOPOWER|BROKEN))
+	if(..())
 		return
 
 	var/list/L = list()

@@ -38,7 +38,8 @@
 				user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the [vessel_type]!"
 				return*/
 		if(level_check()==0)	return
-		if(stat & (NOPOWER|BROKEN))	return
+		if(..())
+			return
 
 		if(!isAI(user))
 			user.set_machine(src)
