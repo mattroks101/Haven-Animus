@@ -188,48 +188,6 @@ datum/reagent/blood/reaction_turf(var/turf/simulated/T, var/volume)//splash the 
 			newVirus.holder = blood_prop
 	return
 
-
-
-datum/reagent/poo
-	name = "poo"
-	id = "poo"
-	description = "It's poo."
-	reagent_state = LIQUID
-	color = "#643200"
-//			melting_temp = 310
-//			boiling_temp = 430
-
-	on_mob_life(var/mob/M)
-		if(!M) M = holder.my_atom
-//				if(prob(20))
-//					M.contract_disease(new /datum/disease/gastric_ejections)
-		M:toxloss += 1
-		holder.remove_reagent(src.id, 0.2)
-		..()
-		return
-//TO MAKE add_poo() PROC
-/*			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
-		src = null
-		if(istype(M, /mob/living/carbon/human) && method==TOUCH)
-			if(M:wear_suit) M:wear_suit.add_poo()
-			if(M:w_uniform) M:w_uniform.add_poo()
-			if(M:shoes) M:shoes.add_poo()
-			if(M:gloves) M:gloves.add_poo()
-			if(M:head) M:head.add_poo()
-		//if(method==INGEST)
-		//	if(prob(20))
-			//	M.contract_disease(new /datum/disease/gastric_ejections)
-			//	holder.add_reagent("gastricejections", 1)
-			//	M:toxloss += 0.1
-			//	holder.remove_reagent(src.id, 0.2)
-*/
-	reaction_turf(var/turf/T, var/volume)
-		src = null
-		if(!istype(T, /turf/space))
-			new /obj/effect/decal/cleanable/poo(T)
-
-
-
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
 
 			Del()

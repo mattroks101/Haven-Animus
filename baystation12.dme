@@ -1479,7 +1479,6 @@
 #include "code\WorkInProgress\Guap6512\medals.dm"
 #include "code\WorkInProgress\Guap6512\zombie.dm"
 #include "code\WorkInProgress\Guap6512\zombieAI.dm"
-#include "code\WorkInProgress\Guap6512\circus\excrements.dm"
 #include "code\WorkInProgress\Guap6512\damage\attack_internal.dm"
 #include "code\WorkInProgress\Guap6512\generation\roguelike.dm"
 #include "code\WorkInProgress\kilakk\fax.dm"

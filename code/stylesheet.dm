@@ -14,12 +14,10 @@ em						{font-style: normal;	font-weight: bold;}
 .prefix					{					font-weight: bold;}
 
 .ooc					{					font-weight: bold;}
-.adminobserverooc		{color: #0099cc;	font-weight: bold;}
-.adminooc				{color: #b82e00;	font-weight: bold;}
 
-.adminobserver			{color: #996600;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
 .adminsay				{color: #9611D4;	font-weight: bold;}
+.mod					{color: #735638;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 
@@ -59,9 +57,6 @@ h1.alert, h2.alert		{color: #000000;}
 .alien					{color: #543354;}
 .newscaster				{color: #800000;}
 
-.mod					{color: #735638;	font-weight: bold;}
-.modooc					{color: #184880;	font-weight: bold;}
-.adminmod				{color: #402A14;	font-weight: bold;}
 .tajaran				{color: #803B56;}
 .skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
