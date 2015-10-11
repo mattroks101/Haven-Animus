@@ -1211,7 +1211,7 @@ table tr:first-child th:first-child { border: none;}
 			if((!E.arePowerSystemsOn()) || (E.stat & NOPOWER)) continue
 			if(!E.density)
 				spawn(0)
-				E.close()
+					E.close()
 				sleep(10)
 				if(E.density)
 					E.locked = 1
@@ -1254,7 +1254,7 @@ table tr:first-child th:first-child { border: none;}
 							D.nextstate = OPEN
 						else if(D.density)
 							spawn(0)
-							D.open()
+								D.open()
 		A.atmosalm = 0
 		A.updateicon()
 		for(var/area/RA in A.related)

@@ -114,13 +114,14 @@
 		master.fire = 1		//used for firedoor checks
 		updateicon()
 		mouse_opacity = 0
-		for(var/obj/machinery/door/firedoor/D in all_doors)
-			if(!D.blocked)
-				if(D.operating)
-					D.nextstate = CLOSED
-				else if(!D.density)
-					spawn()
-						D.close()
+		if (!master.atmosalm)
+			for(var/obj/machinery/door/firedoor/D in all_doors)
+				if(!D.blocked)
+					if(D.operating)
+						D.nextstate = CLOSED
+					else if(!D.density)
+						spawn()
+							D.close()
 		var/list/cameras = list()
 		for(var/area/RA in related)
 			for (var/obj/machinery/camera/C in RA)
@@ -137,13 +138,14 @@
 		master.fire = 0		//used for firedoor checks
 		mouse_opacity = 0
 		updateicon()
-		for(var/obj/machinery/door/firedoor/D in all_doors)
-			if(!D.blocked)
-				if(D.operating)
-					D.nextstate = OPEN
-				else if(D.density)
-					spawn(0)
-					D.open()
+		if (!master.atmosalm)
+			for(var/obj/machinery/door/firedoor/D in all_doors)
+				if(!D.blocked)
+					if(D.operating)
+						D.nextstate = OPEN
+					else if(D.density)
+						spawn(0)
+							D.open()
 		for(var/area/RA in related)
 			for (var/obj/machinery/camera/C in RA)
 				C.network.Remove("Fire Alarms")
@@ -168,24 +170,14 @@
 
 /area/proc/updateicon()
 	if ((master.fire || master.eject || master.atmosalm) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
-		if(master.fire && !master.eject)
+		if(master.atmosalm || master.eject)
+			for(var/obj/machinery/light/L in lights)
+				L.set_blue()
+		else
 			for(var/obj/machinery/light/L in lights)
 				L.set_red()
-
-		else if(master.atmosalm && !master.fire && !master.eject)
-		//	icon_state = "bluenew"
-			for(var/obj/machinery/light/L in lights)
-				L.set_blue()
-
-		else if(!master.fire && master.eject)
-			for(var/obj/machinery/light/L in lights)
-				L.set_blue()
-
-		else
-			icon_state = "blue-red"
 	else
 	//	new lighting behaviour with obj lights
-		icon_state = null
 		for(var/obj/machinery/light/L in lights)
 			L.reset_color()
 
@@ -341,14 +333,14 @@
 				D.locked = 1
 				D.air_locked = 1
 				D.update_icon()
-		if(!fire)
+		if(!master.fire)
 			for(var/obj/machinery/door/firedoor/D in all_doors)
 				if(!D.blocked)
 					if(D.operating)
 						D.nextstate = CLOSED
 					else if(!D.density)
 						spawn(0)
-						D.close()
+							D.close()
 
 			//else
 			//	D.air_locked = 0 //Ensure we're getting the right doors here.
@@ -475,7 +467,7 @@
 					D.air_locked =0
 					D.update_icon()
 */
-		if(!fire)
+		if(!master.fire)
 			for(var/obj/machinery/door/firedoor/D in all_doors)
 				if(!D.blocked)
 					if(D.operating)
