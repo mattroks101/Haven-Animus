@@ -166,46 +166,21 @@
 		updateicon()
 	return
 
-/area/proc/partyalert()
-	if(name == "Space") //no parties in space!!!
-		return
-	if (!( party ))
-		party = 1
-		updateicon()
-		mouse_opacity = 0
-	return
-
-/area/proc/partyreset()
-	if (party)
-		party = 0
-		mouse_opacity = 0
-		updateicon()
-		for(var/obj/machinery/door/firedoor/D in src)
-			if(!D.blocked)
-				if(D.operating)
-					D.nextstate = OPEN
-				else if(D.density)
-					spawn(0)
-					D.open()
-	return
-
 /area/proc/updateicon()
-	if ((master.fire || master.eject || master.party || master.atmosalm) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
-		if(master.fire && !master.eject && !master.party)
+	if ((master.fire || master.eject || master.atmosalm) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
+		if(master.fire && !master.eject)
 			for(var/obj/machinery/light/L in lights)
 				L.set_red()
 
-		else if(master.atmosalm && !master.fire && !master.eject && !master.party)
+		else if(master.atmosalm && !master.fire && !master.eject)
 		//	icon_state = "bluenew"
 			for(var/obj/machinery/light/L in lights)
 				L.set_blue()
 
-		else if(!master.fire && master.eject && !master.party)
+		else if(!master.fire && master.eject)
 			for(var/obj/machinery/light/L in lights)
 				L.set_blue()
 
-		else if(master.party && !master.fire && !master.eject)
-			icon_state = "party"
 		else
 			icon_state = "blue-red"
 	else
@@ -246,7 +221,7 @@
 	for(var/area/RA in related)
 		for(var/obj/machinery/M in RA)	// for each machine in the area
 			M.power_change()				// reverify power status (to update icons etc.)
-		if (fire || eject || party)
+		if (fire || eject)
 			RA.updateicon()
 
 /area/proc/usage(var/chan)
