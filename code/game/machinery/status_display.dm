@@ -162,6 +162,8 @@
 		overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
 
 	proc/update_display(line1, line2)
+		if(overlays.len)
+			overlays.Cut()
 		var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
 		if(maptext != new_text)
 			maptext = new_text

@@ -12,7 +12,7 @@
 		log_admin("[key_name(src)] : [msg]")
 
 	if(check_rights(R_ADMIN|R_MOD,0))
-		msg = "<span class='adminmod'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> (<a href='?_src_=holder;adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
+		msg = "<span class='adminsay'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> (<a href='?_src_=holder;adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 		for(var/client/C in admins)
 			if(R_ADMIN|R_MOD & C.holder.rights)
 				C << msg
@@ -45,4 +45,4 @@
 	if(check_rights(R_ADMIN|R_MOD,0))
 		for(var/client/C in admins)
 			if(R_ADMIN|R_MOD & C.holder.rights)
-				C << "<span class='adminmod'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> toggled the adminchat logging to [log_adminsay].</span>"
+				C << "<span class='adminsay'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> toggled the adminchat logging to [log_adminsay].</span>"

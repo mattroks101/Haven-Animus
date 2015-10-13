@@ -89,6 +89,7 @@ REAGENT SCANNER
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		usr << "\red You don't have the dexterity to do this!"
 		return
+	flick("health2", src)
 	user.visible_message("<span class='notice'> [user] has analyzed [M]'s vitals.","<span class='notice'> You have analyzed [M]'s vitals.")
 
 	if (!istype(M, /mob/living/carbon) || (ishuman(M) && (M:species.flags & IS_SYNTHETIC)))
@@ -235,6 +236,7 @@ REAGENT SCANNER
 	if (!( istype(location, /turf) ))
 		return
 
+	flick("atmos2", src)
 	var/datum/gas_mixture/environment = location.return_air()
 
 	var/pressure = environment.return_pressure()

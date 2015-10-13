@@ -24,7 +24,9 @@
 
 
 /obj/machinery/power/monitor/attack_ai(mob/user)
-	return attack_hand(user)
+	if(..())
+		return
+	interact(user)
 
 /obj/machinery/power/monitor/attack_hand(mob/user)
 	if(..())

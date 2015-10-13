@@ -47,6 +47,7 @@
 		user << "\red [src] can tell you nothing about [target]."
 		return
 
+	flick("hydro2", src)
 	var/dat = "<h3>Plant data for [target]</h3>"
 	user.visible_message("\blue [user] runs the scanner over [target].")
 

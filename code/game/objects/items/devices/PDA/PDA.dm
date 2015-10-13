@@ -987,6 +987,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					update_icon()
 					return
 			O.loc = get_turf(src)
+			usr << "<span class='notice'>You remove \the [O] from \the [src].</span>"
+			update_icon()
 		else
 			usr << "<span class='notice'>This PDA does not have a pen in it.</span>"
 	else
