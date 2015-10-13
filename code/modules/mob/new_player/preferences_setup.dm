@@ -145,6 +145,8 @@ datum/preferences
 		var/gloves_icon = 'icons/mob/hands.dmi'
 		var/suit_icon = 'icons/mob/suit.dmi'
 
+//FAT&FEMALE
+/*
 		if(fat)
 			uniform_icon = 'icons/mob/uniform_fat.dmi'
 		else if(g == "f")
@@ -154,7 +156,7 @@ datum/preferences
 			shoes_icon = 'icons/mob/feet_f.dmi'
 			back_icon = 'icons/mob/back_f.dmi'
 			gloves_icon = 'icons/mob/hands_f.dmi'
-			suit_icon = 'icons/mob/suit_f.dmi'
+			suit_icon = 'icons/mob/suit_f.dmi'*/
 
 		if(current_species)
 			icobase = current_species.icobase
@@ -582,10 +584,13 @@ datum/preferences
 						clothes_s.Blend(new /icon(back_icon, "satchel"), ICON_OVERLAY)
 
 		if(disabilities & NEARSIGHTED)
+//FAT&FEMALE
+/*
 			if(g == "f")
 				preview_icon.Blend(new /icon('icons/mob/eyes_f.dmi', "glasses"), ICON_OVERLAY)
 			else
-				preview_icon.Blend(new /icon('icons/mob/eyes.dmi', "glasses"), ICON_OVERLAY)
+	*/
+			preview_icon.Blend(new /icon('icons/mob/eyes.dmi', "glasses"), ICON_OVERLAY)
 
 		preview_icon.Blend(eyes_s, ICON_OVERLAY)
 		if(clothes_s)
