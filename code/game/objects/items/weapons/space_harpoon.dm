@@ -82,11 +82,12 @@
 	update_icon()
 
 /obj/item/weapon/bluespace_harpoon/update_icon()
-	if(transforming && mode)
-		flick("harpoon-2-change",src)
-		icon_state = "harpoon-1"
-		transforming = 0
-	else if (transforming && !mode)
-		flick("harpoon-1-change", src)
-		icon_state = "harpoon-2"
+	if(transforming)
+		switch(mode)
+			if(0)
+				flick("harpoon-2-change", src)
+				icon_state = "harpoon-1"
+			if(1)
+				flick("harpoon-1-change",src)
+				icon_state = "harpoon-2"
 		transforming = 0
