@@ -234,7 +234,7 @@
 	src.icon_state = "scanner_1"
 
 	// search for ghosts, if the corpse is empty and the scanner is connected to a cloner
-	for(dir in list(NORTH, EAST, SOUTH, WEST))
+	for(var/dir in list(NORTH, EAST, SOUTH, WEST))
 		if(locate(/obj/machinery/computer/cloning, get_step(src, dir)))
 			if(!M.client && M.mind)
 				for(var/mob/dead/observer/ghost in player_list)
@@ -382,7 +382,7 @@
 	return
 
 /obj/machinery/computer/scan_consolenew/proc/findScanner()
-	for(dir in list(NORTH,EAST,SOUTH,WEST))
+	for(var/dir in list(NORTH,EAST,SOUTH,WEST))
 		var/foundmachine = locate(/obj/machinery/dna_scannernew, get_step(src, dir))
 		if(foundmachine)
 			return foundmachine
