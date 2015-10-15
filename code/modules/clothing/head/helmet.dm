@@ -101,3 +101,76 @@
 	siemens_coefficient = 0.7
 	network_used = "swat"
 
+
+
+
+
+/// HUD HELMETS
+
+
+/obj/item/clothing/head/helmet/hud
+	name = "hud helmet"
+	var/broken = 0
+
+
+	proc
+		process_hud(var/mob/M)	return
+
+
+/obj/item/clothing/head/helmet/hud/iron_hammer
+	name = "iron hammer helmet"
+	desc = "Helmet of special forces Iron Hammer"
+
+	process_hud(mob/M)
+
+		if(!M || !M.client || src.broken)	return
+		var/client/C = M.client
+		var/image/holder
+		var/alert_level = 0
+		for(var/mob/living/carbon/human/suspiciou_person in view(get_turf(M)))
+			if(M.see_invisible < suspiciou_person.invisibility)
+				continue
+			if(suspiciou_person.wear_id )
+				var/obj/item/weapon/card/id/CARTA_ID = suspiciou_person.wear_id.GetID()
+				if(1 in CARTA_ID.access)
+					continue
+
+
+			var/list/all_items = suspiciou_person.get_contents()
+
+			for(var/obj/item/T in all_items)
+				if(istype(T, /obj/item/device/assembly/jamming_tool))
+					break
+					world << "found breaker! in [suspiciou_person]"
+
+				else if(istype(T, /obj/item/weapon/gun) || initial(T.name) in wanted_items)
+					world << "found gun [T] in [suspiciou_person]"
+					alert_level+=1
+
+
+			if(istype(suspiciou_person.l_hand, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
+				if(!istype(suspiciou_person.l_hand, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
+					alert_level+=1
+			if(istype(suspiciou_person.r_hand, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
+				if(!istype(suspiciou_person.r_hand, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
+					alert_level+=1
+			if(istype(suspiciou_person:belt, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
+				if(!istype(suspiciou_person:belt, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
+					alert_level+=1
+
+			holder = suspiciou_person.hud_list[ALERT_HUD]
+			if(alert_level > 0)
+				holder.icon_state = "hudalert"
+			else
+				holder.icon_state = "ei xolodno ocenb ze yze ale" // any text for  // Kostul
+			C.images += holder
+		return 1
+
+
+/obj/item/clothing/head/helmet/hud/emp_act(severity)
+	..()
+	broken = 1
+	desc+="\n It's broken!"
+
+
+var/list/wanted_items = list()

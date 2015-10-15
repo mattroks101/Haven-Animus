@@ -152,17 +152,20 @@
 //////////////////////////////////////////////////////////////////
 ////////////////OH SHIT//////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-/obj/item/weapon/gun/projectile/shotgun/combat/Wunderwaffe
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/Wunderwaffe
+	icon_action_button = "action_wunderwaffe"
+
 	var/
-		obj/item/weapon/reagent_containers/spray/chemsprayer/canopy/spray = null
-		obj/item/weapon/granade_launcher_canopy/granade = null
-		obj/item/weapon/cell/power_supply //What type of power cell this uses
-		obj/item/weapon/kitchen/utensil/knife = null
-		obj/item/weapon/breaker_device/brd = null
-		obj/item/weapon/ion_emitter/ion = null
+		obj/item/weapon/reagent_containers/spray/chemsprayer/canopy/spray_module = null
+		obj/item/weapon/grenade_launcher_canopy/granade_module = null
+		obj/item/weapon/cell/power_supply_module //What type of power cell this uses
+		obj/item/weapon/kitchen/utensil/knife_module = null
+		obj/item/weapon/breaker_device/brd_module = null
+		obj/item/weapon/ion_emitter/ion_module = /obj/item/weapon/ion_emitter
+
 		fire_mode = 5
 		matter = 0
-		list/grenades = new/list()
+		list/grenades = list()
 		max_grenades = 2                                // tak shepard scazal
 		open = 0
 		charge_cost = 100
@@ -174,13 +177,10 @@
 
 
 	examine()
-		set src in view()
-		..()
-		if (!(usr in view(2)) && usr!=src.loc) return
-	//	switch(fire_mode) oh. no
-
-
-
+		if (!(usr in view(2)) && usr!=src.loc)
+			return ..()
+		else
+			return ..() + "[spray_module ? spray_module.name + "\n" : ][granade_module ? granade_module.name + "\n":][power_supply_module ? power_supply_module.name + "\n":][ knife_module ? knife_module.name + "\n":][ brd_module ? brd_module.name + "\n":][ ion_module ? ion_module.name :]"
 
 
 
@@ -189,10 +189,9 @@
 	process_chambered()
 		switch(fire_mode)
 			if(3)
-				process_chambered()
 				if(in_chamber)	return 1
-				if(!power_supply)	return 0
-				if(!power_supply.use(charge_cost))	return 0
+				if(!power_supply_module)	return 0
+				if(!power_supply_module.use(charge_cost))	return 0
 				if(!projectile_type)	return 0
 				in_chamber = new projectile_type(src)
 				return 1
@@ -212,37 +211,22 @@
 				return 0
 
 
-	New()
-		..()
-		if(cell_type)
-			power_supply = new cell_type(src)
-		else
-			power_supply = new(src)
-		power_supply.give(power_supply.maxcharge)
-		return
-
 	afterattack(atom/target as mob|obj, mob/user as mob, flag)
 		switch(fire_mode)
 			if(1)
-				if(granade)
-					if (istype(target, /obj/item/weapon/storage/backpack ))
-						return
-
-					else if (locate (/obj/structure/table, src.loc))
-						return
-
-					else if(target == user)
-						return
+				if(granade_module)
+					if (target == user || istype(target, /obj/item/weapon/storage/backpack ) || locate (/obj/structure/table, src.loc))
+						return usr << "grenade return"
 
 					if(grenades.len)
 						spawn(0) fire_grenade(target,user)
 					else
-						usr << "\red The [src.name]  is empty."
+						usr << "\red The [src]  is empty."
 					return
 				else
-					user << "<span class='warning'>You try to shot from grenade launcher, but you don't have this!</span>"
+					user << "<span class='warning'>No!</span>"
 			if(2)
-				if(spray)
+				if(spray_module)
 					if(istype(target, /obj/item/weapon/storage) || istype(target, /obj/structure/table) || istype(target, /obj/structure/rack) || istype(target, /obj/structure/closet) \
 					|| istype(target, /obj/item/weapon/reagent_containers) || istype(target, /obj/structure/sink))
 						return
@@ -300,18 +284,28 @@
 					return
 
 			if(3)
-				if(ion)
-					if(in_chamber)	return 1
-					if(!power_supply)	return 0
-					if(!power_supply.use(charge_cost))	return 0
-					if(!projectile_type)	return 0
+				if(ion_module)
+					if(in_chamber)
+						usr << "ion_module "
+						return 1
+					if(!power_supply_module)
+						usr << "ion_module power_supply_module"
+						return 0
+					if(!power_supply_module.use(charge_cost))
+						usr << "ion_module  power_supply_module use"
+						return 0
+					if(!projectile_type)
+						usr << "ion_module  projectile_type"
+						return 0
+
 					in_chamber = new projectile_type(src)
+					usr << "ion_module ok "
 					return 1
 				else
 					user << "<span class='warning'>Nope.</span>"
 					return
 			if(4)
-				if(brd)
+				if(brd_module)
 					if(istype(target,/area/shuttle)||istype(target,/turf/space/transit))
 						return 0
 					if(!(istype(target, /turf) || istype(target, /obj/machinery/door/airlock)))
@@ -320,34 +314,34 @@
 					if(istype(target, /turf/simulated/wall))
 						if(istype(target, /turf/simulated/wall/r_wall))
 							return 0
-						if(checkResource(5, user))
+						if(brd_module.matter >= 10)
 							user << "Deconstructing Wall..."
 							playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 							if(do_after(user, 40))
-								if(!useResource(5, user)) return 0
-								activate()
+								if(!brd_module.matter - 10) return 0
+								brd_module.matter-=10
 								target:ChangeTurf(/turf/simulated/floor/plating/airless)
 								return 1
 						return 0
 
 					if(istype(target, /turf/simulated/floor) && !istype(target, /turf/simulated/floor/open))
-						if(checkResource(5, user))
+						if(brd_module.matter >= 5)
 							user << "Deconstructing Floor..."
 							playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 							if(do_after(user, 50))
-								if(!useResource(5, user)) return 0
-								activate()
+								if(!brd_module.matter - 5) return 0
+								brd_module.matter-=5
 								target:ChangeTurf(/turf/space)
 								return 1
 						return 0
 
 					if(istype(target, /obj/machinery/door/airlock))
-						if(checkResource(10, user))
+						if(brd_module.matter >= 10)
 							user << "Deconstructing Airlock..."
 							playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 							if(do_after(user, 50))
-								if(!useResource(10, user)) return 0
-								activate()
+								if(!brd_module.matter - 10) return 0
+								brd_module.matter-=10
 								del(target)
 								return 1
 						return	0
@@ -361,6 +355,33 @@
 
 
 
+	attack_self(mob/living/user as mob)
+
+		if(fire_mode == 1 && granade_module)
+			for(var/obj/item/weapon/grenade/G in grenades)
+				//user.put_in_hands(new G)
+				user << "<span class='notice'>You got [G] from [src]</span>"
+				G.loc = user.loc
+				grenades.Remove(G)
+			if(grenades.len == 0)
+				new granade_module(user.loc)
+				src.granade_module = null
+				user << "<span class='notice'>You got [granade_module] from [src]</span>"
+
+		if(fire_mode == 2 && spray_module)
+			user.put_in_hands(new spray_module)
+			src.spray_module = null
+
+		if(fire_mode == 3 && power_supply_module)
+			user.put_in_hands(new power_supply_module)
+			src.power_supply_module = null
+
+		if(fire_mode == 4 && brd_module)
+			user.put_in_hands(new brd_module)
+			src.brd_module = null
+
+		if(fire_mode == 5)
+			return ..()
 
 
 
@@ -375,48 +396,44 @@
 			else
 				usr << "You unscrewed the bolts on [src]."
 				open = 1
-		if(istype(W, /obj/item/weapon/kitchen/utensil) && !knife)
-			knife = W
+		if(istype(W, /obj/item/weapon/kitchen/utensil) && !knife_module)
+			knife_module = W
 
 			user.drop_item()
 			W.loc = src.loc
-			del(W)
-			user << "<span class='notice'>You attache the [W.name] to [src.name].</span>"
-		if(istype(W, /obj/item/weapon/reagent_containers/spray/chemsprayer/canopy) && !spray)
-			spray = W
+			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
+		if(istype(W, /obj/item/weapon/reagent_containers/spray/chemsprayer/canopy) && !spray_module)
+			spray_module = W
 			user.drop_item()
 			W.loc = src.loc
-			del(W)
-			user << "<span class='notice'>You attache the [W.name] to [src.name].</span>"
-		if(istype(W, /obj/item/weapon/granade_launcher_canopy) && !granade)
-			granade = W
+			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
+		if(istype(W, /obj/item/weapon/grenade_launcher_canopy) && !granade_module)
+			granade_module = W
 			user.drop_item()
 			W.loc = src.loc
-			del(W)
-			user << "<span class='notice'>You attache the [W.name] to [src.name].</span>"
-		if(istype(W, /obj/item/weapon/ion_emitter) && !ion)
-			ion = W
-			user.drop_item()
-			W.loc = src.loc
-			del(W)
-			user << "<span class='notice'>You attache the [W.name] to [src.name].</span>"
 
-		if(istype(W, /obj/item/weapon/breaker_device) && !brd)
-			brd = W
+			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
+		if(istype(W, /obj/item/weapon/cell) && !power_supply_module)
+			power_supply_module = W
 			user.drop_item()
 			W.loc = src.loc
-			del(W)
-			user << "<span class='notice'>You attache the [W.name] to [src.name].</span>"
+			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
+
+		if(istype(W, /obj/item/weapon/breaker_device) && !brd_module)
+			brd_module = W
+			user.drop_item()
+			W.loc = src.loc
+			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
 
 
 
-		if(istype(W, /obj/item/weapon/rcd_ammo) && brd)
-			if((matter + 10) > 30)
-				user << "<span class='notice'>The [src.name] cant hold any more matter-units.</span>"
+		if(istype(W, /obj/item/weapon/rcd_ammo) && brd_module)
+			if(brd_module.matter >= 10)
+				user << "<span class='notice'>The [name] cant hold any more matter-units.</span>"
 				return
 			user.drop_item()
 			del(W)
-			matter += 10
+			brd_module.matter += 10
 			playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 
 		if((istype(W, /obj/item/weapon/grenade)))
@@ -424,15 +441,23 @@
 				user.drop_item()
 				W.loc = src
 				grenades += W
-				user << "\blue You put the grenade in the [src.name]."
+				user << "\blue You put the grenade in the [name]."
 				user << "\blue [grenades.len] / [max_grenades] Grenades."
 			else
 				usr << "\red The [src.name] cannot hold more grenades."
 
 		..()
 
+
 	ui_action_click()
 		change_fire_mode(usr)
+
+	emp_act(severity)
+		if(severity <= 2 && power_supply_module)
+			power_supply_module.use(round(power_supply_module.maxcharge / severity))
+			update_icon()
+		else
+			return
 
 	proc
 		fire_grenade(atom/target, mob/user)
@@ -456,43 +481,45 @@
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 
 
-		useResource(var/amount, var/mob/user)
-			if(matter < amount)
-				return 0
-			matter -= amount
-			desc = "A RCD. It currently holds [matter]/30 matter-units."
-			return 1
 
-		checkResource(var/amount, var/mob/user)
-			return matter >= amount
 
 
 
 
 	verb
-		change_fire_mode(mob/living/user as mob,)
+		change_fire_mode(mob/living/user as mob)
 			set name = "Change fire mode"
 			set category = "Object"
-
-			fire_mode++
 			var/mode = "grenade launcher"
-			if (fire_mode > 5)
-				fire_mode = 1
-			else if(fire_mode == 1 && granade)
-				mode = "grenade launcher"
-			else if(fire_mode == 2 && spray)
-				mode = "sprayer"
-			else if(fire_mode == 3 && ion)
-				mode = "ion fire"
-			else if(fire_mode == 4 && brd)
-				mode = "breaking device"
-			else if(fire_mode == 5)
-				mode = "bullet firing"
-
+			var/counter = fire_mode
+			while(1)
+				counter++
+				if(counter > 5)
+					counter = 0
+				if(counter == 1 && granade_module)
+					fire_mode = counter
+					mode = "grenade launcher"
+					break
+				else if(counter == 2 && spray_module)
+					fire_mode = counter
+					mode = "sprayer"
+					break
+				else if(counter == 3 && ion_module)
+					fire_mode = counter
+					mode = "ion fire"
+					break
+				else if(counter == 4 && brd_module)
+					fire_mode = counter
+					mode = "breaking device"
+					break
+				else if(counter == 5)
+					fire_mode = counter
+					mode = "bullet firing"
+					break
 			user << "<span class='notice'>You change fire mode of [src.name] to [mode].</span>"
 			return
 
-/obj/item/weapon/granade_launcher_canopy
+/obj/item/weapon/grenade_launcher_canopy
 	name = "Grenade launcher canope"
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "riotgun"
@@ -512,6 +539,7 @@
 	icon_state = "riotgun"
 	w_class = 1.0
 	force = 3.0
+	var/matter = 0
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/canopy
 	name = "spray canopy"
