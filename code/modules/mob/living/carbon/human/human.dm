@@ -64,7 +64,7 @@
 	if(!dna)
 		dna = new /datum/dna(null)
 
-	for(var/i=0;i<8;i++) // 2 for medHUDs and 5 for secHUDs
+	for(var/i=0;i<9;i++) // 2 for medHUDs and 6 for secHUDs
 		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
 
 	..()

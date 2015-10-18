@@ -563,13 +563,18 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		if(!t_color)		t_color = icon_state
 		var/image/standing	= image("icon_state" = "[t_color]_s")
 
+//FAT&FEMALE
+/*
 		if(FAT in src.mutations)
-			standing.icon	= ((w_uniform.icon_override) ? w_uniform.icon_override : 'icons/mob/uniform_fat.dmi')
+			standing.icon	= ((w_uniform.icon_override) ? w_uniform.icon_override : 'icons/mob/uniform_fat.dmi')*/
 
+//FAT&FEMALE
+/*
 		else if(gender == FEMALE)
 			standing.icon	= ((w_uniform.icon_override) ? w_uniform.icon_override : 'icons/mob/uniform_f.dmi')
 		else
-			standing.icon	= ((w_uniform.icon_override) ? w_uniform.icon_override : 'icons/mob/uniform.dmi')
+	*/
+		standing.icon	= ((w_uniform.icon_override) ? w_uniform.icon_override : 'icons/mob/uniform.dmi')
 
 		if(w_uniform.blood_DNA)
 			var/image/bloodsies	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "uniformblood")
@@ -614,10 +619,13 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		if(!t_state)	t_state = gloves.icon_state
 		var/image/standing	= ""
 
+//FAT&FEMALE
+/*
 		if(gender == FEMALE && (!FAT in mutations))
 			standing = image("icon" = ((gloves.icon_override) ? gloves.icon_override : 'icons/mob/hands_f.dmi'), "icon_state" = "[t_state]")
 		else
-			standing = image("icon" = ((gloves.icon_override) ? gloves.icon_override : 'icons/mob/hands.dmi'), "icon_state" = "[t_state]")
+	*/
+		standing = image("icon" = ((gloves.icon_override) ? gloves.icon_override : 'icons/mob/hands.dmi'), "icon_state" = "[t_state]")
 
 		if(gloves.blood_DNA)
 			var/image/bloodsies	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
@@ -637,26 +645,32 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 
 /mob/living/carbon/human/update_inv_glasses(var/update_icons=1)
 	if(glasses)
+//FAT&FEMALE
+/*
 		if(gender == FEMALE && (!FAT in mutations))
 			overlays_standing[GLASSES_LAYER]	= image("icon" = ((glasses.icon_override) ? glasses.icon_override : 'icons/mob/eyes_f.dmi'), "icon_state" = "[glasses.icon_state]")
 		else
-			overlays_standing[GLASSES_LAYER]	= image("icon" = ((glasses.icon_override) ? glasses.icon_override : 'icons/mob/eyes.dmi'), "icon_state" = "[glasses.icon_state]")
+	*/
+		overlays_standing[GLASSES_LAYER]	= image("icon" = ((glasses.icon_override) ? glasses.icon_override : 'icons/mob/eyes.dmi'), "icon_state" = "[glasses.icon_state]")
 	else
 		overlays_standing[GLASSES_LAYER]	= null
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_ears(var/update_icons=1)
 	if(l_ear || r_ear)
+//FAT&FEMALE
+/*
 		if (gender == FEMALE && (!FAT in mutations))
 			if(l_ear)
 				overlays_standing[EARS_LAYER] = image("icon" = ((l_ear.icon_override) ? l_ear.icon_override : 'icons/mob/ears_f.dmi'), "icon_state" = "[l_ear.icon_state]")
 			if(r_ear)
 				overlays_standing[EARS_LAYER] = image("icon" = ((r_ear.icon_override) ? r_ear.icon_override : 'icons/mob/ears_f.dmi'), "icon_state" = "[r_ear.icon_state]")
 		else
-			if(l_ear)
-				overlays_standing[EARS_LAYER] = image("icon" = ((l_ear.icon_override) ? l_ear.icon_override : 'icons/mob/ears.dmi'), "icon_state" = "[l_ear.icon_state]")
-			if(r_ear)
-				overlays_standing[EARS_LAYER] = image("icon" = ((r_ear.icon_override) ? r_ear.icon_override : 'icons/mob/ears.dmi'), "icon_state" = "[r_ear.icon_state]")
+	*/
+		if(l_ear)
+			overlays_standing[EARS_LAYER] = image("icon" = ((l_ear.icon_override) ? l_ear.icon_override : 'icons/mob/ears.dmi'), "icon_state" = "[l_ear.icon_state]")
+		if(r_ear)
+			overlays_standing[EARS_LAYER] = image("icon" = ((r_ear.icon_override) ? r_ear.icon_override : 'icons/mob/ears.dmi'), "icon_state" = "[r_ear.icon_state]")
 	else
 		overlays_standing[EARS_LAYER]	= null
 	if(update_icons)   update_icons()
@@ -665,10 +679,13 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 	if(shoes)
 		var/image/standing	= ""
 
+//FAT&FEMALE
+/*
 		if(gender == FEMALE && (!FAT in mutations))
 			standing = image("icon" = ((shoes.icon_override) ? shoes.icon_override : 'icons/mob/feet_f.dmi'), "icon_state" = "[shoes.icon_state]")
 		else
-			standing = image("icon" = ((shoes.icon_override) ? shoes.icon_override : 'icons/mob/feet.dmi'), "icon_state" = "[shoes.icon_state]")
+	*/
+		standing = image("icon" = ((shoes.icon_override) ? shoes.icon_override : 'icons/mob/feet.dmi'), "icon_state" = "[shoes.icon_state]")
 
 		if(shoes.blood_DNA)
 			var/image/bloodsies = image("icon" = 'icons/effects/blood.dmi', "icon_state" = "shoeblood")
@@ -712,10 +729,13 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		belt.screen_loc = get_slot_loc("belt")	//TODO
 		var/t_state = belt.item_state
 		if(!t_state)	t_state = belt.icon_state
+//FAT&FEMALE
+/*
 		if(gender == FEMALE && (!FAT in mutations))
 			overlays_standing[BELT_LAYER]	= image("icon" = ((belt.icon_override) ? belt.icon_override : 'icons/mob/belt_f.dmi'), "icon_state" = "[t_state]")
 		else
-			overlays_standing[BELT_LAYER]	= image("icon" = ((belt.icon_override) ? belt.icon_override : 'icons/mob/belt.dmi'), "icon_state" = "[t_state]")
+	*/
+		overlays_standing[BELT_LAYER]	= image("icon" = ((belt.icon_override) ? belt.icon_override : 'icons/mob/belt.dmi'), "icon_state" = "[t_state]")
 	else
 		overlays_standing[BELT_LAYER]	= null
 	if(update_icons)   update_icons()
@@ -726,12 +746,15 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		wear_suit.screen_loc = get_slot_loc("oclothing")	//TODO
 		var/image/standing = ""
 
+//FAT&FEMALE
+/*
 		if(gender == FEMALE  && (!FAT in mutations))
 			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit_f.dmi'), "icon_state" = "[wear_suit.icon_state]")
 		else if (FAT in mutations)
 			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit_fat.dmi'), "icon_state" = "[wear_suit.icon_state]")
 		else
-			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit.dmi'), "icon_state" = "[wear_suit.icon_state]")
+	*/
+		standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit.dmi'), "icon_state" = "[wear_suit.icon_state]")
 
 
 
@@ -768,10 +791,13 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		wear_mask.screen_loc = get_slot_loc("mask")	//TODO
 		var/image/standing	= ""
 
+//FAT&FEMALE
+/*
 		if(gender == FEMALE  && (!FAT in mutations))
 			standing = image("icon" = ((wear_mask.icon_override) ? wear_mask.icon_override : 'icons/mob/mask_f.dmi'), "icon_state" = "[wear_mask.icon_state]")
 		else
-			standing = image("icon" = ((wear_mask.icon_override) ? wear_mask.icon_override : 'icons/mob/mask.dmi'), "icon_state" = "[wear_mask.icon_state]")
+	*/
+		standing = image("icon" = ((wear_mask.icon_override) ? wear_mask.icon_override : 'icons/mob/mask.dmi'), "icon_state" = "[wear_mask.icon_state]")
 
 		if( !istype(wear_mask, /obj/item/clothing/mask/cigarette) && wear_mask.blood_DNA )
 			var/image/bloodsies = image("icon" = 'icons/effects/blood.dmi', "icon_state" = "maskblood")
@@ -786,10 +812,13 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
 	if(back)
 		back.screen_loc = get_slot_loc("back")	//TODO
+//FAT&FEMALE
+/*
 		if(gender == FEMALE  && (!FAT in mutations))
 			overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back_f.dmi'), "icon_state" = "[back.icon_state]")
 		else
-			overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back.dmi'), "icon_state" = "[back.icon_state]")
+	*/
+		overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back.dmi'), "icon_state" = "[back.icon_state]")
 	else
 		overlays_standing[BACK_LAYER]	= null
 	if(update_icons)   update_icons()
