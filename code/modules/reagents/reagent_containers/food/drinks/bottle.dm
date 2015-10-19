@@ -10,6 +10,7 @@
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
 	var/const/duration = 13 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
+	var/molotov = 0
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(mob/living/target as mob, mob/living/user as mob)
 
@@ -27,17 +28,17 @@
 		B.icon = I
 		del(src)
 	else
-		user.drop_item()
 		var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(user.loc)
+		user.drop_item()
 		user.put_in_active_hand(B)
 		if(prob(33))
 			new/obj/item/weapon/shard(target.loc) // Create a glass shard at the target's location!
 		B.icon_state = src.icon_state
-
-		var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
-		I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
-		I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
-		B.icon = I
+		spawn(0)
+			var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
+			I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
+			I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
+			B.icon = I
 
 		playsound(src, "shatter", 70, 1)
 		user.put_in_active_hand(B)
@@ -47,7 +48,16 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, speed)
 	..(hit_atom, speed)
-	if(prob(33))
+	if(molotov==2)
+		for(var/datum/reagent/ethanol/E in src.reagents.reagent_list)
+			for(var/d in alldirs)
+				if(rand(25))
+					var/turf/simulated/TT = get_step(src,d)
+					if(TT)
+						TT.create_fire(2000)
+			break
+		smash()
+	else if(prob(33))
 		if(isliving(hit_atom))
 			var/mob/living/target = hit_atom
 			if(src.reagents)
@@ -56,12 +66,14 @@
 				src.reagents.reaction(target, TOUCH)
 		smash()
 
+
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bullet_act()
 	smash()
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/attack(mob/living/target as mob, mob/living/user as mob)
 
-	if(!target)
+	if(!target || molotov)
 		return
 
 	if(user.a_intent != "hurt" || !isGlass)
@@ -138,6 +150,33 @@
 	src.smash(target, user)
 
 	return
+
+
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+
+	if(istype(W, /obj/item/weapon/paper) && src.isGlass && !molotov)
+		molotov = 1
+		overlays+="paper"
+		user << "<span class='notice'>You add some [W] to [src]</span>"
+	if(istype(W, /obj/item/weapon/flame) && molotov && (molotov != 2))   // high quality code
+		var/obj/item/weapon/flame/F = W
+		if(F.lit)
+			molotov = 2
+			overlays+="fire"
+			var/fire = "fire"
+			user << "<span class='warning'>You add some [fire] to [src]</span>"
+	if(istype(W,/obj/item/weapon/weldingtool) && molotov == 1)
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.welding)
+			molotov = 2
+			overlays+="fire"
+
+	if(istype(W, /obj/item/weapon/storage/photo_album))
+		playsound(loc, 'sound/effects/Ta-ta-tam.wav', 50, 1, -1)
+
+
 
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/weapon/broken_bottle
@@ -221,6 +260,7 @@
 	name = "Flask of Holy Water"
 	desc = "A flask of the chaplain's holy water."
 	icon_state = "holyflask"
+	isGlass = 0
 	New()
 		..()
 		reagents.add_reagent("holywater", 100)

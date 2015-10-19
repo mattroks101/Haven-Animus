@@ -228,9 +228,11 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	if(!(src.wires & WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return
 
-	for(var/obj/item/device/assembly/jamming_tool/J in orange(7,src.loc))
-		if(J.on)
-			return
+
+
+	if(jamming_tool_in_radius(7,src))
+		return
+
 
 	if(GLOBAL_RADIO_TYPE == 1) // NEW RADIO SYSTEMS: By Doohl
 
