@@ -2,6 +2,8 @@
 	name = "jamming tool"
 	desc = "A small electronic device."
 	icon_state = "jammer"
+	flags = FPRINT | TABLEPASS | CONDUCT
+	slot_flags = SLOT_BELT
 	m_amt = 500
 	g_amt = 100
 	origin_tech = "magnets=2"

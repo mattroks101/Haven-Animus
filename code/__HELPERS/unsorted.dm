@@ -1394,3 +1394,19 @@ var/list/WALLITEMS = list(
 	if (!O) return 0
 	if (O.edge) return 1
 	return 0
+
+/atom/proc/GetAllContentsV2()
+	var/list/processing_list = list(src)
+	var/list/assembled = list()
+
+	while(processing_list.len)
+		var/atom/A = processing_list[1]
+		processing_list -= A
+
+		for(var/atom/a in A)
+			if(!(a in assembled))
+				processing_list |= a
+
+		assembled |= A
+
+	return assembled

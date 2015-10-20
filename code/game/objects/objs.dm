@@ -130,3 +130,20 @@
 		mo.show_message(rendered, 2)
 		*/
 	return
+
+/obj/proc/add_item(obj/item, mob/user, msg)
+	user.drop_from_inventory(item)
+	item.loc = src
+	if(msg)
+		user << "<span class='notice'>[msg]</span>"
+
+/obj/proc/get_item(atom/item, mob/user, msg, put_in_hands = 0)
+	for(var/obj/A in src.contents)
+		if(istype(A, item))
+			if(put_in_hands)
+				user.put_in_hands(A)
+			else
+				A.loc = get_turf(src)
+			if(msg)
+				user << "<span class='notice'>[msg]</span>"
+			break

@@ -152,14 +152,13 @@
 //////////////////////////////////////////////////////////////////
 ////////////////OH SHIT//////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-/obj/item/weapon/gun/projectile/revolver/doublebarrel/Wunderwaffe
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/Wunderwaffe
 	icon_action_button = "action_wunderwaffe"
 
 	var/
 		obj/item/weapon/reagent_containers/spray/chemsprayer/canopy/spray_module = null
 		obj/item/weapon/grenade_launcher_canopy/granade_module = null
-		obj/item/weapon/cell/power_supply_module //What type of power cell this uses
-		obj/item/weapon/kitchen/utensil/knife_module = null
+		obj/item/weapon/kitchen/knife_module = null
 		obj/item/weapon/breaker_device/brd_module = null
 		obj/item/weapon/ion_emitter/ion_module = /obj/item/weapon/ion_emitter
 
@@ -172,46 +171,19 @@
 
 		volume = 40
 		amount_per_transfer_from_this = 10
-		projectile_type = "/obj/item/projectile/ion"
-		cell_type = "/obj/item/weapon/cell"
 
+
+	New()
+		..()
+		ion_module = new /obj/item/weapon/ion_emitter(src)
 
 	examine()
 		if (!(usr in view(2)) && usr!=src.loc)
 			return ..()
 		else
-			return ..() + "[spray_module ? spray_module.name + "\n" : ][granade_module ? granade_module.name + "\n":][power_supply_module ? power_supply_module.name + "\n":][ knife_module ? knife_module.name + "\n":][ brd_module ? brd_module.name + "\n":][ ion_module ? ion_module.name :]"
+			return ..() + "[spray_module ? spray_module.name + "\n" : ][granade_module ? granade_module.name + "\n":][ knife_module ? knife_module.name + "\n":][ brd_module ? brd_module.name + "\n":][ ion_module ? ion_module.name :]"
 
-
-
-
-
-	process_chambered()
-		switch(fire_mode)
-			if(3)
-				if(in_chamber)	return 1
-				if(!power_supply_module)	return 0
-				if(!power_supply_module.use(charge_cost))	return 0
-				if(!projectile_type)	return 0
-				in_chamber = new projectile_type(src)
-				return 1
-			if(5)
-				var/obj/item/ammo_casing/AC = chambered //Find chambered round
-				if(isnull(AC) || !istype(AC))
-					return 0
-
-				AC.on_fired()
-
-				if(AC.BB)
-					in_chamber = AC.BB //Load projectile into chamber.
-					AC.BB.loc = src //Set projectile loc to gun.
-					AC.BB = null
-					AC.update_icon()
-					return 1
-				return 0
-
-
-	afterattack(atom/target as mob|obj, mob/user as mob, flag)
+	afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
 		switch(fire_mode)
 			if(1)
 				if(granade_module)
@@ -235,10 +207,10 @@
 						return
 					var/Sprays[3]
 					for(var/i=1, i<=3, i++) // intialize sprays
-						if(src.reagents.total_volume < 1) break
+						if(spray_module.reagents.total_volume < 1) break
 						var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
 						D.create_reagents(amount_per_transfer_from_this)
-						src.reagents.trans_to(D, amount_per_transfer_from_this)
+						spray_module.reagents.trans_to(D, amount_per_transfer_from_this)
 
 						D.icon += mix_color_from_reagents(D.reagents.reagent_list)
 
@@ -269,38 +241,37 @@
 
 					playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
-					if(reagents.has_reagent("sacid"))
+					if(spray_module.reagents.has_reagent("sacid"))
 						message_admins("[key_name_admin(user)] fired sulphuric acid from a chem sprayer.")
 						log_game("[key_name(user)] fired sulphuric acid from a chem sprayer.")
-					if(reagents.has_reagent("pacid"))
+					if(spray_module.reagents.has_reagent("pacid"))
 						message_admins("[key_name_admin(user)] fired Polyacid from a chem sprayer.")
 						log_game("[key_name(user)] fired Polyacid from a chem sprayer.")
-					if(reagents.has_reagent("lube"))
+					if(spray_module.reagents.has_reagent("lube"))
 						message_admins("[key_name_admin(user)] fired Space lube from a chem sprayer.")
 						log_game("[key_name(user)] fired Space lube from a chem sprayer.")
 					return
-				else
-					user << "<span class='warning'>Why this not workning? Maybe try again</span>"
-					return
-
 			if(3)
-				if(ion_module)
-					if(in_chamber)
-						usr << "ion_module "
+				if(ion_module && ion_module.power_supply)
+					if(ion_module.power_supply.use(500))
+						var/turf/T = get_turf(user)
+						var/turf/U = get_turf(target)		//V rot mne kustuli
+						var/obj/item/projectile/ion/PROJ = new /obj/item/projectile/ion(user.loc)
+						playsound(usr.loc, 'sound/weapons/ion.ogg', 75, 1)
+						PROJ.firer = user
+						PROJ.original = target
+						PROJ.loc = T
+						PROJ.starting = T
+						PROJ.shot_from = src
+						user.next_move = world.time + 4
+						PROJ.current = T
+						PROJ.yo = U.y - T.y
+						PROJ.xo = U.x - T.x
+						spawn( 1 )
+							PROJ.process()
 						return 1
-					if(!power_supply_module)
-						usr << "ion_module power_supply_module"
-						return 0
-					if(!power_supply_module.use(charge_cost))
-						usr << "ion_module  power_supply_module use"
-						return 0
-					if(!projectile_type)
-						usr << "ion_module  projectile_type"
-						return 0
-
-					in_chamber = new projectile_type(src)
-					usr << "ion_module ok "
-					return 1
+					else
+						click_empty()
 				else
 					user << "<span class='warning'>Nope.</span>"
 					return
@@ -318,9 +289,12 @@
 							user << "Deconstructing Wall..."
 							playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 							if(do_after(user, 40))
-								if(!brd_module.matter - 10) return 0
-								brd_module.matter-=10
+								world << "do_after ok"
+								if(!useResource(10))
+									world << "if = [!brd_module.matter - 10] Return"
+									return 0
 								target:ChangeTurf(/turf/simulated/floor/plating/airless)
+								world << "I try, but nothing happend and matter = [brd_module.matter]"
 								return 1
 						return 0
 
@@ -329,8 +303,7 @@
 							user << "Deconstructing Floor..."
 							playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 							if(do_after(user, 50))
-								if(!brd_module.matter - 5) return 0
-								brd_module.matter-=5
+								if(!useResource(10)) return 0
 								target:ChangeTurf(/turf/space)
 								return 1
 						return 0
@@ -340,8 +313,7 @@
 							user << "Deconstructing Airlock..."
 							playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 							if(do_after(user, 50))
-								if(!brd_module.matter - 10) return 0
-								brd_module.matter-=10
+								if(!useResource(10)) return 0
 								del(target)
 								return 1
 						return	0
@@ -352,11 +324,7 @@
 			if(5)
 				..()
 
-
-
-
 	attack_self(mob/living/user as mob)
-
 		if(fire_mode == 1 && granade_module)
 			for(var/obj/item/weapon/grenade/G in grenades)
 				//user.put_in_hands(new G)
@@ -364,31 +332,26 @@
 				G.loc = user.loc
 				grenades.Remove(G)
 			if(grenades.len == 0)
-				new granade_module(user.loc)
-				src.granade_module = null
-				user << "<span class='notice'>You got [granade_module] from [src]</span>"
-
+				get_item(granade_module, user, "You got [granade_module] from [src]", 1)
+				granade_module = null
+				change_fire_mode(user)
 		if(fire_mode == 2 && spray_module)
-			user.put_in_hands(new spray_module)
-			src.spray_module = null
-
-		if(fire_mode == 3 && power_supply_module)
-			user.put_in_hands(new power_supply_module)
-			src.power_supply_module = null
-
+			get_item(spray_module, user, "You got [spray_module] from [src]", 1)
+			spray_module = null
+			change_fire_mode(user)
+		if(fire_mode == 3 && ion_module)
+			get_item(ion_module, user, "You got [ion_module] from [src]", 1)
+			ion_module = null
+			change_fire_mode(user)
 		if(fire_mode == 4 && brd_module)
-			user.put_in_hands(new brd_module)
-			src.brd_module = null
-
+			get_item(brd_module, user, "You got [brd_module] from [src]", 1)
+			brd_module = null
+			change_fire_mode(user)
 		if(fire_mode == 5)
 			return ..()
 
-
-
-
-
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
-
+		var/text = "You attache [W] to [src]"
 		if(istype(W, /obj/item/weapon/screwdriver))
 			if(open)
 				usr << "You Tighten the screws on [src]."
@@ -396,37 +359,21 @@
 			else
 				usr << "You unscrewed the bolts on [src]."
 				open = 1
-		if(istype(W, /obj/item/weapon/kitchen/utensil) && !knife_module)
+		if(istype(W, /obj/item/weapon/kitchen) && !knife_module && src.open)
 			knife_module = W
-
-			user.drop_item()
-			W.loc = src.loc
-			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
+			add_item(W, user, text)
 		if(istype(W, /obj/item/weapon/reagent_containers/spray/chemsprayer/canopy) && !spray_module)
 			spray_module = W
-			user.drop_item()
-			W.loc = src.loc
-			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
+			add_item(W, user, text)
 		if(istype(W, /obj/item/weapon/grenade_launcher_canopy) && !granade_module)
 			granade_module = W
-			user.drop_item()
-			W.loc = src.loc
-
-			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
-		if(istype(W, /obj/item/weapon/cell) && !power_supply_module)
-			power_supply_module = W
-			user.drop_item()
-			W.loc = src.loc
-			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
-
+			add_item(W, user, text)
 		if(istype(W, /obj/item/weapon/breaker_device) && !brd_module)
 			brd_module = W
-			user.drop_item()
-			W.loc = src.loc
-			user << "<span class='notice'>You attache the [W.name] to [name].</span>"
-
-
-
+			add_item(W, user, text)
+		if(istype(W, /obj/item/weapon/ion_emitter) && !ion_module)
+			ion_module = W
+			add_item(W, user, text)
 		if(istype(W, /obj/item/weapon/rcd_ammo) && brd_module)
 			if(brd_module.matter >= 10)
 				user << "<span class='notice'>The [name] cant hold any more matter-units.</span>"
@@ -436,7 +383,7 @@
 			brd_module.matter += 10
 			playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 
-		if((istype(W, /obj/item/weapon/grenade)))
+		if((istype(W, /obj/item/weapon/grenade)) && granade_module)
 			if(grenades.len < max_grenades)
 				user.drop_item()
 				W.loc = src
@@ -453,8 +400,8 @@
 		change_fire_mode(usr)
 
 	emp_act(severity)
-		if(severity <= 2 && power_supply_module)
-			power_supply_module.use(round(power_supply_module.maxcharge / severity))
+		if(severity <= 2 && ion_module.power_supply)
+			ion_module.power_supply.use(round(ion_module.power_supply.maxcharge / severity))
 			update_icon()
 		else
 			return
@@ -480,10 +427,11 @@
 		activate()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 
-
-
-
-
+		useResource(amount)
+			if(brd_module.matter < amount)
+				return 0
+			brd_module.matter -= amount
+			return 1
 
 
 	verb
@@ -527,14 +475,24 @@
 	force = 3.0
 
 /obj/item/weapon/ion_emitter
-	name = "ion emitter"
+	name = "ion emitter module"
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "riotgun"
 	w_class = 1.0
 	force = 3.0
+	var/obj/item/weapon/cell/power_supply
+	var/cell_type = "/obj/item/weapon/cell"
+
+	New()
+		if(cell_type)
+			power_supply = new cell_type(src)
+		else
+			power_supply = new(src)
+			power_supply.give(power_supply.maxcharge)
+		return
 
 /obj/item/weapon/breaker_device
-	name = "breaker device"
+	name = "breaker device module"
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "riotgun"
 	w_class = 1.0
@@ -542,7 +500,7 @@
 	var/matter = 0
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/canopy
-	name = "spray canopy"
+	name = "spray canopy module"
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "riotgun"
 	w_class = 1.0
@@ -554,3 +512,4 @@
 
 	afterattack()
 		return
+
