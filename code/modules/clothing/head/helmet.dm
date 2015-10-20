@@ -120,6 +120,11 @@
 /obj/item/clothing/head/helmet/hud/iron_hammer
 	name = "iron hammer helmet"
 	desc = "Helmet of special forces Iron Hammer"
+	flags = FPRINT | TABLEPASS | HEADCOVERSEYES
+	armor = list(melee = 80, bullet = 40, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
+	flags_inv = HIDEEARS|HIDEEYES
+	siemens_coefficient = 0.7
+
 
 	process_hud(mob/M)
 
@@ -138,15 +143,20 @@
 
 			var/list/all_items = suspiciou_person.get_contents()
 
-			for(var/obj/item/T in all_items)
-				if(istype(T, /obj/item/device/assembly/jamming_tool))
-					break
+			for(var/obj/I in all_items)
+				world << I.type
+				if(findtext(I.type, "obj/item/weapon/gun"))
+					world << "EEEEEEE FOUND GUN"
+			/*
+				if(istype(I, /obj/item/device/jamming_tool))
 					world << "found breaker! in [suspiciou_person]"
+					break
 
-				else if(istype(T, /obj/item/weapon/gun) || initial(T.name) in wanted_items)
-					world << "found gun [T] in [suspiciou_person]"
+
+				else if(istype(I, /obj/item/weapon/gun) || initial(I.name) in wanted_items)
+					world << "found gun [I] in [suspiciou_person]"
 					alert_level+=1
-
+*/
 
 			if(istype(suspiciou_person.l_hand, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
 				if(!istype(suspiciou_person.l_hand, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
@@ -159,10 +169,11 @@
 					alert_level+=1
 
 			holder = suspiciou_person.hud_list[ALERT_HUD]
+
 			if(alert_level > 0)
 				holder.icon_state = "hudalert"
 			else
-				holder.icon_state = "ei xolodno ocenb ze yze ale" // any text for  // Kostul
+				holder.icon_state = null
 			C.images += holder
 		return 1
 

@@ -145,6 +145,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	if(uses > 3)
 		randomItems.Add("/obj/item/weapon/melee/energy/sword") //Energy Sword
 		randomItems.Add("/obj/item/clothing/mask/gas/voice") //Voice Changer
+		randomItems.Add("/obj/item/device/jamming_tool") // Jammer Tool ok?
 		randomItems.Add("/obj/item/device/chameleon") //Chameleon Projector
 
 	if(uses > 2)
