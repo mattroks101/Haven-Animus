@@ -130,50 +130,46 @@
 
 		if(!M || !M.client || src.broken)	return
 		var/client/C = M.client
-		var/image/holder
 		var/alert_level = 0
+		var/image/holder
 		for(var/mob/living/carbon/human/suspiciou_person in view(get_turf(M)))
 			if(M.see_invisible < suspiciou_person.invisibility)
 				continue
-			if(suspiciou_person.wear_id )
+			if(suspiciou_person.wear_id)
 				var/obj/item/weapon/card/id/CARTA_ID = suspiciou_person.wear_id.GetID()
 				if(1 in CARTA_ID.access)
 					continue
 
-
-			var/list/all_items = suspiciou_person.get_contents()
+			var/list/all_items = suspiciou_person.GetAllContentsV2()
 
 			for(var/obj/I in all_items)
-				world << I.type
-				if(findtext(I.type, "obj/item/weapon/gun"))
-					world << "EEEEEEE FOUND GUN"
-			/*
+				world << I
 				if(istype(I, /obj/item/device/jamming_tool))
-					world << "found breaker! in [suspiciou_person]"
+					world << "found jammer tool"
 					break
-
-
-				else if(istype(I, /obj/item/weapon/gun) || initial(I.name) in wanted_items)
-					world << "found gun [I] in [suspiciou_person]"
-					alert_level+=1
-*/
+				else if(istype(I, /obj/item/weapon/gun) || (initial(I.name) in wanted_items))
+					world << "found gun [I]"
+					alert_level++
 
 			if(istype(suspiciou_person.l_hand, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
 				if(!istype(suspiciou_person.l_hand, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
-					alert_level+=1
+					alert_level++
 			if(istype(suspiciou_person.r_hand, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
 				if(!istype(suspiciou_person.r_hand, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
-					alert_level+=1
+					alert_level++
 			if(istype(suspiciou_person:belt, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
 				if(!istype(suspiciou_person:belt, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
-					alert_level+=1
+					alert_level++
+
+			if(!C)	continue
 
 			holder = suspiciou_person.hud_list[ALERT_HUD]
 
+			world << "[suspiciou_person] aler level = [alert_level]"
 			if(alert_level > 0)
 				holder.icon_state = "hudalert"
 			else
-				holder.icon_state = null
+				holder.icon_state = "000"
 			C.images += holder
 		return 1
 
