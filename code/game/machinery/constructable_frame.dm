@@ -308,6 +308,17 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/manipulator = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
+/obj/item/weapon/circuitboard/ammolathe
+	name = "Circuit board (Ammolathe)"
+	build_path = /obj/machinery/ammolathe
+	board_type = "machine"
+	origin_tech = "combat=2;engineering=2;programming=2"
+	frame_desc = "Requires 3 Matter Bins, 1 Manipulator, and 1 Console Screen."
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 3,
+							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1)
+
 /obj/item/weapon/circuitboard/protolathe
 	name = "Circuit board (Protolathe)"
 	build_path = /obj/machinery/r_n_d/protolathe

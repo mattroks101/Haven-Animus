@@ -69,6 +69,15 @@ datum/design/telepad
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/autolathe
 
+/datum/design/autolathe
+	name = "Machine Design (Ammolathe Board)"
+	desc = "The circuit board for a ammolathe."
+	id = "ammolathe"
+	req_tech = list("programming" = 2, "engineering" = 2, "combat" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/ammolathe
+
 /datum/design/mechfab
 	name = "Machine Design (Exosuit Fabricator Board)"
 	desc = "The circuit board for an Exosuit Fabricator"
