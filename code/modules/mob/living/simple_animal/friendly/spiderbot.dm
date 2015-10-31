@@ -247,7 +247,7 @@
 
 	return
 
-/mob/living/simple_animal/spiderbot/verb/get_item()
+/mob/living/simple_animal/spiderbot/verb/get_itemm()
 	set name = "Pick up item"
 	set category = "Spiderbot"
 	set desc = "Allows you to take a nearby small item."

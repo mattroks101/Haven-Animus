@@ -1253,7 +1253,7 @@
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.g_dither, global_hud.r_dither, global_hud.gray_dither, global_hud.lp_dither)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.g_dither, global_hud.r_dither, global_hud.gray_dither, global_hud.lp_dither, global_hud.cyan_filter)
 
 		update_action_buttons()
 
@@ -1419,6 +1419,11 @@
 			else if(!seer)
 				see_invisible = SEE_INVISIBLE_LIVING
 
+
+			if(istype(head, /obj/item/clothing/head/helmet/hud))
+				var/obj/item/clothing/head/helmet/hud/H = head
+				H.process_hud(src)
+
 			if(healths)
 				if (analgesic)
 					healths.icon_state = "health_health_numb"
@@ -1501,12 +1506,21 @@
 					client.screen += global_hud.darkMask
 					masked = 1
 
+			if(istype(head, /obj/item/clothing/head/helmet/hud))
+				var/obj/item/clothing/head/helmet/hud/H = head
+				if(H.broken)
+					global_hud.cyan_filter.icon_state = "noize"
+				else
+					global_hud.cyan_filter.icon_state  = "cyaaanaamama"
+
+				client.screen += global_hud.cyan_filter
+
 			if(!masked && istype(glasses, /obj/item/clothing/glasses/welding) )
 				var/obj/item/clothing/glasses/welding/O = glasses
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
 
-			if(istype(glasses, /obj/item/clothing/glasses/night))
+			if((istype(wear_mask, /obj/item/clothing/mask/gas) && !istype(wear_mask, /obj/item/clothing/mask/gas/swat) && !istype(wear_mask, /obj/item/clothing/mask/gas/syndicate)) || istype(glasses, /obj/item/clothing/glasses/night))
 				client.screen += global_hud.g_dither
 
 			if ((istype(glasses, /obj/item/clothing/glasses/thermal) && !istype(glasses, /obj/item/clothing/glasses/thermal/syndi)) || istype(glasses, /obj/item/clothing/glasses/hud/security) || istype(wear_mask, /obj/item/clothing/mask/gas/swat) || istype(wear_mask, /obj/item/clothing/mask/gas/syndicate))

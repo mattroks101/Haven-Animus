@@ -229,6 +229,11 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 		return
 
 
+
+	if(jamming_tool_in_radius(7,src))
+		return
+
+
 	if(GLOBAL_RADIO_TYPE == 1) // NEW RADIO SYSTEMS: By Doohl
 
 		/* Quick introduction:
