@@ -19,6 +19,7 @@ var/datum/global_hud/global_hud = new()
 	var/obj/screen/r_dither = null
 	var/obj/screen/gray_dither = null
 	var/obj/screen/lp_dither = null
+	var/obj/screen/cyan_filter = null
 
 
 /datum/global_hud/New()
@@ -68,6 +69,14 @@ var/datum/global_hud/global_hud = new()
 	lp_dither.layer = 17
 	lp_dither.mouse_opacity = 0
 
+
+	cyan_filter = new /obj/screen()
+	cyan_filter.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	cyan_filter.name = "mesons"
+	cyan_filter.icon = 'icons/effects/alphacolors.dmi'
+	cyan_filter.icon_state = "cyaaanaamama"
+	cyan_filter.layer = 17
+	cyan_filter.mouse_opacity = 0
 
 	var/obj/screen/O
 	var/i

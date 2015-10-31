@@ -101,3 +101,83 @@
 	siemens_coefficient = 0.7
 	network_used = "swat"
 
+
+
+
+
+/// HUD HELMETS
+
+
+/obj/item/clothing/head/helmet/hud
+	name = "hud helmet"
+	var/broken = 0
+
+
+	proc
+		process_hud(var/mob/M)	return
+
+
+/obj/item/clothing/head/helmet/hud/iron_hammer
+	name = "iron hammer helmet"
+	desc = "Helmet of special forces Iron Hammer"
+	flags = FPRINT | TABLEPASS | HEADCOVERSEYES
+	armor = list(melee = 80, bullet = 40, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
+	flags_inv = HIDEEARS|HIDEEYES
+	siemens_coefficient = 0.7
+
+
+	process_hud(mob/M)
+
+		if(!M || !M.client || src.broken)	return
+		var/client/C = M.client
+		var/alert_level = 0
+		var/image/holder
+		for(var/mob/living/carbon/human/suspiciou_person in view(get_turf(M)))
+			if(M.see_invisible < suspiciou_person.invisibility)
+				continue
+			if(suspiciou_person.wear_id)
+				var/obj/item/weapon/card/id/CARTA_ID = suspiciou_person.wear_id.GetID()
+				if(1 in CARTA_ID.access)
+					continue
+
+			var/list/all_items = suspiciou_person.GetAllContentsV2()
+
+			for(var/obj/I in all_items)
+				world << I
+				if(istype(I, /obj/item/device/jamming_tool))
+					world << "found jammer tool"
+					break
+				else if(istype(I, /obj/item/weapon/gun) || (initial(I.name) in wanted_items))
+					world << "found gun [I]"
+					alert_level++
+
+			if(istype(suspiciou_person.l_hand, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
+				if(!istype(suspiciou_person.l_hand, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
+					alert_level++
+			if(istype(suspiciou_person.r_hand, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
+				if(!istype(suspiciou_person.r_hand, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
+					alert_level++
+			if(istype(suspiciou_person:belt, /obj/item/weapon/gun) || istype(suspiciou_person.l_hand, /obj/item/weapon/melee))
+				if(!istype(suspiciou_person:belt, /obj/item/weapon/gun/energy/laser/bluetag || /obj/item/weapon/gun/energy/laser/redtag || /obj/item/weapon/gun/energy/laser/practice))
+					alert_level++
+
+			if(!C)	continue
+
+			holder = suspiciou_person.hud_list[ALERT_HUD]
+
+			world << "[suspiciou_person] aler level = [alert_level]"
+			if(alert_level > 0)
+				holder.icon_state = "hudalert"
+			else
+				holder.icon_state = "000"
+			C.images += holder
+		return 1
+
+
+/obj/item/clothing/head/helmet/hud/emp_act(severity)
+	..()
+	broken = 1
+	desc+="\n It's broken!"
+
+
+var/list/wanted_items = list()
