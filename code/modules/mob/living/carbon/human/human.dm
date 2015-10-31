@@ -479,14 +479,18 @@
 
 //repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
+	var/id_rank = get_id_rank()
 	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
-		return get_id_name("Unknown")
+		return id_rank + get_id_name()
 	if( head && (head.flags_inv&HIDEFACE) )
-		return get_id_name("Unknown")		//Likewise for hats
+		return id_rank + get_id_name()		//Likewise for hats
 	var/face_name = get_face_name()
 	var/id_name = get_id_name("")
-	if(id_name && (id_name != face_name))
-		return "[face_name] (as [id_name])"
+	if(id_name)
+		if(id_name != face_name)
+			return "[face_name] (as [id_rank][id_name])"
+		else
+			return id_rank + id_name
 	return face_name
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
@@ -508,6 +512,38 @@
 		if(I)
 			return I.registered_name
 	return
+
+//gets rank and name from ID or PDA itself, ID inside PDA doesn't matter
+//Useful when player is being seen by other mobs
+/mob/living/carbon/human/proc/get_id_rank()
+	if(istype(wear_id,/obj/item/device/pda))
+		var/obj/item/device/pda/P = wear_id
+		switch(P.ownjob)
+			if("Security Officer")
+				return "Oper. "
+			if("Detective")
+				return "Insp. "
+			if("Warden")
+				return "Sgt. "
+			if("Head of Security")
+				return "Lt. "
+			if("Captain")
+				return "Capt. "
+	if(wear_id)
+		var/obj/item/weapon/card/id/I = wear_id.GetID()
+		if(I)
+			switch(I.rank)
+				if("Security Officer")
+					return "Oper. "
+				if("Detective")
+					return "Insp. "
+				if("Warden")
+					return "Sgt. "
+				if("Head of Security")
+					return "Lt. "
+				if("Captain")
+					return "Capt. "
+	return ""
 
 //gets ID card object from special clothes slot or null.
 /mob/living/carbon/human/proc/get_idcard()

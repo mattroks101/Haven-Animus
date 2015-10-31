@@ -34,8 +34,8 @@
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
 
-	if(name != GetVoice())
-		alt_name = "(as [get_id_name("Unknown")])"
+	if(name != (get_id_rank() + GetVoice()))
+		alt_name = "(as [get_id_rank()][get_id_name()])"
 
 	//parse the radio code and consume it
 	if (message_mode)

@@ -45,7 +45,7 @@
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
-		speaker_name = H.GetVoice()
+		speaker_name = H.get_id_rank() + H.GetVoice()
 
 	if(italics)
 		message = "<i>[message]</i>"
@@ -115,6 +115,22 @@
 
 	if(hard_to_hear)
 		speaker_name = "unknown"
+
+	if(istype(speaker, /mob/living/carbon/human))
+		for(var/datum/data/record/G in data_core.general)
+			if(G.fields["name"] == speaker_name)
+				switch(G.fields["rank"])
+					if("Security Officer")
+						speaker_name = "Oper. [speaker_name]"
+					if("Detective")
+						speaker_name = "Insp. [speaker_name]"
+					if("Warden")
+						speaker_name = "Sgt. [speaker_name]"
+					if("Head of Security")
+						speaker_name = "Lt. [speaker_name]"
+					if("Captain")
+						speaker_name = "Capt. [speaker_name]"
+				break
 
 	var/changed_voice
 

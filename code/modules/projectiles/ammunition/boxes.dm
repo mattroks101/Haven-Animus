@@ -105,3 +105,13 @@
 	name = "beanbag box"
 	icon_state = "bbox"
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+
+//New
+/obj/item/ammo_magazine/ammo_box/a357
+	name = "ammo box (.357)"
+	desc = "A box of .357 ammo."
+	icon_state = "357"
+	caliber = ".357"
+	ammo_type = /obj/item/ammo_casing/a357
+	max_ammo = 7
+	multiple_sprites = 1
