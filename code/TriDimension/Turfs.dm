@@ -8,8 +8,6 @@
 	var/turf/floorbelow
 	var/list/overlay_references
 
-	floor_tile = new/obj/item/stack/tile/open_space // lol
-
 	New()
 		..()
 		getbelow()

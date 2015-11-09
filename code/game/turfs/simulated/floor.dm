@@ -230,43 +230,38 @@ turf/simulated/floor/proc/update_icon()
 
 				icon_state = "[src.style][connectdir]-[diagonalconnect]"
 
-	else if(is_underplating(src))
+	else if(is_underplating())
 		if(!broken && !burnt)
 			var/connectdir = 0
 			for(var/direction in cardinal)
-				if(istype(get_step(src,direction),/turf/simulated/floor))
-					var/turf/simulated/floor/FF = get_step(src,direction)
-					if(FF.is_underplating(src))
-						connectdir |= direction
+				var/turf/FF = get_step(src,direction)
+				if(istype(FF, /turf/simulated/floor/plating/under) || istype(FF, /turf/simulated/floor/open) || istype(FF,/turf/space))
+					connectdir |= direction
 				//Check the diagonal connections for corners, where you have, for example, connections both north and east. In this case it checks for a north-east connection to determine whether to add a corner marker or not.
 			var/diagonalconnect = 0 //1 = NE; 2 = SE; 4 = NW; 8 = SW
 			//Northeast
 			if(connectdir & NORTH && connectdir & EAST)
-				if(istype(get_step(src,NORTHEAST),/turf/simulated/floor))
-					var/turf/simulated/floor/FF = get_step(src,NORTHEAST)
-					if(FF.is_underplating(src))
-						diagonalconnect |= 1
+				var/turf/FF = get_step(src,NORTHEAST)
+				if(istype(FF, /turf/simulated/floor/plating/under) || istype(FF, /turf/simulated/floor/open) || istype(FF,/turf/space))
+					diagonalconnect |= 1
 
 			//Southeast
 			if(connectdir & SOUTH && connectdir & EAST)
-				if(istype(get_step(src,SOUTHEAST),/turf/simulated/floor))
-					var/turf/simulated/floor/FF = get_step(src,SOUTHEAST)
-					if(FF.is_underplating(src))
-						diagonalconnect |= 2
+				var/turf/FF = get_step(src,SOUTHEAST)
+				if(istype(FF, /turf/simulated/floor/plating/under) || istype(FF, /turf/simulated/floor/open) || istype(FF,/turf/space))
+					diagonalconnect |= 2
 
 				//Northwest
 			if(connectdir & NORTH && connectdir & WEST)
-				if(istype(get_step(src,NORTHWEST),/turf/simulated/floor))
-					var/turf/simulated/floor/FF = get_step(src,NORTHWEST)
-					if(FF.is_underplating(src))
-						diagonalconnect |= 4
+				var/turf/FF = get_step(src,NORTHWEST)
+				if(istype(FF, /turf/simulated/floor/plating/under) || istype(FF, /turf/simulated/floor/open) || istype(FF,/turf/space))
+					diagonalconnect |= 4
 
 				//Southwest
 			if(connectdir & SOUTH && connectdir & WEST)
-				if(istype(get_step(src,SOUTHWEST),/turf/simulated/floor))
-					var/turf/simulated/floor/FF = get_step(src,SOUTHWEST)
-					if(FF.is_underplating(src))
-						diagonalconnect |= 8
+				var/turf/FF = get_step(src,SOUTHWEST)
+				if(istype(FF, /turf/simulated/floor/plating/under) || istype(FF, /turf/simulated/floor/open) || istype(FF,/turf/space))
+					diagonalconnect |= 8
 
 			icon_state = "underplating[connectdir]-[diagonalconnect]"
 
@@ -372,7 +367,7 @@ turf/simulated/floor/proc/update_icon()
 		return 0
 
 /turf/simulated/floor/is_underplating()
-	if(istype(floor_tile,/obj/item/stack/tile/underplating) || istype(floor_tile,/obj/item/stack/tile/open_space))
+	if(istype(src,/turf/simulated/floor/plating/under))
 		return 1
 	else
 		return 0

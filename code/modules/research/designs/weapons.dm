@@ -108,25 +108,7 @@ datum/design/xray
 	build_path = /obj/item/weapon/gun/energy/floragun
 
 
-// Ammo
-
-/datum/design/ammo_9mm
-	name = "SMG Magazine (9mm)"
-	desc = "A box of prototype 9mm ammunition."
-	id = "ammo_9mm"
-	req_tech = list("combat" = 4, "materials" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 3750, "$silver" = 100)
-	build_path = /obj/item/ammo_magazine/external/msmg9mm
-
-/datum/design/stunshell
-	name = "Stun Shell"
-	desc = "A stunning shell for a shotgun."
-	id = "stunshell"
-	req_tech = list("combat" = 3, "materials" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 4000)
-	build_path = /obj/item/ammo_casing/shotgun/stunshell
+// Grenades
 
 /datum/design/large_grenade
 	name = "Large Grenade"

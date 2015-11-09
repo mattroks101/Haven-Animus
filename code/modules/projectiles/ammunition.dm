@@ -11,6 +11,20 @@
 	var/projectile_type					//The bullet type to create when New() is called
 	var/obj/item/projectile/BB = null 	//The loaded bullet
 
+	attackby(var/obj/item/A as obj, mob/user as mob)
+		if(istype(A, /obj/item/ammo_casing))
+			var/obj/item/ammo_casing/AC = A
+			if(AC.caliber == caliber)
+				var/obj/item/ammo_magazine/stack/S = new(src.loc, caliber)
+				user.before_take_item(A)
+				S.stored_ammo += src
+				src.loc = S
+				S.stored_ammo += AC
+				AC.loc = S
+				S.update_state()
+				usr << "You add [src] to the stack. It now contains [S.ammo_count()] bullet\s."
+				return
+
 	New()
 		..()
 		if(projectile_type)
@@ -26,6 +40,25 @@
 
 	proc/on_fired()
 		return
+
+	proc/add_to_stacks(mob/usr as mob)
+		for (var/obj/item/ammo_magazine/stack/S in usr.loc)
+			if(S.give_round(src))
+				usr << "You add [src] to the stack. It now contains [S.ammo_count()] bullet\s."
+				S.update_state()
+				return
+		for (var/obj/item/ammo_casing/AC in usr.loc)
+			if(AC == src)
+				continue
+			if(AC.caliber == caliber)
+				var/obj/item/ammo_magazine/stack/S = new(usr.loc, caliber)
+				S.stored_ammo += src
+				src.loc = S
+				S.stored_ammo += AC
+				AC.loc = S
+				S.update_state()
+				usr << "You add [src] to the stack. It now contains [S.ammo_count()] bullet\s."
+				return
 
 //Boxes of ammo
 /obj/item/ammo_magazine
@@ -78,7 +111,7 @@
 					AM.stored_ammo -= AC
 					num_loaded++
 				else break
-			AM.update_icon()
+			AM.update_state()
 
 		if(istype(A, /obj/item/ammo_casing))
 			var/obj/item/ammo_casing/AC = A
@@ -92,15 +125,19 @@
 				user << "<span class='notice'>You load [num_loaded] shell\s into \the [src]!</span>"
 			else
 				user << "<span class='notice'>You load a shell into \the [src]!</span>"
-			update_icon()
+			update_state()
 
 	attack_self(mob/user as mob)
 		var/obj/item/ammo_casing/A = get_round()
 		if(A)
 			A.loc = user.loc
+			A.add_to_stacks(user)
 			user << "<span class='notice'>You remove a shell from \the [src]!</span>"
-			update_icon()
+			update_state()
 
+
+	proc/update_state()
+		return update_icon()
 
 	proc/give_round(var/obj/item/ammo_casing/A)
 		if(istype(A))
@@ -128,3 +165,43 @@
 			else
 				update_icon()
 			return b
+
+//Not box, but ammo_box
+/obj/item/ammo_magazine/ammo_box
+
+	give_round(var/obj/item/ammo_casing/A)
+		if(A.type == ammo_type && stored_ammo.len < max_ammo)
+			stored_ammo += A
+			A.loc = src
+			return 1
+		return 0
+
+/obj/item/ammo_magazine/stack
+	name = "ammo stack"
+	icon_state = null
+	icon = null
+	slot_flags = null
+
+	examine()
+		..()
+		usr << "Contains:"
+		for(var/obj/item/ammo_casing/AC in stored_ammo)
+			usr << "[AC]"
+
+	New(loc, var/caliber)
+		src.caliber = caliber
+
+	update_state()
+		if(!ammo_count())
+			if(istype(src.loc, /mob))
+				//var/mob/M = src.loc
+				//M.before_take_item(src)
+				src.loc:before_take_item(src)
+			qdel(src)
+			return
+		return ..()
+
+	update_icon()
+		overlays.Cut()
+		for(var/obj/item/ammo_casing/AC in stored_ammo)
+			overlays += image(AC, layer=FLOAT_LAYER)
