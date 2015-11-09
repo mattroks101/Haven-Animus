@@ -18,6 +18,11 @@
 	desc = "For prime comfort during psychiatric evaluations."
 	icon_state = "psychbed"
 
+/obj/structure/stool/bed/prison
+	name = "hard bed"
+	desc = "Still better than floor."
+	icon_state = "prisonbed"
+
 /obj/structure/stool/bed/alien
 	name = "resting contraption"
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
