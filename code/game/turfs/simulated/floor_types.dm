@@ -300,6 +300,10 @@
 	style = "purple"
 	icon_state = "purple15-15"
 
+/turf/simulated/floor/carpet/orange
+	style = "orange"
+	icon_state = "orange15-15"
+
 /turf/simulated/floor/plating/ironsand/New()
 	..()
 	name = "Iron Sand"
