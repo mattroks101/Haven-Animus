@@ -480,7 +480,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 
 
-/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level)
+/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/list/level)
 
   /* ###### Prepare the radio connection ###### */
 
@@ -500,7 +500,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if(data == 1)
 		for (var/obj/item/device/radio/intercom/R in connection.devices["[RADIO_CHAT]"])
 			var/turf/position = get_turf(R)
-			if(position && position.z == level)
+			if(position && position.z in level)
 				receive |= R.send_hear(display_freq, level)
 
 
@@ -512,7 +512,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			if(istype(R, /obj/item/device/radio/headset))
 				continue
 			var/turf/position = get_turf(R)
-			if(position && position.z == level)
+			if(position && position.z in level)
 				receive |= R.send_hear(display_freq)
 
 
@@ -523,7 +523,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		for (var/obj/item/device/radio/R in syndicateconnection.devices["[RADIO_CHAT]"])
 			var/turf/position = get_turf(R)
-			if(position && position.z == level)
+			if(position && position.z in level)
 				receive |= R.send_hear(SYND_FREQ)
 
 
@@ -532,7 +532,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	else
 		for (var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
 			var/turf/position = get_turf(R)
-			if(position && position.z == level)
+			if(position && position.z in level)
 				receive |= R.send_hear(display_freq)
 
 

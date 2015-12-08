@@ -5,30 +5,13 @@
 /obj/machinery/telecomms/relay/preset
 	network = "tcommsat"
 
-/obj/machinery/telecomms/relay/preset/station
-	id = "Station Relay"
-	listening_level = 1
-	autolinkers = list("s_relay")
+/obj/machinery/telecomms/relay/preset/vessel
+	id = "Vessel Relay"
+	autolinkers = list("v_relay")
 
-/obj/machinery/telecomms/relay/preset/luna/desk1
-	id = "Luna Desk 1 Relay"
-	listening_level = 4
-	autolinkers = list("ld1_relay")
-
-/obj/machinery/telecomms/relay/preset/luna/desk2
-	id = "Luna Desk 2 Relay"
-	listening_level = 3
-	autolinkers = list("ld2_relay")
-
-/obj/machinery/telecomms/relay/preset/luna/desk3
-	id = "Luna Desk 3 Relay"
-	listening_level = 2
-	autolinkers = list("ld3_relay")
-
-/obj/machinery/telecomms/relay/preset/luna/desk4
-	id = "Luna Desk 4 Relay"
-	listening_level = 1
-	autolinkers = list("ld4_relay")
+	New()
+		..()
+		listening_level = vessel_z
 
 /obj/machinery/telecomms/relay/preset/telecomms
 	id = "Telecomms Relay"
@@ -59,7 +42,7 @@
 /obj/machinery/telecomms/hub/preset
 	id = "Hub"
 	network = "tcommsat"
-	autolinkers = list("hub", "relay", "c_relay", "ld1_relay", "ld2_relay", "ld3_relay", "ld4_relay", "m_relay", "r_relay", "science", "medical",
+	autolinkers = list("hub", "relay", "c_relay", "v_relay", "m_relay", "r_relay", "science", "medical",
 	"supply", "common", "command", "engineering", "security",
 	"receiverA", "receiverB", "broadcasterA", "broadcasterB")
 
@@ -67,7 +50,7 @@
 	id = "CentComm Hub"
 	network = "tcommsat"
 	heatgen = 0
-	autolinkers = list("hub_cent", "c_relay", "ld1_relay", "ld2_relay", "ld3_relay", "ld4_relay", "m_relay", "r_relay",
+	autolinkers = list("hub_cent", "c_relay", "v_relay", "m_relay", "r_relay",
 	 "centcomm", "receiverCent", "broadcasterCent")
 
 //Receivers

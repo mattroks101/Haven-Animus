@@ -389,23 +389,14 @@ turf/simulated/floor/proc/update_icon()
 	if(istype(src,/turf/simulated/floor/mech_bay_recharge_floor))
 		src.ChangeTurf(/turf/simulated/floor/plating)
 	if(broken) return
-	if(is_plasteel_floor())
-		src.damage_overlay = image(overlays_dmi,"damaged[pick(1,2,3,4,5)]")
-		broken = 1
-	else if(is_light_floor())
-		src.damage_overlay = image(overlays_dmi,"light_broken")
-		broken = 1
-	else if(is_plating())
-		src.damage_overlay = image(overlays_dmi,"platingdmg[pick(1,2,3)]")
+	if(is_plasteel_floor() || is_plating() || is_carpet_floor() || is_light_floor())
+		src.damage_overlay = image(overlays_dmi,"damaged[pick(1,2,3)]")
 		broken = 1
 	else if(is_wood_floor())
-		src.damage_overlay = image(overlays_dmi,"wood-broken")
-		broken = 1
-	else if(is_carpet_floor())
-		src.damage_overlay = image(overlays_dmi,"carpet-broken")
+		src.damage_overlay = image(overlays_dmi,"wood-broken[pick(1,2,3,4,5,6,7)]")
 		broken = 1
 	else if(is_grass_floor())
-		src.damage_overlay = image(overlays_dmi,"sand[pick("1","2","3")]")
+		src.damage_overlay = image(overlays_dmi,"sand")
 		broken = 1
 	overlays += src.damage_overlay
 
@@ -413,20 +404,11 @@ turf/simulated/floor/proc/update_icon()
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(istype(src,/turf/simulated/floor/plating/airless/asteroid)) return//Asteroid tiles don't burn
 	if(broken || burnt) return
-	if(is_plasteel_floor())
-		src.damage_overlay = image(overlays_dmi,"damaged[pick(1,2,3,4,5)]")
-		burnt = 1
-	else if(is_plasteel_floor())
-		src.damage_overlay = "floorscorched[pick(1,2)]"
-		burnt = 1
-	else if(is_plating())
-		src.damage_overlay = image(overlays_dmi,"platingdmg[pick(1,2,3)]")
+	if(is_plasteel_floor() || is_plating() || is_carpet_floor())
+		src.damage_overlay = image(overlays_dmi,"scorched[pick(1,2,3)]")
 		burnt = 1
 	else if(is_wood_floor())
-		src.damage_overlay = image(overlays_dmi,"wood-broken")
-		burnt = 1
-	else if(is_carpet_floor())
-		src.damage_overlay = image(overlays_dmi,"carpet-broken")
+		src.damage_overlay = image(overlays_dmi,"wood-broken[pick(1,2,3,4,5,6,7)]")
 		burnt = 1
 	else if(is_grass_floor())
 		src.damage_overlay = image(overlays_dmi,"sand[pick("1","2","3")]")
