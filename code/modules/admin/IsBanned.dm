@@ -29,4 +29,5 @@ world/IsBanned(key,address,computer_id)
 		message_admins("\blue Failed Login: [key] id:[computer_id] ip:[address] - Banned [.["reason"]]")
 		return .
 
-	return ..()	//default pager ban stuff
+//	return ..()	//default pager ban stuff
+	return list("reason"="test", "desc"="\nReason: Only admins are allowed to join.")
