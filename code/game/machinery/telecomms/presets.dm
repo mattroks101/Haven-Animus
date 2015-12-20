@@ -233,3 +233,14 @@
 	network = "tcommsat"
 	heatgen = 0
 	autolinkers = list("broadcasterCent")
+
+//Computers
+
+/obj/machinery/computer/telecomms/monitor/preset
+	network = "tcommsat"
+
+/obj/machinery/computer/telecomms/traffic/preset
+	network = "tcommsat"
+
+/obj/machinery/computer/telecomms/server/preset
+	network = "tcommsat"
