@@ -21,10 +21,7 @@
 						L.update_icon() //so siding get updated properly
 	proc
 		is_catwalk()
-			if(istype(src, /obj/structure/catwalk))
-				return 1
-			else
-				return 0
+			return 1
 
 
 

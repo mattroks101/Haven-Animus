@@ -22,8 +22,6 @@
 			if(!floorbelow) //make sure that there is actually something below
 				if(!getbelow())
 					return
-			for(var/obj/structure/catwalk/C in get_turf(src))
-				return
 
 			if(AM)
 				var/blocked = 0
@@ -54,7 +52,7 @@
 								blocked = 1
 								if(prob(20))
 									blocked = 0
-									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
 									A.Destroy()
 							//      else if((FAT in AM.mutations) && prob(80))
 							//	      blocked = 0
@@ -66,7 +64,7 @@
 								blocked = 1
 								if(prob(10))
 									blocked = 0
-									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
 									A.Destroy()
 							//      else if((FAT in AM.mutations) && prob(40))
 							//	      blocked = 0
@@ -79,7 +77,7 @@
 								blocked = 1
 								if(prob(3))
 									blocked = 0
-									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
 									A.Destroy()
 							//      else if((FAT in AM.mutations) && prob(10))
 							//	      blocked = 0
