@@ -119,6 +119,8 @@
 	if(holder)
 		admins += src
 		holder.owner = src
+		if (holder.rights & R_DEBUG)
+			control_freak = 0
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = preferences_datums[ckey]
