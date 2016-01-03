@@ -33,10 +33,12 @@
 	icon_state = "railing-2corner"
 
 
-/obj/structure/railing/corner/CanPass(atom/movable/mover as mob|obj, turf/target, height=0, air_group=0)
+/obj/structure/railing/corner/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
 
+	if(!mover)
+		return 1	//Null can pass through anything, I suppose.
 	if(dir == EAST)
 		if(mover.loc != src.loc)
 			if((get_dir(loc, target) == WEST) || (get_dir(loc, target) == NORTH))
@@ -100,7 +102,7 @@
 /obj/structure/railing/full
 	icon_state = "railing-full"
 
-/obj/structure/railing/full/CanPass(atom/movable/mover as mob|obj, turf/target, height=0, air_group=0)
+/obj/structure/railing/full/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
 	else return 0
@@ -117,7 +119,7 @@
 	icon_state = "railing-3corner"
 
 
-/obj/structure/railing/triple/CanPass(atom/movable/mover as mob|obj, turf/target, height=0, air_group=0)
+/obj/structure/railing/triple/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
 

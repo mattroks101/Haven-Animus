@@ -411,7 +411,7 @@ turf/simulated/floor/proc/update_icon()
 		src.damage_overlay = image(overlays_dmi,"wood-broken[pick(1,2,3,4,5,6,7)]")
 		burnt = 1
 	else if(is_grass_floor())
-		src.damage_overlay = image(overlays_dmi,"sand[pick("1","2","3")]")
+		src.damage_overlay = image(overlays_dmi,"sand")
 		burnt = 1
 	overlays += src.damage_overlay
 
