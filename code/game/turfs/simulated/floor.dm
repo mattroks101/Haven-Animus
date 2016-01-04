@@ -108,6 +108,8 @@ turf/simulated/floor/proc/update_icon()
 	if(style == "hull_new")
 		var/connectdir = 0
 		var/random_icon = "center[rand(1,34)]"
+		if(icon_state != "hull")
+			random_icon = copytext(icon_state, 5)
 		for(var/direction in cardinal)
 			if(istype(get_step(src,direction),/turf/simulated/floor) || istype(get_step(src,direction),/turf/simulated/wall))
 				connectdir |= direction
