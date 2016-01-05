@@ -386,13 +386,13 @@ turf/simulated/floor/proc/update_icon()
 		return 1
 	return 0
 
-/turf/simulated/floor/proc/break_tile()
+/turf/simulated/floor/proc/break_tile(rust)
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(istype(src,/turf/simulated/floor/mech_bay_recharge_floor))
 		src.ChangeTurf(/turf/simulated/floor/plating)
 	if(broken) return
 	if(is_plasteel_floor() || is_plating() || is_carpet_floor() || is_light_floor())
-		src.damage_overlay = image(overlays_dmi,"damaged[pick(1,2,3)]")
+		src.damage_overlay = image(overlays_dmi,rust?"rust":"damaged[pick(1,2,3)]")
 		broken = 1
 	else if(is_wood_floor())
 		src.damage_overlay = image(overlays_dmi,"wood-broken[pick(1,2,3,4,5,6,7)]")
