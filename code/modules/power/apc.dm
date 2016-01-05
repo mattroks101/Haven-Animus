@@ -98,6 +98,7 @@
 	..()
 
 	if(src.loc.loc.type == /area)
+		stat |= BROKEN
 		return
 	// offset 24 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area

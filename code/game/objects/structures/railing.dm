@@ -123,6 +123,8 @@
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
 
+	if(!mover)
+		return 1	//Null can pass through anything, I suppose.
 	if(dir == EAST)
 		if(mover.loc != src.loc)
 			if(get_dir(loc, target) == WEST)

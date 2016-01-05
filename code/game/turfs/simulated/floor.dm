@@ -3,7 +3,7 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 				"damaged5","panelscorched","floorscorched1","floorscorched2","platingdmg1","platingdmg2",
 				"platingdmg3","plating","light_on","light_on_flicker1","light_on_flicker2",
 				"light_on_clicker3","light_on_clicker4","light_on_clicker5","light_broken",
-				"light_on_broken","light_off","wall_thermite","grass1","grass2","grass3","grass4",
+				"light_on_broken","light_off","wall_thermite","grass1","grass2","grass3","grass4","grass5","dirt",
 				"asteroid","asteroid_dug",
 				"asteroid0","asteroid1","asteroid2","asteroid3","asteroid4",
 				"asteroid5","asteroid6","asteroid7","asteroid8","asteroid9","asteroid10","asteroid11","asteroid12",
@@ -108,6 +108,8 @@ turf/simulated/floor/proc/update_icon()
 	if(style == "hull_new")
 		var/connectdir = 0
 		var/random_icon = "center[rand(1,34)]"
+		if(icon_state != "hull")
+			random_icon = copytext(icon_state, 5)
 		for(var/direction in cardinal)
 			if(istype(get_step(src,direction),/turf/simulated/floor) || istype(get_step(src,direction),/turf/simulated/wall))
 				connectdir |= direction
@@ -187,6 +189,10 @@ turf/simulated/floor/proc/update_icon()
 		if(!broken && !burnt)
 			if(!(icon_state in list("grass1","grass2","grass3","grass4")))
 				icon_state = "grass[pick("1","2","3","4")]"
+	else if(is_dirt_floor())
+		if(!broken && !burnt)
+			if(icon_state != "dirt")
+				icon_state = "dirt"
 	else if(is_carpet_floor())
 		if(!broken && !burnt)
 			if(icon_state != "carpetsymbol")
@@ -354,6 +360,12 @@ turf/simulated/floor/proc/update_icon()
 	else
 		return 0
 
+/turf/simulated/floor/is_dirt_floor()
+	if(istype(floor_tile,/obj/item/stack/tile/dirt))
+		return 1
+	else
+		return 0
+
 /turf/simulated/floor/is_wood_floor()
 	if(istype(floor_tile,/obj/item/stack/tile/wood))
 		return 1
@@ -384,13 +396,13 @@ turf/simulated/floor/proc/update_icon()
 		return 1
 	return 0
 
-/turf/simulated/floor/proc/break_tile()
+/turf/simulated/floor/proc/break_tile(rust)
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(istype(src,/turf/simulated/floor/mech_bay_recharge_floor))
 		src.ChangeTurf(/turf/simulated/floor/plating)
 	if(broken) return
 	if(is_plasteel_floor() || is_plating() || is_carpet_floor() || is_light_floor())
-		src.damage_overlay = image(overlays_dmi,"damaged[pick(1,2,3)]")
+		src.damage_overlay = image(overlays_dmi,rust?"rust":"damaged[pick(1,2,3)]")
 		broken = 1
 	else if(is_wood_floor())
 		src.damage_overlay = image(overlays_dmi,"wood-broken[pick(1,2,3,4,5,6,7)]")
@@ -505,6 +517,23 @@ turf/simulated/floor/proc/update_icon()
 			return
 	//if you gave a valid parameter, it won't get thisf ar.
 	floor_tile = new/obj/item/stack/tile/grass
+
+	update_icon()
+	levelupdate()
+
+//Copypaste power ohgod why
+/turf/simulated/floor/proc/make_dirt_floor(var/obj/item/stack/tile/dirt/T = null)
+	broken = 0
+	burnt = 0
+	intact = 1
+	if(T)
+		if(istype(T,/obj/item/stack/tile/dirt))
+			floor_tile = T
+			update_icon()
+			levelupdate()
+			return
+	//if you gave a valid parameter, it won't get this far.
+	floor_tile = new/obj/item/stack/tile/dirt
 
 	update_icon()
 	levelupdate()
@@ -645,9 +674,12 @@ turf/simulated/floor/proc/update_icon()
 
 	if(istype(C, /obj/item/weapon/shovel))
 		if(is_grass_floor())
-			new /obj/item/weapon/ore/glass(src)
-			new /obj/item/weapon/ore/glass(src) //Make some sand if you shovel grass
 			user << "\blue You shovel the grass."
+			make_dirt_floor()
+		else if(is_dirt_floor())
+			new /obj/item/weapon/ore/glass(src)
+			new /obj/item/weapon/ore/glass(src)
+			user << "\blue You shovel the  dirt."
 			make_plating()
 		else
 			user << "\red You cannot shovel this."

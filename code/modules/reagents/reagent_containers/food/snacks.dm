@@ -2946,45 +2946,6 @@
 		bitesize = 3
 
 
-/obj/item/weapon/reagent_containers/food/snacks/poo
-	name = "poo"
-	desc = "It's a poo. How disgusting!"
-	icon = 'poop.dmi'
-	icon_state = "poop2"
-	item_state = "poop"
-	New()
-		..()
-		icon_state = pick("poop1", "poop2", "poop3", "poop4", "poop5", "poop6", "poop7")
-		reagents.add_reagent("poo", 10)
-		bitesize = 3
-
-/*	proc/poo_splat(atom/target)
-		if(reagents.total_volume)
-			if(ismob(target))
-				src.reagents.reaction(target, TOUCH)
-			if(isturf(target))
-				src.reagents.reaction(get_turf(target))
-			if(isobj(target))
-				src.reagents.reaction(target, TOUCH)
-		spawn(5) src.reagents.clear_reagents()
-		playsound(src.loc, "squish.ogg", 40, 1)
-		del(src)
-*/
-	throw_impact(atom/hit_atom)
-		..()
-		if(reagents.total_volume)
-			src.reagents.reaction(get_turf(hit_atom))
-/*			if(ismob(hit_atom))
-				src.reagents.reaction(hit_atom, TOUCH)
-			if(isturf(hit_atom))
-				src.reagents.reaction(get_turf(hit_atom))
-			if(isobj(hit_atom))
-				src.reagents.reaction(get_turf(hit_atom))*/
-		spawn(5) src.reagents.clear_reagents()
-		playsound(src.loc, "squish.ogg", 40, 1)
-		del(src)
-
-
 
 
 ///////////////////////////////////////////////////////
