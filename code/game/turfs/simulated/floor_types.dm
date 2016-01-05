@@ -256,6 +256,11 @@
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
 
+/turf/simulated/floor/dirt
+	name = "Dirt"
+	icon_state = "dirt"
+	floor_tile = new/obj/item/stack/tile/dirt
+
 /turf/simulated/floor/carpet
 	name = "Carpet"
 	icon = 'icons/turf/carpet.dmi'

@@ -1,6 +1,7 @@
 /* Diffrent misc types of tiles
  * Contains:
  *		Grass
+ *		Dirt
  *		Wood
  *		Carpet
  */
@@ -21,6 +22,22 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	max_amount = 60
 	origin_tech = "biotech=1"
+
+/*
+ * Dirt
+ */
+/obj/item/stack/tile/dirt
+	name = "dirt tile"
+	singular_name = "dirty floor tile"
+	desc = "A floor tile covered in a thick layer of dirt"
+	icon_state = "tile_dirt"
+	w_class = 3.0
+	force = 1.0
+	throwforce = 1.0
+	throw_speed = 5
+	throw_range = 20
+	flags = FPRINT | TABLEPASS | CONDUCT
+	max_amount = 60
 
 /*
  * Wood

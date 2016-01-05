@@ -3,7 +3,7 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 				"damaged5","panelscorched","floorscorched1","floorscorched2","platingdmg1","platingdmg2",
 				"platingdmg3","plating","light_on","light_on_flicker1","light_on_flicker2",
 				"light_on_clicker3","light_on_clicker4","light_on_clicker5","light_broken",
-				"light_on_broken","light_off","wall_thermite","grass1","grass2","grass3","grass4",
+				"light_on_broken","light_off","wall_thermite","grass1","grass2","grass3","grass4","grass5","dirt",
 				"asteroid","asteroid_dug",
 				"asteroid0","asteroid1","asteroid2","asteroid3","asteroid4",
 				"asteroid5","asteroid6","asteroid7","asteroid8","asteroid9","asteroid10","asteroid11","asteroid12",
@@ -189,6 +189,10 @@ turf/simulated/floor/proc/update_icon()
 		if(!broken && !burnt)
 			if(!(icon_state in list("grass1","grass2","grass3","grass4")))
 				icon_state = "grass[pick("1","2","3","4")]"
+	else if(is_dirt_floor())
+		if(!broken && !burnt)
+			if(icon_state != "dirt")
+				icon_state = "dirt"
 	else if(is_carpet_floor())
 		if(!broken && !burnt)
 			if(icon_state != "carpetsymbol")
@@ -356,6 +360,12 @@ turf/simulated/floor/proc/update_icon()
 	else
 		return 0
 
+/turf/simulated/floor/is_dirt_floor()
+	if(istype(floor_tile,/obj/item/stack/tile/dirt))
+		return 1
+	else
+		return 0
+
 /turf/simulated/floor/is_wood_floor()
 	if(istype(floor_tile,/obj/item/stack/tile/wood))
 		return 1
@@ -511,6 +521,23 @@ turf/simulated/floor/proc/update_icon()
 	update_icon()
 	levelupdate()
 
+//Copypaste power ohgod why
+/turf/simulated/floor/proc/make_dirt_floor(var/obj/item/stack/tile/dirt/T = null)
+	broken = 0
+	burnt = 0
+	intact = 1
+	if(T)
+		if(istype(T,/obj/item/stack/tile/dirt))
+			floor_tile = T
+			update_icon()
+			levelupdate()
+			return
+	//if you gave a valid parameter, it won't get this far.
+	floor_tile = new/obj/item/stack/tile/dirt
+
+	update_icon()
+	levelupdate()
+
 //This proc will make a turf into a wood floor. Fun eh? Insert the wood tile to be used as the argument
 //If no argument is given a new one will be made.
 /turf/simulated/floor/proc/make_wood_floor(var/obj/item/stack/tile/wood/T = null)
@@ -647,9 +674,12 @@ turf/simulated/floor/proc/update_icon()
 
 	if(istype(C, /obj/item/weapon/shovel))
 		if(is_grass_floor())
-			new /obj/item/weapon/ore/glass(src)
-			new /obj/item/weapon/ore/glass(src) //Make some sand if you shovel grass
 			user << "\blue You shovel the grass."
+			make_dirt_floor()
+		else if(is_dirt_floor())
+			new /obj/item/weapon/ore/glass(src)
+			new /obj/item/weapon/ore/glass(src)
+			user << "\blue You shovel the  dirt."
 			make_plating()
 		else
 			user << "\red You cannot shovel this."
