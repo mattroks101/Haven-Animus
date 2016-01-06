@@ -38,12 +38,12 @@
 
 						//dont break here, since we still need to be sure that it isnt blocked
 
-				if (!blocked && has_gravity(src))
-					if ( istype(AM, /mob/living/carbon/human))
+				if(!blocked && has_gravity(src))
+					if(istype(AM, /mob/living/carbon/human))
 						var/mob/living/carbon/human/H = AM
-						if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
-							return
-						blocked = 0
+						var/obj/item/weapon/tank/jetpack/J = H.back
+						if(istype(J) && J.stabilization_on)
+							return ..()
 						for(var/atom/A in src)
 							if(A.density&&A!=AM)
 								blocked = 1
@@ -73,6 +73,7 @@
 								break
 							if(istype(A, /obj/structure/catwalk))
 								blocked = 1
+								break
 							if(istype(A, /obj/structure/lattice))
 								blocked = 1
 								if(prob(3))
