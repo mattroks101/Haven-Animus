@@ -145,35 +145,29 @@ datum/preferences
 		var/gloves_icon = 'icons/mob/hands.dmi'
 		var/suit_icon = 'icons/mob/suit.dmi'
 
-//FAT&FEMALE
-/*
-		if(fat)
-			uniform_icon = 'icons/mob/uniform_fat.dmi'
-		else if(g == "f")
-			uniform_icon = 'icons/mob/uniform_f.dmi'
-
-		if(g == "f" && !fat)
-			shoes_icon = 'icons/mob/feet_f.dmi'
-			back_icon = 'icons/mob/back_f.dmi'
-			gloves_icon = 'icons/mob/hands_f.dmi'
-			suit_icon = 'icons/mob/suit_f.dmi'*/
+		switch(fat)
+			if("fat")
+				uniform_icon = 'icons/mob/uniform_fat.dmi'
+				shoes_icon = 'icons/mob/feet_fat.dmi'
+				back_icon = 'icons/mob/back_fat.dmi'
+				gloves_icon = 'icons/mob/hands_fat.dmi'
+				suit_icon = 'icons/mob/suit_fat.dmi'
+			if("slim")
+				uniform_icon = 'icons/mob/uniform_slim.dmi'
+				shoes_icon = 'icons/mob/feet_slim.dmi'
+				back_icon = 'icons/mob/back_slim.dmi'
+				gloves_icon = 'icons/mob/hands_slim.dmi'
+				suit_icon = 'icons/mob/suit_slim.dmi'
 
 		if(current_species)
 			icobase = current_species.icobase
 		else
 			icobase = 'icons/mob/human_races/r_human.dmi'
 
-		preview_icon = new /icon(icobase, "torso_[g][fat ? "_fat" : ""]")
-		preview_icon.Blend(new /icon(icobase, "groin_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "head_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "l_arm_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "r_arm_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "l_leg_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "r_leg_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "l_foot_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "r_foot_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "l_hand_[g]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "r_hand_[g]"), ICON_OVERLAY)
+		preview_icon = new /icon(icobase, "torso_[g][fat ? "_[fat]" : ""]")
+		preview_icon.Blend(new /icon(icobase, "groin_[g][fat ? "_[fat]" : ""]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "head_[g][fat ? "_[fat]" : ""]"), ICON_OVERLAY)
+		//Лоли пидр
 
 		for(var/name in list("l_arm","r_arm","l_leg","r_leg","l_foot","r_foot","l_hand","r_hand"))
 			// make sure the organ is added to the list so it's drawn
@@ -183,7 +177,7 @@ datum/preferences
 		for(var/name in organ_data)
 			if(organ_data[name] == "amputated") continue
 
-			var/icon/temp = new /icon(icobase, "[name]")
+			var/icon/temp = new /icon(icobase, "[name]_[g][fat ? "_[fat]" : ""]")
 			if(organ_data[name] == "cyborg")
 				temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 
@@ -584,12 +578,6 @@ datum/preferences
 						clothes_s.Blend(new /icon(back_icon, "satchel"), ICON_OVERLAY)
 
 		if(disabilities & NEARSIGHTED)
-//FAT&FEMALE
-/*
-			if(g == "f")
-				preview_icon.Blend(new /icon('icons/mob/eyes_f.dmi', "glasses"), ICON_OVERLAY)
-			else
-	*/
 			preview_icon.Blend(new /icon('icons/mob/eyes.dmi', "glasses"), ICON_OVERLAY)
 
 		preview_icon.Blend(eyes_s, ICON_OVERLAY)

@@ -154,7 +154,13 @@ datum/preferences
 
 		dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
-		dat += "<b>Body Shape:</b> <a href='?_src_=prefs;preference=fatness'><b>[fat ? "Fat" : "Slim"]</b></a>"
+		var/body = "Normal"
+		switch(fat)
+			if("fat")
+				body = "Fat"
+			if("slim")
+				body = "Slim"
+		dat += "<b>Body Shape:</b> <a href='?_src_=prefs;preference=fatness'><b>[body]</b></a>"
 
 		dat += "<br>"
 		dat += "<b>UI Type:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_type]</b></a><br>"
@@ -953,22 +959,23 @@ datum/preferences
 			else
 				switch(href_list["preference"])
 					if("gender")
-//FAT&FEMALE
-/*
 						if(gender == MALE)
 							gender = FEMALE
 						else
-	*/
-						gender = MALE
+							gender = MALE
 
 					if("dwarven")
 						dwarven = !dwarven
 
 					if("fatness")
-//FAT&FEMALE
-/*
-						fat = !fat*/
-						fat = 0
+						fat = alert("Body Shape", "Body", "Normal", "Fat", "Slim")
+						switch(fat)
+							if("Fat")
+								fat = "fat"
+							if("Slim")
+								fat = "slim"
+							else
+								fat = 0
 
 					if("disabilities")				//please note: current code only allows nearsightedness as a disability
 						disabilities = !disabilities//if you want to add actual disabilities, code that selects them should be here
@@ -1075,19 +1082,17 @@ datum/preferences
 		character.flavor_texts["legs"] = flavor_texts["legs"]
 		character.flavor_texts["feet"] = flavor_texts["feet"]
 
-//FAT&FEMALE
-/*
-		if(fat)
-			character.mutations += FAT*/
+		switch(fat)
+			if("fat")
+				character.mutations += FAT
+			if("slim")
+				character.mutations += SLIM
 
 		character.med_record = med_record
 		character.sec_record = sec_record
 		character.gen_record = gen_record
 
-//FAT&FEMALE
-/*
-		character.gender = gender*/
-		character.gender = MALE
+		character.gender = gender
 		character.age = age
 		character.b_type = b_type
 
