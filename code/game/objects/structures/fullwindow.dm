@@ -3,7 +3,7 @@
 	health = 0
 	dir=SOUTHWEST
 	mouse_opacity=2 // Complete opacity.
-	layer = 2.91 // Abowe grilles, beneath firelocks.
+	layer = 3.21 //Windows 3.1 oops I meant 3.2
 
 /obj/structure/window/full/CheckExit(atom/movable/O as mob|obj, target as turf)
 	return 1

@@ -338,23 +338,24 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HULK			4
 #define CLUMSY			5
 #define FAT				6
-#define HUSK			7
-#define NOCLONE			8
+#define SLIM			7
+#define HUSK			8
+#define NOCLONE			9
 
 
 	// Extra powers:
-#define LASER			9 	// harm intent - click anywhere to shoot lasers from eyes
-#define HEAL			10 	// healing people with hands
-#define SHADOW			11 	// shadow teleportation (create in/out portals anywhere) (25%)
-#define SCREAM			12 	// supersonic screaming (25%)
-#define EXPLOSIVE		13 	// exploding on-demand (15%)
-#define REGENERATION	14 	// superhuman regeneration (30%)
-#define REPROCESSOR		15 	// eat anything (50%)
-#define SHAPESHIFTING	16 	// take on the appearance of anything (40%)
-#define PHASING			17 	// ability to phase through walls (40%)
-#define SHIELD			18 	// shielding from all projectile attacks (30%)
-#define SHOCKWAVE		19 	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
-#define ELECTRICITY		20 	// ability to shoot electric attacks (15%)
+#define LASER			10 	// harm intent - click anywhere to shoot lasers from eyes
+#define HEAL			11 	// healing people with hands
+#define SHADOW			12 	// shadow teleportation (create in/out portals anywhere) (25%)
+#define SCREAM			13 	// supersonic screaming (25%)
+#define EXPLOSIVE		14 	// exploding on-demand (15%)
+#define REGENERATION	15 	// superhuman regeneration (30%)
+#define REPROCESSOR		16 	// eat anything (50%)
+#define SHAPESHIFTING	17 	// take on the appearance of anything (40%)
+#define PHASING			18 	// ability to phase through walls (40%)
+#define SHIELD			19 	// shielding from all projectile attacks (30%)
+#define SHOCKWAVE		20 	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
+#define ELECTRICITY		21 	// ability to shoot electric attacks (15%)
 
 	//2spooky
 #define SKELETON 29

@@ -808,16 +808,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!(istype(owner.species, /datum/species/human)) && !(istype(owner.species, /datum/species/human/zombie)))
 		gender=""
 		fat = 0
-	if(!istype(src, /datum/organ/external/chest) && fat)
-		fat = 0
-		gender=""
 	if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
-		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][fat ? "_[fat]" : ""]")
 
 	if (status & ORGAN_MUTATED)
-		return new /icon(deform_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_fat" : ""]")
+		return new /icon(deform_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_[fat]" : ""]")
 
-	return new /icon(race_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_fat" : ""]")
+	return new /icon(race_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_[fat]" : ""]")
 
 
 /datum/organ/external/proc/is_usable()
@@ -980,15 +977,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 	vital = 1
 	encased = "skull"
 
-/datum/organ/external/head/get_icon(var/icon/race_icon, var/icon/deform_icon)
+/datum/organ/external/head/get_icon(var/icon/race_icon, var/icon/deform_icon, var/fat)
 	if (!owner)
 	 return ..()
 	var/g = "m"
 	if(owner.gender == FEMALE)	g = "f"
 	if (status & ORGAN_MUTATED)
-		. = new /icon(deform_icon, "[icon_name]_[g]")
+		. = new /icon(deform_icon, "[icon_name]_[g][fat ? "_[fat]" : ""]")
 	else
-		. = new /icon(race_icon, "[icon_name]_[g]")
+		. = new /icon(race_icon, "[icon_name]_[g][fat ? "_[fat]" : ""]")
 
 /datum/organ/external/head/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	..(brute, burn, sharp, edge, used_weapon, forbidden_limbs)

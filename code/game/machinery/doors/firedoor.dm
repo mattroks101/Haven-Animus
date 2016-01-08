@@ -268,5 +268,5 @@
 
 /obj/machinery/door/firedoor/window
 	name = "\improper Window Shutter"
-	layer = 2.92
-	open_layer = 2.92
+	layer = 2.91
+	open_layer = 2.91
