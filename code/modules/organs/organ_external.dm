@@ -977,11 +977,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	vital = 1
 	encased = "skull"
 
-/datum/organ/external/head/get_icon(var/icon/race_icon, var/icon/deform_icon, var/fat)
+/datum/organ/external/head/get_icon(var/icon/race_icon, var/icon/deform_icon, var/g, var/fat)
 	if (!owner)
-	 return ..()
-	var/g = "m"
-	if(owner.gender == FEMALE)	g = "f"
+		return ..()
 	if (status & ORGAN_MUTATED)
 		. = new /icon(deform_icon, "[icon_name]_[g][fat ? "_[fat]" : ""]")
 	else

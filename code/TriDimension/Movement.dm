@@ -67,9 +67,9 @@
 						if(T && (istype(T, /turf/space) || istype(T, /turf/simulated/floor/open)))
 							var/blocked = 0
 							for(var/atom/A in T.contents)
-								if(T.density)
+								if(A.density || istype(A, /obj/structure/catwalk))
 									blocked = 1
-									user << "\red You bump into [T.name]."
+									user << "\red You bump into [A.name]."
 									break
 							if(!blocked)
 								user.Move(T)
@@ -86,9 +86,14 @@
 						if(T && (!T.density) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/simulated/floor/open)))
 							var/blocked = 0
 							for(var/atom/A in T.contents)
-								if(T.density)
+								if(A.density)
 									blocked = 1
-									user << "\red You bump into [T.name]."
+									user << "\red You bump into [A.name]."
+									break
+							for(var/atom/A in user.loc)
+								if(istype(A, /obj/structure/catwalk))
+									blocked = 1
+									user << "\red You bump into [A.name]."
 									break
 							if(!blocked)
 								user.Move(T)
