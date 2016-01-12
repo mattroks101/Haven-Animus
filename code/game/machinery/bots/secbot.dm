@@ -638,7 +638,7 @@ Auto Patrol: []"},
 
 	if(src.emagged == 2) return 10 //Everyone is a criminal!
 
-	if(src.idcheck && !src.allowed(perp))
+	if(src.idcheck && perp.wear_id && (access_weapons in perp.wear_id.GetAccess()))
 
 		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
 			if(!istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/bluetag) \

@@ -37,7 +37,6 @@
 						break
 
 						//dont break here, since we still need to be sure that it isnt blocked
-
 				if(!blocked && has_gravity(src))
 					if(istype(AM, /mob/living/carbon/human))
 						var/mob/living/carbon/human/H = AM
@@ -96,6 +95,15 @@
 							H.apply_damage(damage + rand(-5,5), BRUTE, "r_foot")
 							H:weakened = max(H:weakened,2)
 							H:updatehealth()
+					else if(istype(AM, /obj/item))
+						for(var/obj/structure/catwalk/A in src)
+							if(prob(33 * AM:w_class))
+								blocked = 1
+							else
+								AM.visible_message("<span class='warning'>[AM.name] falls through [A]!")
+							break
+						if(!blocked)
+							AM.Move(floorbelow)
 					else
 						AM.Move(floorbelow)
 		return ..()
