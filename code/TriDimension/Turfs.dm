@@ -95,17 +95,18 @@
 							H.apply_damage(damage + rand(-5,5), BRUTE, "r_foot")
 							H:weakened = max(H:weakened,2)
 							H:updatehealth()
-					else if(istype(AM, /obj/item))
+					else
 						for(var/obj/structure/catwalk/A in src)
-							if(prob(33 * AM:w_class))
-								blocked = 1
+							if(istype(AM, /obj/item))
+								if(prob(33 * AM:w_class))
+									blocked = 1
+								else
+									AM.visible_message("<span class='warning'>[AM.name] falls through [A]!")
 							else
-								AM.visible_message("<span class='warning'>[AM.name] falls through [A]!")
+								blocked = 1
 							break
 						if(!blocked)
 							AM.Move(floorbelow)
-					else
-						AM.Move(floorbelow)
 		return ..()
 
 /turf/simulated/floor/open/proc/getbelow()
