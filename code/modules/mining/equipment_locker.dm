@@ -135,7 +135,7 @@
 		var/obj/item/stack/sheet/metalstack = stack_list[/obj/item/stack/sheet/metal]
 		var/obj/item/stack/sheet/plasmastack = stack_list[/obj/item/stack/sheet/mineral/plasma]
 		if(min(metalstack.amount, plasmastack.amount))
-			dat += text("Plasteel Alloy (Metal + Plasma): <A href='?src=\ref[src];plasteel=1'>Smelt</A><BR>")
+			dat += text("Plasteel Alloy (Metal + Phoron): <A href='?src=\ref[src];plasteel=1'>Smelt</A><BR>")
 
 	dat += text("<br><div class='statusDisplay'><b>Mineral Value List:</b><BR>[get_ore_values()]</div>")
 

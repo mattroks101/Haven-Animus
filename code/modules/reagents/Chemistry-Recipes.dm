@@ -381,7 +381,7 @@ datum
 			result_amount = 3
 
 		plasmasolidification
-			name = "Solid Plasma"
+			name = "Solid Phoron"
 			id = "solidplasma"
 			result = null
 			required_reagents = list("iron" = 5, "frostoil" = 5, "plasma" = 20)
@@ -874,7 +874,7 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
-					O.show_message(text("\red Infused with plasma, the core begins to quiver and grow, and soon a new baby slime emerges from it!"), 1)
+					O.show_message(text("\red Infused with phoron, the core begins to quiver and grow, and soon a new baby slime emerges from it!"), 1)
 				var/mob/living/carbon/slime/S = new /mob/living/carbon/slime
 				S.loc = get_turf_loc(holder.my_atom)
 
@@ -1081,7 +1081,7 @@ datum
 
 //Dark Purple
 		slimeplasma
-			name = "Slime Plasma"
+			name = "Slime Phoron"
 			id = "m_plasma"
 			result = null
 			required_reagents = list("plasma" = 5)

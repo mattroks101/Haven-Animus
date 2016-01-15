@@ -5,6 +5,7 @@
 // END_INTERNALS
 // BEGIN_FILE_DIR
 #define FILE_DIR .
+// END_FILE_DIR
 #define FILE_DIR "code"
 #define FILE_DIR "code/WorkInProgress"
 #define FILE_DIR "code/WorkInProgress/Cael_Aislinn"
@@ -66,7 +67,6 @@
 #define FILE_DIR "sound/voice/Serithi"
 #define FILE_DIR "sound/vox"
 #define FILE_DIR "sound/weapons"
-// END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG
 // END_PREFERENCES

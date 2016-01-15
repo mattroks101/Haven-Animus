@@ -339,7 +339,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	return
 
 /obj/machinery/door/airlock/plasma
-	name = "Plasma Airlock"
+	name = "Phoron Airlock"
 	desc = "No way this can end badly."
 	icon = 'icons/obj/doors/Doorplasma.dmi'
 	mineral = "plasma"
