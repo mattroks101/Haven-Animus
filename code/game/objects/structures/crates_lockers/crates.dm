@@ -396,8 +396,8 @@
 	icon_closed = "weaponcrate"
 
 /obj/structure/closet/crate/secure/plasma
-	desc = "A secure plasma crate."
-	name = "Plasma crate"
+	desc = "A secure phoron crate."
+	name = "Phoron crate"
 	icon_state = "plasmacrate"
 	icon_opened = "plasmacrateopen"
 	icon_closed = "plasmacrate"

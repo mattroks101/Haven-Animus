@@ -20,7 +20,7 @@
 
 /xgm_gas/plasma
 	id = "plasma"
-	name = "Plasma"
+	name = "Phoron"
 	specific_heat = 200	// J/(mol*K)
 
 	//Hypothetical group 14 (same as carbon), period 8 element.

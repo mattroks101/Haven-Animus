@@ -137,8 +137,8 @@
 	category = "Exosuit Equipment"
 
 /datum/design/mech_generator
-	name = "Exosuit Module Design (Plasma Converter Module)"
-	desc = "Exosuit-mounted plasma converter."
+	name = "Exosuit Module Design (Phoron Converter Module)"
+	desc = "Exosuit-mounted phoron converter."
 	id = "mech_plasma_generator"
 	build_type = MECHFAB
 	req_tech = list("plasmatech" = 2, "powerstorage"= 2, "engineering" = 2)
