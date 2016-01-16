@@ -168,7 +168,7 @@
 	if (client.statpanel == "Status")
 		var/datum/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
 		if(istype(P))
-			stat(null, "Plasma Stored: [P.stored_plasma]/[P.max_plasma]")
+			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 		if (internal)
 			if (!internal.air_contents)
 				del(internal)

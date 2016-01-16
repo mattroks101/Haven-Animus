@@ -226,7 +226,7 @@ obj/item/weapon/gun/energy/staff
 
 /obj/item/weapon/gun/energy/plasmacutter/examine()
 	..()
-	usr << "Has [power_supply.charge] unit\s of plasma left."
+	usr << "Has [power_supply.charge] unit\s of phoron left."
 	return
 
 /obj/item/weapon/gun/energy/plasmacutter/attackby(var/obj/item/A, var/mob/user)
@@ -235,10 +235,10 @@ obj/item/weapon/gun/energy/staff
 			var/obj/item/stack/sheet/S = A
 			S.use(1)
 			power_supply.give(2)
-			user << "<span class='info'>You refill [src] with solid plasma. [power_supply.charge] units of plasma left.</span>"
+			user << "<span class='info'>You refill [src] with solid phoron. [power_supply.charge] units of plasma left.</span>"
 		if(istype(A, /obj/item/weapon/ore/plasma))
 			power_supply.give(1)
-			user << "<span class='info'>You refill [src] with plasma ore. [power_supply.charge] units of plasma left.</span>"
+			user << "<span class='info'>You refill [src] with phoron ore. [power_supply.charge] units of plasma left.</span>"
 			qdel(A)
 		if(istype(A, /obj/item/weapon/storage/bag/ore))
 			if(locate(/obj/item/weapon/ore/plasma) in A)

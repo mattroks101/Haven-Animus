@@ -4,7 +4,7 @@
 
 /obj/machinery/ammolathe
 	name = "\improper Ammolathe"
-	desc = "It produces ammo using metal, silver and plasma."
+	desc = "It produces ammo using metal, silver and phoron."
 	icon_state = "autolathe"	//becuz no ammolathe icon
 	density = 1
 
@@ -137,7 +137,7 @@
 	if (stack.sheettype == "plasma")
 		p_amt = stack.perunit
 		if (src.p_amount + p_amt > max_p_amount)
-			user << "\red The ammolathe is full. Please remove plasma from the autolathe in order to insert more."
+			user << "\red The ammolathe is full. Please remove phoron from the autolathe in order to insert more."
 			return 1
 	if (m_amt == 0 && s_amt == 0 && p_amt == 0)
 		return 1
@@ -251,7 +251,7 @@
 	var/dat = "<div class='statusDisplay'><h3>Autolathe Menu:</h3><br>"
 	dat += "<b>Metal amount:</b> [src.m_amount] / [max_m_amount] cm<sup>3</sup><br>"
 	dat += "<b>Silver amount:</b> [src.s_amount] / [max_s_amount] cm<sup>3</sup><br>"
-	dat += "<b>Plasma amount:</b> [src.p_amount] / [max_p_amount] cm<sup>3</sup>"
+	dat += "<b>Phoron amount:</b> [src.p_amount] / [max_p_amount] cm<sup>3</sup>"
 
 	dat += "<form name='search' action='?src=\ref[src]'> \
 	<input type='hidden' name='src' value='\ref[src]'> \
@@ -280,7 +280,7 @@
 	dat += "<div class='statusDisplay'><h3>Browsing [selected_category]:</h3><br>"
 	dat += "<b>Metal amount:</b> [src.m_amount] / [max_m_amount] cm<sup>3</sup><br>"
 	dat += "<b>Silver amount:</b> [src.s_amount] / [max_s_amount] cm<sup>3</sup><br>"
-	dat += "<b>Plasma amount:</b> [src.p_amount] / [max_p_amount] cm<sup>3</sup><hr>"
+	dat += "<b>Phoron amount:</b> [src.p_amount] / [max_p_amount] cm<sup>3</sup><hr>"
 
 	for(var/datum/design/D in files.known_designs)
 		if(!(selected_category in D.category))
@@ -301,7 +301,7 @@
 	dat += "<div class='statusDisplay'><h3>Search results:</h3><br>"
 	dat += "<b>Metal amount:</b> [src.m_amount] / [max_m_amount] cm<sup>3</sup><br>"
 	dat += "<b>Silver amount:</b> [src.s_amount] / [max_s_amount] cm<sup>3</sup><br>"
-	dat += "<b>Plasma amount:</b> [src.p_amount] / [max_p_amount] cm<sup>3</sup><hr>"
+	dat += "<b>Phoron amount:</b> [src.p_amount] / [max_p_amount] cm<sup>3</sup><hr>"
 
 	for(var/datum/design/D in matching_designs)
 		if(disabled || !can_build(D))

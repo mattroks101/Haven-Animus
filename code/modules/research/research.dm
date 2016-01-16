@@ -229,8 +229,8 @@ datum/tech/engineering
 	id = "engineering"
 
 datum/tech/plasmatech
-	name = "Plasma Research"
-	desc = "Research into the mysterious substance colloqually known as 'plasma'."
+	name = "Phoron Research"
+	desc = "Research into the mysterious substance colloqually known as 'phoron'."
 	id = "plasmatech"
 
 datum/tech/powerstorage

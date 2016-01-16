@@ -56,7 +56,7 @@
 				dat += text("<A href='?src=\ref[src];sel_plasma=no'><font color='green'>Smelting</font></A> ")
 			else
 				dat += text("<A href='?src=\ref[src];sel_plasma=yes'><font color='red'>Not smelting</font></A> ")
-			dat += text("Plasma: [machine.ore_plasma]<br>")
+			dat += text("Phoron: [machine.ore_plasma]<br>")
 		else
 			machine.selected_plasma = 0
 
