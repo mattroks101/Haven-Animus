@@ -4,11 +4,11 @@
 	set desc = "Visit the wiki."
 	set hidden = 1
 	if( config.wikiurl )
-		if(alert("Это действие откроет страницу вики в вашем браузере. Вы хотите этого?",,"Да.","Нет.")=="Нет.")
+		if(alert("This will open the wiki in your browser. Are you sure?",,"Yes","No")=="No")
 			return
 		src << link(config.wikiurl)
 	else
-		src << "\red URL вики не определен в настройках сервера, извините."
+		src << "\red The wiki URL is not set in the server configuration."
 	return
 
 /client/verb/forum()
@@ -16,11 +16,11 @@
 	set desc = "Visit the forum."
 	set hidden = 1
 	if( config.forumurl )
-		if(alert("Это действие откроет страницу форума в вашем браузере. Вы хотите этого?",,"Да.","Нет.")=="Нет.")
+		if(alert("This will open the forum in your browser. Are you sure?",,"Yes","No")=="No")
 			return
 		src << link(config.forumurl)
 	else
-		src << "\red URL форума не определен в настройках сервера, извините."
+		src << "\red The forum URL is not set in the server configuration."
 	return
 
 #define RULES_FILE "config/rules.html"
@@ -37,17 +37,17 @@
 
 	var/hotkey_mode = {"<font color='purple'>
 Hotkey-Mode: (hotkey-mode must be on)
-\tTAB = включить или выключить режим горячих клавиш
-\ta = left(влево)
-\ts = down(вниз)
-\td = right(вправо)
-\tw = up(вверх)
-\tq = drop(уронить)
-\te = equip(надеть)
-\tr = throw(кинуть)
-\tt = say(сказать)
-\tx = swap-hand(поменять руку)
-\tz = activate held object (активировать предмет в руке)
+\tTAB = toggle hotkey-mode
+\ta = left
+\ts = down
+\td = right
+\tw = up
+\tq = drop
+\te = equip
+\tr = throw
+\tt = say
+\tx = swap-hand
+\tz = activate held object (or y)
 \tf = cycle-intents-left
 \tg = cycle-intents-right
 \t1 = help-intent

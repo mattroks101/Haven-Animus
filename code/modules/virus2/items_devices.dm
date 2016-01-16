@@ -15,14 +15,14 @@
 
 /obj/item/device/antibody_scanner/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(!istype(M))
-		user << "<span class='notice'>Сканирование не может быть проведено.</span>"
+		user << "<span class='notice'>Incompatible object, scan aborted.</span>"
 		return
 	var/mob/living/carbon/C = M
 	if(!C.antibodies)
-		user << "<span class='notice'>Сканирование остановлено: отсутствуют антитела..</span>"
+		user << "<span class='notice'>Unable to detect antibodies.</span>"
 		return
 	var/code = antigens2string(M.antibodies)
-	user << "<span class='notice'>[src] Сканирование на антитела показало: [code]</span>"
+	user << "<span class='notice'>[src] The antibody scanner displays a cryptic set of data: [code]</span>"
 
 ///////////////VIRUS DISH///////////////
 
