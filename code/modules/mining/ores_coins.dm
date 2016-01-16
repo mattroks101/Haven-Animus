@@ -48,7 +48,7 @@
 		del(src)
 
 /obj/item/weapon/ore/plasma
-	name = "Plasma ore"
+	name = "Phoron ore"
 	icon_state = "Plasma ore"
 	origin_tech = "materials=2"
 	points = 16
@@ -194,7 +194,7 @@
 	icon_state = "coin_iron"
 
 /obj/item/weapon/coin/plasma
-	name = "Solid plasma coin"
+	name = "Solid phoron coin"
 	icon_state = "coin_plasma"
 
 /obj/item/weapon/coin/uranium

@@ -589,7 +589,7 @@ datum
 
 			plasmatank
 				steal_target = /obj/item/weapon/tank/plasma
-				explanation_text = "”крадите маленький баллон плазмы."
+				explanation_text = "”крадите маленький баллон форона."
 				weight = 20
 
 				get_points(var/job)

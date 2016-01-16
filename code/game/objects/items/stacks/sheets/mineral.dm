@@ -93,7 +93,7 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
  * Plasma
  */
 /obj/item/stack/sheet/mineral/plasma
-	name = "solid plasma"
+	name = "solid phoron"
 	icon_state = "sheet-plasma"
 	force = 5.0
 	throwforce = 5
