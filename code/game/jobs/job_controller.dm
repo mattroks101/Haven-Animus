@@ -373,13 +373,13 @@ var/global/datum/controller/occupations/job_master
 		var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)
 		if(H.mind)
 			var/remembered_info = ""
-			remembered_info += "<b>Номер вашего аккаунта:</b> #[M.account_number]<br>"
-			remembered_info += "<b>Пин-код вашего аккаунта:</b> [M.remote_access_pin]<br>"
-			remembered_info += "<b>На вашем счету:</b> $[M.money] кредитов <br>"
+			remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
+			remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
+			remembered_info += "<b>Your account funds are:</b> $[M.money]<br>"
 
 			if(M.transaction_log.len)
 				var/datum/transaction/T = M.transaction_log[1]
-				remembered_info += "<b>Ваш аккаунт создан:</b> [T.time], [T.date] на [T.source_terminal]<br>"
+				remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
 			H.mind.store_memory(remembered_info)
 
 			H.mind.initial_account = M
@@ -390,14 +390,14 @@ var/global/datum/controller/occupations/job_master
 			var/datum/money_account/department_account = department_accounts[job.department]
 
 			if(department_account)
-				remembered_info += "<b>Номер аккаунта вашего отдела:</b> #[department_account.account_number]<br>"
-				remembered_info += "<b>Пин-код аккаунта вашего отдела:</b> [department_account.remote_access_pin]<br>"
-				remembered_info += "<b>На счету вашего отдела :</b> $[department_account.money] кредитов <br>"
+				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
+				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
+				remembered_info += "<b>Your department's account funds are:</b> $[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
 
 		spawn(0)
-			H << "\blue<b>Номер вашего аккаунта: [M.account_number], пин-код : [M.remote_access_pin]</b>"
+			H << "\blue<b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b>"
 
 		var/alt_title = null
 		if(H.mind)
@@ -425,8 +425,8 @@ var/global/datum/controller/occupations/job_master
 							new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 
-		H << "<B>Вы прин&#255;ты на должность : [alt_title ? alt_title : rank].</B>"
-		H << "<b>Как [alt_title ? alt_title : rank] вы подчин&#255;етесь [job.supervisors]. Это может изменитьс&#255; при особых обсто&#255;тельствах.</b>"
+		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
+		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 
 		spawnId(H, rank, alt_title)
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)

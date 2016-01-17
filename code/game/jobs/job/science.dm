@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "капитану"
+	supervisors = "the captain"
 	selection_color = "#ffddff"
 	idtype = /obj/item/weapon/card/id/rd
 	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
@@ -45,7 +45,7 @@
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "директору исследований"
+	supervisors = "the research director"
 	selection_color = "#ffeeff"
 	idtype = /obj/item/weapon/card/id/sci
 	access = list(access_robotics, access_medical, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
@@ -101,7 +101,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "директору исследований и главному инженеру"
+	supervisors = "research director"
 	selection_color = "#ffeeff"
 	idtype = /obj/item/weapon/card/id/dkgrey
 	access = list(access_robotics, access_medical, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.

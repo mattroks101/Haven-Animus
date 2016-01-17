@@ -310,7 +310,7 @@ datum
 				target = targeta
 				job = joba
 				weight = get_points(job)
-				explanation_text = "[target.current.real_name], [pick("родственник","друг","должник") + pick("высокопоставленного","важного")] [pick("члена","агента","информатора","покровителя")] синдиката.  Позаботьтесь о том, чтобы этот человек покинул станцию живым."
+				explanation_text = "[target.current.real_name], the [target.assigned_role] is a [pick("relative of a","friend of a","") + pick("high ranking","important","well-liked")] Syndicate [pick("Leader","Officer","Agent","sympathiser")].  Make sure they get off the station safely, while minimizing intervention."
 
 			check_completion()
 				if(emergency_shuttle.location<2)
@@ -342,7 +342,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "Защитите [target.current.real_name]."
+					explanation_text = "Protect [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -354,7 +354,7 @@ datum
 				target = targeta
 				job = joba
 				weight = get_points(job)
-				explanation_text = "Убейте [target.current.real_name]."
+				explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 
 			check_completion()
 				if(target && target.current)
@@ -393,7 +393,7 @@ datum
 						break
 
 				if(target && target.current)
-					explanation_text = Убейте [target.current.real_name]."
+					explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 				else
 					explanation_text = "Free Objective"
 
@@ -411,7 +411,7 @@ datum
 					target = pick(possible_targets)
 
 				if(target && target.current)
-					explanation_text = "Убейте [target.current.real_name]."
+					explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 				else
 					explanation_text = "Free Objective"
 
@@ -425,7 +425,7 @@ datum
 			New(var/text,var/joba,var/datum/mind/targeta)
 				target = targeta
 				job = joba
-				explanation_text = "Захватите [target.current.real_name]."
+				explanation_text = "Capture [target.current.real_name], the [target.assigned_role]."
 
 			check_completion()
 				if(target && target.current)
@@ -444,7 +444,7 @@ datum
 						break
 
 				if(target && target.current)
-					explanation_text = "Захватите [target.current.real_name]."
+					explanation_text = "Capture [target.current.real_name], the [target.assigned_role]."
 				else
 					explanation_text = "Free Objective"
 
@@ -474,7 +474,7 @@ datum
 
 
 		hijack
-			explanation_text = "Взломайте шаттл и покиньте станцию в одиночестве."
+			explanation_text = "Hijack the emergency shuttle by escaping alone."
 
 			check_completion()
 				if(emergency_shuttle.location<2)
@@ -509,7 +509,7 @@ datum
 				return 1
 
 		escape
-			explanation_text = "Покиньте станцию живым, находясь на свободе."
+			explanation_text = "Escape on the shuttle alive, without being arrested."
 
 			check_completion()
 				if(emergency_shuttle.location<2)
@@ -537,7 +537,7 @@ datum
 
 
 		survive
-			explanation_text = "Останьтесь живы."
+			explanation_text = "Stay alive."
 
 			check_completion()
 				if(!owner.current || owner.current.stat == 2)
@@ -564,7 +564,7 @@ datum
 
 			captainslaser
 				steal_target = /obj/item/weapon/gun/energy/laser/captain
-				explanation_text = "Украдите антикварный лазер капитана.."
+				explanation_text = "Steal the captain's antique laser gun."
 				weight = 20
 
 				get_points(var/job)
@@ -589,7 +589,7 @@ datum
 
 			plasmatank
 				steal_target = /obj/item/weapon/tank/plasma
-				explanation_text = "Украдите маленький баллон форона."
+				explanation_text = "Steal a small plasma tank."
 				weight = 20
 
 				get_points(var/job)
@@ -631,7 +631,7 @@ datum
 
 			handtele
 				steal_target = /obj/item/weapon/hand_tele
-				explanation_text = "Украдите ручной телепортер."
+				explanation_text = "Steal a hand teleporter."
 				weight = 20
 
 				get_points(var/job)
@@ -656,7 +656,7 @@ datum
 
 			RCD
 				steal_target = /obj/item/weapon/rcd
-				explanation_text = "Украдите УБС(Устройство быстрого строительства) ."
+				explanation_text = "Steal a rapid construction device."
 				weight = 20
 
 				get_points(var/job)
@@ -700,7 +700,7 @@ datum
 
 			jetpack
 				steal_target = /obj/item/weapon/tank/jetpack/oxygen
-				explanation_text = "Украдите синий реактивный ранец, работающий на кислороде."
+				explanation_text = "Steal a blue oxygen jetpack."
 				weight = 20
 
 				get_points(var/job)
@@ -750,7 +750,7 @@ datum
 
 			blueprints
 				steal_target = /obj/item/blueprints
-				explanation_text = "Украдите секретные чертежи станции."
+				explanation_text = "Steal the station's blueprints."
 				weight = 20
 
 				get_points(var/job)
@@ -775,7 +775,7 @@ datum
 
 			voidsuit
 				steal_target = /obj/item/clothing/suit/space/nasavoid
-				explanation_text = "Украдите скафандр NASA."
+				explanation_text = "Steal a voidsuit."
 				weight = 20
 
 				get_points(var/job)
@@ -797,7 +797,7 @@ datum
 
 			nuke_disk
 				steal_target = /obj/item/weapon/disk/nuclear
-				explanation_text = "Украдите диск ядерной авторизации."
+				explanation_text = "Steal the station's nuclear authentication disk."
 				weight = 20
 
 				get_points(var/job)
@@ -821,7 +821,7 @@ datum
 
 			nuke_gun
 				steal_target = /obj/item/weapon/gun/energy/gun/nuclear
-				explanation_text = "Украдите атомное оружие."
+				explanation_text = "Steal a nuclear powered gun."
 				weight = 20
 
 				get_points(var/job)
@@ -842,7 +842,7 @@ datum
 
 			diamond_drill
 				steal_target = /obj/item/weapon/pickaxe/diamonddrill
-				explanation_text = "Украдите алмазную дрель."
+				explanation_text = "Steal a diamond drill."
 				weight = 20
 
 				get_points(var/job)
@@ -863,7 +863,7 @@ datum
 
 			boh
 				steal_target = /obj/item/weapon/storage/backpack/holding
-				explanation_text = "Украдите \"bag of holding.\""
+				explanation_text = "Steal a \"bag of holding.\""
 				weight = 20
 
 				get_points(var/job)
@@ -884,7 +884,7 @@ datum
 
 			hyper_cell
 				steal_target = /obj/item/weapon/cell/hyper
-				explanation_text = "Украдите гипер-вместительную батарею."
+				explanation_text = "Steal a hyper capacity power cell."
 				weight = 20
 
 				get_points(var/job)
@@ -905,7 +905,7 @@ datum
 
 			lucy
 				steal_target = /obj/item/stack/sheet/diamond
-				explanation_text = "Украдите 10 алмазов."
+				explanation_text = "Steal 10 diamonds."
 				weight = 20
 
 				get_points(var/job)
@@ -934,7 +934,7 @@ datum
 
 			gold
 				steal_target = /obj/item/stack/sheet/gold
-				explanation_text = "Украдите 50 слитков золота."
+				explanation_text = "Steal 50 gold bars."
 				weight = 20
 
 				get_points(var/job)
@@ -963,7 +963,7 @@ datum
 
 			uranium
 				steal_target = /obj/item/stack/sheet/uranium
-				explanation_text = "Украдите 25 стержней урана.."
+				explanation_text = "Steal 25 uranium bars."
 				weight = 20
 
 				get_points(var/job)
@@ -1012,7 +1012,7 @@ datum
 			*/
 			cyborg
 				steal_target = /obj/item/robot_parts/robot_suit
-				explanation_text = "Украдите законченную оболочку киборга (не вставляя мозг)"
+				explanation_text = "Steal a completed robot shell (no brain)"
 				weight = 30
 
 				get_points(var/job)
@@ -1039,7 +1039,7 @@ datum
 					return 20
 			AI
 				steal_target = /obj/structure/AIcore
-				explanation_text = "Украдите функционирующий ИИ. Можете использовать специальное оборудование, либо выкрасть ядро полностью."
+				explanation_text = "Steal a finished AI, either by intellicard or stealing the whole construct."
 				weight = 50
 
 				get_points(var/job)
@@ -1076,7 +1076,7 @@ datum
 
 			drugs
 				steal_target = /datum/reagent/space_drugs
-				explanation_text = "Украдите немного космической наркоты."
+				explanation_text = "Steal some space drugs."
 				weight = 40
 
 				get_points(var/job)
@@ -1105,7 +1105,7 @@ datum
 
 			pacid
 				steal_target = /datum/reagent/pacid
-				explanation_text = "Украдите немного политриника."
+				explanation_text = "Steal some polytrinic acid."
 				weight = 40
 
 				get_points(var/job)
@@ -1163,7 +1163,7 @@ datum
 						if("Omnizine")
 							steal_target = /datum/reagent/omnizine
 
-					explanation_text = "Украдите ёмкость, наполненную [target_name]."
+					explanation_text = "Steal a container filled with [target_name]."
 
 				get_points(var/job)
 					switch(GetRank(job))
@@ -1190,13 +1190,13 @@ datum
 
 			cash	//must be in credits - atm and coins don't count
 				var/steal_amount = 2000
-				explanation_text = "Заработайте, украдите или выпросите [steal_amount] кредитов."
+				explanation_text = "Beg, borrow or steal 2000 credits."
 				weight = 20
 
 				New(var/text,var/joba)
 					..(text,joba)
 					steal_amount = 1250 + rand(0,3750)
-					explanation_text = "Заработайте, украдите или выпросите [steal_amount] кредитов"
+					explanation_text = "Beg, borrow or steal [steal_amount] credits."
 
 				get_points(var/job)
 					return 10 + 25 * round(steal_amount / 5000)
@@ -1214,11 +1214,11 @@ datum
 
 
 		nuclear
-			explanation_text = "Уничтожьте станцию с помощью ядерной боеголовки."
+			explanation_text = "Destroy the station with a nuclear device."
 
 
 		block
-			explanation_text = "Не позвольте живым организмам покинуть станцию на шаттле."
+			explanation_text = "Do not allow any humans to escape on the shuttle alive."
 
 
 			check_completion()
@@ -1255,7 +1255,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "Убейте [target.current.real_name]. Нас также интересует голова в качестве доказательства. "
+					explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role], has defied us for the last time.  Make an example of him, and bring us his severed head."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1289,7 +1289,7 @@ datum
 								n_p ++
 					target_amount = min(target_amount, n_p)
 
-				explanation_text = "Поглотите [target_amount] геномов."
+				explanation_text = "Absorb [target_amount] compatible genomes."
 				return target_amount
 
 			check_completion()
@@ -1303,7 +1303,7 @@ datum
 			proc/gen_amount_goal(var/lowbound = 4, var/highbound = 6)
 				target_amount = rand (lowbound,highbound)
 
-				explanation_text = "Подчините [target_amount] существ."
+				explanation_text = "Attune [target_amount] humanoid brains."
 				return target_amount
 
 			check_completion()
@@ -1316,7 +1316,7 @@ datum
 			var/target_amount
 			proc/gen_amount_goal()
 				target_amount = rand(10,20)
-				explanation_text = "Загрузите и украдие [target_amount] уровень исследований ."
+				explanation_text = "Download [target_amount] research levels."
 				return target_amount
 
 
@@ -1342,12 +1342,12 @@ datum
 			New(var/text,var/joba,var/datum/mind/targeta)
 				target = targeta
 				job = joba
-				explanation_text = "Извлеките мозг [target.current.real_name]."
+				explanation_text = "Remove and recover the brain of [target.current.real_name], the [target.assigned_role]."
 
 			proc/find_target()
 				..()
 				if(target && target.current)
-					explanation_text = "Украдите мозг [target.current.real_name]."
+					explanation_text = "Steal the brain of [target.current.real_name]."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1356,7 +1356,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "Украдите мозг."
+					explanation_text = "Steal the brain of [target.current.real_name] the [!role_type ? target.assigned_role : target.special_role]."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1378,7 +1378,7 @@ datum
 			proc/find_target()
 				..()
 				if(target && target.current)
-					explanation_text = "Убейте [target.current.real_name]."
+					explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1387,7 +1387,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "Убейте [target.current.real_name]."
+					explanation_text = "Assassinate [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1409,7 +1409,7 @@ datum
 			var/target_amount
 			proc/gen_amount_goal()
 				target_amount = rand(5,10)
-				explanation_text = "Накопите [target_amount] очков захвата."
+				explanation_text = "Accumulate [target_amount] capture points."
 				return target_amount
 
 
@@ -1444,7 +1444,7 @@ datum
 				return 1
 
 datum/objective/silence
-	explanation_text = "Никто не должен покинуть станцию."
+	explanation_text = "Do not allow anyone to escape the station.  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
 
 	check_completion()
 		if(emergency_shuttle.location<2)
