@@ -1,7 +1,7 @@
 
 /obj/item/weapon/shard/plasma
-	name = "plasma shard"
-	desc = "A shard of plasma glass. Considerably tougher then normal glass shards. Apparently not tough enough to be a window."
+	name = "phoron shard"
+	desc = "A shard of phoron glass. Considerably tougher then normal glass shards. Apparently not tough enough to be a window."
 	force = 8.0
 	throwforce = 15.0
 	icon_state = "plasmalarge"
@@ -36,7 +36,7 @@
 				if(G.amount>=G.max_amount)
 					continue
 				G.attackby(NG, user)
-				usr << "You add the newly-formed plasma glass to the stack. It now contains [NG.amount] sheets."
+				usr << "You add the newly-formed phoron glass to the stack. It now contains [NG.amount] sheets."
 			//SN src = null
 			del(src)
 			return

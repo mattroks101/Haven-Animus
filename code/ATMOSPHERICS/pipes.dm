@@ -390,7 +390,7 @@ obj/machinery/atmospherics/pipe
 
 		toxins
 			icon = 'icons/obj/atmospherics/orange_pipe_tank.dmi'
-			name = "Pressure Tank (Plasma)"
+			name = "Pressure Tank (Phoron)"
 
 			New()
 				air_temporary = new

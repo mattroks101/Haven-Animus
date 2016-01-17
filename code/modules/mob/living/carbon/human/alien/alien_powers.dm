@@ -22,7 +22,7 @@
 
 	var/datum/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
 	if(!istype(P))
-		src << "<span class='danger'>Your plasma vessel has been removed!</span>"
+		src << "<span class='danger'>Your phoron vessel has been removed!</span>"
 		return
 
 	if(needs_organ)
@@ -35,7 +35,7 @@
 			return
 
 	if(P.stored_plasma < cost)
-		src << "\red You don't have enough plasma stored to do that."
+		src << "\red You don't have enough phoron stored to do that."
 		return 0
 
 	if(needs_foundation)
@@ -54,8 +54,8 @@
 
 // Free abilities.
 /mob/living/carbon/human/proc/transfer_plasma(mob/living/carbon/human/M as mob in oview())
-	set name = "Transfer Plasma"
-	set desc = "Transfer Plasma to another alien"
+	set name = "Transfer Phoron"
+	set desc = "Transfer Phoron to another alien"
 	set category = "Abilities"
 
 	if (get_dist(src,M) <= 1)
@@ -64,16 +64,16 @@
 
 	var/datum/organ/internal/xenos/plasmavessel/I = M.internal_organs_by_name["plasma vessel"]
 	if(!istype(I))
-		src << "\green Their plasma vessel is missing."
+		src << "\green Their phoron vessel is missing."
 		return
 
-	var/amount = input("Amount:", "Transfer Plasma to [M]") as num
+	var/amount = input("Amount:", "Transfer Phoron to [M]") as num
 	if (amount)
 		amount = abs(round(amount))
 		if(check_alien_ability(amount,0,"plasma vessel"))
 			M.gain_plasma(amount)
-			M << "\green [src] has transfered [amount] plasma to you."
-			src << "\green You have transferred [amount] plasma to [M]"
+			M << "\green [src] has transfered [amount] phoron to you."
+			src << "\green You have transferred [amount] phoron to [M]"
 	return
 
 // Queen verbs.

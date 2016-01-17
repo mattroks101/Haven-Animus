@@ -278,7 +278,7 @@ var/global/datum/controller/gameticker/ticker
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
-					M << "Капитан не был назначен."
+					M << "Captainship not forced on anyone."
 
 
 	proc/process()
@@ -331,13 +331,13 @@ var/global/datum/controller/gameticker/ticker
 
 	for (var/mob/living/silicon/ai/aiPlayer in mob_list)
 		if (aiPlayer.stat != 2)
-			world << "<b>Законами [aiPlayer.name] (Которым был: [aiPlayer.key]) к концу раунда были :</b>"
+			world << "<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the game were:</b>"
 		else
-			world << "<b>Законами [aiPlayer.name] (Которым был: [aiPlayer.key])на момент деактивации были:</b>"
+			world << "<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws when it was deactivated were:</b>"
 		aiPlayer.show_laws(1)
 
 		if (aiPlayer.connected_robots.len)
-			var/robolist = "<b>Лояльные ИИ киборги:</b> "
+			var/robolist = "<b>The AI's loyal minions were:</b> "
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.key]), ":" (Played by: [robo.key]), "]"
 			world << "[robolist]"
@@ -345,9 +345,9 @@ var/global/datum/controller/gameticker/ticker
 	for (var/mob/living/silicon/robot/robo in mob_list)
 		if (!robo.connected_ai)
 			if (robo.stat != 2)
-				world << "<b>[robo.name] (Которым был: [robo.key]) выжил как самостоятельный киборг! Его законами были:</b>"
+				world << "<b>[robo.name] (Played by: [robo.key]) survived as an AI-less borg! Its laws were:</b>"
 			else
-				world << "<b>[robo.name] (Которым был: [robo.key]) не смог выжить, будучи самостоятельным киборгом. Его законами были:</b>"
+				world << "<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a cyborg without an AI. Its laws were:</b>"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)
@@ -372,7 +372,7 @@ var/global/datum/controller/gameticker/ticker
 				total_antagonists[temprole] += ": [Mind.name]([Mind.key])"
 
 	//Now print them all into the log!
-	log_game("Специальными ролями были...")
+	log_game("Antagonists at round end were...")
 	for(var/i in total_antagonists)
 		log_game("[i]s[total_antagonists[i]].")
 

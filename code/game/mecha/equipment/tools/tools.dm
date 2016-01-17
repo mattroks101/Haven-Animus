@@ -830,8 +830,8 @@
 
 
 /obj/item/mecha_parts/mecha_equipment/generator
-	name = "Plasma Converter"
-	desc = "Generates power using solid plasma as fuel. Pollutes the environment."
+	name = "Phoron Converter"
+	desc = "Generates power using solid phoron as fuel. Pollutes the environment."
 	icon_state = "tesla"
 	origin_tech = "plasmatech=2;powerstorage=2;engineering=1"
 	equip_cooldown = 10
@@ -927,11 +927,11 @@
 		var/datum/gas_mixture/GM = new
 		if(prob(10))
 			T.assume_gas("plasma", 100, 1500+T0C)
-			T.visible_message("The [src] suddenly disgorges a cloud of heated plasma.")
+			T.visible_message("The [src] suddenly disgorges a cloud of heated phoron.")
 			destroy()
 		else
 			T.assume_gas("plasma", 5, istype(T) ? T.air.temperature : T20C)
-			T.visible_message("The [src] suddenly disgorges a cloud of plasma.")
+			T.visible_message("The [src] suddenly disgorges a cloud of phoron.")
 		T.assume_air(GM)
 		return
 

@@ -306,9 +306,9 @@
  * Plasma Glass sheets
  */
 /obj/item/stack/sheet/glass/plasmaglass
-	name = "plasma glass"
-	desc = "A very strong and very resistant sheet of a plasma-glass alloy."
-	singular_name = "plasma glass sheet"
+	name = "phoron glass"
+	desc = "A very strong and very resistant sheet of a phoron-glass alloy."
+	singular_name = "phoron glass sheet"
 	icon_state = "sheet-plasmaglass"
 	g_amt = 7500
 	origin_tech = "materials=3;plasma=2"
@@ -338,9 +338,9 @@
  * Reinforced plasma glass sheets
  */
 /obj/item/stack/sheet/glass/plasmarglass
-	name = "reinforced plasma glass"
-	desc = "Plasma glass which seems to have rods or something stuck in them."
-	singular_name = "reinforced plasma glass sheet"
+	name = "reinforced phoron glass"
+	desc = "Phoron glass which seems to have rods or something stuck in them."
+	singular_name = "reinforced phoron glass sheet"
 	icon_state = "sheet-plasmarglass"
 	g_amt = 7500
 	m_amt = 1875

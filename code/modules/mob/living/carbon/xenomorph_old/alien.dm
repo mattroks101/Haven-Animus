@@ -170,7 +170,7 @@
 	..()
 
 	if (client.statpanel == "Status")
-		stat(null, "Plasma Stored: [getPlasma()]/[max_plasma]")
+		stat(null, "Phoron Stored: [getPlasma()]/[max_plasma]")
 
 	if(emergency_shuttle)
 		if(emergency_shuttle.online && emergency_shuttle.location < 2)

@@ -1296,9 +1296,9 @@ datum/reagent/toxin/mutagen
 		return
 
 datum/reagent/toxin/plasma
-	name = "Plasma"
+	name = "Phoron"
 	id = "plasma"
-	description = "Plasma in its liquid form."
+	description = "Phoron in its liquid form."
 	reagent_state = LIQUID
 	color = "#E71B00" // rgb: 231, 27, 0
 	toxpwr = 3
