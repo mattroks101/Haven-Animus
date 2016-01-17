@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "капитану"
+	supervisors = "the captain"
 	selection_color = "#ffddf0"
 	idtype = /obj/item/weapon/card/id/cmo
 	access = list(access_medical, access_morgue, access_genetics, access_heads,
@@ -45,7 +45,7 @@
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "главврачу"
+	supervisors = "the research director"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/med
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
@@ -82,7 +82,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "главврачу"
+	supervisors = "the research director"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/chem
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
@@ -112,7 +112,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "главврачу и директору исследований"
+	supervisors = "the research director"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/gene
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
@@ -141,7 +141,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
-	supervisors = "главврачу"
+	supervisors = "the research director"
 	selection_color = "#ffeef0"
 	idtype = /obj/item/weapon/card/id/viro
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)

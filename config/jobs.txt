@@ -18,7 +18,7 @@ Chemist=2
 Bartender=1
 Botanist=2
 Chef=1
-Janitor=2
+Janitor=1
 Quartermaster=1
 Shaft Miner=3
 
@@ -30,8 +30,8 @@ Assistant=-1
 Atmospheric Technician=4
 Cargo Technician=3
 Chaplain=1
-Lawyer=1
+Lawyer=2
 Librarian=1
 
 AI=1
-Cyborg=2
+Cyborg=1

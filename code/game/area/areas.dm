@@ -172,13 +172,19 @@
 	if ((master.fire || master.eject || master.atmosalm) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
 		if(master.atmosalm || master.eject)
 			for(var/obj/machinery/light/L in lights)
+				if(istype(L, /obj/machinery/light/small))
+					continue
 				L.set_blue()
 		else
 			for(var/obj/machinery/light/L in lights)
+				if(istype(L, /obj/machinery/light/small))
+					continue
 				L.set_red()
 	else
 	//	new lighting behaviour with obj lights
 		for(var/obj/machinery/light/L in lights)
+			if(istype(L, /obj/machinery/light/small))
+				continue
 			L.reset_color()
 
 /*
