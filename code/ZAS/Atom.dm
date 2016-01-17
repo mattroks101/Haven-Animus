@@ -63,7 +63,7 @@ turf/c_airblock(turf/other)
 	//Z-level handling code. Always block if there isn't an open space.
 	#ifdef ZLEVELS
 	if(other.z != src.z)
-		if(other.z < src.z)
+		if(other.z > src.z)
 			if(!istype(src, /turf/simulated/floor/open)) return BLOCKED
 		else
 			if(!istype(other, /turf/simulated/floor/open)) return BLOCKED

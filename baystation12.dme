@@ -1534,7 +1534,6 @@
 #include "maps\encounters\mining_station.dmm"
 #include "maps\encounters\old_base.dmm"
 #include "maps\encounters\satellite.dmm"
-#include "maps\encounters\telesat.dmm"
 #include "maps\overmap\_map.dmm"
 #include "maps\overmap\bearcat\bearcat.dm"
 // END_INCLUDE
