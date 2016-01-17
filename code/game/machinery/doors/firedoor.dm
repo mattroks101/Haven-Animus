@@ -9,6 +9,7 @@
 	opacity = 0
 	density = 0
 	open_layer = 2.69
+	closed_layer = 3.21 // Above other Airlocks (3.2)
 
 	var/blocked = 0
 	var/nextstate = null

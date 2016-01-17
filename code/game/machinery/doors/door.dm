@@ -10,6 +10,7 @@
 	density = 1
 	layer = 2.7
 	var/open_layer = 2.8
+	var/closed_layer =  3.1
 
 	var/secondsElectrified = 0
 	var/visible = 1
@@ -264,7 +265,7 @@
 	do_animate("closing")
 	src.density = 1
 	explosion_resistance = initial(explosion_resistance)
-	src.layer = 3.1
+	src.layer = closed_layer
 	sleep(10)
 	update_icon()
 	if(visible && !glass)
