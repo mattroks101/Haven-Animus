@@ -139,6 +139,48 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 	return 1
 
+
+
+/*
+ * Штука, чтобы показывать какие-нибудь голограммы.
+ * работает с голограммами (/obj/effect/hologram)
+ * в одной зоне и с одинаковым тэгом hologram_group.
+ */
+
+/obj/machinery/hologram/holopad/controller
+	name = "Holopad"
+	var/on = 0
+	var/linked = 0
+	var/hologram_group = "default_group"
+	var/list/obj/effect/hologram/holograms = list()
+
+/obj/machinery/hologram/holopad/controller/attack_hand(var/mob/living/carbon/human/user) // activate device
+	if(!istype(user))
+		return
+	on = !on
+	activate()
+	user << "<span class='notice'>You have [on ? "activated" : "deactivated"] [src].</span>"
+
+/obj/machinery/hologram/holopad/controller/proc/activate()
+	if(linked && holograms.len > 0)
+		for(var/obj/effect/hologram/H in holograms)
+			H.activate(on)
+		if(on)
+			SetLuminosity(1,1,2)
+		else
+			SetLuminosity(0,0,0)
+	else if(!linked)
+		update_links()
+		activate()
+
+/obj/machinery/hologram/holopad/controller/proc/update_links()
+	var/area/area = get_area(src)
+	for(var/obj/effect/hologram/H in area)
+		if(src.hologram_group == H.hologram_group)
+			holograms.Add(H)
+	linked = 1
+
+
 /*
  * Hologram
  */
@@ -181,6 +223,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(hologram)
 		src:clear_holo()
 	..()
+
+
+
+
 
 /*
 Holographic project of everything else.

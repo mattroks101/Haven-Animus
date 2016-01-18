@@ -58,6 +58,7 @@
 	if (usr.abiotic())
 		usr << "\blue <B>Subject cannot have abiotic items on.</B>"
 		return
+	playsound(src.loc, 'sound/machines/medbayscanner1.ogg', 75, 0)
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
 	usr.client.eye = src
@@ -69,6 +70,7 @@
 		del(O)
 		//Foreach goto(124)
 	src.add_fingerprint(usr)
+//	playsound(src.loc, 'sound/machines/medbayscanner1.ogg', 75, 0)
 	return
 
 /obj/machinery/bodyscanner/proc/go_out()
@@ -96,6 +98,7 @@
 	if (G.affecting.abiotic())
 		user << "\blue <B>Subject cannot have abiotic items on.</B>"
 		return
+	playsound(src.loc, 'sound/machines/medbayscanner1.ogg', 75, 0)
 	var/mob/M = G.affecting
 	if (M.client)
 		M.client.perspective = EYE_PERSPECTIVE
@@ -111,6 +114,7 @@
 	src.add_fingerprint(user)
 	//G = null
 	del(G)
+//	playsound(src.loc, 'sound/machines/medbayscanner1.ogg', 75, 0)
 	return
 
 /obj/machinery/bodyscanner/ex_act(severity)
