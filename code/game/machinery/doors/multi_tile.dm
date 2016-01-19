@@ -16,13 +16,15 @@
 	assembly_type = "obj/structure/door_assembly/multi_tile"
 
 
-	//var/obj/machinery/door/poddoor/filler_object/f1
-	//var/obj/machinery/door/poddoor/filler_object/f2
-
 	New()
 		..()
-		f5 = new/obj/machinery/door/airlock/multi_tile/filler_object (src.loc)
-		f6 = new/obj/machinery/door/airlock/multi_tile/filler_object (get_step(src,EAST))
+
+		if(src.dir > 3)
+			f5 = new/obj/machinery/door/airlock/multi_tile/filler_object (src.loc)
+			f6 = new/obj/machinery/door/airlock/multi_tile/filler_object (get_step(src,EAST))
+		else
+			f5 = new/obj/machinery/door/airlock/multi_tile/filler_object (src.loc)
+			f6 = new/obj/machinery/door/airlock/multi_tile/filler_object (get_step(src,NORTH))
 		f5.density = 0
 		f6.density = 0
 		f5.SetOpacity(opacity)
