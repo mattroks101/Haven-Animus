@@ -219,17 +219,25 @@ datum/preferences
 			if(J)//I hate how this looks, but there's no reason to go through this switch if it's empty
 
 				var/obj/item/clothing/under/UF = J.uniform
-				clothes = new /icon(uniform_icon, initial(UF.icon_state))
+				var/UF_state = initial(UF.item_color)
+				if(!UF_state) UF_state = initial(UF.icon_state)
+				clothes = new /icon(uniform_icon, UF_state)
 
 				var/obj/item/clothing/shoes/SH = J.shoes
 				clothes.Blend(new /icon(shoes_icon, initial(SH.icon_state)), ICON_UNDERLAY)
 
 				var/obj/item/clothing/gloves/GL = J.gloves
-				if(GL) clothes.Blend(new /icon(gloves_icon, initial(GL.icon_state)), ICON_UNDERLAY)
+				if(GL)
+					var/GL_state = initial(GL.item_state)
+					if(!GL_state) GL_state = initial(GL.item_state)
+					clothes.Blend(new /icon(gloves_icon, ), ICON_UNDERLAY)
 
 /*
 				var/obj/item/weapon/storage/belt/BT = J.belt
-				if(BT) clothes.Blend(new /icon(belt_icon, initial(BT.icon_state)), ICON_OVERLAY)
+				if(BT)
+					var/BT_state = initial(BT.item_state)
+					if(!BT_state) BT_state = initial(BT.icon_state)
+					clothes.Blend(new /icon(belt_icon, BT_state), ICON_OVERLAY)
 */
 
 				var/obj/item/clothing/suit/ST = J.suit

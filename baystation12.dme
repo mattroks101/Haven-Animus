@@ -429,6 +429,7 @@
 #include "code\game\machinery\robot_fabricator.dm"
 #include "code\game\machinery\seed_extractor.dm"
 #include "code\game\machinery\shieldgen.dm"
+#include "code\game\machinery\shower.dm"
 #include "code\game\machinery\Sleeper.dm"
 #include "code\game\machinery\spaceheater.dm"
 #include "code\game\machinery\status_display.dm"
@@ -560,6 +561,7 @@
 #include "code\game\objects\effects\floor.dm"
 #include "code\game\objects\effects\gibs.dm"
 #include "code\game\objects\effects\glowshroom.dm"
+#include "code\game\objects\effects\hologram.dm"
 #include "code\game\objects\effects\landmarks.dm"
 #include "code\game\objects\effects\manifest.dm"
 #include "code\game\objects\effects\mines.dm"
@@ -1595,7 +1597,6 @@
 #include "maps\encounters\mining_station.dmm"
 #include "maps\encounters\old_base.dmm"
 #include "maps\encounters\satellite.dmm"
-#include "maps\encounters\telesat.dmm"
 #include "maps\overmap\_map.dmm"
 #include "maps\overmap\bearcat\bearcat.dm"
 // END_INCLUDE
