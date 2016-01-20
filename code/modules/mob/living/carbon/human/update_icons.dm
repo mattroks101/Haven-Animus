@@ -569,7 +569,7 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		w_uniform.screen_loc = get_slot_loc("iclothing")
 		var/t_color = w_uniform.item_color
 		if(!t_color)		t_color = icon_state
-		var/image/standing	= image("icon_state" = "[t_color]_s")
+		var/image/standing	= image("icon_state" = t_color)
 
 		if(FAT in src.mutations)
 			standing.icon	= ((w_uniform.icon_override) ? w_uniform.icon_override : 'icons/mob/uniform_fat.dmi')
