@@ -159,6 +159,7 @@
 	uniform = /obj/item/clothing/under/rank/miner
 	pda = /obj/item/device/pda/shaftminer
 	ear = /obj/item/device/radio/headset/headset_cargo
+	survival_gear = /obj/item/weapon/storage/box/engineer
 
 	put_in_backpack = list(\
 		/obj/item/weapon/crowbar,\
