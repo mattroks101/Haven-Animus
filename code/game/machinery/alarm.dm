@@ -217,6 +217,8 @@
 		if(RCON_YES)
 			remote_control = 1
 
+	if (alarm_area.atmosalm == 2) // ASS IN AREA? SHOOP DA LOOP!
+		playsound(src.loc, 'sound/machines/atmosalarmloop.ogg', 25, 0, 4)
 	updateDialog()
 	return
 
@@ -507,6 +509,7 @@
 		air_doors_close(0)
 	else
 		air_doors_open(0)
+
 
 	update_icon()
 
@@ -1558,6 +1561,13 @@ FIRE ALARM
 	if(locate(/obj/fire) in loc)
 		alarm()
 
+	var/area/A = src.loc // that shit use for loop a sound ps: rework a firealarm
+	A = A.loc
+	if (!( istype(A, /area) ))
+		return
+	if(A.fire)
+		playsound(src.loc, 'sound/machines/firealarmloop.ogg', 25, 0, 4)
+
 	return
 
 /obj/machinery/firealarm/power_change()
@@ -1666,7 +1676,6 @@ FIRE ALARM
 		return
 	A.firealert()
 	update_icon()
-	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
 
 /obj/machinery/firealarm/New(loc, dir, building)

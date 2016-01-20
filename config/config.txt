@@ -1,12 +1,13 @@
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
-# SERVERNAME Animus Indigo
+# SERVERNAME spacestation13
+
 ## Alert levels
-ALERT_GREEN Угрозы судну и экипажу нет. Охране разрешено владеть оружием скрытно, за исключением специальных операций. Личная неприкосновенность экипажа соблюдается в полной мере.
-ALERT_BLUE_UPTO Угроза извне. Охране разрешено открыто носить оружие , случайные обыски так-же разрешены.
-ALERT_BLUE_DOWNTO Угроза миновала. Охране все еще разрешено владеть оружием. Случайные обыски остаются разрешенными.
-ALERT_RED_UPTO Критическа&#255; внутренн&#255;&#255; угроза станции. Охране разрешено владеть летальным оружием. Разрешен обыск любого отсека и члена экипажа. Гражданскому персоналу рекомендуется разойтись по отделам и ждать инструкций от глав своих отделов.
-ALERT_RED_DOWNTO Механизм самоуничтожени&#255; станции был деактивирован, однако станции все еще угрожает опасность. Охране разрешено владеть летальным оружием. Разрешен обыск любого отсека и члена экипажа
-ALERT_DELTA Механизм самоуничтожени&#255; станции был активирован. Весь экипаж должен получить инструкции от глав. Любое сопротивление службе безопасности караетс&#255; смертью. Это не учебная тревога.
+ALERT_GREEN All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced.
+ALERT_BLUE_UPTO The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted.
+ALERT_BLUE_DOWNTO The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed.
+ALERT_RED_UPTO There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised.
+ALERT_RED_DOWNTO The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised.
+ALERT_DELTA The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
@@ -171,13 +172,13 @@ GUEST_BAN
 #SERVER server.net:port
 
 ## forum address
-# FORUMURL http://forum.ss13.ru
+# FORUMURL http://example.com
 
 ## Wiki address
-# WIKIURL http://wiki.ss13.ru
+# WIKIURL http://example.com
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-# BANAPPEALS http://hub.ss13.ru/5/bans
+# BANAPPEALS http://example.com
 
 ## In-game features
 ## spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard

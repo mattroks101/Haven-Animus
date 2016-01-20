@@ -6,7 +6,7 @@
 	total_positions = 0
 	spawn_positions = 1
 	selection_color = "#ccffcc"
-	supervisors = "вашим законам"
+	supervisors = "your laws"
 	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
@@ -22,7 +22,7 @@
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 2
-	supervisors = "вашим законам и ИИ"	//Nodrak
+	supervisors = "your laws and the AI"	//Nodrak
 	selection_color = "#ddffdd"
 	minimal_player_age = 1
 
