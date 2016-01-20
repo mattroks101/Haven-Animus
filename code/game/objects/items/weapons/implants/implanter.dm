@@ -37,16 +37,7 @@
 				msg_admin_attack("[user.name] ([user.ckey]) implanted [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 				user.show_message("\red You implanted the implant into [M].")
-				if(src.imp.implanted(M))
-					src.imp.loc = M
-					src.imp.imp_in = M
-					src.imp.implanted = 1
-					if (ishuman(M))
-						var/mob/living/carbon/human/H = M
-						var/datum/organ/external/affected = H.get_organ(user.zone_sel.selecting)
-						affected.implants += src.imp
-						imp.part = affected
-
+				src.imp.implanted(M, user.zone_sel.selecting)
 				src.imp = null
 				update()
 	return

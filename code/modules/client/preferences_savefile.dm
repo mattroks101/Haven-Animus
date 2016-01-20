@@ -132,6 +132,7 @@
 
 	//Jobs
 	S["alternate_option"]	>> alternate_option
+	S["high_job_title"]		>> high_job_title
 	S["job_civilian_high"]	>> job_civilian_high
 	S["job_civilian_med"]	>> job_civilian_med
 	S["job_civilian_low"]	>> job_civilian_low
@@ -252,6 +253,7 @@
 
 	//Jobs
 	S["alternate_option"]	<< alternate_option
+	S["high_job_title"]		<< high_job_title
 	S["job_civilian_high"]	<< job_civilian_high
 	S["job_civilian_med"]	<< job_civilian_med
 	S["job_civilian_low"]	<< job_civilian_low

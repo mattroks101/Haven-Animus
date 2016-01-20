@@ -9,6 +9,7 @@
 	supervisors = "the captain"
 	selection_color = "#ffeeaa"
 	idtype = /obj/item/weapon/card/id/ce
+
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
 			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
 			            access_heads, access_construction, access_sec_doors,
@@ -19,25 +20,20 @@
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
 	minimal_player_age = 7
 
+	uniform = /obj/item/clothing/under/rank/chief_engineer
+	shoes = /obj/item/clothing/shoes/brown
+	pda = /obj/item/device/pda/heads/ce
+	hat = /obj/item/clothing/head/hardhat/white
+	gloves = /obj/item/clothing/gloves/black
+	belt = /obj/item/weapon/storage/belt/utility/full
+	ear = /obj/item/device/radio/headset/heads/ce
+	survival_gear = /obj/item/weapon/storage/box/engineer
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/ce(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/industrial(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_eng(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chief_engineer(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/heads/ce(H), slot_l_store)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat/white(H), slot_head)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H.back), slot_in_backpack)
-		return 1
+	backpacks = list(
+		/obj/item/weapon/storage/backpack/industrial,\
+		/obj/item/weapon/storage/backpack/satchel_eng,\
+		/obj/item/weapon/storage/backpack/satchel
+		)
 
 
 
@@ -55,25 +51,24 @@
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
 
+	uniform = /obj/item/clothing/under/rank/engineer
+	shoes = /obj/item/clothing/shoes/orange
+	pda = /obj/item/device/pda/engineering
+	hat = /obj/item/clothing/head/hardhat
+	belt = /obj/item/weapon/storage/belt/utility/full
+	ear = /obj/item/device/radio/headset/headset_eng
+	survival_gear = /obj/item/weapon/storage/box/engineer
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/industrial(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_eng(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/engineer(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/orange(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat(H), slot_head)
-		H.equip_to_slot_or_del(new /obj/item/device/t_scanner(H), slot_r_store)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/engineering(H), slot_l_store)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H.back), slot_in_backpack)
-		return 1
+	put_in_backpack = list(\
+		/obj/item/device/t_scanner
+		)
+
+	backpacks = list(
+		/obj/item/weapon/storage/backpack/industrial,\
+		/obj/item/weapon/storage/backpack/satchel_eng,\
+		/obj/item/weapon/storage/backpack/satchel
+		)
+
 
 
 
@@ -91,20 +86,9 @@
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
 	minimal_access = list(access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
 
+	survival_gear = /obj/item/weapon/storage/box/engineer
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/atmospheric_technician(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/atmos(H), slot_l_store)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/atmostech/(H), slot_belt)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H.back), slot_in_backpack)
-		return 1
+	uniform = /obj/item/clothing/under/rank/atmospheric_technician
+	pda = /obj/item/device/pda/atmos
+	belt = /obj/item/weapon/storage/belt/utility/atmostech
+	ear = /obj/item/device/radio/headset/headset_eng

@@ -20,7 +20,16 @@
 	// What does the implant do upon injection?
 	// return 0 if the implant fails (ex. Revhead and loyalty implant.)
 	// return 1 if the implant succeeds (ex. Nonrevhead and loyalty implant.)
-	proc/implanted(var/mob/source)
+	proc/implanted(mob/living/carbon/human/target, var/target_organ = "head")
+		if(!istype(target)) return 0
+		var/datum/organ/external/affected = target.organs_by_name[target_organ]
+		if(!affected || !istype(affected)) return 0
+
+		imp_in = src
+		implanted = 1
+		affected.implants += src
+		part = affected
+
 		return 1
 
 	proc/get_data()
@@ -200,13 +209,14 @@ Implant Specifics:<BR>"}
 		if(t)
 			t.hotspot_expose(3500,125)
 
-	implanted(mob/source as mob)
+	implanted(mob/living/carbon/target as mob, var/organ as text)
+		if(!..()) return 0
 		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 		phrase = input("Choose activation phrase:") as text
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
 		phrase = sanitize(phrase, replacechars)
-		usr.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
-		usr << "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate."
+		usr.mind.store_memory("Explosive implant in [target] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
+		usr << "The implanted explosive implant in [target] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate."
 		return 1
 
 	emp_act(severity)
@@ -280,7 +290,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		R.my_atom = src
 
 
-	trigger(emote, source as mob)
+	trigger(emote, target as mob)
 		if(emote == "deathgasp")
 			src.activate(src.reagents.total_volume)
 		return
@@ -331,9 +341,8 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		return dat
 
 
-	implanted(mob/M)
-		if(!istype(M, /mob/living/carbon/human))	return 0
-		var/mob/living/carbon/human/H = M
+	implanted(mob/living/carbon/human/H as mob, var/organ as text)
+		if(!..()) return 0
 		for(var/obj/item/weapon/implant/mentor/I in H.contents)
 			for(var/datum/organ/external/organs in H.organs)
 				if(I in organs.implants)
@@ -367,9 +376,8 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		return dat
 
 
-	implanted(mob/M)
-		if(!istype(M, /mob/living/carbon/human))	return 0
-		var/mob/living/carbon/human/H = M
+	implanted(mob/living/carbon/human/H as mob, var/organ as text)
+		if(!..()) return 0
 		for(var/obj/item/weapon/implant/loyalty/I in H.contents)
 			for(var/datum/organ/external/organs in H.organs)
 				if(I in organs.implants)
@@ -416,9 +424,10 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		return
 
 
-	implanted(mob/source)
-		source.mind.store_memory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", 0, 0)
-		source << "The implanted freedom implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate."
+	implanted(mob/living/carbon/human/target as mob, var/organ as text)
+		if(!..()) return
+		target.mind.store_memory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", 0, 0)
+		target << "The implanted freedom implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate."
 		return 1
 
 
@@ -489,8 +498,9 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		spawn(20)
 			malfunction--
 
-	implanted(mob/source as mob)
-		mobname = source.real_name
+	implanted(mob/living/carbon/human/target as mob, var/organ = "Body")
+		if(!..()) return
+		mobname = target.real_name
 		processing_objects.Add(src)
 		return 1
 
@@ -530,11 +540,12 @@ the implant may become unstable and either pre-maturely inject the subject or si
 			scanned.loc = t
 		del src
 
-	implanted(mob/source as mob)
+	implanted(mob/living/carbon/human/target as mob, organ = "Body")
+		if(!..()) return 0
 		src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_s", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
-		if (source.mind)
-			source.mind.store_memory("Compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
-		source << "The implanted compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate."
+		if (target.mind)
+			target.mind.store_memory("Compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
+		target << "The implanted compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate."
 		return 1
 
 	islegal()
