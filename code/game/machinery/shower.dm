@@ -2,8 +2,8 @@
 //Try watercloset.dm
 
 /obj/machinery/cellshower
-	name = "shower"
-	desc = "Could be used to put out fires. Probably."
+	name = "P.A.I.N. dispenser"
+	desc = "Pacification And INdignity dispenser."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "sprayer"
 	density = 0
@@ -40,6 +40,7 @@
 /obj/machinery/cellshower/proc/toggle()
 	on = !on
 	if(on)
+		visible_message("<span class='warning'>[src] clicks and distributes some pain.")
 		for(var/turf/T in range(1, locate(x, y, z + 1)))
 			if(T.density)
 				continue
@@ -49,7 +50,8 @@
 	update_icon()
 
 /obj/machinery/cellshower/proc/spray()
-	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -3)
+	visible_message("<span class='warning'>[src] clicks and distributes some pain.")
+	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1)
 	for(var/turf/T in range(1, locate(x, y, z + 1)))
 		if(T.density)
 			continue
