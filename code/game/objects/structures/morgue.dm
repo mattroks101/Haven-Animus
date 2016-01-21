@@ -69,12 +69,12 @@
 		//src.connected = null
 		del(src.connected)
 	else
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
 		step(src.connected, src.dir)
 		src.connected.layer = OBJ_LAYER
 		var/turf/T = get_step(src, src.dir)
 		if (T.contents.Find(src.connected))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			src.connected.connected = src
 			src.icon_state = "morgue0"
 			for(var/atom/movable/A as mob|obj in src)
