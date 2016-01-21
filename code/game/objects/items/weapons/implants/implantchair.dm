@@ -124,8 +124,6 @@
 
 
 	implant(var/mob/M)
-		if (!istype(M, /mob/living/carbon))
-			return
 		if(!implant_list.len)	return
 		for(var/obj/item/weapon/implant/loyalty/imp in implant_list)
 			if(!imp)	continue
@@ -133,10 +131,7 @@
 				for (var/mob/O in viewers(M, null))
 					O.show_message("\red [M] has been implanted by the [src.name].", 1)
 
-				if(imp.implanted(M))
-					imp.loc = M
-					imp.imp_in = M
-					imp.implanted = 1
+				imp.implanted(M)
 				implant_list -= imp
 				break
 		return

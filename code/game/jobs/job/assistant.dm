@@ -21,4 +21,4 @@
 	return 1
 
 /datum/job/assistant/get_access()
-		return list(access_maint_tunnels)
+	return list(access_maint_tunnels)
