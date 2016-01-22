@@ -407,29 +407,12 @@ var/global/datum/controller/occupations/job_master
 				if("Cyborg")
 					H.Robotize()
 					return 1
-				if("AI","Clown")	//don't need bag preference stuff!
-				else
-					switch(H.backbag) //BS12 EDIT
-						if(1)
-							H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-						if(2)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-						if(3)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel_norm(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-						if(4)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel(H)
-							new /obj/item/weapon/storage/box/survival(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
+
 
 		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
 		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 
 		spawnId(H, rank, alt_title)
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
 
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
@@ -471,12 +454,11 @@ var/global/datum/controller/occupations/job_master
 
 			H.equip_to_slot_or_del(C, slot_wear_id)
 
-		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)
-		if(locate(/obj/item/device/pda,H))
-			var/obj/item/device/pda/pda = locate(/obj/item/device/pda,H)
-			pda.owner = H.real_name
-			pda.ownjob = C.assignment
-			pda.name = "PDA-[H.real_name] ([pda.ownjob])"
+		var/obj/item/device/pda/P = locate(/obj/item/device/pda) in H
+		if(P)
+			P.owner = H.real_name
+			P.ownjob = C.assignment
+			P.name = "PDA-[H.real_name] ([P.ownjob])"
 
 		return 1
 
