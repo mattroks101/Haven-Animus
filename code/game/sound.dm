@@ -17,6 +17,8 @@
 		if ("pageturn") soundin = pick('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg')
 
 	var/sound/S = sound(soundin)
+	var/step = vol / (world.view+extrarange)
+	var/maxrange = world.view+extrarange
 	S.wait = 0 //No queue
 	S.channel = 0 //Any channel
 	S.volume = vol
@@ -33,6 +35,8 @@
 				if(M2.ear_deaf <= 0 || !M.ear_deaf)
 					if(isturf(source))
 						var/dx = source.x - M2.x
+						var/dy = source.y - M2.y
+						S.volume =(maxrange - sqrt((dx**2) + (dy **2))) * step
 						S.pan = max(-100, min(100, dx/8.0 * 100))
 
 					M2 << S
@@ -41,6 +45,8 @@
 				if(M.ear_deaf <= 0 || !M.ear_deaf)
 					if(isturf(source))
 						var/dx = source.x - M.x
+						var/dy = source.y - M.y
+						S.volume =(maxrange - sqrt((dx**2) + (dy **2))) * step
 						S.pan = max(-100, min(100, dx/8.0 * 100))
 
 					M << S
@@ -52,6 +58,8 @@
 					if(M.ear_deaf <= 0 || !M.ear_deaf)
 						if(isturf(source))
 							var/dx = source.x - M.x
+							var/dy = source.y - M.y
+							S.volume =(maxrange - sqrt((dx**2) + (dy **2))) * step
 							S.pan = max(-100, min(100, dx/8.0 * 100))
 
 						M << S
@@ -62,6 +70,8 @@
 			if(M.ear_deaf <= 0 || !M.ear_deaf)
 				if(isturf(source))
 					var/dx = source.x - M.x
+					var/dy = source.y - M.y
+					S.volume = (maxrange - sqrt((dx**2) + (dy **2))) * step
 					S.pan = max(-100, min(100, dx/8.0 * 100))
 
 				M << S
