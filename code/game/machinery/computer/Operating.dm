@@ -29,6 +29,7 @@
 		return
 	add_fingerprint(user)
 	interact(user)
+	playsound(src, "keyboard", 100, 0, 0)
 
 
 /obj/machinery/computer/operating/interact(mob/user)
@@ -74,6 +75,7 @@
 		return
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
+//	playsound(src, "keyboard", 100, 0, 0)
 	return
 
 
