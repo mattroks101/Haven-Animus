@@ -33,10 +33,10 @@
 
 /obj/machinery/door_timer/New()
 	..()
-
+/*
 	pixel_x = ((src.dir & 3)? (0) : (src.dir == 4 ? 32 : -32))
 	pixel_y = ((src.dir & 3)? (src.dir ==1 ? 32 : -32) : (0))
-
+*/
 	spawn(20)
 		for(var/obj/machinery/door/window/brigdoor/M in world)
 			if (M.id == src.id)
@@ -211,7 +211,9 @@
 			dat += "<br/><A href='?src=\ref[src];fc=1'>Activate Flash</A><br/>"
 
 	for(var/obj/machinery/cellshower/S in targets)
-		dat += "<br/>Shower <A href='?src=\ref[src];se=1'>[S.on ? "On" : "Off"]</A> <A href='?src=\ref[src];st=1'>[S.watertemp]</A>"
+		dat += "<br/>Shower: <A href='?src=\ref[src];se=1'>[S.on ? "On" : "Off"]</A>"
+		dat += "<br/><b>WARNING: Changing shower temperature is EXTREMELY dangerous!</b>"
+		dat += "<br/>Temperature: <A href='?src=\ref[src];st=1'>[S.watertemp]</A>"
 		if(S.last_spray && (S.last_spray + 3000) > world.time)
 			dat += "<br/><A href='?src=\ref[src];sp=1'>Spray Charging</A><br/>"
 		else

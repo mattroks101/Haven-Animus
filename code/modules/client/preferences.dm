@@ -79,6 +79,8 @@ datum/preferences
 	var/icon/preview_icon_front = null
 	var/icon/preview_icon_side = null
 
+	var/high_job_title = ""
+
 		//Jobs, uses bitflags
 	var/job_civilian_high = 0
 	var/job_civilian_med = 0
@@ -588,6 +590,7 @@ datum/preferences
 				job_civilian_high = 0
 				job_medsci_high = 0
 				job_engsec_high = 0
+				high_job_title = ""
 				return 1
 			if(2)//Set current highs to med, then reset them
 				job_civilian_med |= job_civilian_high
@@ -596,6 +599,7 @@ datum/preferences
 				job_civilian_high = 0
 				job_medsci_high = 0
 				job_engsec_high = 0
+				high_job_title = job.title
 
 		switch(job.department_flag)
 			if(CIVILIAN)

@@ -47,6 +47,9 @@
 							if(A.density&&A!=AM)
 								blocked = 1
 								break
+							if(istype(A, /obj/structure/catwalk))
+								blocked = 1
+								break
 							if(istype(A, /obj/machinery/atmospherics/pipe))
 								blocked = 1
 								if(prob(20))
@@ -69,9 +72,6 @@
 							//	      blocked = 0
 							//	      AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
 							//	      A.Destroy()
-								break
-							if(istype(A, /obj/structure/catwalk))
-								blocked = 1
 								break
 							if(istype(A, /obj/structure/lattice))
 								blocked = 1

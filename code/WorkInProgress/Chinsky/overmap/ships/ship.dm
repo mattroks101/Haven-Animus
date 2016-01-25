@@ -46,6 +46,10 @@
 	..()
 	name = "[vessel_name()]"
 
+/obj/effect/map/ship/eris/New(var/obj/effect/mapinfo/data)
+	..()
+	name = "[vessel_name()]"
+
 /obj/effect/map/ship/initialize()
 	for(var/obj/machinery/computer/engines/E in machines)
 		if (E.z in ship_levels)
