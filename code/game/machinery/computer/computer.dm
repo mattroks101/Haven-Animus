@@ -142,7 +142,7 @@
 	return
 
 
-/obj/machinery/computer/attack_hand(mob/user as mob)
+/obj/machinery/computer/attack_hand(mob/user as mob)//check mob direction
 	if(..())
 		return 1
 	if(istype(user, /mob/living/silicon))
