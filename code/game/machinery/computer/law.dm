@@ -26,7 +26,7 @@
 
 	attackby(obj/item/weapon/O as obj, mob/user as mob)
 
-		if(istype(O, /obj/item/weapon/aiModule))
+		if(istype(O, /obj/item/weapon/aiModule)) //here need keyboard sound?
 			var/obj/item/weapon/aiModule/M = O
 			M.install(src)
 		else
@@ -64,6 +64,8 @@
 
 
 	attack_hand(var/mob/user as mob)
+		if(..())
+			return
 		if(level_check()==0)	return
 		if(src.stat & NOPOWER)
 			usr << "The upload computer has no power!"

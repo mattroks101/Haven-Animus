@@ -18,7 +18,6 @@
 		return
 
 	attack_hand(var/mob/user as mob)
-
 		if(..())
 			return
 		user.set_machine(src)

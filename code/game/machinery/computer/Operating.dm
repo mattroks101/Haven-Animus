@@ -29,7 +29,7 @@
 		return
 	add_fingerprint(user)
 	interact(user)
-	playsound(src, "keyboard", 100, 0, 0)
+//	playsound(src, "keyboard", 100, 0, 0)
 
 
 /obj/machinery/computer/operating/interact(mob/user)

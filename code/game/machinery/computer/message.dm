@@ -82,6 +82,8 @@
 	return
 
 /obj/machinery/computer/message_monitor/attack_hand(var/mob/living/user as mob)
+	if(..())
+		return
 	if(level_check()==0)	return
 	if(stat & (NOPOWER|BROKEN))
 		return
