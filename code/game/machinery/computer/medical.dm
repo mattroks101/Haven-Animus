@@ -123,7 +123,7 @@
 			dat += text("<A href='?src=\ref[];login=1'>{Log In}</A>", src)
 	user << browse(text("<HEAD><TITLE>Medical Records</TITLE></HEAD><TT>[]</TT>", dat), "window=med_rec")
 	onclose(user, "med_rec")
-	playsound(src, "keyboard", 100, 0, 0)
+//	playsound(src, "keyboard", 100, 0, 0)
 	return
 
 /obj/machinery/computer/med_data/Topic(href, href_list)
@@ -486,7 +486,7 @@
 
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
-	playsound(src, "keyboard", 100, 0, 0)
+//	playsound(src, "keyboard", 100, 0, 0)
 	return
 
 /obj/machinery/computer/med_data/emp_act(severity)
