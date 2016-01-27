@@ -46,6 +46,9 @@
 	return attack_hand(user)
 
 /obj/machinery/computer/syndicate_station/attack_hand(mob/user as mob)
+	if(..())
+		return
+
 	if(!allowed(user))
 		user << "\red Access Denied"
 		return
@@ -85,6 +88,7 @@
 		syndicate_move_to(/area/syndicate_station/deck1)
 	add_fingerprint(usr)
 	updateUsrDialog()
+	keyboardsound(usr)
 	return
 
 /obj/machinery/computer/syndicate_station/bullet_act(var/obj/item/projectile/Proj)

@@ -1400,7 +1400,7 @@ Code shamelessly copied from apc_frame
 		return
 
 	var/turf/loc = get_turf_loc(usr)
-	var/area/A = loc.loc
+	var/area/A = get_area(src)
 	if (!istype(loc, /turf/simulated/floor))
 		usr << "\red Air Alarm cannot be placed on this spot."
 		return
@@ -1437,6 +1437,7 @@ FIRE ALARM
 	var/last_process = 0
 	var/wiresexposed = 0
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
+	var/area/alarm_area = null
 
 /obj/machinery/firealarm/update_icon()
 
@@ -1561,11 +1562,7 @@ FIRE ALARM
 	if(locate(/obj/fire) in loc)
 		alarm()
 
-	var/area/A = src.loc // that shit use for loop a sound ps: rework a firealarm
-	A = A.loc
-	if (!( istype(A, /area) ))
-		return
-	if(A.fire)
+	if(alarm_area.fire)
 		playsound(src.loc, 'sound/machines/firealarmloop.ogg', 25, 0, 4)
 
 	return
@@ -1587,13 +1584,10 @@ FIRE ALARM
 		return
 
 	user.set_machine(src)
-	var/area/A = src.loc
 	var/d1
 	var/d2
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
-		A = A.loc
-
-		if (A.fire)
+		if (alarm_area.fire)
 			d1 = text("<A href='?src=\ref[];reset=1'>Reset - Lockdown</A>", src)
 		else
 			d1 = text("<A href='?src=\ref[];alarm=1'>Alarm - Lockdown</A>", src)
@@ -1607,8 +1601,7 @@ FIRE ALARM
 		user << browse(dat, "window=firealarm")
 		onclose(user, "firealarm")
 	else
-		A = A.loc
-		if (A.fire)
+		if (alarm_area.fire)
 			d1 = text("<A href='?src=\ref[];reset=1'>[]</A>", src, stars("Reset - Lockdown"))
 		else
 			d1 = text("<A href='?src=\ref[];alarm=1'>[]</A>", src, stars("Alarm - Lockdown"))
@@ -1657,11 +1650,7 @@ FIRE ALARM
 /obj/machinery/firealarm/proc/reset()
 	if (!( src.working ))
 		return
-	var/area/A = src.loc
-	A = A.loc
-	if (!( istype(A, /area) ))
-		return
-	A.firereset()
+	alarm_area.firereset()
 	update_icon()
 	return
 
@@ -1670,11 +1659,7 @@ FIRE ALARM
 		return
 	if (!( src.working ))
 		return
-	var/area/A = src.loc
-	A = A.loc
-	if (!( istype(A, /area) ))
-		return
-	A.firealert()
+	alarm_area.firealert()
 	update_icon()
 	return
 
@@ -1698,6 +1683,8 @@ FIRE ALARM
 			src.overlays += image('icons/obj/monitors.dmi', "overlay_[get_security_level()]")
 		else
 			src.overlays += image('icons/obj/monitors.dmi', "overlay_green")
+
+	alarm_area = get_area(src)
 
 	update_icon()
 
@@ -1743,7 +1730,7 @@ Code shamelessly copied from apc_frame
 		return
 
 	var/turf/loc = get_turf_loc(usr)
-	var/area/A = loc.loc
+	var/area/A = get_area(src)
 	if (!istype(loc, /turf/simulated/floor))
 		usr << "\red Fire Alarm cannot be placed on this spot."
 		return
