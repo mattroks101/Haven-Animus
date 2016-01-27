@@ -101,6 +101,7 @@
 			if(damage > emergency_point)
 
 				radio.autosay(addtext(emergency_alert, " Instability: ",stability,"%"), "Supermatter Monitor")
+				world << sound('sound/ambience/matteralarm.ogg')
 				lastwarning = world.timeofday
 
 			else if(damage >= damage_archived) // The damage is still going up
