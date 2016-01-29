@@ -23,8 +23,8 @@
 	var/air_properties_vary_with_direction = 0
 	var/locked = 0									//Moved it here to simplify zombie-interaction code.
 	var/zombiedamage
-	var/obj/machinery/door/airlock/multi_tile/filler_object/f5
-	var/obj/machinery/door/airlock/multi_tile/filler_object/f6
+	var/obj/machinery/filler_object/f5
+	var/obj/machinery/filler_object/f6
 
 	//Multi-tile doors
 	dir = EAST
