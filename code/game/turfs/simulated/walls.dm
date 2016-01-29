@@ -156,6 +156,8 @@
 			O.loc = src
 
 	ChangeTurf(/turf/simulated/floor/plating)
+	relativewall_neighbours()
+
 
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
