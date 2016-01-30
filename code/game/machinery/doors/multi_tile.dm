@@ -20,11 +20,11 @@
 		..()
 
 		if(src.dir > 3)
-			f5 = new/obj/machinery/door/airlock/multi_tile/filler_object (src.loc)
-			f6 = new/obj/machinery/door/airlock/multi_tile/filler_object (get_step(src,EAST))
+			f5 = new/obj/machinery/filler_object (src.loc)
+			f6 = new/obj/machinery/filler_object (get_step(src,EAST))
 		else
-			f5 = new/obj/machinery/door/airlock/multi_tile/filler_object (src.loc)
-			f6 = new/obj/machinery/door/airlock/multi_tile/filler_object (get_step(src,NORTH))
+			f5 = new/obj/machinery/filler_object (src.loc)
+			f6 = new/obj/machinery/filler_object (get_step(src,NORTH))
 		f5.density = 0
 		f6.density = 0
 		f5.SetOpacity(opacity)
@@ -35,7 +35,7 @@
 		del f6
 		..()
 
-/obj/machinery/door/airlock/multi_tile/filler_object
+/obj/machinery/filler_object
 	name = ""
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = ""
