@@ -19,6 +19,10 @@
 			world << "BAD: [src] ([src.type]) spawned at [src.x] [src.y] [src.z]"
 			del(src)
 
+/obj/item/weapon/storage/toolbox/attack(mob/living/carbon/human/M as mob)
+	..()
+	playsound(src.loc, 'sound/weapons/toolbox.ogg', 100, 1)
+
 /obj/item/weapon/storage/toolbox/emergency
 	name = "emergency toolbox"
 	icon_state = "red"

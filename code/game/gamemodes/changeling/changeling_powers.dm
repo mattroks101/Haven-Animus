@@ -154,9 +154,11 @@
 			if(1)
 				src << "<span class='notice'>This creature is compatible. We must hold still...</span>"
 			if(2)
+				playsound(loc, 'sound/effects/lingextends.ogg', 100, 1)
 				src << "<span class='notice'>We extend a proboscis.</span>"
 				src.visible_message("<span class='warning'>[src] extends a proboscis!</span>")
 			if(3)
+				playsound(loc, 'sound/effects/lingstabs.ogg', 100, 1)
 				src << "<span class='notice'>We stab [T] with the proboscis.</span>"
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				T << "<span class='danger'>You feel a sharp stabbing pain!</span>"
@@ -169,7 +171,7 @@
 			src << "<span class='warning'>Our absorption of [T] has been interrupted!</span>"
 			changeling.isabsorbing = 0
 			return
-
+	playsound(loc, 'sound/effects/lingabsorbs.ogg', 100, 1)
 	src << "<span class='notice'>We have absorbed [T]!</span>"
 	src.visible_message("<span class='danger'>[src] sucks the fluids from [T]!</span>")
 	T << "<span class='danger'>You have been absorbed by the changeling!</span>"
