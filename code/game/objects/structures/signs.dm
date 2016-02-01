@@ -205,6 +205,41 @@
 	desc = "Sign depicts the symbolic of Ironhammer Security, the largest security provider within Trade Union of Hansa."
 	icon_state = "ironhammer"
 
+/obj/structure/sign/atmos_co2
+	name = "CO2 warning sign"
+	desc = "WARNING! CO2 flow tube. Ensure the flow is disengaged before working."
+	icon_state = "atmos_co2"
+
+/obj/structure/sign/atmos_n2o
+	name = "N2O warning sign"
+	desc = "WARNING! N2O flow tube. Ensure the flow is disengaged before working."
+	icon_state = "atmos_n2o"
+
+/obj/structure/sign/atmos_phoron
+	name = "Phoron warning sign"
+	desc = "WARNING! Phoron flow tube. Ensure the flow is disengaged before working."
+	icon_state = "atmos_phoron"
+
+/obj/structure/sign/atmos_n2
+	name = "N2 warning sign"
+	desc = "WARNING! N2 flow tube. Ensure the flow is disengaged before working."
+	icon_state = "atmos_n2"
+
+/obj/structure/sign/atmos_o2
+	name = "O2 warning sign"
+	desc = "WARNING! O2 flow tube. Ensure the flow is disengaged before working."
+	icon_state = "atmos_o2"
+
+/obj/structure/sign/atmos_air
+	name = "Air warning sign"
+	desc = "WARNING! Air flow tube. Ensure the flow is disengaged before working."
+	icon_state = "atmos_air"
+
+/obj/structure/sign/atmos_waste
+	name = "Atmos waste warning sign"
+	desc = "WARNING! Waste flow tube. Ensure the flow is disengaged before working."
+	icon_state = "atmos_waste"
+
 
 //New Signs
 
