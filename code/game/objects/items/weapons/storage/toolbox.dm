@@ -32,6 +32,7 @@
 		..()
 		new /obj/item/weapon/crowbar/red(src)
 		new /obj/item/weapon/extinguisher/mini(src)
+		new /obj/item/weapon/weldingtool/mini(src)
 		if(prob(50))
 			new /obj/item/device/flashlight(src)
 		else
