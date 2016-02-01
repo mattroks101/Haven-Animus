@@ -239,7 +239,7 @@
 
 	//DRILLING
 	if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
-
+		playsound(loc, 'sound/weapons/drill.ogg', 50, 1)
 		user << "<span class='notice'>You begin to drill though the wall.</span>"
 
 		sleep(200)
