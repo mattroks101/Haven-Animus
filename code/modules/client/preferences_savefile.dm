@@ -110,7 +110,7 @@
 	S["dwarven"]			>> dwarven
 	S["name_is_always_random"] >> be_random_name
 	S["gender"]				>> gender
-	S["fat"]				>> fat
+	S["body_build"]			>> body_build
 	S["age"]				>> age
 
 	//colors to be consolidated into hex strings (requires some work with dna code)
@@ -176,7 +176,8 @@
 	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
 	dwarven 		= sanitize_integer(dwarven, 0, 1, initial(dwarven))
 	gender			= sanitize_gender(gender)
-	fat				= sanitize_integer(fat, 0, 1, initial(fat))
+	body_build		= sanitize_inlist(body_build, list("Default", "Slim", "Fat"), initial(body_build))
+	body			= get_body_build(gender, body_build)
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	r_hair			= sanitize_integer(r_hair, 0, 255, initial(r_hair))
 	g_hair			= sanitize_integer(g_hair, 0, 255, initial(g_hair))
@@ -222,7 +223,7 @@
 	S["name_is_always_random"] << be_random_name
 	S["dwarven"]			<< dwarven
 	S["gender"]				<< gender
-	S["fat"]				<< fat
+	S["body_build"]			<< body_build
 	S["age"]				<< age
 	S["hair_red"]			<< r_hair
 	S["hair_green"]			<< g_hair

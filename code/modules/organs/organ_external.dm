@@ -809,12 +809,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		gender=""
 		fat = 0
 	if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
-		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][fat ? "_[fat]" : ""]")
+		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name]_[gender][fat]")
 
 	if (status & ORGAN_MUTATED)
-		return new /icon(deform_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_[fat]" : ""]")
+		return new /icon(deform_icon, "[icon_name]_[gender][fat]")
 
-	return new /icon(race_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_[fat]" : ""]")
+	return new /icon(race_icon, "[icon_name]_[gender][fat]")
 
 
 /datum/organ/external/proc/is_usable()
