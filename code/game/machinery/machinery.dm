@@ -186,7 +186,7 @@ Class Procs:
 		use_power(active_power_usage,power_channel)
 	return 1
 
-/obj/machinery/Topic(href, href_list)
+/obj/machinery/Topic(href, href_list) // machine is work? Human is ok? 0 = y
 	..()
 	if(stat & (NOPOWER|BROKEN))
 		return 1

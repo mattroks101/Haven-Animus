@@ -4,7 +4,7 @@
 	name = "Hologram Computer"
 	desc = "Rumoured to control holograms."
 	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "holo_console0"
+	icon_state = "holo_console0" //!!!!!!!!!!!ICON IS MISSING!!!!!!!!!!! its broken???
 	var/obj/machinery/hologram/projector/projector = null
 	var/temp = null
 	var/lumens = 0.0

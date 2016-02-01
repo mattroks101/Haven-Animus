@@ -1,4 +1,5 @@
 /obj/effect/damagedfloor
+	layer = 2.01
 	icon = 'damage_overlays.dmi'
 	icon_state = "damaged1"
 

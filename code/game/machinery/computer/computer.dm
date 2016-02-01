@@ -142,22 +142,26 @@
 	return
 
 
-/obj/machinery/computer/attack_hand(mob/user as mob)
+/obj/machinery/computer/attack_hand(mob/user as mob)//check mob direction
 	if(..())
 		return 1
 	if(istype(user, /mob/living/silicon))
 		return 0
 	if((src.dir == 1) && (user.y - src.y == 1)) //NORTH
 		if(src.x == user.x || src.x - user.x == 1 || user.x - src.x == 1)
+			keyboardsound(user)
 			return 0
 	else if(src.dir == 2 && src.y - user.y == 1) //SOUTH
 		if(src.x == user.x || src.x - user.x == 1 || user.x - src.x == 1)
+			keyboardsound(user)
 			return 0
 	else if(src.dir == 4 && user.x - src.x == 1) //EAST
 		if(src.y == user.y || src.y - user.y == 1 || user.y - src.y == 1)
+			keyboardsound(user)
 			return 0
 	else if(src.dir == 8 && src.x - user.x == 1) //WEST
 		if(src.y == user.y || src.y - user.y == 1 || user.y - src.y == 1)
+			keyboardsound(user)
 			return 0
 	else
 		return 1
@@ -168,3 +172,13 @@
 	set src in oview(1)
 	src.dir = turn(src.dir, -90)
 	return 1
+
+/obj/machinery/computer/Topic(href, href_list)//if all ok then playsound
+	if(..())
+		return 1
+	keyboardsound(usr)
+	return 0
+
+/obj/machinery/computer/proc/keyboardsound(mob/user as mob)
+	if(!issilicon(user))
+		playsound(src, "keyboard", 100, 1, 0)

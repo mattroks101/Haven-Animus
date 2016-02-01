@@ -47,43 +47,45 @@
 							if(A.density&&A!=AM)
 								blocked = 1
 								break
-							if(istype(A, /obj/machinery/atmospherics/pipe))
-								blocked = 1
-								if(prob(20))
-									blocked = 0
-									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
-									A.Destroy()
-							//      else if((FAT in AM.mutations) && prob(80))
-							//	      blocked = 0
-							//	      AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
-							//	      A.Destroy()
-								break
-
-							if(istype(A, /obj/structure/disposalpipe))
-								blocked = 1
-								if(prob(10))
-									blocked = 0
-									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
-									A.Destroy()
-							//      else if((FAT in AM.mutations) && prob(40))
-							//	      blocked = 0
-							//	      AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
-							//	      A.Destroy()
-								break
 							if(istype(A, /obj/structure/catwalk))
 								blocked = 1
 								break
-							if(istype(A, /obj/structure/lattice))
-								blocked = 1
-								if(prob(3))
-									blocked = 0
-									AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
-									A.Destroy()
-							//      else if((FAT in AM.mutations) && prob(10))
-							//	      blocked = 0
-							//	      AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
-							//	      A.Destroy()
-								break
+						if(!blocked)	//This is in a separate block because.
+							for(var/atom/A in src)
+								if(istype(A, /obj/machinery/atmospherics/pipe))
+									blocked = 1
+									if(prob(20))
+										blocked = 0
+										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
+										A.Destroy()
+								//      else if((FAT in AM.mutations) && prob(80))
+								//	      blocked = 0
+								//	      AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//	      A.Destroy()
+									break
+
+								if(istype(A, /obj/structure/disposalpipe))
+									blocked = 1
+									if(prob(10))
+										blocked = 0
+										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
+										A.Destroy()
+								//      else if((FAT in AM.mutations) && prob(40))
+								//	      blocked = 0
+								//	      AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//	      A.Destroy()
+									break
+								if(istype(A, /obj/structure/lattice))
+									blocked = 1
+									if(prob(3))
+										blocked = 0
+										AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You break through [A] and fall down!")
+										A.Destroy()
+								//      else if((FAT in AM.mutations) && prob(10))
+								//	      blocked = 0
+								//	      AM.visible_message("<span class='warning'>[AM.name] breaks through [A] and falls down!","<span class='warning'>You breaks through [A] and falls down!")
+								//	      A.Destroy()
+									break
 
 						if (!blocked)
 							AM.Move(floorbelow)

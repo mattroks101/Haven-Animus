@@ -128,6 +128,7 @@
 	//DRILLING
 	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
 		var/turf/T = get_turf(src)
+		playsound(loc, 'sound/weapons/drill.ogg', 50, 1)
 		if(!mineral)
 			T.ChangeTurf(/turf/simulated/wall)
 		else
@@ -253,6 +254,7 @@
 	//DRILLING
 	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
 		var/turf/T = get_turf(src)
+		playsound(loc, 'sound/weapons/drill.ogg', 50, 1)
 		T.ChangeTurf(/turf/simulated/wall)
 		T = get_turf(src)
 		T.attackby(W,user)

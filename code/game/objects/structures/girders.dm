@@ -44,6 +44,7 @@
 				del(src)
 
 		else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+			playsound(loc, 'sound/weapons/drill.ogg', 50, 1)
 			user << "\blue You drill through the girder!"
 			new /obj/item/stack/sheet/metal(get_turf(src))
 			del(src)
@@ -227,6 +228,7 @@
 			del(src)
 
 		else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+			playsound(loc, 'sound/weapons/drill.ogg', 50, 1)
 			user << "\blue You drill through the girder!"
 			new /obj/effect/decal/remains/human(get_turf(src))
 			del(src)
