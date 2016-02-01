@@ -207,7 +207,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 			del(src)
 	blackbox = src
 
-/obj/machinery/blackbox_recorder/Destroy()
+/obj/machinery/blackbox_recorder/Destroy()//<-<-<-BLACKBOX BUG IS HERE!!!!!!
 	var/turf/T = locate(1,1,2)
 	if(T)
 		blackbox = null

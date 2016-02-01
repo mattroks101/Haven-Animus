@@ -21,6 +21,9 @@ var/global/announce_vox_departure = 1 //Stealth systems - give an announcement o
 	return attack_hand(user)
 
 /obj/machinery/computer/vox_stealth/attack_hand(mob/user as mob)
+	if(..())
+		return
+
 	if(!allowed(user))
 		user << "\red Access Denied"
 		return
@@ -85,6 +88,9 @@ var/global/announce_vox_departure = 1 //Stealth systems - give an announcement o
 	return attack_hand(user)
 
 /obj/machinery/computer/vox_station/attack_hand(mob/user as mob)
+	if(..())
+		return
+
 	if(!allowed(user))
 		user << "\red Access Denied"
 		return
@@ -107,6 +113,9 @@ var/global/announce_vox_departure = 1 //Stealth systems - give an announcement o
 
 
 /obj/machinery/computer/vox_station/Topic(href, href_list)
+	if(..())
+		return
+
 	if(!isliving(usr))	return
 	var/mob/living/user = usr
 

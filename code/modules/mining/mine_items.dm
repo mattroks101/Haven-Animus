@@ -236,6 +236,7 @@ proc/move_mining_shuttle()
 		digspeed = 30
 		origin_tech = "materials=2;powerstorage=3;engineering=2"
 		desc = "Yours is the drill that will pierce through the rock walls."
+		drill_sound = 'sound/weapons/drill.ogg'
 
 	jackhammer
 		name = "sonic jackhammer"
@@ -268,6 +269,7 @@ proc/move_mining_shuttle()
 		digspeed = 5 //Digs through walls, girders, and can dig up sand
 		origin_tech = "materials=6;powerstorage=4;engineering=5"
 		desc = "Yours is the drill that will pierce the heavens!"
+		drill_sound = 'sound/weapons/drill.ogg'
 
 	borgdrill
 		name = "cyborg mining drill"
