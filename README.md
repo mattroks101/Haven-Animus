@@ -1,1 +1,1 @@
-<blockquote class="imgur-embed-pub" lang="en" data-id="jY5nIrz"><a href="//imgur.com/jY5nIrz">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+![^14E67281D32E236F20165C3DE4AD3A34197E0E401CE2F5D4D3^pimgpsh_fullsize_distr.jpg](https://bitbucket.org/repo/rXzKaL/images/1446330929-%5E14E67281D32E236F20165C3DE4AD3A34197E0E401CE2F5D4D3%5Epimgpsh_fullsize_distr.jpg)
