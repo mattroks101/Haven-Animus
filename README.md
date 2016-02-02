@@ -1,1 +1,1 @@
-# Оставь надежду, всяк сюда входящий #
+[img]http://i.imgur.com/jY5nIrz.gif[/img]
