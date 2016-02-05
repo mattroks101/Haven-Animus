@@ -198,6 +198,7 @@
 	idle_power_usage = 2
 	active_power_usage = 20
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
+	var/needsound
 	var/on = 0					// 1 if on, 0 if off
 	var/on_gs = 0
 	var/brightnessred = 8				// luminosity when on, also used in power calculation
@@ -323,6 +324,14 @@
 
 	update_icon()
 
+	if(on == 1)
+		if(needsound == 1)
+			playsound(src.loc, 'sound/effects/Custom_lights.ogg', 65, 1)
+			needsound = 0
+	else
+		needsound = 1
+
+
 	if(on)
 
 		SetLuminosity(on * brightnessred, on * brightnessgreen * !isalert(), on * brightnessblue * !isalert())		// *UL*
@@ -368,8 +377,9 @@
 // will not switch on if broken/burned/empty
 /obj/machinery/light/proc/seton(var/s)
 	on = (s && status == LIGHT_OK)
-	if(on)
-		playsound(src.loc, 'sound/effects/tube_sound.ogg', 80, 1)
+	//if(on)
+		//if(istype(src, /obj/machinery/light))
+		//	playsound(src.loc, 'sound/effects/Custom_lights.ogg', 80, 1)
 	update()
 
 // examine verb
@@ -883,3 +893,4 @@
 		force = 5
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		update()
+

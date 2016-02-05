@@ -19,10 +19,12 @@
 /obj/machinery/power/apc
 	name = "area power controller"
 
+
 	icon_state = "apc0"
 	anchored = 1
 	use_power = 0
 	req_access = list(access_engine_equip)
+	var/needsound
 	var/area/area
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
@@ -645,8 +647,11 @@
 /obj/machinery/power/apc/proc/update()
 	if(operating && !shorted)
 		area.power_light = (lighting > 1)
+		playsound(src.loc, 'sound/effects/tube_sound.ogg', 80, 1)
 		area.power_equip = (equipment > 1)
+		playsound(src.loc, 'sound/effects/tube_sound.ogg', 80, 1)
 		area.power_environ = (environ > 1)
+		playsound(src.loc, 'sound/effects/tube_sound.ogg', 80, 1)
 //		if (area.name == "AI Chamber")
 //			spawn(10)
 //				world << " [area.name] [area.power_equip]"
@@ -1027,6 +1032,14 @@
 		main_status = 2
 
 	var/perapc = 0
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	if(cell.charge <= 0)
+		if (needsound == 1)
+			playsound(src.loc, 'sound/machines/Custom_apcnopower.ogg', 75, 0)
+			needsound = 0
+	else
+		needsound = 1
+
 	if(terminal && terminal.powernet)
 		perapc = terminal.powernet.perapc
 
@@ -1080,16 +1093,19 @@
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
 			area.poweralert(0, src)
+
 		else if(cell.percent() < 15 && longtermpower < 0)	// <15%, turn off lighting & equipment
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
 			area.poweralert(0, src)
+
 		else if(cell.percent() < 30 && longtermpower < 0)			// <30%, turn off equipment
 			equipment = autoset(equipment, 1)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
 			area.poweralert(0, src)
+
 		else									// otherwise all can be on
 			equipment = autoset(equipment, 1)
 			lighting = autoset(lighting, 1)
