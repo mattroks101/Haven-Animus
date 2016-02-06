@@ -54,7 +54,8 @@ datum/preferences
 	var/be_random_name = 0				//whether we are a random name every round
 	var/dwarven = 0
 	var/gender = MALE					//gender of character (well duh)
-	var/fat = 0
+	var/body_build = "Default"			//character body build name
+	var/datum/body_build/body = null	//body_build object
 	var/age = 30						//age of character
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/underwear = 1					//underwear type
@@ -123,10 +124,10 @@ datum/preferences
 				if(load_character())
 					return
 	gender = pick(MALE, FEMALE)
+	body = get_body_build(gender, body_build)
 	real_name = random_name(gender, dwarven_name = dwarven)
 
 /datum/preferences
-
 	proc/ShowChoices(mob/user)
 		if(!user || !user.client)	return
 		update_preview_icon()
@@ -156,13 +157,7 @@ datum/preferences
 
 		dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
-		var/body = "Normal"
-		switch(fat)
-			if("fat")
-				body = "Fat"
-			if("slim")
-				body = "Slim"
-		dat += "<b>Body Shape:</b> <a href='?_src_=prefs;preference=fatness'><b>[body]</b></a>"
+		dat += "<b>Body Shape:</b> <a href='?_src_=prefs;preference=fatness'><b>[body_build]</b></a>"
 
 		dat += "<br>"
 		dat += "<b>UI Type:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_type]</b></a><br>"
@@ -250,11 +245,10 @@ datum/preferences
 		else
 			dat += "<br><br>"
 
-		if(!fat)
-			if(gender == MALE)
-				dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
-			else
-				dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_f[underwear]]</b></a><br>"
+		if(gender == MALE)
+			dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
+		else
+			dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_f[underwear]]</b></a><br>"
 
 		dat += "Backpack Type:<br><a href ='?_src_=prefs;preference=bag;task=input'><b>[backbaglist[backbag]]</b></a><br>"
 
@@ -972,14 +966,8 @@ datum/preferences
 						dwarven = !dwarven
 
 					if("fatness")
-						fat = alert("Body Shape", "Body", "Normal", "Fat", "Slim")
-						switch(fat)
-							if("Fat")
-								fat = "fat"
-							if("Slim")
-								fat = "slim"
-							else
-								fat = 0
+						body_build = input("Body Shape", "Body") in list("Default", "Slim", "Fat")
+						body = get_body_build(gender, body_build)
 
 					if("disabilities")				//please note: current code only allows nearsightedness as a disability
 						disabilities = !disabilities//if you want to add actual disabilities, code that selects them should be here
@@ -1086,11 +1074,7 @@ datum/preferences
 		character.flavor_texts["legs"] = flavor_texts["legs"]
 		character.flavor_texts["feet"] = flavor_texts["feet"]
 
-		switch(fat)
-			if("fat")
-				character.mutations += FAT
-			if("slim")
-				character.mutations += SLIM
+		character.body_build = get_body_build(gender, body_build)
 
 		character.med_record = med_record
 		character.sec_record = sec_record

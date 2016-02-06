@@ -18,6 +18,8 @@
 
 	var/s_tone = 0	//Skin tone
 
+	var/datum/body_build/body_build = null
+
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
 	var/age = 30		//Player's age (pure fluff)

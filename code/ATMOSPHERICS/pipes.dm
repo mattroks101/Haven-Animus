@@ -203,6 +203,7 @@ obj/machinery/atmospherics/pipe
 			else
 				if(!node1&&!node2)
 					del(src) //TODO: silent deleting looks weird
+					return
 				var/have_node1 = node1?1:0
 				var/have_node2 = node2?1:0
 				icon_state = "exposed[have_node1][have_node2][invisibility ? "-f" : "" ]"
