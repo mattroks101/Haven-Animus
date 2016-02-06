@@ -45,7 +45,6 @@ proc/random_name(gender, species = "Human", dwarven_name = 0)
 		if(gender==FEMALE)	return capitalize(pick(first_names_dwarven_female)) + " " + capitalize(pick(last_names_dwarven))
 		else				return capitalize(pick(first_names_dwarven_male)) + " " + capitalize(pick(last_names_dwarven))
 
-
 proc/random_skin_tone()
 	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
 		if("caucasian")		. = -10
@@ -80,6 +79,19 @@ proc/age2agedescription(age)
 		if(60 to 70)		return "aging"
 		if(70 to INFINITY)	return "elderly"
 		else				return "unknown"
+
+proc/get_body_build(gender, body_build = "Default")
+	if(gender == MALE)
+		if(body_build in male_body_builds)
+			return male_body_builds[body_build]
+		else
+			return male_body_builds["Default"]
+	else
+		if(body_build in female_body_builds)
+			return female_body_builds[body_build]
+		else
+			return female_body_builds["Default"]
+
 /*
 proc/generate_backstory(age)
 
