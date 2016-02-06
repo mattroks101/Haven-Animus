@@ -447,12 +447,14 @@ About the new airlock wires panel:
 			//raises them if they are down (only if power's on)
 			if(!src.locked)
 				src.locked = 1
+				playsound(src.loc, 'sound/effects/Custom_bolts.ogg', 50, 1, 7)
 				for(var/mob/M in range(1,src))
 					M << "You hear a click from the bottom of the door."
 				src.updateUsrDialog()
 			else
 				if(src.arePowerSystemsOn()) //only can raise bolts if power's on
 					src.locked = 0
+					playsound(src.loc, 'sound/effects/Custom_boltsup.ogg', 50, 1, 7)
 					for(var/mob/M in range(1,src))
 						M << "You hear a click from the bottom of the door."
 					src.updateUsrDialog()
@@ -690,6 +692,7 @@ About the new airlock wires panel:
 
 
 /obj/machinery/door/airlock/update_icon()
+
 	if(overlays) overlays.Cut()
 	if(density)
 		if(locked && lights)
@@ -1331,8 +1334,8 @@ About the new airlock wires panel:
 		if( !arePowerSystemsOn() || (stat & NOPOWER) || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
 			return 0
 	use_power(50)
-	if(istype(src, /obj/machinery/door/airlock/glass))
-		playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
+	//if(istype(src, /obj/machinery/door/airlock/glass))
+	//	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	if(istype(src, /obj/machinery/door/airlock/clown))
 		playsound(src.loc, 'sound/items/bikehorn.ogg', 30, 1)
 	else
