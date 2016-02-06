@@ -52,6 +52,7 @@
 	flick("pdoorc0", src)
 	src.icon_state = "pdoor0"
 	src.SetOpacity(0)
+	playsound(src.loc, 'sound/effects/Custom_blastdooropen.ogg', 65, 0)
 	sleep(10)
 	layer = initial(layer)
 	src.density = 0
@@ -73,6 +74,7 @@
 	src.icon_state = "pdoor1"
 	src.density = 1
 	src.SetOpacity(initial(opacity))
+	playsound(src.loc, 'sound/effects/Custom_blastdoorclose.ogg', 65, 0)
 	update_nearby_tiles()
 	crush()
 	sleep(10)

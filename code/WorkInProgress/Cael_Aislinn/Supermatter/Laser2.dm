@@ -58,6 +58,7 @@
 	if(!next)
 		if(get_step(src.loc,src.dir))
 			var/obj/effect/beam/e_beam/e = new /obj/effect/beam/e_beam(src.loc)
+			playsound(src.loc, 'sound/effects/Custom_beam.ogg', 9, 0, 15)
 			e.dir = src.dir
 			src.next = e
 			e.master = src.master
