@@ -1242,8 +1242,14 @@ About the new airlock wires panel:
 		else
 			return
 	else if(istype(C, /obj/item/weapon/screwdriver))
-		src.p_open = !( src.p_open )
-		src.update_icon()
+		if (src.p_open)
+			playsound(src.loc, 'sound/effects/Custom_screwdriveropen.ogg', 50, 1)
+			src.p_open = !( src.p_open )
+			src.update_icon()
+		else
+			src.p_open = !( src.p_open )
+			playsound(src.loc, 'sound/effects/Custom_screwdriverclose.ogg', 50, 1)
+			src.update_icon()
 	else if(istype(C, /obj/item/weapon/wirecutters))
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/device/multitool))
