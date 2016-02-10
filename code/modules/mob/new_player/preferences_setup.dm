@@ -139,34 +139,14 @@ datum/preferences
 		var/icon/icobase
 		var/datum/species/current_species = all_species[species]
 
-		var/uniform_icon = 'icons/mob/uniform.dmi'
-		var/shoes_icon = 'icons/mob/feet.dmi'
-		var/back_icon = 'icons/mob/back.dmi'
-		var/gloves_icon = 'icons/mob/hands.dmi'
-		var/suit_icon = 'icons/mob/suit.dmi'
-
-		switch(fat)
-			if("fat")
-				uniform_icon = 'icons/mob/uniform_fat.dmi'
-				shoes_icon = 'icons/mob/feet_fat.dmi'
-				back_icon = 'icons/mob/back_fat.dmi'
-				gloves_icon = 'icons/mob/hands_fat.dmi'
-				suit_icon = 'icons/mob/suit_fat.dmi'
-			if("slim")
-				uniform_icon = 'icons/mob/uniform_slim.dmi'
-				shoes_icon = 'icons/mob/feet_slim.dmi'
-				back_icon = 'icons/mob/back_slim.dmi'
-				gloves_icon = 'icons/mob/hands_slim.dmi'
-				suit_icon = 'icons/mob/suit_slim.dmi'
-
 		if(current_species)
 			icobase = current_species.icobase
 		else
 			icobase = 'icons/mob/human_races/r_human.dmi'
 
-		preview_icon = new /icon(icobase, "torso_[g][fat ? "_[fat]" : ""]")
-		preview_icon.Blend(new /icon(icobase, "groin_[g][fat ? "_[fat]" : ""]"), ICON_OVERLAY)
-		preview_icon.Blend(new /icon(icobase, "head_[g][fat ? "_[fat]" : ""]"), ICON_OVERLAY)
+		preview_icon = new /icon(icobase, "torso_[g][body.index]")
+		preview_icon.Blend(new /icon(icobase, "groin_[g][body.index]"), ICON_OVERLAY)
+		preview_icon.Blend(new /icon(icobase, "head_[g][body.index]"), ICON_OVERLAY)
 		//Лоли пидр
 
 		for(var/name in list("l_arm","r_arm","l_leg","r_leg","l_foot","r_foot","l_hand","r_hand"))
@@ -177,7 +157,7 @@ datum/preferences
 		for(var/name in organ_data)
 			if(organ_data[name] == "amputated") continue
 
-			var/icon/temp = new /icon(icobase, "[name]_[g][fat ? "_[fat]" : ""]")
+			var/icon/temp = new /icon(icobase, "[name]_[g][body.index]")
 			if(organ_data[name] == "cyborg")
 				temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 
@@ -207,12 +187,12 @@ datum/preferences
 
 		var/icon/clothes = null
 		if(job_civilian_low & ASSISTANT || !job_master)//This gives the preview icon clothes depending on which job(if any) is set to 'high'
-			clothes = new /icon(uniform_icon, "grey_s")
-			clothes.Blend(new /icon(shoes_icon, "black"), ICON_UNDERLAY)
+			clothes = new /icon(body.uniform_icon, "grey_s")
+			clothes.Blend(new /icon(body.shoes_icon, "black"), ICON_UNDERLAY)
 			if(backbag == 2)
-				clothes.Blend(new /icon(back_icon, "backpack"), ICON_OVERLAY)
+				clothes.Blend(new /icon(body.backpack_icon, "backpack"), ICON_OVERLAY)
 			else if(backbag == 3 || backbag == 4)
-				clothes.Blend(new /icon(back_icon, "satchel"), ICON_OVERLAY)
+				clothes.Blend(new /icon(body.backpack_icon, "satchel"), ICON_OVERLAY)
 
 		else
 			var/datum/job/J = job_master.GetJob(high_job_title)
@@ -221,34 +201,34 @@ datum/preferences
 				var/obj/item/clothing/under/UF = J.uniform
 				var/UF_state = initial(UF.item_color)
 				if(!UF_state) UF_state = initial(UF.icon_state)
-				clothes = new /icon(uniform_icon, UF_state)
+				clothes = new /icon(body.uniform_icon, UF_state)
 
 				var/obj/item/clothing/shoes/SH = J.shoes
-				clothes.Blend(new /icon(shoes_icon, initial(SH.icon_state)), ICON_UNDERLAY)
+				clothes.Blend(new /icon(body.shoes_icon, initial(SH.icon_state)), ICON_UNDERLAY)
 
 				var/obj/item/clothing/gloves/GL = J.gloves
 				if(GL)
 					var/GL_state = initial(GL.item_state)
 					if(!GL_state) GL_state = initial(GL.item_state)
-					clothes.Blend(new /icon(gloves_icon, ), ICON_UNDERLAY)
+					clothes.Blend(new /icon(body.gloves_icon, ), ICON_UNDERLAY)
 
-/*
+
 				var/obj/item/weapon/storage/belt/BT = J.belt
 				if(BT)
 					var/BT_state = initial(BT.item_state)
 					if(!BT_state) BT_state = initial(BT.icon_state)
-					clothes.Blend(new /icon(belt_icon, BT_state), ICON_OVERLAY)
-*/
+					clothes.Blend(new /icon(body.belt_icon, BT_state), ICON_OVERLAY)
+
 
 				var/obj/item/clothing/suit/ST = J.suit
-				if(ST) clothes.Blend(new /icon(suit_icon, initial(ST.icon_state)), ICON_OVERLAY)
+				if(ST) clothes.Blend(new /icon(body.suit_icon, initial(ST.icon_state)), ICON_OVERLAY)
 
 				var/obj/item/clothing/head/HT = J.hat
-				if(HT) clothes.Blend(new /icon('icons/mob/head.dmi', initial(HT.icon_state)), ICON_OVERLAY)
+				if(HT) clothes.Blend(new /icon(body.hat_icon, initial(HT.icon_state)), ICON_OVERLAY)
 
 				if( backbag > 1 )
 					var/obj/item/weapon/storage/backpack/BP = J.backpacks[backbag-1]
-					clothes.Blend(new /icon(back_icon, initial(BP.icon_state)), ICON_OVERLAY)
+					clothes.Blend(new /icon(body.backpack_icon, initial(BP.icon_state)), ICON_OVERLAY)
 
 		if(disabilities & NEARSIGHTED)
 			preview_icon.Blend(new /icon('icons/mob/eyes.dmi', "glasses"), ICON_OVERLAY)

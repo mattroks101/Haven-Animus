@@ -108,12 +108,14 @@
 	overlays = list()
 	if(!isopen)
 		overlays += "close"
+		playsound(src.loc, 'sound/effects/Custom_unitclose.ogg', 50, 0)
 	if(isUV)
 		overlays += "uv"
 	if(issuperUV && isUV)
 		overlays += "super"
 	if(isopen)
 		overlays += "open"
+		playsound(src.loc, 'sound/effects/Custom_openunit.ogg', 50, 0)
 		if(SUIT)
 			overlays += "suit"
 		if(HELMET)

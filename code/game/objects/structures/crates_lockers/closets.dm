@@ -69,7 +69,7 @@
 	if(istype(src, /obj/structure/closet/body_bag))
 		playsound(src.loc, 'sound/items/zip.ogg', 15, 1, -3)
 	else
-		playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
+		playsound(src.loc, 'sound/machines/Custom_closetopen.ogg', 35, 1, -3)
 	density = 0
 	return 1
 
@@ -115,7 +115,7 @@
 	if(istype(src, /obj/structure/closet/body_bag))
 		playsound(src.loc, 'sound/items/zip.ogg', 15, 1, -3)
 	else
-		playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
+		playsound(src.loc, 'sound/machines/Custom_closetclose.ogg', 25, 1, -3)
 	density = 1
 	return 1
 

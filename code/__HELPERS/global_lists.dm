@@ -28,6 +28,9 @@ var/global/list/whitelisted_species = list("Human")
 var/global/list/datum/poster/poster_designs = typesof(/datum/poster) - /datum/poster
 
 //Preferences stuff
+	//Bodybuilds
+var/global/list/male_body_builds = list()
+var/global/list/female_body_builds = list()
 	//Hairstyles
 var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
 var/global/list/hair_styles_male_list = list()
@@ -50,6 +53,15 @@ var/global/list/table_recipes = list()
 
 /hook/startup/proc/makeDatumRefLists()
 	var/list/paths
+
+	//Bodybuilds
+	paths = typesof(/datum/body_build)
+	for(var/path in paths)
+		var/datum/body_build/B = new path()
+		if (B.gender == FEMALE)
+			female_body_builds[B.name] = B
+		else
+			male_body_builds[B.name] = B
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
 	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
