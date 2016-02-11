@@ -262,8 +262,6 @@ proc/move_mining_shuttle()
 		origin_tech = "materials=6;engineering=4"
 		desc = "A pickaxe with a diamond pick head, this is just like minecraft."
 
-
-
 	diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 		name = "diamond mining drill"
 		icon_state = "diamonddrill"
@@ -282,10 +280,10 @@ proc/move_mining_shuttle()
 
 /obj/item/weapon/pickaxe/drill/attack(mob/living/carbon/human/M as mob)
 	..()
-	playsound(src.loc, 'sound/weapons/drill.ogg', 100, 1)
+	playsound(src.loc, drill_sound, 100, 1)
 /obj/item/weapon/pickaxe/diamonddrill/attack(mob/living/carbon/human/M as mob)
 	..()
-	playsound(src.loc, 'sound/weapons/drill.ogg', 100, 1)
+	playsound(src.loc, drill_sound, 100, 1)
 
 /*****************************Shovel********************************/
 

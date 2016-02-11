@@ -343,6 +343,7 @@
 
 							if(best)
 								C << "<span class='notice'>You are now running on internals from [tankcheck[best]] on your [nicename[best]].</span>"
+								playsound(usr, 'sound/effects/Custom_internals.ogg', 50, 0)
 								C.internal = tankcheck[best]
 
 

@@ -154,8 +154,8 @@
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 	var/max_fuel = 20 	//The max amount of fuel the welder can hold
-	var/off_state
-	var/on_state
+	var/off_state		// for off state
+	var/on_state		// for on state
 
 /obj/item/weapon/weldingtool/New()
 //	var/random_fuel = min(rand(10,20),max_fuel)
@@ -164,7 +164,7 @@
 	R.my_atom = src
 	R.add_reagent("fuel", max_fuel)
 	src.off_state = src.icon_state
-	src.on_state = src.icon_state+"1"
+	src.on_state = "[src.icon_state]1"
 	return
 
 
@@ -216,19 +216,19 @@
 	switch(welding)
 		//If off
 		if(0)
-			if(src.icon_state != off_state) //Check that the sprite is correct, if it isnt, it means toggle() was not called
+			if(src.icon_state != src.off_state) //Check that the sprite is correct, if it isnt, it means toggle() was not called
 				src.force = 3
 				src.damtype = "brute"
-				src.icon_state = off_state
+				src.icon_state = src.off_state
 				src.welding = 0
 			processing_objects.Remove(src)
 			return
 		//Welders left on now use up fuel, but lets not have them run out quite that fast
 		if(1)
-			if(src.icon_state != on_state) //Check that the sprite is correct, if it isnt, it means toggle() was not called
+			if(src.icon_state != src.on_state) //Check that the sprite is correct, if it isnt, it means toggle() was not called
 				src.force = 15
 				src.damtype = "fire"
-				src.icon_state = on_state
+				src.icon_state = src.on_state
 			if(prob(5))
 				remove_fuel(1)
 
@@ -314,7 +314,7 @@
 			usr << "\blue The [src] switches on."
 			src.force = 15
 			src.damtype = "fire"
-			src.icon_state = on_state
+			src.icon_state = src.on_state
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
@@ -325,7 +325,7 @@
 		usr << "\blue The [src] switches off."
 		src.force = 3
 		src.damtype = "brute"
-		src.icon_state = off_state
+		src.icon_state = src.off_state
 		src.welding = 0
 
 //Turns off the welder if there is no more fuel (does this really need to be its own proc?)
@@ -345,7 +345,7 @@
 			usr << "\blue You switch the [src] on."
 			src.force = 15
 			src.damtype = "fire"
-			src.icon_state = on_state
+			src.icon_state = src.on_state
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
@@ -358,7 +358,7 @@
 			usr << "\blue The [src] shuts off!"
 		src.force = 3
 		src.damtype = "brute"
-		src.icon_state = off_state
+		src.icon_state = src.off_state
 		src.welding = 0
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection

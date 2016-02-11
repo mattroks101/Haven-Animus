@@ -107,12 +107,29 @@
 /obj/machinery/atmospherics/unary/cold_sink/freezer/process()
 	..()
 	src.updateUsrDialog()
+	if (on == 1)
+		playsound(src.loc, 'sound/effects/Custom_freezer.ogg', 25, 0, 10)
+
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/power_change()
 	..()
 	if(stat & NOPOWER)
 		on = 0
 		update_icon()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /obj/machinery/atmospherics/unary/heat_reservoir/heater/
@@ -235,3 +252,4 @@
 	if(stat & NOPOWER)
 		on = 0
 		update_icon()
+

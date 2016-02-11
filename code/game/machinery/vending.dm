@@ -199,14 +199,25 @@
 		user << "You short out the product lock on [src]"
 		return
 	else if(istype(W, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		src.panel_open = !src.panel_open
-		user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
-		src.overlays.Cut()
-		if(src.panel_open)
-			src.overlays += image(src.icon, "[initial(icon_state)]-panel")
-		src.updateUsrDialog()
-		return
+		if (src.panel_open)
+			playsound(src.loc, 'sound/effects/Custom_screwdriveropen.ogg', 50, 1)
+			src.panel_open = !src.panel_open
+			user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
+			src.overlays.Cut()
+			if(src.panel_open)
+				src.overlays += image(src.icon, "[initial(icon_state)]-panel")
+			src.updateUsrDialog()
+			return
+		else
+			playsound(src.loc, 'sound/effects/Custom_screwdriverclose.ogg', 50, 1)
+			src.panel_open = !src.panel_open
+			user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
+			src.overlays.Cut()
+			if(src.panel_open)
+				src.overlays += image(src.icon, "[initial(icon_state)]-panel")
+			src.updateUsrDialog()
+			return
+
 	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
 		if(src.panel_open)
 			attack_hand(user)
