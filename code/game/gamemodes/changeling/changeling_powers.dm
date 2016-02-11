@@ -442,6 +442,7 @@
 			// sending display messages
 			C << "<span class='notice'>We have regenerated.</span>"
 			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
+			playsound(src.loc, 'sound/effects/Custom_changelingrev.ogg', 50, 0)
 
 
 	return 1

@@ -179,6 +179,7 @@
 				if(location.wear_mask && (location.wear_mask.flags & MASKINTERNALS))
 					location.internal = src
 					usr << "\blue You open \the [src] valve."
+					playsound(usr, 'sound/effects/Custom_internals.ogg', 50, 0)
 					if (location.internals)
 						location.internals.icon_state = "internal1"
 				else
