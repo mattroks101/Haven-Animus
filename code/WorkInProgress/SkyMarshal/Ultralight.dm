@@ -279,22 +279,20 @@ turf/proc/ul_UpdateLight()
 		return
 
 	var/LightingTag = copytext(CurrentArea.tag, 1, findtext(CurrentArea.tag, ":UL")) + ":UL[ul_GetRed()]_[ul_GetGreen()]_[ul_GetBlue()]"
-
+	if (findtext(LightingTag, ":UL") == 1)
+		LightingTag = CurrentArea.type + ":UL[ul_GetRed()]_[ul_GetGreen()]_[ul_GetBlue()]"
+	else
+		LightingTag = copytext(CurrentArea.tag, 1, findtext(CurrentArea.tag, ":UL")) + ":UL[ul_GetRed()]_[ul_GetGreen()]_[ul_GetBlue()]"
 	if(CurrentArea.tag != LightingTag)
 		var/area/NewArea = locate(LightingTag)
-
 		if(!NewArea)
 			NewArea = new CurrentArea.type()
 			NewArea.tag = LightingTag
-
 			for(var/V in CurrentArea.vars - "contents")
 				if(issaved(CurrentArea.vars[V]))
 					NewArea.vars[V] = CurrentArea.vars[V]
-
 			NewArea.tag = LightingTag
-
 			NewArea.ul_Light(ul_GetRed(), ul_GetGreen(), ul_GetBlue())
-
 
 		NewArea.contents += src
 
@@ -346,12 +344,12 @@ area/proc/ul_Light(var/Red = LightLevelRed, var/Green = LightLevelGreen, var/Blu
 
 	return
 
-area/proc/ul_Prep()
+area/proc/ul_Prep()// формурует параметр tag
 
-	if(!tag)
-		tag = "[type]"
+	if(!src.tag)
+		src.tag = "[src.type]"
 	if(ul_Lighting)
-		if(!findtext(tag,":UL"))
+		if(!findtext(src.tag,":UL"))
 			ul_Light()
 	//world.log << tag
 
