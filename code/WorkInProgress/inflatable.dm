@@ -128,7 +128,7 @@
 
 	deflate()
 
-/obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
+/obj/structure/inflatable/proc/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	health -= damage
 	if(health <= 0)
 		user.visible_message("<span class='danger'>[user] [attack_verb] open the [src]!</span>")
