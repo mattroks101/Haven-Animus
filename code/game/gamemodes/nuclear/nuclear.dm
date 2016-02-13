@@ -226,24 +226,8 @@
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/automatic/c20r(synd_mob), slot_belt)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(synd_mob.back), slot_in_backpack)
 
-	if(synd_mob.species)
-		var/race = synd_mob.species.name
-
-		if(race == "Unathi")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/unathi(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/unathi(synd_mob), slot_head)
-		else if(race == "Tajaran")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/tajara(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/tajara(synd_mob), slot_head)
-		else if(race == "Skrell")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/skrell(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/skrell(synd_mob), slot_head)
-		else
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
-	else
-		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
-		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
+	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
+	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
 
 	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
 	E.imp_in = synd_mob

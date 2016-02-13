@@ -597,13 +597,6 @@
 	item_state = "leatherjack"
 	item_color = "leatherjack"
 
-/obj/item/clothing/suit/armor/vest/fluff/deus_blueshield //deusdactyl
-	name = "blue shield security armor"
-	desc = "An armored vest with the badge of a Blue Shield Security lieutenant."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "deus_blueshield"
-	item_state = "deus_blueshield"
-
 /obj/item/clothing/suit/fluff/oldscarf //Writerer2: Javaria Zara
 	name = "old scarf"
 	desc = "An old looking scarf, it seems to be fairly worn."
@@ -614,14 +607,6 @@
 
 //////////// Uniforms ////////////
 
-/obj/item/clothing/under/fluff/milo_hachert //Field Dress Uniform - Milo Hachert - Commissar_Drew
-	name = "field dress uniform"
-	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacket’s shoulder bar."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "milohachert"
-	item_state = "milohachert"
-	item_color = "milohachert"
-
 /obj/item/clothing/under/fluff/jumpsuitdown //searif: Yuki Matsuda
 	name = "rolled down jumpsuit"
 	desc = "A rolled down jumpsuit. Great for mechanics."
@@ -629,22 +614,6 @@
 	icon_state = "jumpsuitdown"
 	item_state = "jumpsuitdown"
 	item_color = "jumpsuitdown"
-
-/obj/item/clothing/under/fluff/lilith_vinous_1 //slyhidden: Lilith Vinous
-	name = "casual security uniform"
-	desc = "A less formal version of the traditional dark red Security uniform. It has the top button undone, rolled up sleeves and different belt."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "lilith_uniform"
-	item_state = "lilith_uniform"
-	item_color = "lilith_uniform"
-
-/obj/item/clothing/under/fluff/ana_issek_1 //suethecake: Ana Issek
-	name = "retired uniform"
-	desc = "A silken blouse paired with dark-colored slacks. It has the words 'Chief Investigator' embroidered into the shoulder bar."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "ana_uniform"
-	item_state = "ana_uniform"
-	item_color = "ana_uniform"
 
 /obj/item/clothing/under/fluff/olddressuniform //desiderium: Momiji Inubashiri
 	name = "retired dress uniform"
@@ -654,21 +623,6 @@
 	item_state = "olddressuniform"
 	item_color = "olddressuniform"
 
-/obj/item/clothing/under/rank/security/fluff/jeremy_wolf_1 //whitewolf41: Jeremy Wolf
-	name = "worn officer's uniform"
-	desc = "An old red security jumpsuit. Seems to have some slight modifications."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "jeremy_wolf_1"
-	item_color = "jeremy_wolf_1"
-
-/obj/item/clothing/under/fluff/tian_dress //phaux: Tian Yinhu
-	name = "purple dress"
-	desc = "A nicely tailored purple dress made for the taller woman."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "tian_dress"
-	item_state = "tian_dress"
-	item_color = "tian_dress"
-
 /obj/item/clothing/under/rank/bartender/fluff/classy	//searif: Ara Al-Jazari
 	name = "classy bartender uniform"
 	desc = "A prim and proper uniform that looks very similar to a bartender's, the only differences being a red tie, waistcoat and a rag hanging out of the back pocket."
@@ -677,14 +631,6 @@
 	item_state = "ara_bar_uniform"
 	item_color = "ara_bar_uniform"
 
-/obj/item/clothing/under/fluff/callum_suit //roaper: Callum Leamus
-	name = "knockoff suit"
-	desc = "A knockoff of a suit commonly worn by the upper class."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "callum_suit"
-	item_state = "callum_suit"
-	item_color = "callum_suit"
-
 /obj/item/clothing/under/fluff/solara_light_1 //bluefishie: Solara Born-In-Light
 	name = "Elaborate Purple Dress"
 	desc = "An expertly tailored dress, made out of fine fabrics. The interwoven necklace appears to be made out of gold, with three complicated symbols engraved in the front."
@@ -692,59 +638,6 @@
 	icon_state = "solara_dress"
 	item_state = "solara_dress"
 	item_color = "solara_dress"
-
-/////// NT-SID Suit //Zuhayr: Jane Doe
-
-/obj/item/clothing/under/fluff/jane_sidsuit
-	name = "NT-SID jumpsuit"
-	desc = "A NanoTrasen Synthetic Intelligence Division jumpsuit, issued to 'volunteers'. On other people it looks fine, but right here a scientist has noted: on you it looks stupid."
-
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "jane_sid_suit"
-	item_state = "jane_sid_suit"
-	item_color = "jane_sid_suit"
-	has_sensor = 2
-	sensor_mode = 3
-	flags = FPRINT | TABLEPASS
-
-//Suit roll-down toggle.
-/obj/item/clothing/under/fluff/jane_sidsuit/verb/toggle_zipper()
-	set name = "Toggle Jumpsuit Zipper"
-	set category = "Object"
-	set src in usr
-
-	if(!usr.canmove || usr.stat || usr.restrained())
-		return 0
-
-	if(src.icon_state == "jane_sid_suit_down")
-		src.item_color = "jane_sid_suit"
-		usr << "You zip up the [src]."
-	else
-		src.item_color = "jane_sid_suit_down"
-		usr << "You unzip and roll down the [src]."
-
-	src.icon_state = "[item_color]"
-	src.item_state = "[item_color]"
-	usr.update_inv_w_uniform()
-
-////// Wyatt's Ex-Commander Jumpsuit - RawrTaicho
-/obj/item/clothing/under/fluff/wyatt_1
-
-	name = "ex-commander jumpsuit"
-	desc = "A standard Central Command Engineering Commander jumpsuit tailored to fight the wearer tightly. It has a Medal of Service pinned onto the left side of it."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "wyatt_uniform"
-	item_state = "wyatt_uniform"
-	item_color = "wyatt_uniform"
-
-////// Black Dress - Lillian Amsel - PapaDrow
-/obj/item/clothing/under/fluff/lillian_amsel_1
-	name = "Black Dress"
-	desc = "A knee-length, dark gray and black dress made of a soft, velvety material."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "lillian_dress"
-	item_state = "lillian_dress"
-	item_color = "lillian_dress"
 
 //////////// Masks ////////////
 
@@ -847,30 +740,11 @@
 	slot_flags = SLOT_MASK
 //////////// Shoes ////////////
 
-/obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
-	name = "Susan's Magboots"
-	desc = "A colorful pair of magboots with the name Susan Harris clearly written on the back."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "atmosmagboots0"
 
 //////////// Sets ////////////
 
-/*
-/obj/item/clothing/suit/storage/labcoat/fluff/cdc_labcoat
-	name = "\improper CDC labcoat"
-	desc = "A standard-issue CDC labcoat that protects against minor chemical spills.  It has the name \"Wiles\" sewn on to the breast pocket."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "labcoat_cdc_open"
-*/
-////// Short Sleeve Medical Outfit //erthilo: Farah Lants
 
-/obj/item/clothing/under/rank/medical/fluff/short
-	name = "short sleeve medical jumpsuit"
-	desc = "Made of a special fiber that gives special protection against biohazards. Has a cross on the chest denoting that the wearer is trained medical personnel and short sleeves."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "medical_short"
-	item_state = "medical_short"
-	item_color = "medical_short"
+////// Short Sleeve Medical Outfit //erthilo: Farah Lants
 
 /obj/item/clothing/suit/storage/labcoat/fluff/red
 	name = "red labcoat"
@@ -893,13 +767,6 @@
 	desc = "A clean and properly creased colony police cap. The badge is shined and polished, the word \"RETIRED\" engraved professionally under the words \"OUTER LIGHT POLICE.\""
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpolcap"
-
-/obj/item/clothing/under/det/fluff/retpoluniform
-	name = "retired colony patrolman's uniform"
-	desc = "A meticulously clean police uniform belonging to Precinct 31, Outer Light Colony. The word \"RETIRED\" is engraved tastefully and professionally in the badge below the number, 501."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "retpoluniform"
-	item_color = "retpoluniform"
 
 //////////// Weapons ////////////
 
@@ -962,20 +829,3 @@
 	desc = "An old gold plated flask. Nothing noteworthy about it besides it being gold and the red star on the worn out leather around it. There is also an engraving on the cap that is rather hard to see but it looks like \"Kornienkovich\" "
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "yuri_kornienkovich_flask"
-
-/obj/item/clothing/under/fluff/mai_yang_dress // Mai Yang's pretty pretty dress.
-	name = "White Cheongsam"
-	desc = "It is a white cheongsam dress."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "mai_yang"
-	item_state = "mai_yang"
-	item_color = "mai_yang"
-
-/obj/item/clothing/under/fluff/sakura_hokkaido_kimono
-	name = "Sakura Kimono"
-	desc = "A pale-pink, nearly white, kimono with a red and gold obi. There is a embroidered design of cherry blossom flowers covering the kimono."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "sakura_hokkaido_kimono"
-	item_state = "sakura_hokkaido_kimono"
-	item_color = "sakura_hokkaido_kimono"
-

@@ -1,7 +1,7 @@
 var/global/vox_tick = 1
 
 /mob/living/carbon/human/proc/equip_vox_raider()
-
+/*
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset/syndicate(src)
 	R.set_frequency(SYND_FREQ) //Same frequency as the syndicate team in Nuke mode.
 	equip_to_slot_or_del(R, slot_l_ear)
@@ -83,5 +83,5 @@ var/global/vox_tick = 1
 
 	vox_tick++
 	if (vox_tick > 4) vox_tick = 1
-
+*/
 	return 1

@@ -432,7 +432,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		"space pirate",
 		"soviet admiral",
 		"tunnel clown",
-		"masked killer",
 		"assassin",
 		"death commando",
 		"syndicate commando",
@@ -443,7 +442,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		"emergency response team",
 		"nanotrasen representative",
 		"nanotrasen officer",
-		"nanotrasen captain"
 		)
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
 	if (isnull(dresscode))
@@ -571,25 +569,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			var/obj/item/weapon/twohanded/fireaxe/fire_axe = new(M)
 			M.equip_to_slot_or_del(fire_axe, slot_r_hand)
 
-		if("masked killer")
-			M.equip_to_slot_or_del(new /obj/item/clothing/under/overalls(M), slot_w_uniform)
-			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
-			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/latex(M), slot_gloves)
-			M.equip_to_slot_or_del(new /obj/item/clothing/mask/surgical(M), slot_wear_mask)
-			M.equip_to_slot_or_del(new /obj/item/clothing/head/welding(M), slot_head)
-			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
-			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(M), slot_glasses)
-			M.equip_to_slot_or_del(new /obj/item/clothing/suit/apron(M), slot_wear_suit)
-			M.equip_to_slot_or_del(new /obj/item/weapon/kitchenknife(M), slot_l_store)
-			M.equip_to_slot_or_del(new /obj/item/weapon/scalpel(M), slot_r_store)
-
-			var/obj/item/weapon/twohanded/fireaxe/fire_axe = new(M)
-			M.equip_to_slot_or_del(fire_axe, slot_r_hand)
-
-			for(var/obj/item/carried_item in M.contents)
-				if(!istype(carried_item, /obj/item/weapon/implant))//If it's not an implant.
-					carried_item.add_blood(M)//Oh yes, there will be blood...
-
 		if("assassin")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
@@ -677,31 +656,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			W.access = get_all_accesses()
 			W.access += get_all_centcom_access()
 			W.assignment = "NanoTrasen Navy Officer"
-			W.registered_name = M.real_name
-			M.equip_if_possible(W, slot_wear_id)
-
-
-		if("nanotrasen captain")
-			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom/captain(M), slot_w_uniform)
-			M.equip_if_possible(new /obj/item/clothing/shoes/centcom(M), slot_shoes)
-			M.equip_if_possible(new /obj/item/clothing/gloves/white(M), slot_gloves)
-			M.equip_if_possible(new /obj/item/device/radio/headset/heads/captain(M), slot_l_ear)
-			M.equip_if_possible(new /obj/item/clothing/head/beret/centcom/captain(M), slot_head)
-
-			var/obj/item/device/pda/heads/pda = new(M)
-			pda.owner = M.real_name
-			pda.ownjob = "NanoTrasen Navy Captain"
-			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
-
-			M.equip_if_possible(pda, slot_r_store)
-			M.equip_if_possible(new /obj/item/clothing/glasses/sunglasses(M), slot_l_store)
-			M.equip_if_possible(new /obj/item/weapon/gun/energy(M), slot_belt)
-
-			var/obj/item/weapon/card/id/centcom/W = new(M)
-			W.name = "[M.real_name]'s ID Card"
-			W.access = get_all_accesses()
-			W.access += get_all_centcom_access()
-			W.assignment = "NanoTrasen Navy Captain"
 			W.registered_name = M.real_name
 			M.equip_if_possible(W, slot_wear_id)
 

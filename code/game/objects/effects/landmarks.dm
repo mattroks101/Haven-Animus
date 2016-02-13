@@ -114,15 +114,7 @@
 	new /obj/item/clothing/head/helmet/gladiator(src.loc)
 	del(src)
 
-/obj/effect/landmark/costume/madscientist/New()
-	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
-	new /obj/item/clothing/head/flatcap(src.loc)
-	new /obj/item/clothing/suit/storage/labcoat/mad(src.loc)
-	new /obj/item/clothing/glasses/greenglasses(src.loc)
-	del(src)
-
 /obj/effect/landmark/costume/elpresidente/New()
-	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
 	new /obj/item/clothing/mask/cigarette/cigar/havana(src.loc)
 	new /obj/item/clothing/shoes/jackboots(src.loc)
@@ -146,13 +138,6 @@
 	new /obj/item/clothing/head/that(src.loc)
 	del(src)
 
-/obj/effect/landmark/costume/scratch/New()
-	new /obj/item/clothing/gloves/white(src.loc)
-	new /obj/item/clothing/shoes/white(src.loc)
-	new /obj/item/clothing/under/scratch(src.loc)
-	if (prob(30))
-		new /obj/item/clothing/head/cueball(src.loc)
-	del(src)
 
 /obj/effect/landmark/costume/highlander/New()
 	new /obj/item/clothing/under/kilt(src.loc)
@@ -213,12 +198,6 @@
 /obj/effect/landmark/costume/marisawizard/fake/New()
 	new /obj/item/clothing/head/wizard/marisa/fake(src.loc)
 	new/obj/item/clothing/suit/wizrobe/marisa/fake(src.loc)
-	del(src)
-
-/obj/effect/landmark/costume/cutewitch/New()
-	new /obj/item/clothing/under/sundress(src.loc)
-	new /obj/item/clothing/head/witchwig(src.loc)
-	new /obj/item/weapon/staff/broom(src.loc)
 	del(src)
 
 /obj/effect/landmark/costume/fakewizard/New()

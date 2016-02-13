@@ -43,7 +43,6 @@ Wooden Sandals:/obj/item/clothing/shoes/sandal:80
 Fluffy Slippers:/obj/item/clothing/shoes/slippers:150
 
 Jumpsuits
-Vice Policeman:/obj/item/clothing/under/rank/vice:900
 Rainbow Suit:/obj/item/clothing/under/rainbow:200
 Lightblue Suit:/obj/item/clothing/under/lightblue:200
 Aqua Suit:/obj/item/clothing/under/aqua:900
@@ -56,8 +55,6 @@ Lightred Suit:/obj/item/clothing/under/lightred:200
 Darkred Suit:/obj/item/clothing/under/darkred:200
 Grim Jacket:/obj/item/clothing/under/suit_jacket:200
 Black Jacket:/obj/item/clothing/under/color/blackf:200
-Police Uniform:/obj/item/clothing/under/det/fluff/retpoluniform:400
-Scratched Suit:/obj/item/clothing/under/scratch:200
 Downy Jumpsuit:/obj/item/clothing/under/fluff/jumpsuitdown:200
 Tacticool Turtleneck:/obj/item/clothing/under/syndicate/tacticool:200
 

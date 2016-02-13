@@ -273,7 +273,6 @@
 		new /obj/item/weapon/storage/belt/medical(src)
 		new /obj/item/clothing/shoes/white(src)
 		new /obj/item/device/radio/headset/headset_med(src)
-		new /obj/item/clothing/under/rank/nursesuit (src)
 		new /obj/item/clothing/under/rank/medical(src)
 		new /obj/item/device/healthanalyzer(src)
 

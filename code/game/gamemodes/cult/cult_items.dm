@@ -45,10 +45,6 @@
 	icon_state = "cult_hoodalt"
 	item_state = "cult_hoodalt"
 
-/obj/item/clothing/suit/cultrobes/alt
-	icon_state = "cultrobesalt"
-	item_state = "cultrobesalt"
-
 /obj/item/clothing/suit/cultrobes
 	name = "cult robes"
 	desc = "A set of armored robes worn by the followers of Nar-Sie"
