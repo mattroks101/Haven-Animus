@@ -19,15 +19,6 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = FPRINT | TABLEPASS
 
-/obj/item/clothing/under/rank/research_director/dress_rd
-	name = "research director dress uniform"
-	desc = "Feminine fashion for the style concious RD. Its fabric provides minor protection from biological contaminants."
-	icon_state = "dress_rd"
-	item_color = "dress_rd"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-	flags = FPRINT | TABLEPASS
-
-
 /obj/item/clothing/under/rank/scientist
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer as a scientist."
 	name = "scientist's jumpsuit"
@@ -79,33 +70,6 @@
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
-/obj/item/clothing/under/rank/nursesuit
-	desc = "It's a jumpsuit commonly worn by nursing staff in the medical department."
-	name = "nurse's suit"
-	icon_state = "nursesuit"
-	item_state = "nursesuit"
-	item_color = "nursesuit"
-	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-
-/obj/item/clothing/under/rank/nurse
-	desc = "A dress commonly worn by the nursing staff in the medical department."
-	name = "nurse's dress"
-	icon_state = "nurse"
-	item_state = "nurse"
-	item_color = "nurse"
-	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-
-/obj/item/clothing/under/rank/orderly
-	desc = "A white suit to be worn by orderly people who love orderly things."
-	name = "orderly's uniform"
-	icon_state = "orderly"
-	item_state = "orderly"
-	item_color = "orderly"
-	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-
 /obj/item/clothing/under/rank/medical
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has a cross on the chest denoting that the wearer is trained medical personnel."
 	name = "medical doctor's jumpsuit"
@@ -115,66 +79,3 @@
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = FPRINT | TABLEPASS
-
-/obj/item/clothing/under/rank/medical/blue
-	name = "medical scrubs"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in baby blue."
-	icon_state = "scrubsblue"
-	item_color = "scrubsblue"
-	flags = FPRINT | TABLEPASS
-
-/obj/item/clothing/under/rank/medical/green
-	name = "medical scrubs"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in dark green."
-	icon_state = "scrubsgreen"
-	item_color = "scrubsgreen"
-	flags = FPRINT | TABLEPASS
-
-/obj/item/clothing/under/rank/medical/purple
-	name = "medical scrubs"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in deep purple."
-	icon_state = "scrubspurple"
-	item_color = "scrubspurple"
-	flags = FPRINT | TABLEPASS
-
-
-
-
-/*
- * Medsci, unused (i think) stuff
- */
-/obj/item/clothing/under/rank/geneticist_new
-	desc = "It's made of a special fiber which provides minor protection against biohazards."
-	name = "geneticist's jumpsuit"
-	icon_state = "genetics_new"
-	item_state = "w_suit"
-	item_color = "genetics_new"
-	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-
-/obj/item/clothing/under/rank/chemist_new
-	desc = "It's made of a special fiber which provides minor protection against biohazards."
-	name = "chemist's jumpsuit"
-	icon_state = "chemist_new"
-	item_state = "w_suit"
-	item_color = "chemist_new"
-	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-
-/obj/item/clothing/under/rank/scientist_new
-	desc = "Made of a special fiber that gives special protection against biohazards and small explosions."
-	name = "scientist's jumpsuit"
-	icon_state = "scientist_new"
-	item_state = "w_suit"
-	item_color = "scientist_new"
-	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
-
-/obj/item/clothing/under/rank/virologist_new
-	desc = "Made of a special fiber that gives increased protection against biohazards."
-	name = "virologist's jumpsuit"
-	icon_state = "virologist_new"
-	item_state = "w_suit"
-	item_color = "virologist_new"
-	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)

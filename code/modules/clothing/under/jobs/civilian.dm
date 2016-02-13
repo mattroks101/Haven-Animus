@@ -157,14 +157,6 @@
 	item_state = "lawyer_purp"
 	item_color = "lawyer_purp"
 
-/obj/item/clothing/under/lawyer/oldman
-	name = "Old Man's Suit"
-	desc = "A classic suit for the older gentleman with built in back support."
-	icon_state = "oldman"
-	item_state = "oldman"
-	item_color = "oldman"
-
-
 /obj/item/clothing/under/librarian
 	name = "sensible suit"
 	desc = "It's very... sensible."

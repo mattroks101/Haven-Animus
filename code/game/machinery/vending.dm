@@ -1083,11 +1083,10 @@
 	vend_delay = 15
 	vend_reply = "Thank you for using AutoDrobe!"
 /*	products = list(/obj/item/clothing/mask/fawkes = 1, /obj/item/clothing/suit/chickensuit = 1,/obj/item/clothing/head/chicken = 1,/obj/item/clothing/under/gladiator = 1,
-					/obj/item/clothing/head/helmet/gladiator = 1,/obj/item/clothing/under/gimmick/rank/captain/suit = 1,/obj/item/clothing/head/flatcap = 1,
 					/obj/item/clothing/suit/labcoat/mad = 1,/obj/item/clothing/glasses/greenglasses = 1,/obj/item/clothing/shoes/jackboots = 1,
 					/obj/item/clothing/under/schoolgirl = 1,/obj/item/clothing/head/kitty = 1,/obj/item/clothing/under/blackskirt = 1,/obj/item/clothing/head/beret = 1,
 					/obj/item/clothing/tie/waistcoat = 1,/obj/item/clothing/under/suit_jacket = 1,/obj/item/clothing/head/that =1,/obj/item/clothing/head/cueball = 1,
-					/obj/item/clothing/under/scratch = 1,/obj/item/clothing/under/kilt = 1,/obj/item/clothing/head/beret = 1,/obj/item/clothing/tie/waistcoat = 1,
+					/obj/item/clothing/under/kilt = 1,/obj/item/clothing/head/beret = 1,/obj/item/clothing/tie/waistcoat = 1,
 					/obj/item/clothing/glasses/monocle =1,/obj/item/clothing/head/bowler = 1,/obj/item/weapon/cane = 1,/obj/item/clothing/under/sl_suit = 1,
 					/obj/item/clothing/mask/fakemoustache = 1,/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 1,/obj/item/clothing/head/plaguedoctorhat = 1,
 					/obj/item/clothing/under/owl = 1,/obj/item/clothing/mask/gas/owl_mask = 1,/obj/item/clothing/suit/apron = 1,/obj/item/clothing/under/waiter = 1,
@@ -1096,7 +1095,7 @@
 					/obj/item/clothing/mask/gas/cyborg = 1,/obj/item/clothing/suit/holidaypriest = 1,/obj/item/clothing/head/wizard/marisa/fake = 1, /obj/item/clothing/suit/cabanelasuit = 1, /obj/item/clothing/mask/horsehead/black = 1, /obj/item/clothing/mask/unicornhead = 1, /obj/item/clothing/head/rabbithead = 1,
 					/obj/item/clothing/suit/wizrobe/marisa/fake = 1,/obj/item/clothing/under/sundress = 1,/obj/item/clothing/head/witchwig = 1,/obj/item/weapon/staff/broom = 1, /obj/item/clothing/mask/heist/smiley = 1, /obj/item/clothing/mask/heist/smiley/yellow = 1, /obj/item/clothing/mask/heist/smiley/red = 1,
 					/obj/item/clothing/suit/wizrobe/fake = 1,/obj/item/clothing/head/wizard/fake = 1,/obj/item/weapon/staff = 3,/obj/item/clothing/mask/gas/sexyclown = 1, /obj/item/clothing/mask/crocodile = 1,
-					/obj/item/clothing/under/sexyclown = 1,/obj/item/clothing/mask/gas/sexymime = 1,/obj/item/clothing/under/sexymime = 1,/obj/item/clothing/suit/apron/overalls = 1, /obj/item/clothing/suit/rabbitsuit = 1,
+					/obj/item/clothing/under/sexyclown = 1,/obj/item/clothing/mask/gas/sexymime = 1,/obj/item/clothing/under/sexymime = 1, /obj/item/clothing/suit/rabbitsuit = 1,
 					/obj/item/clothing/head/rabbitears = 1, /obj/item/clothing/under/maid = 1, /obj/item/clothing/head/maidbow = 1, /obj/item/clothing/under/schoolgirl = 1, /obj/item/clothing/under/schoolgirl/red = 1, /obj/item/clothing/under/schoolgirl/green = 1, /obj/item/clothing/under/schoolgirl/orange = 1,
 					/obj/item/clothing/head/sombrero = 1, /obj/item/clothing/head/sombrero/green = 1, /obj/item/clothing/suit/poncho = 1,
 					/obj/item/clothing/suit/poncho/green = 1, /obj/item/clothing/suit/poncho/red = 1) //Pretty much everything that had a chance to spawn.
@@ -1112,14 +1111,14 @@
 	vend_delay = 15
 	vend_reply = "Thank you for using the Clothe-O-Mat!"
 /*	products = list(/obj/item/clothing/mask/fakemoustache = 3,/obj/item/clothing/head/collectable/tophat = 3,/obj/item/clothing/glasses/monocle = 2,
-					/obj/item/clothing/under/suit_jacket/navy = 3,/obj/item/clothing/under/kilt = 1,/obj/item/clothing/under/overalls = 3,
+					/obj/item/clothing/under/suit_jacket/navy = 3,/obj/item/clothing/under/kilt = 1,
 					/obj/item/clothing/under/suit_jacket/really_black = 3,/obj/item/clothing/under/jeans = 5,/obj/item/clothing/under/camo = 2,
-					/obj/item/clothing/tie/waistcoat = 3,/obj/item/clothing/under/sundress = 4,/obj/item/clothing/under/blacktango = 2,
+					/obj/item/clothing/tie/waistcoat = 3,/obj/item/clothing/under/blacktango = 2,
 					/obj/item/clothing/head/maidbow = 1,/obj/item/clothing/under/janimaid = 1,/obj/item/clothing/suit/labcoat/coat/jacket/varsity = 3,/obj/item/clothing/suit/labcoat/coat/jacket = 5,
 					/obj/item/clothing/glasses/regular = 3,/obj/item/clothing/head/sombrero = 2,/obj/item/clothing/suit/poncho = 2,
 					/obj/item/clothing/shoes/laceup = 3,/obj/item/clothing/shoes/sneakers/black = 6, /obj/item/clothing/shoes/sandal = 2)
 	contraband = list(/obj/item/clothing/under/syndicate/tacticool = 1,/obj/item/clothing/mask/fawkes = 1,/obj/item/clothing/mask/balaclava = 1,/obj/item/clothing/head/ushanka = 1,/obj/item/clothing/under/soviet = 1,/obj/item/clothing/suit/cardborg = 1, /obj/item/clothing/head/cardborg = 1,/obj/item/clothing/glasses/hypno = 1)
-	premium = list(/obj/item/clothing/under/suit_jacket/checkered = 1,/obj/item/clothing/head/mailman = 1,/obj/item/clothing/under/rank/mailman = 1,/obj/item/clothing/suit/labcoat/coat/jacket/leather = 1,/obj/item/clothing/suit/ianshirt = 1,/obj/item/clothing/glasses/sunglasses = 3, /obj/item/clothing/glasses/threed = 2, /obj/item/clothing/head/collectable/paper = 1, /obj/item/clothing/head/fedora = 2)*/
+	premium = list(/obj/item/clothing/under/suit_jacket/checkered = 1,/obj/item/clothing/head/mailman = 1,/obj/item/clothing/suit/labcoat/coat/jacket/leather = 1,/obj/item/clothing/suit/ianshirt = 1,/obj/item/clothing/glasses/sunglasses = 3, /obj/item/clothing/glasses/threed = 2, /obj/item/clothing/head/collectable/paper = 1, /obj/item/clothing/head/fedora = 2)*/
 	refill_canister = /obj/item/weapon/vending_refill/clothing
 
 

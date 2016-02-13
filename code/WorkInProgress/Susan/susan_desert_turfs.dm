@@ -74,7 +74,6 @@ turf/simulated/wall/impassable_rock
 
 /obj/effect/landmark/corpse/alien/laborer
 	name = "Laborer"
-	corpseuniform = /obj/item/clothing/under/overalls
 	corpseradio = /obj/item/device/radio/headset/headset_eng
 	corpseback = /obj/item/weapon/storage/backpack/industrial
 	corpsebelt = /obj/item/weapon/storage/belt/utility/full
