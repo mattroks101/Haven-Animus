@@ -873,9 +873,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/sterile
 	name = "Sterile equipment crate"
-	contains = list(/obj/item/clothing/under/rank/medical/green,
-					/obj/item/clothing/under/rank/medical/green,
-					/obj/item/weapon/storage/box/masks,
+	contains = list(/obj/item/weapon/storage/box/masks,
 					/obj/item/weapon/storage/box/gloves)
 	cost = 15
 	containertype = "/obj/structure/closet/crate"
@@ -900,14 +898,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/suit/johnny_coat,
 					/obj/item/clothing/suit/judgerobe,
 					/obj/item/clothing/suit/wcoat,
-					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/imperium_monk,
 					/obj/item/clothing/suit/ianshirt,
-					/obj/item/clothing/under/gimmick/rank/captain/suit,
 					/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
 					/obj/item/clothing/under/lawyer/purpsuit,
 					/obj/item/clothing/suit/suspenders,
-					/obj/item/clothing/suit/storage/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit)
 	name = "Standard Costume crate"
 	cost = 10

@@ -12,20 +12,6 @@
 	item_color = "blue_pyjamas"
 	item_state = "w_suit"
 
-/obj/item/clothing/under/captain_fly
-	name = "rogue captains uniform"
-	desc = "For the man who doesn't care because he's still free."
-	icon_state = "captain_fly"
-	item_state = "captain_fly"
-	item_color = "captain_fly"
-
-/obj/item/clothing/under/scratch
-	name = "white suit"
-	desc = "A white suit, suitable for an excellent host"
-	icon_state = "scratch"
-	item_state = "scratch"
-	item_color = "scratch"
-
 /obj/item/clothing/under/sl_suit
 	desc = "It's a very amish looking suit."
 	name = "amish suit"
@@ -41,13 +27,6 @@
 	item_color = "waiter"
 	flags = FPRINT | TABLEPASS
 
-/obj/item/clothing/under/rank/mailman
-	name = "mailman's jumpsuit"
-	desc = "<i>'Special delivery!'</i>"
-	icon_state = "mailman"
-	item_state = "b_suit"
-	item_color = "mailman"
-
 /obj/item/clothing/under/sexyclown
 	name = "sexy-clown suit"
 	desc = "It makes you look HONKable!"
@@ -55,26 +34,12 @@
 	item_state = "sexyclown"
 	item_color = "sexyclown"
 
-/obj/item/clothing/under/rank/vice
-	name = "vice officer's jumpsuit"
-	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."
-	icon_state = "vice"
-	item_state = "gy_suit"
-	item_color = "vice"
-
 /obj/item/clothing/under/rank/centcom_officer
 	desc = "It's a jumpsuit worn by CentCom Officers."
 	name = "\improper CentCom officer's jumpsuit"
 	icon_state = "officer"
 	item_state = "g_suit"
 	item_color = "officer"
-
-/obj/item/clothing/under/rank/centcom_commander
-	desc = "It's a jumpsuit worn by CentCom's highest-tier Commanders."
-	name = "\improper CentCom officer's jumpsuit"
-	icon_state = "centcom"
-	item_state = "dg_suit"
-	item_color = "centcom"
 
 /obj/item/clothing/under/space
 	name = "\improper NASA jumpsuit"
@@ -112,12 +77,6 @@
 	item_color = "owl"
 	flags = FPRINT | TABLEPASS
 
-/obj/item/clothing/under/johnny
-	name = "johnny~~ jumpsuit"
-	desc = "Johnny~~"
-	icon_state = "johnny"
-	item_color = "johnny"
-
 /obj/item/clothing/under/rainbow
 	name = "rainbow"
 	desc = "rainbow"
@@ -137,20 +96,6 @@
 	icon_state = "psysuit"
 	item_state = "psysuit"
 	item_color = "psysuit"
-
-/obj/item/clothing/under/gentlesuit
-	name = "Gentlemans Suit"
-	desc = "A silk black shirt with a white tie and a matching gray vest and slacks. Feels proper."
-	icon_state = "gentlesuit"
-	item_state = "gentlesuit"
-	item_color = "gentlesuit"
-
-/obj/item/clothing/under/gimmick/rank/captain/suit
-	name = "captain's suit"
-	desc = "A green suit and yellow necktie. Exemplifies authority."
-	icon_state = "green_suit"
-	item_state = "dg_suit"
-	item_color = "green_suit"
 
 /obj/item/clothing/under/gimmick/rank/head_of_personnel/suit
 	name = "head of personnel's suit"
@@ -202,13 +147,6 @@
 	item_color = "schoolgirl"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
-/obj/item/clothing/under/overalls
-	name = "laborer's overalls"
-	desc = "A set of durable overalls for getting the job done."
-	icon_state = "overalls"
-	item_state = "lb_suit"
-	item_color = "overalls"
-
 /obj/item/clothing/under/pirate
 	name = "pirate outfit"
 	desc = "Yarr."
@@ -222,13 +160,6 @@
 	icon_state = "soviet"
 	item_state = "soviet"
 	item_color = "soviet"
-
-/obj/item/clothing/under/redcoat
-	name = "redcoat uniform"
-	desc = "Looks old."
-	icon_state = "redcoat"
-	item_state = "redcoat"
-	item_color = "redcoat"
 
 /obj/item/clothing/under/kilt
 	name = "kilt"
@@ -255,79 +186,11 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 //dress
-
-/obj/item/clothing/under/dress/dress_fire
-	name = "flame dress"
-	desc = "A small black dress with blue flames print on it."
-	icon_state = "dress_fire"
-	item_color = "dress_fire"
-
-/obj/item/clothing/under/dress/dress_green
-	name = "green dress"
-	desc = "A simple, tight fitting green dress."
-	icon_state = "dress_green"
-	item_color = "dress_green"
-
-/obj/item/clothing/under/dress/dress_orange
-	name = "orange dress"
-	desc = "A fancy orange gown for those who like to show leg."
-	icon_state = "dress_orange"
-	item_color = "dress_orange"
-
-/obj/item/clothing/under/dress/dress_pink
-	name = "pink dress"
-	desc = "A simple, tight fitting pink dress."
-	icon_state = "dress_pink"
-	item_color = "dress_pink"
-
 /obj/item/clothing/under/dress/dress_yellow
 	name = "yellow dress"
 	desc = "A flirty, little yellow dress."
 	icon_state = "dress_yellow"
 	item_color = "dress_yellow"
-
-/obj/item/clothing/under/dress/dress_saloon
-	name = "saloon girl dress"
-	desc = "A old western inspired gown for the girl who likes to drink."
-	icon_state = "dress_saloon"
-	item_color = "dress_saloon"
-
-
-/obj/item/clothing/under/dress/dress_cap
-	name = "captain dress uniform"
-	desc = "Feminine fashion for the style concious captain."
-	icon_state = "dress_cap"
-	item_color = "dress_cap"
-
-/obj/item/clothing/under/dress/dress_hop
-	name = "head of personal dress uniform"
-	desc = "Feminine fashion for the style concious HoP."
-	icon_state = "dress_hop"
-	item_color = "dress_hop"
-
-/obj/item/clothing/under/dress/dress_hr
-	name = "human resources director uniform"
-	desc = "Superior class for the nosy H.R. Director."
-	icon_state = "huresource"
-	item_color = "huresource"
-
-/obj/item/clothing/under/dress/plaid_blue
-	name = "blue plaid skirt"
-	desc = "A preppy blue skirt with a white blouse."
-	icon_state = "plaid_blue"
-	item_color = "plaid_blue"
-
-/obj/item/clothing/under/dress/plaid_red
-	name = "red plaid skirt"
-	desc = "A preppy red skirt with a white blouse."
-	icon_state = "plaid_red"
-	item_color = "plaid_red"
-
-/obj/item/clothing/under/dress/plaid_purple
-	name = "blue purple skirt"
-	desc = "A preppy purple skirt with a white blouse."
-	icon_state = "plaid_purple"
-	item_color = "plaid_purple"
 
 //wedding stuff
 
@@ -365,14 +228,6 @@
 	icon_state = "bride_white"
 	item_color = "bride_white"
 	flags_inv = HIDESHOES
-
-/obj/item/clothing/under/sundress
-	name = "sundress"
-	desc = "Makes you want to frolic in a field of daisies."
-	icon_state = "sundress"
-	item_state = "sundress"
-	item_color = "sundress"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/schoolgirl/red
 	name = "red schoolgirl uniform"
@@ -437,23 +292,3 @@
 	item_color = "camopants"
 	gender = PLURAL
 
-
-
-/obj/item/clothing/under/kamina
-	name = "awesome pants"
-	desc = "Just who the hell do you think I am?!"
-	icon_state = "kaminapants"
-	item_state = "kaminapants"
-	item_color = "kaminapants"
-	gender = PLURAL
-
-
-
-
-/obj/item/clothing/under/snake
-	desc = "It's an old jumpsuit, that was worn by 'the man who makes the impossible possible'."
-	name = "sneak suit"
-	icon_state = "snake"
-	item_state = "snake"
-	item_color = "snake"
-	armor = list(melee = 10, bullet = 15, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)

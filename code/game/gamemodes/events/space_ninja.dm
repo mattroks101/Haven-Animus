@@ -697,10 +697,10 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 	kamikaze = 1
 
-	icon_state = U.gender==FEMALE ? "s-ninjakf" : "s-ninjak"
+	icon_state = U.gender==FEMALE ? "s-ninjanf" : "s-ninjan"
 	if(n_gloves)
-		n_gloves.icon_state = "s-ninjak"
-		n_gloves.item_state = "s-ninjak"
+		n_gloves.icon_state = "s-ninjan"
+		n_gloves.item_state = "s-ninjan"
 		n_gloves.candrain = 0
 		n_gloves.draining = 0
 		n_gloves.verbs -= /obj/item/clothing/gloves/space_ninja/proc/toggled

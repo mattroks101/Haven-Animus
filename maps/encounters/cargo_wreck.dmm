@@ -161,7 +161,7 @@
 "de" = (/obj/machinery/power/apc/worn_out{dir = 2; name = "South APC"; pixel_y = -24},/turf/simulated/shuttle/floor{blocks_air = 1; icon_state = "floor3"; tag = "icon-floor3"},/area/ship/scrap/cargo_wreck/dorm)
 "df" = (/turf/simulated/shuttle/floor{blocks_air = 1; icon_state = "floor3"; tag = "icon-floor3"},/area/ship/scrap/cargo_wreck/dorm)
 "dg" = (/obj/structure/rack,/obj/item/clothing/suit/space/rig/medical,/obj/item/clothing/mask/breath,/obj/item/clothing/head/helmet/space/rig/medical,/turf/simulated/shuttle/floor{blocks_air = 1; icon_state = "floor3"; tag = "icon-floor3"},/area/ship/scrap/cargo_wreck/dorm_bay)
-"dh" = (/obj/structure/stool/bed/chair/shuttle{tag = "icon-schair (EAST)"; icon_state = "schair"; dir = 4},/obj/effect/decal/remains/human,/obj/item/clothing/under/kamina,/obj/item/clothing/head/caphat,/turf/simulated/shuttle/floor,/area/ship/scrap/cargo_wreck/command)
+"dh" = (/obj/structure/stool/bed/chair/shuttle{tag = "icon-schair (EAST)"; icon_state = "schair"; dir = 4},/obj/effect/decal/remains/human,/obj/item/clothing/head/caphat,/turf/simulated/shuttle/floor,/area/ship/scrap/cargo_wreck/command)
 "di" = (/obj/structure/table/reinforced,/obj/item/weapon/shard{icon_state = "medium"},/turf/simulated/shuttle/floor,/area/ship/scrap/cargo_wreck/command)
 "dj" = (/obj/item/stack/sheet/metal,/turf/simulated/shuttle/floor{tag = "icon-floor3"; icon_state = "floor3"},/area/ship/scrap/cargo_wreck/hangar)
 "dk" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/shuttle/floor{tag = "icon-floor3"; icon_state = "floor3"},/area/ship/scrap/cargo_wreck/hangar)

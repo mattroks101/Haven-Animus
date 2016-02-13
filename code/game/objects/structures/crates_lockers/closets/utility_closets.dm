@@ -72,7 +72,7 @@
 /obj/structure/closet/firecloset/New()
 	..()
 
-	new /obj/item/clothing/suit/fire/firefighter(src)
+	new /obj/item/clothing/suit/fire(src)
 	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/weapon/tank/oxygen/red(src)
 	new /obj/item/weapon/extinguisher(src)
@@ -83,7 +83,7 @@
 	sleep(4)
 	contents = list()
 
-	new /obj/item/clothing/suit/fire/firefighter(src)
+	new /obj/item/clothing/suit/fire(src)
 	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/device/flashlight(src)
 	new /obj/item/weapon/tank/oxygen/red(src)
@@ -205,7 +205,7 @@
 /obj/structure/closet/hydrant/New()
 	..()
 	sleep(2)
-	new /obj/item/clothing/suit/fire/firefighter(src)
+	new /obj/item/clothing/suit/fire(src)
 	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/device/flashlight(src)
 	new /obj/item/weapon/tank/oxygen/red(src)

@@ -29,12 +29,6 @@
 			if("labcoat_cmo")
 				src.icon_state = "labcoat_cmo_open"
 				usr << "You unbutton the labcoat."
-			if("labcoat_gen_open")
-				src.icon_state = "labcoat_gen"
-				usr << "You button up the labcoat."
-			if("labcoat_gen")
-				src.icon_state = "labcoat_gen_open"
-				usr << "You unbutton the labcoat."
 			if("labcoat_chem_open")
 				src.icon_state = "labcoat_chem"
 				usr << "You button up the labcoat."
@@ -70,11 +64,6 @@
 	icon_state = "labcoat_cmo_open"
 	item_state = "labcoat_cmo"
 
-/obj/item/clothing/suit/storage/labcoat/mad
-	name = "The Mad's labcoat"
-	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
-	icon_state = "labgreen_open"
-	item_state = "labgreen"
 
 /obj/item/clothing/suit/storage/labcoat/genetics
 	name = "Geneticist Labcoat"
