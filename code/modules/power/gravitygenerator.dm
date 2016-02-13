@@ -84,6 +84,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 /obj/machinery/gravity_generator/main/station/initialize()
 	setup_parts()
 	middle.overlays += "activated"
+
 	update_list()
 
 //
@@ -308,6 +309,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	if(stat & BROKEN)
 		return
 	if(charging_state != POWER_IDLE)
+		playsound(src.loc, 'sound/effects/Custom_grav.ogg', 50, 0, 10)
 		if(charging_state == POWER_UP && charge_count >= 100)
 			set_state(1)
 		else if(charging_state == POWER_DOWN && charge_count <= 0)
@@ -344,7 +346,8 @@ var/const/GRAV_NEEDS_WRENCH = 3
 					if(overlay_state)
 						middle.overlays += overlay_state
 					current_overlay = overlay_state
-
+	else
+		playsound(src.loc, 'sound/effects/Custom_grav.ogg', 50, 0, 10)
 
 /obj/machinery/gravity_generator/main/proc/pulse_radiation()
 	for(var/mob/living/L in view(7, src))

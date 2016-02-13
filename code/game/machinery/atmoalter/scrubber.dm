@@ -52,6 +52,7 @@
 	var/power_draw = -1
 
 	if(on && cell && cell.charge)
+		playsound(src.loc, 'sound/effects/Custom_scrubber.ogg', 50, 0, 10)
 		var/datum/gas_mixture/environment
 		if(holding)
 			environment = holding.air_contents

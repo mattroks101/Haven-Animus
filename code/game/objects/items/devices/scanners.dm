@@ -77,8 +77,10 @@ REAGENT SCANNER
 
 
 /obj/item/device/healthanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
+	playsound(src.loc, 'sound/effects/Custom_healthanal.ogg', 50, 1)
 	if (( (CLUMSY in user.mutations) || user.getBrainLoss() >= 60) && prob(50))
 		user << text("\red You try to analyze the floor's vitals!")
+		M << text("You feel a prick as the needle takes your blood sample.")
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("\red [user] has analyzed the floor's vitals!"), 1)
 		user.show_message(text("\blue Analyzing Results for The floor:\n\t Overall Status: Healthy"), 1)
