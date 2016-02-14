@@ -631,14 +631,6 @@
 	item_state = "ara_bar_uniform"
 	item_color = "ara_bar_uniform"
 
-/obj/item/clothing/under/fluff/solara_light_1 //bluefishie: Solara Born-In-Light
-	name = "Elaborate Purple Dress"
-	desc = "An expertly tailored dress, made out of fine fabrics. The interwoven necklace appears to be made out of gold, with three complicated symbols engraved in the front."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "solara_dress"
-	item_state = "solara_dress"
-	item_color = "solara_dress"
-
 //////////// Masks ////////////
 
 /*

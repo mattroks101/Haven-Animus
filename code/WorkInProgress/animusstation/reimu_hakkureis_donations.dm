@@ -54,7 +54,6 @@ Darkblue suit:/obj/item/clothing/under/darkblue:200
 Lightred Suit:/obj/item/clothing/under/lightred:200
 Darkred Suit:/obj/item/clothing/under/darkred:200
 Grim Jacket:/obj/item/clothing/under/suit_jacket:200
-Black Jacket:/obj/item/clothing/under/color/blackf:200
 Downy Jumpsuit:/obj/item/clothing/under/fluff/jumpsuitdown:200
 Tacticool Turtleneck:/obj/item/clothing/under/syndicate/tacticool:200
 
