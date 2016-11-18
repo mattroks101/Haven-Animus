@@ -243,16 +243,12 @@
 
 	do_animate("opening")
 	icon_state = "door0"
-	src.SetOpacity(0)
+	SetOpacity(0)
 	sleep(10)
-	src.layer = open_layer
-	src.density = 0
+	layer = open_layer
+	density = 0
 	explosion_resistance = 0
 	update_icon()
-	SetOpacity(0)
-	if(istype(src, /obj/machinery/door/airlock/multi_tile/metal))
-		f5.SetOpacity(0)
-		f6.SetOpacity(0)
 	update_nearby_tiles()
 
 	if(operating)	operating = 0
@@ -266,6 +262,11 @@
 
 	return 1
 
+/obj/machinery/door/SetOpacity(var/new_opacity = null)
+	if(istype(src, /obj/machinery/door/airlock/multi_tile/metal))
+		f5.SetOpacity(new_opacity)
+		f6.SetOpacity(new_opacity)
+	return ..(new_opacity)
 
 /obj/machinery/door/proc/close()
 	if(density)	return 1
@@ -280,9 +281,6 @@
 	update_icon()
 	if(visible && !glass)
 		SetOpacity(1)	//caaaaarn!
-		if(istype(src, /obj/machinery/door/airlock/multi_tile/metal))
-			f5.SetOpacity(1)
-			f6.SetOpacity(1)
 	operating = 0
 	update_nearby_tiles()
 
