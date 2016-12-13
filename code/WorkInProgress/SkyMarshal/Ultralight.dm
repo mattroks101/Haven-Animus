@@ -280,7 +280,7 @@ turf/proc/ul_UpdateLight()
 
 	var/LightingTag = copytext(CurrentArea.tag, 1, findtext(CurrentArea.tag, ":UL")) + ":UL[ul_GetRed()]_[ul_GetGreen()]_[ul_GetBlue()]"
 	if (findtext(LightingTag, ":UL") == 1)
-		LightingTag = CurrentArea.type + ":UL[ul_GetRed()]_[ul_GetGreen()]_[ul_GetBlue()]"
+		LightingTag = "[CurrentArea.type]:UL[ul_GetRed()]_[ul_GetGreen()]_[ul_GetBlue()]"
 	else
 		LightingTag = copytext(CurrentArea.tag, 1, findtext(CurrentArea.tag, ":UL")) + ":UL[ul_GetRed()]_[ul_GetGreen()]_[ul_GetBlue()]"
 	if(CurrentArea.tag != LightingTag)
