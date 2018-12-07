@@ -209,7 +209,7 @@
 						if(1)
 							emote("twitch")
 						if(2 to 3)
-							say("[prob(50) ? ";" : ""][pick("цнбмн", "охгдю", "акърэ", "уси", "усеяня", "еаюрэ", "яхяэйх", "онь╗к мюуси", "днкан╗аш", "ясйю", "цнмднм", "уня усеяня", "йюохрюм цнмднм", "уно лсдюй", "яа яняср уси")]")
+							say("[prob(50) ? ";" : ""][pick("О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫", "О©╫О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫ь╗О©╫ О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫О©╫н╗О©╫О©╫", "О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫", "О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫")]")
 					var/old_x = pixel_x
 					var/old_y = pixel_y
 					pixel_x += rand(-2,2)
@@ -1483,9 +1483,7 @@
 					if(260 to 280)			bodytemp.icon_state = "temp-3"
 					else					bodytemp.icon_state = "temp-4"
 
-			if(blind)
-				if(blinded)		blind.layer = 18
-				else			blind.layer = 0
+			handle_hud_vision()
 
 			if(disabilities & NEARSIGHTED)	//this looks meh but saves a lot of memory by not requiring to add var/prescription
 				if(glasses)					//to every /obj/item

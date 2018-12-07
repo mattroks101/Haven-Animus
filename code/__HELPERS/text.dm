@@ -190,12 +190,18 @@ proc/checkhtml(var/t)
 
 /*
  * Text modification
+ *
+ * Deprecated in 510 as Regex has become a built-in module of DM
+ * This still exists so users can still compile this code against
+ * older versions - 2016/11/13
  */
+#if DM_VERSION < 510
 /proc/replacetext(text, find, replacement)
 	return list2text(text2list(text, find), replacement)
 
 /proc/replacetextEx(text, find, replacement)
 	return list2text(text2listEx(text, find), replacement)
+#endif
 
 //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
