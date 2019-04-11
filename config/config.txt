@@ -197,7 +197,7 @@ GUEST_BAN
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
 ##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.7
+TICKLAG 0.5
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
 TICKCOMP 1
@@ -215,7 +215,7 @@ SOCKET_TALK 0
 GATEWAY_DELAY 18000
 
 ## Remove the # to give assistants maint access.
-#ASSISTANT_MAINT
+ASSISTANT_MAINT
 
 ## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
@@ -339,7 +339,7 @@ ANIMAL_DELAY 0
 #USE_LOYALTY_IMPLANTS
 
 ## Remove # if you want your server have the Luna's job system
-JOIN_UNASSIGNED
+#JOIN_UNASSIGNED
 
 ## Uncomment to use overmap system for zlevel travel
 #USE_OVERMAP

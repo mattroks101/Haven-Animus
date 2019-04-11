@@ -453,10 +453,10 @@
 	if(..()) // critical exploit prevention, do not remove unless you replace it -walter0o
 		return
 
-	var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
+	var/datum/topic_input/d_filter = new /datum/topic_input(href,href_list)
 
 	if(href_list["remove_from_queue"])
-		remove_from_queue(filter.getNum("remove_from_queue"))
+		remove_from_queue(d_filter.getNum("remove_from_queue"))
 		return 1
 
 	if(href_list["eject"])
@@ -557,8 +557,8 @@
 		src.screen = href_list["screen"]
 
 	if(href_list["queue_move"] && href_list["index"])
-		var/index = filter.getNum("index")
-		var/new_index = index + filter.getNum("queue_move")
+		var/index = d_filter.getNum("index")
+		var/new_index = index + d_filter.getNum("queue_move")
 		if(isnum(index) && isnum(new_index))
 			if(InRange(new_index,1,queue.len))
 				queue.Swap(index,new_index)
@@ -575,7 +575,7 @@
 			src.sync()
 		return update_queue_on_page()
 	if(href_list["part_desc"])
-		var/obj/part = filter.getObj("part_desc")
+		var/obj/part = d_filter.getObj("part_desc")
 
 		// critical exploit prevention, do not remove unless you replace it -walter0o
 		if(src.exploit_prevention(part, usr, 1))

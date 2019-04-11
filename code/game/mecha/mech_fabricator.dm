@@ -604,9 +604,9 @@
 
 /obj/machinery/mecha_part_fabricator/Topic(href, href_list)
 	..()
-	var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
+	var/datum/topic_input/d_filter = new /datum/topic_input(href,href_list)
 	if(href_list["part_set"])
-		var/tpart_set = filter.getStr("part_set")
+		var/tpart_set = d_filter.getStr("part_set")
 		if(tpart_set)
 			if(tpart_set=="clear")
 				src.part_set = null
@@ -614,19 +614,19 @@
 				src.part_set = tpart_set
 				screen = "parts"
 	if(href_list["part"])
-		var/list/part = filter.getObj("part")
+		var/list/part = d_filter.getObj("part")
 		if(!processing_queue)
 			build_part(part)
 		else
 			add_to_queue(part)
 	if(href_list["add_to_queue"])
-		add_to_queue(filter.getObj("add_to_queue"))
+		add_to_queue(d_filter.getObj("add_to_queue"))
 		return update_queue_on_page()
 	if(href_list["remove_from_queue"])
-		remove_from_queue(filter.getNum("remove_from_queue"))
+		remove_from_queue(d_filter.getNum("remove_from_queue"))
 		return update_queue_on_page()
 	if(href_list["partset_to_queue"])
-		add_part_set_to_queue(filter.get("partset_to_queue"))
+		add_part_set_to_queue(d_filter.get("partset_to_queue"))
 		return update_queue_on_page()
 	if(href_list["process_queue"])
 		spawn(-1)
@@ -644,8 +644,8 @@
 	if(href_list["screen"])
 		src.screen = href_list["screen"]
 	if(href_list["queue_move"] && href_list["index"])
-		var/index = filter.getNum("index")
-		var/new_index = index + filter.getNum("queue_move")
+		var/index = d_filter.getNum("index")
+		var/new_index = index + d_filter.getNum("queue_move")
 		if(isnum(index) && isnum(new_index))
 			if(InRange(new_index,1,queue.len))
 				queue.Swap(index,new_index)
@@ -658,7 +658,7 @@
 		src.sync()
 		return update_queue_on_page()
 	if(href_list["part_desc"])
-		var/obj/part = filter.getObj("part_desc")
+		var/obj/part = d_filter.getObj("part_desc")
 		if(part)
 			temp = {"<h1>[part] description:</h1>
 						[part.desc]<br>
